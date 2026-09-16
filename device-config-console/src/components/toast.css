@@ -1,0 +1,14 @@
+.app-toast {
+  position: fixed;
+  top: var(--spacing-5, 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  pointer-events: none;
+}
+
+.app-toast > * {
+  pointer-events: auto;
+  box-shadow: var(--shadow-popover, 0 8px 24px rgba(0, 0, 0, 0.16));
+  border-radius: var(--radius-base, 4px);
+}

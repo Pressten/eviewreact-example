@@ -1,0 +1,4427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT 设备运维平台 · 设备配置</title>
+<!-- 1. Core Libraries (local UMD) -->
+<script src="./assets/library/react.production.min.js"></script>
+<script src="./assets/library/react-dom.production.min.js"></script>
+<script src="./assets/library/dayjs.min.js"></script>
+<!-- 2. UI Components (local UMD, antd 内置图标随包携带) -->
+<script src="./assets/library/antd.min.js"></script>
+<!-- 3. react-intl (offline, exposes ReactIntl) -->
+<script src="./assets/library/react-intl.umd.js"></script>
+<!-- 3. Babel Transpiler (local) -->
+<script src="./assets/library/babel.min.js"></script>
+<!-- 4. 五层 CSS(base → light → theme → dark → ant 组件换肤层)内联 -->
+<style>
+:root {
+  /* ==========================================================================
+    1. 基础色阶 (Primitive Colors)
+    ========================================================================== */
+  /* brand */
+  --brand-05: #E6F2FD;
+  --brand-10: #B8D9F9;
+  --brand-20: #8ABEF3;
+  --brand-30: #5CA2E9;
+  --brand-40: #2E86DE;
+  --brand-50: #0067D1;
+  --brand-60: #004EA8;
+  --brand-70: #003D83;
+  --brand-80: #002E6A;
+  --brand-90: #00214B;
+
+  /* gray */
+  --gray-0: #FFFFFF;
+  --gray-05: #F3F3F3;
+  --gray-10: #DFDFDF;
+  --gray-20: #C9C9C9; 
+  --gray-30: #AEAEAE;
+  --gray-40: #939393;
+  --gray-50: #777777;
+  --gray-60: #595959;
+  --gray-70: #393939;
+  --gray-80: #2A2A2A;
+  --gray-90: #191919;
+  --gray-100: #000000;
+
+  /* red */
+  --red-05: #FEE7E8;
+  --red-10: #FABDC1;
+  --red-20: #F59297;
+  --red-30: #EE696F;
+  --red-40: #E7434A;
+  --red-50: #E02128;
+  --red-60: #C7000B;
+  --red-70: #850F12;
+  --red-80: #59080A;
+  --red-90: #350305;
+
+  /* rose */
+  --rose-05: #FEE5F2;
+  --rose-10: #FCC3E0;
+  --rose-20: #F99AC7;
+  --rose-30: #F470AB;
+  --rose-40: #ED448A;
+  --rose-50: #E61866;
+  --rose-60: #C40054;
+  --rose-70: #811439;
+  --rose-80: #540D24;
+  --rose-90: #330614;
+
+  /* orange */
+  --orange-05: #FEF5E8;
+  --orange-10: #FDE2BD;
+  --orange-20: #FCCE92;
+  --orange-30: #F9B766;
+  --orange-40: #F69E39;
+  --orange-50: #F4840C;
+  --orange-60: #C76207;
+  --orange-70: #954304;
+  --orange-80: #642802;
+  --orange-90: #3D1601;
+
+  /* yellow */
+  --yellow-05: #FEFCE0;
+  --yellow-10: #FEF8B8;
+  --yellow-20: #FEF08A;
+  --yellow-30: #FDE55C;
+  --yellow-40: #FCD72E;
+  --yellow-50: #FCC800;
+  --yellow-60: #D19F00;
+  --yellow-70: #9E7400;
+  --yellow-80: #614500;
+  --yellow-90: #2E1F00;
+
+  /* green */
+  --green-05: #F2FBE9;
+  --green-10: #DFF4CC;
+  --green-20: #C6E9A8;
+  --green-30: #A8DB81;
+  --green-40: #87C859;
+  --green-50: #62B42E;
+  --green-60: #488E20;
+  --green-70: #316614;
+  --green-80: #1B3E0A;
+  --green-90: #0C2004;
+
+  /* mint */
+  --mint-05: #E7FBF2;
+  --mint-10: #BCF2DB;
+  --mint-20: #8FE5C2;
+  --mint-30: #63D5A8;
+  --mint-40: #36C18D;
+  --mint-50: #09AA71;
+  --mint-60: #058358;
+  --mint-70: #036142;
+  --mint-80: #02422E;
+  --mint-90: #00291D;
+
+  /* cyan */
+  --cyan-05: #E8FCFD;
+  --cyan-10: #C9F6F9;
+  --cyan-20: #A4ECF1;
+  --cyan-30: #7DDFE7;
+  --cyan-40: #55CCD9;
+  --cyan-50: #2CB8C9;
+  --cyan-60: #1C94A4;
+  --cyan-70: #127180;
+  --cyan-80: #094C57;
+  --cyan-90: #04282F;
+
+  /* blue */
+  --blue-05: #EEF3FE;
+  --blue-10: #D0D8FD;
+  --blue-20: #B0BFFD;
+  --blue-30: #8CA3FA;
+  --blue-40: #668CF7;
+  --blue-50: #2070F3;
+  --blue-60: #1F55B5;
+  --blue-70: #1B3F86;
+  --blue-80: #112857;
+  --blue-90: #081635;
+
+  /* indigo */
+  --indigo-05: #EEEEFE;
+  --indigo-10: #D5D3FD;
+  --indigo-20: #BFB9FA;
+  --indigo-30: #A89FF9;
+  --indigo-40: #8E81F4;
+  --indigo-50: #715AFB;
+  --indigo-60: #5531EB;
+  --indigo-70: #3F21B5;
+  --indigo-80: #281675;
+  --indigo-90: #160B48;
+
+  /* purple */
+  --purple-05: #F7EDFE;
+  --purple-10: #E8CFFE;
+  --purple-20: #D9B1FD;
+  --purple-30: #CB8EFB;
+  --purple-40: #BF68FA;
+  --purple-50: #B62BF7;
+  --purple-60: #8A21BC;
+  --purple-70: #651B8B;
+  --purple-80: #41125A;
+  --purple-90: #260937;
+
+  /* pink */
+  --pink-05: #FDE6FC;
+  --pink-10: #F9C5F6;
+  --pink-20: #F39DEC;
+  --pink-30: #EB74DF;
+  --pink-40: #E049CE;
+  --pink-50: #D41DBC;
+  --pink-60: #9F1C8D;
+  --pink-70: #751868;
+  --pink-80: #4C0F43;
+  --pink-90: #2E0728;
+
+  /* ==========================================================================
+    2. 尺寸与形状 (Sizes & Shapes)
+    ========================================================================== */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-base: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+    3. 文本排版 (Typography)
+    ========================================================================== */
+  /* Font Family */
+  --font-family: 'HarmonyOS Sans', 'Microsoft YaHei', Arial, 'PingFang SC', 'San Francisco', sans-serif;
+
+  /* Font Size (10px → 72px) */
+  --font-size-sm: 0.625rem;    /* 10px */
+  --font-size-base: 0.75rem;   /* 12px */
+  --font-size-md: 0.875rem;    /* 14px */
+  --font-size-lg: 1rem;        /* 16px */
+  --font-size-xl: 1.125rem;    /* 18px */
+  --font-size-2xl: 1.25rem;    /* 20px */
+  --font-size-3xl: 1.5rem;     /* 24px */
+  --font-size-4xl: 1.75rem;    /* 28px */
+  --font-size-5xl: 2.25rem;    /* 36px */
+  --font-size-6xl: 3rem;       /* 48px */
+  --font-size-7xl: 3.75rem;    /* 60px */
+  --font-size-8xl: 4.5rem;     /* 72px */
+
+  /* Line Height (刻度,1.25 → 1.8) */
+  --line-height-xs: 1.25;
+  --line-height-sm: 1.375;
+  --line-height-base: 1.5;
+  --line-height-md: 1.625;
+  --line-height-lg: 1.8;
+
+  /* Font Weight */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ==========================================================================
+    4. 间距 (Spacing)
+    ========================================================================== */
+  /* 4px 网格 + 半步档,0 → 80px 封顶(更大留白用 px 字面量按需写) */
+  --spacing-0: 0px;
+  --spacing-0-5: 2px;
+  --spacing-1: 4px;
+  --spacing-1-5: 6px;
+  --spacing-2: 8px;
+  --spacing-2-5: 10px;
+  --spacing-3: 12px;
+  --spacing-3-5: 14px;
+  --spacing-4: 16px;
+  --spacing-4-5: 18px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-11: 44px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-15: 60px;
+  --spacing-16: 64px;
+  --spacing-17: 68px;
+  --spacing-18: 72px;
+  --spacing-19: 76px;
+  --spacing-20: 80px;
+}
+
+/* ==========================================================================
+  5. 响应式 rem 基准 (Responsive rem base) — html font-size 随视口宽度变化
+  ========================================================================== */
+@media (max-width: 1366px) {
+  html { font-size: 12px; }
+}
+@media (min-width: 1367px) and (max-width: 1680px) {
+  html { font-size: 14px; }
+}
+@media (min-width: 1681px) and (max-width: 1920px) {
+  html { font-size: 16px; }
+}
+@media (min-width: 1921px) {
+  html { font-size: 20px; }
+}
+
+/* ==========================================================================
+  6. 字体注册 (Font Face)
+  ========================================================================== */
+/* Light */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Regular */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Medium */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+/* ── body base ── */
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  line-height: var(--line-height-base);
+  background-color: var(--surface);
+  color: var(--on-surface);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+  7. 基础滚动条样式 (Scrollbar)
+  ========================================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 4px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #dededf;
+}
+
+
+:root {
+  /* 品牌色 */
+  --color-brand: var(--brand-50);
+  --color-brand-hover: var(--brand-40);
+  --color-brand-focus: var(--brand-50);
+  --color-brand-active: var(--brand-60);
+  --color-brand-disabled: var(--brand-20);
+  /* 文本色 */
+  --color-text-primary: var(--gray-90);
+  --color-text-secondary: var(--gray-50);
+  --color-text-placeholder: var(--gray-30);
+  --color-text-disabled: var(--gray-20);
+  --color-text-inverse: var(--gray-0);
+  --color-text-inverse-disabled: var(--gray-0);
+  --color-text-on: var(--brand-50);
+  --color-link: var(--brand-50);
+  --color-link-hover: var(--brand-40);
+  --color-link-active: var(--brand-60);
+  --color-link-visited: var(--indigo-50);
+  --color-link-disabled: var(--brand-20);
+  /* 背景色 */
+  --color-bg-1: var(--gray-05);
+  --color-bg-2: var(--gray-0);
+  --color-bg-3: var(--gray-0);
+  --color-bg-4: var(--gray-0);
+  --color-bg-5: var(--gray-0);
+  --color-bg-6: rgb(from var(--gray-20) r g b / 0.2);
+  --color-bg-mask: rgb(from var(--gray-90) r g b / 0.3);
+  /* 填充色 */
+  --color-fill-disabled: var(--gray-10);
+  --color-hover: rgb(from var(--gray-90) r g b / 0.05);
+  --color-fill-disabled-subtle: rgb(from var(--gray-90) r g b / 0.05);
+  --color-fill: rgb(from var(--gray-90) r g b / 0.05);
+  --color-select: var(--brand-05);
+  --color-fill-subtle: var(--gray-0);
+  /* 图标色 */
+  --color-icon-primary: var(--gray-90);
+  --color-icon-secondary: var(--gray-50);
+  --color-icon-tertiary: var(--gray-40);
+  --color-icon-placeholder: var(--gray-30);
+  --color-icon-disabled: var(--gray-20);
+  --color-icon-inverse: var(--gray-0);
+  --color-icon-hover: var(--brand-40);
+  --color-icon-focus: var(--brand-50);
+  --color-icon-active: var(--brand-60);
+  /* 边框色 */
+  --color-border: var(--gray-20);
+  --color-border-hover: var(--gray-90);
+  --color-border-focus: var(--brand-50);
+  --color-border-active: var(--brand-10);
+  --color-border-disabled: var(--gray-20);
+  --color-border-separator: var(--gray-10);
+  --color-border-separator-sbutle: var(--gray-05);
+  /* 功能色-错误 */
+  --color-error: var(--red-50);
+  --color-error-hover: var(--red-40);
+  --color-error-active: var(--red-60);
+  --color-error-disabled: var(--red-10);
+  --color-error-subtle: var(--red-20);
+  --color-error-subtler: var(--red-05);
+  /* 功能色-告警 */
+  --color-alert: var(--orange-50);
+  --color-alert-hover: var(--orange-40);
+  --color-alert-active: var(--orange-60);
+  --color-alert-disabled: var(--orange-10);
+  --color-alert-subtle: var(--orange-20);
+  --color-alert-subtler: var(--orange-05);
+  /* 功能色-提醒 */
+  --color-warning: var(--yellow-50);
+  --color-warning-hover: var(--yellow-40);
+  --color-warning-active: var(--yellow-60);
+  --color-warning-disabled: var(--yellow-10);
+  --color-warning-bold: var(--yellow-60);
+  --color-warning-subtle: var(--yellow-20);
+  --color-warning-subtler: var(--yellow-05);
+  /* 功能色-成功 */
+  --color-success: var(--mint-50);
+  --color-success-hover: var(--mint-40);
+  --color-success-active: var(--mint-60);
+  --color-success-disabled: var(--mint-10);
+  --color-success-subtle: var(--mint-20);
+  --color-success-subtler: var(--mint-05);
+  /* 功能色-信息 */
+  --color-info-primary: var(--blue-50);
+  --color-info-primary-subtle: var(--blue-30);
+  --color-info-primary-subtler: var(--blue-05);
+  --color-info-secondary: var(--blue-30);
+  --color-info-secondary-hover: var(--blue-20);
+  --color-info-secondary-active: var(--blue-40);
+  --color-info-secondary-disabled: var(--blue-10);
+  --color-info-secondary-subtle: var(--blue-05);
+  /* 功能色-失效 */
+  --color-none: var(--gray-30);
+  --color-none-hover: var(--gray-20);
+  --color-none-active: var(--gray-40);
+  --color-none-disabled: var(--gray-10);
+  --color-none-subtle: var(--gray-05);
+  /* 推荐图表色 */
+  --color-chart-1: var(--blue-50);
+  --color-chart-2: var(--green-50);
+  --color-chart-3: var(--indigo-50);
+  --color-chart-4: var(--cyan-50);
+  --color-chart-5: var(--orange-40);
+  --color-chart-6: var(--brand-30);
+  --color-chart-7: var(--purple-40);
+  --color-chart-8: var(--rose-40);
+  --color-chart-9: var(--indigo-20);
+  --color-chart-10: var(--yellow-60);
+  --color-chart-11: var(--brand-10);
+  --color-chart-12: var(--green-60);
+  --color-chart-13: var(--purple-20);
+  --color-chart-14: var(--cyan-60);
+  --color-chart-15: var(--orange-20);
+  --color-chart-16: var(--rose-60);
+  --color-chart-17: var(--cyan-20);
+  --color-chart-18: var(--blue-60);
+  --color-chart-19: var(--green-20);
+  --color-chart-20: var(--indigo-70);
+  --color-chart-21: var(--rose-10);
+  --color-chart-22: var(--cyan-70);
+  --color-chart-23: var(--yellow-20);
+  --color-chart-24: var(--purple-70);
+  --color-chart-25: var(--mint-20);
+  /* 特殊场景 */
+  --color-scrollbar: var(--gray-10);
+  --color-scrollbar-hover: var(--gray-30);
+  --color-card-gray-disabled: rgb(from var(--gray-30) r g b / 0.05);
+  --color-card-white-disabled: rgb(from var(--gray-0) r g b / 0.5);
+  --color-sidenav-bg: rgb(from var(--gray-05) r g b / 0.5);
+  --color-table-header: rgb(from var(--gray-90) r g b / 0.05);
+  --color-table-zebra: rgb(from var(--gray-40) r g b / 0.05);
+  --color-message-bg-info: var(--blue-05);
+  --color-message-bg-success: var(--mint-05);
+  --color-message-bg-warning: var(--yellow-05);
+  --color-message-bg-alert: var(--orange-05);
+  --color-message-bg-error: var(--red-05);
+  /* ICT3.0 3.0告警色 */
+  --color-alert-urgent: #F43146;
+  --color-alert-primary: #EC6F1A;
+  --color-alert-secondary: #EEBA18;
+  --color-alert-success: #2DA769;
+  --color-alert-running: #5990FD;
+  --color-alert-none: #939393;
+  /* ICT3.1 表格 */
+  --color-table-1: var(--brand-05);
+  --color-table-2: var(--brand-10);
+  --color-table-sticky-1: var(--brand-05);
+  --color-table-sticky-2: var(--brand-10);
+  --color-table-sticky-bg: var(--gray-0);
+  --color-table-sticky-header: var(--gray-05);
+  /* 标签配色 */
+  --color-tag-text-purple: var(--purple-60);
+  --color-tag-bg-purple: rgb(from var(--purple-10) r g b / 0.6);
+  --color-tag-text-cyan: var(--cyan-80);
+  --color-tag-bg-cyan: rgb(from var(--cyan-60) r g b / 0.15);
+  --color-tag-text-rose: var(--rose-60);
+  --color-tag-bg-rose: var(--rose-05);
+  --color-tag-text-green: var(--green-70);
+  --color-tag-bg-green: var(--green-10);
+  --color-tag-text-pink: var(--pink-60);
+  --color-tag-bg-pink: var(--pink-05);
+  --color-tag-text-indigo: var(--indigo-80);
+  --color-tag-bg-indigo: rgb(from var(--indigo-10) r g b / 0.6);
+  --color-tag-text-none: var(--gray-70);
+  --color-tag-bg-none: rgb(from var(--gray-90) r g b / 0.05);
+  --color-tag-text-error: var(--red-60);
+  --color-tag-bg-error: var(--red-05);
+  --color-tag-text-alert: var(--orange-70);
+  --color-tag-bg-alert: var(--orange-10);
+  --color-tag-text-warning: var(--yellow-80);
+  --color-tag-bg-warning: rgb(from var(--yellow-30) r g b / 0.6);
+  --color-tag-text-success: var(--mint-70);
+  --color-tag-bg-success: rgb(from var(--mint-10) r g b / 0.6);
+  --color-tag-text-info: var(--blue-60);
+  --color-tag-bg-info: rgb(from var(--blue-10) r g b / 0.5);
+  /* Border */
+  --border: var(--gray-20);
+  --border-light: var(--gray-10);
+  --border-primary: var(--brand-50);
+  --border-success: var(--mint-20);
+  --border-warning: var(--yellow-20);
+  --border-alert: var(--orange-20);
+  --border-error: var(--red-20);
+  /* Icon */
+  --icon-primary: var(--brand-50);
+  --icon-success: var(--mint-50);
+  --icon-warning: var(--yellow-50);
+  --icon-critical: var(--orange-50);
+  --icon-alert: var(--orange-50);
+  --icon-error: var(--red-50);
+  /* Shadow */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.08);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.16);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+  --shadow-r-sm: 1px 0 6px 0 rgba(0, 0, 0, 0.08);
+  --shadow-t-sm: 0 -1px 6px rgba(0, 0, 0, 0.08);
+  --shadow-l-base: -2px 0 12px 0 rgba(0, 0, 0, 0.08);
+  --shadow-l-md: -2px 0 24px 0 rgba(0, 0, 0, 0.08);
+}
+
+
+:root {
+  --primary: var(--color-brand);
+  --on-primary: var(--color-text-inverse);
+  --primary-hover: var(--color-brand-hover);
+  --primary-active: var(--color-brand-active);
+  --primary-disabled: var(--color-brand-disabled);
+  --primary-container: var(--color-info-primary-subtler);
+  --on-primary-container: var(--color-text-primary);
+  --primary-fixed: var(--color-brand);
+  --primary-fixed-dim: var(--color-brand-active);
+  --on-primary-fixed: var(--color-text-inverse);
+  --on-primary-fixed-variant: var(--color-text-inverse);
+
+  --surface: var(--color-bg-1);
+  --surface-dim: var(--color-bg-2);
+  --surface-bright: var(--color-bg-2);
+  --on-surface: var(--color-text-primary);
+  --surface-variant: var(--color-bg-1);
+  --on-surface-variant: var(--color-text-secondary);
+  --surface-container-lowest: var(--color-bg-1);
+  --surface-container-low: var(--color-bg-2);
+  --surface-container: var(--color-bg-2);
+  --surface-container-high: var(--color-bg-2);
+  --surface-container-highest: var(--color-bg-2);
+
+  --inverse-surface: var(--color-text-primary);
+  --inverse-on-surface: var(--color-text-inverse);
+  --inverse-on-surface-variant: var(--color-text-inverse-disabled);
+  --inverse-primary: var(--color-brand);
+
+  --error: var(--color-error);
+  --on-error: var(--color-text-inverse);
+  --error-container: var(--color-message-bg-error);
+  --on-error-container: var(--color-text-primary);
+
+  --success: var(--color-success);
+  --on-success: var(--color-text-inverse);
+  --success-container: var(--color-message-bg-success);
+  --on-success-container: var(--color-text-primary);
+
+  --critical: var(--color-alert);
+  --on-critical: var(--color-text-inverse);
+  --critical-container: var(--color-message-bg-alert);
+  --on-critical-container: var(--color-text-primary);
+
+  --warning: var(--color-warning);
+  --on-warning: var(--color-text-inverse);
+  --warning-container: var(--color-message-bg-warning);
+  --on-warning-container: var(--color-text-primary);
+
+  --info: var(--color-info-primary);
+  --on-info: var(--color-text-inverse);
+  --info-container: var(--color-message-bg-info);
+  --on-info-container: var(--color-text-primary);
+
+  --content-placeholder: var(--color-text-placeholder);
+  --content-disabled: var(--color-text-disabled);
+  --content-inverse-disabled: var(--color-text-inverse-disabled);
+
+  --interactive-link: var(--color-link);
+  --interactive-link-hover: var(--color-link-hover);
+  --interactive-link-active: var(--color-link-active);
+  --interactive-link-visited: var(--color-link-visited);
+  --interactive-link-disabled: var(--color-link-disabled);
+  
+  --scrim: var(--color-bg-mask);
+  --outline: var(--color-border);
+  --outline-variant: var(--color-border-separator);
+  --divider: var(--color-border-separator);
+  --focus-ring: var(--color-border-focus);
+  --selected: var(--color-border-focus);
+
+  /* ── spacing → --spacing-* ── */
+  --spacing-inline: var(--spacing-2);   /* 8px */
+  --spacing-stack: var(--spacing-3);    /* 12px */
+  --spacing-gutter: var(--spacing-4);  /* 16px */
+  --spacing-inset: var(--spacing-6);    /* 24px */
+  --spacing-section: var(--spacing-4); /* 16px */
+  --spacing-page: var(--spacing-8);      /* 32px */
+
+  /* ── boxShadow ── */
+  --shadow-card: var(--shadow-sm);
+  --shadow-popover: var(--shadow-lg);
+  --shadow-modal: var(--shadow-xl);
+
+  /* ── borderRadius → --radius-* ── */
+  --radius-badge: var(--radius-base);  /* 4px */
+  --radius-action: var(--radius-base); /* 4px */
+  --radius-container: var(--radius-lg); /* 8px */
+  --radius-overlay: var(--radius-lg);  /* 8px */
+
+  /* ── outlineWidth / outlineOffset ── */
+  --outline-width-focus: 1px;
+  --outline-offset-gap: 2px;
+
+  /* ── typography → --font-*（角色化 font 简写：字号/行高 字族；字重另行用 --font-weight-* 组合）── */
+  /* Display 展示文本 — 英雄标语、数据看板大数字 */
+  --font-display-l: var(--font-size-7xl)/var(--line-height-xs) var(--font-family);    /* 60px/1.25 */
+  --font-display-m: var(--font-size-6xl)/var(--line-height-sm) var(--font-family);    /* 48px/1.375 */
+  --font-display-s: var(--font-size-5xl)/var(--line-height-sm) var(--font-family);    /* 36px/1.375 */
+  /* Headline 标题 — 页面区块标题(H3)→卡片标题→表单区标题 */
+  --font-headline-l: var(--font-size-2xl)/var(--line-height-sm) var(--font-family);   /* 20px/1.375 */
+  --font-headline-m: var(--font-size-xl)/var(--line-height-sm) var(--font-family);    /* 18px/1.375 */
+  --font-headline-s: var(--font-size-lg)/var(--line-height-base) var(--font-family);  /* 16px/1.5 */
+  /* Body 正文 — 表单标签/按钮文字→表格正文→辅助说明 */
+  --font-body-l: var(--font-size-lg)/var(--line-height-base) var(--font-family);      /* 16px/1.5 */
+  --font-body-m: var(--font-size-md)/var(--line-height-base) var(--font-family);      /* 14px/1.5 */
+  --font-body-s: var(--font-size-base)/var(--line-height-md) var(--font-family);      /* 12px/1.625 */
+  /* Caption 注释 — 时间戳/表格附加信息→底部免责声明 */
+  --font-caption-m: var(--font-size-base)/var(--line-height-md) var(--font-family);   /* 12px/1.625 */
+  --font-caption-s: var(--font-size-sm)/var(--line-height-lg) var(--font-family);    /* 10px/1.8 */
+}
+
+.dark {
+  /* 品牌色 */
+  --color-brand: var(--brand-50);
+  --color-brand-hover: var(--brand-40);
+  --color-brand-focus: var(--brand-50);
+  --color-brand-active: var(--brand-60);
+  --color-brand-disabled: var(--brand-70);
+  /* 文本色 */
+  --color-text-primary: var(--gray-0);
+  --color-text-secondary: var(--gray-20);
+  --color-text-placeholder: var(--gray-40);
+  --color-text-disabled: var(--gray-40);
+  --color-text-inverse: var(--gray-0);
+  --color-text-inverse-disabled: rgb(from var(--gray-05) r g b / 0.3);
+  --color-text-on: var(--gray-0);
+  --color-link: var(--brand-30);
+  --color-link-hover: var(--brand-20);
+  --color-link-active: var(--brand-40);
+  --color-link-visited: var(--indigo-50);
+  --color-link-disabled: var(--brand-60);
+  /* 背景色 */
+  --color-bg-1: var(--gray-100);
+  --color-bg-2: var(--gray-90);
+  --color-bg-3: var(--gray-80);
+  --color-bg-4: var(--gray-70);
+  --color-bg-5: rgb(from var(--gray-05) r g b / 0.1);
+  --color-bg-6: rgb(from var(--gray-05) r g b / 0.1);
+  --color-bg-mask: rgb(from var(--gray-0) r g b / 0.7);
+  /* 填充色 */
+  --color-fill-disabled: var(--gray-60);
+  --color-hover: rgb(from var(--gray-05) r g b / 0.2);
+  --color-fill-disabled-subtle: rgb(from var(--gray-05) r g b / 0.2);
+  --color-fill: rgb(from var(--gray-05) r g b / 0.2);
+  --color-select: rgb(from var(--brand-50) r g b / 0.4);
+  --color-fill-subtle: rgb(from var(--gray-100) r g b / 0);
+  /* 图标色 */
+  --color-icon-primary: var(--gray-10);
+  --color-icon-secondary: var(--gray-30);
+  --color-icon-tertiary: var(--gray-50);
+  --color-icon-placeholder: var(--gray-40);
+  --color-icon-disabled: var(--gray-40);
+  --color-icon-inverse: var(--gray-0);
+  --color-icon-hover: var(--brand-20);
+  --color-icon-focus: var(--brand-30);
+  --color-icon-active: var(--brand-40);
+  /* 边框色 */
+  --color-border: var(--gray-50);
+  --color-border-hover: var(--gray-05);
+  --color-border-focus: var(--brand-40);
+  --color-border-active: var(--brand-80);
+  --color-border-disabled: var(--gray-60);
+  --color-border-separator: rgb(from var(--gray-05) r g b / 0.15);
+  --color-border-separator-sbutle: rgb(from var(--gray-05) r g b / 0.1);
+  /* 功能色-错误 */
+  --color-error: var(--red-40);
+  --color-error-hover: var(--red-30);
+  --color-error-active: var(--red-50);
+  --color-error-disabled: var(--red-80);
+  --color-error-subtle: var(--red-60);
+  --color-error-subtler: var(--red-80);
+  /* 功能色-告警 */
+  --color-alert: var(--orange-50);
+  --color-alert-hover: var(--orange-40);
+  --color-alert-active: var(--orange-60);
+  --color-alert-disabled: var(--orange-80);
+  --color-alert-subtle: var(--orange-60);
+  --color-alert-subtler: var(--orange-80);
+  /* 功能色-提醒 */
+  --color-warning: var(--yellow-40);
+  --color-warning-hover: var(--yellow-30);
+  --color-warning-active: var(--yellow-50);
+  --color-warning-disabled: var(--yellow-80);
+  --color-warning-bold: var(--yellow-60);
+  --color-warning-subtle: var(--yellow-60);
+  --color-warning-subtler: var(--yellow-80);
+  /* 功能色-成功 */
+  --color-success: var(--mint-60);
+  --color-success-hover: var(--mint-50);
+  --color-success-active: var(--mint-60);
+  --color-success-disabled: var(--mint-80);
+  --color-success-subtle: var(--mint-60);
+  --color-success-subtler: var(--mint-80);
+  /* 功能色-信息 */
+  --color-info-primary: var(--blue-50);
+  --color-info-primary-subtle: var(--blue-60);
+  --color-info-primary-subtler: var(--blue-80);
+  --color-info-secondary: var(--blue-60);
+  --color-info-secondary-hover: var(--blue-40);
+  --color-info-secondary-active: var(--blue-60);
+  --color-info-secondary-disabled: var(--blue-80);
+  --color-info-secondary-subtle: var(--blue-80);
+  /* 功能色-失效 */
+  --color-none: var(--gray-60);
+  --color-none-hover: rgb(from var(--gray-05) r g b / 0.2);
+  --color-none-active: var(--gray-50);
+  --color-none-disabled: var(--gray-90);
+  --color-none-subtle: var(--gray-90);
+  /* 推荐图表色 */
+  --color-chart-1: var(--blue-50);
+  --color-chart-2: var(--green-50);
+  --color-chart-3: var(--indigo-50);
+  --color-chart-4: var(--cyan-50);
+  --color-chart-5: var(--orange-40);
+  --color-chart-6: var(--brand-30);
+  --color-chart-7: var(--purple-60);
+  --color-chart-8: var(--rose-60);
+  --color-chart-9: var(--indigo-60);
+  --color-chart-10: var(--yellow-60);
+  --color-chart-11: var(--brand-60);
+  --color-chart-12: var(--green-60);
+  --color-chart-13: var(--purple-70);
+  --color-chart-14: var(--cyan-60);
+  --color-chart-15: var(--orange-70);
+  --color-chart-16: var(--rose-60);
+  --color-chart-17: var(--cyan-70);
+  --color-chart-18: var(--blue-60);
+  --color-chart-19: var(--green-70);
+  --color-chart-20: var(--indigo-70);
+  --color-chart-21: var(--rose-70);
+  --color-chart-22: var(--cyan-30);
+  --color-chart-23: var(--yellow-70);
+  --color-chart-24: var(--purple-50);
+  --color-chart-25: var(--mint-70);
+  /* 特殊场景 */
+  --color-scrollbar: var(--gray-60);
+  --color-scrollbar-hover: var(--gray-40);
+  --color-card-gray-disabled: rgb(from var(--gray-40) r g b / 0.05);
+  --color-card-white-disabled: rgb(from var(--gray-40) r g b / 0.1);
+  --color-sidenav-bg: var(--gray-70);
+  --color-table-header: rgb(from var(--gray-05) r g b / 0.1);
+  --color-table-zebra: rgb(from var(--gray-50) r g b / 0.15);
+  --color-message-bg-info: rgb(from var(--blue-50) r g b / 0.15);
+  --color-message-bg-success: rgb(from var(--mint-60) r g b / 0.15);
+  --color-message-bg-warning: rgb(from var(--yellow-40) r g b / 0.15);
+  --color-message-bg-alert: rgb(from var(--orange-50) r g b / 0.15);
+  --color-message-bg-error: rgb(from var(--red-40) r g b / 0.15);
+  /* ICT3.0 3.0告警色 */
+  --color-alert-urgent: #F43146;
+  --color-alert-primary: #EC6F1A;
+  --color-alert-secondary: #EEBA18;
+  --color-alert-success: #0D9458;
+  --color-alert-running: #5990FD;
+  --color-alert-none: #818181;
+  /* ICT3.1 表格 */
+  --color-table-1: rgb(from var(--brand-50) r g b / 0.2);
+  --color-table-2: rgb(from var(--brand-50) r g b / 0.4);
+  --color-table-sticky-1: var(--brand-80);
+  --color-table-sticky-2: var(--brand-70);
+  --color-table-sticky-bg: var(--gray-70);
+  --color-table-sticky-header: var(--gray-70);
+  /* 标签配色 */
+  --color-tag-text-purple: var(--purple-30);
+  --color-tag-bg-purple: rgb(from var(--purple-30) r g b / 0.15);
+  --color-tag-text-cyan: var(--cyan-40);
+  --color-tag-bg-cyan: rgb(from var(--cyan-50) r g b / 0.15);
+  --color-tag-text-rose: var(--rose-30);
+  --color-tag-bg-rose: rgb(from var(--rose-30) r g b / 0.15);
+  --color-tag-text-green: var(--green-50);
+  --color-tag-bg-green: rgb(from var(--green-40) r g b / 0.15);
+  --color-tag-text-pink: var(--pink-30);
+  --color-tag-bg-pink: rgb(from var(--pink-30) r g b / 0.15);
+  --color-tag-text-indigo: var(--indigo-30);
+  --color-tag-bg-indigo: rgb(from var(--indigo-30) r g b / 0.15);
+  --color-tag-text-none: var(--gray-30);
+  --color-tag-bg-none: rgb(from var(--gray-30) r g b / 0.15);
+  --color-tag-text-error: var(--red-40);
+  --color-tag-bg-error: rgb(from var(--red-30) r g b / 0.15);
+  --color-tag-text-alert: var(--orange-40);
+  --color-tag-bg-alert: rgb(from var(--orange-50) r g b / 0.15);
+  --color-tag-text-warning: var(--yellow-50);
+  --color-tag-bg-warning: rgb(from var(--yellow-30) r g b / 0.15);
+  --color-tag-text-success: var(--mint-40);
+  --color-tag-bg-success: rgb(from var(--mint-50) r g b / 0.15);
+  --color-tag-text-info: var(--blue-30);
+  --color-tag-bg-info: rgb(from var(--blue-40) r g b / 0.15);
+  /* Border */
+  --border: var(--gray-50);
+  --border-light: rgb(from var(--gray-05) r g b / 0.15);
+  --border-primary: var(--brand-30);
+  --border-success: var(--mint-20);
+  --border-warning: var(--yellow-20);
+  --border-alert: var(--orange-20);
+  --border-error: var(--red-20);
+  /* Icon */
+  --icon-primary: var(--brand-30);
+  --icon-success: var(--mint-30);
+  --icon-warning: var(--yellow-30);
+  --icon-critical: var(--orange-30);
+  --icon-alert: var(--orange-30);
+  --icon-error: var(--red-30);
+  /* Shadow (暗色模式下阴影更强) */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.5);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-r-sm: 1px 0 6px 0 rgba(0, 0, 0, 0.5);
+  --shadow-t-sm: 0 -1px 6px rgba(0, 0, 0, 0.5);
+  --shadow-l-base: -2px 0 12px 0 rgba(0, 0, 0, 0.5);
+  --shadow-l-md: -2px 0 24px 0 rgba(0, 0, 0, 0.5);
+}
+
+
+/* Button 组件样式（token 映射） */
+.ant-btn {
+  font-size: var(--font-size-md);
+  border-radius: var(--radius-base);
+  font-weight: var(--font-weight-normal);
+  min-width: calc(var(--spacing-4) * 5.5);
+  box-shadow: none;
+  gap: 4px;
+}
+.ant-btn.ant-btn-color-default {
+  color: var(--color-text-primary);
+}
+.ant-btn.ant-btn-color-default:not(:disabled):hover {
+  color: var(--color-text-primary);
+  border-color: var(--gray-90);
+  background-color: var(--color-bg-2);
+}
+.ant-btn.ant-btn-color-default:not(:disabled):active {
+  color: var(--color-text-primary);
+  border-color: var(--border-primary);
+  background-color: var(--color-bg-2);
+}
+.ant-btn.ant-btn-color-default:disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--gray-10);
+}
+.ant-btn.ant-btn-color-primary {
+  color: var(--gray-0);
+  background-color: var(--color-brand);
+}
+.ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  color: var(--gray-0);
+  background-color: var(--brand-40);
+}
+.ant-btn.ant-btn-color-primary:not(:disabled):active {
+  color: var(--gray-0);
+  background-color: var(--brand-60);
+}
+.ant-btn.ant-btn-color-primary:disabled {
+  color: var(--gray-0);
+  background-color: var(--brand-20);
+  border-color: var(--brand-20);
+}
+.ant-btn.ant-btn-dangerous {
+  color: var(--gray-0);
+  background-color: var(--red-50);
+}
+.ant-btn.ant-btn-dangerous:not(:disabled):hover {
+  color: var(--gray-0);
+  background-color: var(--red-40);
+}
+.ant-btn.ant-btn-dangerous:not(:disabled):active {
+  color: var(--gray-0);
+  background-color: var(--red-60);
+}
+.ant-btn.ant-btn-dangerous:disabled {
+  color: var(--gray-0);
+  background-color: var(--red-10);
+  border-color: var(--red-10);
+}
+.ant-btn.ant-btn-sm {
+  height: 28px;
+}
+.ant-btn.ant-btn-lg {
+  height: 36px;
+  padding: var(--spacing-0) var(--spacing-5);
+  min-width: 96px;
+  font-size: var(--font-size-md);
+}
+.ant-btn.ant-btn-icon-only {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: auto !important;
+  border: none !important;
+  background-color: transparent !important;
+  padding: var(--spacing-0);
+}
+.ant-btn.ant-btn-icon-only .anticon {
+  font-size: var(--font-size-2xl);
+}
+.ant-btn.ant-btn-icon-only.ant-btn-sm {
+  width: 24px !important;
+  height: 24px !important;
+}
+.ant-btn.ant-btn-icon-only.ant-btn-sm .anticon {
+  font-size: var(--font-size-md);
+}
+.ant-btn.ant-btn-icon-only:hover,
+.ant-btn.ant-btn-icon-only:focus {
+  background-color: transparent !important;
+}
+.ant-btn.ant-btn-icon-only.ant-btn-color-default:hover {
+  color: var(--brand-40);
+}
+.ant-btn.ant-btn-icon-only.ant-btn-color-default:active {
+  color: var(--brand-50);
+}
+.ant-btn.ant-btn-variant-link {
+  min-width: unset;
+  line-height: 22px;
+  padding: var(--spacing-0);
+  border: none;
+  background-color: transparent;
+  color: var(--color-brand);
+}
+.ant-btn.ant-btn-variant-link:not(:disabled):hover {
+  color: var(--brand-40);
+}
+.ant-btn.ant-btn-variant-link:not(:disabled):active {
+  color: var(--brand-60);
+}
+.dark .ant-btn.ant-btn-color-default {
+  border-color: var(--gray-50);
+  background-color: rgb(from var(--gray-100) r g b / 0);
+}
+.dark .ant-btn.ant-btn-color-default:not(:disabled):hover {
+  background-color: rgb(from var(--gray-100) r g b / 0);
+  border-color: var(--gray-05);
+}
+.dark .ant-btn.ant-btn-color-default:not(:disabled):active {
+  color: var(--color-text-primary);
+  border-color: var(--brand-40);
+  background-color: rgb(from var(--gray-100) r g b / 0);
+}
+.dark .ant-btn.ant-btn-color-default:disabled {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-60);
+}
+.dark .ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  background-color: var(--brand-40);
+}
+.dark .ant-btn.ant-btn-color-primary:not(:disabled):active {
+  background-color: var(--brand-60);
+}
+.dark .ant-btn.ant-btn-color-primary:disabled {
+  color: rgb(from var(--gray-05) r g b / 0.3);
+  background-color: var(--brand-70);
+  border-color: var(--brand-70);
+}
+.dark .ant-btn.ant-btn-color-dangerous {
+  background-color: var(--red-40);
+}
+.dark .ant-btn.ant-btn-color-dangerous:not(:disabled):hover {
+  background-color: var(--red-30);
+}
+.dark .ant-btn.ant-btn-color-dangerous:not(:disabled):active {
+  background-color: var(--red-50);
+}
+.dark .ant-btn.ant-btn-color-dangerous:disabled {
+  color: var(--gray-0);
+  background-color: var(--red-80);
+  border-color: var(--red-80);
+}
+.dark .ant-btn.ant-btn-variant-link {
+  color: var(--brand-30);
+}
+.dark .ant-btn.ant-btn-variant-link:not(:disabled):hover {
+  color: var(--brand-20);
+}
+.dark .ant-btn.ant-btn-variant-link:not(:disabled):active {
+  color: var(--brand-40);
+}
+.dark .ant-btn.ant-btn-icon-only {
+  color: var(--gray-10);
+}
+.dark .ant-btn.ant-btn-icon-only:hover .anticon {
+  color: var(--brand-20);
+}
+.dark .ant-btn.ant-btn-icon-only:active .anticon {
+  color: var(--brand-40);
+}
+
+/* Checkbox 组件样式（token 映射，转换自根目录 checkbox.css） */
+.ant-checkbox-wrapper {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked):hover .ant-checkbox {
+  border-color: var(--brand-40);
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox-disabled.ant-checkbox {
+  background-color: rgb(from var(--gray-100) r g b / 0.05);
+  border-color: var(--gray-20);
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox {
+  border-color: var(--gray-40);
+  background-color: var(--gray-0);
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked:hover .ant-checkbox {
+  background-color: var(--brand-40);
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox {
+  background-color: var(--brand-50);
+  border-color: none;
+}
+.dark .ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox {
+  border-color: var(--gray-50);
+  background-color: var(--gray-100);
+}
+
+/* Tag 组件样式（占位，待填充 token 映射） */
+.ant-tag {
+  border-color: transparent;
+  padding: 0 8px;
+  line-height: 24px;
+  background-color: var(--color-tag-bg-none);
+  color: var(--color-text-primary);
+}
+.ant-tag.ant-tag-processing {
+  border-color: transparent;
+  background-color: var(--color-tag-bg-info);
+  color: var(--color-tag-text-info);
+}
+.ant-tag.ant-tag-error {
+  border-color: transparent;
+  background-color: var(--color-tag-bg-error);
+  color: var(--color-tag-text-error);
+}
+.ant-tag.ant-tag-warning {
+  border-color: transparent;
+  background-color: var(--color-tag-bg-warning);
+  color: var(--color-tag-text-warning);
+}
+.ant-tag.ant-tag-gold {
+  border-color: transparent;
+  background-color: var(--color-tag-bg-alert);
+  color: var(--color-tag-text-alert);
+}
+.ant-tag.ant-tag-success {
+  border-color: transparent;
+  background-color: var(--color-tag-bg-success);
+  color: var(--color-tag-text-success);
+}
+.ant-tag.ant-tag-green {
+  border-color: transparent;
+  background-color: var(--color-tag-bg-green);
+  color: var(--color-tag-text-green);
+}
+.ant-tag.ant-tag-has-color {
+  border-color: transparent;
+  background-color: var(--color-tag-bg-rose);
+  color: var(--color-tag-text-rose);
+}
+.ant-tag.ant-tag-pink {
+  border-color: transparent;
+  background-color: var(--color-tag-bg-pink);
+  color: var(--color-tag-text-pink);
+}
+.ant-tag.ant-tag-purple {
+  border-color: transparent;
+  background-color: var(--color-tag-bg-purple);
+  color: var(--color-tag-text-purple);
+}
+.ant-tag.ant-tag-geekblue {
+  border-color: transparent;
+  background-color: var(--color-tag-bg-indigo);
+  color: var(--color-tag-text-indigo);
+}
+.ant-tag.ant-tag-cyan {
+  border-color: transparent;
+  background-color: var(--color-tag-bg-cyan);
+  color: var(--color-tag-text-cyan);
+}
+.ant-tag.ant-tag-disabled {
+  background-color: var(--color-tag-bg-none);
+  color: var(--color-tag-text-none);
+}
+.ant-tag.ant-tag-disabled .anticon {
+  color: var(--color-tag-text-none);
+}
+.ant-tag > .anticon + span,
+.ant-tag > span + .anticon {
+  margin-left: 4px;
+}
+.ant-tag .anticon {
+  color: var(--color-text-primary);
+}
+
+/* ============================================================================
+   antd token 对齐层
+   antd 5 组件在运行时注入样式(优先级高于本文件),且其默认品牌色/亮色底纹不随
+   四层 token 翻转。本层用 !important 做确定性覆盖,使 antd 组件的颜色、底色与
+   暗色模式全部跟随 token(ant.css 重置层仅覆盖 Button/Checkbox/Tag)。
+   ========================================================================== */
+
+/* ---------- Switch ---------- */
+.ant-switch {
+  background: var(--content-placeholder) !important;
+}
+.ant-switch.ant-switch-checked {
+  background: var(--primary) !important;
+}
+.ant-switch.ant-switch-checked:hover {
+  background: var(--primary-hover) !important;
+}
+
+/* ---------- Menu ---------- */
+.ant-menu-light.ant-menu-inline,
+.ant-menu-light.ant-menu-vertical {
+  background: transparent !important;
+  border-inline-end: none !important;
+}
+.ant-menu-light .ant-menu-item,
+.ant-menu-light .ant-menu-submenu-title {
+  color: var(--on-surface) !important;
+  border-radius: var(--radius-base) !important;
+}
+.ant-menu-light .ant-menu-item:hover,
+.ant-menu-light .ant-menu-submenu-title:hover {
+  background: var(--surface-variant) !important;
+  color: var(--on-surface) !important;
+}
+.ant-menu-light .ant-menu-item-selected {
+  background: var(--primary-container) !important;
+  color: var(--primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+.ant-menu-light .ant-menu-item-selected .ant-menu-item-icon,
+.ant-menu-light .ant-menu-item-selected .anticon {
+  color: var(--primary) !important;
+}
+.ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title {
+  color: var(--primary) !important;
+}
+.ant-menu-light .ant-menu-sub .ant-menu-item {
+  color: var(--on-surface-variant) !important;
+}
+.ant-menu-light .ant-menu-sub .ant-menu-item-selected {
+  color: var(--primary) !important;
+}
+.ant-menu-light.ant-menu-horizontal {
+  background: transparent !important;
+  border-bottom: none !important;
+}
+.ant-menu-horizontal .ant-menu-item {
+  color: var(--on-surface-variant) !important;
+}
+.ant-menu-horizontal .ant-menu-item:hover {
+  color: var(--on-surface) !important;
+}
+.ant-menu-horizontal .ant-menu-item-selected {
+  color: var(--primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+.ant-menu-horizontal .ant-menu-item::after {
+  border-bottom-color: transparent !important;
+}
+.ant-menu-horizontal .ant-menu-item-selected::after {
+  border-bottom-color: var(--primary) !important;
+}
+
+/* ---------- Form ---------- */
+.ant-form-item .ant-form-item-label > label {
+  color: var(--on-surface) !important;
+  font: var(--font-body-m) !important;
+  font-weight: var(--font-weight-medium) !important;
+  height: auto !important;
+}
+.ant-form-item .ant-form-item-label > label.ant-form-item-required::before {
+  color: var(--error) !important;
+}
+.ant-form-item .ant-form-item-explain-error {
+  color: var(--error) !important;
+  font: var(--font-body-s) !important;
+}
+.ant-form-item .ant-form-item-extra {
+  color: var(--on-surface-variant) !important;
+  font: var(--font-caption-m) !important;
+}
+
+/* ---------- Input / InputNumber / Select 触发器 ---------- */
+.ant-input,
+.ant-input-affix-wrapper,
+.ant-input-number,
+.ant-select .ant-select-selector,
+.ant-picker {
+  background: var(--surface-container-highest) !important;
+  border-color: var(--outline) !important;
+  color: var(--on-surface) !important;
+}
+.ant-input::placeholder,
+.ant-input-number-input::placeholder,
+.ant-select .ant-select-selection-placeholder {
+  color: var(--content-placeholder) !important;
+}
+.ant-input:hover,
+.ant-input-affix-wrapper:hover,
+.ant-input-number:hover,
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: var(--primary) !important;
+}
+.ant-input:focus,
+.ant-input-focused,
+.ant-input-affix-wrapper-focused,
+.ant-input-number-focused,
+.ant-select-focused .ant-select-selector {
+  border-color: var(--selected) !important;
+  box-shadow: 0 0 0 2px var(--primary-container) !important;
+}
+.ant-input-number .ant-input-number-input,
+.ant-select .ant-select-selection-item {
+  color: var(--on-surface) !important;
+}
+.ant-select .ant-select-arrow,
+.ant-select .ant-select-clear,
+.ant-input-affix-wrapper .anticon,
+.ant-input-number .ant-input-number-handler .anticon {
+  color: var(--on-surface-variant) !important;
+}
+.ant-form-item-has-error .ant-input,
+.ant-form-item-has-error .ant-input-affix-wrapper,
+.ant-form-item-has-error .ant-input-number,
+.ant-form-item-has-error .ant-select .ant-select-selector {
+  border-color: var(--error) !important;
+}
+.ant-form-item-has-error .ant-input:focus,
+.ant-form-item-has-error .ant-input-affix-wrapper-focused,
+.ant-form-item-has-error .ant-input-number-focused,
+.ant-form-item-has-error .ant-select-focused .ant-select-selector {
+  border-color: var(--error) !important;
+  box-shadow: 0 0 0 2px var(--error-container) !important;
+}
+
+/* ---------- Radio.Group(solid 按钮组) ---------- */
+.ant-radio-button-wrapper {
+  background: var(--surface-container-highest) !important;
+  border-color: var(--outline) !important;
+  color: var(--on-surface-variant) !important;
+}
+.ant-radio-button-wrapper:not(:first-child)::before {
+  background: var(--outline) !important;
+}
+.ant-radio-button-wrapper-checked {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: var(--on-primary) !important;
+  box-shadow: none !important;
+}
+.ant-radio-button-wrapper-checked::before {
+  background: var(--primary) !important;
+}
+
+/* ---------- Checkbox ---------- */
+.ant-checkbox .ant-checkbox-inner {
+  background: var(--surface-container-highest) !important;
+  border-color: var(--outline) !important;
+}
+.ant-checkbox-checked .ant-checkbox-inner,
+.ant-checkbox-indeterminate .ant-checkbox-inner::after {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+/* ---------- Table ---------- */
+.ant-table-wrapper .ant-table {
+  background: transparent !important;
+  color: var(--on-surface) !important;
+}
+.ant-table-wrapper .ant-table-thead > tr > th {
+  background: var(--surface-variant) !important;
+  color: var(--on-surface-variant) !important;
+  border-bottom: 1px solid var(--divider) !important;
+  font: var(--font-body-m) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+.ant-table-wrapper .ant-table-thead > tr > th::before {
+  display: none !important;
+}
+.ant-table-wrapper .ant-table-tbody > tr > td {
+  border-bottom: 1px solid var(--divider) !important;
+  color: var(--on-surface) !important;
+  font: var(--font-body-m) !important;
+}
+.ant-table-wrapper .ant-table-tbody > tr.ant-table-row:hover > td,
+.ant-table-wrapper .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: var(--surface-variant) !important;
+}
+.ant-table-wrapper .ant-table-tbody > tr.ant-table-row-selected > td {
+  background: var(--primary-container) !important;
+}
+.ant-table-wrapper .ant-table-placeholder:hover > td {
+  background: transparent !important;
+}
+.ant-table-wrapper .ant-table-column-sorter {
+  color: var(--on-surface-variant) !important;
+}
+.ant-table-wrapper .ant-table-pagination {
+  color: var(--on-surface-variant) !important;
+}
+.ant-empty .ant-empty-description {
+  color: var(--on-surface-variant) !important;
+}
+.dark .ant-empty .ant-empty-image {
+  opacity: 0.45;
+}
+
+/* ---------- Pagination ---------- */
+.ant-pagination .ant-pagination-total-text,
+.ant-pagination .ant-pagination-options-quick-jumper {
+  color: var(--on-surface-variant) !important;
+}
+.ant-pagination .ant-pagination-item {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+.ant-pagination .ant-pagination-item a {
+  color: var(--on-surface) !important;
+}
+.ant-pagination .ant-pagination-item-active {
+  background: var(--primary-container) !important;
+  border-color: var(--primary) !important;
+}
+.ant-pagination .ant-pagination-item-active a {
+  color: var(--primary) !important;
+}
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  background: transparent !important;
+  border-color: var(--outline) !important;
+  color: var(--on-surface) !important;
+}
+.ant-pagination .ant-pagination-disabled .ant-pagination-item-link {
+  color: var(--content-disabled) !important;
+}
+
+/* ---------- 浮层:Select 下拉 / Dropdown ---------- */
+.ant-select-dropdown,
+.ant-dropdown .ant-dropdown-menu {
+  background: var(--surface-container-high) !important;
+  box-shadow: var(--shadow-popover) !important;
+  border-radius: var(--radius-overlay) !important;
+}
+.ant-select-dropdown .ant-select-item {
+  color: var(--on-surface) !important;
+  border-radius: var(--radius-base) !important;
+}
+.ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background: var(--surface-variant) !important;
+}
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: var(--primary-container) !important;
+  color: var(--primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+.ant-dropdown .ant-dropdown-menu-item {
+  color: var(--on-surface) !important;
+  border-radius: var(--radius-base) !important;
+}
+.ant-dropdown .ant-dropdown-menu-item:hover {
+  background: var(--surface-variant) !important;
+}
+.ant-dropdown .ant-dropdown-menu-item-selected {
+  background: var(--primary-container) !important;
+  color: var(--primary) !important;
+}
+.ant-dropdown .ant-dropdown-menu-item-danger {
+  color: var(--error) !important;
+}
+.ant-dropdown .ant-dropdown-menu-item-divider {
+  background: var(--divider) !important;
+}
+
+/* ---------- Tooltip ---------- */
+.ant-tooltip .ant-tooltip-inner {
+  background: var(--inverse-surface) !important;
+  color: var(--inverse-on-surface) !important;
+  border-radius: var(--radius-base) !important;
+  font: var(--font-body-s) !important;
+  box-shadow: none !important;
+}
+.ant-tooltip .ant-tooltip-arrow::before,
+.ant-tooltip .ant-tooltip-arrow::after {
+  background: var(--inverse-surface) !important;
+}
+.dark .ant-tooltip .ant-tooltip-inner {
+  background: var(--surface-container-high) !important;
+  color: var(--on-surface) !important;
+  box-shadow: var(--shadow-popover) !important;
+}
+.dark .ant-tooltip .ant-tooltip-arrow::before,
+.dark .ant-tooltip .ant-tooltip-arrow::after {
+  background: var(--surface-container-high) !important;
+}
+
+/* ---------- Modal ---------- */
+.ant-modal .ant-modal-content {
+  background: var(--surface-container-highest) !important;
+  border-radius: var(--radius-overlay) !important;
+  box-shadow: var(--shadow-modal) !important;
+  color: var(--on-surface) !important;
+  padding: var(--spacing-inset) !important;
+}
+.ant-modal .ant-modal-header {
+  background: transparent !important;
+  margin-bottom: var(--spacing-gutter) !important;
+}
+.ant-modal .ant-modal-title {
+  color: var(--on-surface) !important;
+  font: var(--font-headline-m) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+.ant-modal .ant-modal-close {
+  background: transparent !important;
+  color: var(--on-surface-variant) !important;
+  border-radius: var(--radius-base) !important;
+}
+.ant-modal .ant-modal-close:hover {
+  background: var(--surface-variant) !important;
+  color: var(--on-surface) !important;
+}
+.ant-modal .ant-modal-footer {
+  margin-top: var(--spacing-inset) !important;
+  padding-top: var(--spacing-gutter) !important;
+  border-top: 1px solid var(--divider) !important;
+}
+
+/* ---------- 全局提示 Message ---------- */
+.ant-message .ant-message-notice-content {
+  background: var(--surface-container-highest) !important;
+  color: var(--on-surface) !important;
+  box-shadow: var(--shadow-popover) !important;
+  border-radius: var(--radius-base) !important;
+  font: var(--font-body-m) !important;
+}
+.ant-message .anticon {
+  color: var(--success) !important;
+}
+
+/* ---------- Breadcrumb / Badge ---------- */
+.ant-breadcrumb,
+.ant-breadcrumb .ant-breadcrumb-link,
+.ant-breadcrumb .ant-breadcrumb-link a {
+  color: var(--on-surface-variant) !important;
+  font: var(--font-body-s) !important;
+}
+.ant-breadcrumb .ant-breadcrumb-separator {
+  color: var(--content-placeholder) !important;
+}
+.ant-breadcrumb li:last-child .ant-breadcrumb-link {
+  color: var(--on-surface) !important;
+}
+.ant-badge .ant-badge-count {
+  background: var(--error) !important;
+  box-shadow: 0 0 0 1px var(--surface-container-highest) !important;
+  font: var(--font-caption-s) !important;
+}
+
+
+/* Layer 5: 应用级布局骨架 — 固定外壳(顶部导航 + 侧边导航 + 内部滚动内容区) */
+.app-shell.ant-layout {
+  height: 100vh;
+  overflow: hidden;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.app-body.ant-layout {
+  height: calc(100vh - 48px);
+  background: var(--surface-container-lowest);
+}
+
+.app-content.ant-layout-content {
+  min-width: 0;
+  padding: var(--spacing-page);
+  overflow-y: auto;
+  background: var(--surface-container-lowest);
+}
+
+.app-content.ant-layout-content::-webkit-scrollbar,
+.app-sider-menu.ant-menu::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.app-content.ant-layout-content::-webkit-scrollbar-track,
+.app-sider-menu.ant-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.app-content.ant-layout-content::-webkit-scrollbar-thumb,
+.app-sider-menu.ant-menu::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-full);
+  background: var(--color-scrollbar);
+}
+
+.app-content.ant-layout-content::-webkit-scrollbar-thumb:hover,
+.app-sider-menu.ant-menu::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-hover);
+}
+
+
+/* Layer 4: 顶部导航栏 — 高度 48px,仅承载全局导航与全局工具 */
+.app-header.ant-layout-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+  height: 48px;
+  padding: 0 var(--spacing-gutter);
+  background: var(--surface-container-highest);
+  border-bottom: 1px solid var(--divider);
+  color: var(--on-surface);
+  line-height: normal;
+  flex: none;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+  flex: none;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  min-width: 0;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: var(--radius-md);
+  background: var(--primary-fixed);
+  color: var(--on-primary-fixed);
+}
+
+.brand-name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+/* 一级导航:占据中间弹性空间,高度与 Header 对齐 */
+.app-topnav.ant-menu-horizontal {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 48px;
+  line-height: 47px;
+  border-bottom: none;
+  background: transparent;
+}
+
+.app-topnav.ant-menu-horizontal .ant-menu-item,
+.app-topnav.ant-menu-horizontal .ant-menu-submenu {
+  line-height: 47px;
+}
+
+.header-btn.ant-btn {
+  padding: 0 var(--spacing-inline);
+}
+
+.header-btn-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-btn-text {
+  font: var(--font-body-m);
+  white-space: nowrap;
+}
+
+.header-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--divider);
+  flex: none;
+}
+
+.header-user.ant-btn {
+  height: 36px;
+  padding: 0 var(--spacing-stack) 0 4px;
+}
+
+.header-user-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  line-height: 1.2;
+}
+
+.header-user-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.header-user-role {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+}
+
+@media (max-width: 1279px) {
+  .header-user-meta {
+    display: none;
+  }
+  .header-btn-text {
+    display: none;
+  }
+}
+
+
+/* Layer 4: 侧边导航 */
+.app-sider.ant-layout-sider {
+  background: var(--surface-container-highest);
+  border-right: 1px solid var(--divider);
+  flex: none;
+}
+
+.app-sider .ant-layout-sider-children {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-sider-menu.ant-menu {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: var(--spacing-inline) var(--spacing-inline) 0;
+  font: var(--font-body-m);
+}
+
+.app-sider-menu.ant-menu-inline .ant-menu-item,
+.app-sider-menu.ant-menu-inline .ant-menu-submenu-title {
+  height: 36px;
+  line-height: 36px;
+  margin: 2px 0;
+}
+
+.app-sider-menu.ant-menu-inline-collapsed {
+  padding-inline: var(--spacing-inline);
+}
+
+.app-sider-foot {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+  flex: none;
+  padding: var(--spacing-stack) var(--spacing-gutter);
+  border-top: 1px solid var(--divider);
+}
+
+.foot-dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: var(--radius-full);
+  background: var(--success);
+}
+
+.foot-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.foot-title {
+  font: var(--font-body-s);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.foot-meta {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.app-sider.ant-layout-sider-collapsed .foot-text {
+  display: none;
+}
+
+.app-sider.ant-layout-sider-collapsed .app-sider-foot {
+  justify-content: center;
+  padding-inline: 0;
+}
+
+
+/* Layer 4: 设备配置页主体 */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+  max-width: 1600px;
+}
+
+.page-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack);
+}
+
+.page-head-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+}
+
+.page-head-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.page-title {
+  margin: 0;
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.page-desc {
+  margin: 0;
+  max-width: 640px;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.page-actions {
+  flex: none;
+}
+
+
+/* Layer 4: 采集策略表单区 */
+.full-width {
+  width: 100%;
+}
+
+.bound-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 var(--spacing-inline);
+  border-radius: var(--radius-full);
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+/* 开关行:说明在行首,Switch 在行尾 */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  margin-top: var(--spacing-inline);
+  padding-top: var(--spacing-inset);
+  border-top: 1px solid var(--divider);
+}
+
+.toggle-copy {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-stack);
+  min-width: 0;
+}
+
+.toggle-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: var(--radius-base);
+  background: var(--primary-container);
+  color: var(--primary);
+}
+
+.toggle-title {
+  font: var(--font-body-l);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.toggle-desc {
+  margin-top: 2px;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+/* 二级内嵌区:开关开启后展开的详细参数 */
+.detail-region {
+  margin-top: var(--spacing-section);
+  padding: var(--spacing-inset);
+  border-radius: var(--radius-container);
+  background: var(--surface-variant);
+  animation: region-in 0.22s ease-out;
+}
+
+.detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  margin-bottom: var(--spacing-gutter);
+}
+
+.detail-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.detail-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-inline);
+  margin-top: var(--spacing-section);
+  padding-top: var(--spacing-inset);
+  border-top: 1px solid var(--divider);
+}
+
+@keyframes region-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-region {
+    animation: none;
+  }
+}
+
+
+/* Layer 3: 通用卡片容器 — Level 1 容器(阴影 + 最高层背景,无结构性描边) */
+.card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-inset) var(--spacing-inset) 0;
+}
+
+.card-heading {
+  min-width: 0;
+}
+
+.card-title {
+  margin: 0;
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.card-sub {
+  margin: 4px 0 0;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.card-extra {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex: none;
+}
+
+.card-body {
+  padding: var(--spacing-inset);
+}
+
+.card-body-flush {
+  padding: var(--spacing-inset) 0 0;
+}
+
+
+/* Layer 4: 设备配置清单 */
+/* 四边留白由卡片 body 的 24px 内边距负责;工具栏只补与表格之间的 16px 间距 */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  margin-bottom: var(--spacing-gutter);
+}
+
+.table-search {
+  width: 260px;
+}
+
+.table-filter {
+  width: 148px;
+}
+
+.selection-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  margin-bottom: var(--spacing-gutter);
+  padding: var(--spacing-inline) var(--spacing-stack);
+  border-radius: var(--radius-base);
+  background: var(--primary-container);
+}
+
+.selection-count {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-primary-container);
+  margin-right: var(--spacing-inline);
+}
+
+/* 表格已整体内缩,单元格恢复表格默认内边距,避免与卡片 24px 叠加成双重缩进 */
+.device-table.ant-table-wrapper .ant-table-pagination {
+  margin: var(--spacing-gutter) 0 0 !important;
+}
+
+.device-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+  min-width: 0;
+}
+
+.device-icon {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: var(--radius-base);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+}
+
+.cell-strong {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.cell-mono {
+  font: var(--font-body-m);
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.cell-muted {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+
+/* Layer 3: 状态标签 — 语义容器底色 + 对应 on-*-container 文字 */
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 var(--spacing-inline);
+  border-radius: var(--radius-full);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.status-tag-icon {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+}
+
+.status-tag-online {
+  background: var(--success-container);
+}
+.status-tag-online .status-tag-text {
+  color: var(--on-success-container);
+}
+.status-tag-online .status-tag-icon {
+  color: var(--success);
+}
+
+.status-tag-offline {
+  background: var(--surface-variant);
+}
+.status-tag-offline .status-tag-text,
+.status-tag-offline .status-tag-icon {
+  color: var(--on-surface-variant);
+}
+
+.status-tag-alarm {
+  background: var(--error-container);
+}
+.status-tag-alarm .status-tag-text {
+  color: var(--on-error-container);
+}
+.status-tag-alarm .status-tag-icon {
+  color: var(--error);
+}
+
+.status-tag-upgrading {
+  background: var(--info-container);
+}
+.status-tag-upgrading .status-tag-text {
+  color: var(--on-info-container);
+}
+.status-tag-upgrading .status-tag-icon {
+  color: var(--info);
+}
+
+.status-tag-disabled {
+  background: var(--warning-container);
+}
+.status-tag-disabled .status-tag-text {
+  color: var(--on-warning-container);
+}
+.status-tag-disabled .status-tag-icon {
+  color: var(--critical);
+}
+
+
+/* Layer 4: 设备配置弹窗 */
+.modal-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.modal-desc {
+  margin: 0 0 var(--spacing-gutter);
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.modal-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  margin-bottom: var(--spacing-inset);
+  padding: var(--spacing-stack) var(--spacing-gutter);
+  border-radius: var(--radius-base);
+  background: var(--surface-variant);
+}
+
+.modal-switch-text {
+  min-width: 0;
+}
+
+.modal-switch-title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.modal-switch-desc {
+  margin-top: 2px;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.modal-remark {
+  margin-bottom: 0;
+}
+
+</style>
+<!-- 5. Base styles -->
+<style>
+body, html { margin: 0; padding: 0; height: 100%; font-family: var(--font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif); }
+#root { height: 100%; }
+</style>
+</head>
+<body>
+<div id="root">Loading...</div>
+<script>
+// 注册 classic JSX 运行时 preset(新版 babel-standalone 默认 automatic,
+// 产出的 import "react/jsx-runtime" 无法在经典脚本中执行)
+Babel.registerPreset("react-classic", {
+  presets: [[Babel.availablePresets["react"], { runtime: "classic" }]],
+});
+</script>
+<script type="text/babel" data-presets="react-classic">
+var __export = {};
+/* ===== assets/shared/antd-zh-cn.js ===== */
+(function () {
+// antd-zh-cn.js — 中文 locale 补丁包
+// antd.min.js / dayjs.min.js UMD 均不含 locale 包,本文件补齐:
+//   1. 注册 dayjs zh-cn locale(星期/月份/相对时间中文化)
+//   2. 导出 antd ConfigProvider 可用的 zhCN locale 对象
+//
+// 用法(页面入口):
+//   import zhCN from "./assets/shared/antd-zh-cn.js";
+//   <ConfigProvider locale={zhCN}> ... </ConfigProvider>
+
+
+
+// ---- 1. 注册 dayjs zh-cn locale(dayjs.min.js 核心包不带任何 locale) ----
+dayjs.locale(
+  "zh-cn",
+  {
+    name: "zh-cn",
+    weekdays: "星期日_星期一_星期二_星期三_星期四_星期五_星期六".split("_"),
+    weekdaysShort: "周日_周一_周二_周三_周四_周五_周六".split("_"),
+    weekdaysMin: "日_一_二_三_四_五_六".split("_"),
+    months: "一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月".split("_"),
+    monthsShort: "1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月".split("_"),
+    weekStart: 1,
+    formats: {
+      LT: "HH:mm",
+      LTS: "HH:mm:ss",
+      L: "YYYY/MM/DD",
+      LL: "YYYY年M月D日",
+      LLL: "YYYY年M月D日 Ah点mm分",
+      LLLL: "YYYY年M月D日ddddAh点mm分",
+      l: "YYYY/M/D",
+      ll: "YYYY年M月D日",
+      lll: "YYYY年M月D日 HH:mm",
+      llll: "YYYY年M月D日dddd HH:mm",
+    },
+    relativeTime: {
+      future: "%s内",
+      past: "%s前",
+      s: "几秒",
+      m: "1 分钟",
+      mm: "%d 分钟",
+      h: "1 小时",
+      hh: "%d 小时",
+      d: "1 天",
+      dd: "%d 天",
+      M: "1 个月",
+      MM: "%d 个月",
+      y: "1 年",
+      yy: "%d 年",
+    },
+    meridiem(hour, minute) {
+      const hm = hour * 100 + minute;
+      if (hm < 600) return "凌晨";
+      if (hm < 900) return "早上";
+      if (hm < 1130) return "上午";
+      if (hm < 1230) return "中午";
+      if (hm < 1800) return "下午";
+      return "晚上";
+    },
+    ordinal(number, period) {
+      switch (period) {
+        case "W":
+          return `${number}周`;
+        default:
+          return `${number}日`;
+      }
+    },
+  },
+  true
+);
+
+// ---- 2. antd zh_CN locale(对齐 antd 5 官方 zh_CN,常用组件全量) ----
+const typeTemplate = "${label}不是一个有效的${type}";
+
+const zhCN = {
+  locale: "zh-cn",
+  dayjsLocale: "zh-cn",
+
+  Pagination: {
+    items_per_page: "条/页",
+    jump_to: "跳至",
+    jump_to_confirm: "确定",
+    page: "页",
+    prev_page: "上一页",
+    next_page: "下一页",
+    prev_5: "向前 5 页",
+    next_5: "向后 5 页",
+    prev_3: "向前 3 页",
+    next_3: "向后 3 页",
+  },
+
+  DatePicker: {
+    lang: {
+      placeholder: "请选择日期",
+      yearPlaceholder: "请选择年份",
+      quarterPlaceholder: "请选择季度",
+      monthPlaceholder: "请选择月份",
+      weekPlaceholder: "请选择周",
+      rangePlaceholder: ["开始日期", "结束日期"],
+      rangeYearPlaceholder: ["开始年份", "结束年份"],
+      rangeMonthPlaceholder: ["开始月份", "结束月份"],
+      rangeWeekPlaceholder: ["开始周", "结束周"],
+      locale: "zh_cn",
+      today: "今天",
+      now: "此刻",
+      backToToday: "返回今天",
+      ok: "确定",
+      timeSelect: "选择时间",
+      dateSelect: "选择日期",
+      weekSelect: "选择周",
+      clear: "清除",
+      month: "月",
+      year: "年",
+      previousMonth: "上个月 (翻页上键)",
+      nextMonth: "下个月 (翻页下键)",
+      monthSelect: "选择月份",
+      yearSelect: "选择年份",
+      decadeSelect: "选择年代",
+      yearFormat: "YYYY年",
+      dayFormat: "D日",
+      dateFormat: "YYYY年M月D日",
+      dateTimeFormat: "YYYY年M月D日 HH时mm分ss秒",
+      previousYear: "上一年 (Control键加左方向键)",
+      nextYear: "下一年 (Control键加右方向键)",
+      previousDecade: "上一年代",
+      nextDecade: "下一年代",
+      previousCentury: "上一世纪",
+      nextCentury: "下一世纪",
+      shortWeekDays: ["一", "二", "三", "四", "五", "六", "日"],
+    },
+    timePickerLocale: { placeholder: "请选择时间" },
+  },
+
+  TimePicker: { placeholder: "请选择时间" },
+
+  Calendar: {
+    lang: {
+      placeholder: "请选择日期",
+      yearPlaceholder: "请选择年份",
+      quarterPlaceholder: "请选择季度",
+      monthPlaceholder: "请选择月份",
+      weekPlaceholder: "请选择周",
+      rangePlaceholder: ["开始日期", "结束日期"],
+      locale: "zh_cn",
+      today: "今天",
+      now: "此刻",
+      backToToday: "返回今天",
+      ok: "确定",
+      timeSelect: "选择时间",
+      dateSelect: "选择日期",
+      weekSelect: "选择周",
+      clear: "清除",
+      month: "月",
+      year: "年",
+      previousMonth: "上个月 (翻页上键)",
+      nextMonth: "下个月 (翻页下键)",
+      monthSelect: "选择月份",
+      yearSelect: "选择年份",
+      decadeSelect: "选择年代",
+      yearFormat: "YYYY年",
+      dayFormat: "D日",
+      dateFormat: "YYYY年M月D日",
+      dateTimeFormat: "YYYY年M月D日 HH时mm分ss秒",
+      previousYear: "上一年 (Control键加左方向键)",
+      nextYear: "下一年 (Control键加右方向键)",
+      previousDecade: "上一年代",
+      nextDecade: "下一年代",
+      previousCentury: "上一世纪",
+      nextCentury: "下一世纪",
+      shortWeekDays: ["一", "二", "三", "四", "五", "六", "日"],
+    },
+    timePickerLocale: { placeholder: "请选择时间" },
+  },
+
+  global: { placeholder: "请选择" },
+
+  Table: {
+    filterTitle: "筛选",
+    filterConfirm: "确定",
+    filterReset: "重置",
+    filterEmptyText: "无筛选项",
+    filterCheckall: "全选",
+    filterSearchPlaceholder: "在筛选项中搜索",
+    emptyText: "暂无数据",
+    selectAll: "全选当页",
+    selectInvert: "反选当页",
+    selectNone: "清空所有",
+    selectionAll: "全选所有",
+    sortTitle: "排序",
+    expand: "展开行",
+    collapse: "关闭行",
+    triggerDesc: "点击降序",
+    triggerAsc: "点击升序",
+    cancelSort: "取消排序",
+  },
+
+  Modal: { okText: "确定", cancelText: "取消", justOkText: "知道了" },
+
+  Tour: { Next: "下一步", Previous: "上一步", Finish: "结束" },
+
+  Popconfirm: { okText: "确定", cancelText: "取消" },
+
+  Transfer: {
+    titles: ["", ""],
+    searchPlaceholder: "请输入搜索内容",
+    itemUnit: "项",
+    itemsUnit: "项",
+    remove: "删除",
+    selectCurrent: "全选当页",
+    removeCurrent: "删除当页",
+    selectAll: "全选所有",
+    removeAll: "删除全部",
+    selectInvert: "反选当页",
+  },
+
+  Upload: {
+    uploading: "文件上传中",
+    removeFile: "删除文件",
+    uploadError: "上传错误",
+    previewFile: "预览文件",
+    downloadFile: "下载文件",
+  },
+
+  Empty: { description: "暂无数据" },
+
+  Icon: { icon: "图标" },
+
+  Text: {
+    edit: "编辑",
+    copy: "复制",
+    copied: "复制成功",
+    expand: "展开",
+    collapse: "收起",
+  },
+
+  Form: {
+    optional: "（可选）",
+    defaultValidateMessages: {
+      default: "字段验证错误${label}",
+      required: "请输入${label}",
+      enum: "${label}必须是其中一个[${enum}]",
+      whitespace: "${label}不能为空字符",
+      date: {
+        format: "${label}日期格式无效",
+        parse: "${label}不能转换为日期",
+        invalid: "${label}是一个无效日期",
+      },
+      types: {
+        string: typeTemplate,
+        method: typeTemplate,
+        array: typeTemplate,
+        object: typeTemplate,
+        number: typeTemplate,
+        date: typeTemplate,
+        boolean: typeTemplate,
+        integer: typeTemplate,
+        float: typeTemplate,
+        regexp: typeTemplate,
+        email: typeTemplate,
+        url: typeTemplate,
+        hex: typeTemplate,
+      },
+      string: {
+        len: "${label}须为${len}个字符",
+        min: "${label}最少${min}个字符",
+        max: "${label}最多${max}个字符",
+        range: "${label}须在${min}-${max}个字符之间",
+      },
+      number: {
+        len: "${label}必须等于${len}",
+        min: "${label}最小值为${min}",
+        max: "${label}最大值为${max}",
+        range: "${label}须在${min}-${max}之间",
+      },
+      array: {
+        len: "须为${len}个${label}",
+        min: "最少${min}个${label}",
+        max: "最多${max}个${label}",
+        range: "${label}数量须在${min}-${max}之间",
+      },
+      pattern: { mismatch: "${label}与模式不匹配（${pattern}）" },
+    },
+  },
+
+  Image: { preview: "预览" },
+
+  QRCode: { expired: "二维码已过期", refresh: "点击刷新", scanned: "已扫描" },
+
+  ColorPicker: {
+    presetEmpty: "暂无",
+    transparent: "无色",
+    singleColor: "单色",
+    gradientColor: "渐变色",
+  },
+};
+  Object.assign(__export, { zhCN });
+})();
+
+/* ===== src/context.jsx ===== */
+(function () {
+  const { useState, useEffect, createContext, useContext } = React;
+// Layer 1: 全局状态 — 主题模式、界面语言与布局折叠
+// 换肤单轨驱动:isDark 只切换 <html> 的 .dark class;
+// 普通 H5 元素(token 四层)与 antd 组件(ant.css 重置层)同源跟随,无需 React 参与换肤。
+const AppContext = createContext(null);
+
+function AppProvider({ children }) {
+  const [isDark, setIsDark] = useState(false);
+  const [lang, setLang] = useState("zh");
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+  }, [lang]);
+
+  const value = {
+    isDark,
+    toggleDark: () => setIsDark((d) => !d),
+    lang,
+    setLang,
+    collapsed,
+    toggleCollapsed: () => setCollapsed((c) => !c),
+  };
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+}
+
+function useApp() {
+  return useContext(AppContext);
+}
+  Object.assign(__export, { AppProvider, useApp });
+})();
+
+/* ===== src/i18n.js ===== */
+(function () {
+// Layer 2: 国际化字典 — 中/英双语文案 + antd enUS locale 精简补丁
+// 消费: <FormattedMessage id="..." defaultMessage="..." /> 或 useIntl().formatMessage(...)
+// 切语言需同步三处: IntlProvider(locale/messages) + ConfigProvider(locale) + dayjs.locale()
+
+const LANG_OPTIONS = [
+  { key: "zh", label: "简体中文" },
+  { key: "en", label: "English" },
+];
+
+const messages = {
+  zh: {
+    "app.name": "ICT 设备运维平台",
+    "app.shortName": "设备运维",
+
+    "nav.console": "控制台",
+    "nav.resources": "资源管理",
+    "nav.operations": "运维中心",
+    "nav.reports": "数据报表",
+
+    "header.language": "语言",
+    "header.theme.toDark": "切换深色模式",
+    "header.theme.toLight": "切换浅色模式",
+    "header.notifications": "通知",
+    "header.help": "帮助中心",
+    "header.user.name": "张运维",
+    "header.user.role": "平台管理员",
+    "header.profile": "个人资料",
+    "header.logout": "退出登录",
+    "header.collapse": "收起导航",
+    "header.expand": "展开导航",
+
+    "menu.overview": "总览",
+    "menu.devices": "设备管理",
+    "menu.devices.config": "设备配置",
+    "menu.devices.inventory": "设备台账",
+    "menu.devices.firmware": "固件升级",
+    "menu.collection": "数据采集",
+    "menu.collection.policy": "采集策略",
+    "menu.collection.protocol": "协议模板",
+    "menu.alarms": "告警中心",
+    "menu.reports": "数据报表",
+    "menu.settings": "系统设置",
+    "menu.serviceHealthy": "采集服务运行正常",
+    "menu.version": "版本 v3.8.2",
+
+    "page.breadcrumb.home": "控制台",
+    "page.breadcrumb.group": "设备管理",
+    "page.breadcrumb.current": "设备配置",
+    "page.title": "设备配置",
+    "page.desc": "统一维护设备的采集策略、上报协议与运行参数，保存后自动下发至目标站点。",
+    "page.export": "导出配置",
+    "page.create": "新增设备配置",
+
+    "form.title": "采集策略配置",
+    "form.subtitle": "策略生效后将下发至所选站点下的同类型设备。",
+    "form.bound": "已绑定 {count} 台设备",
+    "form.policyName": "策略名称",
+    "form.policyName.placeholder": "请输入策略名称",
+    "form.deviceType": "设备类型",
+    "form.site": "应用站点",
+    "form.protocol": "上报协议",
+    "form.interval": "采集周期（秒）",
+    "form.priority": "策略优先级",
+    "form.enhanced": "启用增强采集",
+    "form.enhanced.desc": "开启后可继续配置采样间隔、压缩算法与失败重试等高级参数",
+    "form.detail.title": "增强采集参数",
+    "form.detail.hint": "采样频率越高，带宽占用与设备功耗越大，请按业务场景开启",
+    "form.sampleInterval": "采样间隔（毫秒）",
+    "form.batchSize": "单次上报条数",
+    "form.heartbeat": "心跳超时（秒）",
+    "form.bufferLimit": "离线缓存上限（条）",
+    "form.compression": "数据压缩",
+    "form.retries": "失败重试次数",
+    "form.masking": "敏感数据脱敏",
+    "form.remark": "策略备注",
+    "form.remark.placeholder": "补充说明该策略的适用范围与注意事项",
+    "form.reset": "重置",
+    "form.submit": "保存配置",
+    "form.required": "此项为必填",
+    "form.saved": "采集策略已保存并下发",
+
+    "option.priority.high": "高",
+    "option.priority.medium": "中",
+    "option.priority.low": "低",
+    "option.compression.none": "不压缩",
+    "option.compression.gzip": "GZIP",
+    "option.compression.lz4": "LZ4",
+
+    "deviceType.gateway": "智能网关",
+    "deviceType.sensor": "环境传感器",
+    "deviceType.meter": "电力仪表",
+    "deviceType.camera": "视频终端",
+
+    "site.shanghai": "上海临港数据中心",
+    "site.beijing": "北京亦庄机房",
+    "site.shenzhen": "深圳前海园区",
+    "site.chengdu": "成都天府节点",
+
+    "policy.highFreq": "高频采集策略",
+    "policy.standard": "标准采集策略",
+    "policy.lowFreq": "低频采集策略",
+    "policy.video": "视频回传策略",
+
+    "status.online": "在线",
+    "status.offline": "离线",
+    "status.alarm": "告警",
+    "status.upgrading": "升级中",
+    "status.disabled": "停用",
+
+    "table.title": "设备配置清单",
+    "table.subtitle": "共 {total} 台设备，在线 {online} 台，告警 {alarm} 台",
+    "table.search.placeholder": "搜索设备名称或编号",
+    "table.filter.status": "全部状态",
+    "table.refresh": "刷新",
+    "table.refreshed": "列表已刷新",
+    "table.col.name": "设备名称",
+    "table.col.code": "设备编号",
+    "table.col.type": "设备类型",
+    "table.col.site": "所属站点",
+    "table.col.firmware": "固件版本",
+    "table.col.policy": "采集策略",
+    "table.col.status": "状态",
+    "table.col.lastReport": "最后上报",
+    "table.col.actions": "操作",
+    "table.action.edit": "编辑",
+    "table.action.more": "更多操作",
+    "table.action.copy": "复制配置",
+    "table.action.logs": "查看日志",
+    "table.action.disable": "停用设备",
+    "table.copied": "配置已复制",
+    "table.exported": "已导出所选配置",
+    "table.selected": "已选择 {count} 项",
+    "table.bulkDisable": "批量停用",
+    "table.bulkExport": "导出所选",
+    "table.clearSelection": "取消选择",
+    "table.total": "共 {total} 条记录",
+    "table.empty": "没有匹配的设备",
+    "table.disabled.toast": "设备已停用",
+
+    "modal.title": "新增设备配置",
+    "modal.titleEdit": "编辑设备配置",
+    "modal.desc": "填写设备基础信息并绑定采集策略，保存后立即纳管。",
+    "modal.name": "设备名称",
+    "modal.name.placeholder": "请输入设备名称",
+    "modal.code": "设备编号",
+    "modal.code.placeholder": "例如 GW-SH-0201",
+    "modal.type": "设备类型",
+    "modal.site": "所属站点",
+    "modal.firmware": "固件版本",
+    "modal.policy": "采集策略模板",
+    "modal.enabled": "保存后立即启用",
+    "modal.enabled.desc": "启用后设备将按所选策略开始上报数据",
+    "modal.remark": "备注",
+    "modal.remark.placeholder": "可选，记录设备位置或负责人信息",
+    "modal.cancel": "取消",
+    "modal.ok": "确定",
+    "modal.required": "此项为必填",
+    "modal.created": "设备配置已创建",
+    "modal.updated": "设备配置已更新",
+  },
+
+  en: {
+    "app.name": "ICT Device Operations Platform",
+    "app.shortName": "Device Ops",
+
+    "nav.console": "Console",
+    "nav.resources": "Resources",
+    "nav.operations": "Operations",
+    "nav.reports": "Analytics",
+
+    "header.language": "Language",
+    "header.theme.toDark": "Switch to dark mode",
+    "header.theme.toLight": "Switch to light mode",
+    "header.notifications": "Notifications",
+    "header.help": "Help center",
+    "header.user.name": "Zhang Yunwei",
+    "header.user.role": "Platform admin",
+    "header.profile": "Profile",
+    "header.logout": "Sign out",
+    "header.collapse": "Collapse navigation",
+    "header.expand": "Expand navigation",
+
+    "menu.overview": "Overview",
+    "menu.devices": "Devices",
+    "menu.devices.config": "Device configuration",
+    "menu.devices.inventory": "Device inventory",
+    "menu.devices.firmware": "Firmware upgrade",
+    "menu.collection": "Data collection",
+    "menu.collection.policy": "Collection policies",
+    "menu.collection.protocol": "Protocol templates",
+    "menu.alarms": "Alarms",
+    "menu.reports": "Analytics",
+    "menu.settings": "Settings",
+    "menu.serviceHealthy": "Collection service healthy",
+    "menu.version": "Version v3.8.2",
+
+    "page.breadcrumb.home": "Console",
+    "page.breadcrumb.group": "Devices",
+    "page.breadcrumb.current": "Device configuration",
+    "page.title": "Device configuration",
+    "page.desc": "Maintain collection policies, reporting protocols and runtime parameters in one place. Saved changes are delivered to the target sites automatically.",
+    "page.export": "Export",
+    "page.create": "Add device",
+
+    "form.title": "Collection policy",
+    "form.subtitle": "Once applied, the policy is delivered to every device of the selected type under the chosen site.",
+    "form.bound": "Bound to {count} devices",
+    "form.policyName": "Policy name",
+    "form.policyName.placeholder": "Enter a policy name",
+    "form.deviceType": "Device type",
+    "form.site": "Site",
+    "form.protocol": "Reporting protocol",
+    "form.interval": "Collection interval (s)",
+    "form.priority": "Priority",
+    "form.enhanced": "Enable enhanced collection",
+    "form.enhanced.desc": "Turn on to configure sampling interval, compression and retry options",
+    "form.detail.title": "Enhanced collection parameters",
+    "form.detail.hint": "Higher sampling frequency increases bandwidth and power usage",
+    "form.sampleInterval": "Sampling interval (ms)",
+    "form.batchSize": "Records per report",
+    "form.heartbeat": "Heartbeat timeout (s)",
+    "form.bufferLimit": "Offline buffer limit",
+    "form.compression": "Data compression",
+    "form.retries": "Retry attempts",
+    "form.masking": "Sensitive data masking",
+    "form.remark": "Remarks",
+    "form.remark.placeholder": "Describe the scope and precautions of this policy",
+    "form.reset": "Reset",
+    "form.submit": "Save policy",
+    "form.required": "This field is required",
+    "form.saved": "Policy saved and delivered",
+
+    "option.priority.high": "High",
+    "option.priority.medium": "Medium",
+    "option.priority.low": "Low",
+    "option.compression.none": "None",
+    "option.compression.gzip": "GZIP",
+    "option.compression.lz4": "LZ4",
+
+    "deviceType.gateway": "Smart gateway",
+    "deviceType.sensor": "Environment sensor",
+    "deviceType.meter": "Power meter",
+    "deviceType.camera": "Video terminal",
+
+    "site.shanghai": "Shanghai Lingang IDC",
+    "site.beijing": "Beijing Yizhuang DC",
+    "site.shenzhen": "Shenzhen Qianhai Campus",
+    "site.chengdu": "Chengdu Tianfu Node",
+
+    "policy.highFreq": "High-frequency policy",
+    "policy.standard": "Standard policy",
+    "policy.lowFreq": "Low-frequency policy",
+    "policy.video": "Video backhaul policy",
+
+    "status.online": "Online",
+    "status.offline": "Offline",
+    "status.alarm": "Alarm",
+    "status.upgrading": "Upgrading",
+    "status.disabled": "Disabled",
+
+    "table.title": "Device configurations",
+    "table.subtitle": "{total} devices in total, {online} online, {alarm} in alarm",
+    "table.search.placeholder": "Search device name or ID",
+    "table.filter.status": "All statuses",
+    "table.refresh": "Refresh",
+    "table.refreshed": "List refreshed",
+    "table.col.name": "Device",
+    "table.col.code": "Device ID",
+    "table.col.type": "Type",
+    "table.col.site": "Site",
+    "table.col.firmware": "Firmware",
+    "table.col.policy": "Policy",
+    "table.col.status": "Status",
+    "table.col.lastReport": "Last report",
+    "table.col.actions": "Actions",
+    "table.action.edit": "Edit",
+    "table.action.more": "More actions",
+    "table.action.copy": "Duplicate",
+    "table.action.logs": "View logs",
+    "table.action.disable": "Disable",
+    "table.copied": "Configuration duplicated",
+    "table.exported": "Selected configurations exported",
+    "table.selected": "{count} selected",
+    "table.bulkDisable": "Disable selected",
+    "table.bulkExport": "Export selected",
+    "table.clearSelection": "Clear",
+    "table.total": "{total} records in total",
+    "table.empty": "No matching devices",
+    "table.disabled.toast": "Device disabled",
+
+    "modal.title": "Add device configuration",
+    "modal.titleEdit": "Edit device configuration",
+    "modal.desc": "Fill in the basic device information and bind a collection policy. The device is managed right after saving.",
+    "modal.name": "Device name",
+    "modal.name.placeholder": "Enter the device name",
+    "modal.code": "Device ID",
+    "modal.code.placeholder": "e.g. GW-SH-0201",
+    "modal.type": "Device type",
+    "modal.site": "Site",
+    "modal.firmware": "Firmware version",
+    "modal.policy": "Collection policy template",
+    "modal.enabled": "Enable right after saving",
+    "modal.enabled.desc": "The device starts reporting data with the selected policy",
+    "modal.remark": "Remarks",
+    "modal.remark.placeholder": "Optional. Location or owner information",
+    "modal.cancel": "Cancel",
+    "modal.ok": "Confirm",
+    "modal.required": "This field is required",
+    "modal.created": "Device configuration created",
+    "modal.updated": "Device configuration updated",
+  },
+};
+
+// antd enUS locale 精简补丁 — 仅覆盖本页用到的组件(Table / Pagination / Modal / Form / Empty / Select)
+const antdEnUS = {
+  locale: "en",
+  dayjsLocale: "en",
+  global: { placeholder: "Please select" },
+  Pagination: {
+    items_per_page: "/ page",
+    jump_to: "Go to",
+    jump_to_confirm: "confirm",
+    page: "Page",
+    prev_page: "Previous Page",
+    next_page: "Next Page",
+    prev_5: "Previous 5 Pages",
+    next_5: "Next 5 Pages",
+    prev_3: "Previous 3 Pages",
+    next_3: "Next 3 Pages",
+    page_size: "Page Size",
+  },
+  Table: {
+    filterTitle: "Filter menu",
+    filterConfirm: "OK",
+    filterReset: "Reset",
+    filterEmptyText: "No filters",
+    filterCheckall: "Select all items",
+    filterSearchPlaceholder: "Search in filters",
+    emptyText: "No data",
+    selectAll: "Select current page",
+    selectInvert: "Invert current page",
+    selectNone: "Clear all data",
+    selectionAll: "Select all data",
+    sortTitle: "Sort",
+    expand: "Expand row",
+    collapse: "Collapse row",
+    triggerDesc: "Click to sort descending",
+    triggerAsc: "Click to sort ascending",
+    cancelSort: "Click to cancel sorting",
+  },
+  Modal: { okText: "OK", cancelText: "Cancel", justOkText: "OK" },
+  Empty: { description: "No data" },
+  Form: {
+    optional: "(optional)",
+    defaultValidateMessages: {
+      default: "Validation error on field ${label}",
+      required: "Please enter ${label}",
+      enum: "${label} must be one of [${enum}]",
+      whitespace: "${label} cannot be empty",
+      date: {
+        format: "${label} is invalid for format date",
+        parse: "${label} could not be parsed as date",
+        invalid: "${label} is invalid date",
+      },
+      types: {
+        string: "${label} is not a valid ${type}",
+        number: "${label} is not a valid ${type}",
+        email: "${label} is not a valid ${type}",
+        url: "${label} is not a valid ${type}",
+      },
+      string: {
+        len: "${label} must be ${len} characters",
+        min: "${label} must be at least ${min} characters",
+        max: "${label} cannot be longer than ${max} characters",
+        range: "${label} must be between ${min}-${max} characters",
+      },
+      number: {
+        len: "${label} must equal ${len}",
+        min: "${label} cannot be less than ${min}",
+        max: "${label} cannot be greater than ${max}",
+        range: "${label} must be between ${min}-${max}",
+      },
+    },
+  },
+  DatePicker: {
+    lang: {
+      placeholder: "Select date",
+      locale: "en",
+      today: "Today",
+      now: "Now",
+      ok: "OK",
+      clear: "Clear",
+      month: "Month",
+      year: "Year",
+      backToToday: "Back to today",
+    },
+    timePickerLocale: { placeholder: "Select time" },
+  },
+  TimePicker: { placeholder: "Select time" },
+};
+  Object.assign(__export, { LANG_OPTIONS, messages, antdEnUS });
+})();
+
+/* ===== assets/shared/icons.js ===== */
+(function () {
+  const LUCIDE = {
+    "activity": [["path",{"d":"M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"}]],
+    "bell": [["path",{"d":"M10.268 21a2 2 0 0 0 3.464 0"}],["path",{"d":"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"}]],
+    "chart-column": [["path",{"d":"M3 3v16a2 2 0 0 0 2 2h16"}],["path",{"d":"M18 17V9"}],["path",{"d":"M13 17V5"}],["path",{"d":"M8 17v-3"}]],
+    "chevron-down": [["path",{"d":"m6 9 6 6 6-6"}]],
+    "circle-question-mark": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"}],["path",{"d":"M12 17h.01"}]],
+    "copy": [["rect",{"width":"14","height":"14","x":"8","y":"8","rx":"2","ry":"2"}],["path",{"d":"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"}]],
+    "cpu": [["path",{"d":"M12 20v2"}],["path",{"d":"M12 2v2"}],["path",{"d":"M17 20v2"}],["path",{"d":"M17 2v2"}],["path",{"d":"M2 12h2"}],["path",{"d":"M2 17h2"}],["path",{"d":"M2 7h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"M20 17h2"}],["path",{"d":"M20 7h2"}],["path",{"d":"M7 20v2"}],["path",{"d":"M7 2v2"}],["rect",{"x":"4","y":"4","width":"16","height":"16","rx":"2"}],["rect",{"x":"8","y":"8","width":"8","height":"8","rx":"1"}]],
+    "download": [["path",{"d":"M12 15V3"}],["path",{"d":"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"}],["path",{"d":"m7 10 5 5 5-5"}]],
+    "ellipsis": [["circle",{"cx":"12","cy":"12","r":"1"}],["circle",{"cx":"19","cy":"12","r":"1"}],["circle",{"cx":"5","cy":"12","r":"1"}]],
+    "info": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M12 16v-4"}],["path",{"d":"M12 8h.01"}]],
+    "languages": [["path",{"d":"m5 8 6 6"}],["path",{"d":"m4 14 6-6 2-3"}],["path",{"d":"M2 5h12"}],["path",{"d":"M7 2h1"}],["path",{"d":"m22 22-5-10-5 10"}],["path",{"d":"M14 18h6"}]],
+    "layers": [["path",{"d":"M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"}],["path",{"d":"M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"}],["path",{"d":"M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"}]],
+    "layout-dashboard": [["rect",{"width":"7","height":"9","x":"3","y":"3","rx":"1"}],["rect",{"width":"7","height":"5","x":"14","y":"3","rx":"1"}],["rect",{"width":"7","height":"9","x":"14","y":"12","rx":"1"}],["rect",{"width":"7","height":"5","x":"3","y":"16","rx":"1"}]],
+    "log-out": [["path",{"d":"m16 17 5-5-5-5"}],["path",{"d":"M21 12H9"}],["path",{"d":"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"}]],
+    "menu": [["path",{"d":"M4 5h16"}],["path",{"d":"M4 12h16"}],["path",{"d":"M4 19h16"}]],
+    "moon": [["path",{"d":"M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"}]],
+    "plus": [["path",{"d":"M5 12h14"}],["path",{"d":"M12 5v14"}]],
+    "power": [["path",{"d":"M12 2v10"}],["path",{"d":"M18.4 6.6a9 9 0 1 1-12.77.04"}]],
+    "radio-tower": [["path",{"d":"M4.9 16.1C1 12.2 1 5.8 4.9 1.9"}],["path",{"d":"M7.8 4.7a6.14 6.14 0 0 0-.8 7.5"}],["circle",{"cx":"12","cy":"9","r":"2"}],["path",{"d":"M16.2 4.8c2 2 2.26 5.11.8 7.47"}],["path",{"d":"M19.1 1.9a9.96 9.96 0 0 1 0 14.1"}],["path",{"d":"M9.5 18h5"}],["path",{"d":"m8 22 4-11 4 11"}]],
+    "refresh-cw": [["path",{"d":"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"}],["path",{"d":"M21 3v5h-5"}],["path",{"d":"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"}],["path",{"d":"M8 16H3v5"}]],
+    "save": [["path",{"d":"M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"}],["path",{"d":"M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"}],["path",{"d":"M7 3v4a1 1 0 0 0 1 1h7"}]],
+    "search": [["path",{"d":"m21 21-4.34-4.34"}],["circle",{"cx":"11","cy":"11","r":"8"}]],
+    "settings": [["path",{"d":"M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"}],["circle",{"cx":"12","cy":"12","r":"3"}]],
+    "sliders-horizontal": [["path",{"d":"M10 5H3"}],["path",{"d":"M12 19H3"}],["path",{"d":"M14 3v4"}],["path",{"d":"M16 17v4"}],["path",{"d":"M21 12h-9"}],["path",{"d":"M21 19h-5"}],["path",{"d":"M21 5h-7"}],["path",{"d":"M8 10v4"}],["path",{"d":"M8 12H3"}]],
+    "square-pen": [["path",{"d":"M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"}],["path",{"d":"M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"}]],
+    "sun": [["circle",{"cx":"12","cy":"12","r":"4"}],["path",{"d":"M12 2v2"}],["path",{"d":"M12 20v2"}],["path",{"d":"m4.93 4.93 1.41 1.41"}],["path",{"d":"m17.66 17.66 1.41 1.41"}],["path",{"d":"M2 12h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"m6.34 17.66-1.41 1.41"}],["path",{"d":"m19.07 4.93-1.41 1.41"}]],
+    "user": [["path",{"d":"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"}],["circle",{"cx":"12","cy":"7","r":"4"}]],
+  };
+  const { useState, useEffect } = React;
+// ---- Lucide (offline fallback, table injected at build time) ----
+const ICONS = typeof LUCIDE !== "undefined" ? LUCIDE : {};
+
+function camelToKebab(s) {
+  return s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+}
+
+function lookupIcon(name) {
+  if (!name) return null;
+  return (
+    ICONS[name] ||
+    ICONS[camelToKebab(name)] ||
+    ICONS[name.replace(/-([a-z])/g, (_m, c) => c.toUpperCase())] ||
+    null
+  );
+}
+
+// ---- icon-plus (联通) online flow, same as packages/previewpc ----
+const ICON_API_BASE = "https://octo.hdesign.huawei.com";
+const GET_CONFIG = `${ICON_API_BASE}/assetRepository/iconPlus/getConfig`;
+const GET_ICON_INFO = `${ICON_API_BASE}/assetRepository/iconPlus/getIconInfo`;
+const GET_ICON = `${ICON_API_BASE}/assetRepository/iconPlus/getIcon`;
+
+let plusState = null; // null = probing, true = icon-plus available, false = fall back to Lucide
+let plusPromise = null; // singleton getConfig probe promise
+let iconConfig = null;
+let defaultColorId = "";
+const iconInfoMap = {}; // name -> { name, url }
+const svgCache = new Map(); // "name&variant&color" -> svg text
+
+// variant prop -> getConfig style key (matches previewpc's shapeToStyleKey)
+const STYLE_KEY = {
+  lined: "border",
+  filled: "filled",
+  "two-tone": "two_colors1",
+  circle: "round_bottom2",
+  square: "square_bottom2",
+};
+
+function getStyleValue(styleKey) {
+  return iconConfig?.style?.find((s) => s.key === styleKey)?.value || styleKey;
+}
+
+// resolve an API color id from the requested hex against getConfig colors
+function resolveColorId(variant, colorHex) {
+  const styleValue = getStyleValue(STYLE_KEY[variant] || "border");
+  const colors = (iconConfig?.colors || []).filter((c) => c.style === styleValue);
+  if (colorHex) {
+    const m = colors.find((c) =>
+      c.value.split(",").map((v) => v.trim()).includes(colorHex)
+    );
+    if (m) return m.id;
+  }
+  return defaultColorId || colors[0]?.id || "";
+}
+
+// getConfig probe == 联通可用性验证 (same as previewpc fetchIconConfig)
+function ensurePlus() {
+  if (plusPromise) return plusPromise;
+  plusPromise = (async () => {
+    try {
+      const resp = await fetch(GET_CONFIG);
+      if (!resp.ok) {
+        plusState = false;
+        return false;
+      }
+      iconConfig = await resp.json();
+      const linear = iconConfig.colors?.find(
+        (c) => c.type === "linear" || c.type === "通用色"
+      );
+      defaultColorId =
+        linear?.id || iconConfig.colors?.[0]?.id || "";
+      plusState = true;
+      return true;
+    } catch (e) {
+      plusState = false;
+      return false;
+    }
+  })();
+  return plusPromise;
+}
+
+// pick the best icon-plus match for a keyword (prefer system-icon group, then name contains keyword, else first)
+function selectBestIcon(icons, keyword) {
+  return (
+    icons.find(
+      (i) => Array.isArray(i.group) && i.group.some((g) => g.includes("系统图标"))
+    ) ||
+    icons.find((i) => i.name?.toLowerCase().includes(keyword.toLowerCase())) ||
+    icons[0]
+  );
+}
+
+// name -> { name, url } via getIconInfo (cached in iconInfoMap)
+async function resolveIconInfo(name) {
+  if (iconInfoMap[name]) return iconInfoMap[name];
+  try {
+    const resp = await fetch(
+      `${GET_ICON_INFO}?keyword=${encodeURIComponent(name)}&topK=2&source_id=6`
+    );
+    const data = await resp.json(); // [{ keyword, icons: [{ icon_id, name, category, group[], url }] }]
+    const entry = (Array.isArray(data) ? data : [data]).find(
+      (d) => d.icons?.length
+    );
+    const selected = selectBestIcon(entry?.icons || [], name);
+    if (!selected?.url) return null;
+    iconInfoMap[name] = { name: selected.name, url: selected.url };
+    return iconInfoMap[name];
+  } catch (e) {
+    return null;
+  }
+}
+
+// fetch the SVG text for a name via getIcon (url + size + variant + colorId + fileType=svg)
+async function fetchSvg(name, variant, colorHex) {
+  const info = await resolveIconInfo(name);
+  if (!info) return "";
+  const styleValue = getStyleValue(STYLE_KEY[variant] || "border");
+  const colorId = resolveColorId(variant, colorHex);
+  try {
+    const resp = await fetch(
+      `${GET_ICON}?url=${encodeURIComponent(info.url)}&size=16&style=${encodeURIComponent(
+        styleValue
+      )}&color=${encodeURIComponent(colorId)}&fileType=svg`
+    );
+    const data = await resp.json(); // { url, name, data } or array
+    const item = Array.isArray(data) ? data[0] : data;
+    return item?.data || ""; // raw SVG text, injected as-is
+  } catch (e) {
+    return "";
+  }
+}
+
+function Icon({
+  name,
+  src,
+  size = 16,
+  color,
+  className = "",
+  style,
+  strokeWidth = 2,
+  variant = "lined",
+}) {
+  const [plus, setPlus] = useState(plusState); // reuse already-probed result
+  const [svg, setSvg] = useState(
+    () => svgCache.get(`${name}&${variant}&${color}`) || ""
+  );
+
+  useEffect(() => {
+    if (src) return; // user-asset mode: no network needed
+    let alive = true;
+    ensurePlus().then((ok) => {
+      if (!alive) return;
+      setPlus(ok);
+      if (!ok) return; // getConfig probe failed → Lucide branch
+      const key = `${name}&${variant}&${color}`;
+      if (svgCache.has(key)) {
+        setSvg(svgCache.get(key));
+        return;
+      }
+      fetchSvg(name, variant, color).then((s) => {
+        if (!alive) return;
+        svgCache.set(key, s);
+        setSvg(s);
+      });
+    });
+    return () => {
+      alive = false;
+    };
+  }, [src, name, variant, color]);
+
+  // user-provided asset (svg/png/jpg) via relative path — overrides name when both are set
+  if (src) {
+    return React.createElement("img", {
+      src: src,
+      width: size,
+      height: size,
+      className: className,
+      alt: "",
+      "aria-hidden": true,
+      style: { ...style, display: "inline-block", verticalAlign: "middle" },
+    });
+  }
+
+  // probe not finished yet → render nothing
+  if (plus === null) return null;
+
+  // icon-plus unavailable (offline) → Lucide fallback (original behavior)
+  if (plus === false) {
+    const nodes = lookupIcon(name);
+    if (!nodes) return null;
+    return React.createElement(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: size,
+        height: size,
+        viewBox: "0 0 24 24",
+        fill: "none",
+        strokeWidth: strokeWidth,
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        className: className,
+        "aria-hidden": true,
+        style: { ...style, stroke: color || "currentColor" },
+      },
+      nodes.map(([tag, attrs], i) =>
+        React.createElement(tag, { key: i, ...attrs })
+      )
+    );
+  }
+
+  // icon-plus available → render fetched SVG text as-is (only width/height on the wrapper)
+  if (!svg) {
+    return React.createElement("span", {
+      className,
+      "aria-hidden": true,
+      style: { ...style, width: size, height: size },
+    });
+  }
+  
+  return React.createElement("span", {
+    className,
+    "aria-hidden": true,
+    style: { ...style, width: size, height: size },
+    dangerouslySetInnerHTML: { __html: svg },
+  });
+}
+  Object.assign(__export, { Icon });
+})();
+
+/* ===== src/data.js ===== */
+(function () {
+// Layer 2: 数据与业务逻辑 — 设备配置控制台的 mock 数据与派生统计
+// 展示文案统一存 i18n msgId(如 "deviceType.gateway"),由视图层用 useIntl / FormattedMessage 渲染
+
+// ---- 顶部一级导航 ----
+const topNav = [
+  { key: "console", msgId: "nav.console", fallback: "控制台" },
+  { key: "resources", msgId: "nav.resources", fallback: "资源管理" },
+  { key: "operations", msgId: "nav.operations", fallback: "运维中心" },
+  { key: "reports", msgId: "nav.reports", fallback: "数据报表" },
+];
+
+// ---- 侧边多级导航 ----
+const sideMenuItems = [
+  { key: "overview", icon: "layout-dashboard", msgId: "menu.overview", fallback: "总览" },
+  {
+    key: "devices",
+    icon: "cpu",
+    msgId: "menu.devices",
+    fallback: "设备管理",
+    children: [
+      { key: "device-config", msgId: "menu.devices.config", fallback: "设备配置" },
+      { key: "device-inventory", msgId: "menu.devices.inventory", fallback: "设备台账" },
+      { key: "firmware", msgId: "menu.devices.firmware", fallback: "固件升级" },
+    ],
+  },
+  {
+    key: "collection",
+    icon: "radio-tower",
+    msgId: "menu.collection",
+    fallback: "数据采集",
+    children: [
+      { key: "policy", msgId: "menu.collection.policy", fallback: "采集策略" },
+      { key: "protocol", msgId: "menu.collection.protocol", fallback: "协议模板" },
+    ],
+  },
+  { key: "alarms", icon: "bell", msgId: "menu.alarms", fallback: "告警中心" },
+  { key: "reports", icon: "chart-column", msgId: "menu.reports", fallback: "数据报表" },
+  { key: "settings", icon: "settings", msgId: "menu.settings", fallback: "系统设置" },
+];
+
+// ---- 表单选项字典 ----
+const deviceTypeOptions = [
+  { value: "gateway", msgId: "deviceType.gateway", fallback: "智能网关" },
+  { value: "sensor", msgId: "deviceType.sensor", fallback: "环境传感器" },
+  { value: "meter", msgId: "deviceType.meter", fallback: "电力仪表" },
+  { value: "camera", msgId: "deviceType.camera", fallback: "视频终端" },
+];
+
+const TYPE_ICON = {
+  gateway: "cpu",
+  sensor: "thermometer",
+  meter: "gauge",
+  camera: "video",
+};
+
+const siteOptions = [
+  { value: "shanghai", msgId: "site.shanghai", fallback: "上海临港数据中心" },
+  { value: "beijing", msgId: "site.beijing", fallback: "北京亦庄机房" },
+  { value: "shenzhen", msgId: "site.shenzhen", fallback: "深圳前海园区" },
+  { value: "chengdu", msgId: "site.chengdu", fallback: "成都天府节点" },
+];
+
+const protocolOptions = [
+  { value: "mqtt", label: "MQTT" },
+  { value: "http", label: "HTTP" },
+  { value: "coap", label: "CoAP" },
+];
+
+const compressionOptions = [
+  { value: "none", msgId: "option.compression.none", fallback: "不压缩" },
+  { value: "gzip", label: "GZIP" },
+  { value: "lz4", label: "LZ4" },
+];
+
+const priorityOptions = [
+  { value: "high", msgId: "option.priority.high", fallback: "高" },
+  { value: "medium", msgId: "option.priority.medium", fallback: "中" },
+  { value: "low", msgId: "option.priority.low", fallback: "低" },
+];
+
+const policyTemplates = [
+  { value: "policy.highFreq", msgId: "policy.highFreq", fallback: "高频采集策略" },
+  { value: "policy.standard", msgId: "policy.standard", fallback: "标准采集策略" },
+  { value: "policy.lowFreq", msgId: "policy.lowFreq", fallback: "低频采集策略" },
+  { value: "policy.video", msgId: "policy.video", fallback: "视频回传策略" },
+];
+
+const firmwareOptions = ["v3.8.2", "v3.8.0", "v3.6.0", "v2.4.1"].map((v) => ({
+  value: v,
+  label: v,
+}));
+
+const STATUS_KEYS = ["online", "offline", "alarm", "upgrading", "disabled"];
+
+// ---- 表格数据 ----
+const deviceRows = [
+  {
+    code: "GW-SH-0121",
+    name: "临港网关 A01",
+    type: "gateway",
+    site: "shanghai",
+    policy: "policy.highFreq",
+    firmware: "v3.8.2",
+    status: "online",
+    lastReport: "2026-09-15 09:42",
+  },
+  {
+    code: "SN-BJ-0044",
+    name: "亦庄传感器 B12",
+    type: "sensor",
+    site: "beijing",
+    policy: "policy.standard",
+    firmware: "v2.4.1",
+    status: "online",
+    lastReport: "2026-09-15 09:41",
+  },
+  {
+    code: "MT-SZ-0087",
+    name: "前海电表 C07",
+    type: "meter",
+    site: "shenzhen",
+    policy: "policy.standard",
+    firmware: "v2.4.1",
+    status: "alarm",
+    lastReport: "2026-09-15 09:12",
+  },
+  {
+    code: "VC-SH-0203",
+    name: "临港视频终端 V03",
+    type: "camera",
+    site: "shanghai",
+    policy: "policy.video",
+    firmware: "v3.6.0",
+    status: "online",
+    lastReport: "2026-09-15 09:40",
+  },
+  {
+    code: "GW-CD-0056",
+    name: "天府网关 D05",
+    type: "gateway",
+    site: "chengdu",
+    policy: "policy.highFreq",
+    firmware: "v3.8.0",
+    status: "offline",
+    lastReport: "2026-09-14 22:05",
+  },
+  {
+    code: "SN-SZ-0112",
+    name: "前海传感器 B08",
+    type: "sensor",
+    site: "shenzhen",
+    policy: "policy.lowFreq",
+    firmware: "v2.3.9",
+    status: "online",
+    lastReport: "2026-09-15 09:38",
+  },
+  {
+    code: "MT-BJ-0130",
+    name: "亦庄电表 C11",
+    type: "meter",
+    site: "beijing",
+    policy: "policy.standard",
+    firmware: "v2.4.1",
+    status: "upgrading",
+    lastReport: "2026-09-15 08:57",
+  },
+  {
+    code: "GW-SH-0137",
+    name: "临港网关 A02",
+    type: "gateway",
+    site: "shanghai",
+    policy: "policy.highFreq",
+    firmware: "v3.8.2",
+    status: "online",
+    lastReport: "2026-09-15 09:42",
+  },
+  {
+    code: "SN-CD-0021",
+    name: "天府传感器 B03",
+    type: "sensor",
+    site: "chengdu",
+    policy: "policy.lowFreq",
+    firmware: "v2.4.1",
+    status: "disabled",
+    lastReport: "2026-08-30 17:24",
+  },
+  {
+    code: "VC-BJ-0064",
+    name: "亦庄视频终端 V07",
+    type: "camera",
+    site: "beijing",
+    policy: "policy.video",
+    firmware: "v3.6.0",
+    status: "alarm",
+    lastReport: "2026-09-15 07:33",
+  },
+  {
+    code: "MT-SH-0149",
+    name: "临港电表 C19",
+    type: "meter",
+    site: "shanghai",
+    policy: "policy.standard",
+    firmware: "v2.4.1",
+    status: "online",
+    lastReport: "2026-09-15 09:39",
+  },
+  {
+    code: "GW-SZ-0078",
+    name: "前海网关 D02",
+    type: "gateway",
+    site: "shenzhen",
+    policy: "policy.standard",
+    firmware: "v3.8.0",
+    status: "offline",
+    lastReport: "2026-09-14 19:48",
+  },
+];
+
+// ---- 表单初值 ----
+const policyFormInitialValues = {
+  policyName: "临港数据中心高频采集",
+  deviceType: "gateway",
+  site: "shanghai",
+  protocol: "mqtt",
+  interval: 30,
+  priority: "high",
+  enhanced: true,
+  sampleInterval: 500,
+  batchSize: 60,
+  heartbeat: 45,
+  bufferLimit: 10000,
+  compression: "gzip",
+  retries: 3,
+  masking: false,
+  remark: "",
+};
+
+const deviceFormInitialValues = {
+  name: "",
+  code: "",
+  type: "gateway",
+  site: "shanghai",
+  firmware: "v3.8.2",
+  policy: "policy.highFreq",
+  enabled: true,
+  remark: "",
+};
+
+// ---- 派生统计 ----
+function summarize(rows) {
+  return rows.reduce(
+    (acc, row) => {
+      acc.total += 1;
+      if (acc[row.status] !== undefined) acc[row.status] += 1;
+      return acc;
+    },
+    { total: 0, online: 0, offline: 0, alarm: 0, upgrading: 0, disabled: 0 }
+  );
+}
+  Object.assign(__export, { summarize, topNav, sideMenuItems, deviceTypeOptions, TYPE_ICON, siteOptions, protocolOptions, compressionOptions, priorityOptions, policyTemplates, firmwareOptions, STATUS_KEYS, deviceRows, policyFormInitialValues, deviceFormInitialValues });
+})();
+
+/* ===== src/views/header-bar.jsx ===== */
+(function () {
+  const { useState } = React;
+  const { Avatar, Badge, Button, Dropdown, Layout, Menu, Tooltip } = antd;
+  const { FormattedMessage, useIntl } = ReactIntl;
+  const { Icon, useApp, topNav, LANG_OPTIONS } = __export;
+// Layer 4: 顶部导航栏 — 品牌标识 / 一级导航 / 语言切换 / 主题切换 / 全局工具 / 用户区
+function HeaderBar() {
+  const intl = useIntl();
+  const { isDark, toggleDark, lang, setLang, collapsed, toggleCollapsed } = useApp();
+  const [activeNav, setActiveNav] = useState("console");
+
+  const navItems = topNav.map((item) => ({
+    key: item.key,
+    label: <FormattedMessage id={item.msgId} defaultMessage={item.fallback} />,
+  }));
+
+  const langMenu = {
+    selectable: true,
+    selectedKeys: [lang],
+    items: LANG_OPTIONS.map((opt) => ({ key: opt.key, label: opt.label })),
+    onClick: ({ key }) => setLang(key),
+  };
+
+  const userMenu = {
+    items: [
+      {
+        key: "profile",
+        icon: <Icon name="user" size={14} />,
+        label: <FormattedMessage id="header.profile" defaultMessage="个人资料" />,
+      },
+      {
+        key: "help",
+        icon: <Icon name="circle-question-mark" size={14} />,
+        label: <FormattedMessage id="header.help" defaultMessage="帮助中心" />,
+      },
+      { type: "divider" },
+      {
+        key: "logout",
+        icon: <Icon name="log-out" size={14} />,
+        label: <FormattedMessage id="header.logout" defaultMessage="退出登录" />,
+      },
+    ],
+  };
+
+  const collapseLabel = intl.formatMessage({
+    id: collapsed ? "header.expand" : "header.collapse",
+    defaultMessage: collapsed ? "展开导航" : "收起导航",
+  });
+  const themeLabel = intl.formatMessage({
+    id: isDark ? "header.theme.toLight" : "header.theme.toDark",
+    defaultMessage: isDark ? "切换浅色模式" : "切换深色模式",
+  });
+  const langLabel = intl.formatMessage({ id: "header.language", defaultMessage: "语言" });
+  const notifyLabel = intl.formatMessage({ id: "header.notifications", defaultMessage: "通知" });
+
+  return (
+    <Layout.Header className="app-header">
+      <div className="header-left">
+        <Tooltip title={collapseLabel}>
+          <Button
+            type="text"
+            aria-label={collapseLabel}
+            onClick={toggleCollapsed}
+            icon={<Icon name="menu" size={16} />}
+          />
+        </Tooltip>
+        <div className="brand">
+          <span className="brand-mark">
+            <Icon name="activity" size={16} />
+          </span>
+          <span className="brand-name">
+            <FormattedMessage id="app.name" defaultMessage="ICT 设备运维平台" />
+          </span>
+        </div>
+      </div>
+
+      <Menu
+        className="app-topnav"
+        mode="horizontal"
+        selectedKeys={[activeNav]}
+        onClick={(e) => setActiveNav(e.key)}
+        items={navItems}
+      />
+
+      <div className="header-right">
+        <Dropdown menu={langMenu} trigger={["click"]} placement="bottomRight">
+          <Button type="text" className="header-btn" aria-label={langLabel}>
+            <span className="header-btn-inner">
+              <Icon name="languages" size={16} />
+              <span className="header-btn-text">{lang === "zh" ? "简体中文" : "English"}</span>
+              <Icon name="chevron-down" size={12} />
+            </span>
+          </Button>
+        </Dropdown>
+
+        <Tooltip title={themeLabel}>
+          <Button
+            type="text"
+            aria-label={themeLabel}
+            onClick={toggleDark}
+            icon={<Icon name={isDark ? "sun" : "moon"} size={16} />}
+          />
+        </Tooltip>
+
+        <Tooltip title={notifyLabel}>
+          <Badge count={5} size="small" offset={[-2, 6]}>
+            <Button type="text" aria-label={notifyLabel} icon={<Icon name="bell" size={16} />} />
+          </Badge>
+        </Tooltip>
+
+        <span className="header-divider" />
+
+        <Dropdown menu={userMenu} trigger={["click"]} placement="bottomRight">
+          <Button type="text" className="header-user">
+            <Avatar size={24} src="https://randomuser.me/api/portraits/men/32.jpg" />
+            <span className="header-user-meta">
+              <span className="header-user-name">
+                <FormattedMessage id="header.user.name" defaultMessage="张运维" />
+              </span>
+              <span className="header-user-role">
+                <FormattedMessage id="header.user.role" defaultMessage="平台管理员" />
+              </span>
+            </span>
+            <Icon name="chevron-down" size={12} />
+          </Button>
+        </Dropdown>
+      </div>
+    </Layout.Header>
+  );
+}
+  Object.assign(__export, { HeaderBar });
+})();
+
+/* ===== src/views/side-menu.jsx ===== */
+(function () {
+  const { useMemo, useState } = React;
+  const { Layout, Menu } = antd;
+  const { FormattedMessage } = ReactIntl;
+  const { Icon, useApp, sideMenuItems } = __export;
+function buildItems(nodes) {
+  return nodes.map((node) => ({
+    key: node.key,
+    icon: node.icon ? <Icon name={node.icon} size={16} /> : null,
+    label: <FormattedMessage id={node.msgId} defaultMessage={node.fallback} />,
+    children: node.children ? buildItems(node.children) : undefined,
+  }));
+}
+
+// Layer 4: 侧边导航 — 展开 248px / 折叠 48px,亮色底,折叠态保留图标与选中态
+function SideMenu() {
+  const { collapsed } = useApp();
+  const [selected, setSelected] = useState("device-config");
+  const items = useMemo(() => buildItems(sideMenuItems), []);
+
+  return (
+    <Layout.Sider
+      className="app-sider"
+      theme="light"
+      width={248}
+      collapsedWidth={48}
+      collapsed={collapsed}
+      trigger={null}
+      collapsible
+    >
+      <Menu
+        className="app-sider-menu"
+        mode="inline"
+        theme="light"
+        selectedKeys={[selected]}
+        defaultOpenKeys={["devices", "collection"]}
+        items={items}
+        onClick={(e) => setSelected(e.key)}
+      />
+      <div className="app-sider-foot">
+        <span className="foot-dot" />
+        <span className="foot-text">
+          <span className="foot-title">
+            <FormattedMessage id="menu.serviceHealthy" defaultMessage="采集服务运行正常" />
+          </span>
+          <span className="foot-meta">
+            <FormattedMessage id="menu.version" defaultMessage="版本 v3.8.2" />
+          </span>
+        </span>
+      </div>
+    </Layout.Sider>
+  );
+}
+  Object.assign(__export, { SideMenu });
+})();
+
+/* ===== src/components/SectionCard.jsx ===== */
+(function () {
+// Layer 3: 通用区块容器 — 标题 / 副标题 / 右侧操作 / 内容
+function SectionCard({ title, subtitle, extra, children, bodyClassName }) {
+  return (
+    <section className="card">
+      <div className="card-head">
+        <div className="card-heading">
+          <h2 className="card-title">{title}</h2>
+          {subtitle ? <p className="card-sub">{subtitle}</p> : null}
+        </div>
+        {extra ? <div className="card-extra">{extra}</div> : null}
+      </div>
+      <div className={bodyClassName ? "card-body " + bodyClassName : "card-body"}>{children}</div>
+    </section>
+  );
+}
+  Object.assign(__export, { SectionCard });
+})();
+
+/* ===== src/views/config-form.jsx ===== */
+(function () {
+  const { useState } = React;
+  const { Button, Col, Form, Input, InputNumber, Radio, Row, Select, Switch, message } = antd;
+  const { FormattedMessage, useIntl } = ReactIntl;
+  const { Icon, compressionOptions, deviceTypeOptions, policyFormInitialValues, priorityOptions, protocolOptions, siteOptions } = __export;
+  const SectionCard = __export.SectionCard;
+// Layer 4: 采集策略表单区 — 基础字段 + 增强采集开关(开启后展开详细参数)
+function ConfigForm() {
+  const intl = useIntl();
+  const [form] = Form.useForm();
+  const [enhanced, setEnhanced] = useState(true);
+
+  const t = (id, fallback, values) =>
+    intl.formatMessage({ id: id, defaultMessage: fallback }, values);
+  const label = (id, fallback) => <FormattedMessage id={id} defaultMessage={fallback} />;
+  const toOptions = (list) =>
+    list.map((item) => ({
+      value: item.value,
+      label: item.label || t(item.msgId, item.fallback),
+    }));
+
+  const requiredRule = [{ required: true, message: t("form.required", "此项为必填") }];
+
+  const handleFinish = () => {
+    message.success(t("form.saved", "采集策略已保存并下发"));
+  };
+
+  const handleReset = () => {
+    form.resetFields();
+    setEnhanced(true);
+  };
+
+  return (
+    <SectionCard
+      title={label("form.title", "采集策略配置")}
+      subtitle={label("form.subtitle", "策略生效后将下发至所选站点下的同类型设备。")}
+      extra={
+        <span className="bound-tag">
+          <Icon name="layers" size={14} />
+          {t("form.bound", "已绑定 {count} 台设备", { count: 18 })}
+        </span>
+      }
+    >
+      <Form
+        form={form}
+        layout="vertical"
+        initialValues={policyFormInitialValues}
+        onFinish={handleFinish}
+      >
+        <Row gutter={[16, 0]}>
+          <Col xs={24} md={8}>
+            <Form.Item
+              name="policyName"
+              label={label("form.policyName", "策略名称")}
+              rules={requiredRule}
+            >
+              <Input placeholder={t("form.policyName.placeholder", "请输入策略名称")} />
+            </Form.Item>
+          </Col>
+          <Col xs={24} md={8}>
+            <Form.Item name="deviceType" label={label("form.deviceType", "设备类型")}>
+              <Select options={toOptions(deviceTypeOptions)} />
+            </Form.Item>
+          </Col>
+          <Col xs={24} md={8}>
+            <Form.Item name="site" label={label("form.site", "应用站点")}>
+              <Select options={toOptions(siteOptions)} showSearch optionFilterProp="label" />
+            </Form.Item>
+          </Col>
+          <Col xs={24} md={8}>
+            <Form.Item name="protocol" label={label("form.protocol", "上报协议")}>
+              <Radio.Group options={protocolOptions} optionType="button" buttonStyle="solid" />
+            </Form.Item>
+          </Col>
+          <Col xs={24} md={8}>
+            <Form.Item name="interval" label={label("form.interval", "采集周期（秒）")}>
+              <InputNumber min={5} max={3600} step={5} className="full-width" />
+            </Form.Item>
+          </Col>
+          <Col xs={24} md={8}>
+            <Form.Item name="priority" label={label("form.priority", "策略优先级")}>
+              <Select options={toOptions(priorityOptions)} />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <div className="toggle-row">
+          <div className="toggle-copy">
+            <span className="toggle-icon">
+              <Icon name="sliders-horizontal" size={16} />
+            </span>
+            <div className="toggle-text">
+              <div className="toggle-title">{label("form.enhanced", "启用增强采集")}</div>
+              <div className="toggle-desc">
+                {label(
+                  "form.enhanced.desc",
+                  "开启后可继续配置采样间隔、压缩算法与失败重试等高级参数"
+                )}
+              </div>
+            </div>
+          </div>
+          <Form.Item name="enhanced" valuePropName="checked" noStyle>
+            <Switch onChange={setEnhanced} />
+          </Form.Item>
+        </div>
+
+        {enhanced ? (
+          <div className="detail-region">
+            <div className="detail-head">
+              <span className="detail-title">
+                <Icon name="sliders-horizontal" size={14} />
+                {label("form.detail.title", "增强采集参数")}
+              </span>
+              <span className="detail-hint">
+                <Icon name="info" size={12} />
+                {label(
+                  "form.detail.hint",
+                  "采样频率越高，带宽占用与设备功耗越大，请按业务场景开启"
+                )}
+              </span>
+            </div>
+            <Row gutter={[16, 0]}>
+              <Col xs={24} md={8}>
+                <Form.Item
+                  name="sampleInterval"
+                  label={label("form.sampleInterval", "采样间隔（毫秒）")}
+                >
+                  <InputNumber min={100} max={60000} step={100} className="full-width" />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={8}>
+                <Form.Item name="batchSize" label={label("form.batchSize", "单次上报条数")}>
+                  <InputNumber min={1} max={500} className="full-width" />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={8}>
+                <Form.Item name="heartbeat" label={label("form.heartbeat", "心跳超时（秒）")}>
+                  <InputNumber min={5} max={600} className="full-width" />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={8}>
+                <Form.Item
+                  name="bufferLimit"
+                  label={label("form.bufferLimit", "离线缓存上限（条）")}
+                >
+                  <InputNumber min={100} max={100000} step={100} className="full-width" />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={8}>
+                <Form.Item name="compression" label={label("form.compression", "数据压缩")}>
+                  <Select options={toOptions(compressionOptions)} />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={8}>
+                <Form.Item name="retries" label={label("form.retries", "失败重试次数")}>
+                  <InputNumber min={0} max={10} className="full-width" />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={8}>
+                <Form.Item
+                  name="masking"
+                  valuePropName="checked"
+                  label={label("form.masking", "敏感数据脱敏")}
+                >
+                  <Switch />
+                </Form.Item>
+              </Col>
+              <Col xs={24}>
+                <Form.Item name="remark" label={label("form.remark", "策略备注")}>
+                  <Input.TextArea
+                    rows={2}
+                    placeholder={t(
+                      "form.remark.placeholder",
+                      "补充说明该策略的适用范围与注意事项"
+                    )}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+          </div>
+        ) : null}
+
+        <div className="form-actions">
+          <Button onClick={handleReset}>{label("form.reset", "重置")}</Button>
+          <Button type="primary" htmlType="submit" icon={<Icon name="save" size={14} />}>
+            {label("form.submit", "保存配置")}
+          </Button>
+        </div>
+      </Form>
+    </SectionCard>
+  );
+}
+  Object.assign(__export, { ConfigForm });
+})();
+
+/* ===== src/components/StatusTag.jsx ===== */
+(function () {
+  const { FormattedMessage } = ReactIntl;
+  const { Icon } = __export;
+// Layer 3: 设备状态标签 — status 取 online / offline / alarm / upgrading / disabled
+const STATUS_ICON = {
+  online: "circle-check",
+  offline: "circle-x",
+  alarm: "triangle-alert",
+  upgrading: "rotate-ccw",
+  disabled: "power",
+};
+
+const STATUS_FALLBACK = {
+  online: "Online",
+  offline: "Offline",
+  alarm: "Alarm",
+  upgrading: "Upgrading",
+  disabled: "Disabled",
+};
+
+function StatusTag({ status }) {
+  const icon = STATUS_ICON[status] || "circle-alert";
+  return (
+    <span className={"status-tag status-tag-" + status}>
+      <span className="status-tag-icon">
+        <Icon name={icon} size={12} />
+      </span>
+      <span className="status-tag-text">
+        <FormattedMessage
+          id={"status." + status}
+          defaultMessage={STATUS_FALLBACK[status] || status}
+        />
+      </span>
+    </span>
+  );
+}
+  Object.assign(__export, { StatusTag });
+})();
+
+/* ===== src/views/device-table.jsx ===== */
+(function () {
+  const { useMemo, useState } = React;
+  const { Button, Dropdown, Input, Select, Space, Table, message } = antd;
+  const { FormattedMessage, useIntl } = ReactIntl;
+  const { Icon, STATUS_KEYS, TYPE_ICON, deviceRows, summarize } = __export;
+  const SectionCard = __export.SectionCard;
+  const StatusTag = __export.StatusTag;
+// Layer 4: 设备配置清单 — 工具栏(搜索/筛选/刷新) + 复选表格 + 行内操作
+function DeviceTable({ onEdit }) {
+  const intl = useIntl();
+  const [rows, setRows] = useState(deviceRows);
+  const [keyword, setKeyword] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [selectedKeys, setSelectedKeys] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const t = (id, fallback, values) =>
+    intl.formatMessage({ id: id, defaultMessage: fallback }, values);
+  const label = (id, fallback) => <FormattedMessage id={id} defaultMessage={fallback} />;
+
+  const stats = useMemo(() => summarize(rows), [rows]);
+
+  const data = useMemo(() => {
+    const kw = keyword.trim().toLowerCase();
+    return rows.filter((row) => {
+      if (statusFilter !== "all" && row.status !== statusFilter) return false;
+      if (!kw) return true;
+      return (
+        row.name.toLowerCase().includes(kw) ||
+        row.code.toLowerCase().includes(kw) ||
+        t(row.policy, row.policy).toLowerCase().includes(kw)
+      );
+    });
+  }, [rows, keyword, statusFilter, intl]);
+
+  const statusOptions = [{ value: "all", label: t("table.filter.status", "全部状态") }].concat(
+    STATUS_KEYS.map((key) => ({ value: key, label: t("status." + key, key) }))
+  );
+
+  const refresh = () => {
+    setLoading(true);
+    window.setTimeout(() => {
+      setLoading(false);
+      message.success(t("table.refreshed", "列表已刷新"));
+    }, 600);
+  };
+
+  const disableRows = (codes) => {
+    if (!codes.length) return;
+    setRows((prev) =>
+      prev.map((row) => (codes.indexOf(row.code) >= 0 ? { ...row, status: "disabled" } : row))
+    );
+    setSelectedKeys([]);
+    message.success(t("table.disabled.toast", "设备已停用"));
+  };
+
+  const rowMenu = (record) => ({
+    items: [
+      {
+        key: "copy",
+        icon: <Icon name="copy" size={14} />,
+        label: label("table.action.copy", "复制配置"),
+      },
+      { type: "divider" },
+      {
+        key: "disable",
+        danger: true,
+        icon: <Icon name="power" size={14} />,
+        label: label("table.action.disable", "停用设备"),
+      },
+    ],
+    onClick: ({ key }) => {
+      if (key === "copy") {
+        message.success(t("table.copied", "配置已复制"));
+      } else if (key === "disable") {
+        disableRows([record.code]);
+      }
+    },
+  });
+
+  const columns = [
+    {
+      title: label("table.col.name", "设备名称"),
+      dataIndex: "name",
+      key: "name",
+      render: (value, record) => (
+        <div className="device-cell">
+          <span className="device-icon">
+            <Icon name={TYPE_ICON[record.type]} size={14} />
+          </span>
+          <span className="cell-strong">{value}</span>
+        </div>
+      ),
+    },
+    {
+      title: label("table.col.code", "设备编号"),
+      dataIndex: "code",
+      key: "code",
+      render: (value) => <span className="cell-mono">{value}</span>,
+    },
+    {
+      title: label("table.col.type", "设备类型"),
+      dataIndex: "type",
+      key: "type",
+      render: (value) => t(value, value),
+    },
+    {
+      title: label("table.col.site", "所属站点"),
+      dataIndex: "site",
+      key: "site",
+      render: (value) => t(value, value),
+    },
+    {
+      title: label("table.col.firmware", "固件版本"),
+      dataIndex: "firmware",
+      key: "firmware",
+      render: (value) => <span className="cell-mono">{value}</span>,
+    },
+    {
+      title: label("table.col.policy", "采集策略"),
+      dataIndex: "policy",
+      key: "policy",
+      render: (value) => t(value, value),
+    },
+    {
+      title: label("table.col.status", "状态"),
+      dataIndex: "status",
+      key: "status",
+      render: (value) => <StatusTag status={value} />,
+    },
+    {
+      title: label("table.col.lastReport", "最后上报"),
+      dataIndex: "lastReport",
+      key: "lastReport",
+      render: (value) => <span className="cell-muted">{dayjs(value).format("MM-DD HH:mm")}</span>,
+    },
+    {
+      title: label("table.col.actions", "操作"),
+      key: "actions",
+      align: "right",
+      render: (_, record) => (
+        <Space size={4}>
+          <Button type="link" size="small" onClick={() => onEdit(record)}>
+            {label("table.action.edit", "编辑")}
+          </Button>
+          <Dropdown menu={rowMenu(record)} trigger={["click"]} placement="bottomRight">
+            <Button
+              type="link"
+              size="small"
+              aria-label={t("table.action.more", "更多操作")}
+              icon={<Icon name="ellipsis" size={14} />}
+            />
+          </Dropdown>
+        </Space>
+      ),
+    },
+  ];
+
+  return (
+    <SectionCard
+      title={label("table.title", "设备配置清单")}
+      subtitle={t("table.subtitle", "共 {total} 台设备，在线 {online} 台，告警 {alarm} 台", {
+        total: stats.total,
+        online: stats.online,
+        alarm: stats.alarm,
+      })}
+    >
+      <div className="table-toolbar">
+        <Input
+          className="table-search"
+          allowClear
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          prefix={<Icon name="search" size={14} />}
+          placeholder={t("table.search.placeholder", "搜索设备名称或编号")}
+        />
+        <Select
+          className="table-filter"
+          value={statusFilter}
+          onChange={setStatusFilter}
+          options={statusOptions}
+        />
+        <Button icon={<Icon name="refresh-cw" size={14} />} loading={loading} onClick={refresh}>
+          {label("table.refresh", "刷新")}
+        </Button>
+      </div>
+
+      {selectedKeys.length > 0 ? (
+        <div className="selection-bar">
+          <span className="selection-count">
+            {t("table.selected", "已选择 {count} 项", { count: selectedKeys.length })}
+          </span>
+          <Button
+            size="small"
+            icon={<Icon name="download" size={14} />}
+            onClick={() => {
+              message.success(t("table.exported", "已导出所选配置"));
+              setSelectedKeys([]);
+            }}
+          >
+            {label("table.bulkExport", "导出所选")}
+          </Button>
+          <Button
+            size="small"
+            danger
+            icon={<Icon name="power" size={14} />}
+            onClick={() => disableRows(selectedKeys)}
+          >
+            {label("table.bulkDisable", "批量停用")}
+          </Button>
+          <Button size="small" type="text" onClick={() => setSelectedKeys([])}>
+            {label("table.clearSelection", "取消选择")}
+          </Button>
+        </div>
+      ) : null}
+
+      <Table
+        rowKey="code"
+        size="middle"
+        className="device-table"
+        columns={columns}
+        dataSource={data}
+        loading={loading}
+        locale={{ emptyText: t("table.empty", "没有匹配的设备") }}
+        rowSelection={{
+          selectedRowKeys: selectedKeys,
+          onChange: setSelectedKeys,
+          columnWidth: 48,
+        }}
+        pagination={{
+          pageSize: 8,
+          pageSizeOptions: [8, 16, 32],
+          showSizeChanger: true,
+          showTotal: (total) => t("table.total", "共 {total} 条记录", { total: total }),
+        }}
+      />
+    </SectionCard>
+  );
+}
+  Object.assign(__export, { DeviceTable });
+})();
+
+/* ===== src/views/config-modal.jsx ===== */
+(function () {
+  const { useEffect, useState } = React;
+  const { Form, Input, Modal, Select, Switch, message } = antd;
+  const { FormattedMessage, useIntl } = ReactIntl;
+  const { Icon, deviceFormInitialValues, deviceTypeOptions, firmwareOptions, policyTemplates, siteOptions } = __export;
+// Layer 4: 设备配置弹窗 — 新增 / 编辑设备并绑定采集策略(单一焦点,单列表单)
+function ConfigModal({ open, record, onCancel }) {
+  const intl = useIntl();
+  const [form] = Form.useForm();
+  const [enabled, setEnabled] = useState(true);
+  const isEdit = Boolean(record);
+
+  const t = (id, fallback, values) =>
+    intl.formatMessage({ id: id, defaultMessage: fallback }, values);
+  const label = (id, fallback) => <FormattedMessage id={id} defaultMessage={fallback} />;
+  const toOptions = (list) =>
+    list.map((item) => ({
+      value: item.value,
+      label: item.label || t(item.msgId, item.fallback),
+    }));
+
+  useEffect(() => {
+    if (!open) return;
+    if (record) {
+      const nextEnabled = record.status !== "disabled";
+      form.setFieldsValue({
+        name: record.name,
+        code: record.code,
+        type: record.type,
+        site: record.site,
+        firmware: record.firmware,
+        policy: record.policy,
+        enabled: nextEnabled,
+        remark: "",
+      });
+      setEnabled(nextEnabled);
+    } else {
+      form.resetFields();
+      setEnabled(true);
+    }
+  }, [open, record, form]);
+
+  const handleOk = () => {
+    form
+      .validateFields()
+      .then(() => {
+        message.success(
+          t(
+            isEdit ? "modal.updated" : "modal.created",
+            isEdit ? "设备配置已更新" : "设备配置已创建"
+          )
+        );
+        onCancel();
+      })
+      .catch(() => {});
+  };
+
+  const requiredRule = [{ required: true, message: t("modal.required", "此项为必填") }];
+
+  return (
+    <Modal
+      className="config-modal"
+      open={open}
+      centered
+      width={560}
+      maskClosable={false}
+      onOk={handleOk}
+      onCancel={onCancel}
+      okText={t("modal.ok", "确定")}
+      cancelText={t("modal.cancel", "取消")}
+      title={
+        <span className="modal-title">
+          <Icon name={isEdit ? "square-pen" : "plus"} size={16} />
+          {label(
+            isEdit ? "modal.titleEdit" : "modal.title",
+            isEdit ? "编辑设备配置" : "新增设备配置"
+          )}
+        </span>
+      }
+    >
+      <p className="modal-desc">
+        {label("modal.desc", "填写设备基础信息并绑定采集策略，保存后立即纳管。")}
+      </p>
+      <Form form={form} layout="vertical" initialValues={deviceFormInitialValues}>
+        <Form.Item name="name" label={label("modal.name", "设备名称")} rules={requiredRule}>
+          <Input placeholder={t("modal.name.placeholder", "请输入设备名称")} />
+        </Form.Item>
+        <Form.Item name="code" label={label("modal.code", "设备编号")} rules={requiredRule}>
+          <Input placeholder={t("modal.code.placeholder", "例如 GW-SH-0201")} />
+        </Form.Item>
+        <Form.Item name="type" label={label("modal.type", "设备类型")} rules={requiredRule}>
+          <Select options={toOptions(deviceTypeOptions)} />
+        </Form.Item>
+        <Form.Item name="site" label={label("modal.site", "所属站点")} rules={requiredRule}>
+          <Select options={toOptions(siteOptions)} showSearch optionFilterProp="label" />
+        </Form.Item>
+        <Form.Item name="firmware" label={label("modal.firmware", "固件版本")}>
+          <Select options={firmwareOptions} />
+        </Form.Item>
+        <Form.Item name="policy" label={label("modal.policy", "采集策略模板")} rules={requiredRule}>
+          <Select options={toOptions(policyTemplates)} />
+        </Form.Item>
+
+        <div className="modal-switch">
+          <div className="modal-switch-text">
+            <div className="modal-switch-title">{label("modal.enabled", "保存后立即启用")}</div>
+            <div className="modal-switch-desc">
+              {label("modal.enabled.desc", "启用后设备将按所选策略开始上报数据")}
+            </div>
+          </div>
+          <Form.Item name="enabled" valuePropName="checked" noStyle>
+            <Switch onChange={setEnabled} />
+          </Form.Item>
+        </div>
+
+        <Form.Item name="remark" label={label("modal.remark", "备注")} className="modal-remark">
+          <Input.TextArea
+            rows={2}
+            placeholder={t("modal.remark.placeholder", "可选，记录设备位置或负责人信息")}
+          />
+        </Form.Item>
+      </Form>
+    </Modal>
+  );
+}
+  Object.assign(__export, { ConfigModal });
+})();
+
+/* ===== src/views/console-page.jsx ===== */
+(function () {
+  const { useState } = React;
+  const { Breadcrumb, Button, Space, message } = antd;
+  const { FormattedMessage, useIntl } = ReactIntl;
+  const { Icon } = __export;
+  const ConfigForm = __export.ConfigForm;
+  const DeviceTable = __export.DeviceTable;
+  const ConfigModal = __export.ConfigModal;
+// Layer 4: 设备配置页 — 表单区 + 清单表 + 新增/编辑弹窗
+function ConsolePage() {
+  const intl = useIntl();
+  const [modal, setModal] = useState({ open: false, record: null });
+
+  const openCreate = () => setModal({ open: true, record: null });
+  const openEdit = (record) => setModal({ open: true, record: record });
+  const closeModal = () => setModal((prev) => ({ ...prev, open: false }));
+
+  const breadcrumbItems = [
+    { title: <FormattedMessage id="page.breadcrumb.home" defaultMessage="控制台" /> },
+    { title: <FormattedMessage id="page.breadcrumb.group" defaultMessage="设备管理" /> },
+    { title: <FormattedMessage id="page.breadcrumb.current" defaultMessage="设备配置" /> },
+  ];
+
+  return (
+    <div className="page">
+      <header className="page-head">
+        <Breadcrumb items={breadcrumbItems} />
+        <div className="page-head-row">
+          <div className="page-head-text">
+            <h1 className="page-title">
+              <FormattedMessage id="page.title" defaultMessage="设备配置" />
+            </h1>
+            <p className="page-desc">
+              <FormattedMessage
+                id="page.desc"
+                defaultMessage="统一维护设备的采集策略、上报协议与运行参数，保存后自动下发至目标站点。"
+              />
+            </p>
+          </div>
+          <Space size={8} className="page-actions">
+            <Button
+              icon={<Icon name="download" size={14} />}
+              onClick={() =>
+                message.success(
+                  intl.formatMessage({ id: "table.exported", defaultMessage: "已导出所选配置" })
+                )
+              }
+            >
+              <FormattedMessage id="page.export" defaultMessage="导出配置" />
+            </Button>
+            <Button type="primary" icon={<Icon name="plus" size={14} />} onClick={openCreate}>
+              <FormattedMessage id="page.create" defaultMessage="新增设备配置" />
+            </Button>
+          </Space>
+        </div>
+      </header>
+
+      <ConfigForm />
+      <DeviceTable onEdit={openEdit} />
+
+      <ConfigModal open={modal.open} record={modal.record} onCancel={closeModal} />
+    </div>
+  );
+}
+  Object.assign(__export, { ConsolePage });
+})();
+
+/* ===== app.jsx ===== */
+(function () {
+  const { useEffect } = React;
+  const { ConfigProvider, Layout } = antd;
+  const { IntlProvider } = ReactIntl;
+  const { AppProvider, useApp, antdEnUS, messages } = __export;
+  const zhCN = __export.zhCN;
+  const HeaderBar = __export.HeaderBar;
+  const SideMenu = __export.SideMenu;
+  const ConsolePage = __export.ConsolePage;
+// 应用入口 — ICT React 页面
+// 分层约定:
+//   Layer 1 全局状态   → src/context.jsx  (AppProvider: dark 模式 / 界面语言 / 导航折叠)
+//   Layer 2 数据与逻辑 → src/data.js, src/i18n.js (mock 数据、派生统计、中英字典)
+//   Layer 3 通用小组件 → src/components/  (SectionCard / StatusTag)
+//   Layer 4 视图组件   → src/views/       (header-bar / side-menu / config-form / device-table / config-modal)
+//   Layer 5 布局骨架   → app.jsx          (本文件: 组装 Provider + antd Layout)
+//
+// 样式约定: antd 组件承载布局与交互;自定义样式写在 CSS 文件中,颜色/阴影/圆角
+// 一律使用 token(var(--primary) / var(--shadow-card) / var(--radius-*))。
+// 切语言三件套同步: IntlProvider(locale/messages) + ConfigProvider(locale) + dayjs.locale()。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 页面标题 — 构建时写入产物 <title>
+const APP_TITLE = "ICT 设备运维平台 · 设备配置";
+
+function App() {
+  return (
+    <AppProvider>
+      <AppShell />
+    </AppProvider>
+  );
+}
+
+function AppShell() {
+  const { lang } = useApp();
+  const isZh = lang === "zh";
+
+  useEffect(() => {
+    dayjs.locale(isZh ? "zh-cn" : "en");
+  }, [isZh]);
+
+  return (
+    <IntlProvider locale={isZh ? "zh-CN" : "en"} messages={messages[lang]}>
+      <ConfigProvider locale={isZh ? zhCN : antdEnUS}>
+        <Layout className="app-shell">
+          <HeaderBar />
+          <Layout className="app-body" hasSider>
+            <SideMenu />
+            <Layout.Content className="app-content">
+              <ConsolePage />
+            </Layout.Content>
+          </Layout>
+        </Layout>
+      </ConfigProvider>
+    </IntlProvider>
+  );
+}
+  Object.assign(__export, { App, APP_TITLE });
+})();
+/* ===== render ===== */
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(__export.App));
+</script>
+</body>
+</html>
