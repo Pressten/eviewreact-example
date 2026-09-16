@@ -116,9 +116,9 @@ export default function ConfigForm() {
               </div>
             </div>
           </div>
-          <Form.Item name="enhanced" valuePropName="toggled" updateTrigger="onToggle">
-            <Toggle onToggle={setEnhanced} data={["", ""]} />
-          </Form.Item>
+          {/* Toggle 联动显隐:按官方 Toggle.md §7 用独立受控 Toggle(toggled+onToggle),
+               不要放进 Form.Item(那里 Form 托管 onToggle,自定义 onToggle 会被覆盖导致联动失效) */}
+          <Toggle data={[false, true]} toggled={enhanced} onToggle={setEnhanced} />
         </div>
 
         {enhanced ? (
@@ -184,7 +184,7 @@ export default function ConfigForm() {
                   updateTrigger="onToggle"
                   label={label("form.masking", "敏感数据脱敏")}
                 >
-                  <Toggle data={["", ""]} />
+                  <Toggle data={[false, true]} />
                 </Form.Item>
               </div>
               <div className="form-col form-col-full">

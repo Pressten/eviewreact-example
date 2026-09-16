@@ -15,11 +15,11 @@ import "./device-table.css";
 
 // Layer 4: 设备配置清单 — 工具栏(搜索/筛选/刷新) + 复选表格 + 行内操作
 //
-// TODO(eview-react): Table 的以下 prop 名按 skill 映射总表写入,需对照已安装的 eview-react Table Reference 核对:
-//   - dataset / keyIndex / columns[].key / emptyTableMsg
-//   - enablePagination + pagingProps + onPageChange(分页参数结构 pageSize/pageSizes 以 Reference 为准)
-//   - enableCheckBox + onRowCheck + 受控已选项的 prop 名(此处暂用 selectedDataKeys,如不符请改)
-//   - loading(antd 用 loading,eview-react 可能用 isOpen 包 Loading 或 Table 自带 isLoading,请按实际调整)
+// eview-react Table API(对照 Table.md):
+//   - dataset=对象行数组(key 对应 columns[].key);keyIndex=行主键所在列序号(code 列=1)
+//   - enableLoading(非 loading);勾选 enableCheckBox + checkedRows(受控主键数组)+ onRowCheck(row, checkedRows)
+//   - 静态全量数据用 enableAutoPaging 前台分页 + pageSize/pageSizeOptions
+//   - render 签名 (cellValue, rowData, options, row, isEdit),操作列用第 2 参 rowData
 export default function DeviceTable({ onEdit }) {
   const intl = useIntl();
   const toast = useToast();
@@ -223,17 +223,18 @@ export default function DeviceTable({ onEdit }) {
 
       <Table
         className="device-table"
-        keyIndex="code"
+        keyIndex={1}
         dataset={data}
         columns={columns}
-        loading={loading}
+        enableLoading={loading}
         emptyTableMsg={t("table.empty", "没有匹配的设备")}
         enableCheckBox
-        selectedDataKeys={selectedKeys}
-        onRowCheck={(checkedKeys) => setSelectedKeys(checkedKeys || [])}
+        checkedRows={selectedKeys}
+        onRowCheck={(row, checkedRows) => setSelectedKeys(checkedRows || [])}
         enablePagination
-        pagingProps={{ pageSize: 8, pageSizes: [8, 16, 32] }}
-        onPageChange={() => {}}
+        enableAutoPaging
+        pageSize={8}
+        pageSizeOptions={[8, 16, 32]}
       />
     </SectionCard>
   );

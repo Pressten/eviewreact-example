@@ -37,26 +37,23 @@ export default function ConfigModal({ open, record, onCancel }) {
 
   useEffect(() => {
     if (!open) return;
-    // Dialog 打开后 Form 才挂载,等下一帧再回填,确保 ref 已就绪
-    const id = window.requestAnimationFrame(() => {
-      const form = formRef.current;
-      if (!form) return;
-      if (record) {
-        form.setFieldsValue({
-          name: record.name,
-          code: record.code,
-          type: record.type,
-          site: record.site,
-          firmware: record.firmware,
-          policy: record.policy,
-          enabled: record.status !== "disabled",
-          remark: "",
-        });
-      } else {
-        form.resetFields();
-      }
-    });
-    return () => window.cancelAnimationFrame(id);
+    // Dialog destroyOnClose 默认 true,打开后 Form 重新挂载;effect 跑时 ref 已就绪,直接回填
+    const form = formRef.current;
+    if (!form) return;
+    if (record) {
+      form.setFieldsValue({
+        name: record.name,
+        code: record.code,
+        type: record.type,
+        site: record.site,
+        firmware: record.firmware,
+        policy: record.policy,
+        enabled: record.status !== "disabled",
+        remark: "",
+      });
+    } else {
+      form.resetFields();
+    }
   }, [open, record]);
 
   const handleSuccess = () => {
@@ -67,13 +64,13 @@ export default function ConfigModal({ open, record, onCancel }) {
   };
 
   return (
-    // TODO(eview-react): Dialog 的 width/centered/maskClosable 在 eview-react 用 size/position 等表达,
-    // 此处保留 isOpen/onClose/buttons/title 四个核心 prop,宽度按 Reference 调整。
+    // Dialog:isOpen 受控;modal 默认 true 已居中,无需 position(其值为 [x,y] 数组,误传 "center" 会导致弹窗定位到屏外)。
+    // size=[宽,高],高 null 自适应。
     <Dialog
       className="config-modal"
       isOpen={open}
       onClose={onCancel}
-      position="center"
+      size={[560, null]}
       title={
         <span className="modal-title">
           <Icon name={isEdit ? "square-pen" : "plus"} size={16} />
@@ -127,7 +124,7 @@ export default function ConfigModal({ open, record, onCancel }) {
             </div>
           </div>
           <Form.Item name="enabled" valuePropName="toggled" updateTrigger="onToggle">
-            <Toggle data={["", ""]} />
+            <Toggle data={[false, true]} />
           </Form.Item>
         </div>
 
