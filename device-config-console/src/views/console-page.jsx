@@ -1,31 +1,37 @@
 ﻿import { useState } from "react";
-import { Breadcrumb, Button, Space, message } from "antd";
-import { FormattedMessage, useIntl } from "react-intl";
-import { Icon } from "../../assets/shared/icons.js";
+import Crumbs from "@nce/eview-react/Crumbs";
+import Button from "@nce/eview-react/Button";
+import { useIntl, FormattedMessage } from "react-intl";
+import { Icon } from "../icons.jsx";
 import ConfigForm from "./config-form.jsx";
 import DeviceTable from "./device-table.jsx";
 import ConfigModal from "./config-modal.jsx";
+import { useToast } from "../components/Toast.jsx";
 import "./console-page.css";
 
 // Layer 4: 设备配置页 — 表单区 + 清单表 + 新增/编辑弹窗
 export default function ConsolePage() {
   const intl = useIntl();
+  const toast = useToast();
   const [modal, setModal] = useState({ open: false, record: null });
 
   const openCreate = () => setModal({ open: true, record: null });
   const openEdit = (record) => setModal({ open: true, record: record });
   const closeModal = () => setModal((prev) => ({ ...prev, open: false }));
 
-  const breadcrumbItems = [
-    { title: <FormattedMessage id="page.breadcrumb.home" defaultMessage="控制台" /> },
-    { title: <FormattedMessage id="page.breadcrumb.group" defaultMessage="设备管理" /> },
-    { title: <FormattedMessage id="page.breadcrumb.current" defaultMessage="设备配置" /> },
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback });
+
+  // Crumbs data: [{title}],最后一项无 url。title 用字符串(避免 Crumbs 对 ReactNode 的兼容性问题)
+  const breadcrumbData = [
+    { title: t("page.breadcrumb.home", "控制台") },
+    { title: t("page.breadcrumb.group", "设备管理") },
+    { title: t("page.breadcrumb.current", "设备配置") },
   ];
 
   return (
     <div className="page">
       <header className="page-head">
-        <Breadcrumb items={breadcrumbItems} />
+        <Crumbs data={breadcrumbData} />
         <div className="page-head-row">
           <div className="page-head-text">
             <h1 className="page-title">
@@ -38,21 +44,24 @@ export default function ConsolePage() {
               />
             </p>
           </div>
-          <Space size={8} className="page-actions">
+          {/* antd Space → flex div + gap */}
+          <div className="page-actions">
             <Button
-              icon={<Icon name="download" size={14} />}
+              leftIcon={<Icon name="download" size={14} />}
+              text={t("page.export", "导出配置")}
               onClick={() =>
-                message.success(
+                toast.success(
                   intl.formatMessage({ id: "table.exported", defaultMessage: "已导出所选配置" })
                 )
               }
-            >
-              <FormattedMessage id="page.export" defaultMessage="导出配置" />
-            </Button>
-            <Button type="primary" icon={<Icon name="plus" size={14} />} onClick={openCreate}>
-              <FormattedMessage id="page.create" defaultMessage="新增设备配置" />
-            </Button>
-          </Space>
+            />
+            <Button
+              status="primary"
+              leftIcon={<Icon name="plus" size={14} />}
+              text={t("page.create", "新增设备配置")}
+              onClick={openCreate}
+            />
+          </div>
         </div>
       </header>
 

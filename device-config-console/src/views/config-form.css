@@ -1,4 +1,25 @@
 /* Layer 4: 采集策略表单区 */
+/* Row/Col(antd) → 手写 CSS Grid 三列,窄屏单列 */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 var(--spacing-gutter);
+}
+
+.form-col {
+  min-width: 0;
+}
+
+.form-col-full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .full-width {
   width: 100%;
 }

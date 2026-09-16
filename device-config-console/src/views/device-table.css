@@ -32,9 +32,21 @@
   margin-right: var(--spacing-inline);
 }
 
-/* 表格已整体内缩,单元格恢复表格默认内边距,避免与卡片 24px 叠加成双重缩进 */
-.device-table.ant-table-wrapper .ant-table-pagination {
-  margin: var(--spacing-gutter) 0 0 !important;
+/* 表格分页区与上方留 16px 间距(类名按 eview-react Table 实际渲染的容器调整) */
+.device-table {
+  margin-top: 0;
+}
+
+.device-table > .ev-table-pagination,
+.device-table .ev-pagination {
+  margin: var(--spacing-gutter) 0 0;
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
 }
 
 .device-cell {

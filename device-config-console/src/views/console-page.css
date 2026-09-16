@@ -42,4 +42,7 @@
 
 .page-actions {
   flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
 }

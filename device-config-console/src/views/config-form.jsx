@@ -1,8 +1,16 @@
-﻿import { useState } from "react";
-import { Button, Col, Form, Input, InputNumber, Radio, Row, Select, Switch, message } from "antd";
+﻿import { useRef, useState } from "react";
+import Form from "@nce/eview-react/Form";
+import TextField from "@nce/eview-react/TextField";
+import TextArea from "@nce/eview-react/TextArea";
+import Spinner from "@nce/eview-react/Spinner";
+import Select from "@nce/eview-react/Select";
+import SelectCard from "@nce/eview-react/SelectCard";
+import Toggle from "@nce/eview-react/Toggle";
+import Button from "@nce/eview-react/Button";
 import { FormattedMessage, useIntl } from "react-intl";
-import { Icon } from "../../assets/shared/icons.js";
+import { Icon } from "../icons.jsx";
 import SectionCard from "../components/SectionCard.jsx";
+import { useToast } from "../components/Toast.jsx";
 import {
   compressionOptions,
   deviceTypeOptions,
@@ -14,9 +22,11 @@ import {
 import "./config-form.css";
 
 // Layer 4: 采集策略表单区 — 基础字段 + 增强采集开关(开启后展开详细参数)
+// eview-react Form 用 ref + submit() → onSuccess(values) 回调(非 Promise),推进逻辑移到 onSuccess。
 export default function ConfigForm() {
   const intl = useIntl();
-  const [form] = Form.useForm();
+  const toast = useToast();
+  const formRef = useRef(null);
   const [enhanced, setEnhanced] = useState(true);
 
   const t = (id, fallback, values) =>
@@ -25,17 +35,15 @@ export default function ConfigForm() {
   const toOptions = (list) =>
     list.map((item) => ({
       value: item.value,
-      label: item.label || t(item.msgId, item.fallback),
+      text: item.label || t(item.msgId, item.fallback),
     }));
 
-  const requiredRule = [{ required: true, message: t("form.required", "此项为必填") }];
-
-  const handleFinish = () => {
-    message.success(t("form.saved", "采集策略已保存并下发"));
+  const handleSuccess = () => {
+    toast.success(t("form.saved", "采集策略已保存并下发"));
   };
 
   const handleReset = () => {
-    form.resetFields();
+    formRef.current && formRef.current.resetFields();
     setEnhanced(true);
   };
 
@@ -51,47 +59,47 @@ export default function ConfigForm() {
       }
     >
       <Form
-        form={form}
+        ref={formRef}
         layout="vertical"
+        validateErrorType="tip"
         initialValues={policyFormInitialValues}
-        onFinish={handleFinish}
+        onSuccess={handleSuccess}
+        onFailed={() => {}}
       >
-        <Row gutter={[16, 0]}>
-          <Col xs={24} md={8}>
-            <Form.Item
-              name="policyName"
-              label={label("form.policyName", "策略名称")}
-              rules={requiredRule}
-            >
-              <Input placeholder={t("form.policyName.placeholder", "请输入策略名称")} />
+        <div className="form-row">
+          <div className="form-col">
+            <Form.Item name="policyName" label={label("form.policyName", "策略名称")} rules={[{ required: true }]}>
+              <TextField placeholder={t("form.policyName.placeholder", "请输入策略名称")} />
             </Form.Item>
-          </Col>
-          <Col xs={24} md={8}>
+          </div>
+          <div className="form-col">
             <Form.Item name="deviceType" label={label("form.deviceType", "设备类型")}>
               <Select options={toOptions(deviceTypeOptions)} />
             </Form.Item>
-          </Col>
-          <Col xs={24} md={8}>
+          </div>
+          <div className="form-col">
             <Form.Item name="site" label={label("form.site", "应用站点")}>
-              <Select options={toOptions(siteOptions)} showSearch optionFilterProp="label" />
+              <Select options={toOptions(siteOptions)} />
             </Form.Item>
-          </Col>
-          <Col xs={24} md={8}>
+          </div>
+          <div className="form-col">
             <Form.Item name="protocol" label={label("form.protocol", "上报协议")}>
-              <Radio.Group options={protocolOptions} optionType="button" buttonStyle="solid" />
+              <SelectCard data={toOptions(protocolOptions)} />
             </Form.Item>
-          </Col>
-          <Col xs={24} md={8}>
+          </div>
+          <div className="form-col">
             <Form.Item name="interval" label={label("form.interval", "采集周期（秒）")}>
-              <InputNumber min={5} max={3600} step={5} className="full-width" />
+              <div className="full-width">
+                <Spinner min={5} max={3600} step={5} />
+              </div>
             </Form.Item>
-          </Col>
-          <Col xs={24} md={8}>
+          </div>
+          <div className="form-col">
             <Form.Item name="priority" label={label("form.priority", "策略优先级")}>
               <Select options={toOptions(priorityOptions)} />
             </Form.Item>
-          </Col>
-        </Row>
+          </div>
+        </div>
 
         <div className="toggle-row">
           <div className="toggle-copy">
@@ -108,8 +116,8 @@ export default function ConfigForm() {
               </div>
             </div>
           </div>
-          <Form.Item name="enhanced" valuePropName="checked" noStyle>
-            <Switch onChange={setEnhanced} />
+          <Form.Item name="enhanced" valuePropName="toggled" updateTrigger="onToggle">
+            <Toggle onToggle={setEnhanced} data={["", ""]} />
           </Form.Item>
         </div>
 
@@ -128,72 +136,80 @@ export default function ConfigForm() {
                 )}
               </span>
             </div>
-            <Row gutter={[16, 0]}>
-              <Col xs={24} md={8}>
-                <Form.Item
-                  name="sampleInterval"
-                  label={label("form.sampleInterval", "采样间隔（毫秒）")}
-                >
-                  <InputNumber min={100} max={60000} step={100} className="full-width" />
+            <div className="form-row">
+              <div className="form-col">
+                <Form.Item name="sampleInterval" label={label("form.sampleInterval", "采样间隔（毫秒）")}>
+                  <div className="full-width">
+                    <Spinner min={100} max={60000} step={100} />
+                  </div>
                 </Form.Item>
-              </Col>
-              <Col xs={24} md={8}>
+              </div>
+              <div className="form-col">
                 <Form.Item name="batchSize" label={label("form.batchSize", "单次上报条数")}>
-                  <InputNumber min={1} max={500} className="full-width" />
+                  <div className="full-width">
+                    <Spinner min={1} max={500} />
+                  </div>
                 </Form.Item>
-              </Col>
-              <Col xs={24} md={8}>
+              </div>
+              <div className="form-col">
                 <Form.Item name="heartbeat" label={label("form.heartbeat", "心跳超时（秒）")}>
-                  <InputNumber min={5} max={600} className="full-width" />
+                  <div className="full-width">
+                    <Spinner min={5} max={600} />
+                  </div>
                 </Form.Item>
-              </Col>
-              <Col xs={24} md={8}>
-                <Form.Item
-                  name="bufferLimit"
-                  label={label("form.bufferLimit", "离线缓存上限（条）")}
-                >
-                  <InputNumber min={100} max={100000} step={100} className="full-width" />
+              </div>
+              <div className="form-col">
+                <Form.Item name="bufferLimit" label={label("form.bufferLimit", "离线缓存上限（条）")}>
+                  <div className="full-width">
+                    <Spinner min={100} max={100000} step={100} />
+                  </div>
                 </Form.Item>
-              </Col>
-              <Col xs={24} md={8}>
+              </div>
+              <div className="form-col">
                 <Form.Item name="compression" label={label("form.compression", "数据压缩")}>
                   <Select options={toOptions(compressionOptions)} />
                 </Form.Item>
-              </Col>
-              <Col xs={24} md={8}>
+              </div>
+              <div className="form-col">
                 <Form.Item name="retries" label={label("form.retries", "失败重试次数")}>
-                  <InputNumber min={0} max={10} className="full-width" />
+                  <div className="full-width">
+                    <Spinner min={0} max={10} />
+                  </div>
                 </Form.Item>
-              </Col>
-              <Col xs={24} md={8}>
+              </div>
+              <div className="form-col">
                 <Form.Item
                   name="masking"
-                  valuePropName="checked"
+                  valuePropName="toggled"
+                  updateTrigger="onToggle"
                   label={label("form.masking", "敏感数据脱敏")}
                 >
-                  <Switch />
+                  <Toggle data={["", ""]} />
                 </Form.Item>
-              </Col>
-              <Col xs={24}>
+              </div>
+              <div className="form-col form-col-full">
                 <Form.Item name="remark" label={label("form.remark", "策略备注")}>
-                  <Input.TextArea
-                    rows={2}
+                  <TextArea
+                    maxLength={200}
                     placeholder={t(
                       "form.remark.placeholder",
                       "补充说明该策略的适用范围与注意事项"
                     )}
                   />
                 </Form.Item>
-              </Col>
-            </Row>
+              </div>
+            </div>
           </div>
         ) : null}
 
         <div className="form-actions">
-          <Button onClick={handleReset}>{label("form.reset", "重置")}</Button>
-          <Button type="primary" htmlType="submit" icon={<Icon name="save" size={14} />}>
-            {label("form.submit", "保存配置")}
-          </Button>
+          <Button text={t("form.reset", "重置")} onClick={handleReset} />
+          <Button
+            status="primary"
+            leftIcon={<Icon name="save" size={14} />}
+            text={t("form.submit", "保存配置")}
+            onClick={() => formRef.current && formRef.current.submit()}
+          />
         </div>
       </Form>
     </SectionCard>
