@@ -1,0 +1,122 @@
+/* 布局骨架 — token 优先 */
+.shell {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+}
+
+/* antd Layout/Header/Sider/Content 在 eview-react 无 Reference,改手写布局;
+   以下 .shell-body / 显式宽高补齐 antd Layout 原内置的 flex 行为。 */
+.shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 var(--spacing-page);
+  background: var(--surface-container-highest);
+  border-bottom: 1px solid var(--divider);
+}
+
+.shell-body {
+  display: flex;
+  min-height: calc(100vh - 48px);
+}
+
+.shell-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.shell-brand-icon {
+  color: var(--primary);
+}
+
+.shell-brand-text {
+  font: var(--font-body-l);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.shell-tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+}
+
+.shell-search {
+  width: 220px;
+}
+
+/* TODO(eview-react): Avatar 无导出,当前手写圆形占位 */
+.shell-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+  font: var(--font-body-s);
+  cursor: pointer;
+}
+
+/* TODO(eview-react): Menu 有导出名但无 Reference,当前手写侧导航 */
+.shell-sider {
+  width: 248px;
+  flex-shrink: 0;
+  background: var(--surface-container-highest);
+  border-right: 1px solid var(--divider);
+  overflow-y: auto;
+}
+
+.shell-menu {
+  padding: var(--spacing-2) 0;
+}
+
+.shell-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-4);
+  border: none;
+  background: transparent;
+  text-align: left;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.shell-menu-item:hover {
+  background: var(--hover);
+}
+
+.shell-menu-item.is-active {
+  background: var(--select);
+  color: var(--color-text-on);
+  border-left: 2px solid var(--primary);
+}
+
+.shell-menu-item-icon {
+  display: inline-flex;
+  color: var(--on-surface-variant);
+}
+
+.shell-menu-item.is-active .shell-menu-item-icon {
+  color: var(--primary);
+}
+
+.shell-content {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-stack) var(--spacing-page) var(--spacing-page);
+}
+
+/* 面包屑:视觉权重低于内容标题 */
+.shell-breadcrumb {
+  margin-bottom: var(--spacing-stack);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}

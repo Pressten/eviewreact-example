@@ -1,0 +1,118 @@
+/* 步骤流面板 — token 优先 */
+.step-panel {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+}
+
+.step-content {
+  margin-top: var(--spacing-section);
+  min-height: 320px;
+  padding: var(--spacing-inset);
+  background: var(--surface-container-low);
+  border-radius: var(--radius-container);
+}
+
+.step-form {
+  max-width: 640px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.step-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-gutter);
+}
+
+.confirm-alert {
+  margin-bottom: var(--spacing-stack);
+}
+
+.confirm-group {
+  margin-top: var(--spacing-stack);
+}
+
+.confirm-group + .confirm-group {
+  margin-top: var(--spacing-section);
+}
+
+/* 底部按钮组靠右:次要(上一步)在左,主操作(下一步/提交)在最右 */
+.step-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-inline);
+  margin-top: var(--spacing-section);
+  padding-top: var(--spacing-stack);
+  border-top: 1px solid var(--divider);
+}
+
+/* 结果页(antd Result → Empty type="success" + 手写内容) */
+.result-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  text-align: center;
+}
+.result-title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.result-subtitle {
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+}
+.result-actions {
+  margin-top: var(--spacing-4);
+}
+
+/* Form.Item extra 无对应,改为下方的辅助说明文案 */
+.step-form-hint {
+  margin-top: var(--spacing-1);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+/* 确认页键值详情块(antd Descriptions → 手写 dl/dt/dd) */
+.confirm-list {
+  margin: 0;
+}
+.confirm-list + .confirm-list {
+  margin-top: var(--spacing-section);
+}
+.confirm-list-title {
+  margin-bottom: var(--spacing-stack);
+  font: var(--font-body-l);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.confirm-list-grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto 1fr);
+  gap: var(--spacing-3) var(--spacing-gutter);
+  margin: 0;
+  padding: var(--spacing-inset);
+  background: var(--surface-container-highest);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-container);
+}
+.confirm-list dt {
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+.confirm-list dd {
+  margin: 0;
+  color: var(--on-surface);
+}
+
+/* 窄屏时双列表单退化为单列 */
+@media (max-width: 768px) {
+  .step-form-row {
+    grid-template-columns: 1fr;
+  }
+}
