@@ -8,6 +8,7 @@ import { deviceTypeOptions, stationOptions, protocolOptions } from "../../data.j
 // Layer 4: 步骤一 — 基础信息表单
 // antd Form form={form} → eview-react Form ref={formRef};校验由父级 ref.submit() 触发 → onSuccess 回调。
 // Select options 的 label → text;placeholder → defaultLabel。Radio.Group + Radio.Button → SelectCard(data)。
+// 多列布局用 Form 级 itemCol(24 栅格,统一半宽 12),Form 内不允许用 div 做栅格。
 export default function BasicInfoForm({ formRef, initialValues, onSuccess }) {
   const toOptions = (list) => list.map((o) => ({ value: o.value, text: o.label }));
 
@@ -15,6 +16,7 @@ export default function BasicInfoForm({ formRef, initialValues, onSuccess }) {
     <Form
       ref={formRef}
       layout="vertical"
+      itemCol={12}
       initialValues={initialValues}
       validateErrorType="tip"
       onSuccess={onSuccess}
@@ -29,22 +31,20 @@ export default function BasicInfoForm({ formRef, initialValues, onSuccess }) {
         <TextField placeholder="如:华北风电场-03 逆变器 A12" maxLength={32} />
       </Form.Item>
 
-      <div className="step-form-row">
-        <Form.Item
-          name="deviceType"
-          label="设备类型"
-          rules={[{ required: true }]}
-        >
-          <Select options={toOptions(deviceTypeOptions)} defaultLabel="请选择设备类型" enableClear />
-        </Form.Item>
-        <Form.Item
-          name="station"
-          label="所属站点"
-          rules={[{ required: true }]}
-        >
-          <Select options={toOptions(stationOptions)} defaultLabel="请选择所属站点" enableClear />
-        </Form.Item>
-      </div>
+      <Form.Item
+        name="deviceType"
+        label="设备类型"
+        rules={[{ required: true }]}
+      >
+        <Select options={toOptions(deviceTypeOptions)} defaultLabel="请选择设备类型" />
+      </Form.Item>
+      <Form.Item
+        name="station"
+        label="所属站点"
+        rules={[{ required: true }]}
+      >
+        <Select options={toOptions(stationOptions)} defaultLabel="请选择所属站点" />
+      </Form.Item>
 
       <Form.Item name="protocol" label="接入协议" rules={[{ required: true }]}>
         <SelectCard data={toOptions(protocolOptions)} />
