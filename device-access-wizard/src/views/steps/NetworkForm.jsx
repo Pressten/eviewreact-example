@@ -36,15 +36,11 @@ export default function NetworkForm({ formRef, initialValues, onSuccess }) {
         />
       </Form.Item>
       <Form.Item name="port" label="端口" rules={[{ required: true }]}>
-        <div className="full-width">
-          <Spinner min={1} max={65535} />
-        </div>
+        <Spinner min={1} max={65535} className="full-width" />
       </Form.Item>
 
       <Form.Item name="collectInterval" label="采集周期(秒)" rules={[{ required: true }]}>
-        <div className="full-width">
-          <Spinner min={5} max={3600} />
-        </div>
+        <Spinner min={5} max={3600} className="full-width" />
       </Form.Item>
       <p className="step-form-hint">数据点位的轮询间隔,范围 5 ~ 3600 秒</p>
 

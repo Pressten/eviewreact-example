@@ -18,10 +18,9 @@ export default function ConfirmForm({ values }) {
         display
         type="default"
         enableDisposeTimeOut={false}
+        text="请核对以下配置信息,提交后设备将进入接入调试队列"
         className="confirm-alert"
-      >
-        请核对以下配置信息,提交后设备将进入接入调试队列
-      </DivMessage>
+      />
 
       {confirmGroups.map((group) => (
         <dl key={group.key} className="confirm-list">
