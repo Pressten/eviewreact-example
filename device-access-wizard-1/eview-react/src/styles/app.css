@@ -1,0 +1,194 @@
+/* =========================================================================
+   app.css — 布局骨架 + 步骤流 + 手写补位组件样式
+   全部引用原始 token（var(--surface) 等），与 aui3_1.css 并存。
+   类名用业务前缀 app- / shell-，不用 ev_。
+   ========================================================================= */
+
+/* 应用级基础样式 — 页面骨架的 token 消费示例 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+/* 布局骨架 — token 优先（antd Layout/Header/Sider/Content 手写为 div + CSS） */
+.shell {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+}
+
+.shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 var(--spacing-page);
+  background: var(--surface-container-highest);
+  border-bottom: 1px solid var(--divider);
+}
+
+.shell-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.shell-brand-icon {
+  color: var(--primary);
+}
+
+.shell-brand-text {
+  font: var(--font-body-l);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.shell-tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+}
+
+.shell-search {
+  width: 220px;
+}
+
+/* 手写补位 Avatar（antd Avatar 无对应），补全尺寸与圆形 */
+.shell-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--on-primary);
+  font: var(--font-body-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* antd Layout 的 Sider+Content 并排结构手写为 flex */
+.shell-body {
+  display: flex;
+  min-height: calc(100vh - 48px);
+}
+
+.shell-sider {
+  width: 248px;
+  background: var(--surface-container-highest);
+  border-right: 1px solid var(--divider);
+}
+
+.shell-content {
+  flex: 1;
+  padding: var(--spacing-stack) var(--spacing-page) var(--spacing-page);
+  min-width: 0;
+}
+
+/* 面包屑:视觉权重低于内容标题 */
+.shell-breadcrumb {
+  margin-bottom: var(--spacing-stack);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+/* 步骤流面板 — token 优先 */
+.step-panel {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+}
+
+.step-content {
+  margin-top: var(--spacing-section);
+  min-height: 320px;
+  padding: var(--spacing-inset);
+  background: var(--surface-container-low);
+  border-radius: var(--radius-container);
+}
+
+.step-form {
+  max-width: 640px;
+}
+
+/* eview-react Form 用 itemCol 做栅格，不再需要 div+grid 的 step-form-row */
+
+.confirm-alert {
+  margin-bottom: var(--spacing-stack);
+}
+
+.confirm-group {
+  margin-top: var(--spacing-stack);
+}
+
+.confirm-group + .confirm-group {
+  margin-top: var(--spacing-section);
+}
+
+/* Descriptions title 的手写替代 */
+.confirm-group-title {
+  font: var(--font-body-l);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  margin-bottom: var(--spacing-stack);
+}
+
+/* 底部按钮组靠右:次要(上一步)在左,主操作(下一步/提交)在最右 */
+.step-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-section);
+  padding-top: var(--spacing-stack);
+  border-top: 1px solid var(--divider);
+}
+
+/* ── 手写补位：侧导航菜单（antd Menu 无 Reference） ── */
+.app-menu {
+  padding: var(--spacing-2) 0;
+}
+
+.app-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-4);
+  border: none;
+  background: transparent;
+  text-align: left;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.app-menu-item:hover {
+  background: var(--hover);
+}
+
+.app-menu-item.active {
+  background: var(--color-select);
+  color: var(--color-text-on);
+  border-left: 2px solid var(--primary);
+}
+
+/* ── 手写补位：键值详情块（antd Descriptions 无对应） ── */
+.app-kvlist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, auto) 1fr);
+  gap: var(--spacing-3) var(--spacing-4);
+  margin: 0;
+}
+
+.app-kvlist-key {
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.app-kvlist-val {
+  margin: 0;
+  color: var(--on-surface);
+}
