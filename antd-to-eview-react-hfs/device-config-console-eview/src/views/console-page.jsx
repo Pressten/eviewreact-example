@@ -1,6 +1,4 @@
-// Layer 4: 设备配置页 — 表单区 + 清单表 + 新增/编辑弹窗
-// Breadcrumb→Crumbs;Space→flex div;message.success→ToastProvider(DivMessage 渲染式)
-import { useState } from "react";
+﻿import { useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import Button from "@nce/eview-react/Button";
 import Crumbs from "@nce/eview-react/Crumbs";
@@ -16,7 +14,6 @@ function PageActions({ openCreate }) {
   const t = (id, fallback) => intl.formatMessage({ id: id, defaultMessage: fallback });
 
   return (
-    // TODO(eview-react): Space 无对应,flex div + gap 替代
     <div className="page-actions">
       <Button
         text={<FormattedMessage id="page.export" defaultMessage="导出配置" />}
@@ -27,6 +24,7 @@ function PageActions({ openCreate }) {
   );
 }
 
+// Layer 4: 设备配置页 — 表单区 + 清单表 + 新增/编辑弹窗
 export default function ConsolePage() {
   const intl = useIntl();
   const [modal, setModal] = useState({ open: false, record: null });

@@ -42,12 +42,4 @@
 
 .page-actions {
   flex: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.page-crumbs {
-  font: var(--font-caption-m);
-  color: var(--on-surface-variant);
 }

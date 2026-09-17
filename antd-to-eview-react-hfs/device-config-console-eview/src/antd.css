@@ -1,0 +1,368 @@
+/* ============================================================================
+   antd token 对齐层
+   antd 5 组件在运行时注入样式(优先级高于本文件),且其默认品牌色/亮色底纹不随
+   四层 token 翻转。本层用 !important 做确定性覆盖,使 antd 组件的颜色、底色与
+   暗色模式全部跟随 token(ant.css 重置层仅覆盖 Button/Checkbox/Tag)。
+   ========================================================================== */
+
+/* ---------- Switch ---------- */
+.ant-switch {
+  background: var(--content-placeholder) !important;
+}
+.ant-switch.ant-switch-checked {
+  background: var(--primary) !important;
+}
+.ant-switch.ant-switch-checked:hover {
+  background: var(--primary-hover) !important;
+}
+
+/* ---------- Menu ---------- */
+.ant-menu-light.ant-menu-inline,
+.ant-menu-light.ant-menu-vertical {
+  background: transparent !important;
+  border-inline-end: none !important;
+}
+.ant-menu-light .ant-menu-item,
+.ant-menu-light .ant-menu-submenu-title {
+  color: var(--on-surface) !important;
+  border-radius: var(--radius-base) !important;
+}
+.ant-menu-light .ant-menu-item:hover,
+.ant-menu-light .ant-menu-submenu-title:hover {
+  background: var(--surface-variant) !important;
+  color: var(--on-surface) !important;
+}
+.ant-menu-light .ant-menu-item-selected {
+  background: var(--primary-container) !important;
+  color: var(--primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+.ant-menu-light .ant-menu-item-selected .ant-menu-item-icon,
+.ant-menu-light .ant-menu-item-selected .anticon {
+  color: var(--primary) !important;
+}
+.ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title {
+  color: var(--primary) !important;
+}
+.ant-menu-light .ant-menu-sub .ant-menu-item {
+  color: var(--on-surface-variant) !important;
+}
+.ant-menu-light .ant-menu-sub .ant-menu-item-selected {
+  color: var(--primary) !important;
+}
+.ant-menu-light.ant-menu-horizontal {
+  background: transparent !important;
+  border-bottom: none !important;
+}
+.ant-menu-horizontal .ant-menu-item {
+  color: var(--on-surface-variant) !important;
+}
+.ant-menu-horizontal .ant-menu-item:hover {
+  color: var(--on-surface) !important;
+}
+.ant-menu-horizontal .ant-menu-item-selected {
+  color: var(--primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+.ant-menu-horizontal .ant-menu-item::after {
+  border-bottom-color: transparent !important;
+}
+.ant-menu-horizontal .ant-menu-item-selected::after {
+  border-bottom-color: var(--primary) !important;
+}
+
+/* ---------- Form ---------- */
+.ant-form-item .ant-form-item-label > label {
+  color: var(--on-surface) !important;
+  font: var(--font-body-m) !important;
+  font-weight: var(--font-weight-medium) !important;
+  height: auto !important;
+}
+.ant-form-item .ant-form-item-label > label.ant-form-item-required::before {
+  color: var(--error) !important;
+}
+.ant-form-item .ant-form-item-explain-error {
+  color: var(--error) !important;
+  font: var(--font-body-s) !important;
+}
+.ant-form-item .ant-form-item-extra {
+  color: var(--on-surface-variant) !important;
+  font: var(--font-caption-m) !important;
+}
+
+/* ---------- Input / InputNumber / Select 触发器 ---------- */
+.ant-input,
+.ant-input-affix-wrapper,
+.ant-input-number,
+.ant-select .ant-select-selector,
+.ant-picker {
+  background: var(--surface-container-highest) !important;
+  border-color: var(--outline) !important;
+  color: var(--on-surface) !important;
+}
+.ant-input::placeholder,
+.ant-input-number-input::placeholder,
+.ant-select .ant-select-selection-placeholder {
+  color: var(--content-placeholder) !important;
+}
+.ant-input:hover,
+.ant-input-affix-wrapper:hover,
+.ant-input-number:hover,
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: var(--primary) !important;
+}
+.ant-input:focus,
+.ant-input-focused,
+.ant-input-affix-wrapper-focused,
+.ant-input-number-focused,
+.ant-select-focused .ant-select-selector {
+  border-color: var(--selected) !important;
+  box-shadow: 0 0 0 2px var(--primary-container) !important;
+}
+.ant-input-number .ant-input-number-input,
+.ant-select .ant-select-selection-item {
+  color: var(--on-surface) !important;
+}
+.ant-select .ant-select-arrow,
+.ant-select .ant-select-clear,
+.ant-input-affix-wrapper .anticon,
+.ant-input-number .ant-input-number-handler .anticon {
+  color: var(--on-surface-variant) !important;
+}
+.ant-form-item-has-error .ant-input,
+.ant-form-item-has-error .ant-input-affix-wrapper,
+.ant-form-item-has-error .ant-input-number,
+.ant-form-item-has-error .ant-select .ant-select-selector {
+  border-color: var(--error) !important;
+}
+.ant-form-item-has-error .ant-input:focus,
+.ant-form-item-has-error .ant-input-affix-wrapper-focused,
+.ant-form-item-has-error .ant-input-number-focused,
+.ant-form-item-has-error .ant-select-focused .ant-select-selector {
+  border-color: var(--error) !important;
+  box-shadow: 0 0 0 2px var(--error-container) !important;
+}
+
+/* ---------- Radio.Group(solid 按钮组) ---------- */
+.ant-radio-button-wrapper {
+  background: var(--surface-container-highest) !important;
+  border-color: var(--outline) !important;
+  color: var(--on-surface-variant) !important;
+}
+.ant-radio-button-wrapper:not(:first-child)::before {
+  background: var(--outline) !important;
+}
+.ant-radio-button-wrapper-checked {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: var(--on-primary) !important;
+  box-shadow: none !important;
+}
+.ant-radio-button-wrapper-checked::before {
+  background: var(--primary) !important;
+}
+
+/* ---------- Checkbox ---------- */
+.ant-checkbox .ant-checkbox-inner {
+  background: var(--surface-container-highest) !important;
+  border-color: var(--outline) !important;
+}
+.ant-checkbox-checked .ant-checkbox-inner,
+.ant-checkbox-indeterminate .ant-checkbox-inner::after {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+/* ---------- Table ---------- */
+.ant-table-wrapper .ant-table {
+  background: transparent !important;
+  color: var(--on-surface) !important;
+}
+.ant-table-wrapper .ant-table-thead > tr > th {
+  background: var(--surface-variant) !important;
+  color: var(--on-surface-variant) !important;
+  border-bottom: 1px solid var(--divider) !important;
+  font: var(--font-body-m) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+.ant-table-wrapper .ant-table-thead > tr > th::before {
+  display: none !important;
+}
+.ant-table-wrapper .ant-table-tbody > tr > td {
+  border-bottom: 1px solid var(--divider) !important;
+  color: var(--on-surface) !important;
+  font: var(--font-body-m) !important;
+}
+.ant-table-wrapper .ant-table-tbody > tr.ant-table-row:hover > td,
+.ant-table-wrapper .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: var(--surface-variant) !important;
+}
+.ant-table-wrapper .ant-table-tbody > tr.ant-table-row-selected > td {
+  background: var(--primary-container) !important;
+}
+.ant-table-wrapper .ant-table-placeholder:hover > td {
+  background: transparent !important;
+}
+.ant-table-wrapper .ant-table-column-sorter {
+  color: var(--on-surface-variant) !important;
+}
+.ant-table-wrapper .ant-table-pagination {
+  color: var(--on-surface-variant) !important;
+}
+.ant-empty .ant-empty-description {
+  color: var(--on-surface-variant) !important;
+}
+.dark .ant-empty .ant-empty-image {
+  opacity: 0.45;
+}
+
+/* ---------- Pagination ---------- */
+.ant-pagination .ant-pagination-total-text,
+.ant-pagination .ant-pagination-options-quick-jumper {
+  color: var(--on-surface-variant) !important;
+}
+.ant-pagination .ant-pagination-item {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+.ant-pagination .ant-pagination-item a {
+  color: var(--on-surface) !important;
+}
+.ant-pagination .ant-pagination-item-active {
+  background: var(--primary-container) !important;
+  border-color: var(--primary) !important;
+}
+.ant-pagination .ant-pagination-item-active a {
+  color: var(--primary) !important;
+}
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  background: transparent !important;
+  border-color: var(--outline) !important;
+  color: var(--on-surface) !important;
+}
+.ant-pagination .ant-pagination-disabled .ant-pagination-item-link {
+  color: var(--content-disabled) !important;
+}
+
+/* ---------- 浮层:Select 下拉 / Dropdown ---------- */
+.ant-select-dropdown,
+.ant-dropdown .ant-dropdown-menu {
+  background: var(--surface-container-high) !important;
+  box-shadow: var(--shadow-popover) !important;
+  border-radius: var(--radius-overlay) !important;
+}
+.ant-select-dropdown .ant-select-item {
+  color: var(--on-surface) !important;
+  border-radius: var(--radius-base) !important;
+}
+.ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background: var(--surface-variant) !important;
+}
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: var(--primary-container) !important;
+  color: var(--primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+.ant-dropdown .ant-dropdown-menu-item {
+  color: var(--on-surface) !important;
+  border-radius: var(--radius-base) !important;
+}
+.ant-dropdown .ant-dropdown-menu-item:hover {
+  background: var(--surface-variant) !important;
+}
+.ant-dropdown .ant-dropdown-menu-item-selected {
+  background: var(--primary-container) !important;
+  color: var(--primary) !important;
+}
+.ant-dropdown .ant-dropdown-menu-item-danger {
+  color: var(--error) !important;
+}
+.ant-dropdown .ant-dropdown-menu-item-divider {
+  background: var(--divider) !important;
+}
+
+/* ---------- Tooltip ---------- */
+.ant-tooltip .ant-tooltip-inner {
+  background: var(--inverse-surface) !important;
+  color: var(--inverse-on-surface) !important;
+  border-radius: var(--radius-base) !important;
+  font: var(--font-body-s) !important;
+  box-shadow: none !important;
+}
+.ant-tooltip .ant-tooltip-arrow::before,
+.ant-tooltip .ant-tooltip-arrow::after {
+  background: var(--inverse-surface) !important;
+}
+.dark .ant-tooltip .ant-tooltip-inner {
+  background: var(--surface-container-high) !important;
+  color: var(--on-surface) !important;
+  box-shadow: var(--shadow-popover) !important;
+}
+.dark .ant-tooltip .ant-tooltip-arrow::before,
+.dark .ant-tooltip .ant-tooltip-arrow::after {
+  background: var(--surface-container-high) !important;
+}
+
+/* ---------- Modal ---------- */
+.ant-modal .ant-modal-content {
+  background: var(--surface-container-highest) !important;
+  border-radius: var(--radius-overlay) !important;
+  box-shadow: var(--shadow-modal) !important;
+  color: var(--on-surface) !important;
+  padding: var(--spacing-inset) !important;
+}
+.ant-modal .ant-modal-header {
+  background: transparent !important;
+  margin-bottom: var(--spacing-gutter) !important;
+}
+.ant-modal .ant-modal-title {
+  color: var(--on-surface) !important;
+  font: var(--font-headline-m) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+.ant-modal .ant-modal-close {
+  background: transparent !important;
+  color: var(--on-surface-variant) !important;
+  border-radius: var(--radius-base) !important;
+}
+.ant-modal .ant-modal-close:hover {
+  background: var(--surface-variant) !important;
+  color: var(--on-surface) !important;
+}
+.ant-modal .ant-modal-footer {
+  margin-top: var(--spacing-inset) !important;
+  padding-top: var(--spacing-gutter) !important;
+  border-top: 1px solid var(--divider) !important;
+}
+
+/* ---------- 全局提示 Message ---------- */
+.ant-message .ant-message-notice-content {
+  background: var(--surface-container-highest) !important;
+  color: var(--on-surface) !important;
+  box-shadow: var(--shadow-popover) !important;
+  border-radius: var(--radius-base) !important;
+  font: var(--font-body-m) !important;
+}
+.ant-message .anticon {
+  color: var(--success) !important;
+}
+
+/* ---------- Breadcrumb / Badge ---------- */
+.ant-breadcrumb,
+.ant-breadcrumb .ant-breadcrumb-link,
+.ant-breadcrumb .ant-breadcrumb-link a {
+  color: var(--on-surface-variant) !important;
+  font: var(--font-body-s) !important;
+}
+.ant-breadcrumb .ant-breadcrumb-separator {
+  color: var(--content-placeholder) !important;
+}
+.ant-breadcrumb li:last-child .ant-breadcrumb-link {
+  color: var(--on-surface) !important;
+}
+.ant-badge .ant-badge-count {
+  background: var(--error) !important;
+  box-shadow: 0 0 0 1px var(--surface-container-highest) !important;
+  font: var(--font-caption-s) !important;
+}

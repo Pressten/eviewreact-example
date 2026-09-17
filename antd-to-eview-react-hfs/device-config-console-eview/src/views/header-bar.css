@@ -12,6 +12,10 @@
   flex: none;
 }
 
+.app-header button {
+  white-space: nowrap;
+}
+
 .header-left {
   display: flex;
   align-items: center;
@@ -34,12 +38,14 @@
 }
 
 .brand-mark {
-  display: inline-block;
+  display: grid;
+  place-items: center;
   width: 28px;
   height: 28px;
   flex: none;
   border-radius: var(--radius-md);
   background: var(--primary-fixed);
+  color: var(--on-primary-fixed);
 }
 
 .brand-name {
@@ -60,17 +66,14 @@
 }
 
 .topnav-item {
-  padding: 0 var(--spacing-stack);
   height: 100%;
-  border: none;
+  padding: 0 var(--spacing-stack);
+  border: 0;
   border-bottom: 2px solid transparent;
-  border-radius: 0;
   background: transparent;
-  font: var(--font-body-m);
   color: var(--on-surface-variant);
+  font: var(--font-body-m);
   cursor: pointer;
-  white-space: nowrap;
-  transition: color 0.2s, border-color 0.2s;
 }
 
 .topnav-item:hover {
@@ -86,6 +89,17 @@
   padding: 0 var(--spacing-inline);
 }
 
+.header-btn-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-btn-text {
+  font: var(--font-body-m);
+  white-space: nowrap;
+}
+
 .header-divider {
   width: 1px;
   height: 20px;
@@ -93,14 +107,13 @@
   flex: none;
 }
 
-/* 用户区:手写头像 + 双行元信息 */
 .header-user {
   display: flex;
   align-items: center;
   gap: var(--spacing-stack);
   height: 36px;
   padding: 0 var(--spacing-stack) 0 4px;
-  border: none;
+  border: 0;
   border-radius: var(--radius-base);
   background: transparent;
   cursor: pointer;
@@ -122,6 +135,13 @@
   font: var(--font-caption-s);
 }
 
+.header-avatar span {
+  display: inline-block;
+  max-width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .header-user-meta {
   display: flex;
   flex-direction: column;
@@ -141,7 +161,6 @@
   color: var(--on-surface-variant);
 }
 
-/* TipBox 用户菜单弹层内容 */
 .header-menu-pop {
   display: flex;
   flex-direction: column;
@@ -150,12 +169,12 @@
 
 .header-menu-item {
   padding: 8px var(--spacing-gutter);
-  border: none;
+  border: 0;
   border-radius: var(--radius-base);
   background: transparent;
-  text-align: left;
-  font: var(--font-body-m);
   color: var(--on-surface);
+  font: var(--font-body-m);
+  text-align: left;
   cursor: pointer;
 }
 
@@ -173,8 +192,7 @@
   .header-user-meta {
     display: none;
   }
-
-  .brand-name {
+  .header-btn-text {
     display: none;
   }
 }

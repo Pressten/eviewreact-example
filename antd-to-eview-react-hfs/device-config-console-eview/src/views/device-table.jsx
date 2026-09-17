@@ -1,9 +1,4 @@
-// Layer 4: 设备配置清单 — 工具栏(搜索/筛选/刷新) + 复选表格 + 行内操作
-// eview-react 转换要点:
-//   Table: dataSource→dataset(对象行)、rowKey→keyIndex(指向 code 列)、rowSelection→enableCheckBox、
-//          pagination→enablePagination+enableAutoPaging(前台分页)、loading→enableLoading、locale.emptyText→emptyTableMsg
-//   行内 Dropdown 菜单退化为内联文字按钮;message.success→Toast;dayjs 格式化退化为字符串切片
-import { useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import Table from "@nce/eview-react/Table";
 import Button from "@nce/eview-react/Button";
@@ -15,11 +10,11 @@ import { useToast } from "../components/Toast.jsx";
 import { STATUS_KEYS, deviceRows, summarize } from "../data.js";
 import "./device-table.css";
 
-// "2026-09-15 09:42" → "09-15 09:42"(原 dayjs format("MM-DD HH:mm"))
 function formatLastReport(value) {
   return String(value || "").slice(5);
 }
 
+// Layer 4: 设备配置清单 — 工具栏(搜索/筛选/刷新) + 复选表格 + 行内操作
 export default function DeviceTable({ onEdit }) {
   const intl = useIntl();
   const toast = useToast();
@@ -114,8 +109,7 @@ export default function DeviceTable({ onEdit }) {
       title: label("table.col.actions", "操作"),
       key: "actions",
       align: "right",
-      render: (_, row) => (
-        // TODO(eview-react): Dropdown 行内菜单退化为内联文字按钮
+      render: (_value, row) => (
         <span className="cell-actions">
           <Button status="text" size="small" text={label("table.action.edit", "编辑")} onClick={() => onEdit(row)} />
           <Button

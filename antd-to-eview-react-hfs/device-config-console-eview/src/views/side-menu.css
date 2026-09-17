@@ -1,4 +1,4 @@
-/* Layer 4: 侧边导航 — 手写实现,展开 248px / 折叠 48px */
+/* Layer 4: 侧边导航 */
 .app-sider {
   width: 248px;
   background: var(--surface-container-highest);
@@ -30,15 +30,14 @@
   height: 36px;
   margin: 2px 0;
   padding: 0 var(--spacing-inline);
-  border: none;
+  border: 0;
   border-left: 2px solid transparent;
   border-radius: var(--radius-base);
   background: transparent;
-  text-align: left;
-  font: var(--font-body-m);
   color: var(--on-surface);
+  font: var(--font-body-m);
+  text-align: left;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
 }
 
 .sider-item:hover {
@@ -59,14 +58,12 @@
   white-space: nowrap;
 }
 
-.sider-submenu .sider-arrow {
-  flex: none;
-  color: var(--on-surface-variant);
-  font: var(--font-body-m);
-}
-
 .sider-child {
   padding-left: var(--spacing-gutter);
+}
+
+.sider-arrow {
+  color: var(--on-surface-variant);
 }
 
 .app-sider.collapsed .sider-item {
@@ -86,11 +83,6 @@
   flex: none;
   padding: var(--spacing-stack) var(--spacing-gutter);
   border-top: 1px solid var(--divider);
-}
-
-.app-sider.collapsed .app-sider-foot {
-  justify-content: center;
-  padding-inline: 0;
 }
 
 .foot-dot {
@@ -118,4 +110,9 @@
   font: var(--font-caption-s);
   color: var(--on-surface-variant);
   white-space: nowrap;
+}
+
+.app-sider.collapsed .app-sider-foot {
+  justify-content: center;
+  padding-inline: 0;
 }

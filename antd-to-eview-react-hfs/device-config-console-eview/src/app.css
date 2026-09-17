@@ -1,74 +1,14 @@
-/* Layer 5: 应用级基础样式与布局骨架 — 固定外壳(顶部导航 + 侧边导航 + 内部滚动内容区) */
+@import '../app.css';
+
 html,
 body {
   margin: 0;
-  height: 100%;
-  font-family: var(--font-family);
-  line-height: 1.5;
-  background-color: var(--surface);
-  color: var(--on-surface);
+  min-height: 100%;
 }
 
-#root {
-  min-height: 100vh;
-}
-
-.app-root {
-  height: 100%;
-  background: var(--surface-container-lowest);
-  color: var(--on-surface);
-  font: var(--font-body-m);
-}
-
-.app-shell {
-  height: 100vh;
-  overflow: hidden;
-  background: var(--surface-container-lowest);
-  color: var(--on-surface);
-  font: var(--font-body-m);
-}
-
-.app-body {
-  display: flex;
-  height: calc(100vh - 48px);
-  background: var(--surface-container-lowest);
-}
-
-.app-content {
-  min-width: 0;
-  flex: 1;
-  padding: var(--spacing-page);
-  overflow-y: auto;
-  background: var(--surface-container-lowest);
-}
-
-.app-content::-webkit-scrollbar,
-.app-sider-menu::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.app-content::-webkit-scrollbar-track,
-.app-sider-menu::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.app-content::-webkit-scrollbar-thumb,
-.app-sider-menu::-webkit-scrollbar-thumb {
-  border-radius: var(--radius-full);
-  background: var(--color-scrollbar);
-}
-
-.app-content::-webkit-scrollbar-thumb:hover,
-.app-sider-menu::-webkit-scrollbar-thumb:hover {
-  background: var(--color-scrollbar-hover, var(--color-scrollbar));
-}
-
-/* 全局轻提示(DivMessage 渲染式,替代 antd message 命令式 API) */
-.app-toast {
-  position: fixed;
-  top: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }

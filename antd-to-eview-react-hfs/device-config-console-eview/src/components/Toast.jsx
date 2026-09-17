@@ -1,5 +1,4 @@
 // Layer 3: 全局轻提示 — DivMessage 渲染式封装,替代 antd message.success() 命令式 API
-// 用法: <ToastProvider> 包住需要发提示的区域,子组件 const toast = useToast(); toast("success", "已保存")
 import { createContext, useCallback, useContext, useState } from "react";
 import DivMessage from "@nce/eview-react/DivMessage";
 

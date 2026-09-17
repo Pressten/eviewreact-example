@@ -1,6 +1,4 @@
-// Layer 4: 顶部导航栏 — 品牌标识 / 一级导航 / 语言切换 / 主题切换 / 全局工具 / 用户区
-// Layout/Menu/Avatar 无对应手写;Dropdown 语言菜单退化为直切按钮、用户菜单用 TipBox click 弹层
-import { useState } from "react";
+﻿import { useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import Button from "@nce/eview-react/Button";
 import Badge from "@nce/eview-react/Badge";
@@ -9,17 +7,22 @@ import { useApp } from "../context.jsx";
 import { topNav } from "../data.js";
 import "./header-bar.css";
 
+// Layer 4: 顶部导航栏 — 品牌标识 / 一级导航 / 语言切换 / 主题切换 / 全局工具 / 用户区
 export default function HeaderBar() {
   const intl = useIntl();
   const { isDark, toggleDark, lang, setLang, collapsed, toggleCollapsed } = useApp();
   const [activeNav, setActiveNav] = useState("console");
 
-  const t = (id, fallback) => intl.formatMessage({ id: id, defaultMessage: fallback });
-
-  const collapseLabel = t(collapsed ? "header.expand" : "header.collapse", collapsed ? "展开导航" : "收起导航");
-  const themeLabel = t(isDark ? "header.theme.toLight" : "header.theme.toDark", isDark ? "切换浅色模式" : "切换深色模式");
-  const langLabel = t("header.language", "语言");
-  const notifyLabel = t("header.notifications", "通知");
+  const collapseLabel = intl.formatMessage({
+    id: collapsed ? "header.expand" : "header.collapse",
+    defaultMessage: collapsed ? "展开导航" : "收起导航",
+  });
+  const themeLabel = intl.formatMessage({
+    id: isDark ? "header.theme.toLight" : "header.theme.toDark",
+    defaultMessage: isDark ? "切换浅色模式" : "切换深色模式",
+  });
+  const langLabel = intl.formatMessage({ id: "header.language", defaultMessage: "语言" });
+  const notifyLabel = intl.formatMessage({ id: "header.notifications", defaultMessage: "通知" });
 
   return (
     <header className="app-header">
@@ -33,7 +36,6 @@ export default function HeaderBar() {
         </div>
       </div>
 
-      {/* TODO(eview-react): Menu 无对应,手写一级横向导航 */}
       <nav className="app-topnav">
         {topNav.map((item) => (
           <button
@@ -48,7 +50,6 @@ export default function HeaderBar() {
       </nav>
 
       <div className="header-right">
-        {/* TODO(eview-react): Dropdown 语言菜单退化为中英直切 */}
         <Button
           status="text"
           className="header-btn"
@@ -65,7 +66,6 @@ export default function HeaderBar() {
 
         <span className="header-divider" />
 
-        {/* TODO(eview-react): Avatar 无对应手写;Dropdown 用户菜单用 TipBox click 弹层 */}
         <TipBox
           trigger="click"
           direction="bottomRight"

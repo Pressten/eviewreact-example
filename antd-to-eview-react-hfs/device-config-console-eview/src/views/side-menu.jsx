@@ -1,5 +1,3 @@
-// Layer 4: 侧边导航 — 展开 248px / 折叠 48px,亮色底,折叠态保留首字与选中态
-// TODO(eview-react): Layout.Sider/Menu 无对应,手写可折叠侧导航(含多级子菜单)
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useApp } from "../context.jsx";
@@ -7,11 +5,10 @@ import { sideMenuItems } from "../data.js";
 import "./side-menu.css";
 
 function MenuItemLabel({ node }) {
-  return (
-    <FormattedMessage id={node.msgId} defaultMessage={node.fallback} />
-  );
+  return <FormattedMessage id={node.msgId} defaultMessage={node.fallback} />;
 }
 
+// Layer 4: 侧边导航 — 展开 248px / 折叠 48px,亮色底,折叠态保留图标与选中态
 export default function SideMenu() {
   const { collapsed } = useApp();
   const [selected, setSelected] = useState("device-config");
@@ -34,9 +31,7 @@ export default function SideMenu() {
             <div key={node.key} className="sider-group">
               <button
                 type="button"
-                className={
-                  "sider-item sider-submenu" + (openKeys.has(node.key) ? " open" : "")
-                }
+                className={"sider-item sider-submenu" + (openKeys.has(node.key) ? " open" : "")}
                 onClick={() => toggleGroup(node.key)}
               >
                 {collapsed ? (
@@ -47,7 +42,7 @@ export default function SideMenu() {
                       <MenuItemLabel node={node} />
                     </span>
                     <span className="sider-arrow" aria-hidden="true">
-                      {openKeys.has(node.key) ? "−" : "+"}
+                      {openKeys.has(node.key) ? "-" : "+"}
                     </span>
                   </>
                 )}
@@ -58,9 +53,7 @@ export default function SideMenu() {
                     <button
                       key={child.key}
                       type="button"
-                      className={
-                        "sider-item sider-child" + (selected === child.key ? " active" : "")
-                      }
+                      className={"sider-item sider-child" + (selected === child.key ? " active" : "")}
                       onClick={() => setSelected(child.key)}
                     >
                       <span className="sider-item-text">

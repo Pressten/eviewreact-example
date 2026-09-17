@@ -1,7 +1,4 @@
-// Layer 4: 设备配置弹窗 — 新增 / 编辑设备并绑定采集策略(单一焦点,单列表单)
-// Modal→Dialog(open→isOpen,onOk/onCancel→buttons 数组,自身不关窗需回调置 false);
-// form.validateFields() Promise → formRef.submit() + onSuccess 回调;message.success→Toast
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import Dialog from "@nce/eview-react/Dialog";
 import Form from "@nce/eview-react/Form";
@@ -19,6 +16,7 @@ import {
 } from "../data.js";
 import "./config-modal.css";
 
+// Layer 4: 设备配置弹窗 — 新增 / 编辑设备并绑定采集策略(单一焦点,单列表单)
 export default function ConfigModal({ open, record, onCancel }) {
   const intl = useIntl();
   const toast = useToast();
@@ -51,7 +49,6 @@ export default function ConfigModal({ open, record, onCancel }) {
     }
   }, [open, record]);
 
-  // 校验通过回调(代替 validateFields().then)
   const handleSuccess = () => {
     toast(
       "success",
@@ -69,11 +66,7 @@ export default function ConfigModal({ open, record, onCancel }) {
       title={label(isEdit ? "modal.titleEdit" : "modal.title", isEdit ? "编辑设备配置" : "新增设备配置")}
       buttons={[
         { text: t("modal.cancel", "取消"), onClick: onCancel },
-        {
-          text: t("modal.ok", "确定"),
-          status: "primary",
-          onClick: () => formRef.current?.submit(),
-        },
+        { text: t("modal.ok", "确定"), status: "primary", onClick: () => formRef.current?.submit() },
       ]}
     >
       <p className="modal-desc">
@@ -104,6 +97,7 @@ export default function ConfigModal({ open, record, onCancel }) {
         <Form.Item name="policy" label={label("modal.policy", "采集策略模板")} rules={[{ required: true }]}>
           <Select options={toOptions(policyTemplates)} />
         </Form.Item>
+
         <Form.Item
           name="enabled"
           label={label("modal.enabled", "保存后立即启用")}
@@ -113,6 +107,7 @@ export default function ConfigModal({ open, record, onCancel }) {
         >
           <Toggle data={[false, true]} />
         </Form.Item>
+
         <Form.Item name="remark" label={label("modal.remark", "备注")} className="modal-remark">
           <TextArea
             rows={2}

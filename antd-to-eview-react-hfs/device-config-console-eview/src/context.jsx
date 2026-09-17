@@ -1,7 +1,8 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
 // Layer 1: 全局状态 — 主题模式、界面语言与布局折叠
-// 换肤双类名驱动: aui3_1_dark 挂 .root(eview-react 组件暗色) + .dark 挂 <html>(原始 token 暗色覆盖)
+// 换肤单轨驱动:isDark 只切换 <html> 的 .dark class;
+// 普通 H5 元素(token 四层)与 antd 组件(ant.css 重置层)同源跟随,无需 React 参与换肤。
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
@@ -10,8 +11,6 @@ export function AppProvider({ children }) {
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
-    const root = document.querySelector(".root");
-    if (root) root.classList.toggle("aui3_1_dark", isDark);
     document.documentElement.classList.toggle("dark", isDark);
   }, [isDark]);
 

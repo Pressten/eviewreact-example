@@ -1,19 +1,24 @@
-// 应用入口 — eview-react 页面
-// Provider 组装:IntlProvider 按当前语言动态切换,放在 app.jsx(依赖 context 的 lang);
-// 本文件只挂 ConfigProvider 与三处 CSS import
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { IntlProvider } from 'react-intl';
+import componentsLocales from '@nce/eview-react/locales';
+import ConfigProvider from '@nce/eview-react/ConfigProvider';
+import '@nce/eview-react/styles/aui3_1.css';
+import '../assets/style/base.css';
+import '../assets/style/light.css';
+import '../assets/style/theme.css';
+import '../assets/style/dark.css';
+import './app.css';
+import App from './app.jsx';
 
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import ConfigProvider from "@nce/eview-react/ConfigProvider";
-import "@nce/eview-react/styles/aui3_1.css";
-import "./styles/tokens.css";
-import "./styles/theme-dark.css";
-import App from "./app.jsx";
+const locale = 'zh';
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <ConfigProvider>
-      <App />
-    </ConfigProvider>
-  </StrictMode>
+createRoot(document.getElementById('root')).render(
+    <StrictMode>
+        <ConfigProvider>
+            <IntlProvider locale={locale} messages={componentsLocales[locale]}>
+                <App />
+            </IntlProvider>
+        </ConfigProvider>
+    </StrictMode>
 );
