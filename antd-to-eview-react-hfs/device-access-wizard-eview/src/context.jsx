@@ -1,14 +1,12 @@
-// Layer 1: 全局状态 — dark 模式双类名同步(aui3_1_dark 挂 .root + .dark 挂 <html>)
 import { useState, useEffect, createContext, useContext } from "react";
 
+// Layer 1: 全局状态 — dark 模式双轨同步(eview aui3_1_dark + .dark token class)
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const root = document.querySelector(".root");
-    if (root) root.classList.toggle("aui3_1_dark", isDark);
     document.documentElement.classList.toggle("dark", isDark);
   }, [isDark]);
 
@@ -17,7 +15,9 @@ export function AppProvider({ children }) {
     toggleDark: () => setIsDark((d) => !d),
   };
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={value}>{children}</AppContext.Provider>
+  );
 }
 
 export function useApp() {

@@ -4,11 +4,15 @@ import { IntlProvider } from 'react-intl';
 import componentsLocales from '@nce/eview-react/locales';
 import ConfigProvider from '@nce/eview-react/ConfigProvider';
 import '@nce/eview-react/styles/aui3_1.css';
-import './styles/tokens.css';
-import './styles/theme-dark.css';
+import '../assets/style/base.css';
+import '../assets/style/light.css';
+import '../assets/style/theme.css';
+import '../assets/style/dark.css';
+import './app.css';
 import App from './app.jsx';
 
 const locale = 'zh';
+
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <ConfigProvider>

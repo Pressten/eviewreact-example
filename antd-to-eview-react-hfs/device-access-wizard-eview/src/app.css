@@ -1,50 +1,14 @@
-/* 应用级基础样式 — 消费 tokens.css 的原始 token */
+@import '../app.css';
+
 html,
 body {
   margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: var(--font-family);
-  line-height: 1.5;
-  background-color: var(--surface);
-  color: var(--on-surface);
+  min-height: 100%;
 }
 
-#root {
-  min-height: 100vh;
-}
-
-.app-root {
-  min-height: 100vh;
-  background: var(--surface-container-lowest);
-  color: var(--on-surface);
-  font: var(--font-body-m);
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-corner {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #dfdfdf;
-  border-radius: 4px;
-  background-clip: padding-box;
-}
-
-::-webkit-scrollbar-track-piece {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #dededf;
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }

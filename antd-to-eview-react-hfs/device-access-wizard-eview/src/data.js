@@ -1,6 +1,6 @@
-// Layer 2: mock 数据与流程配置(eview-react 数据格式:Select/SelectCard 用 {text,value},Steps 用 {text,value})
+// Layer 2: mock 数据与流程配置
 
-// 侧边菜单(手写侧导航消费)
+// 侧边菜单(亮色体系,默认不生成深色侧导航)
 export const menuItems = [
   { key: "overview", icon: "gauge", label: "设备总览" },
   { key: "devices", icon: "server", label: "设备管理" },
@@ -8,34 +8,33 @@ export const menuItems = [
   { key: "settings", icon: "settings", label: "系统设置" },
 ];
 
-// 面包屑路径(真实层级,不凑假路径);Crumbs 用 {title},最后一项无 url
+// 面包屑路径(真实层级,不凑假路径)
 export const breadcrumbs = ["设备管理", "新建接入", "配置向导"];
-export const crumbsData = breadcrumbs.map((title) => ({ title }));
 
-// 步骤定义(Steps data 驱动,currentStep 匹配 value)
-export const stepData = [
-  { text: "基础信息", value: "basic" },
-  { text: "网络配置", value: "network" },
-  { text: "确认提交", value: "confirm" },
+// 步骤定义(横向 Steps 不承载长文案,说明放内容区)
+export const stepItems = [
+  { key: "basic", text: "基础信息", value: "basic" },
+  { key: "network", text: "网络配置", value: "network" },
+  { key: "confirm", text: "确认提交", value: "confirm" },
 ];
 
 export const deviceTypeOptions = [
-  { value: "inverter", text: "光伏逆变器" },
-  { value: "turbine", text: "风力发电机组" },
-  { value: "storage", text: "储能电池簇" },
-  { value: "meter", text: "智能电表" },
+  { value: "inverter", label: "光伏逆变器" },
+  { value: "turbine", label: "风力发电机组" },
+  { value: "storage", label: "储能电池簇" },
+  { value: "meter", label: "智能电表" },
 ];
 
 export const stationOptions = [
-  { value: "north-wind-03", text: "华北风电场-03" },
-  { value: "east-pv-11", text: "华东光伏站-11" },
-  { value: "south-storage-02", text: "华南储能站-02" },
+  { value: "north-wind-03", label: "华北风电场-03" },
+  { value: "east-pv-11", label: "华东光伏站-11" },
+  { value: "south-storage-02", label: "华南储能站-02" },
 ];
 
-export const protocolData = [
-  { value: "modbus-tcp", text: "Modbus TCP" },
-  { value: "iec104", text: "IEC 104" },
-  { value: "mqtt", text: "MQTT" },
+export const protocolOptions = [
+  { value: "modbus-tcp", label: "Modbus TCP" },
+  { value: "iec104", label: "IEC 104" },
+  { value: "mqtt", label: "MQTT" },
 ];
 
 // 第三步确认页的字段分组呈现配置
@@ -63,10 +62,10 @@ export const confirmGroups = [
   },
 ];
 
-// value → 文案映射(用于确认页回显)
+// label → 文案映射(用于确认页回显)
 export const labelMaps = {
-  deviceType: Object.fromEntries(deviceTypeOptions.map((o) => [o.value, o.text])),
-  station: Object.fromEntries(stationOptions.map((o) => [o.value, o.text])),
-  protocol: Object.fromEntries(protocolData.map((o) => [o.value, o.text])),
+  deviceType: Object.fromEntries(deviceTypeOptions.map((o) => [o.value, o.label])),
+  station: Object.fromEntries(stationOptions.map((o) => [o.value, o.label])),
+  protocol: Object.fromEntries(protocolOptions.map((o) => [o.value, o.label])),
   encrypted: { true: "已启用", false: "未启用" },
 };

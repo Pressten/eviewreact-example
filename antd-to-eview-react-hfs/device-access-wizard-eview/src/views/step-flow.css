@@ -1,4 +1,4 @@
-/* 步骤流面板 — token 优先;Result/Descriptions 为手写补位 */
+/* 步骤流面板 — token 优先 */
 .step-panel {
   background: var(--surface-container-highest);
   border-radius: var(--radius-container);
@@ -18,25 +18,12 @@
   max-width: 640px;
 }
 
-/* 提交成功结果页(Empty type="success" + 手写内容) */
-.step-result {
-  text-align: center;
-}
-
-.step-result-title {
-  font: var(--font-headline-s);
-  font-weight: var(--font-weight-medium);
-  color: var(--on-surface);
-}
-
-.step-result-subtitle {
-  margin-top: var(--spacing-inline);
-  margin-bottom: var(--spacing-gutter);
-  font: var(--font-body-m);
-  color: var(--on-surface-variant);
-}
-
 .confirm-alert {
+  padding: var(--spacing-stack) var(--spacing-gutter);
+  border: 1px solid var(--color-info-primary-subtle);
+  border-radius: var(--radius-container);
+  background: var(--info-container);
+  color: var(--on-info-container);
   margin-bottom: var(--spacing-stack);
 }
 
@@ -44,52 +31,48 @@
   margin-top: var(--spacing-stack);
 }
 
-.confirm-group + .confirm-group {
-  margin-top: var(--spacing-section);
-}
-
-.confirm-group-title {
-  margin: 0 0 var(--spacing-inline);
+.confirm-group h3 {
+  margin: 0 0 var(--spacing-stack);
+  color: var(--on-surface);
   font: var(--font-body-l);
   font-weight: var(--font-weight-medium);
-  color: var(--on-surface);
 }
 
-/* 键值详情块(Descriptions 手写补位):两对一行,带边框单元格 */
-.confirm-kv {
+.confirm-list {
   display: grid;
-  grid-template-columns: minmax(96px, max-content) 1fr minmax(96px, max-content) 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0;
-  border: 1px solid var(--divider);
-  border-radius: var(--radius-action);
   overflow: hidden;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-container);
 }
 
-.confirm-kv-label,
-.confirm-kv-value {
+.confirm-item {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  min-height: 40px;
+  border-right: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+}
+
+.confirm-item dt,
+.confirm-item dd {
   margin: 0;
-  padding: 8px var(--spacing-gutter);
+  padding: var(--spacing-2) var(--spacing-stack);
   font: var(--font-body-s);
-  word-break: break-all;
 }
 
-.confirm-kv-label {
+.confirm-item dt {
+  background: var(--surface-container-lowest);
   color: var(--on-surface-variant);
-  background: var(--surface-container-low);
-  border-right: 1px solid var(--divider);
 }
 
-.confirm-kv-value {
+.confirm-item dd {
   color: var(--on-surface);
-  border-right: 1px solid var(--divider);
 }
 
-.confirm-kv > *:nth-child(4n) {
-  border-right: none;
-}
-
-.confirm-kv > *:nth-child(n + 5) {
-  border-top: 1px solid var(--divider);
+.confirm-group + .confirm-group {
+  margin-top: var(--spacing-section);
 }
 
 /* 底部按钮组靠右:次要(上一步)在左,主操作(下一步/提交)在最右 */
@@ -101,26 +84,71 @@
   border-top: 1px solid var(--divider);
 }
 
-.step-footer-actions {
+.step-actions {
   display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+}
+
+.step-actions button,
+.step-result button {
+  display: inline-flex;
+  align-items: center;
   gap: var(--spacing-inline);
 }
 
-/* 窄屏时键值详情块退化为单列 */
+.full-width {
+  width: 100%;
+}
+
+.step-form-hint {
+  margin: calc(-1 * var(--spacing-stack)) 0 var(--spacing-stack);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.step-result {
+  display: flex;
+  min-height: 360px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-stack);
+  text-align: center;
+}
+
+.step-result h2 {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.step-result p {
+  max-width: 560px;
+  margin: 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+}
+
+/* 窄屏时双列表单退化为单列 */
 @media (max-width: 768px) {
-  .confirm-kv {
-    grid-template-columns: minmax(96px, max-content) 1fr;
+  .confirm-list {
+    grid-template-columns: 1fr;
   }
 
-  .confirm-kv > *:nth-child(4n) {
-    border-right: 1px solid var(--divider);
+  .confirm-item {
+    grid-template-columns: 108px minmax(0, 1fr);
+    border-right: 0;
   }
 
-  .confirm-kv > *:nth-child(2n) {
-    border-right: none;
+  .step-panel,
+  .step-content {
+    padding: var(--spacing-stack);
   }
 
-  .confirm-kv > *:nth-child(n + 3) {
-    border-top: 1px solid var(--divider);
+  .step-actions {
+    width: 100%;
+    justify-content: flex-end;
   }
 }
