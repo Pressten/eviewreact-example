@@ -1,0 +1,46 @@
+/* Layer 3: 通用卡片容器 — Level 1 容器(阴影 + 最高层背景,无结构性描边) */
+.card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-inset) var(--spacing-inset) 0;
+}
+
+.card-heading {
+  min-width: 0;
+}
+
+.card-title {
+  margin: 0;
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.card-sub {
+  margin: 4px 0 0;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.card-extra {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex: none;
+}
+
+.card-body {
+  padding: var(--spacing-inset);
+}
+
+.card-body-flush {
+  padding: var(--spacing-inset) 0 0;
+}

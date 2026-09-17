@@ -1,0 +1,61 @@
+/* Layer 4: 设备配置清单 */
+/* 四边留白由卡片 body 的 24px 内边距负责;工具栏只补与表格之间的 16px 间距 */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  margin-bottom: var(--spacing-gutter);
+}
+
+.table-search {
+  width: 260px;
+}
+
+.table-filter {
+  width: 148px;
+}
+
+.selection-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  margin-bottom: var(--spacing-gutter);
+  padding: var(--spacing-inline) var(--spacing-stack);
+  border-radius: var(--radius-base);
+  background: var(--primary-container);
+}
+
+.selection-count {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-primary-container);
+  margin-right: var(--spacing-inline);
+}
+
+.cell-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.cell-strong {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.cell-mono {
+  font: var(--font-body-m);
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.cell-muted {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}

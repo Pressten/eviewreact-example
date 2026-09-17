@@ -1,0 +1,66 @@
+/* Layer 3: 状态标签 — 语义容器底色 + 对应 on-*-container 文字 */
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 var(--spacing-inline);
+  border-radius: var(--radius-full);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.status-tag-icon {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+}
+
+.status-tag-online {
+  background: var(--success-container);
+}
+.status-tag-online .status-tag-text {
+  color: var(--on-success-container);
+}
+.status-tag-online .status-tag-icon {
+  color: var(--success);
+}
+
+.status-tag-offline {
+  background: var(--surface-variant);
+}
+.status-tag-offline .status-tag-text,
+.status-tag-offline .status-tag-icon {
+  color: var(--on-surface-variant);
+}
+
+.status-tag-alarm {
+  background: var(--error-container);
+}
+.status-tag-alarm .status-tag-text {
+  color: var(--on-error-container);
+}
+.status-tag-alarm .status-tag-icon {
+  color: var(--error);
+}
+
+.status-tag-upgrading {
+  background: var(--info-container);
+}
+.status-tag-upgrading .status-tag-text {
+  color: var(--on-info-container);
+}
+.status-tag-upgrading .status-tag-icon {
+  color: var(--info);
+}
+
+.status-tag-disabled {
+  background: var(--warning-container);
+}
+.status-tag-disabled .status-tag-text {
+  color: var(--on-warning-container);
+}
+.status-tag-disabled .status-tag-icon {
+  color: var(--critical);
+}

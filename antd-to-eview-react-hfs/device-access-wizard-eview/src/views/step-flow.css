@@ -1,0 +1,154 @@
+/* 步骤流面板 — token 优先 */
+.step-panel {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+}
+
+.step-content {
+  margin-top: var(--spacing-section);
+  min-height: 320px;
+  padding: var(--spacing-inset);
+  background: var(--surface-container-low);
+  border-radius: var(--radius-container);
+}
+
+.step-form {
+  max-width: 640px;
+}
+
+.confirm-alert {
+  padding: var(--spacing-stack) var(--spacing-gutter);
+  border: 1px solid var(--color-info-primary-subtle);
+  border-radius: var(--radius-container);
+  background: var(--info-container);
+  color: var(--on-info-container);
+  margin-bottom: var(--spacing-stack);
+}
+
+.confirm-group {
+  margin-top: var(--spacing-stack);
+}
+
+.confirm-group h3 {
+  margin: 0 0 var(--spacing-stack);
+  color: var(--on-surface);
+  font: var(--font-body-l);
+  font-weight: var(--font-weight-medium);
+}
+
+.confirm-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-container);
+}
+
+.confirm-item {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  min-height: 40px;
+  border-right: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+}
+
+.confirm-item dt,
+.confirm-item dd {
+  margin: 0;
+  padding: var(--spacing-2) var(--spacing-stack);
+  font: var(--font-body-s);
+}
+
+.confirm-item dt {
+  background: var(--surface-container-lowest);
+  color: var(--on-surface-variant);
+}
+
+.confirm-item dd {
+  color: var(--on-surface);
+}
+
+.confirm-group + .confirm-group {
+  margin-top: var(--spacing-section);
+}
+
+/* 底部按钮组靠右:次要(上一步)在左,主操作(下一步/提交)在最右 */
+.step-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-section);
+  padding-top: var(--spacing-stack);
+  border-top: 1px solid var(--divider);
+}
+
+.step-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+}
+
+.step-actions button,
+.step-result button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.step-form-hint {
+  margin: calc(-1 * var(--spacing-stack)) 0 var(--spacing-stack);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.step-result {
+  display: flex;
+  min-height: 360px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-stack);
+  text-align: center;
+}
+
+.step-result h2 {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.step-result p {
+  max-width: 560px;
+  margin: 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+}
+
+/* 窄屏时双列表单退化为单列 */
+@media (max-width: 768px) {
+  .confirm-list {
+    grid-template-columns: 1fr;
+  }
+
+  .confirm-item {
+    grid-template-columns: 108px minmax(0, 1fr);
+    border-right: 0;
+  }
+
+  .step-panel,
+  .step-content {
+    padding: var(--spacing-stack);
+  }
+
+  .step-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
