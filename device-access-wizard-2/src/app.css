@@ -1,0 +1,51 @@
+/* 应用级基础样式 — token 消费示例 */
+
+/* ── body base ── */
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  line-height: 1.5;
+  background-color: var(--surface);
+  color: var(--on-surface);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Standard scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-scrollbar, #dfdfdf);
+  border-radius: 4px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-scrollbar-hover, #dededf);
+}
+
+/* 应用根容器 — 挂 aui3_1（浅色基础常驻），暗色叠加 aui3_1_dark */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
