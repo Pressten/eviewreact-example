@@ -1,0 +1,126 @@
+/* 步骤流面板 — token 优先;Result/Descriptions 为手写补位 */
+.step-panel {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+}
+
+.step-content {
+  margin-top: var(--spacing-section);
+  min-height: 320px;
+  padding: var(--spacing-inset);
+  background: var(--surface-container-low);
+  border-radius: var(--radius-container);
+}
+
+.step-form {
+  max-width: 640px;
+}
+
+/* 提交成功结果页(Empty type="success" + 手写内容) */
+.step-result {
+  text-align: center;
+}
+
+.step-result-title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.step-result-subtitle {
+  margin-top: var(--spacing-inline);
+  margin-bottom: var(--spacing-gutter);
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+}
+
+.confirm-alert {
+  margin-bottom: var(--spacing-stack);
+}
+
+.confirm-group {
+  margin-top: var(--spacing-stack);
+}
+
+.confirm-group + .confirm-group {
+  margin-top: var(--spacing-section);
+}
+
+.confirm-group-title {
+  margin: 0 0 var(--spacing-inline);
+  font: var(--font-body-l);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+/* 键值详情块(Descriptions 手写补位):两对一行,带边框单元格 */
+.confirm-kv {
+  display: grid;
+  grid-template-columns: minmax(96px, max-content) 1fr minmax(96px, max-content) 1fr;
+  margin: 0;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-action);
+  overflow: hidden;
+}
+
+.confirm-kv-label,
+.confirm-kv-value {
+  margin: 0;
+  padding: 8px var(--spacing-gutter);
+  font: var(--font-body-s);
+  word-break: break-all;
+}
+
+.confirm-kv-label {
+  color: var(--on-surface-variant);
+  background: var(--surface-container-low);
+  border-right: 1px solid var(--divider);
+}
+
+.confirm-kv-value {
+  color: var(--on-surface);
+  border-right: 1px solid var(--divider);
+}
+
+.confirm-kv > *:nth-child(4n) {
+  border-right: none;
+}
+
+.confirm-kv > *:nth-child(n + 5) {
+  border-top: 1px solid var(--divider);
+}
+
+/* 底部按钮组靠右:次要(上一步)在左,主操作(下一步/提交)在最右 */
+.step-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-section);
+  padding-top: var(--spacing-stack);
+  border-top: 1px solid var(--divider);
+}
+
+.step-footer-actions {
+  display: flex;
+  gap: var(--spacing-inline);
+}
+
+/* 窄屏时键值详情块退化为单列 */
+@media (max-width: 768px) {
+  .confirm-kv {
+    grid-template-columns: minmax(96px, max-content) 1fr;
+  }
+
+  .confirm-kv > *:nth-child(4n) {
+    border-right: 1px solid var(--divider);
+  }
+
+  .confirm-kv > *:nth-child(2n) {
+    border-right: none;
+  }
+
+  .confirm-kv > *:nth-child(n + 3) {
+    border-top: 1px solid var(--divider);
+  }
+}

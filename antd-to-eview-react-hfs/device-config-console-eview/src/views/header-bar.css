@@ -1,0 +1,180 @@
+/* Layer 4: 顶部导航栏 — 高度 48px,仅承载全局导航与全局工具 */
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+  height: 48px;
+  padding: 0 var(--spacing-gutter);
+  background: var(--surface-container-highest);
+  border-bottom: 1px solid var(--divider);
+  color: var(--on-surface);
+  line-height: normal;
+  flex: none;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+  flex: none;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  min-width: 0;
+}
+
+.brand-mark {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: var(--radius-md);
+  background: var(--primary-fixed);
+}
+
+.brand-name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+/* 一级导航:占据中间弹性空间,高度与 Header 对齐 */
+.app-topnav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 48px;
+}
+
+.topnav-item {
+  padding: 0 var(--spacing-stack);
+  height: 100%;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.topnav-item:hover {
+  color: var(--on-surface);
+}
+
+.topnav-item.active {
+  color: var(--color-text-on);
+  border-bottom-color: var(--primary);
+}
+
+.header-btn {
+  padding: 0 var(--spacing-inline);
+}
+
+.header-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--divider);
+  flex: none;
+}
+
+/* 用户区:手写头像 + 双行元信息 */
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+  height: 36px;
+  padding: 0 var(--spacing-stack) 0 4px;
+  border: none;
+  border-radius: var(--radius-base);
+  background: transparent;
+  cursor: pointer;
+}
+
+.header-user:hover {
+  background: var(--color-hover);
+}
+
+.header-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+  font: var(--font-caption-s);
+}
+
+.header-user-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  line-height: 1.2;
+}
+
+.header-user-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.header-user-role {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+}
+
+/* TipBox 用户菜单弹层内容 */
+.header-menu-pop {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.header-menu-item {
+  padding: 8px var(--spacing-gutter);
+  border: none;
+  border-radius: var(--radius-base);
+  background: transparent;
+  text-align: left;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  cursor: pointer;
+}
+
+.header-menu-item:hover {
+  background: var(--color-hover);
+}
+
+.header-menu-divider {
+  height: 1px;
+  margin: var(--spacing-0-5) 0;
+  background: var(--divider);
+}
+
+@media (max-width: 1279px) {
+  .header-user-meta {
+    display: none;
+  }
+
+  .brand-name {
+    display: none;
+  }
+}
