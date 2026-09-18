@@ -1,0 +1,97 @@
+/* 步骤流面板 — token 优先 */
+.step-panel {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+}
+
+.step-content {
+  margin-top: var(--spacing-section);
+  min-height: 320px;
+  padding: var(--spacing-inset);
+  background: var(--surface-container-low);
+  border-radius: var(--radius-container);
+}
+
+.step-form {
+  max-width: 640px;
+}
+
+/* antd Alert（页面常驻公告）→ 手写常驻信息条，用 info 语义 token */
+.app-alert {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  padding: var(--spacing-2) var(--spacing-4);
+  margin-bottom: var(--spacing-stack);
+  background: var(--info-container);
+  color: var(--on-info-container);
+  border-radius: var(--radius-base);
+}
+
+.app-alert-icon {
+  color: var(--info);
+  flex-shrink: 0;
+}
+
+.confirm-group {
+  margin-top: var(--spacing-stack);
+}
+
+.confirm-group + .confirm-group {
+  margin-top: var(--spacing-section);
+}
+
+/* Descriptions 无对应 → 手写键值详情块 */
+.confirm-group-title {
+  margin: 0 0 var(--spacing-2);
+  font: var(--font-headline-s);
+  color: var(--on-surface);
+}
+
+.app-keyvalue {
+  display: grid;
+  gap: var(--spacing-2) var(--spacing-4);
+  margin: 0;
+  padding: var(--spacing-2) 0;
+}
+
+.app-keyvalue-dt {
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.app-keyvalue-dd {
+  margin: 0;
+  color: var(--on-surface);
+}
+
+/* 结果页（Result 无对应，用 Empty type="success" + 手写内容） */
+.app-result-title {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.app-result-subtitle {
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+  margin-top: var(--spacing-2);
+}
+
+/* 底部按钮组靠右:次要(上一步)在左,主操作(下一步/提交)在最右 */
+.step-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-section);
+  padding-top: var(--spacing-stack);
+  border-top: 1px solid var(--divider);
+}
+
+/* antd Space → flex div + gap */
+.step-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+}
