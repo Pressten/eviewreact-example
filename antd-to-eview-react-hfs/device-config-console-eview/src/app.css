@@ -1,14 +1,56 @@
-@import '../app.css';
-
-html,
-body {
-  margin: 0;
-  min-height: 100%;
+/* Layer 5: 应用级布局骨架 — 固定外壳(顶部导航 + 侧边导航 + 内部滚动内容区) */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
 }
 
-button,
-input,
-textarea,
-select {
-  font-family: inherit;
+.app-shell {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-lowest);
+}
+
+.app-body {
+  flex: 1;
+  min-height: 0;
+  background: var(--surface-container-lowest);
+}
+
+.app-body-has-sider {
+  display: flex;
+  align-items: stretch;
+}
+
+.app-content {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-page);
+  overflow-y: auto;
+  background: var(--surface-container-lowest);
+}
+
+.app-content::-webkit-scrollbar,
+.app-sider-menu::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.app-content::-webkit-scrollbar-track,
+.app-sider-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.app-content::-webkit-scrollbar-thumb,
+.app-sider-menu::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-full);
+  background: var(--color-scrollbar);
+}
+
+.app-content::-webkit-scrollbar-thumb:hover,
+.app-sider-menu::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-hover);
 }

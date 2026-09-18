@@ -12,6 +12,10 @@
   gap: var(--spacing-stack);
 }
 
+.page-crumbs {
+  margin-bottom: var(--spacing-1);
+}
+
 .page-head-row {
   display: flex;
   align-items: flex-start;
@@ -42,4 +46,7 @@
 
 .page-actions {
   flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
 }

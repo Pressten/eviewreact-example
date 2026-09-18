@@ -1,8 +1,9 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
 // Layer 1: 全局状态 — 主题模式、界面语言与布局折叠
-// 换肤单轨驱动:isDark 只切换 <html> 的 .dark class;
-// 普通 H5 元素(token 四层)与 antd 组件(ant.css 重置层)同源跟随,无需 React 参与换肤。
+// 换肤双轨驱动:
+//   1) isDark 切换 <html> 的 .dark class → 四层设计 token(base/light/theme/dark)翻转自定义样式
+//   2) 根容器 aui3_1 / aui3_1_dark class → eview-react 组件主题翻转(见 app.jsx)
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {

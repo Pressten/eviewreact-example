@@ -1,6 +1,7 @@
-// Layer 2: 国际化字典 — 中/英双语文案 + antd enUS locale 精简补丁
+// Layer 2: 国际化字典 — 中/英双语文案
 // 消费: <FormattedMessage id="..." defaultMessage="..." /> 或 useIntl().formatMessage(...)
-// 切语言需同步三处: IntlProvider(locale/messages) + ConfigProvider(locale) + dayjs.locale()
+// 组件内置文案(分页"共 x 条"、Select 占位等)由 @nce/eview-react/locales 提供,
+// 在 app.jsx 的 IntlProvider 里与本项目 messages 合并: { ...componentsLocales[lang], ...messages[lang] }
 
 export const LANG_OPTIONS = [
   { key: "zh", label: "简体中文" },
@@ -309,92 +310,4 @@ export const messages = {
     "modal.created": "Device configuration created",
     "modal.updated": "Device configuration updated",
   },
-};
-
-// antd enUS locale 精简补丁 — 仅覆盖本页用到的组件(Table / Pagination / Modal / Form / Empty / Select)
-export const antdEnUS = {
-  locale: "en",
-  dayjsLocale: "en",
-  global: { placeholder: "Please select" },
-  Pagination: {
-    items_per_page: "/ page",
-    jump_to: "Go to",
-    jump_to_confirm: "confirm",
-    page: "Page",
-    prev_page: "Previous Page",
-    next_page: "Next Page",
-    prev_5: "Previous 5 Pages",
-    next_5: "Next 5 Pages",
-    prev_3: "Previous 3 Pages",
-    next_3: "Next 3 Pages",
-    page_size: "Page Size",
-  },
-  Table: {
-    filterTitle: "Filter menu",
-    filterConfirm: "OK",
-    filterReset: "Reset",
-    filterEmptyText: "No filters",
-    filterCheckall: "Select all items",
-    filterSearchPlaceholder: "Search in filters",
-    emptyText: "No data",
-    selectAll: "Select current page",
-    selectInvert: "Invert current page",
-    selectNone: "Clear all data",
-    selectionAll: "Select all data",
-    sortTitle: "Sort",
-    expand: "Expand row",
-    collapse: "Collapse row",
-    triggerDesc: "Click to sort descending",
-    triggerAsc: "Click to sort ascending",
-    cancelSort: "Click to cancel sorting",
-  },
-  Modal: { okText: "OK", cancelText: "Cancel", justOkText: "OK" },
-  Empty: { description: "No data" },
-  Form: {
-    optional: "(optional)",
-    defaultValidateMessages: {
-      default: "Validation error on field ${label}",
-      required: "Please enter ${label}",
-      enum: "${label} must be one of [${enum}]",
-      whitespace: "${label} cannot be empty",
-      date: {
-        format: "${label} is invalid for format date",
-        parse: "${label} could not be parsed as date",
-        invalid: "${label} is invalid date",
-      },
-      types: {
-        string: "${label} is not a valid ${type}",
-        number: "${label} is not a valid ${type}",
-        email: "${label} is not a valid ${type}",
-        url: "${label} is not a valid ${type}",
-      },
-      string: {
-        len: "${label} must be ${len} characters",
-        min: "${label} must be at least ${min} characters",
-        max: "${label} cannot be longer than ${max} characters",
-        range: "${label} must be between ${min}-${max} characters",
-      },
-      number: {
-        len: "${label} must equal ${len}",
-        min: "${label} cannot be less than ${min}",
-        max: "${label} cannot be greater than ${max}",
-        range: "${label} must be between ${min}-${max}",
-      },
-    },
-  },
-  DatePicker: {
-    lang: {
-      placeholder: "Select date",
-      locale: "en",
-      today: "Today",
-      now: "Now",
-      ok: "OK",
-      clear: "Clear",
-      month: "Month",
-      year: "Year",
-      backToToday: "Back to today",
-    },
-    timePickerLocale: { placeholder: "Select time" },
-  },
-  TimePicker: { placeholder: "Select time" },
 };

@@ -1,5 +1,4 @@
 /* Layer 4: 设备配置清单 */
-/* 四边留白由卡片 body 的 24px 内边距负责;工具栏只补与表格之间的 16px 间距 */
 .table-toolbar {
   display: flex;
   align-items: center;
@@ -32,12 +31,22 @@
   margin-right: var(--spacing-inline);
 }
 
-.cell-actions {
-  display: inline-flex;
+.device-cell {
+  display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 4px;
-  white-space: nowrap;
+  gap: var(--spacing-stack);
+  min-width: 0;
+}
+
+.device-icon {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: var(--radius-base);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
 }
 
 .cell-strong {
@@ -58,4 +67,11 @@
   font: var(--font-caption-m);
   color: var(--on-surface-variant);
   white-space: nowrap;
+}
+
+.cell-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-1);
 }

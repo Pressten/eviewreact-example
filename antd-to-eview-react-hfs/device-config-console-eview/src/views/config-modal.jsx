@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import Dialog from "@nce/eview-react/Dialog";
 import Form from "@nce/eview-react/Form";
@@ -7,6 +7,7 @@ import TextArea from "@nce/eview-react/TextArea";
 import Select from "@nce/eview-react/Select";
 import Toggle from "@nce/eview-react/Toggle";
 import { useToast } from "../components/Toast.jsx";
+import { Icon } from "../../assets/shared/icons.js";
 import {
   deviceFormInitialValues,
   deviceTypeOptions,
@@ -31,6 +32,8 @@ export default function ConfigModal({ open, record, onCancel }) {
       text: item.label || t(item.msgId, item.fallback),
     }));
 
+  // 编辑态:弹窗打开后用 setFieldsValue 回填(异步 record 不能塞 initialValues);
+  // 新增态:resetFields 回到 initialValues。Dialog 默认 destroyOnClose,每次打开表单是新的。
   useEffect(() => {
     if (!open) return;
     if (record) {
@@ -50,6 +53,7 @@ export default function ConfigModal({ open, record, onCancel }) {
   }, [open, record]);
 
   const handleSuccess = () => {
+    // 真实项目:此处 await api.save(values);失败保持打开;成功才关
     toast(
       "success",
       t(isEdit ? "modal.updated" : "modal.created", isEdit ? "设备配置已更新" : "设备配置已创建")
@@ -63,10 +67,22 @@ export default function ConfigModal({ open, record, onCancel }) {
       isOpen={open}
       onClose={onCancel}
       size={[560, null]}
-      title={label(isEdit ? "modal.titleEdit" : "modal.title", isEdit ? "编辑设备配置" : "新增设备配置")}
+      title={
+        <span className="modal-title">
+          <Icon name={isEdit ? "square-pen" : "plus"} size={16} />
+          {label(
+            isEdit ? "modal.titleEdit" : "modal.title",
+            isEdit ? "编辑设备配置" : "新增设备配置"
+          )}
+        </span>
+      }
       buttons={[
         { text: t("modal.cancel", "取消"), onClick: onCancel },
-        { text: t("modal.ok", "确定"), status: "primary", onClick: () => formRef.current?.submit() },
+        {
+          text: t("modal.ok", "确定"),
+          status: "primary",
+          onClick: () => formRef.current?.submit(),
+        },
       ]}
     >
       <p className="modal-desc">
@@ -98,15 +114,22 @@ export default function ConfigModal({ open, record, onCancel }) {
           <Select options={toOptions(policyTemplates)} />
         </Form.Item>
 
-        <Form.Item
-          name="enabled"
-          label={label("modal.enabled", "保存后立即启用")}
-          labelTip={t("modal.enabled.desc", "启用后设备将按所选策略开始上报数据")}
-          valuePropName="toggled"
-          updateTrigger="onToggle"
-        >
-          <Toggle data={[false, true]} />
-        </Form.Item>
+        <div className="modal-switch">
+          <div className="modal-switch-text">
+            <div className="modal-switch-title">{label("modal.enabled", "保存后立即启用")}</div>
+            <div className="modal-switch-desc">
+              {label("modal.enabled.desc", "启用后设备将按所选策略开始上报数据")}
+            </div>
+          </div>
+          <Form.Item
+            name="enabled"
+            valuePropName="toggled"
+            updateTrigger="onToggle"
+            colon={false}
+          >
+            <Toggle data={[false, true]} />
+          </Form.Item>
+        </div>
 
         <Form.Item name="remark" label={label("modal.remark", "备注")} className="modal-remark">
           <TextArea

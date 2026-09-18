@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FormattedMessage } from "react-intl";
+import { Icon } from "../../assets/shared/icons.js";
 import { useApp } from "../context.jsx";
 import { sideMenuItems } from "../data.js";
 import "./side-menu.css";
@@ -9,6 +10,8 @@ function MenuItemLabel({ node }) {
 }
 
 // Layer 4: 侧边导航 — 展开 248px / 折叠 48px,亮色底,折叠态保留图标与选中态
+// 说明:eview-react 本批次无 Menu / Layout.Sider,用原生 <aside>+<nav>+<button> 复刻内联折叠菜单。
+//      展开态显示图标+文字+展开箭头,折叠态仅图标并悬浮 title 提示。TODO 待 Menu 组件覆盖。
 export default function SideMenu() {
   const { collapsed } = useApp();
   const [selected, setSelected] = useState("device-config");
@@ -23,6 +26,8 @@ export default function SideMenu() {
     });
   };
 
+  const isGroupOpen = (key) => openKeys.has(key);
+
   return (
     <aside className={"app-sider" + (collapsed ? " collapsed" : "")}>
       <nav className="app-sider-menu">
@@ -31,23 +36,25 @@ export default function SideMenu() {
             <div key={node.key} className="sider-group">
               <button
                 type="button"
-                className={"sider-item sider-submenu" + (openKeys.has(node.key) ? " open" : "")}
+                className={"sider-item sider-submenu" + (isGroupOpen(node.key) ? " open" : "")}
+                title={collapsed ? node.fallback : undefined}
                 onClick={() => toggleGroup(node.key)}
               >
-                {collapsed ? (
-                  <span className="sider-item-glyph" aria-hidden="true">{node.fallback[0]}</span>
-                ) : (
+                <span className="sider-item-icon">
+                  <Icon name={node.icon} size={16} />
+                </span>
+                {!collapsed ? (
                   <>
                     <span className="sider-item-text">
                       <MenuItemLabel node={node} />
                     </span>
                     <span className="sider-arrow" aria-hidden="true">
-                      {openKeys.has(node.key) ? "-" : "+"}
+                      {isGroupOpen(node.key) ? "−" : "+"}
                     </span>
                   </>
-                )}
+                ) : null}
               </button>
-              {!collapsed && openKeys.has(node.key) ? (
+              {!collapsed && isGroupOpen(node.key) ? (
                 <div className="sider-children">
                   {node.children.map((child) => (
                     <button
@@ -69,16 +76,17 @@ export default function SideMenu() {
               key={node.key}
               type="button"
               className={"sider-item" + (selected === node.key ? " active" : "")}
-              onClick={() => setSelected(node.key)}
               title={collapsed ? node.fallback : undefined}
+              onClick={() => setSelected(node.key)}
             >
-              {collapsed ? (
-                <span className="sider-item-glyph" aria-hidden="true">{node.fallback[0]}</span>
-              ) : (
+              <span className="sider-item-icon">
+                <Icon name={node.icon} size={16} />
+              </span>
+              {!collapsed ? (
                 <span className="sider-item-text">
                   <MenuItemLabel node={node} />
                 </span>
-              )}
+              ) : null}
             </button>
           )
         )}
