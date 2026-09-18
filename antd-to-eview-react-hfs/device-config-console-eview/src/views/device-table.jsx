@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import Table from "@nce/eview-react/Table";
 import Button from "@nce/eview-react/Button";
@@ -7,10 +7,12 @@ import SearchInput from "@nce/eview-react/SearchInput";
 import SectionCard from "../components/SectionCard.jsx";
 import StatusTag from "../components/StatusTag.jsx";
 import { useToast } from "../components/Toast.jsx";
-import { STATUS_KEYS, deviceRows, summarize } from "../data.js";
+import { Icon } from "../../assets/shared/icons.js";
+import { STATUS_KEYS, TYPE_ICON, deviceRows, summarize } from "../data.js";
 import "./device-table.css";
 
 function formatLastReport(value) {
+  // mock 时间已是 "YYYY-MM-DD HH:mm",截取 MM-DD HH:mm 对齐原 dayjs 格式
   return String(value || "").slice(5);
 }
 
@@ -68,7 +70,14 @@ export default function DeviceTable({ onEdit }) {
     {
       title: label("table.col.name", "设备名称"),
       key: "name",
-      render: (value) => <span className="cell-strong">{value}</span>,
+      render: (value, rowData) => (
+        <div className="device-cell">
+          <span className="device-icon">
+            <Icon name={TYPE_ICON[rowData.type]} size={14} />
+          </span>
+          <span className="cell-strong">{value}</span>
+        </div>
+      ),
     },
     {
       title: label("table.col.code", "设备编号"),
@@ -98,6 +107,7 @@ export default function DeviceTable({ onEdit }) {
     {
       title: label("table.col.status", "状态"),
       key: "status",
+      allowSort: false,
       render: (value) => <StatusTag status={value} />,
     },
     {
@@ -108,10 +118,16 @@ export default function DeviceTable({ onEdit }) {
     {
       title: label("table.col.actions", "操作"),
       key: "actions",
+      allowSort: false,
       align: "right",
-      render: (_value, row) => (
+      render: (_value, rowData) => (
         <span className="cell-actions">
-          <Button status="text" size="small" text={label("table.action.edit", "编辑")} onClick={() => onEdit(row)} />
+          <Button
+            status="text"
+            size="small"
+            text={label("table.action.edit", "编辑")}
+            onClick={() => onEdit(rowData)}
+          />
           <Button
             status="text"
             size="small"
@@ -122,7 +138,7 @@ export default function DeviceTable({ onEdit }) {
             status="risk"
             size="small"
             text={label("table.action.disable", "停用设备")}
-            onClick={() => disableRows([row.code])}
+            onClick={() => disableRows([rowData.code])}
           />
         </span>
       ),
@@ -153,7 +169,11 @@ export default function DeviceTable({ onEdit }) {
           onChange={(value) => setStatusFilter(value)}
           options={statusOptions}
         />
-        <Button text={label("table.refresh", "刷新")} disabled={loading} onClick={refresh} />
+        <Button
+          text={label("table.refresh", "刷新")}
+          disabled={loading}
+          onClick={refresh}
+        />
       </div>
 
       {selectedKeys.length > 0 ? (
@@ -175,7 +195,12 @@ export default function DeviceTable({ onEdit }) {
             text={label("table.bulkDisable", "批量停用")}
             onClick={() => disableRows(selectedKeys)}
           />
-          <Button size="small" status="text" text={label("table.clearSelection", "取消选择")} onClick={() => setSelectedKeys([])} />
+          <Button
+            size="small"
+            status="text"
+            text={label("table.clearSelection", "取消选择")}
+            onClick={() => setSelectedKeys([])}
+          />
         </div>
       ) : null}
 
@@ -190,7 +215,7 @@ export default function DeviceTable({ onEdit }) {
         enableCheckBox
         checkType="multi"
         checkedRows={selectedKeys}
-        onRowCheck={(row, checkedRows) => setSelectedKeys(checkedRows)}
+        onRowCheck={(_row, checkedRows) => setSelectedKeys(checkedRows)}
         onHeaderCheck={(checkedRows) => setSelectedKeys(checkedRows)}
         enablePagination
         enableAutoPaging

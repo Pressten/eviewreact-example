@@ -1,0 +1,57 @@
+/* Layer 3: Toast 浮层 — 顶部居中堆叠,自动消失 */
+.app-toast-wrap {
+  position: fixed;
+  top: var(--spacing-6);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  pointer-events: none;
+}
+
+.app-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  max-width: 480px;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-base);
+  background: var(--surface-container-highest);
+  color: var(--on-surface);
+  box-shadow: var(--shadow-popover);
+  font: var(--font-body-m);
+  animation: app-toast-in 160ms ease-out;
+}
+
+.app-toast-icon {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+}
+
+.app-toast-success .app-toast-icon {
+  color: var(--success);
+}
+.app-toast-error .app-toast-icon {
+  color: var(--error);
+}
+.app-toast-warning .app-toast-icon {
+  color: var(--critical);
+}
+.app-toast-info .app-toast-icon {
+  color: var(--info);
+}
+
+@keyframes app-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

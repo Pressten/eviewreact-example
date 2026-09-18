@@ -1,4 +1,4 @@
-/* Layer 4: 侧边导航 */
+/* Layer 4: 侧边导航 — 原生 <aside>+<nav>+<button> 复刻内联折叠菜单 */
 .app-sider {
   width: 248px;
   background: var(--surface-container-highest);
@@ -6,9 +6,8 @@
   flex: none;
   display: flex;
   flex-direction: column;
-  height: 100%;
   overflow: hidden;
-  transition: width 0.2s ease;
+  transition: width 0.18s ease;
 }
 
 .app-sider.collapsed {
@@ -22,47 +21,75 @@
   font: var(--font-body-m);
 }
 
+.sider-group {
+  display: flex;
+  flex-direction: column;
+}
+
 .sider-item {
   display: flex;
   align-items: center;
   gap: var(--spacing-inline);
-  width: 100%;
   height: 36px;
-  margin: 2px 0;
+  width: 100%;
   padding: 0 var(--spacing-inline);
-  border: 0;
-  border-left: 2px solid transparent;
+  border: none;
   border-radius: var(--radius-base);
   background: transparent;
   color: var(--on-surface);
   font: var(--font-body-m);
   text-align: left;
   cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
 }
 
 .sider-item:hover {
-  background: var(--color-hover);
+  background: var(--surface-variant);
 }
 
 .sider-item.active {
-  background: var(--color-select);
-  color: var(--color-text-on);
-  border-left-color: var(--primary);
+  background: var(--primary-container);
+  color: var(--primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.sider-item.active .sider-item-icon {
+  color: var(--primary);
+}
+
+.sider-item-icon {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  color: var(--on-surface-variant);
 }
 
 .sider-item-text {
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 0;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.sider-child {
-  padding-left: var(--spacing-gutter);
 }
 
 .sider-arrow {
+  flex: none;
+  width: 16px;
+  text-align: center;
+  color: var(--on-surface-variant);
+  font-weight: var(--font-weight-semibold);
+}
+
+.sider-children {
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+}
+
+.sider-child {
+  height: 32px;
   color: var(--on-surface-variant);
 }
 
@@ -71,9 +98,9 @@
   padding: 0;
 }
 
-.sider-item-glyph {
-  font: var(--font-body-m);
-  font-weight: var(--font-weight-medium);
+.app-sider.collapsed .sider-item-icon {
+  width: 24px;
+  height: 24px;
 }
 
 .app-sider-foot {
@@ -110,6 +137,10 @@
   font: var(--font-caption-s);
   color: var(--on-surface-variant);
   white-space: nowrap;
+}
+
+.app-sider.collapsed .foot-text {
+  display: none;
 }
 
 .app-sider.collapsed .app-sider-foot {

@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import Button from "@nce/eview-react/Button";
 import Crumbs from "@nce/eview-react/Crumbs";
@@ -19,12 +19,16 @@ function PageActions({ openCreate }) {
         text={<FormattedMessage id="page.export" defaultMessage="导出配置" />}
         onClick={() => toast("success", t("table.exported", "已导出所选配置"))}
       />
-      <Button status="primary" text={<FormattedMessage id="page.create" defaultMessage="新增设备配置" />} onClick={openCreate} />
+      <Button
+        status="primary"
+        text={<FormattedMessage id="page.create" defaultMessage="新增设备配置" />}
+        onClick={openCreate}
+      />
     </div>
   );
 }
 
-// Layer 4: 设备配置页 — 表单区 + 清单表 + 新增/编辑弹窗
+// Layer 4: 设备配置页 — 面包屑 + 表单区 + 清单表 + 新增/编辑弹窗
 export default function ConsolePage() {
   const intl = useIntl();
   const [modal, setModal] = useState({ open: false, record: null });
@@ -34,8 +38,8 @@ export default function ConsolePage() {
   const closeModal = () => setModal((prev) => ({ ...prev, open: false }));
 
   const crumbsData = [
-    { title: intl.formatMessage({ id: "page.breadcrumb.home", defaultMessage: "控制台" }) },
-    { title: intl.formatMessage({ id: "page.breadcrumb.group", defaultMessage: "设备管理" }) },
+    { title: intl.formatMessage({ id: "page.breadcrumb.home", defaultMessage: "控制台" }), id: "home" },
+    { title: intl.formatMessage({ id: "page.breadcrumb.group", defaultMessage: "设备管理" }), id: "group" },
     { title: intl.formatMessage({ id: "page.breadcrumb.current", defaultMessage: "设备配置" }) },
   ];
 
