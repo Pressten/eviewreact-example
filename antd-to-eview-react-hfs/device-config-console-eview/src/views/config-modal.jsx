@@ -19,7 +19,9 @@ import "./config-modal.css";
 
 // Layer 4: 设备配置弹窗 — 新增 / 编辑设备并绑定采集策略(单一焦点,单列表单)
 // antd → eview-react: Modal → Dialog(isOpen/onClose/buttons,尺寸 size=[宽,'auto'] + maxHeight 限高);
-// form.validateFields().then() → ref.submit() → onSuccess(values) 回调,校验失败自动走 onFailed。
+// form.validateFields().then() → ref.submit() → onSuccess(values) 回调,校验失败自动走 onFailed;
+// Switch 行 → Form.Item label + labelTip 托管(valuePropName="toggled" updateTrigger="onToggle"),
+// 不能用 div 包裹 Form.Item 做左右布局(标签宽度与栅格按直接子级计算,见 skill Form.md)。
 export default function ConfigModal({ open, record, onCancel }) {
   const intl = useIntl();
   const toast = useToast();
@@ -115,19 +117,17 @@ export default function ConfigModal({ open, record, onCancel }) {
           <Select options={toOptions(policyTemplates)} />
         </Form.Item>
 
-        <div className="modal-switch">
-          <div className="modal-switch-text">
-            <div className="modal-switch-title">{label("modal.enabled", "保存后立即启用")}</div>
-            <div className="modal-switch-desc">
-              {label("modal.enabled.desc", "启用后设备将按所选策略开始上报数据")}
-            </div>
-          </div>
-          <Form.Item name="enabled" valuePropName="toggled" updateTrigger="onToggle">
-            <Toggle data={[false, true]} />
-          </Form.Item>
-        </div>
+        <Form.Item
+          name="enabled"
+          label={label("modal.enabled", "保存后立即启用")}
+          labelTip={t("modal.enabled.desc", "启用后设备将按所选策略开始上报数据")}
+          valuePropName="toggled"
+          updateTrigger="onToggle"
+        >
+          <Toggle data={[false, true]} />
+        </Form.Item>
 
-        <Form.Item name="remark" label={label("modal.remark", "备注")} className="modal-remark">
+        <Form.Item name="remark" label={label("modal.remark", "备注")}>
           <TextArea
             maxLength={200}
             placeholder={t("modal.remark.placeholder", "可选，记录设备位置或负责人信息")}

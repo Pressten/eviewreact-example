@@ -25,13 +25,17 @@ import "./config-form.css";
 // antd → eview-react:
 //   Form.useForm/onFinish → Form ref + submit() → onSuccess(values) 回调(非 Promise);
 //   InputNumber → Spinner(程序化改值场景加 doNotFocusWhenValueUpdate);
-//   Radio.Group button → SelectCard(data[].text);Switch → Toggle(valuePropName="toggled" updateTrigger="onToggle");
-//   Row/Col 栅格 → form-row/form-col CSS grid。
+//   Radio.Group button → SelectCard(data[].text);Switch → Toggle;
+//   Row/Col 栅格 → Form 的 itemCol={8} 三列 + Form.Item.col 单项覆盖。
+//   注意:Form.Item 必须是 Form 的直接子节点,ev_label 标签宽度和栅格都按直接子级计算,
+//   用 div/flex/grid 包裹 Form.Item 会导致标签塌缩、栅格失效(见 skill Form.md 反例)。
 export default function ConfigForm() {
   const intl = useIntl();
   const toast = useToast();
   const formRef = useRef(null);
-  const [enhanced, setEnhanced] = useState(true);
+  // 增强采集开关是"设置页开关联动"型 UI 开关(Toggle.md),走受控写法放在装饰行内;
+  // 不能为了排版把 Form.Item 包进 div,表单字段仍全部由 Form 托管。
+  const [enhanced, setEnhanced] = useState(policyFormInitialValues.enhanced);
 
   const t = (id, fallback, values) =>
     intl.formatMessage({ id: id, defaultMessage: fallback }, values);
@@ -42,7 +46,12 @@ export default function ConfigForm() {
       text: item.label || t(item.msgId, item.fallback),
     }));
 
-  const handleSuccess = () => {
+  const handleEnhancedToggle = (value) => {
+    setEnhanced(!!value);
+  };
+
+  const handleSuccess = (values) => {
+    // enhanced 由受控 Toggle 持有,真实项目提交时合并:{ ...values, enhanced }
     toast.success(t("form.saved", "采集策略已保存并下发"));
   };
 
@@ -62,53 +71,37 @@ export default function ConfigForm() {
         </span>
       }
     >
+      {/* itemCol={8}: 三列栅格设在 Form 上;Form.Item 全部为直接子节点 */}
       <Form
         ref={formRef}
         layout="vertical"
+        itemCol={8}
         validateErrorType="tip"
         initialValues={policyFormInitialValues}
         onSuccess={handleSuccess}
         onFailed={() => {}}
-        onValuesChange={(changed) => {
-          // 增强采集开关联动显隐:Form 托管 Toggle 值,这里同步给本地 state 驱动条件渲染
-          if (changed && "enhanced" in changed) setEnhanced(!!changed.enhanced);
-        }}
       >
-        <div className="form-row">
-          <div className="form-col">
-            <Form.Item name="policyName" label={label("form.policyName", "策略名称")} rules={[{ required: true }]}>
-              <TextField placeholder={t("form.policyName.placeholder", "请输入策略名称")} />
-            </Form.Item>
-          </div>
-          <div className="form-col">
-            <Form.Item name="deviceType" label={label("form.deviceType", "设备类型")}>
-              <Select options={toOptions(deviceTypeOptions)} />
-            </Form.Item>
-          </div>
-          <div className="form-col">
-            <Form.Item name="site" label={label("form.site", "应用站点")}>
-              <Select options={toOptions(siteOptions)} />
-            </Form.Item>
-          </div>
-          <div className="form-col">
-            <Form.Item name="protocol" label={label("form.protocol", "上报协议")}>
-              <SelectCard data={toOptions(protocolOptions)} />
-            </Form.Item>
-          </div>
-          <div className="form-col">
-            <Form.Item name="interval" label={label("form.interval", "采集周期（秒）")}>
-              <div className="full-width">
-                <Spinner min={5} max={3600} step={5} doNotFocusWhenValueUpdate />
-              </div>
-            </Form.Item>
-          </div>
-          <div className="form-col">
-            <Form.Item name="priority" label={label("form.priority", "策略优先级")}>
-              <Select options={toOptions(priorityOptions)} />
-            </Form.Item>
-          </div>
-        </div>
+        <Form.Item name="policyName" label={label("form.policyName", "策略名称")} rules={[{ required: true }]}>
+          <TextField placeholder={t("form.policyName.placeholder", "请输入策略名称")} />
+        </Form.Item>
+        <Form.Item name="deviceType" label={label("form.deviceType", "设备类型")}>
+          <Select options={toOptions(deviceTypeOptions)} />
+        </Form.Item>
+        <Form.Item name="site" label={label("form.site", "应用站点")}>
+          <Select options={toOptions(siteOptions)} />
+        </Form.Item>
+        <Form.Item name="protocol" label={label("form.protocol", "上报协议")}>
+          <SelectCard data={toOptions(protocolOptions)} />
+        </Form.Item>
+        <Form.Item name="interval" label={label("form.interval", "采集周期（秒）")}>
+          {/* 控件直接作为 Form.Item 子节点(Form 注入 value/onChange),不能再包 div */}
+          <Spinner min={5} max={3600} step={5} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
+        </Form.Item>
+        <Form.Item name="priority" label={label("form.priority", "策略优先级")}>
+          <Select options={toOptions(priorityOptions)} />
+        </Form.Item>
 
+        {/* 开关行:Form.Item 之间的普通节点(不包裹 Form.Item),Toggle 受控驱动下方区块显隐 */}
         <div className="toggle-row">
           <div className="toggle-copy">
             <span className="toggle-icon">
@@ -124,13 +117,16 @@ export default function ConfigForm() {
               </div>
             </div>
           </div>
-          <Form.Item name="enhanced" valuePropName="toggled" updateTrigger="onToggle">
-            <Toggle data={[false, true]} />
-          </Form.Item>
+          <Toggle
+            data={[false, true]}
+            toggled={enhanced}
+            onToggle={handleEnhancedToggle}
+          />
         </div>
 
         {enhanced ? (
-          <div className="detail-region">
+          <>
+            {/* 分组标题:普通节点占整行,详细参数 Form.Item 依旧是直接子级 */}
             <div className="detail-head">
               <span className="detail-title">
                 <Icon name="sliders-horizontal" size={14} />
@@ -144,65 +140,38 @@ export default function ConfigForm() {
                 )}
               </span>
             </div>
-            <div className="form-row">
-              <div className="form-col">
-                <Form.Item name="sampleInterval" label={label("form.sampleInterval", "采样间隔（毫秒）")}>
-                  <div className="full-width">
-                    <Spinner min={100} max={60000} step={100} doNotFocusWhenValueUpdate />
-                  </div>
-                </Form.Item>
-              </div>
-              <div className="form-col">
-                <Form.Item name="batchSize" label={label("form.batchSize", "单次上报条数")}>
-                  <div className="full-width">
-                    <Spinner min={1} max={500} doNotFocusWhenValueUpdate />
-                  </div>
-                </Form.Item>
-              </div>
-              <div className="form-col">
-                <Form.Item name="heartbeat" label={label("form.heartbeat", "心跳超时（秒）")}>
-                  <div className="full-width">
-                    <Spinner min={5} max={600} doNotFocusWhenValueUpdate />
-                  </div>
-                </Form.Item>
-              </div>
-              <div className="form-col">
-                <Form.Item name="bufferLimit" label={label("form.bufferLimit", "离线缓存上限（条）")}>
-                  <div className="full-width">
-                    <Spinner min={100} max={100000} step={100} doNotFocusWhenValueUpdate />
-                  </div>
-                </Form.Item>
-              </div>
-              <div className="form-col">
-                <Form.Item name="compression" label={label("form.compression", "数据压缩")}>
-                  <Select options={toOptions(compressionOptions)} />
-                </Form.Item>
-              </div>
-              <div className="form-col">
-                <Form.Item name="retries" label={label("form.retries", "失败重试次数")}>
-                  <div className="full-width">
-                    <Spinner min={0} max={10} doNotFocusWhenValueUpdate />
-                  </div>
-                </Form.Item>
-              </div>
-              <div className="form-col">
-                <Form.Item name="masking" label={label("form.masking", "敏感数据脱敏")} valuePropName="toggled" updateTrigger="onToggle">
-                  <Toggle data={[false, true]} />
-                </Form.Item>
-              </div>
-              <div className="form-col form-col-full">
-                <Form.Item name="remark" label={label("form.remark", "策略备注")}>
-                  <TextArea
-                    maxLength={200}
-                    placeholder={t(
-                      "form.remark.placeholder",
-                      "补充说明该策略的适用范围与注意事项"
-                    )}
-                  />
-                </Form.Item>
-              </div>
-            </div>
-          </div>
+            <Form.Item name="sampleInterval" label={label("form.sampleInterval", "采样间隔（毫秒）")}>
+              <Spinner min={100} max={60000} step={100} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
+            </Form.Item>
+            <Form.Item name="batchSize" label={label("form.batchSize", "单次上报条数")}>
+              <Spinner min={1} max={500} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
+            </Form.Item>
+            <Form.Item name="heartbeat" label={label("form.heartbeat", "心跳超时（秒）")}>
+              <Spinner min={5} max={600} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
+            </Form.Item>
+            <Form.Item name="bufferLimit" label={label("form.bufferLimit", "离线缓存上限（条）")}>
+              <Spinner min={100} max={100000} step={100} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
+            </Form.Item>
+            <Form.Item name="compression" label={label("form.compression", "数据压缩")}>
+              <Select options={toOptions(compressionOptions)} />
+            </Form.Item>
+            <Form.Item name="retries" label={label("form.retries", "失败重试次数")}>
+              <Spinner min={0} max={10} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
+            </Form.Item>
+            <Form.Item name="masking" label={label("form.masking", "敏感数据脱敏")} valuePropName="toggled" updateTrigger="onToggle">
+              <Toggle data={[false, true]} />
+            </Form.Item>
+            {/* col={24}: 单项覆盖占整行 */}
+            <Form.Item col={24} name="remark" label={label("form.remark", "策略备注")}>
+              <TextArea
+                maxLength={200}
+                placeholder={t(
+                  "form.remark.placeholder",
+                  "补充说明该策略的适用范围与注意事项"
+                )}
+              />
+            </Form.Item>
+          </>
         ) : null}
 
         <div className="form-actions">

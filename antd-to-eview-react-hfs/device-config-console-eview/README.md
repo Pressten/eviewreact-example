@@ -33,7 +33,7 @@ npm run build
 | 纯图标按钮 `Button type="text" icon` | `IconButton` iconName（传业务 `Icon` 元素） |
 | `message.success` | `ToastProvider` + `useToast().success()`（内部渲染 `DivMessage`，换 key 重挂） |
 | `Space` | flex 容器 + gap |
-| `Row`/`Col` 栅格 | `.form-row`/`.form-col` CSS grid |
+| `Row`/`Col` 栅格 | `Form` 的 `itemCol={8}` 三列 + `Form.Item col={24}` 单项整行（`Form.Item` 必须是 `Form` 直接子节点，禁止 div 包裹） |
 
 ## 补位说明（eview-react 未覆盖 / 无 Reference 的部分）
 
