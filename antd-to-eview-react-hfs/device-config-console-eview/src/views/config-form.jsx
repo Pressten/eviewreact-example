@@ -28,7 +28,8 @@ import "./config-form.css";
 //   Radio.Group button → SelectCard(data[].text);Switch → Toggle;
 //   Row/Col 栅格 → Form 的 itemCol={8} 三列 + Form.Item.col 单项覆盖。
 //   注意:Form.Item 必须是 Form 的直接子节点,ev_label 标签宽度和栅格都按直接子级计算,
-//   用 div/flex/grid 包裹 Form.Item 会导致标签塌缩、栅格失效(见 skill Form.md 反例)。
+//   用 div/flex/grid 包裹 Form.Item 会导致标签塌缩、栅格失效;
+//   条件显隐也不能用 Fragment/容器包一组(脱离直接子级),改为返回 Form.Item 数组保持聚合(见 skill Form.md)。
 export default function ConfigForm() {
   const intl = useIntl();
   const toast = useToast();
@@ -59,6 +60,39 @@ export default function ConfigForm() {
     formRef.current && formRef.current.resetFields();
     setEnhanced(policyFormInitialValues.enhanced);
   };
+
+  // 增强采集参数一组:整组放数组保持代码聚合,React.Children 展开后仍是 Form 直接子级,itemCol 可注入(实测可行);
+  // 不能换成 Fragment/div 包裹整组(脱离直接子级,栅格失效)。
+  const detailItems = [
+    <Form.Item key="sampleInterval" name="sampleInterval" label={label("form.sampleInterval", "采样间隔（毫秒）")}>
+      <Spinner min={100} max={60000} step={100} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
+    </Form.Item>,
+    <Form.Item key="batchSize" name="batchSize" label={label("form.batchSize", "单次上报条数")}>
+      <Spinner min={1} max={500} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
+    </Form.Item>,
+    <Form.Item key="heartbeat" name="heartbeat" label={label("form.heartbeat", "心跳超时（秒）")}>
+      <Spinner min={5} max={600} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
+    </Form.Item>,
+    <Form.Item key="bufferLimit" name="bufferLimit" label={label("form.bufferLimit", "离线缓存上限（条）")}>
+      <Spinner min={100} max={100000} step={100} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
+    </Form.Item>,
+    <Form.Item key="compression" name="compression" label={label("form.compression", "数据压缩")}>
+      <Select options={toOptions(compressionOptions)} />
+    </Form.Item>,
+    <Form.Item key="retries" name="retries" label={label("form.retries", "失败重试次数")}>
+      <Spinner min={0} max={10} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
+    </Form.Item>,
+    <Form.Item key="masking" name="masking" label={label("form.masking", "敏感数据脱敏")} valuePropName="toggled" updateTrigger="onToggle">
+      <Toggle data={[false, true]} />
+    </Form.Item>,
+    // col={24}: 单项覆盖占整行
+    <Form.Item key="remark" col={24} name="remark" label={label("form.remark", "策略备注")}>
+      <TextArea
+        maxLength={200}
+        placeholder={t("form.remark.placeholder", "补充说明该策略的适用范围与注意事项")}
+      />
+    </Form.Item>,
+  ];
 
   return (
     <SectionCard
@@ -124,55 +158,23 @@ export default function ConfigForm() {
           />
         </div>
 
+        {/* 条件显隐:分组标题为普通节点,整组字段用数组保持直接子级 */}
         {enhanced ? (
-          <>
-            {/* 分组标题:普通节点占整行,详细参数 Form.Item 依旧是直接子级 */}
-            <div className="detail-head">
-              <span className="detail-title">
-                <Icon name="sliders-horizontal" size={14} />
-                {label("form.detail.title", "增强采集参数")}
-              </span>
-              <span className="detail-hint">
-                <Icon name="info" size={12} />
-                {label(
-                  "form.detail.hint",
-                  "采样频率越高，带宽占用与设备功耗越大，请按业务场景开启"
-                )}
-              </span>
-            </div>
-            <Form.Item name="sampleInterval" label={label("form.sampleInterval", "采样间隔（毫秒）")}>
-              <Spinner min={100} max={60000} step={100} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
-            </Form.Item>
-            <Form.Item name="batchSize" label={label("form.batchSize", "单次上报条数")}>
-              <Spinner min={1} max={500} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
-            </Form.Item>
-            <Form.Item name="heartbeat" label={label("form.heartbeat", "心跳超时（秒）")}>
-              <Spinner min={5} max={600} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
-            </Form.Item>
-            <Form.Item name="bufferLimit" label={label("form.bufferLimit", "离线缓存上限（条）")}>
-              <Spinner min={100} max={100000} step={100} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
-            </Form.Item>
-            <Form.Item name="compression" label={label("form.compression", "数据压缩")}>
-              <Select options={toOptions(compressionOptions)} />
-            </Form.Item>
-            <Form.Item name="retries" label={label("form.retries", "失败重试次数")}>
-              <Spinner min={0} max={10} doNotFocusWhenValueUpdate style={{ width: "100%" }} />
-            </Form.Item>
-            <Form.Item name="masking" label={label("form.masking", "敏感数据脱敏")} valuePropName="toggled" updateTrigger="onToggle">
-              <Toggle data={[false, true]} />
-            </Form.Item>
-            {/* col={24}: 单项覆盖占整行 */}
-            <Form.Item col={24} name="remark" label={label("form.remark", "策略备注")}>
-              <TextArea
-                maxLength={200}
-                placeholder={t(
-                  "form.remark.placeholder",
-                  "补充说明该策略的适用范围与注意事项"
-                )}
-              />
-            </Form.Item>
-          </>
+          <div className="detail-head">
+            <span className="detail-title">
+              <Icon name="sliders-horizontal" size={14} />
+              {label("form.detail.title", "增强采集参数")}
+            </span>
+            <span className="detail-hint">
+              <Icon name="info" size={12} />
+              {label(
+                "form.detail.hint",
+                "采样频率越高，带宽占用与设备功耗越大，请按业务场景开启"
+              )}
+            </span>
+          </div>
         ) : null}
+        {enhanced ? detailItems : null}
 
         <div className="form-actions">
           <Button text={t("form.reset", "重置")} onClick={handleReset} />
