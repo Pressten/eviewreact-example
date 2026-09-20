@@ -12,10 +12,6 @@
   gap: var(--spacing-stack);
 }
 
-.page-crumbs {
-  margin-bottom: var(--spacing-1);
-}
-
 .page-head-row {
   display: flex;
   align-items: flex-start;
@@ -44,9 +40,10 @@
   color: var(--on-surface-variant);
 }
 
+/* antd Space → flex + gap */
 .page-actions {
-  flex: none;
   display: flex;
   align-items: center;
   gap: var(--spacing-inline);
+  flex: none;
 }

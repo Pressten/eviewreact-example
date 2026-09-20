@@ -3,6 +3,27 @@
   width: 100%;
 }
 
+/* antd Row/Col(xs24 md8) → CSS grid 三列,窄屏单列 */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 var(--spacing-gutter);
+}
+
+.form-col {
+  min-width: 0;
+}
+
+.form-col-full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 991px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .bound-tag {
   display: inline-flex;
   align-items: center;
@@ -17,7 +38,7 @@
   white-space: nowrap;
 }
 
-/* 开关行:说明在行首,Switch 在行尾 */
+/* 开关行:说明在行首,Toggle 在行尾 */
 .toggle-row {
   display: flex;
   align-items: center;

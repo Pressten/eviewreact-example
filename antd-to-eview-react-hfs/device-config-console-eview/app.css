@@ -1,32 +1,23 @@
 /* Layer 5: 应用级布局骨架 — 固定外壳(顶部导航 + 侧边导航 + 内部滚动内容区) */
-.app-root {
-  min-height: 100vh;
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
   background: var(--surface-container-lowest);
   color: var(--on-surface);
   font: var(--font-body-m);
 }
 
-.app-shell {
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  background: var(--surface-container-lowest);
-}
-
 .app-body {
-  flex: 1;
+  display: flex;
+  flex: 1 1 auto;
   min-height: 0;
   background: var(--surface-container-lowest);
 }
 
-.app-body-has-sider {
-  display: flex;
-  align-items: stretch;
-}
-
 .app-content {
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 0;
   padding: var(--spacing-page);
   overflow-y: auto;

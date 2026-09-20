@@ -1,0 +1,89 @@
+/* TODO(eview-react): antd Dropdown 补位样式(app- 前缀,不借用组件库 ev_ 类名) */
+.app-dropdown {
+  position: relative;
+  display: inline-flex;
+}
+
+.app-dropdown-trigger {
+  display: inline-flex;
+}
+
+.app-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  z-index: 1000;
+  min-width: 160px;
+  padding: 4px;
+  border-radius: var(--radius-overlay, 8px);
+  background: var(--surface-container-high);
+  box-shadow: var(--shadow-popover, 0 4px 16px rgba(0, 0, 0, 0.16));
+  animation: app-dropdown-in 0.14s ease-out;
+}
+
+.app-dropdown-menu.placement-bottomRight {
+  right: 0;
+}
+
+.app-dropdown-menu.placement-bottomLeft {
+  left: 0;
+}
+
+.app-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 10px;
+  border: none;
+  border-radius: var(--radius-base, 4px);
+  background: transparent;
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  text-align: left;
+  cursor: pointer;
+}
+
+.app-dropdown-item:hover,
+.app-dropdown-item:focus-visible {
+  background: var(--surface-variant);
+  outline: none;
+}
+
+.app-dropdown-item.is-selected {
+  background: var(--primary-container);
+  color: var(--primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.app-dropdown-item.is-danger {
+  color: var(--error);
+}
+
+.app-dropdown-item.is-danger:hover,
+.app-dropdown-item.is-danger:focus-visible {
+  background: var(--error-container);
+  color: var(--on-error-container);
+}
+
+.app-dropdown-item-icon {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+}
+
+.app-dropdown-divider {
+  height: 1px;
+  margin: 4px 8px;
+  background: var(--divider);
+}
+
+@keyframes app-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

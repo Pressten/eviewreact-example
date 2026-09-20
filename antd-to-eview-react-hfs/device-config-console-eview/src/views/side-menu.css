@@ -1,17 +1,21 @@
-/* Layer 4: 侧边导航 — 原生 <aside>+<nav>+<button> 复刻内联折叠菜单 */
+/* Layer 4: 侧边导航(手写)— 展开 248px / 折叠 48px */
 .app-sider {
   width: 248px;
+  flex: none;
   background: var(--surface-container-highest);
   border-right: 1px solid var(--divider);
-  flex: none;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: width 0.18s ease;
+  transition: width 0.2s ease;
 }
 
-.app-sider.collapsed {
+.app-sider.is-collapsed {
   width: 48px;
+}
+
+.app-sider-children {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 
 .app-sider-menu {
@@ -21,86 +25,82 @@
   font: var(--font-body-m);
 }
 
-.sider-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.sider-item {
+.app-sider-item,
+.app-sider-submenu-title {
   display: flex;
   align-items: center;
-  gap: var(--spacing-inline);
-  height: 36px;
+  gap: var(--spacing-stack);
   width: 100%;
-  padding: 0 var(--spacing-inline);
+  height: 36px;
+  margin: 2px 0;
+  padding: 0 var(--spacing-stack);
   border: none;
   border-radius: var(--radius-base);
   background: transparent;
   color: var(--on-surface);
   font: var(--font-body-m);
-  text-align: left;
   cursor: pointer;
-  transition: background-color 0.12s ease, color 0.12s ease;
+  overflow: hidden;
 }
 
-.sider-item:hover {
+.app-sider.is-collapsed .app-sider-item,
+.app-sider.is-collapsed .app-sider-submenu-title {
+  justify-content: center;
+  padding: 0;
+}
+
+.app-sider-item:hover,
+.app-sider-submenu-title:hover {
   background: var(--surface-variant);
 }
 
-.sider-item.active {
+.app-sider-item.is-selected {
   background: var(--primary-container);
   color: var(--primary);
   font-weight: var(--font-weight-medium);
 }
 
-.sider-item.active .sider-item-icon {
+.app-sider-item.is-selected .app-sider-item-icon {
   color: var(--primary);
 }
 
-.sider-item-icon {
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
+.app-sider-item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex: none;
   color: var(--on-surface-variant);
 }
 
-.sider-item-text {
-  flex: 1 1 auto;
-  min-width: 0;
+.app-sider-item-label {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.sider-arrow {
-  flex: none;
-  width: 16px;
-  text-align: center;
+.app-sider-submenu-title .app-sider-arrow {
+  margin-left: auto;
+  display: inline-flex;
   color: var(--on-surface-variant);
-  font-weight: var(--font-weight-semibold);
+  transition: transform 0.2s ease;
 }
 
-.sider-children {
+.app-sider-submenu-title.is-open .app-sider-arrow {
+  transform: rotate(180deg);
+}
+
+.app-sider-sub {
   display: flex;
   flex-direction: column;
-  padding-left: 24px;
 }
 
-.sider-child {
-  height: 32px;
+.app-sider-sub .app-sider-item {
+  padding-left: calc(var(--spacing-stack) * 2 + 16px);
   color: var(--on-surface-variant);
 }
 
-.app-sider.collapsed .sider-item {
-  justify-content: center;
-  padding: 0;
-}
-
-.app-sider.collapsed .sider-item-icon {
-  width: 24px;
-  height: 24px;
+.app-sider-sub .app-sider-item.is-selected {
+  color: var(--primary);
 }
 
 .app-sider-foot {
@@ -139,11 +139,11 @@
   white-space: nowrap;
 }
 
-.app-sider.collapsed .foot-text {
+.app-sider.is-collapsed .foot-text {
   display: none;
 }
 
-.app-sider.collapsed .app-sider-foot {
+.app-sider.is-collapsed .app-sider-foot {
   justify-content: center;
   padding-inline: 0;
 }

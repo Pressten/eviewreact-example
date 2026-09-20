@@ -1,22 +1,25 @@
 import { useMemo, useState } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
 import Table from "@nce/eview-react/Table";
-import Button from "@nce/eview-react/Button";
 import Select from "@nce/eview-react/Select";
 import SearchInput from "@nce/eview-react/SearchInput";
+import Button from "@nce/eview-react/Button";
+import IconButton from "@nce/eview-react/IconButton";
+import { FormattedMessage, useIntl } from "react-intl";
+import dayjs from "dayjs";
+import { Icon } from "../icons.jsx";
 import SectionCard from "../components/SectionCard.jsx";
 import StatusTag from "../components/StatusTag.jsx";
+import Dropdown from "../components/Dropdown.jsx";
 import { useToast } from "../components/Toast.jsx";
-import { Icon } from "../../assets/shared/icons.js";
 import { STATUS_KEYS, TYPE_ICON, deviceRows, summarize } from "../data.js";
 import "./device-table.css";
 
-function formatLastReport(value) {
-  // mock 时间已是 "YYYY-MM-DD HH:mm",截取 MM-DD HH:mm 对齐原 dayjs 格式
-  return String(value || "").slice(5);
-}
-
 // Layer 4: 设备配置清单 — 工具栏(搜索/筛选/刷新) + 复选表格 + 行内操作
+// antd → eview-react Table API(对照 Table.md):
+//   dataSource/rowKey → dataset 对象行数组 + keyIndex(主键所在列序号,code 列=1);
+//   rowSelection → enableCheckBox + checkedRows(受控主键数组)+ onRowCheck/onHeaderCheck;
+//   pagination(静态数据) → enablePagination + enableAutoPaging(前台分页)+ pageSize/pageSizeOptions;
+//   loading → enableLoading;locale.emptyText → emptyTableMsg;Button loading → disabled。
 export default function DeviceTable({ onEdit }) {
   const intl = useIntl();
   const toast = useToast();
@@ -53,7 +56,7 @@ export default function DeviceTable({ onEdit }) {
     setLoading(true);
     window.setTimeout(() => {
       setLoading(false);
-      toast("success", t("table.refreshed", "列表已刷新"));
+      toast.success(t("table.refreshed", "列表已刷新"));
     }, 600);
   };
 
@@ -63,17 +66,41 @@ export default function DeviceTable({ onEdit }) {
       prev.map((row) => (codes.indexOf(row.code) >= 0 ? { ...row, status: "disabled" } : row))
     );
     setSelectedKeys([]);
-    toast("success", t("table.disabled.toast", "设备已停用"));
+    toast.success(t("table.disabled.toast", "设备已停用"));
   };
+
+  const rowMenu = (record) => ({
+    items: [
+      {
+        key: "copy",
+        icon: <Icon name="copy" size={14} />,
+        label: label("table.action.copy", "复制配置"),
+      },
+      { type: "divider" },
+      {
+        key: "disable",
+        danger: true,
+        icon: <Icon name="power" size={14} />,
+        label: label("table.action.disable", "停用设备"),
+      },
+    ],
+    onClick: ({ key }) => {
+      if (key === "copy") {
+        toast.success(t("table.copied", "配置已复制"));
+      } else if (key === "disable") {
+        disableRows([record.code]);
+      }
+    },
+  });
 
   const columns = [
     {
       title: label("table.col.name", "设备名称"),
       key: "name",
-      render: (value, rowData) => (
+      render: (value, record) => (
         <div className="device-cell">
           <span className="device-icon">
-            <Icon name={TYPE_ICON[rowData.type]} size={14} />
+            <Icon name={TYPE_ICON[record.type]} size={14} />
           </span>
           <span className="cell-strong">{value}</span>
         </div>
@@ -107,40 +134,31 @@ export default function DeviceTable({ onEdit }) {
     {
       title: label("table.col.status", "状态"),
       key: "status",
-      allowSort: false,
       render: (value) => <StatusTag status={value} />,
     },
     {
       title: label("table.col.lastReport", "最后上报"),
       key: "lastReport",
-      render: (value) => <span className="cell-muted">{formatLastReport(value)}</span>,
+      render: (value) => <span className="cell-muted">{dayjs(value).format("MM-DD HH:mm")}</span>,
     },
     {
       title: label("table.col.actions", "操作"),
       key: "actions",
-      allowSort: false,
       align: "right",
-      render: (_value, rowData) => (
-        <span className="cell-actions">
-          <Button
-            status="text"
-            size="small"
-            text={label("table.action.edit", "编辑")}
-            onClick={() => onEdit(rowData)}
-          />
-          <Button
-            status="text"
-            size="small"
-            text={label("table.action.copy", "复制配置")}
-            onClick={() => toast("success", t("table.copied", "配置已复制"))}
-          />
-          <Button
-            status="risk"
-            size="small"
-            text={label("table.action.disable", "停用设备")}
-            onClick={() => disableRows([rowData.code])}
-          />
-        </span>
+      render: (_, record) => (
+        <div className="row-actions">
+          <Button status="text" text={t("table.action.edit", "编辑")} onClick={() => onEdit(record)} />
+          {/* TODO(eview-react): antd Dropdown 补位,见 src/components/Dropdown.jsx */}
+          <Dropdown menu={rowMenu(record)} trigger="click" placement="bottomRight">
+            <IconButton
+              iconName={<Icon name="ellipsis" size={14} />}
+              tipText={t("table.action.more", "更多操作")}
+              tipData={{ direction: "bottom" }}
+              aria-label={t("table.action.more", "更多操作")}
+              onClick={() => {}}
+            />
+          </Dropdown>
+        </div>
       ),
     },
   ];
@@ -155,23 +173,29 @@ export default function DeviceTable({ onEdit }) {
       })}
     >
       <div className="table-toolbar">
-        <SearchInput
-          className="table-search"
-          value={keyword}
-          onChange={(value) => setKeyword(value)}
-          onSearch={(value) => setKeyword(value)}
-          onClear={() => setKeyword("")}
-          placeholder={t("table.search.placeholder", "搜索设备名称或编号")}
-        />
-        <Select
-          className="table-filter"
-          value={statusFilter}
-          onChange={(value) => setStatusFilter(value)}
-          options={statusOptions}
-        />
+        {/* SearchInput:onSearch 在点图标/回车/值变化时都会触发,这里受控 + 实时过滤;
+            onClear 清空关键词恢复全量 */}
+        <div className="table-search">
+          <SearchInput
+            placeholder={t("table.search.placeholder", "搜索设备名称或编号")}
+            value={keyword}
+            isLoading={loading}
+            onChange={(value) => setKeyword(value || "")}
+            onSearch={(value) => setKeyword(value || "")}
+            onClear={() => setKeyword("")}
+          />
+        </div>
+        <div className="table-filter">
+          <Select
+            value={statusFilter}
+            options={statusOptions}
+            onChange={(value) => setStatusFilter(value)}
+          />
+        </div>
         <Button
-          text={label("table.refresh", "刷新")}
+          leftIcon={<Icon name="refresh-cw" size={14} />}
           disabled={loading}
+          text={t("table.refresh", "刷新")}
           onClick={refresh}
         />
       </div>
@@ -182,23 +206,22 @@ export default function DeviceTable({ onEdit }) {
             {t("table.selected", "已选择 {count} 项", { count: selectedKeys.length })}
           </span>
           <Button
-            size="small"
-            text={label("table.bulkExport", "导出所选")}
+            leftIcon={<Icon name="download" size={14} />}
+            text={t("table.bulkExport", "导出所选")}
             onClick={() => {
-              toast("success", t("table.exported", "已导出所选配置"));
+              toast.success(t("table.exported", "已导出所选配置"));
               setSelectedKeys([]);
             }}
           />
           <Button
-            size="small"
             status="risk"
-            text={label("table.bulkDisable", "批量停用")}
+            leftIcon={<Icon name="power" size={14} />}
+            text={t("table.bulkDisable", "批量停用")}
             onClick={() => disableRows(selectedKeys)}
           />
           <Button
-            size="small"
             status="text"
-            text={label("table.clearSelection", "取消选择")}
+            text={t("table.clearSelection", "取消选择")}
             onClick={() => setSelectedKeys([])}
           />
         </div>
@@ -206,17 +229,15 @@ export default function DeviceTable({ onEdit }) {
 
       <Table
         className="device-table"
-        columns={columns}
-        dataset={data}
         keyIndex={1}
-        enableSort={false}
+        dataset={data}
+        columns={columns}
         enableLoading={loading}
         emptyTableMsg={t("table.empty", "没有匹配的设备")}
         enableCheckBox
-        checkType="multi"
         checkedRows={selectedKeys}
-        onRowCheck={(_row, checkedRows) => setSelectedKeys(checkedRows)}
-        onHeaderCheck={(checkedRows) => setSelectedKeys(checkedRows)}
+        onRowCheck={(row, checkedRows) => setSelectedKeys(checkedRows || [])}
+        onHeaderCheck={(checkedRows) => setSelectedKeys(checkedRows || [])}
         enablePagination
         enableAutoPaging
         pageSize={8}

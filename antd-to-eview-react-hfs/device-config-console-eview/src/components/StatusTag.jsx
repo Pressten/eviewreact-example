@@ -1,5 +1,5 @@
-﻿import { FormattedMessage } from "react-intl";
-import { Icon } from "../../assets/shared/icons.js";
+import { FormattedMessage } from "react-intl";
+import { Icon } from "../icons.jsx";
 import "./status-tag.css";
 
 // Layer 3: 设备状态标签 — status 取 online / offline / alarm / upgrading / disabled

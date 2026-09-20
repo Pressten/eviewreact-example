@@ -1,9 +1,9 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
 // Layer 1: 全局状态 — 主题模式、界面语言与布局折叠
-// 换肤双轨驱动:
-//   1) isDark 切换 <html> 的 .dark class → 四层设计 token(base/light/theme/dark)翻转自定义样式
-//   2) 根容器 aui3_1 / aui3_1_dark class → eview-react 组件主题翻转(见 app.jsx)
+// 换肤双轨驱动：eview-react 组件跟随 <html> 的 .aui3_1_dark（aui3_1.css / aui3_1_dark.css），
+// 手写元素跟随 .dark（四层设计 token 的暗色覆盖层）。两个类名都挂在 <html> 上，
+// 保证 Dialog / Select 等 portal 弹层也能跟随主题。
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
@@ -12,7 +12,9 @@ export function AppProvider({ children }) {
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark);
+    const root = document.documentElement;
+    root.classList.toggle("aui3_1_dark", isDark);
+    root.classList.toggle("dark", isDark);
   }, [isDark]);
 
   useEffect(() => {
