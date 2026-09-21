@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "round": 3,
+  "failures": [],
+  "notes": "L0 全 38 条实跑通过（38/38 pass，0 failed，0 warnings，blockNext=false）。上轮 4 条 style 类失败已全部修复：body-aui3_1 / body-ev-no-wcag（index.html <body> 已加 class=\"aui3_1 ev_no_wcag\"）、dark-useeffect-two-classes / dark-on-body-not-root（context.jsx effect 已同时切 document.body 的 aui3_1_dark + documentElement 的 dark）。分类明细：import 6/6、API 命名 17/17、模式转换 5/5、样式入口 9/9、回调 1/1 全过。L1 跳过：@nce/@cloudsop/@hui 内网依赖可能不可达（npm install 大概率失败）。L2 跳过：无 baseline + L1 dev 未起。L3 跳过：多模态能力未就绪。本轮仅 L0 静态判定，运行时/视觉未覆盖。"
+}

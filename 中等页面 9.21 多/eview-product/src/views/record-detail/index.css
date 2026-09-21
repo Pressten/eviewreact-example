@@ -1,0 +1,124 @@
+/* RecordDetail — 二级页签「采集明细」私有样式
+ * 消费全局 token：surface-variant / on-surface / spacing-* / radius-* / font-*
+ * 暗色经 token var() 级联自动跟随（.aui3_1.aui3_1_dark 已在 theme-dark.css 翻转语义色）。
+ * 来源：原始 index.page.html 内联 .record-detail / .mini-stat / .table-toolbar /
+ *       .table-hint / .cell-link / .num-cell / .row-actions 块（逐像素还原）。
+ * 注：.status-tag--* 由 metric-list 视图的私有 CSS 提供（共享件 StatusTag 的样式），
+ *      本视图不重复定义，避免与 metric-list agent 产物冲突。
+ */
+
+.record-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── 统计卡 ────────────────────────────────────────────────────────────────── */
+.record-detail__stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-inline);
+  margin-bottom: var(--spacing-gutter);
+}
+
+.mini-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--spacing-stack) var(--spacing-gutter);
+  border-radius: var(--radius-container);
+  background: var(--surface-variant);
+}
+
+.mini-stat__label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.mini-stat__value {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.mini-stat__value--success { color: var(--success); }
+.mini-stat__value--error { color: var(--error); }
+
+@media (max-width: 1024px) {
+  .record-detail__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ── 表格工具区 ─────────────────────────────────────────────────────────────── */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-stack);
+}
+
+.table-toolbar__filters,
+.table-toolbar__extra {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+}
+
+.toolbar-search {
+  width: 280px;
+}
+
+.toolbar-select {
+  width: 148px;
+}
+
+.table-toolbar__count {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.table-toolbar__count em {
+  font-style: normal;
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+}
+
+/* ── 下钻提示条 ─────────────────────────────────────────────────────────────── */
+.table-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px var(--spacing-stack);
+  margin-bottom: var(--spacing-stack);
+  border-radius: var(--radius-base);
+  background: var(--info-container);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+/* icon-plus 渲染为 svg（或包在 span 内的 svg），按原 .table-hint svg 着色 */
+.table-hint svg {
+  color: var(--primary);
+  flex: none;
+}
+
+/* ── 表格内链接 / 数字 / 行操作 ─────────────────────────────────────────────── */
+.cell-link {
+  padding-inline: 0;
+  height: auto;
+  font: var(--font-body-m);
+}
+
+.num-cell {
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface);
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

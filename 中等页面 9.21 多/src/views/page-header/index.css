@@ -1,0 +1,106 @@
+.page-header {
+  padding: var(--spacing-page) var(--spacing-page) var(--spacing-section);
+}
+
+.page-header__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  flex-wrap: wrap;
+}
+
+.page-header__crumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.page-header__crumb-current {
+  color: var(--on-surface);
+}
+
+.page-header__title {
+  margin: 6px 0 0;
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.page-header__desc {
+  margin: var(--spacing-inline) 0 0;
+  max-width: 720px;
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+}
+
+.page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.page-header__kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+  margin-top: var(--spacing-page);
+}
+
+.kpi-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+  padding: var(--spacing-gutter);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.kpi-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: var(--radius-lg);
+}
+
+.kpi-card__icon--brand { background: var(--primary-container); color: var(--primary); }
+.kpi-card__icon--success { background: var(--success-container); color: var(--success); }
+.kpi-card__icon--critical { background: var(--critical-container); color: var(--critical); }
+.kpi-card__icon--error { background: var(--error-container); color: var(--error); }
+
+.kpi-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.kpi-card__label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.kpi-card__value {
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.kpi-card__unit {
+  margin-left: 4px;
+  font: var(--font-caption-m);
+  font-style: normal;
+  color: var(--on-surface-variant);
+}
+
+@media (max-width: 1024px) {
+  .page-header__kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

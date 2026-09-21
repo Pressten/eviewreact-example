@@ -1,0 +1,28 @@
+.data-tabs {
+  padding: 0 var(--spacing-inset) var(--spacing-inset);
+}
+
+.tab-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tab-label__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.data-tabs .ant-tabs-tab-active .tab-label__count {
+  background: var(--primary-container);
+  color: var(--primary);
+}

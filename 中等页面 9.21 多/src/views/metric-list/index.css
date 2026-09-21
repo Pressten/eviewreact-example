@@ -1,0 +1,102 @@
+.metric-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 表格工具区 */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-stack);
+}
+
+.table-toolbar__filters,
+.table-toolbar__extra {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+}
+
+.toolbar-search {
+  width: 280px;
+}
+
+.toolbar-select {
+  width: 148px;
+}
+
+.table-toolbar__count {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.table-toolbar__count em,
+.selection-bar__text em {
+  font-style: normal;
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+}
+
+/* 下钻提示 */
+.table-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px var(--spacing-stack);
+  margin-bottom: var(--spacing-stack);
+  border-radius: var(--radius-base);
+  background: var(--info-container);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.table-hint svg {
+  color: var(--primary);
+  flex: none;
+}
+
+/* 选中态工具区 */
+.selection-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+  padding: 8px var(--spacing-stack);
+  margin-bottom: var(--spacing-stack);
+  border-radius: var(--radius-base);
+  background: var(--primary-container);
+}
+
+.selection-bar__text {
+  font: var(--font-caption-m);
+  color: var(--on-primary-container);
+}
+
+.selection-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+/* 表格内链接与数字 */
+.cell-link {
+  padding-inline: 0;
+  height: auto;
+  font: var(--font-body-m);
+}
+
+.num-cell {
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface);
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

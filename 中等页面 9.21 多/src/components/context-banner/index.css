@@ -1,0 +1,68 @@
+.context-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  padding: var(--spacing-stack) var(--spacing-gutter);
+  margin-bottom: var(--spacing-section);
+  background: var(--surface-variant);
+  border-radius: var(--radius-container);
+}
+
+.context-banner__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: var(--radius-full);
+  background: var(--primary-container);
+  color: var(--primary);
+}
+
+.context-banner__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.context-banner__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+}
+
+.context-banner__title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.context-banner__crumb {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.context-banner__fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-gutter);
+  margin-top: 2px;
+}
+
+.context-banner__field {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.context-banner__field-label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.context-banner__field-value {
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
