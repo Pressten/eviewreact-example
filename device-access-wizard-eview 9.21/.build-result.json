@@ -1,0 +1,21 @@
+{
+  "install": {
+    "ok": false,
+    "errors": []
+  },
+  "build": {
+    "ok": false,
+    "errors": [
+      "install 失败，跳过 build"
+    ]
+  },
+  "dev": {
+    "ok": false,
+    "started": false,
+    "httpOk": false,
+    "port": null,
+    "errors": [
+      "install 失败，跳过 dev"
+    ]
+  }
+}

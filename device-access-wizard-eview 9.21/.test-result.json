@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "notes": "L0 38/38 通过（blockNext=false，无 import 错误）；L1 跳过：内网依赖不可达（@nce/* 装不上，install errors 为空，build/dev 因 install 失败跳过）；L2 跳过：未提供 baseline（且 dev 未起来）；L3 跳过：多模态能力未就绪"
+}
