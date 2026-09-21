@@ -1,0 +1,53 @@
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  height: 22px;
+  padding: 0 var(--spacing-2);
+  border-radius: var(--radius-badge);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.status-tag__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+}
+
+.status-tag--success {
+  color: var(--success);
+  background: var(--success-container);
+}
+
+.status-tag--critical {
+  color: var(--critical);
+  background: var(--critical-container);
+}
+
+.status-tag--error {
+  color: var(--error);
+  background: var(--error-container);
+}
+
+.status-tag--info {
+  color: var(--info);
+  background: var(--info-container);
+}
+
+.status-tag--neutral {
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+}
+
+.status-tag--muted {
+  color: var(--text-disabled);
+  background: var(--surface-variant);
+}
+
+/* 深色模式下软底自身加一层描边，避免与页面底色糊在一起 */
+.dark .status-tag {
+  border: var(--border-width-thin) solid var(--outline-variant);
+}

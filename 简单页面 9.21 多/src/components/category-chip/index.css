@@ -1,0 +1,45 @@
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 var(--spacing-2);
+  border-radius: var(--radius-badge);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.category-chip--info {
+  color: var(--color-tag-text-info);
+  background: var(--color-tag-bg-info);
+}
+
+.category-chip--green {
+  color: var(--color-tag-text-green);
+  background: var(--color-tag-bg-green);
+}
+
+.category-chip--purple {
+  color: var(--color-tag-text-purple);
+  background: var(--color-tag-bg-purple);
+}
+
+.category-chip--rose {
+  color: var(--color-tag-text-rose);
+  background: var(--color-tag-bg-rose);
+}
+
+.category-chip--cyan {
+  color: var(--color-tag-text-cyan);
+  background: var(--color-tag-bg-cyan);
+}
+
+.category-chip--none {
+  color: var(--color-tag-text-none);
+  background: var(--color-tag-bg-none);
+}
+
+/* 深色模式下软底加描边，避免与页面底色糊在一起（暗色双类名体系：.dark 与 aui3_1_dark 同步 toggle） */
+.dark .category-chip {
+  border: var(--border-width-thin) solid var(--outline-variant);
+}

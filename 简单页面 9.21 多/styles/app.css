@@ -1,0 +1,17 @@
+/* 应用级基础样式 - 页面骨架（Level 0 画布 + 内容流）。依赖 styles/tokens.css 中的语义 token。 */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+  padding: var(--spacing-page);
+}

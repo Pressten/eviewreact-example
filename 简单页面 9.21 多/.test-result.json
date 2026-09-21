@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "round": 2,
+  "failures": [],
+  "notes": "L0 38/38 全通过（block 已解除，上一轮被级联 skip 的 31 条断言本轮全部实际执行并通过：css-imports-in-entry / button-status / select-defaultLabel / toggle-toggled / toggle-onToggle / toggle-taggled-children / crumbs-seprator / selectcard-disable / fileupload-disable / dialog-isOpen / drawer-visible / loading-isOpen / steps-currentStep / badge-content / tag-no-closable / table-dataset / table-keyIndex / table-key-in-columns / form-ref-not-useForm / form-no-validateFields / form-no-onFinish / message-imperial-gone / popconfirm-to-messagedialog / body-aui3_1 / body-ev-no-wcag / config-provider-present / intl-provider-present / dark-useeffect-two-classes / dark-on-body-not-root / no-dead-color-in-css / no-ev-class-prefix / clickable-is-button；加 no-etarget-value(warn) 共 38）。blockNext=false。脚本判定依据见 .checklist-result.json。\n\n上轮 4 个 antd 遗产文件已确认清理：assets/library/antd.min.js、assets/shared/antd-zh.js、assets/shared/icon.jsx、assets/style/ant.css 均 Test-Path=False。\n\nL1 跳过：preview 下仍无 package.json（非 npm 工程，无法跑 npm install/build/dev）；且 @nce/* 为内网依赖，外网不可达 → L1 不具备，跳过（非失败）。\nL2 跳过：未提供 BASELINE_DIR（preview/baseline 不存在），且 L1 dev 起不来 → L2 跳过（非失败）。\nL3 跳过：多模态 LLM 能力未就绪 → L3 跳过（非失败）。\n综上本轮仅 L0 静态判定，38/38 全过 → status=PASS。运行时（L1 build/dev）与视觉交互（L2 像素 diff）层未覆盖，如需进一步验证需补 package.json + 内网 npm 源 + baseline 截图目录。"
+}

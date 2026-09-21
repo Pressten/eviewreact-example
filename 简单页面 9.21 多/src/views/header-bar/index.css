@@ -1,0 +1,102 @@
+.header-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  height: 48px;
+  padding: 0 var(--spacing-page);
+  background: var(--surface-container-highest);
+  border-bottom: var(--border-width-thin) solid var(--divider);
+}
+
+.header-bar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.header-bar__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md);
+  background: var(--primary-container);
+  color: var(--primary);
+}
+
+.header-bar__name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.header-bar__divider {
+  width: var(--border-width-thin);
+  height: 16px;
+  background: var(--divider);
+}
+
+.header-bar__module {
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.header-bar__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.header-bar__search {
+  width: 280px;
+}
+
+.header-bar__user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  height: 32px;
+  padding: 0 var(--spacing-2) 0 var(--spacing-1);
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  cursor: pointer;
+}
+
+.header-bar__user:hover {
+  background: var(--color-hover);
+}
+
+.header-bar__avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.dark .header-bar,
+.aui3_1_dark .header-bar {
+  background: var(--surface-container-highest);
+  border-bottom-color: var(--divider);
+}
+
+.dark .header-bar__logo,
+.aui3_1_dark .header-bar__logo {
+  background: var(--primary-container);
+  color: var(--primary);
+}
+
+.dark .header-bar__user:hover,
+.aui3_1_dark .header-bar__user:hover {
+  background: var(--color-hover);
+}

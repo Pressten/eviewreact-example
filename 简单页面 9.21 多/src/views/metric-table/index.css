@@ -1,0 +1,154 @@
+.metric-table__body {
+  padding: var(--spacing-4) 0 0;
+}
+
+.metric-table__bulk {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: 0 var(--spacing-5) var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
+  background: var(--info-container);
+  border-radius: var(--radius-base);
+}
+
+.metric-table__bulk-text {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+
+.metric-table__bulk-text b {
+  font-weight: var(--font-weight-semibold);
+  color: var(--info);
+}
+
+.metric-table__bulk-clear {
+  margin-left: auto;
+}
+
+.metric-table__name {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+}
+
+.metric-table__name-link {
+  height: auto;
+  padding: 0;
+  font: var(--font-body-m);
+  justify-content: flex-start;
+}
+
+.metric-table__code {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.metric-table__muted {
+  color: var(--on-surface-variant);
+}
+
+.metric-table__num {
+  font: var(--font-body-m);
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-table__num--alert {
+  color: var(--critical);
+  font-weight: var(--font-weight-medium);
+}
+
+.metric-table__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-0-5);
+}
+
+.metric-table__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+}
+
+.metric-table__footer span {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+/* TODO(eview-react): 建议替换为 DropDown/PopUpMenu，本 Skill 暂无其规格；当前手写版仅支持单击触发、单级菜单 */
+.metric-table__more {
+  position: relative;
+  display: inline-flex;
+}
+
+.metric-table__more-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-base);
+  background: transparent;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+}
+
+.metric-table__more-trigger:hover {
+  background: var(--color-hover);
+  color: var(--on-surface);
+}
+
+.metric-table__more-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+.metric-table__more-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 50;
+  min-width: 168px;
+  padding: var(--spacing-1) 0;
+  background: var(--surface-container-highest);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.metric-table__more-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding: var(--spacing-1) var(--spacing-3);
+  border: none;
+  background: transparent;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  cursor: pointer;
+}
+
+.metric-table__more-item:hover {
+  background: var(--color-hover);
+}
+
+.metric-table__more-item--danger {
+  color: var(--error);
+}
+
+.metric-table__more-item--danger:hover {
+  background: var(--error-container);
+}
+
+.metric-table__more-divider {
+  display: block;
+  height: var(--border-width-thin);
+  margin: var(--spacing-1) 0;
+  background: var(--divider);
+}
