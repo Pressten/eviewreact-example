@@ -1,0 +1,39 @@
+/* TODO(eview-react): 手写时间范围输入 — 待 TimeRangeSelector 规格就绪后替换 */
+.time-range-field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  width: 100%;
+}
+
+.time-range-field__input {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 0 var(--spacing-2);
+  font-size: var(--font-size-md);
+  color: var(--on-surface);
+  background: var(--color-fill-subtle);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-action);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.time-range-field__input:hover {
+  border-color: var(--color-border-hover);
+}
+
+.time-range-field__input:focus {
+  border-color: var(--focus-ring);
+  box-shadow: 0 0 0 1px var(--color-border-active);
+}
+
+.time-range-field__input::placeholder {
+  color: var(--text-placeholder);
+}
+
+.time-range-field__sep {
+  flex: none;
+  color: var(--on-surface-variant);
+}

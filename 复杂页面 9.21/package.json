@@ -1,0 +1,32 @@
+{
+  "name": "cloudnet-console-eview-react",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "云网智控平台 · 策略配置页 — @nce/eview-react (HUI Eview React, ICT 3.1) 版本",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@baize/wdk": "*",
+    "@cloudsop/horizon": "*",
+    "@cloudsop/horizon-intl": "*",
+    "@cloudsop/htimezone": "*",
+    "@hui/design-token": "*",
+    "@nce/eview-react": "*",
+    "@nce/icon-plus": "*",
+    "lodash": "^4.17.21",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-intl": "^7.1.14"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.7",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "vite": "^5.4.0"
+  }
+}

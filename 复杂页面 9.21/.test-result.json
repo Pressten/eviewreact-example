@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "round": 3,
+  "failures": [],
+  "notes": "L0 全 38 条重跑（checklist.mjs 原脚本 + 关闭 blockNext 的同正则副本，二者一致）：37 通过 / 0 硬失败 / 1 警告，blockNext=false。上轮唯一剩余 dark-on-body-not-root 已修复确认：src/context.jsx:14-15 去掉别名，直接内联 `document.body.classList.add('aui3_1')` 与 `document.body.classList.toggle('aui3_1_dark', isDark)`，正则 `/document\\.body\\.classList[^;]*aui3_1_dark/` 命中 → 通过。至此 L0 全部硬失败清零。重点核查项结论不变：Form 托管链✓（ref+submit→onSuccess/onFailed、Form.Item 直接子级、onValuesChange 镜像、setFieldsValue 回填）、Table✓（dataset/keyIndex=0/enableCheckBox+checkType=multi+preserveCheckedRows+checkedRows/enableAutoPaging/enableRowExpand+onRowExpend/emptyTableMsg）、Dialog✓（isOpen/onClose/buttons、成功才关失败留）、命名✓（text 非 label、toggled/onToggle+valuePropName、status/text/leftIcon）、暗色三类同切 aui3_1_dark 挂 body。唯一警告 no-etarget-value(time-range-field.jsx:12,15 e.target.value) 为原生 <input type=time> 的 DOM 事件而非 eview 组件回调，疑似误报，按清单规则不计入 failed、不影响 status。L1 跳过：.npmrc 仍指向华为内网源 cmc.centralrepo.rnd.huawei.com（registry 与 @nce scope 均内网，与上轮一致、未变更），外部不可达，按约定不重跑 180s 挂起、直接跳过。L2 跳过：未提供 baseline。L3 跳过：多模态能力未就绪。"
+}
