@@ -1,4 +1,5 @@
 /* Layer 4: 设备配置清单 */
+/* 四边留白由卡片 body 的内边距负责;工具栏只补与表格之间的间距 */
 .table-toolbar {
   display: flex;
   align-items: center;
@@ -29,6 +30,13 @@
   font-weight: var(--font-weight-medium);
   color: var(--on-primary-container);
   margin-right: var(--spacing-inline);
+}
+
+/* antd Space → flex + gap */
+.row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .device-cell {
@@ -67,11 +75,4 @@
   font: var(--font-caption-m);
   color: var(--on-surface-variant);
   white-space: nowrap;
-}
-
-.cell-actions {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--spacing-1);
 }

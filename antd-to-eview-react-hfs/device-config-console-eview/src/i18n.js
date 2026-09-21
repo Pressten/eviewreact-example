@@ -1,7 +1,7 @@
 // Layer 2: 国际化字典 — 中/英双语文案
 // 消费: <FormattedMessage id="..." defaultMessage="..." /> 或 useIntl().formatMessage(...)
-// 组件内置文案(分页"共 x 条"、Select 占位等)由 @nce/eview-react/locales 提供,
-// 在 app.jsx 的 IntlProvider 里与本项目 messages 合并: { ...componentsLocales[lang], ...messages[lang] }
+// 切语言同步两处: IntlProvider(locale/messages) + dayjs.locale()；
+// eview-react 组件内置文案由 @nce/eview-react/locales 提供，在 app.jsx 中与本字典合并。
 
 export const LANG_OPTIONS = [
   { key: "zh", label: "简体中文" },

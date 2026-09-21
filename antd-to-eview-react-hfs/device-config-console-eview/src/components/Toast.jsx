@@ -1,59 +1,39 @@
-import { createContext, useCallback, useContext, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { Icon } from "../../assets/shared/icons.js";
+// TODO(eview-react): antd message.success() 是命令式 API,eview-react 无对应命令式方法,
+// 只能渲染 DivMessage 组件。这里用 ToastProvider 暴露 useToast().success(text),
+// 内部维护单条 {text,key} 并渲染 DivMessage;display 控制,换 key 重挂以重置自动消失计时。
+import { createContext, useContext, useRef, useState } from "react";
+import DivMessage from "@nce/eview-react/DivMessage";
 import "./toast.css";
 
-// Layer 3: 轻量 Toast — 替代 antd message.success(...)
-// 用法: const toast = useToast(); toast("success", "已保存");
 const ToastContext = createContext(null);
 
-const TOAST_ICON = {
-  success: "circle-check",
-  error: "circle-x",
-  warning: "triangle-alert",
-  info: "circle-info",
-};
-
-const TOAST_TTL = 2500;
-
 export function ToastProvider({ children }) {
-  const [toasts, setToasts] = useState([]);
-  const idRef = useRef(0);
+  const [toast, setToast] = useState({ text: "", key: 0, display: false });
+  const keyRef = useRef(0);
 
-  const remove = useCallback((id) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
-  }, []);
-
-  const toast = useCallback(
-    (type, text) => {
-      const id = ++idRef.current;
-      setToasts((prev) => [...prev, { id, type: type || "info", text }]);
-      window.setTimeout(() => remove(id), TOAST_TTL);
-    },
-    [remove]
-  );
+  const success = (text) => {
+    keyRef.current += 1;
+    setToast({ text, key: keyRef.current, display: true });
+  };
 
   return (
-    <ToastContext.Provider value={toast}>
+    <ToastContext.Provider value={{ success }}>
       {children}
-      {createPortal(
-        <div className="app-toast-wrap" aria-live="polite">
-          {toasts.map((t) => (
-            <div key={t.id} className={"app-toast app-toast-" + t.type} role="status">
-              <span className="app-toast-icon">
-                <Icon name={TOAST_ICON[t.type] || "circle-info"} size={16} />
-              </span>
-              <span className="app-toast-text">{t.text}</span>
-            </div>
-          ))}
-        </div>,
-        document.body
-      )}
+      {toast.display ? (
+        <div className="app-toast">
+          <DivMessage key={toast.key} display type="success" disposeTimeOut={3000}>
+            {toast.text}
+          </DivMessage>
+        </div>
+      ) : null}
     </ToastContext.Provider>
   );
 }
 
 export function useToast() {
-  const toast = useContext(ToastContext);
-  return toast || (() => {});
+  const ctx = useContext(ToastContext);
+  if (!ctx) {
+    return { success: () => {} };
+  }
+  return ctx;
 }

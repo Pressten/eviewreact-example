@@ -1,5 +1,10 @@
-/* Layer 4: 采集策略表单区 */
-.full-width {
+/* Layer 4: 采集策略表单区
+   多列栅格由 Form 的 itemCol={8} 提供,不再用 CSS grid 模拟 antd Row/Col;
+   Form.Item 之间的普通节点需占满整行(grid 布局下跨全部列,非 grid 下自然整行) */
+.toggle-row,
+.detail-head,
+.form-actions {
+  grid-column: 1 / -1;
   width: 100%;
 }
 
@@ -17,7 +22,7 @@
   white-space: nowrap;
 }
 
-/* 开关行:说明在行首,Switch 在行尾 */
+/* 开关行:说明在行首,Toggle 在行尾 */
 .toggle-row {
   display: flex;
   align-items: center;
@@ -58,21 +63,17 @@
   color: var(--on-surface-variant);
 }
 
-/* 二级内嵌区:开关开启后展开的详细参数 */
-.detail-region {
-  margin-top: var(--spacing-section);
-  padding: var(--spacing-inset);
-  border-radius: var(--radius-container);
-  background: var(--surface-variant);
-  animation: region-in 0.22s ease-out;
-}
-
+/* 二级内嵌区:开关开启后展开的详细参数
+   原设计的外层底色卡片需要包裹 Form.Item,违反"Form.Item 直接子级"规则,
+   改为整行分组标题 + 分隔线表达层级 */
 .detail-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-gutter);
-  margin-bottom: var(--spacing-gutter);
+  margin-top: var(--spacing-gutter);
+  padding-top: var(--spacing-inset);
+  border-top: 1px solid var(--divider);
 }
 
 .detail-title {
@@ -99,21 +100,4 @@
   margin-top: var(--spacing-section);
   padding-top: var(--spacing-inset);
   border-top: 1px solid var(--divider);
-}
-
-@keyframes region-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .detail-region {
-    animation: none;
-  }
 }

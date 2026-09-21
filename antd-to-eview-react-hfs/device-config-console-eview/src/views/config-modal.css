@@ -10,34 +10,3 @@
   font: var(--font-body-s);
   color: var(--on-surface-variant);
 }
-
-.modal-switch {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-gutter);
-  margin-bottom: var(--spacing-inset);
-  padding: var(--spacing-stack) var(--spacing-gutter);
-  border-radius: var(--radius-base);
-  background: var(--surface-variant);
-}
-
-.modal-switch-text {
-  min-width: 0;
-}
-
-.modal-switch-title {
-  font: var(--font-body-m);
-  font-weight: var(--font-weight-medium);
-  color: var(--on-surface);
-}
-
-.modal-switch-desc {
-  margin-top: 2px;
-  font: var(--font-body-s);
-  color: var(--on-surface-variant);
-}
-
-.modal-remark {
-  margin-bottom: 0;
-}
