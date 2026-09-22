@@ -1,0 +1,113 @@
+.sb-aside {
+  width: 248px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-highest);
+  border-right: 1px solid var(--divider);
+  position: sticky;
+  top: 48px;
+  height: calc(100vh - 48px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: width 0.2s ease;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.sb-aside.collapsed {
+  width: 64px;
+}
+
+.sb-item-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sb-collapse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-inline);
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-base);
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.sb-collapse:hover {
+  background: var(--surface-variant);
+  color: var(--on-surface);
+}
+
+.sb-nav {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sb-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-base);
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-align: left;
+}
+
+.sb-menu-item:hover {
+  background: var(--surface-variant);
+  color: var(--on-surface);
+}
+
+.sb-menu-item.active {
+  background: var(--primary-container);
+  color: var(--primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.sb-aside.collapsed .sb-menu-item {
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.sb-menu-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sb-group-label {
+  padding: 12px 12px 4px;
+  font: var(--font-caption-s);
+  color: var(--text-placeholder);
+  letter-spacing: 0.04em;
+}
+
+.sb-aside.collapsed .sb-group-label {
+  height: 1px;
+  padding: 0;
+  background: var(--divider);
+  margin: 6px 8px;
+}
+
+.sb-badge {
+  margin-left: 4px;
+}

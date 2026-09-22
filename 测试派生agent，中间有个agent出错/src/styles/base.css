@@ -1,0 +1,92 @@
+/* base.css - 骨架自带的全局基础样式（开箱即用，不用改） */
+/* 配合 index.html 的 <body class="ev_no_wcag">：关闭非 eview-react 元素的焦点轮廓 */
+body.ev_no_wcag *:not([class ^= "eui*"]):focus{
+   outline: none !important;
+}
+/* 保证Form中每一行对齐 */
+.ev_form_item{
+   vertical-align: top;
+}
+/* 保证Form中的元素的宽度 */
+.ev_form .ev_selectCom,
+.ev_form .ev_select_div,
+.ev_form .ev_inputSelect,
+.ev_form .ev_spinner,
+.ev_form .ev_spinner_wrap,
+.ev_form .ev_spinner_container {
+  width: 100%;
+}
+
+/* Toast 堆叠容器（替代 antd message 命令式 API） */
+.app-toast-stack {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 380px;
+  pointer-events: none;
+}
+.app-toast-stack > * {
+  pointer-events: auto;
+}
+
+/* Segmented 分段控件（替代 antd Segmented） */
+.app-segmented {
+  display: inline-flex;
+  background: var(--surface-container-low, #f3f3f3);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+}
+.app-segmented-item {
+  border: none;
+  background: transparent;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--on-surface-variant, #777);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.app-segmented-item:hover {
+  color: var(--on-surface, #191919);
+}
+.app-segmented-item.active {
+  background: var(--surface-container-highest, #fff);
+  color: var(--primary, #0067D1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown 菜单（替代 antd Dropdown） */
+.app-dropdown-menu {
+  background: var(--surface-container-highest, #fff);
+  border: 1px solid var(--divider, #e0e0e0);
+  border-radius: 6px;
+  box-shadow: var(--shadow-popover, 0 4px 16px rgba(0, 0, 0, 0.12));
+  padding: 4px;
+}
+.app-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--on-surface, #191919);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+.app-dropdown-item:hover {
+  background: var(--surface-container-low, #f3f3f3);
+}
+.app-dropdown-item.danger {
+  color: var(--error, #E02128);
+}
