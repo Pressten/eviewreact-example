@@ -1,0 +1,4 @@
+/* base.css - 全局基础样式（配合 index.html 的 <body class="ev_no_wcag">：关闭非 eview-react 元素的焦点轮廓） */
+body, html { margin: 0; padding: 0; height: 100%; font-family: var(--font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif); }
+#root { height: 100%; }
+body.ev_no_wcag *:not([class ^= "eui*"]):focus { outline: none !important; }

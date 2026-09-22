@@ -1,0 +1,8 @@
+/* theme-dark.css - 暗色模式覆盖（<html class="dark"> 时生效） */
+html.dark {
+  --surface: var(--gray-90);
+  --surface-variant: var(--gray-80);
+  --on-surface: var(--gray-0);
+  --on-surface-variant: var(--gray-40);
+  --divider: var(--gray-70);
+}

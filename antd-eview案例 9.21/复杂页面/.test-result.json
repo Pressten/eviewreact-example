@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "notes": "L0 静态 38/38 通过（no-antd-import / no-antd-locale / no-antd-icons / eview-import-path / no-src-prefix / css-imports / API 命名 16 条 / Form 模式 6 条 / 暗色双轨 / disabled+separator 等，blockNext=false，无 antd 残留，eview-react 正向用法齐全）。工程完整性新增项全过：① package.json 存在，dependencies 声明 react^18.3.0 / react-dom^18.3.0 / react-intl^7.1.14 / dayjs^1.11.13 / @nce/eview-react latest，devDependencies 声明 @vitejs/plugin-react^4.3.0 / vite^5.4.0；② vite.config.js 存在，plugins:[react()] 已配置 @vitejs/plugin-react；③ index.html 为 Vite 标准入口，含 <div id=\"root\"> + <script type=\"module\" src=\"/src/main.jsx\"> + <body class=\"ev_no_wcag aui3_1\">（aui3_1 与 ev_no_wcag 双类齐全）；④ src/main.jsx 装配 ConfigProvider + IntlProvider + componentsLocales + CSS imports（aui3_1.css / aui3_1_dark.css / base.css / tokens.css / theme-dark.css）；⑤ src/ 下 6 个业务组件文件共 29 处以 ES 模块默认导入 @nce/eview-react/<Component>（Button/Badge/TipBox/SelectCard/TextField/Table/DivMessage/Form/Toggle/TextArea/Spinner/Select/CheckboxGroup/Dialog/ConfigProvider/locales），src/ 与全产物 .jsx 无任何 antd 残留；⑥ L0 38 条静态断言全过。L1/L2/L3 跳过（外网 @nce/* 内网依赖不可达，按用户要求仅做静态判定）。"
+}

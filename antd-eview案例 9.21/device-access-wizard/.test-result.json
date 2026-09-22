@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "round": 2,
+  "failures": [],
+  "notes": "L0 38/38 全部通过（blockNext=false，无级联跳过）；工程完整性 9/9 全过。上轮 2 条失败均已修复：(1) no-dead-color-in-css — src/styles/base.css:33 与 :43 已由 #dfdfdf/#dededf 改为 var(--color-scrollbar)/var(--color-scrollbar-hover)，脚本通过；(2) antd 死资源 — assets/library/antd.min.js 已删除（Test-Path=False），assets/shared/ 下仍仅 icons.js 无 antd-zh*.js。工程完整性其余 8 项沿用上轮核验结果（无相关改动）：package.json 声明 react/react-dom/@nce/eview-react/dayjs/react-intl deps + vite/@vitejs/plugin-react devDeps；vite.config.js 配 @vitejs/plugin-react；根 index.html Vite 标准入口（<div id=root> + <script type=module src=/src/main.jsx> + <body class=aui3_1 ev_no_wcag>）；src/main.jsx 装配 ConfigProvider+IntlProvider+componentsLocales+4 CSS+createRoot；业务逻辑 ES 模块默认导入 @nce/eview-react/<Component> 无 window 全局解构残留依赖 antd；index.page.html 内联块无 antd 拋留；src import 路径无死导入；手写补位组件（Layout/Menu/Avatar/Descriptions/Result）全手写非 antd。用户声明 @nce 依赖装不上，L1/L2/L3 跳过；本轮 L0 + 工程完整性静态判定全过 → PASS。"
+}

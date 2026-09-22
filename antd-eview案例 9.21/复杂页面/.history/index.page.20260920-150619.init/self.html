@@ -1,0 +1,5335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT页面</title>
+<!-- 1. Core Libraries (local UMD) -->
+<script src="./assets/library/react.production.min.js"></script>
+<script src="./assets/library/react-dom.production.min.js"></script>
+<script src="./assets/library/dayjs.min.js"></script>
+<!-- 2. UI Components (local UMD, antd 内置图标随包携带) -->
+<script src="./assets/library/antd.min.js"></script>
+<!-- 3. react-intl (offline, exposes ReactIntl) -->
+<script src="./assets/library/react-intl.umd.js"></script>
+<!-- 4. Babel Transpiler (local) -->
+<script src="./assets/library/babel.min.js"></script>
+<!-- 5. 五层 CSS(base → light → theme → dark → ant 组件换肤层)内联 -->
+<style>
+:root {
+  /* ==========================================================================
+    1. 基础色阶 (Primitive Colors)
+    ========================================================================== */
+  /* brand */
+  --brand-05: #E6F2FD;
+  --brand-10: #B8D9F9;
+  --brand-20: #8ABEF3;
+  --brand-30: #5CA2E9;
+  --brand-40: #2E86DE;
+  --brand-50: #0067D1;
+  --brand-60: #004EA8;
+  --brand-70: #003D83;
+  --brand-80: #002E6A;
+  --brand-90: #00214B;
+
+  /* gray */
+  --gray-0: #FFFFFF;
+  --gray-05: #F3F3F3;
+  --gray-10: #DFDFDF;
+  --gray-20: #C9C9C9; 
+  --gray-30: #AEAEAE;
+  --gray-40: #939393;
+  --gray-50: #777777;
+  --gray-60: #595959;
+  --gray-70: #393939;
+  --gray-80: #2A2A2A;
+  --gray-90: #191919;
+  --gray-100: #000000;
+
+  /* red */
+  --red-05: #FEE7E8;
+  --red-10: #FABDC1;
+  --red-20: #F59297;
+  --red-30: #EE696F;
+  --red-40: #E7434A;
+  --red-50: #E02128;
+  --red-60: #C7000B;
+  --red-70: #850F12;
+  --red-80: #59080A;
+  --red-90: #350305;
+
+  /* rose */
+  --rose-05: #FEE5F2;
+  --rose-10: #FCC3E0;
+  --rose-20: #F99AC7;
+  --rose-30: #F470AB;
+  --rose-40: #ED448A;
+  --rose-50: #E61866;
+  --rose-60: #C40054;
+  --rose-70: #811439;
+  --rose-80: #540D24;
+  --rose-90: #330614;
+
+  /* orange */
+  --orange-05: #FEF5E8;
+  --orange-10: #FDE2BD;
+  --orange-20: #FCCE92;
+  --orange-30: #F9B766;
+  --orange-40: #F69E39;
+  --orange-50: #F4840C;
+  --orange-60: #C76207;
+  --orange-70: #954304;
+  --orange-80: #642802;
+  --orange-90: #3D1601;
+
+  /* yellow */
+  --yellow-05: #FEFCE0;
+  --yellow-10: #FEF8B8;
+  --yellow-20: #FEF08A;
+  --yellow-30: #FDE55C;
+  --yellow-40: #FCD72E;
+  --yellow-50: #FCC800;
+  --yellow-60: #D19F00;
+  --yellow-70: #9E7400;
+  --yellow-80: #614500;
+  --yellow-90: #2E1F00;
+
+  /* green */
+  --green-05: #F2FBE9;
+  --green-10: #DFF4CC;
+  --green-20: #C6E9A8;
+  --green-30: #A8DB81;
+  --green-40: #87C859;
+  --green-50: #62B42E;
+  --green-60: #488E20;
+  --green-70: #316614;
+  --green-80: #1B3E0A;
+  --green-90: #0C2004;
+
+  /* mint */
+  --mint-05: #E7FBF2;
+  --mint-10: #BCF2DB;
+  --mint-20: #8FE5C2;
+  --mint-30: #63D5A8;
+  --mint-40: #36C18D;
+  --mint-50: #09AA71;
+  --mint-60: #058358;
+  --mint-70: #036142;
+  --mint-80: #02422E;
+  --mint-90: #00291D;
+
+  /* cyan */
+  --cyan-05: #E8FCFD;
+  --cyan-10: #C9F6F9;
+  --cyan-20: #A4ECF1;
+  --cyan-30: #7DDFE7;
+  --cyan-40: #55CCD9;
+  --cyan-50: #2CB8C9;
+  --cyan-60: #1C94A4;
+  --cyan-70: #127180;
+  --cyan-80: #094C57;
+  --cyan-90: #04282F;
+
+  /* blue */
+  --blue-05: #EEF3FE;
+  --blue-10: #D0D8FD;
+  --blue-20: #B0BFFD;
+  --blue-30: #8CA3FA;
+  --blue-40: #668CF7;
+  --blue-50: #2070F3;
+  --blue-60: #1F55B5;
+  --blue-70: #1B3F86;
+  --blue-80: #112857;
+  --blue-90: #081635;
+
+  /* indigo */
+  --indigo-05: #EEEEFE;
+  --indigo-10: #D5D3FD;
+  --indigo-20: #BFB9FA;
+  --indigo-30: #A89FF9;
+  --indigo-40: #8E81F4;
+  --indigo-50: #715AFB;
+  --indigo-60: #5531EB;
+  --indigo-70: #3F21B5;
+  --indigo-80: #281675;
+  --indigo-90: #160B48;
+
+  /* purple */
+  --purple-05: #F7EDFE;
+  --purple-10: #E8CFFE;
+  --purple-20: #D9B1FD;
+  --purple-30: #CB8EFB;
+  --purple-40: #BF68FA;
+  --purple-50: #B62BF7;
+  --purple-60: #8A21BC;
+  --purple-70: #651B8B;
+  --purple-80: #41125A;
+  --purple-90: #260937;
+
+  /* pink */
+  --pink-05: #FDE6FC;
+  --pink-10: #F9C5F6;
+  --pink-20: #F39DEC;
+  --pink-30: #EB74DF;
+  --pink-40: #E049CE;
+  --pink-50: #D41DBC;
+  --pink-60: #9F1C8D;
+  --pink-70: #751868;
+  --pink-80: #4C0F43;
+  --pink-90: #2E0728;
+
+  /* ==========================================================================
+    2. 尺寸与形状 (Sizes & Shapes)
+    ========================================================================== */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-base: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+    3. 文本排版 (Typography)
+    ========================================================================== */
+  /* Font Family */
+  --font-family: 'HarmonyOS Sans', 'Microsoft YaHei', Arial, 'PingFang SC', 'San Francisco', sans-serif;
+
+  /* Font Size (10px → 72px) */
+  --font-size-sm: 0.625rem;    /* 10px */
+  --font-size-base: 0.75rem;   /* 12px */
+  --font-size-md: 0.875rem;    /* 14px */
+  --font-size-lg: 1rem;        /* 16px */
+  --font-size-xl: 1.125rem;    /* 18px */
+  --font-size-2xl: 1.25rem;    /* 20px */
+  --font-size-3xl: 1.5rem;     /* 24px */
+  --font-size-4xl: 1.75rem;    /* 28px */
+  --font-size-5xl: 2.25rem;    /* 36px */
+  --font-size-6xl: 3rem;       /* 48px */
+  --font-size-7xl: 3.75rem;    /* 60px */
+  --font-size-8xl: 4.5rem;     /* 72px */
+
+  /* Line Height (刻度,1.25 → 1.8) */
+  --line-height-xs: 1.25;
+  --line-height-sm: 1.375;
+  --line-height-base: 1.5;
+  --line-height-md: 1.625;
+  --line-height-lg: 1.8;
+
+  /* Font Weight */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ==========================================================================
+    4. 间距 (Spacing)
+    ========================================================================== */
+  /* 4px 网格 + 半步档,0 → 80px 封顶(更大留白用 px 字面量按需写) */
+  --spacing-0: 0px;
+  --spacing-0-5: 2px;
+  --spacing-1: 4px;
+  --spacing-1-5: 6px;
+  --spacing-2: 8px;
+  --spacing-2-5: 10px;
+  --spacing-3: 12px;
+  --spacing-3-5: 14px;
+  --spacing-4: 16px;
+  --spacing-4-5: 18px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-11: 44px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-15: 60px;
+  --spacing-16: 64px;
+  --spacing-17: 68px;
+  --spacing-18: 72px;
+  --spacing-19: 76px;
+  --spacing-20: 80px;
+}
+
+/* ==========================================================================
+  5. 响应式 rem 基准 (Responsive rem base) — html font-size 随视口宽度变化
+  ========================================================================== */
+@media (max-width: 1366px) {
+  html { font-size: 12px; }
+}
+@media (min-width: 1367px) and (max-width: 1680px) {
+  html { font-size: 14px; }
+}
+@media (min-width: 1681px) and (max-width: 1920px) {
+  html { font-size: 16px; }
+}
+@media (min-width: 1921px) {
+  html { font-size: 20px; }
+}
+
+/* ==========================================================================
+  6. 字体注册 (Font Face)
+  ========================================================================== */
+/* Light */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Regular */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Medium */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+/* ── body base ── */
+body {
+  margin: 0;
+  font: var(--font-body-m);
+  background-color: var(--surface);
+  color: var(--on-surface);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+  7. 基础滚动条样式 (Scrollbar)
+  ========================================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 4px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #dededf;
+}
+
+
+:root {
+  /* 品牌色 */
+  --color-brand: var(--brand-50);
+  --color-brand-hover: var(--brand-40);
+  --color-brand-focus: var(--brand-50);
+  --color-brand-active: var(--brand-60);
+  --color-brand-disabled: var(--brand-20);
+  /* 文本色 */
+  --color-text-primary: var(--gray-90);
+  --color-text-secondary: var(--gray-50);
+  --color-text-placeholder: var(--gray-30);
+  --color-text-disabled: var(--gray-20);
+  --color-text-inverse: var(--gray-0);
+  --color-text-inverse-disabled: var(--gray-0);
+  --color-text-on: var(--brand-50);
+  --color-link: var(--brand-50);
+  --color-link-hover: var(--brand-40);
+  --color-link-active: var(--brand-60);
+  --color-link-visited: var(--indigo-50);
+  --color-link-disabled: var(--brand-20);
+  /* 背景色 */
+  --color-bg-1: var(--gray-05);
+  --color-bg-2: var(--gray-0);
+  --color-bg-3: var(--gray-0);
+  --color-bg-4: var(--gray-0);
+  --color-bg-5: var(--gray-0);
+  --color-bg-6: rgb(from var(--gray-20) r g b / 0.2);
+  --color-bg-mask: rgb(from var(--gray-90) r g b / 0.3);
+  /* 填充色 */
+  --color-fill-disabled: var(--gray-10);
+  --color-hover: rgb(from var(--gray-90) r g b / 0.05);
+  --color-fill-disabled-subtle: rgb(from var(--gray-90) r g b / 0.05);
+  --color-fill: rgb(from var(--gray-90) r g b / 0.05);
+  --color-select: var(--brand-05);
+  --color-fill-subtle: var(--gray-0);
+  /* 图标色 */
+  --color-icon-primary: var(--gray-90);
+  --color-icon-secondary: var(--gray-50);
+  --color-icon-tertiary: var(--gray-40);
+  --color-icon-placeholder: var(--gray-30);
+  --color-icon-disabled: var(--gray-20);
+  --color-icon-inverse: var(--gray-0);
+  --color-icon-hover: var(--brand-40);
+  --color-icon-focus: var(--brand-50);
+  --color-icon-active: var(--brand-60);
+  /* 边框色 */
+  --color-border: var(--gray-20);
+  --color-border-hover: var(--gray-90);
+  --color-border-focus: var(--brand-50);
+  --color-border-active: var(--brand-10);
+  --color-border-disabled: var(--gray-20);
+  --color-border-separator: var(--gray-10);
+  --color-border-separator-sbutle: var(--gray-05);
+  /* 功能色-错误 */
+  --color-error: var(--red-50);
+  --color-error-hover: var(--red-40);
+  --color-error-active: var(--red-60);
+  --color-error-disabled: var(--red-10);
+  --color-error-subtle: var(--red-20);
+  --color-error-subtler: var(--red-05);
+  /* 功能色-告警 */
+  --color-alert: var(--orange-50);
+  --color-alert-hover: var(--orange-40);
+  --color-alert-active: var(--orange-60);
+  --color-alert-disabled: var(--orange-10);
+  --color-alert-subtle: var(--orange-20);
+  --color-alert-subtler: var(--orange-05);
+  /* 功能色-提醒 */
+  --color-warning: var(--yellow-50);
+  --color-warning-hover: var(--yellow-40);
+  --color-warning-active: var(--yellow-60);
+  --color-warning-disabled: var(--yellow-10);
+  --color-warning-bold: var(--yellow-60);
+  --color-warning-subtle: var(--yellow-20);
+  --color-warning-subtler: var(--yellow-05);
+  /* 功能色-成功 */
+  --color-success: var(--mint-50);
+  --color-success-hover: var(--mint-40);
+  --color-success-active: var(--mint-60);
+  --color-success-disabled: var(--mint-10);
+  --color-success-subtle: var(--mint-20);
+  --color-success-subtler: var(--mint-05);
+  /* 功能色-信息 */
+  --color-info-primary: var(--blue-50);
+  --color-info-primary-subtle: var(--blue-30);
+  --color-info-primary-subtler: var(--blue-05);
+  --color-info-secondary: var(--blue-30);
+  --color-info-secondary-hover: var(--blue-20);
+  --color-info-secondary-active: var(--blue-40);
+  --color-info-secondary-disabled: var(--blue-10);
+  --color-info-secondary-subtle: var(--blue-05);
+  /* 功能色-失效 */
+  --color-none: var(--gray-30);
+  --color-none-hover: var(--gray-20);
+  --color-none-active: var(--gray-40);
+  --color-none-disabled: var(--gray-10);
+  --color-none-subtle: var(--gray-05);
+  /* 推荐图表色 */
+  --color-chart-1: var(--blue-50);
+  --color-chart-2: var(--green-50);
+  --color-chart-3: var(--indigo-50);
+  --color-chart-4: var(--cyan-50);
+  --color-chart-5: var(--orange-40);
+  --color-chart-6: var(--brand-30);
+  --color-chart-7: var(--purple-40);
+  --color-chart-8: var(--rose-40);
+  --color-chart-9: var(--indigo-20);
+  --color-chart-10: var(--yellow-60);
+  --color-chart-11: var(--brand-10);
+  --color-chart-12: var(--green-60);
+  --color-chart-13: var(--purple-20);
+  --color-chart-14: var(--cyan-60);
+  --color-chart-15: var(--orange-20);
+  --color-chart-16: var(--rose-60);
+  --color-chart-17: var(--cyan-20);
+  --color-chart-18: var(--blue-60);
+  --color-chart-19: var(--green-20);
+  --color-chart-20: var(--indigo-70);
+  --color-chart-21: var(--rose-10);
+  --color-chart-22: var(--cyan-70);
+  --color-chart-23: var(--yellow-20);
+  --color-chart-24: var(--purple-70);
+  --color-chart-25: var(--mint-20);
+  /* 特殊场景 */
+  --color-scrollbar: var(--gray-10);
+  --color-scrollbar-hover: var(--gray-30);
+  --color-card-gray-disabled: rgb(from var(--gray-30) r g b / 0.05);
+  --color-card-white-disabled: rgb(from var(--gray-0) r g b / 0.5);
+  --color-sidenav-bg: rgb(from var(--gray-05) r g b / 0.5);
+  --color-table-header: rgb(from var(--gray-90) r g b / 0.05);
+  --color-table-zebra: rgb(from var(--gray-40) r g b / 0.05);
+  --color-message-bg-info: var(--blue-05);
+  --color-message-bg-success: var(--mint-05);
+  --color-message-bg-warning: var(--yellow-05);
+  --color-message-bg-alert: var(--orange-05);
+  --color-message-bg-error: var(--red-05);
+  /* ICT3.0 3.0告警色 */
+  --color-alert-urgent: #F43146;
+  --color-alert-primary: #EC6F1A;
+  --color-alert-secondary: #EEBA18;
+  --color-alert-success: #2DA769;
+  --color-alert-running: #5990FD;
+  --color-alert-none: #939393;
+  /* ICT3.1 表格 */
+  --color-table-1: var(--brand-05);
+  --color-table-2: var(--brand-10);
+  --color-table-sticky-1: var(--brand-05);
+  --color-table-sticky-2: var(--brand-10);
+  --color-table-sticky-bg: var(--gray-0);
+  --color-table-sticky-header: var(--gray-05);
+  /* 标签配色 */
+  --color-tag-text-purple: var(--purple-60);
+  --color-tag-bg-purple: rgb(from var(--purple-10) r g b / 0.6);
+  --color-tag-text-cyan: var(--cyan-80);
+  --color-tag-bg-cyan: rgb(from var(--cyan-60) r g b / 0.15);
+  --color-tag-text-rose: var(--rose-60);
+  --color-tag-bg-rose: var(--rose-05);
+  --color-tag-text-green: var(--green-70);
+  --color-tag-bg-green: var(--green-10);
+  --color-tag-text-pink: var(--pink-60);
+  --color-tag-bg-pink: var(--pink-05);
+  --color-tag-text-indigo: var(--indigo-80);
+  --color-tag-bg-indigo: rgb(from var(--indigo-10) r g b / 0.6);
+  --color-tag-text-none: var(--gray-70);
+  --color-tag-bg-none: rgb(from var(--gray-90) r g b / 0.05);
+  --color-tag-text-error: var(--red-60);
+  --color-tag-bg-error: var(--red-05);
+  --color-tag-text-alert: var(--orange-70);
+  --color-tag-bg-alert: var(--orange-10);
+  --color-tag-text-warning: var(--yellow-80);
+  --color-tag-bg-warning: rgb(from var(--yellow-30) r g b / 0.6);
+  --color-tag-text-success: var(--mint-70);
+  --color-tag-bg-success: rgb(from var(--mint-10) r g b / 0.6);
+  --color-tag-text-info: var(--blue-60);
+  --color-tag-bg-info: rgb(from var(--blue-10) r g b / 0.5);
+  /* Border */
+  --border: var(--gray-20);
+  --border-light: var(--gray-10);
+  --border-primary: var(--brand-50);
+  --border-success: var(--mint-20);
+  --border-warning: var(--yellow-20);
+  --border-alert: var(--orange-20);
+  --border-error: var(--red-20);
+  /* Icon */
+  --icon-primary: var(--brand-50);
+  --icon-success: var(--mint-50);
+  --icon-warning: var(--yellow-50);
+  --icon-critical: var(--orange-50);
+  --icon-alert: var(--orange-50);
+  --icon-error: var(--red-50);
+  /* Shadow */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.08);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.16);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+  --shadow-r-sm: 1px 0 6px 0 rgba(0, 0, 0, 0.08);
+  --shadow-t-sm: 0 -1px 6px rgba(0, 0, 0, 0.08);
+  --shadow-l-base: -2px 0 12px 0 rgba(0, 0, 0, 0.08);
+  --shadow-l-md: -2px 0 24px 0 rgba(0, 0, 0, 0.08);
+}
+
+
+:root {
+  --primary: var(--color-brand);
+  --on-primary: var(--color-text-inverse);
+  --primary-hover: var(--color-brand-hover);
+  --primary-active: var(--color-brand-active);
+  --primary-disabled: var(--color-brand-disabled);
+  --primary-container: var(--color-info-primary-subtler);
+  --on-primary-container: var(--color-text-primary);
+  --primary-fixed: var(--color-brand);
+  --primary-fixed-dim: var(--color-brand-active);
+  --on-primary-fixed: var(--color-text-inverse);
+  --on-primary-fixed-variant: var(--color-text-inverse);
+
+  --surface: var(--color-bg-1);
+  --surface-dim: var(--color-bg-2);
+  --surface-bright: var(--color-bg-2);
+  --on-surface: var(--color-text-primary);
+  --surface-variant: var(--color-bg-1);
+  --on-surface-variant: var(--color-text-secondary);
+  --surface-container-lowest: var(--color-bg-1);
+  --surface-container-low: var(--color-bg-2);
+  --surface-container: var(--color-bg-2);
+  --surface-container-high: var(--color-bg-2);
+  --surface-container-highest: var(--color-bg-2);
+
+  --inverse-surface: var(--color-text-primary);
+  --inverse-on-surface: var(--color-text-inverse);
+  --inverse-on-surface-variant: var(--color-text-inverse-disabled);
+  --inverse-primary: var(--color-brand);
+
+  --error: var(--color-error);
+  --on-error: var(--color-text-inverse);
+  --error-container: var(--color-message-bg-error);
+  --on-error-container: var(--color-text-primary);
+
+  --success: var(--color-success);
+  --on-success: var(--color-text-inverse);
+  --success-container: var(--color-message-bg-success);
+  --on-success-container: var(--color-text-primary);
+
+  --critical: var(--color-alert);
+  --on-critical: var(--color-text-inverse);
+  --critical-container: var(--color-message-bg-alert);
+  --on-critical-container: var(--color-text-primary);
+
+  --warning: var(--color-warning);
+  --on-warning: var(--color-text-inverse);
+  --warning-container: var(--color-message-bg-warning);
+  --on-warning-container: var(--color-text-primary);
+
+  --info: var(--color-info-primary);
+  --on-info: var(--color-text-inverse);
+  --info-container: var(--color-message-bg-info);
+  --on-info-container: var(--color-text-primary);
+
+  --text-placeholder: var(--color-text-placeholder);
+  --text-disabled: var(--color-text-disabled);
+  --text-inverse-disabled: var(--color-text-inverse-disabled);
+
+  --interactive-link: var(--color-link);
+  --interactive-link-hover: var(--color-link-hover);
+  --interactive-link-active: var(--color-link-active);
+  --interactive-link-visited: var(--color-link-visited);
+  --interactive-link-disabled: var(--color-link-disabled);
+  
+  --scrim: var(--color-bg-mask);
+  --outline: var(--color-border);
+  --outline-variant: var(--color-border-separator);
+  --divider: var(--color-border-separator);
+  --focus-ring: var(--color-border-focus);
+  --selected: var(--color-border-focus);
+
+  /* ── spacing → --spacing-* ── */
+  --spacing-inline: var(--spacing-2);   /* 8px */
+  --spacing-stack: var(--spacing-3);    /* 12px */
+  --spacing-gutter: var(--spacing-4);  /* 16px */
+  --spacing-inset: var(--spacing-6);    /* 24px */
+  --spacing-section: var(--spacing-4); /* 16px */
+  --spacing-page: var(--spacing-8);      /* 32px */
+
+  /* ── boxShadow ── */
+  --shadow-card: var(--shadow-sm);
+  --shadow-popover: var(--shadow-lg);
+  --shadow-modal: var(--shadow-xl);
+
+  /* ── borderRadius → --radius-* ── */
+  --radius-badge: var(--radius-base);  /* 4px */
+  --radius-action: var(--radius-base); /* 4px */
+  --radius-container: var(--radius-lg); /* 8px */
+  --radius-overlay: var(--radius-lg);  /* 8px */
+
+  /* ── border & outline width ── */
+  --border-width-thin: 1px;    
+  --border-width-thick: 2px;  
+  --outline-width-focus: 1px;
+  --outline-offset-gap: 2px;
+
+  /* ── typography → --font-*（角色化 font 简写：字号/行高 字族；字重另行用 --font-weight-* 组合）── */
+  /* Display 展示文本 — 英雄标语、数据看板大数字 */
+  --font-display-l: var(--font-size-7xl)/var(--line-height-xs) var(--font-family);    /* 60px/1.25 */
+  --font-display-m: var(--font-size-6xl)/var(--line-height-sm) var(--font-family);    /* 48px/1.375 */
+  --font-display-s: var(--font-size-5xl)/var(--line-height-sm) var(--font-family);    /* 36px/1.375 */
+  /* Headline 标题 — 页面区块标题(H3)→卡片标题→表单区标题 */
+  --font-headline-l: var(--font-size-2xl)/var(--line-height-sm) var(--font-family);   /* 20px/1.375 */
+  --font-headline-m: var(--font-size-xl)/var(--line-height-sm) var(--font-family);    /* 18px/1.375 */
+  --font-headline-s: var(--font-size-lg)/var(--line-height-base) var(--font-family);  /* 16px/1.5 */
+  /* Body 正文 — 表单标签/按钮文字→表格正文→辅助说明 */
+  --font-body-l: var(--font-size-lg)/var(--line-height-base) var(--font-family);      /* 16px/1.5 */
+  --font-body-m: var(--font-size-md)/var(--line-height-base) var(--font-family);      /* 14px/1.5 */
+  --font-body-s: var(--font-size-base)/var(--line-height-md) var(--font-family);      /* 12px/1.625 */
+  /* Caption 注释 — 时间戳/表格附加信息→底部免责声明 */
+  --font-caption-m: var(--font-size-base)/var(--line-height-md) var(--font-family);   /* 12px/1.625 */
+  --font-caption-s: var(--font-size-sm)/var(--line-height-lg) var(--font-family);    /* 10px/1.8 */
+}
+
+.dark {
+  /* 品牌色 */
+  --color-brand: var(--brand-50);
+  --color-brand-hover: var(--brand-40);
+  --color-brand-focus: var(--brand-50);
+  --color-brand-active: var(--brand-60);
+  --color-brand-disabled: var(--brand-70);
+  /* 文本色 */
+  --color-text-primary: var(--gray-0);
+  --color-text-secondary: var(--gray-20);
+  --color-text-placeholder: var(--gray-40);
+  --color-text-disabled: var(--gray-40);
+  --color-text-inverse: var(--gray-0);
+  --color-text-inverse-disabled: rgb(from var(--gray-05) r g b / 0.3);
+  --color-text-on: var(--gray-0);
+  --color-link: var(--brand-30);
+  --color-link-hover: var(--brand-20);
+  --color-link-active: var(--brand-40);
+  --color-link-visited: var(--indigo-50);
+  --color-link-disabled: var(--brand-60);
+  /* 背景色 */
+  --color-bg-1: var(--gray-100);
+  --color-bg-2: var(--gray-90);
+  --color-bg-3: var(--gray-80);
+  --color-bg-4: var(--gray-70);
+  --color-bg-5: rgb(from var(--gray-05) r g b / 0.1);
+  --color-bg-6: rgb(from var(--gray-05) r g b / 0.1);
+  --color-bg-mask: rgb(from var(--gray-0) r g b / 0.7);
+  /* 填充色 */
+  --color-fill-disabled: var(--gray-60);
+  --color-hover: rgb(from var(--gray-05) r g b / 0.2);
+  --color-fill-disabled-subtle: rgb(from var(--gray-05) r g b / 0.2);
+  --color-fill: rgb(from var(--gray-05) r g b / 0.2);
+  --color-select: rgb(from var(--brand-50) r g b / 0.4);
+  --color-fill-subtle: rgb(from var(--gray-100) r g b / 0);
+  /* 图标色 */
+  --color-icon-primary: var(--gray-10);
+  --color-icon-secondary: var(--gray-30);
+  --color-icon-tertiary: var(--gray-50);
+  --color-icon-placeholder: var(--gray-40);
+  --color-icon-disabled: var(--gray-40);
+  --color-icon-inverse: var(--gray-0);
+  --color-icon-hover: var(--brand-20);
+  --color-icon-focus: var(--brand-30);
+  --color-icon-active: var(--brand-40);
+  /* 边框色 */
+  --color-border: var(--gray-50);
+  --color-border-hover: var(--gray-05);
+  --color-border-focus: var(--brand-40);
+  --color-border-active: var(--brand-80);
+  --color-border-disabled: var(--gray-60);
+  --color-border-separator: rgb(from var(--gray-05) r g b / 0.15);
+  --color-border-separator-sbutle: rgb(from var(--gray-05) r g b / 0.1);
+  /* 功能色-错误 */
+  --color-error: var(--red-40);
+  --color-error-hover: var(--red-30);
+  --color-error-active: var(--red-50);
+  --color-error-disabled: var(--red-80);
+  --color-error-subtle: var(--red-60);
+  --color-error-subtler: var(--red-80);
+  /* 功能色-告警 */
+  --color-alert: var(--orange-50);
+  --color-alert-hover: var(--orange-40);
+  --color-alert-active: var(--orange-60);
+  --color-alert-disabled: var(--orange-80);
+  --color-alert-subtle: var(--orange-60);
+  --color-alert-subtler: var(--orange-80);
+  /* 功能色-提醒 */
+  --color-warning: var(--yellow-40);
+  --color-warning-hover: var(--yellow-30);
+  --color-warning-active: var(--yellow-50);
+  --color-warning-disabled: var(--yellow-80);
+  --color-warning-bold: var(--yellow-60);
+  --color-warning-subtle: var(--yellow-60);
+  --color-warning-subtler: var(--yellow-80);
+  /* 功能色-成功 */
+  --color-success: var(--mint-60);
+  --color-success-hover: var(--mint-50);
+  --color-success-active: var(--mint-60);
+  --color-success-disabled: var(--mint-80);
+  --color-success-subtle: var(--mint-60);
+  --color-success-subtler: var(--mint-80);
+  /* 功能色-信息 */
+  --color-info-primary: var(--blue-50);
+  --color-info-primary-subtle: var(--blue-60);
+  --color-info-primary-subtler: var(--blue-80);
+  --color-info-secondary: var(--blue-60);
+  --color-info-secondary-hover: var(--blue-40);
+  --color-info-secondary-active: var(--blue-60);
+  --color-info-secondary-disabled: var(--blue-80);
+  --color-info-secondary-subtle: var(--blue-80);
+  /* 功能色-失效 */
+  --color-none: var(--gray-60);
+  --color-none-hover: rgb(from var(--gray-05) r g b / 0.2);
+  --color-none-active: var(--gray-50);
+  --color-none-disabled: var(--gray-90);
+  --color-none-subtle: var(--gray-90);
+  /* 推荐图表色 */
+  --color-chart-1: var(--blue-50);
+  --color-chart-2: var(--green-50);
+  --color-chart-3: var(--indigo-50);
+  --color-chart-4: var(--cyan-50);
+  --color-chart-5: var(--orange-40);
+  --color-chart-6: var(--brand-30);
+  --color-chart-7: var(--purple-60);
+  --color-chart-8: var(--rose-60);
+  --color-chart-9: var(--indigo-60);
+  --color-chart-10: var(--yellow-60);
+  --color-chart-11: var(--brand-60);
+  --color-chart-12: var(--green-60);
+  --color-chart-13: var(--purple-70);
+  --color-chart-14: var(--cyan-60);
+  --color-chart-15: var(--orange-70);
+  --color-chart-16: var(--rose-60);
+  --color-chart-17: var(--cyan-70);
+  --color-chart-18: var(--blue-60);
+  --color-chart-19: var(--green-70);
+  --color-chart-20: var(--indigo-70);
+  --color-chart-21: var(--rose-70);
+  --color-chart-22: var(--cyan-30);
+  --color-chart-23: var(--yellow-70);
+  --color-chart-24: var(--purple-50);
+  --color-chart-25: var(--mint-70);
+  /* 特殊场景 */
+  --color-scrollbar: var(--gray-60);
+  --color-scrollbar-hover: var(--gray-40);
+  --color-card-gray-disabled: rgb(from var(--gray-40) r g b / 0.05);
+  --color-card-white-disabled: rgb(from var(--gray-40) r g b / 0.1);
+  --color-sidenav-bg: var(--gray-70);
+  --color-table-header: rgb(from var(--gray-05) r g b / 0.1);
+  --color-table-zebra: rgb(from var(--gray-50) r g b / 0.15);
+  --color-message-bg-info: rgb(from var(--blue-50) r g b / 0.15);
+  --color-message-bg-success: rgb(from var(--mint-60) r g b / 0.15);
+  --color-message-bg-warning: rgb(from var(--yellow-40) r g b / 0.15);
+  --color-message-bg-alert: rgb(from var(--orange-50) r g b / 0.15);
+  --color-message-bg-error: rgb(from var(--red-40) r g b / 0.15);
+  /* ICT3.0 3.0告警色 */
+  --color-alert-urgent: #F43146;
+  --color-alert-primary: #EC6F1A;
+  --color-alert-secondary: #EEBA18;
+  --color-alert-success: #0D9458;
+  --color-alert-running: #5990FD;
+  --color-alert-none: #818181;
+  /* ICT3.1 表格 */
+  --color-table-1: rgb(from var(--brand-50) r g b / 0.2);
+  --color-table-2: rgb(from var(--brand-50) r g b / 0.4);
+  --color-table-sticky-1: var(--brand-80);
+  --color-table-sticky-2: var(--brand-70);
+  --color-table-sticky-bg: var(--gray-70);
+  --color-table-sticky-header: var(--gray-70);
+  /* 标签配色 */
+  --color-tag-text-purple: var(--purple-30);
+  --color-tag-bg-purple: rgb(from var(--purple-30) r g b / 0.15);
+  --color-tag-text-cyan: var(--cyan-40);
+  --color-tag-bg-cyan: rgb(from var(--cyan-50) r g b / 0.15);
+  --color-tag-text-rose: var(--rose-30);
+  --color-tag-bg-rose: rgb(from var(--rose-30) r g b / 0.15);
+  --color-tag-text-green: var(--green-50);
+  --color-tag-bg-green: rgb(from var(--green-40) r g b / 0.15);
+  --color-tag-text-pink: var(--pink-30);
+  --color-tag-bg-pink: rgb(from var(--pink-30) r g b / 0.15);
+  --color-tag-text-indigo: var(--indigo-30);
+  --color-tag-bg-indigo: rgb(from var(--indigo-30) r g b / 0.15);
+  --color-tag-text-none: var(--gray-30);
+  --color-tag-bg-none: rgb(from var(--gray-30) r g b / 0.15);
+  --color-tag-text-error: var(--red-40);
+  --color-tag-bg-error: rgb(from var(--red-30) r g b / 0.15);
+  --color-tag-text-alert: var(--orange-40);
+  --color-tag-bg-alert: rgb(from var(--orange-50) r g b / 0.15);
+  --color-tag-text-warning: var(--yellow-50);
+  --color-tag-bg-warning: rgb(from var(--yellow-30) r g b / 0.15);
+  --color-tag-text-success: var(--mint-40);
+  --color-tag-bg-success: rgb(from var(--mint-50) r g b / 0.15);
+  --color-tag-text-info: var(--blue-30);
+  --color-tag-bg-info: rgb(from var(--blue-40) r g b / 0.15);
+  /* Border */
+  --border: var(--gray-50);
+  --border-light: rgb(from var(--gray-05) r g b / 0.15);
+  --border-primary: var(--brand-30);
+  --border-success: var(--mint-20);
+  --border-warning: var(--yellow-20);
+  --border-alert: var(--orange-20);
+  --border-error: var(--red-20);
+  /* Icon */
+  --icon-primary: var(--brand-30);
+  --icon-success: var(--mint-30);
+  --icon-warning: var(--yellow-30);
+  --icon-critical: var(--orange-30);
+  --icon-alert: var(--orange-30);
+  --icon-error: var(--red-30);
+  /* Shadow (暗色模式下阴影更强) */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.5);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-r-sm: 1px 0 6px 0 rgba(0, 0, 0, 0.5);
+  --shadow-t-sm: 0 -1px 6px rgba(0, 0, 0, 0.5);
+  --shadow-l-base: -2px 0 12px 0 rgba(0, 0, 0, 0.5);
+  --shadow-l-md: -2px 0 24px 0 rgba(0, 0, 0, 0.5);
+}
+
+
+/* 组件样式汇总：由 npm run build:css 生成，勿手改 */
+.ant-table {
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+}
+
+/* Divider 组件样式（占位，待填充 token 映射） */
+.ant-divider {
+  border-color: var(--gray-10);
+}
+.dark .ant-divider {
+  border-color: var(--color-border-separator);
+}
+
+/* Button 组件样式（token 映射） */
+.ant-btn {
+  font-size: var(--font-size-md);
+  border-radius: var(--radius-base);
+  font-weight: var(--font-weight-normal);
+  min-width: calc(var(--spacing-4) * 5.5);
+  box-shadow: none !important;
+  gap: 4px;
+}
+.ant-btn.ant-btn-color-default {
+  color: var(--color-text-primary);
+}
+.ant-btn.ant-btn-color-default:not(:disabled):hover {
+  color: var(--color-text-primary);
+  border-color: var(--gray-90);
+  background-color: var(--color-bg-2);
+}
+.ant-btn.ant-btn-color-default:not(:disabled):active {
+  color: var(--color-text-primary);
+  border-color: var(--border-primary);
+  background-color: var(--color-bg-2);
+}
+.ant-btn.ant-btn-color-default:disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--gray-10);
+}
+.ant-btn.ant-btn-color-primary {
+  color: var(--gray-0);
+  background-color: var(--color-brand);
+}
+.ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  color: var(--gray-0);
+  background-color: var(--brand-40);
+}
+.ant-btn.ant-btn-color-primary:not(:disabled):active {
+  color: var(--gray-0);
+  background-color: var(--brand-60);
+}
+.ant-btn.ant-btn-color-primary:disabled {
+  color: var(--gray-0);
+  background-color: var(--brand-20);
+  border-color: var(--brand-20);
+}
+.ant-btn.ant-btn-dangerous {
+  color: var(--gray-0);
+  background-color: var(--red-50);
+}
+.ant-btn.ant-btn-dangerous:not(:disabled):hover {
+  color: var(--gray-0);
+  background-color: var(--red-40);
+}
+.ant-btn.ant-btn-dangerous:not(:disabled):active {
+  color: var(--gray-0);
+  background-color: var(--red-60);
+}
+.ant-btn.ant-btn-dangerous:disabled {
+  color: var(--gray-0);
+  background-color: var(--red-10);
+  border-color: var(--red-10);
+}
+.ant-btn.ant-btn-sm {
+  height: 28px;
+}
+.ant-btn.ant-btn-lg {
+  height: 36px;
+  padding: var(--spacing-0) var(--spacing-5);
+  min-width: 96px;
+  font-size: var(--font-size-md);
+}
+.ant-btn.ant-btn-icon-only {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: auto !important;
+  border: none !important;
+  background-color: transparent !important;
+  padding: var(--spacing-0);
+}
+.ant-btn.ant-btn-icon-only .anticon {
+  font-size: var(--font-size-2xl);
+}
+.ant-btn.ant-btn-icon-only.ant-btn-sm {
+  width: 24px !important;
+  height: 24px !important;
+}
+.ant-btn.ant-btn-icon-only.ant-btn-sm .anticon {
+  font-size: var(--font-size-md);
+}
+.ant-btn.ant-btn-icon-only:hover,
+.ant-btn.ant-btn-icon-only:focus {
+  background-color: transparent !important;
+}
+.ant-btn.ant-btn-variant-link {
+  min-width: unset;
+  line-height: 22px;
+  padding: var(--spacing-0);
+  border: none !important;
+  background-color: transparent;
+  color: var(--color-brand);
+}
+.ant-btn.ant-btn-variant-link:not(:disabled):hover {
+  color: var(--brand-40);
+}
+.ant-btn.ant-btn-variant-link:not(:disabled):active {
+  color: var(--brand-60);
+}
+.dark .ant-btn.ant-btn-color-default {
+  border-color: var(--gray-50);
+  background-color: rgb(from var(--gray-100) r g b / 0);
+}
+.dark .ant-btn.ant-btn-color-default:not(:disabled):hover {
+  background-color: rgb(from var(--gray-100) r g b / 0);
+  border-color: var(--gray-05);
+}
+.dark .ant-btn.ant-btn-color-default:not(:disabled):active {
+  color: var(--color-text-primary);
+  border-color: var(--brand-40);
+  background-color: rgb(from var(--gray-100) r g b / 0);
+}
+.dark .ant-btn.ant-btn-color-default:disabled {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-60);
+}
+.dark .ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  background-color: var(--brand-40);
+}
+.dark .ant-btn.ant-btn-color-primary:not(:disabled):active {
+  background-color: var(--brand-60);
+}
+.dark .ant-btn.ant-btn-color-primary:disabled {
+  color: rgb(from var(--gray-05) r g b / 0.3);
+  background-color: var(--brand-70);
+  border-color: var(--brand-70);
+}
+.dark .ant-btn.ant-btn-color-dangerous {
+  background-color: var(--red-40);
+}
+.dark .ant-btn.ant-btn-color-dangerous:not(:disabled):hover {
+  background-color: var(--red-30);
+}
+.dark .ant-btn.ant-btn-color-dangerous:not(:disabled):active {
+  background-color: var(--red-50);
+}
+.dark .ant-btn.ant-btn-color-dangerous:disabled {
+  color: var(--gray-0);
+  background-color: var(--red-80);
+  border-color: var(--red-80);
+}
+.dark .ant-btn.ant-btn-variant-link {
+  color: var(--brand-30);
+}
+.dark .ant-btn.ant-btn-variant-link:not(:disabled):hover {
+  color: var(--brand-20);
+}
+.dark .ant-btn.ant-btn-variant-link:not(:disabled):active {
+  color: var(--brand-40);
+}
+.dark .ant-btn.ant-btn-icon-only {
+  color: var(--gray-10);
+}
+.dark .ant-btn.ant-btn-icon-only:hover .anticon {
+  color: var(--brand-20);
+}
+.dark .ant-btn.ant-btn-icon-only:active .anticon {
+  color: var(--brand-40);
+}
+
+/* Input 组件样式（占位，待填充 token 映射） */
+input.ant-input {
+  padding: 0 var(--spacing-3);
+  height: 32px;
+  font-size: var(--font-size-md);
+  line-height: 24px;
+  border-radius: var(--radius-base);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+  background-color: var(--color-fill-subtle);
+  caret-color: var(--brand-50);
+}
+input.ant-input::placeholder {
+  color: var(--color-text-placeholder);
+}
+input.ant-input.ant-input-lg {
+  height: 40px;
+  padding: 0 var(--spacing-3);
+  font-size: var(--font-size-md);
+  border-radius: var(--radius-base);
+}
+input.ant-input.ant-input-sm {
+  padding: 0 var(--spacing-3);
+  height: 28px;
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-base);
+}
+.ant-input-affix-wrapper {
+  padding: 0 var(--spacing-3);
+  height: 32px;
+}
+.ant-input-affix-wrapper .ant-input {
+  height: 100%;
+}
+.ant-input-affix-wrapper .ant-input[type="password"] {
+  letter-spacing: var(--spacing-1);
+  color: var(--color-icon-primary);
+}
+.ant-input-affix-wrapper > input.ant-input {
+  color: var(--color-text-primary);
+}
+.ant-input-affix-wrapper .anticon {
+  color: var(--color-icon-secondary);
+}
+.ant-input-affix-wrapper .ant-input-suffix {
+  color: var(--color-text-primary);
+}
+.ant-input-outlined {
+  border-color: var(--color-border);
+  background-color: var(--color-fill-subtle);
+}
+.ant-input-outlined.ant-input-disabled {
+  border-color: var(--color-border-disabled);
+  background-color: var(--color-fill-disabled-subtle);
+  color: var(--color-text-disabled);
+}
+.ant-input-outlined.ant-input-disabled:hover {
+  border-color: var(--color-border-disabled);
+}
+.ant-input-outlined:hover {
+  border-color: var(--color-border-hover);
+}
+.ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
+  border-color: var(--color-error);
+  background-color: var(--color-fill-subtle);
+}
+.ant-input-outlined:focus,
+.ant-input-outlined:focus-within {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px var(--color-brand-disabled);
+  background-color: var(--color-fill-subtle);
+}
+/* textarea style start*/
+.ant-input-textarea-affix-wrapper,
+.ant-flex-align-center {
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+  padding: 0px !important;
+  height: auto;
+}
+.ant-input-textarea-affix-wrapper textarea,
+.ant-flex-align-center textarea {
+  color: var(--color-text-primary);
+  caret-color: var(--brand-50);
+  padding: 6px 16px;
+}
+.ant-input-textarea-affix-wrapper .ant-input-suffix,
+.ant-flex-align-center .ant-input-suffix {
+  font-size: var(--font-size-base);
+}
+.ant-input-textarea-affix-wrapper .ant-input-suffix .ant-input-data-count,
+.ant-flex-align-center .ant-input-suffix .ant-input-data-count {
+  color: var(--color-text-secondary);
+}
+.ant-input-textarea-affix-wrapper.ant-input-affix-wrapper-focused,
+.ant-flex-align-center.ant-input-affix-wrapper-focused {
+  border-color: var(--brand-50);
+}
+.dark .ant-input-textarea-affix-wrapper,
+.dark .ant-flex-align-center {
+  border-color: var(--color-border);
+}
+.dark .ant-input-textarea-affix-wrapper.ant-input-affix-wrapper-focused,
+.dark .ant-flex-align-center.ant-input-affix-wrapper-focused {
+  border-color: var(--brand-40);
+}
+/* textarea style end*/
+
+/* InputNumber 组件样式（占位，待填充 token 映射） */
+.ant-input-number {
+  height: 32px;
+  border-color: var(--gray-20);
+  box-shadow: none;
+}
+.ant-input-number .ant-input-number-action-down {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.ant-input-number .ant-input-number-action-up {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.ant-input-number .ant-input-number-input {
+  font-size: 14px;
+}
+.ant-input-number-outlined:hover {
+  border-color: var(--gray-100);
+}
+.ant-input-number-outlined:active {
+  border-color: var(--gray-10);
+}
+.ant-input-number-inlined:active {
+  border-color: var(--gray-50);
+}
+.ant-input-number-focused {
+  border: 1px solid var(--gray-50);
+}
+.dark {
+  /* InputNumber 组件样式（占位，待填充 token 映射） */
+}
+.dark .ant-input-number {
+  color: var(--gray-0);
+  height: 32px;
+  border-color: var(--gray-20);
+  box-shadow: none;
+}
+.dark .ant-input-number .ant-input-number-action-down {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.dark .ant-input-number .ant-input-number-action-up {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.dark .ant-input-number .ant-input-number-input {
+  font-size: 14px;
+}
+.dark .ant-input-number-outlined:hover {
+  border-color: var(--gray-0);
+}
+.dark .ant-input-number-outlined:active {
+  border-color: var(--brand-40);
+}
+.dark .ant-input-number-inlined:active {
+  border-color: var(--brand-40);
+}
+.dark .ant-input-number-focused {
+  border: 1px solid var(--brand-40) !important;
+}
+
+.ant-select-sm {
+  --ant-select-height: 28px;
+}
+.ant-select {
+  --ant-select-border-radius: var(--radius-base);
+  background: var(--color-bg-4);
+  color: var(--color-text-primary);
+}
+.ant-select.ant-select-outlined {
+  --ant-select-border-color: var(--color-border);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled):hover {
+  --ant-select-border-color: var(--color-border-hover);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled):hover .ant-select-suffix {
+  color: var(--color-icon-primary);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled).ant-select-focused {
+  --ant-select-border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px var(--color-border-active);
+}
+.ant-select.ant-select-outlined.ant-select-disabled {
+  --ant-select-border-color: var(--color-border-disabled);
+}
+.ant-select:not(.ant-select-disabled) .ant-select-placeholder {
+  color: var(--color-text-placeholder);
+}
+.ant-select:not(.ant-select-disabled) .ant-select-suffix {
+  color: var(--color-icon-secondary);
+}
+.ant-select:not(.ant-select-disabled):not(.ant-select-multiple).ant-select-focused.ant-select-open .ant-select-suffix {
+  transform: rotate(180deg);
+}
+.ant-select.ant-select-disabled {
+  --ant-select-color: var(--color-text-disabled);
+  color: var(--color-text-disabled);
+  background: var(--color-hover);
+}
+.ant-select.ant-select-disabled.ant-select-multiple {
+  background: var(--color-fill-disabled-subtle);
+}
+.ant-select.ant-select-disabled.ant-select-multiple .ant-select-content .ant-select-selection-item {
+  background: var(--color-fill-disabled-subtle);
+}
+.ant-select.ant-select-disabled .ant-select-placeholder {
+  color: var(--color-text-disabled);
+}
+.ant-select.ant-select-disabled .ant-select-suffix {
+  color: var(--color-icon-disabled);
+}
+.ant-select .ant-select-suffix svg {
+  width: 10px;
+  height: 10px;
+}
+.ant-select-multiple .ant-select-content .ant-select-selection-item-remove {
+  color: var(--color-icon-primary);
+}
+.ant-select-dropdown {
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-4);
+}
+.ant-select-dropdown .ant-select-item-option-disabled {
+  color: var(--color-text-disabled);
+}
+.ant-select-dropdown .ant-select-item {
+  padding: 5px var(--spacing-2);
+}
+.ant-select-dropdown .ant-select-item:not(.ant-select-item-option-disabled) {
+  color: var(--color-text-primary);
+}
+.ant-select-dropdown .ant-select-item-option-selected.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-select);
+  color: var(--color-text-on);
+}
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-select);
+  color: var(--color-text-on);
+}
+.ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-hover);
+}
+.ant-select-single:not(.ant-select-customize).ant-select-open .ant-select-content-has-value {
+  opacity: unset;
+}
+.ant-select-dropdown-list-holder-inner {
+  gap: var(--spacing-1);
+}
+.ant-select-multiple .ant-select-content .ant-select-selection-item {
+  margin-inline-end: var(--spacing-2);
+  background: var(--color-hover);
+}
+
+/* TimePicker 组件样式（占位，待填充 token 映射） */
+.ant-picker.ant-picker-css-var {
+  --ant-color-border: var(--gray-20);
+  --ant-border-radius: 4px;
+  --ant-date-picker-padding-block-sm: 1px;
+  --ant-date-picker-padding-inline: 12px;
+  --ant-date-picker-padding-inline-sm: 12px;
+  --ant-date-picker-padding-inline-lg: 12px;
+  --ant-color-text-quaternary: var(--gray-50);
+  --ant-date-picker-active-border-color: var(--brand-50);
+  --ant-date-picker-active-shadow: 0 0 0 1px var(--brand-10);
+  --ant-date-picker-hover-border-color: var(--gray-0);
+  color: var(--color-text-primary);
+}
+.ant-picker.ant-picker-css-var.ant-picker-focused {
+  --ant-color-text-quaternary: var(--gray-90);
+}
+.ant-picker.ant-picker-css-var.ant-picker-disabled {
+  color: var(--color-text-disabled) !important;
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+  border-color: var(--gray-20);
+}
+.ant-picker.ant-picker-css-var.ant-picker-disabled .ant-picker-input > input {
+  color: var(--color-text-disabled);
+}
+.ant-picker.ant-picker-css-var.ant-picker-disabled .ant-picker-suffix {
+  color: var(--color-text-disabled) !important;
+}
+.ant-picker.ant-picker-css-var .ant-picker-input > input {
+  z-index: 1;
+  color: var(--color-text-primary);
+}
+.ant-picker.ant-picker-css-var .ant-picker-input > input::placeholder {
+  color: var(--color-text-placeholder);
+}
+.ant-picker-range .ant-picker-active-bar {
+  bottom: 4px;
+  height: 22px;
+  background: var(--brand-05);
+  border-radius: 2px;
+}
+.ant-picker-range .ant-picker-input > input {
+  padding-left: 4px;
+}
+.ant-picker-range .ant-picker-range-separator {
+  padding: 0px;
+}
+.ant-picker-range .ant-picker-separator {
+  text-align: center;
+}
+.ant-picker-range .ant-picker-separator span {
+  display: none;
+}
+.ant-picker-range .ant-picker-separator::before {
+  content: '-';
+  color: var(--color-text-primary);
+}
+.dark .ant-picker.ant-picker-css-var {
+  --ant-color-border: var(--gray-50);
+  --ant-color-text-quaternary: var(--gray-30);
+  --ant-date-picker-active-border-color: var(--brand-40);
+  --ant-date-picker-active-shadow: 0 0 0 1px var(--brand-80);
+  --ant-date-picker-hover-border-color: var(--brand-40);
+  color: var(--color-text-primary);
+}
+.dark .ant-picker.ant-picker-css-var.ant-picker-focused {
+  --ant-color-text-quaternary: var(--gray-10);
+}
+.dark .ant-picker.ant-picker-css-var.ant-picker-disabled {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-20);
+}
+.dark .ant-picker-range .ant-picker-active-bar {
+  background: rgb(from var(--brand-50) r g b / 0.4);
+}
+
+/* Radio 组件样式（占位，待填充 token 映射） */
+.ant-radio-wrapper:hover .ant-radio {
+  border-color: var(--brand-40);
+}
+.ant-radio-wrapper:hover .ant-radio.ant-radio-checked {
+  background-color: var(--brand-40);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio-label {
+  color: var(--color-text-disabled);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+  border-color: var(--color-border-disabled);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked {
+  background-color: var(--brand-20);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked::after {
+  background-color: var(--gray-0);
+}
+.ant-radio-wrapper .ant-radio {
+  background-color: var(--gray-0);
+  border-color: var(--gray-40);
+}
+.ant-radio-wrapper .ant-radio.ant-radio-checked {
+  background-color: var(--brand-50);
+  border-color: transparent;
+}
+.ant-radio-wrapper .ant-radio-label {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.dark .ant-radio {
+  background-color: var(--gray-100);
+  border-color: var(--gray-50);
+}
+.dark .ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-50);
+}
+.dark .ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked {
+  background-color: var(--brand-70);
+  border-color: transparent;
+}
+.dark .ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked::after {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+
+/* Checkbox 组件样式（token 映射，转换自根目录 checkbox.css） */
+.ant-checkbox-wrapper {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked):hover .ant-checkbox {
+  border-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox-disabled.ant-checkbox {
+  background-color: rgb(from var(--gray-100) r g b / 0.05);
+  border-color: var(--color-border-disabled) !important;
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox-disabled + .ant-checkbox-label {
+  color: var(--color-text-disabled);
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox {
+  border-color: var(--gray-40);
+  background-color: var(--gray-0);
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked:hover .ant-checkbox {
+  background-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled.ant-checkbox {
+  background-color: var(--brand-20) !important;
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled + .ant-checkbox-label {
+  color: var(--color-text-disabled);
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled:after {
+  border-color: var(--gray-0);
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox {
+  background-color: var(--brand-50);
+  border-color: transparent ;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate {
+  background-color: var(--brand-50) !important;
+  border-color: transparent !important;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate:hover {
+  background-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate::after {
+  height: 2px;
+  background-color: var(--gray-0);
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate.ant-checkbox-disabled {
+  background-color: var(--brand-20) !important;
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox {
+  border-color: var(--gray-50);
+  background-color: var(--gray-100);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-disabled.ant-checkbox {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-60) !important;
+}
+.dark .ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled.ant-checkbox {
+  background-color: var(--brand-70) !important;
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled:after {
+  border-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate {
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate::after {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate.ant-checkbox-disabled {
+  background-color: var(--brand-70) !important;
+}
+
+/* Switch 组件样式（占位，待填充 token 映射） */
+.ant-switch {
+  height: 20px;
+  line-height: 20px;
+  min-width: 38px;
+  background-color: var(--gray-30);
+}
+.ant-switch .ant-switch-handle {
+  width: 16px;
+  height: 16px;
+}
+.ant-switch.ant-switch-checked {
+  background-color: var(--brand-50);
+}
+.ant-switch.ant-switch-checked .ant-switch-handle {
+  inset-inline-start: calc(100% - 18px);
+}
+.ant-switch.ant-switch-disabled {
+  background-color: var(--gray-10);
+}
+.ant-switch.ant-switch-disabled.ant-switch-checked {
+  background-color: var(--brand-20);
+}
+.ant-switch .ant-switch-inner .ant-switch-inner-unchecked {
+  margin-top: -20px;
+}
+.ant-switch .ant-switch-inner .ant-switch-inner-checked,
+.ant-switch .ant-switch-inner .ant-switch-inner-unchecked {
+  min-height: 20px;
+}
+.dark .ant-switch {
+  background-color: var(--gray-60);
+}
+.dark .ant-switch.ant-switch-checked {
+  background-color: var(--brand-50);
+}
+.dark .ant-switch.ant-switch-disabled {
+  background-color: var(--gray-60);
+}
+.dark .ant-switch.ant-switch-disabled.ant-switch-checked {
+  background-color: var(--brand-70);
+}
+.dark .ant-switch.ant-switch-disabled .ant-switch-handle::before {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+
+/* Slider 组件样式（占位，待填充 token 映射） */
+.ant-slider .ant-slider-rail {
+  background-color: var(--gray-10);
+}
+.ant-slider .ant-slider-track {
+  background-color: var(--brand-50) !important;
+}
+.ant-slider .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.ant-slider .ant-slider-mark .ant-slider-mark-text {
+  font-size: 14px;
+  color: var(--gray-100);
+}
+.ant-slider:hover .ant-slider-rail {
+  background-color: var(--gray-10);
+}
+.ant-slider:hover .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.ant-slider:hover .ant-slider-handle:not(.ant-slider-handle-disabled)::after {
+  box-shadow: 0 0 0 2px var(--brand-50);
+}
+.dark .ant-slider .ant-slider-rail {
+  background-color: color-mix(in srgb, var(--gray-05) 15%, transparent);
+}
+.dark .ant-slider .ant-slider-track {
+  background-color: var(--brand-50) !important;
+}
+.dark .ant-slider .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  background-color: var(--gray-0);
+  box-shadow: 0 0 0 2px var(--brand-70);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dark .ant-slider .ant-slider-mark .ant-slider-mark-text {
+  font-size: 14px;
+  color: var(--gray-0);
+}
+.dark .ant-slider:hover .ant-slider-rail {
+  background-color: color-mix(in srgb, var(--gray-05) 15%, transparent);
+}
+.dark .ant-slider:hover .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dark .ant-slider:hover .ant-slider-handle:not(.ant-slider-handle-disabled)::after {
+  box-shadow: 0 0 0 2px var(--brand-50);
+}
+
+/* Rate 组件样式（占位，待填充 token 映射） */
+.ant-rate .ant-rate-star {
+  margin-inline-end: var(--spacing-2);
+}
+.ant-rate .anticon svg {
+  color: var(--yellow-50);
+}
+
+/* Table 组件样式（占位，待填充 token 映射） */
+.ant-table .ant-table-content {
+  border-start-start-radius: 0 !important;
+  border-start-end-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-column-sorters {
+  justify-content: flex-start;
+}
+.ant-table .ant-table-content .ant-table-column-sorters .ant-table-column-title {
+  flex: none;
+}
+.ant-table .ant-table-content .ant-table-column-sorters .ant-table-column-sorter {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  margin-inline-start: 8px;
+}
+.ant-table .ant-table-content .ant-table-filter-column {
+  justify-content: flex-start;
+}
+.ant-table .ant-table-content .ant-table-filter-column .ant-table-column-title {
+  flex: none;
+}
+.ant-table .ant-table-content .ant-table-filter-column .ant-table-filter-trigger {
+  margin-inline-start: 8px;
+  margin-inline-end: 0;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px;
+  color: var(--color-text-primary);
+  background-color: var(--gray-05);
+  border-top: none !important;
+  border-bottom: none !important;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th::before {
+  background-color: var(--gray-20) !important;
+  height: 1em !important;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th:first-child {
+  border-start-start-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th:last-child {
+  border-start-end-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-tbody > tr > td {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 8px;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--gray-05);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-row > .ant-table-cell-row-hover {
+  background-color: var(--brand-10);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-row.ant-table-row-selected > .ant-table-cell {
+  background-color: var(--brand-05);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-expanded-row .ant-table-cell {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-column-sort {
+  background: initial;
+}
+.dark .ant-table .ant-table-content .ant-table-thead > tr > th {
+  color: var(--color-text-primary);
+  background-color: var(--gray-70);
+}
+.dark .ant-table .ant-table-content .ant-table-thead > tr > th::before {
+  background-color: var(--gray-50) !important;
+}
+.dark .ant-table .ant-table-content .ant-table-tbody > tr > td {
+  color: var(--color-text-primary);
+  border-bottom: 1px solid rgb(from var(--gray-05) r g b / 0.1);
+  background-color: transparent;
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-row > .ant-table-cell-row-hover {
+  background-color: rgb(from var(--brand-50) r g b / 0.4);
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-row.ant-table-row-selected > .ant-table-cell {
+  background-color: rgb(from var(--brand-50) r g b / 0.2);
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-expanded-row .ant-table-cell {
+  background-color: rgb(from var(--gray-05) r g b / 0.1);
+}
+
+/* Tabs 组件样式（占位，待填充 token 映射） */
+.ant-tabs .ant-tabs-tab {
+  color: var(--color-text-secondary);
+}
+.ant-tabs .ant-tabs-tab:not(.ant-tabs-tab-disabled):hover {
+  color: var(--color-text-primary);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--color-link);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-remove {
+  color: var(--color-link);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-disabled {
+  color: var(--color-text-disabled);
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
+  background-color: var(--color-card-gray-disabled);
+  border-color: transparent;
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab.ant-tabs-tab-active {
+  border-color: var(--color-border-separator);
+  border-bottom-color: var(--color-card-gray-disabled);
+  background-color: var(--color-bg-3);
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-nav-add {
+  border: none;
+}
+.ant-tabs .ant-tabs-tab-remove {
+  padding: 0;
+  font-size: var(--font-size-md);
+}
+.ant-tabs-top > .ant-tabs-nav::before {
+  border-color: var(--color-border-separator);
+}
+
+/* Collapse 组件样式（占位，待填充 token 映射） */
+.ant-collapse .ant-collapse-item {
+  border-color: var(--color-border-separator);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-header {
+  color: var(--color-text-primary);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-header .ant-collapse-expand-icon {
+  margin-inline-end: var(--spacing-1);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-panel {
+  border-color: var(--color-border-separator);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-panel .ant-collapse-body {
+  padding: var(--spacing-3) var(--spacing-4) var(--spacing-4) var(--spacing-8);
+}
+.dark .ant-collapse .ant-collapse-item {
+  border-color: var(--color-text-inverse-disabled);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-header {
+  color: var(--color-text-primary);
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-header .ant-collapse-expand-icon {
+  color: var(--gray-10);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-panel {
+  border-color: var(--color-text-inverse-disabled);
+}
+
+/* Tag 组件样式（占位，待填充 token 映射） */
+.ant-tag {
+  border-color: transparent;
+  padding: 0 var(--spacing-2);
+  line-height: 24px;
+  background-color: var(--color-tag-bg-none);
+  color: var(--color-text-primary);
+}
+.ant-tag.ant-tag-processing:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-info);
+  color: var(--color-tag-text-info);
+}
+.ant-tag.ant-tag-error:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-error);
+  color: var(--color-tag-text-error);
+}
+.ant-tag.ant-tag-warning:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-warning);
+  color: var(--color-tag-text-warning);
+}
+.ant-tag.ant-tag-gold:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-alert);
+  color: var(--color-tag-text-alert);
+}
+.ant-tag.ant-tag-success:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-success);
+  color: var(--color-tag-text-success);
+}
+.ant-tag.ant-tag-green:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-green);
+  color: var(--color-tag-text-green);
+}
+.ant-tag.ant-tag-magenta:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-rose);
+  color: var(--color-tag-text-rose);
+}
+.ant-tag.ant-tag-pink:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-pink);
+  color: var(--color-tag-text-pink);
+}
+.ant-tag.ant-tag-purple:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-purple);
+  color: var(--color-tag-text-purple);
+}
+.ant-tag.ant-tag-geekblue:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-indigo);
+  color: var(--color-tag-text-indigo);
+}
+.ant-tag.ant-tag-cyan:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-cyan);
+  color: var(--color-tag-text-cyan);
+}
+.ant-tag.ant-tag-disabled {
+  background-color: var(--color-tag-bg-none);
+  color: var(--color-text-disabled);
+}
+.ant-tag.ant-tag-disabled .anticon {
+  color: var(--color-text-disabled);
+}
+.ant-tag > .anticon + span,
+.ant-tag > span + .anticon {
+  margin-left: var(--spacing-1);
+}
+.ant-tag .anticon {
+  color: var(--color-text-primary);
+}
+
+/* Badge 组件样式（占位，待填充 token 映射） */
+.ant-badge .ant-badge-count {
+  min-width: 16px;
+  border: none;
+  padding: var(--spacing-0-5) var(--spacing-1);
+  font-size: var(--font-size-base);
+  line-height: 12px;
+  height: 18px;
+  border: 1px solid var(--gray-0);
+  box-shadow: 0 0 0 1px var(--gray-0);
+  background-color: var(--color-error);
+  color: var(--color-text-inverse);
+}
+.ant-badge .ant-badge-dot {
+  box-shadow: 0 0 0 1px var(--gray-0);
+  border: 1px solid var(--gray-0);
+  background-color: var(--color-error);
+}
+.dark .ant-badge .ant-badge-count {
+  border: 1px solid rgb(from var(--gray-0) r g b / 0);
+  box-shadow: 0 0 0 1px rgb(from var(--gray-0) r g b / 0);
+}
+.dark .ant-badge .ant-badge-dot {
+  box-shadow: 0 0 0 1px rgb(from var(--gray-0) r g b / 0);
+  border: 1px solid rgb(from var(--gray-0) r g b / 0);
+}
+
+/* Progress 组件样式（占位，待填充 token 映射） */
+.ant-progress .ant-progress-indicator {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+}
+.ant-progress.ant-progress-line .ant-progress-rail {
+  background-color: var(--color-border-separator);
+}
+.ant-progress.ant-progress-line .ant-progress-track {
+  background-color: var(--color-brand);
+}
+.ant-progress.ant-progress-line.ant-progress-status-success .ant-progress-track {
+  background-color: var(--mint-50);
+}
+.dark .ant-progress.ant-progress-line.ant-progress-status-success .ant-progress-track {
+  background-color: var(--mint-40);
+}
+
+/* Steps 组件样式（占位，待填充 token 映射） */
+.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item-wrapper {
+  column-gap: var(--spacing-3);
+}
+.ant-steps-small.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item-wrapper {
+  column-gap: var(--spacing-2);
+}
+.ant-steps-title-vertical > .ant-steps-item .ant-steps-item-wrapper {
+  row-gap: var(--spacing-2);
+}
+.ant-steps-title-horizontal.ant-steps-vertical .ant-steps-item-wrapper {
+  column-gap: var(--spacing-3);
+}
+.ant-steps-small.ant-steps-title-horizontal.ant-steps-vertical .ant-steps-item-wrapper {
+  column-gap: var(--spacing-2);
+}
+.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item:not(:first-child) {
+  margin-inline-start: var(--spacing-3);
+}
+.ant-steps-small.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item:not(:first-child) {
+  margin-inline-start: var(--spacing-2);
+}
+.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item-rail {
+  margin-inline-start: var(--spacing-3);
+}
+.ant-steps-title-vertical > .ant-steps-item .ant-steps-item-rail {
+  width: calc(100% - var(--ant-cmp-steps-icon-size) - var(--spacing-2) * 2);
+  inset-inline-start: calc(50% + var(--ant-cmp-steps-icon-size) / 2 + var(--spacing-2));
+}
+.ant-steps-small.ant-steps-title-vertical > .ant-steps-item .ant-steps-item-rail {
+  width: calc(100% - var(--ant-cmp-steps-icon-size) - var(--spacing-2) * 2);
+  inset-inline-start: calc(50% + var(--ant-cmp-steps-icon-size) / 2 + var(--spacing-2));
+  margin-inline-start: 0;
+}
+.ant-steps .ant-steps-item-rail {
+  border-color: var(--color-border-separator);
+}
+.ant-steps .ant-steps-item-rail-process {
+  border-color: var(--brand-50);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item:not(.ant-steps-item-custom) .ant-steps-item-icon,
+.ant-steps:not(.ant-steps-dot) .ant-steps-item:not(.ant-steps-item-wait) .ant-steps-item-icon {
+  border-color: var(--color-border-focus);
+  background-color: var(--color-info-primary-subtler);
+  color: var(--color-border-focus);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item.ant-steps-item-wait .ant-steps-item-icon {
+  color: var(--color-text-placeholder);
+  background-color: var(--color-fill);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item-wait.ant-steps-item:not(.ant-steps-item-custom) .ant-steps-item-icon {
+  border-color: var(--color-border);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item:not(.ant-steps-item-custom).ant-steps-item-active .ant-steps-item-icon {
+  border-color: transparent;
+}
+.ant-steps .ant-steps-item:not(.ant-steps-item-wait) .ant-steps-item-title {
+  color: var(--color-text-primary);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait.ant-steps-item-active .ant-steps-item-title {
+  color: var(--color-link);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait.ant-steps-item-active .ant-steps-item-content {
+  color: var(--color-link);
+}
+.ant-steps .ant-steps-item .ant-steps-item-title {
+  color: var(--color-text-secondary);
+}
+.ant-steps .ant-steps-item .ant-steps-item-content {
+  color: var(--color-text-secondary);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait .ant-steps-item-icon {
+  color: var(--color-text-placeholder);
+}
+.ant-steps .ant-steps-item-content {
+  color: var(--color-text-secondary);
+}
+.ant-steps.ant-steps-small .ant-steps-item-content {
+  font-size: var(--font-size-base);
+}
+.ant-steps.ant-steps-small .ant-steps-item-rail {
+  margin-inline-start: var(--spacing-2);
+}
+.ant-steps.ant-steps-panel .ant-steps-item .ant-steps-item-content {
+  font-size: var(--font-size-base);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish {
+  background-color: var(--color-info-primary-subtler);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish .ant-steps-item-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish .ant-steps-panel-arrow path {
+  fill: var(--color-info-primary-subtler);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active {
+  background-color: var(--color-brand);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active .ant-steps-item-title {
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active .ant-steps-panel-arrow path {
+  fill: var(--color-brand);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait {
+  background-color: var(--color-fill);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait .ant-steps-item-title {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait .ant-steps-panel-arrow path {
+  fill: var(--color-fill);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error {
+  background-color: var(--red-05);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-item-title {
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-panel-arrow path {
+  fill: var(--red-05);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error.ant-steps-item-active {
+  color: var(--color-text-inverse);
+  background-color: var(--color-error);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error.ant-steps-item-active .ant-steps-panel-arrow path {
+  fill: var(--color-error);
+}
+.dark .ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error {
+  background-color: rgba(238, 0, 34, 0.4);
+}
+.dark .ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-panel-arrow path {
+  fill: rgba(238, 0, 34, 0.4);
+}
+
+/* Pagination 组件样式（占位，待填充 token 映射） */
+.ant-pagination {
+  font-size: 14px;
+}
+.ant-pagination .ant-pagination-total-text {
+  color: var(--gray-90);
+  margin-right: var(--spacing-2);
+}
+.ant-pagination .ant-pagination-prev,
+.ant-pagination .ant-pagination-next {
+  margin-right: var(--spacing-2);
+  height: 24px !important;
+  min-width: 24px;
+  margin-inline-end: var(--spacing-2);
+}
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  width: 24px !important;
+}
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link .anticon,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link .anticon {
+  width: 10px;
+  height: 10px;
+}
+.ant-pagination .ant-pagination-item {
+  margin-right: var(--spacing-2);
+  color: var(--gray-90);
+  width: 32px;
+  height: 32px;
+}
+.ant-pagination .ant-pagination-item a:hover {
+  text-decoration: none;
+  background-color: color-mix(in srgb, var(--gray-90) 50%, transparent);
+  color: var(--gray-90);
+}
+.ant-pagination .ant-pagination-item-active {
+  background-color: var(--brand-05);
+  border: none;
+  font-weight: var(--font-weight-normal);
+  color: var(--brand-50);
+}
+.ant-pagination .ant-pagination-item-active:hover a {
+  color: var(--brand-50);
+  font-weight: var(--font-weight-normal);
+}
+.ant-pagination .ant-pagination-options {
+  margin-inline-start: 0;
+}
+.ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item .ant-select-item-option-content {
+  font-weight: var(--font-weight-normal) !important;
+}
+.ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item-option-selected {
+  background-color: var(--brand-05);
+}
+.ant-pagination .ant-pagination-options .ant-pagination-options-quick-jumper input {
+  color: var(--gray-90);
+  font-size: 14px;
+}
+.dark {
+  /* Pagination 组件样式（占位，待填充 token 映射） */
+}
+.dark .ant-pagination {
+  font-size: 14px;
+}
+.dark .ant-pagination .ant-pagination-total-text {
+  color: var(--gray-0);
+  margin-right: var(--spacing-2);
+}
+.dark .ant-pagination .ant-pagination-prev,
+.dark .ant-pagination .ant-pagination-next {
+  margin-right: var(--spacing-2);
+  height: 24px !important;
+  min-width: 24px;
+  margin-inline-end: var(--spacing-2);
+}
+.dark .ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.dark .ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  width: 24px !important;
+}
+.dark .ant-pagination .ant-pagination-prev .ant-pagination-item-link .anticon,
+.dark .ant-pagination .ant-pagination-next .ant-pagination-item-link .anticon {
+  width: 10px;
+  height: 10px;
+}
+.dark .ant-pagination .ant-pagination-item {
+  margin-right: var(--spacing-2);
+  color: var(--gray-0);
+  width: 32px;
+  height: 32px;
+}
+.dark .ant-pagination .ant-pagination-item a:hover {
+  text-decoration: none;
+  background-color: color-mix(in srgb, var(--brand-05) 20%, transparent);
+  color: var(--gray-0);
+}
+.dark .ant-pagination .ant-pagination-item-active {
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  border: none;
+  font-weight: var(--font-weight-normal);
+  color: var(--gray-0) !important;
+}
+.dark .ant-pagination .ant-pagination-item-active a {
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  border: none;
+  font-weight: var(--font-weight-normal);
+  color: var(--gray-0) !important;
+}
+.dark .ant-pagination .ant-pagination-item-active:hover a {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  font-weight: var(--font-weight-normal);
+}
+.dark .ant-pagination .ant-pagination-options {
+  margin-inline-start: 0;
+}
+.dark .ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item .ant-select-item-option-content {
+  font-weight: var(--font-weight-normal) !important;
+}
+.dark .ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item-option-selected {
+  background-color: var(--brand-05);
+}
+.dark .ant-pagination .ant-pagination-options .ant-pagination-options-quick-jumper input {
+  color: var(--gray-90);
+  font-size: 14px;
+}
+
+.ant-tooltip {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-tooltip .ant-tooltip-container {
+  color: var(--color-text-primary);
+  padding: var(--spacing-4);
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-tooltip .ant-tooltip-arrow:before {
+  background-color: var(--color-bg-4);
+}
+
+.ant-popover .ant-popover-container {
+  padding: var(--spacing-4);
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-popover .ant-popover-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-lg);
+}
+.ant-popover .ant-popover-content {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+}
+
+/* Timeline 组件样式（占位，待填充 token 映射） */
+.ant-steps .ant-steps-item .ant-steps-item-wrapper {
+  column-gap: var(--spacing-2);
+}
+.ant-steps .ant-steps-item .ant-steps-item-wrapper .ant-steps-item-icon {
+  font-size: var(--font-size-md);
+}
+.ant-steps .ant-steps-item .ant-steps-item-wrapper .ant-steps-item-section {
+  gap: var(--spacing-8) !important;
+}
+.ant-steps .ant-steps-item .ant-steps-item-wrapper .ant-steps-item-section .ant-steps-item-header .ant-steps-item-rail {
+  margin-top: var(--spacing-1);
+  margin-bottom: var(--spacing-1);
+}
+
+/* Tree 组件样式（占位，待填充 token 映射） */
+.ant-tree {
+  color: var(--color-text-primary);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-treenode {
+  margin-bottom: var(--spacing-0);
+  line-height: var(--spacing-7);
+  padding: var(--spacing-1) 0;
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  line-height: var(--spacing-4);
+  margin-right: var(--spacing-2);
+  align-self: center;
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher:hover {
+  background: var(--color-fill);
+  border-radius: var(--radius-base);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher::before {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-checkbox {
+  margin-top: var(--spacing-0);
+  align-self: center;
+  margin-right: var(--spacing-2);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-node-content-wrapper:hover {
+  background: var(--color-fill);
+  border-radius: var(--radius-base);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-node-content-wrapper.ant-tree-node-selected {
+  background: var(--color-select);
+}
+
+/* Segmented 组件样式（占位，待填充 token 映射） */
+.ant-segmented .ant-segmented-group {
+  gap: var(--spacing-1);
+  background: var(--color-fill);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-label {
+  padding: 0 var(--spacing-4);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-90);
+  background: var(--color-fill);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled {
+  color: var(--gray-20);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected-text {
+  color: var(--gray-0);
+  background: var(--brand-50);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected-text:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+  background: var(--brand-40);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected-text.ant-segmented-item-disabled {
+  color: var(--gray-0);
+  background: var(--brand-20);
+}
+.dark .ant-segmented-group .ant-segmented-item .ant-segmented-item-icon {
+  color: var(--gray-30);
+}
+.dark .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover .ant-segmented-item-icon {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled {
+  color: var(--gray-40);
+}
+.dark .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled .ant-segmented-item-icon {
+  color: var(--gray-40);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text {
+  color: var(--gray-0);
+  background: var(--brand-50);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text .ant-segmented-item-icon {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+  background: var(--brand-40);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text.ant-segmented-item-disabled {
+  color: var(--color-text-inverse-disabled);
+  background: var(--brand-70);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text.ant-segmented-item-disabled .ant-segmented-item-icon {
+  color: var(--color-text-inverse-disabled);
+}
+
+/* Drawer 组件样式（占位，待填充 token 映射） */
+.ant-drawer .ant-drawer-content-wrapper {
+  box-shadow: var(--shadow-l-base);
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header {
+  padding: 20px 24px 16px;
+  border-bottom: none;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close {
+  order: 2;
+  margin-inline-start: auto;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close .anticon {
+  font-size: 14px;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close .anticon svg {
+  width: 14px;
+  height: 14px;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-body {
+  padding: 0 24px 24px;
+}
+.dark .ant-drawer .ant-drawer-content-wrapper .ant-drawer-section {
+  background-color: var(--gray-80);
+}
+
+/* Modal 组件样式（占位，待填充 token 映射） */
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container {
+  position: relative;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: var(--radius-lg);
+  pointer-events: auto;
+  padding: var(--spacing-6);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header {
+  color: var(--gray-90);
+  margin-bottom: var();
+  padding: var(--ant-modal-header-padding);
+  border-bottom: var(--spacing-4);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header .ant-modal-title {
+  font-size: 20px;
+  color: var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-secondary,
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-link.ant-typography-secondary {
+  color: var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn {
+  border-radius: var(--radius-base);
+  height: 36px;
+  line-height: 36px;
+  border: 1px solid var(--gray-20);
+  color: var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn span {
+  font-size: 14px;
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:hover {
+  border: 1px solid var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:active {
+  border: 1px solid var(--brand-50);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary {
+  background-color: var(--brand-50);
+  color: var(--gray-0);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:hover {
+  background-color: var(--brand-40);
+  color: var(--gray-0);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:active {
+  background-color: var(--brand-60);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container {
+  position: relative;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: var(--radius-lg);
+  pointer-events: auto;
+  padding: var(--spacing-6);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header {
+  color: var(--gray-0);
+  margin-bottom: var();
+  padding: var(--ant-modal-header-padding);
+  border-bottom: var(--spacing-4);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header .ant-modal-title {
+  font-size: 20px;
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-secondary,
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-link.ant-typography-secondary {
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn {
+  border-radius: var(--radius-base);
+  height: 36px;
+  line-height: 36px;
+  border: 1px solid var(--gray-50);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn span {
+  font-size: 14px;
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:hover {
+  border: 1px solid var(--gray-05);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:active {
+  border: 1px solid var(--brand-40);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary {
+  background-color: var(--brand-50);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:hover {
+  background-color: var(--brand-40);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:active {
+  background-color: var(--brand-60);
+  color: var(--gray-0);
+}
+
+/* Breadcrumb 组件样式（占位，待填充 token 映射） */
+.ant-breadcrumb .ant-breadcrumb-item {
+  color: var(--gray-50);
+  font-size: 14px;
+}
+.ant-breadcrumb .ant-breadcrumb-item:last-child {
+  color: var(--gray-90);
+}
+.ant-breadcrumb .ant-breadcrumb-separator {
+  width: 12px;
+  text-align: center;
+  margin-inline: var(--spacing-1);
+  color: var(--gray-20);
+}
+.dark .ant-breadcrumb .ant-breadcrumb-item {
+  color: var(--gray-20);
+  font-size: 14px;
+}
+.dark .ant-breadcrumb .ant-breadcrumb-item:last-child {
+  color: var(--gray-0);
+}
+.dark .ant-breadcrumb .ant-breadcrumb-separator {
+  width: 12px;
+  text-align: center;
+  margin-inline: var(--spacing-1);
+  color: var(--gray-40);
+}
+
+/* Dropdown 下拉菜单样式（占位，待填充 token 映射） */
+.ant-dropdown .ant-dropdown-menu {
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
+  padding: var(--spacing-1) var(--spacing-2);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-base);
+  line-height: 32px;
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item-icon {
+  font-size: var(--font-size-md);
+  margin-right: var(--spacing-1);
+}
+.dark .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+  background-color: var(--gray-70);
+}
+
+/* Menu 导航菜单样式（占位，待填充 token 映射） */
+.ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title {
+  padding-left: var(--spacing-3);
+  padding-right: var(--spacing-3);
+  color: var(--gray-90);
+  font-size: 14px;
+}
+.ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title:active {
+  color: var(--brand-50);
+  background-color: var(--brand-05);
+}
+.ant-menu-inline .ant-menu-submenu-selecte {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item {
+  font-size: 14px;
+}
+.ant-menu-light .ant-menu-item-selected,
+.ant-menu-light > .ant-menu .ant-menu-item-selected {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item:active {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item:hover {
+  color: var(--gray-90);
+  background-color: color-mix(in srgb, var(--gray-90) 5%, transparent);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title {
+  padding-left: var(--spacing-3);
+  padding-right: var(--spacing-3);
+  color: var(--gray-0);
+  font-size: 14px;
+  background-color: var(--gray-90);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title .ant-menu-item-icon {
+  color: var(--gray-10);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title:active {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+}
+.dark .ant-menu-inline .ant-menu-submenu-selecte {
+  color: var(--gray-0) !important;
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-item {
+  font-size: 14px;
+}
+.dark .ant-menu-light .ant-menu-item-selected,
+.dark .ant-menu-light > .ant-menu .ant-menu-item-selected {
+  color: var(--gray-0) !important;
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-item:active {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-item:hover {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--gray-05) 20%, transparent);
+}
+.ant-menu-vertical .ant-menu-item {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.ant-menu-horizontal .ant-menu-item {
+  color: var(--gray-50);
+  font-size: 16px;
+}
+.ant-menu-horizontal .ant-menu-item::after {
+  border-bottom: 0 !important;
+}
+.ant-menu-horizontal .ant-menu-item:hover {
+  color: var(--gray-90);
+}
+.ant-menu-horizontal .ant-menu-item:active {
+  background-color: transparent !important;
+}
+.ant-menu-horizontal .ant-menu-item:hover::after {
+  border-bottom: 0;
+}
+.ant-menu-horizontal .ant-menu-item-selected {
+  background-color: transparent !important;
+}
+.ant-menu-horizontal .ant-menu-item-selected::after {
+  border-bottom: 2px solid var(--brand-50) !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item {
+  color: var(--gray-20);
+  font-size: 16px;
+}
+.dark .ant-menu-horizontal .ant-menu-item::after {
+  border-bottom: 0 !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item:hover {
+  color: var(--gray-0);
+}
+.dark .ant-menu-horizontal .ant-menu-item:active {
+  color: var(--brand-30);
+  background-color: transparent !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item:hover::after {
+  border-bottom: 0;
+}
+.dark .ant-menu-horizontal .ant-menu-item-selected {
+  color: var(--brand-30) !important;
+  background-color: transparent !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item-selected::after {
+  border-bottom: 2px solid var(--brand-30) !important;
+}
+
+.ant-form-item .ant-form-item-label > label {
+  font-size: 14px;
+  color: var(--gray-90);
+}
+.ant-form-item .ant-form-item-label label:not(.ant-form-item-required)::before {
+  content: "*";
+  display: inline-block;
+  margin-inline-end: var(--ant-margin-xxs);
+  font-size: var(--ant-font-size);
+  font-family: sans-serif;
+  line-height: 1;
+  visibility: hidden;
+}
+.ant-form-item .ant-form-item-extra {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--gray-30);
+}
+.ant-form-item .ant-form-item-explain-error {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--red-50);
+}
+.ant-form-item .ant-form-item-explain-warning {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--yellow-50);
+}
+.dark .ant-form-item .ant-form-item-label > label {
+  color: var(--gray-0);
+}
+.dark .ant-form-item-extra {
+  color: var(--gray-40);
+}
+.dark .ant-form-item-explain-error {
+  color: var(--red-40);
+}
+.dark .ant-form-item-explain-warning {
+  color: var(--orange-50);
+}
+
+
+/* 应用级基础样式 — 页面骨架与通用卡片容器 */
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+/* ── 主体骨架：侧边导航 + 内容区 ── */
+.app-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  padding: var(--spacing-page);
+  background: var(--surface-container-lowest);
+}
+
+.app-main__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+}
+
+/* ── 页头：标题 + 主操作 ── */
+.app-page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  margin-bottom: var(--spacing-6);
+}
+
+.app-page-head__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+  min-width: 0;
+}
+
+.app-page-head__crumb {
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.app-page-head__title {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-semibold);
+}
+
+.app-page-head__desc {
+  margin: 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.app-page-head__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: none;
+}
+
+.app-page-head__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  height: 32px;
+  padding: 0 var(--spacing-4);
+  border: var(--border-width-thin) solid var(--outline);
+  border-radius: var(--radius-action);
+  background: var(--surface-container-highest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.app-page-head__btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.app-page-head__btn--primary {
+  border-color: transparent;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.app-page-head__btn--primary:hover {
+  background: var(--primary-hover);
+  color: var(--on-primary);
+}
+
+/* ── 通用内容卡片（Level 1：最高层容器 + 卡片阴影，不加描边） ── */
+.panel-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.panel-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  border-bottom: var(--border-width-thin) solid var(--divider);
+}
+
+.panel-card__titles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+  min-width: 0;
+}
+
+.panel-card__title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+}
+
+.panel-card__desc {
+  margin: 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.panel-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: none;
+}
+
+@media (max-width: 1024px) {
+  .app-main {
+    padding: var(--spacing-4);
+  }
+
+  .app-page-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  height: 48px;
+  flex: none;
+  padding: 0 var(--spacing-4) 0 var(--spacing-3);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-t-sm);
+  position: relative;
+  z-index: 20;
+}
+
+/* ── 品牌区 ── */
+.header-bar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: none;
+}
+
+.header-bar__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md);
+  background: var(--primary-fixed);
+  color: var(--on-primary-fixed);
+}
+
+.header-bar__names {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.header-bar__title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.header-bar__sub {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+/* ── 全局工具区 ── */
+.header-bar__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: none;
+}
+
+.header-bar__search {
+  width: 220px;
+}
+
+.header-bar__lang {
+  flex: none;
+}
+
+.header-bar__divider {
+  width: var(--border-width-thin);
+  height: 20px;
+  background: var(--divider);
+  margin: 0 var(--spacing-1);
+}
+
+.header-bar__user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding-left: var(--spacing-1);
+}
+
+.header-bar__avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  background: var(--surface-variant);
+}
+
+.header-bar__user-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.header-bar__user-text strong {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.header-bar__user-text em {
+  font: var(--font-caption-s);
+  font-style: normal;
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+@media (max-width: 1280px) {
+  .header-bar__search,
+  .header-bar__user-text {
+    display: none;
+  }
+}
+
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  width: 248px;
+  height: 100%;
+  padding: var(--spacing-2) 0 var(--spacing-3);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-r-sm);
+  transition: width 0.18s ease;
+  overflow: hidden auto;
+}
+
+.side-nav.is-collapsed {
+  width: 48px;
+}
+
+.side-nav__menu {
+  flex: 1;
+}
+
+.side-nav__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: var(--spacing-2) var(--spacing-3) 0;
+  padding-top: var(--spacing-3);
+  border-top: var(--border-width-thin) solid var(--divider);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-s);
+  white-space: nowrap;
+}
+
+.side-nav.is-collapsed .side-nav__footer {
+  justify-content: center;
+  margin: var(--spacing-2) var(--spacing-1) 0;
+}
+
+
+.strategy-form {
+  padding: var(--spacing-inset);
+}
+
+.strategy-form__draft {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: 2px var(--spacing-2);
+  border-radius: var(--radius-badge);
+  background: var(--warning-container);
+  color: var(--critical);
+  font: var(--font-caption-m);
+  white-space: nowrap;
+}
+
+/* 打开高级参数时的提示行 */
+.strategy-form__hint {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin: 0 0 var(--spacing-4);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.strategy-form__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding-top: var(--spacing-4);
+  border-top: var(--border-width-thin) solid var(--divider);
+}
+
+.strategy-form__footer-main {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+
+/* Layer 3: 策略字段组样式 — 两列自适应栅格 + 高级参数二级容器 */
+
+.strategy-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.strategy-fields__group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.strategy-fields__group-title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.strategy-fields__group-line {
+  flex: 1;
+  height: var(--border-width-thin);
+  background: var(--divider);
+}
+
+.strategy-fields__group-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: 2px var(--spacing-2);
+  border-radius: var(--radius-badge);
+  background: var(--primary-container);
+  color: var(--primary);
+  font: var(--font-caption-m);
+}
+
+.strategy-fields__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--spacing-gutter);
+  row-gap: var(--spacing-0);
+}
+
+.strategy-fields__full {
+  grid-column: 1 / -1;
+}
+
+/* 高级参数面板 = 卡片内的二级区域（theme: Level 2 用 surface-variant） */
+.strategy-fields__advanced {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-inset);
+  border-radius: var(--radius-container);
+  background: var(--surface-variant);
+  animation: fields-expand 0.18s ease-out;
+}
+
+@keyframes fields-expand {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.strategy-fields__checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-inline);
+}
+
+/* 开关行：Label + 说明在行首，Switch 在行尾 */
+.switch-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-3) var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+  border-radius: var(--radius-container);
+  background: var(--surface-container-high);
+}
+
+.strategy-fields__advanced .switch-row,
+.switch-row--inset {
+  background: var(--surface-container-highest);
+}
+
+.switch-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+  min-width: 0;
+}
+
+.switch-row__label {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.switch-row__desc {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+@media (max-width: 1024px) {
+  .strategy-fields__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+
+.strategy-table {
+  padding: var(--spacing-inset) var(--spacing-inset) var(--spacing-4);
+}
+
+/* ── 工具区 ── */
+.strategy-table__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) 0;
+}
+
+.strategy-table__search {
+  width: 260px;
+}
+
+.strategy-table__count {
+  padding: 2px var(--spacing-2);
+  border-radius: var(--radius-badge);
+  background: var(--primary-container);
+  color: var(--primary);
+  font: var(--font-caption-m);
+  white-space: nowrap;
+}
+
+.strategy-table__toolbar-ops {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-left: auto;
+}
+
+/* ── 单元格 ── */
+.strategy-table__code {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  letter-spacing: 0.02em;
+}
+
+.strategy-table__link {
+  height: auto;
+  padding: 0;
+  font: var(--font-body-m);
+  text-align: left;
+  white-space: normal;
+}
+
+.strategy-table__type {
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.strategy-table__time {
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.strategy-table__ops {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+/* 展开行：卡片内二级区域 */
+.strategy-table__expand {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-container);
+  background: var(--surface-variant);
+}
+
+.strategy-table__expand-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+}
+
+.strategy-table__expand-k {
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.strategy-table__expand-v {
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ── 空状态 ── */
+.strategy-table__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-8) 0;
+  color: var(--on-surface-variant);
+}
+
+.strategy-table__empty strong {
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.strategy-table__empty span {
+  font: var(--font-body-s);
+}
+
+@media (max-width: 1024px) {
+  .strategy-table__expand {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: 0 var(--spacing-2);
+  border-radius: var(--radius-badge);
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  line-height: 20px;
+}
+
+.status-tag__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+}
+
+/* 软底状态色：底色用 *-container，文字用状态主色，暗色模式随 token 自动翻转 */
+.status-tag--success {
+  color: var(--success);
+  background: var(--success-container);
+}
+
+.status-tag--warning {
+  color: var(--critical);
+  background: var(--critical-container);
+}
+
+.status-tag--error {
+  color: var(--error);
+  background: var(--error-container);
+}
+
+.status-tag--info {
+  color: var(--info);
+  background: var(--info-container);
+}
+
+.status-tag--neutral {
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+}
+
+
+.strategy-modal__title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.strategy-modal__desc {
+  margin: 0 0 var(--spacing-4);
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.strategy-modal__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin: 0;
+  padding: 2px var(--spacing-2);
+  border-radius: var(--radius-badge);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+</style>
+<!-- 6. Base styles -->
+<style>
+body, html { margin: 0; padding: 0; height: 100%; font-family: var(--font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif); }
+#root { height: 100%; }
+</style>
+</head>
+<body>
+<div id="root">Loading...</div>
+<script>
+// 注册 classic JSX 运行时 preset(新版 babel-standalone 默认 automatic,
+// 产出的 import "react/jsx-runtime" 无法在经典脚本中执行)
+Babel.registerPreset("react-classic", {
+  presets: [[Babel.availablePresets["react"], { runtime: "classic" }]],
+});
+</script>
+<script type="text/babel" data-presets="react-classic">
+var __export = {};
+/* ===== assets/shared/antd-zh.js ===== */
+(function () {
+// antd-zh.js — 中文 locale 补丁包
+// antd.min.js / dayjs.min.js UMD 均不含 locale 包,本文件补齐:
+//   1. 注册 dayjs zh-cn locale(星期/月份/相对时间中文化)
+//   2. 导出 antd ConfigProvider 可用的 zhCN locale 对象
+//
+// 用法(页面入口):
+//   import zhCN from "./assets/shared/antd-zh.js";
+//   <ConfigProvider locale={zhCN}> ... </ConfigProvider>
+
+// ---- 1. 注册 dayjs zh-cn locale(dayjs.min.js 核心包不带任何 locale) ----
+dayjs.locale(
+  "zh-cn",
+  {
+    name: "zh-cn",
+    weekdays: "星期日_星期一_星期二_星期三_星期四_星期五_星期六".split("_"),
+    weekdaysShort: "周日_周一_周二_周三_周四_周五_周六".split("_"),
+    weekdaysMin: "日_一_二_三_四_五_六".split("_"),
+    months: "一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月".split("_"),
+    monthsShort: "1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月".split("_"),
+    weekStart: 1,
+    formats: {
+      LT: "HH:mm",
+      LTS: "HH:mm:ss",
+      L: "YYYY/MM/DD",
+      LL: "YYYY年M月D日",
+      LLL: "YYYY年M月D日 Ah点mm分",
+      LLLL: "YYYY年M月D日ddddAh点mm分",
+      l: "YYYY/M/D",
+      ll: "YYYY年M月D日",
+      lll: "YYYY年M月D日 HH:mm",
+      llll: "YYYY年M月D日dddd HH:mm",
+    },
+    relativeTime: {
+      future: "%s内",
+      past: "%s前",
+      s: "几秒",
+      m: "1 分钟",
+      mm: "%d 分钟",
+      h: "1 小时",
+      hh: "%d 小时",
+      d: "1 天",
+      dd: "%d 天",
+      M: "1 个月",
+      MM: "%d 个月",
+      y: "1 年",
+      yy: "%d 年",
+    },
+    meridiem(hour, minute) {
+      const hm = hour * 100 + minute;
+      if (hm < 600) return "凌晨";
+      if (hm < 900) return "早上";
+      if (hm < 1130) return "上午";
+      if (hm < 1230) return "中午";
+      if (hm < 1800) return "下午";
+      return "晚上";
+    },
+    ordinal(number, period) {
+      switch (period) {
+        case "W":
+          return `${number}周`;
+        default:
+          return `${number}日`;
+      }
+    },
+  },
+  true
+);
+// ---- 2. antd zh_CN locale(对齐 antd 5 官方 zh_CN,常用组件全量) ----
+const typeTemplate = "${label}不是一个有效的${type}";
+const zhCN = {
+  locale: "zh-cn",
+  dayjsLocale: "zh-cn",
+  Pagination: {
+    items_per_page: "条/页",
+    jump_to: "跳至",
+    jump_to_confirm: "确定",
+    page: "页",
+    prev_page: "上一页",
+    next_page: "下一页",
+    prev_5: "向前 5 页",
+    next_5: "向后 5 页",
+    prev_3: "向前 3 页",
+    next_3: "向后 3 页",
+  },
+  DatePicker: {
+    lang: {
+      placeholder: "请选择日期",
+      yearPlaceholder: "请选择年份",
+      quarterPlaceholder: "请选择季度",
+      monthPlaceholder: "请选择月份",
+      weekPlaceholder: "请选择周",
+      rangePlaceholder: ["开始日期", "结束日期"],
+      rangeYearPlaceholder: ["开始年份", "结束年份"],
+      rangeMonthPlaceholder: ["开始月份", "结束月份"],
+      rangeWeekPlaceholder: ["开始周", "结束周"],
+      locale: "zh_cn",
+      today: "今天",
+      now: "此刻",
+      backToToday: "返回今天",
+      ok: "确定",
+      timeSelect: "选择时间",
+      dateSelect: "选择日期",
+      weekSelect: "选择周",
+      clear: "清除",
+      month: "月",
+      year: "年",
+      previousMonth: "上个月 (翻页上键)",
+      nextMonth: "下个月 (翻页下键)",
+      monthSelect: "选择月份",
+      yearSelect: "选择年份",
+      decadeSelect: "选择年代",
+      yearFormat: "YYYY年",
+      dayFormat: "D日",
+      dateFormat: "YYYY年M月D日",
+      dateTimeFormat: "YYYY年M月D日 HH时mm分ss秒",
+      previousYear: "上一年 (Control键加左方向键)",
+      nextYear: "下一年 (Control键加右方向键)",
+      previousDecade: "上一年代",
+      nextDecade: "下一年代",
+      previousCentury: "上一世纪",
+      nextCentury: "下一世纪",
+      shortWeekDays: ["一", "二", "三", "四", "五", "六", "日"],
+    },
+    timePickerLocale: { placeholder: "请选择时间" },
+  },
+  TimePicker: { placeholder: "请选择时间" },
+  Calendar: {
+    lang: {
+      placeholder: "请选择日期",
+      yearPlaceholder: "请选择年份",
+      quarterPlaceholder: "请选择季度",
+      monthPlaceholder: "请选择月份",
+      weekPlaceholder: "请选择周",
+      rangePlaceholder: ["开始日期", "结束日期"],
+      locale: "zh_cn",
+      today: "今天",
+      now: "此刻",
+      backToToday: "返回今天",
+      ok: "确定",
+      timeSelect: "选择时间",
+      dateSelect: "选择日期",
+      weekSelect: "选择周",
+      clear: "清除",
+      month: "月",
+      year: "年",
+      previousMonth: "上个月 (翻页上键)",
+      nextMonth: "下个月 (翻页下键)",
+      monthSelect: "选择月份",
+      yearSelect: "选择年份",
+      decadeSelect: "选择年代",
+      yearFormat: "YYYY年",
+      dayFormat: "D日",
+      dateFormat: "YYYY年M月D日",
+      dateTimeFormat: "YYYY年M月D日 HH时mm分ss秒",
+      previousYear: "上一年 (Control键加左方向键)",
+      nextYear: "下一年 (Control键加右方向键)",
+      previousDecade: "上一年代",
+      nextDecade: "下一年代",
+      previousCentury: "上一世纪",
+      nextCentury: "下一世纪",
+      shortWeekDays: ["一", "二", "三", "四", "五", "六", "日"],
+    },
+    timePickerLocale: { placeholder: "请选择时间" },
+  },
+  global: { placeholder: "请选择" },
+  Table: {
+    filterTitle: "筛选",
+    filterConfirm: "确定",
+    filterReset: "重置",
+    filterEmptyText: "无筛选项",
+    filterCheckall: "全选",
+    filterSearchPlaceholder: "在筛选项中搜索",
+    emptyText: "暂无数据",
+    selectAll: "全选当页",
+    selectInvert: "反选当页",
+    selectNone: "清空所有",
+    selectionAll: "全选所有",
+    sortTitle: "排序",
+    expand: "展开行",
+    collapse: "关闭行",
+    triggerDesc: "点击降序",
+    triggerAsc: "点击升序",
+    cancelSort: "取消排序",
+  },
+  Modal: { okText: "确定", cancelText: "取消", justOkText: "知道了" },
+  Tour: { Next: "下一步", Previous: "上一步", Finish: "结束" },
+  Popconfirm: { okText: "确定", cancelText: "取消" },
+  Transfer: {
+    titles: ["", ""],
+    searchPlaceholder: "请输入搜索内容",
+    itemUnit: "项",
+    itemsUnit: "项",
+    remove: "删除",
+    selectCurrent: "全选当页",
+    removeCurrent: "删除当页",
+    selectAll: "全选所有",
+    removeAll: "删除全部",
+    selectInvert: "反选当页",
+  },
+  Upload: {
+    uploading: "文件上传中",
+    removeFile: "删除文件",
+    uploadError: "上传错误",
+    previewFile: "预览文件",
+    downloadFile: "下载文件",
+  },
+  Empty: { description: "暂无数据" },
+  Icon: { icon: "图标" },
+  Text: {
+    edit: "编辑",
+    copy: "复制",
+    copied: "复制成功",
+    expand: "展开",
+    collapse: "收起",
+  },
+  Form: {
+    optional: "（可选）",
+    defaultValidateMessages: {
+      default: "字段验证错误${label}",
+      required: "请输入${label}",
+      enum: "${label}必须是其中一个[${enum}]",
+      whitespace: "${label}不能为空字符",
+      date: {
+        format: "${label}日期格式无效",
+        parse: "${label}不能转换为日期",
+        invalid: "${label}是一个无效日期",
+      },
+      types: {
+        string: typeTemplate,
+        method: typeTemplate,
+        array: typeTemplate,
+        object: typeTemplate,
+        number: typeTemplate,
+        date: typeTemplate,
+        boolean: typeTemplate,
+        integer: typeTemplate,
+        float: typeTemplate,
+        regexp: typeTemplate,
+        email: typeTemplate,
+        url: typeTemplate,
+        hex: typeTemplate,
+      },
+      string: {
+        len: "${label}须为${len}个字符",
+        min: "${label}最少${min}个字符",
+        max: "${label}最多${max}个字符",
+        range: "${label}须在${min}-${max}个字符之间",
+      },
+      number: {
+        len: "${label}必须等于${len}",
+        min: "${label}最小值为${min}",
+        max: "${label}最大值为${max}",
+        range: "${label}须在${min}-${max}之间",
+      },
+      array: {
+        len: "须为${len}个${label}",
+        min: "最少${min}个${label}",
+        max: "最多${max}个${label}",
+        range: "${label}数量须在${min}-${max}之间",
+      },
+      pattern: { mismatch: "${label}与模式不匹配（${pattern}）" },
+    },
+  },
+  Image: { preview: "预览" },
+  QRCode: { expired: "二维码已过期", refresh: "点击刷新", scanned: "已扫描" },
+  ColorPicker: {
+    presetEmpty: "暂无",
+    transparent: "无色",
+    singleColor: "单色",
+    gradientColor: "渐变色",
+  },
+};
+  Object.assign(__export, { zhCN });
+})();
+
+/* ===== src/context.jsx ===== */
+(function () {
+  const { useState, useEffect, createContext, useContext } = React;
+// Layer 1: 全局状态 — 皮肤模式、界面语言、侧边栏折叠
+// 换肤单轨驱动：isDark 只切换 <html> 的 .dark class；
+// 普通 H5 元素(token 四层)与 antd 组件(ant.css 换肤层)同源跟随，无需 React 参与换肤。
+const AppContext = createContext(null);
+
+function AppProvider({ children }) {
+  const [isDark, setIsDark] = useState(false);
+  const [lang, setLang] = useState("zh");
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+  }, [lang]);
+
+  const value = {
+    isDark,
+    lang,
+    collapsed,
+    setLang,
+    toggleDark: () => setIsDark((d) => !d),
+    toggleCollapsed: () => setCollapsed((c) => !c),
+  };
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+}
+
+function useApp() {
+  return useContext(AppContext);
+}
+  Object.assign(__export, { AppProvider, useApp });
+})();
+
+/* ===== src/i18n.js ===== */
+(function () {
+// 界面文案字典（zh / en）— 组件内使用 FormattedMessage / useIntl，defaultMessage 必填
+
+const messages = {
+  zh: {
+    "app.name": "云网智控平台",
+    "app.brandSub": "CloudNet Console",
+
+    "nav.toggleSider": "收起 / 展开导航",
+    "top.search": "搜索设备、策略或 IP",
+    "top.lang": "界面语言",
+    "top.theme.toDark": "切换为深色模式",
+    "top.theme.toLight": "切换为浅色模式",
+    "top.notify": "通知",
+    "top.help": "帮助中心",
+    "top.logout": "退出登录",
+    "top.role": "网络运维管理员",
+
+    "nav.overview": "运行概览",
+    "nav.strategy": "策略配置",
+    "nav.strategy.form": "参数配置",
+    "nav.strategy.list": "策略清单",
+    "nav.strategy.template": "策略模板",
+    "nav.device": "设备管理",
+    "nav.device.list": "设备清单",
+    "nav.device.group": "设备分组",
+    "nav.device.firmware": "固件升级",
+    "nav.alarm": "告警中心",
+    "nav.alarm.rule": "告警规则",
+    "nav.alarm.history": "告警记录",
+    "nav.report": "报表分析",
+    "nav.audit": "审计日志",
+    "nav.settings": "系统设置",
+    "nav.version": "版本 v5.4.2 · 生产环境",
+
+    "page.breadcrumb.home": "首页",
+    "page.breadcrumb.current": "策略配置",
+    "page.title": "策略配置",
+    "page.desc": "按设备类型下发采集与告警策略，保存后 5 分钟内自动生效。",
+    "page.import": "导入配置",
+    "page.export": "导出",
+    "page.new": "新建策略",
+
+    "form.title": "策略参数配置",
+    "form.desc": "基础参数对所有设备生效，开启高级参数后可细化阈值与通知链路。",
+    "form.draftTag": "草稿未提交",
+    "form.basicTitle": "基础参数",
+    "form.advancedTitle": "高级参数",
+    "form.name": "策略名称",
+    "form.name.ph": "如：网关在线率监测",
+    "form.name.required": "请输入策略名称",
+    "form.deviceType": "适用设备类型",
+    "form.deviceType.ph": "请选择设备类型",
+    "form.deviceType.required": "请选择设备类型",
+    "form.interval": "采集周期",
+    "form.interval.required": "请输入采集周期",
+    "form.interval.unit": "秒",
+    "form.level": "触发级别",
+    "form.timeRange": "生效时段",
+    "form.desc2": "策略描述",
+    "form.desc2.ph": "说明该策略的适用场景与处理要求，便于其他运维人员复用。",
+    "form.advanced.toggle": "启用高级参数",
+    "form.advanced.toggleDesc": "开启后可配置告警阈值、失败重试、抖动抑制与通知方式。",
+    "form.threshold": "告警阈值",
+    "form.threshold.unit": "%",
+    "form.retry": "失败重试次数",
+    "form.retry.unit": "次",
+    "form.flap": "抖动抑制",
+    "form.flapDesc": "连续两次触发间隔小于 60 秒时合并为一条告警。",
+    "form.notify": "通知方式",
+    "form.silent": "静默窗口",
+    "form.memo": "备注",
+    "form.memo.ph": "补充说明（选填）",
+    "form.hint": "提示：高级参数开启后，面板内字段会一并参与校验。",
+    "form.reset": "重置",
+    "form.saveDraft": "保存草稿",
+    "form.submit": "提交并启用",
+    "form.openModal": "在弹窗中填写",
+    "form.advancedBadge": "已展开 {count} 项高级参数",
+
+    "opt.device.gateway": "边缘网关",
+    "opt.device.switch": "汇聚交换机",
+    "opt.device.camera": "智能摄像头",
+    "opt.device.sensor": "温湿度传感器",
+    "opt.device.edge": "边缘计算节点",
+    "opt.device.ap": "无线 AP",
+
+    "opt.level.critical": "紧急",
+    "opt.level.warning": "警告",
+    "opt.level.info": "提示",
+
+    "opt.notify.inbox": "站内信",
+    "opt.notify.email": "邮件",
+    "opt.notify.sms": "短信",
+    "opt.notify.webhook": "Webhook",
+
+    "opt.status.enabled": "已启用",
+    "opt.status.disabled": "已停用",
+    "opt.status.draft": "配置中",
+    "opt.status.expired": "已过期",
+
+    "table.title": "策略清单",
+    "table.desc": "共 {total} 条策略，其中 {enabled} 条处于启用状态。",
+    "table.filter.all": "全部",
+    "table.filter.enabled": "已启用",
+    "table.filter.disabled": "已停用",
+    "table.search.ph": "搜索策略名称或编号",
+    "table.batch.enable": "批量启用",
+    "table.batch.disable": "批量停用",
+    "table.selected": "已选 {count} 项",
+    "table.clear": "取消选择",
+    "table.refresh": "刷新数据",
+    "table.col.id": "策略编号",
+    "table.col.name": "策略名称",
+    "table.col.deviceType": "适用设备类型",
+    "table.col.interval": "采集周期",
+    "table.col.level": "触发级别",
+    "table.col.devices": "关联设备",
+    "table.col.status": "状态",
+    "table.col.owner": "更新人",
+    "table.col.updatedAt": "更新时间",
+    "table.col.actions": "操作",
+    "table.unit.second": "秒",
+    "table.unit.device": "台",
+    "table.action.edit": "编辑",
+    "table.action.copy": "复制",
+    "table.action.enable": "启用",
+    "table.action.disable": "停用",
+    "table.action.delete": "删除",
+    "table.expand.threshold": "告警阈值",
+    "table.expand.retry": "重试次数",
+    "table.expand.notify": "通知方式",
+    "table.expand.flap": "抖动抑制",
+    "table.expand.on": "已开启",
+    "table.expand.off": "未开启",
+    "table.empty": "没有符合条件的策略",
+    "table.emptyHint": "调整筛选条件或新建一条策略。",
+
+    "modal.title.new": "新建策略",
+    "modal.title.edit": "编辑策略",
+    "modal.desc": "弹窗内仅填写核心参数，保存后可在右侧列表中继续补充高级参数。",
+    "modal.enableNow": "创建后立即启用",
+    "modal.enableNowDesc": "关闭时以“配置中”状态保存，不会下发到设备。",
+    "modal.cancel": "取消",
+    "modal.draft": "保存草稿",
+    "modal.ok": "确定并启用",
+    "modal.namePh": "请输入策略名称",
+
+    "toast.created": "策略已创建并下发",
+    "toast.updated": "策略已更新",
+    "toast.draft": "草稿已保存",
+    "toast.enabled": "已启用 {count} 条策略",
+    "toast.disabled": "已停用 {count} 条策略",
+    "toast.deleted": "策略已删除",
+    "toast.copied": "已复制为新策略",
+    "toast.imported": "配置文件解析中，请稍候",
+    "toast.selectFirst": "请先选择需要操作的策略",
+  },
+  en: {
+    "app.name": "CloudNet Console",
+    "app.brandSub": "云网智控平台",
+
+    "nav.toggleSider": "Collapse / Expand navigation",
+    "top.search": "Search device, strategy or IP",
+    "top.lang": "Language",
+    "top.theme.toDark": "Switch to dark mode",
+    "top.theme.toLight": "Switch to light mode",
+    "top.notify": "Notifications",
+    "top.help": "Help center",
+    "top.logout": "Sign out",
+    "top.role": "Network O&M Admin",
+
+    "nav.overview": "Overview",
+    "nav.strategy": "Strategy",
+    "nav.strategy.form": "Parameters",
+    "nav.strategy.list": "Strategy List",
+    "nav.strategy.template": "Templates",
+    "nav.device": "Devices",
+    "nav.device.list": "Device List",
+    "nav.device.group": "Device Groups",
+    "nav.device.firmware": "Firmware",
+    "nav.alarm": "Alarms",
+    "nav.alarm.rule": "Alarm Rules",
+    "nav.alarm.history": "Alarm History",
+    "nav.report": "Reports",
+    "nav.audit": "Audit Log",
+    "nav.settings": "Settings",
+    "nav.version": "Version v5.4.2 · Production",
+
+    "page.breadcrumb.home": "Home",
+    "page.breadcrumb.current": "Strategy",
+    "page.title": "Strategy Configuration",
+    "page.desc": "Deliver collection and alarm strategies per device type. Changes take effect within 5 minutes.",
+    "page.import": "Import",
+    "page.export": "Export",
+    "page.new": "New Strategy",
+
+    "form.title": "Strategy Parameters",
+    "form.desc": "Basic parameters apply to every device. Turn on advanced parameters to refine thresholds and notification paths.",
+    "form.draftTag": "Unsaved draft",
+    "form.basicTitle": "Basic parameters",
+    "form.advancedTitle": "Advanced parameters",
+    "form.name": "Strategy name",
+    "form.name.ph": "e.g. Gateway online rate",
+    "form.name.required": "Please enter a strategy name",
+    "form.deviceType": "Device type",
+    "form.deviceType.ph": "Select device type",
+    "form.deviceType.required": "Please select a device type",
+    "form.interval": "Collection interval",
+    "form.interval.required": "Please enter the collection interval",
+    "form.interval.unit": "s",
+    "form.level": "Trigger level",
+    "form.timeRange": "Active window",
+    "form.desc2": "Description",
+    "form.desc2.ph": "Describe the scenario and handling requirements so other engineers can reuse it.",
+    "form.advanced.toggle": "Advanced parameters",
+    "form.advanced.toggleDesc": "Configure alarm thresholds, retries, flap damping and notification channels.",
+    "form.threshold": "Alarm threshold",
+    "form.threshold.unit": "%",
+    "form.retry": "Retry attempts",
+    "form.retry.unit": "times",
+    "form.flap": "Flap damping",
+    "form.flapDesc": "Merge alarms triggered twice within 60 seconds into a single event.",
+    "form.notify": "Notification channels",
+    "form.silent": "Silence window",
+    "form.memo": "Memo",
+    "form.memo.ph": "Additional notes (optional)",
+    "form.hint": "Note: fields inside the panel join validation once advanced parameters are on.",
+    "form.reset": "Reset",
+    "form.saveDraft": "Save draft",
+    "form.submit": "Submit & enable",
+    "form.openModal": "Fill in dialog",
+    "form.advancedBadge": "{count} advanced fields expanded",
+
+    "opt.device.gateway": "Edge gateway",
+    "opt.device.switch": "Aggregation switch",
+    "opt.device.camera": "Smart camera",
+    "opt.device.sensor": "Temp/Humidity sensor",
+    "opt.device.edge": "Edge node",
+    "opt.device.ap": "Wireless AP",
+
+    "opt.level.critical": "Critical",
+    "opt.level.warning": "Warning",
+    "opt.level.info": "Info",
+
+    "opt.notify.inbox": "Inbox",
+    "opt.notify.email": "Email",
+    "opt.notify.sms": "SMS",
+    "opt.notify.webhook": "Webhook",
+
+    "opt.status.enabled": "Enabled",
+    "opt.status.disabled": "Disabled",
+    "opt.status.draft": "Draft",
+    "opt.status.expired": "Expired",
+
+    "table.title": "Strategy List",
+    "table.desc": "{total} strategies in total, {enabled} of them enabled.",
+    "table.filter.all": "All",
+    "table.filter.enabled": "Enabled",
+    "table.filter.disabled": "Disabled",
+    "table.search.ph": "Search strategy name or ID",
+    "table.batch.enable": "Enable",
+    "table.batch.disable": "Disable",
+    "table.selected": "{count} selected",
+    "table.clear": "Clear selection",
+    "table.refresh": "Refresh",
+    "table.col.id": "Strategy ID",
+    "table.col.name": "Strategy name",
+    "table.col.deviceType": "Device type",
+    "table.col.interval": "Interval",
+    "table.col.level": "Level",
+    "table.col.devices": "Devices",
+    "table.col.status": "Status",
+    "table.col.owner": "Owner",
+    "table.col.updatedAt": "Updated",
+    "table.col.actions": "Actions",
+    "table.unit.second": "s",
+    "table.unit.device": "",
+    "table.action.edit": "Edit",
+    "table.action.copy": "Duplicate",
+    "table.action.enable": "Enable",
+    "table.action.disable": "Disable",
+    "table.action.delete": "Delete",
+    "table.expand.threshold": "Alarm threshold",
+    "table.expand.retry": "Retry attempts",
+    "table.expand.notify": "Notification channels",
+    "table.expand.flap": "Flap damping",
+    "table.expand.on": "On",
+    "table.expand.off": "Off",
+    "table.empty": "No strategy matches the filter",
+    "table.emptyHint": "Adjust the filter or create a new strategy.",
+
+    "modal.title.new": "New Strategy",
+    "modal.title.edit": "Edit Strategy",
+    "modal.desc": "Fill in the core parameters here, then refine advanced parameters from the list.",
+    "modal.enableNow": "Enable right after creation",
+    "modal.enableNowDesc": "When off, the strategy is saved as a draft and is not delivered to devices.",
+    "modal.cancel": "Cancel",
+    "modal.draft": "Save draft",
+    "modal.ok": "Confirm & enable",
+    "modal.namePh": "Enter strategy name",
+
+    "toast.created": "Strategy created and delivered",
+    "toast.updated": "Strategy updated",
+    "toast.draft": "Draft saved",
+    "toast.enabled": "{count} strategies enabled",
+    "toast.disabled": "{count} strategies disabled",
+    "toast.deleted": "Strategy deleted",
+    "toast.copied": "Duplicated as a new strategy",
+    "toast.imported": "Parsing the configuration file, please wait",
+    "toast.selectFirst": "Select at least one strategy first",
+  },
+};
+  Object.assign(__export, { messages });
+})();
+
+/* ===== assets/shared/icons.js ===== */
+(function () {
+  const LUCIDE = {
+    "activity": [["path",{"d":"M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"}]],
+    "bell": [["path",{"d":"M10.268 21a2 2 0 0 0 3.464 0"}],["path",{"d":"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"}]],
+    "chart-column": [["path",{"d":"M3 3v16a2 2 0 0 0 2 2h16"}],["path",{"d":"M18 17V9"}],["path",{"d":"M13 17V5"}],["path",{"d":"M8 17v-3"}]],
+    "circle-check": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"m9 12 2 2 4-4"}]],
+    "circle-plus": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M8 12h8"}],["path",{"d":"M12 8v8"}]],
+    "circle-question-mark": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"}],["path",{"d":"M12 17h.01"}]],
+    "copy": [["rect",{"width":"14","height":"14","x":"8","y":"8","rx":"2","ry":"2"}],["path",{"d":"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"}]],
+    "download": [["path",{"d":"M12 15V3"}],["path",{"d":"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"}],["path",{"d":"m7 10 5 5 5-5"}]],
+    "external-link": [["path",{"d":"M15 3h6v6"}],["path",{"d":"M10 14 21 3"}],["path",{"d":"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"}]],
+    "file-text": [["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5"}],["path",{"d":"M10 9H8"}],["path",{"d":"M16 13H8"}],["path",{"d":"M16 17H8"}]],
+    "hard-drive": [["path",{"d":"M10 16h.01"}],["path",{"d":"M2.212 11.577a2 2 0 0 0-.212.896V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.527a2 2 0 0 0-.212-.896L18.55 5.11A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"}],["path",{"d":"M21.946 12.013H2.054"}],["path",{"d":"M6 16h.01"}]],
+    "info": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M12 16v-4"}],["path",{"d":"M12 8h.01"}]],
+    "layout-dashboard": [["rect",{"width":"7","height":"9","x":"3","y":"3","rx":"1"}],["rect",{"width":"7","height":"5","x":"14","y":"3","rx":"1"}],["rect",{"width":"7","height":"9","x":"14","y":"12","rx":"1"}],["rect",{"width":"7","height":"5","x":"3","y":"16","rx":"1"}]],
+    "list-checks": [["path",{"d":"M13 5h8"}],["path",{"d":"M13 12h8"}],["path",{"d":"M13 19h8"}],["path",{"d":"m3 17 2 2 4-4"}],["path",{"d":"m3 7 2 2 4-4"}]],
+    "log-out": [["path",{"d":"m16 17 5-5-5-5"}],["path",{"d":"M21 12H9"}],["path",{"d":"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"}]],
+    "moon": [["path",{"d":"M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"}]],
+    "network": [["rect",{"x":"16","y":"16","width":"6","height":"6","rx":"1"}],["rect",{"x":"2","y":"16","width":"6","height":"6","rx":"1"}],["rect",{"x":"9","y":"2","width":"6","height":"6","rx":"1"}],["path",{"d":"M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"}],["path",{"d":"M12 12V8"}]],
+    "panel-left-close": [["rect",{"width":"18","height":"18","x":"3","y":"3","rx":"2"}],["path",{"d":"M9 3v18"}],["path",{"d":"m16 15-3-3 3-3"}]],
+    "panel-left-open": [["rect",{"width":"18","height":"18","x":"3","y":"3","rx":"2"}],["path",{"d":"M9 3v18"}],["path",{"d":"m14 9 3 3-3 3"}]],
+    "pause": [["rect",{"x":"14","y":"3","width":"5","height":"18","rx":"1"}],["rect",{"x":"5","y":"3","width":"5","height":"18","rx":"1"}]],
+    "pencil": [["path",{"d":"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"}],["path",{"d":"m15 5 4 4"}]],
+    "pencil-line": [["path",{"d":"M13 21h8"}],["path",{"d":"m15 5 4 4"}],["path",{"d":"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"}]],
+    "play": [["path",{"d":"M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"}]],
+    "plus": [["path",{"d":"M5 12h14"}],["path",{"d":"M12 5v14"}]],
+    "refresh-cw": [["path",{"d":"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"}],["path",{"d":"M21 3v5h-5"}],["path",{"d":"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"}],["path",{"d":"M8 16H3v5"}]],
+    "router": [["rect",{"width":"20","height":"8","x":"2","y":"14","rx":"2"}],["path",{"d":"M6.01 18H6"}],["path",{"d":"M10.01 18H10"}],["path",{"d":"M15 10v4"}],["path",{"d":"M17.84 7.17a4 4 0 0 0-5.66 0"}],["path",{"d":"M20.66 4.34a8 8 0 0 0-11.31 0"}]],
+    "save": [["path",{"d":"M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"}],["path",{"d":"M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"}],["path",{"d":"M7 3v4a1 1 0 0 0 1 1h7"}]],
+    "scroll-text": [["path",{"d":"M15 12h-5"}],["path",{"d":"M15 8h-5"}],["path",{"d":"M19 17V5a2 2 0 0 0-2-2H4"}],["path",{"d":"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"}]],
+    "search": [["path",{"d":"m21 21-4.34-4.34"}],["circle",{"cx":"11","cy":"11","r":"8"}]],
+    "settings": [["path",{"d":"M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"}],["circle",{"cx":"12","cy":"12","r":"3"}]],
+    "shield-check": [["path",{"d":"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"}],["path",{"d":"m9 12 2 2 4-4"}]],
+    "sliders-horizontal": [["path",{"d":"M10 5H3"}],["path",{"d":"M12 19H3"}],["path",{"d":"M14 3v4"}],["path",{"d":"M16 17v4"}],["path",{"d":"M21 12h-9"}],["path",{"d":"M21 19h-5"}],["path",{"d":"M21 5h-7"}],["path",{"d":"M8 10v4"}],["path",{"d":"M8 12H3"}]],
+    "sun": [["circle",{"cx":"12","cy":"12","r":"4"}],["path",{"d":"M12 2v2"}],["path",{"d":"M12 20v2"}],["path",{"d":"m4.93 4.93 1.41 1.41"}],["path",{"d":"m17.66 17.66 1.41 1.41"}],["path",{"d":"M2 12h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"m6.34 17.66-1.41 1.41"}],["path",{"d":"m19.07 4.93-1.41 1.41"}]],
+    "trash-2": [["path",{"d":"M10 11v6"}],["path",{"d":"M14 11v6"}],["path",{"d":"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"}],["path",{"d":"M3 6h18"}],["path",{"d":"M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"}]],
+    "triangle-alert": [["path",{"d":"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"}],["path",{"d":"M12 9v4"}],["path",{"d":"M12 17h.01"}]],
+    "undo-2": [["path",{"d":"M9 14 4 9l5-5"}],["path",{"d":"M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"}]],
+    "users": [["path",{"d":"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"}],["path",{"d":"M16 3.128a4 4 0 0 1 0 7.744"}],["path",{"d":"M22 21v-2a4 4 0 0 0-3-3.87"}],["circle",{"cx":"9","cy":"7","r":"4"}]],
+    "wifi": [["path",{"d":"M12 20h.01"}],["path",{"d":"M2 8.82a15 15 0 0 1 20 0"}],["path",{"d":"M5 12.859a10 10 0 0 1 14 0"}],["path",{"d":"M8.5 16.429a5 5 0 0 1 7 0"}]],
+  };
+  const { useState, useEffect } = React;
+// ---- Lucide (offline fallback, table injected at build time) ----
+const ICONS = typeof LUCIDE !== "undefined" ? LUCIDE : {};
+
+function camelToKebab(s) {
+  return s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+}
+
+function lookupIcon(name) {
+  if (!name) return null;
+  return (
+    ICONS[name] ||
+    ICONS[camelToKebab(name)] ||
+    ICONS[name.replace(/-([a-z])/g, (_m, c) => c.toUpperCase())] ||
+    null
+  );
+}
+
+// ---- icon-plus (联通) online flow, same as packages/previewpc ----
+const ICON_API_BASE = "https://octo.hdesign.huawei.com";
+const GET_CONFIG = `${ICON_API_BASE}/assetRepository/iconPlus/getConfig`;
+const GET_ICON_INFO = `${ICON_API_BASE}/assetRepository/iconPlus/getIconInfo`;
+const GET_ICON = `${ICON_API_BASE}/assetRepository/iconPlus/getIcon`;
+
+let plusState = null; // null = probing, true = icon-plus available, false = fall back to Lucide
+let plusPromise = null; // singleton getConfig probe promise
+let iconConfig = null;
+let defaultColorId = "";
+const iconInfoMap = {}; // name -> { name, url }
+const svgCache = new Map(); // "name&variant&color" -> svg text
+
+// variant prop -> getConfig style key (matches previewpc's shapeToStyleKey)
+const STYLE_KEY = {
+  lined: "border",
+  filled: "filled",
+  "two-tone": "two_colors1",
+  circle: "round_bottom2",
+  square: "square_bottom2",
+};
+
+function getStyleValue(styleKey) {
+  return iconConfig?.style?.find((s) => s.key === styleKey)?.value || styleKey;
+}
+
+// resolve an API color id from the requested hex against getConfig colors
+function resolveColorId(variant, colorHex) {
+  const styleValue = getStyleValue(STYLE_KEY[variant] || "border");
+  const colors = (iconConfig?.colors || []).filter((c) => c.style === styleValue);
+  if (colorHex) {
+    const m = colors.find((c) =>
+      c.value.split(",").map((v) => v.trim()).includes(colorHex)
+    );
+    if (m) return m.id;
+  }
+  return defaultColorId || colors[0]?.id || "";
+}
+
+// getConfig probe == 联通可用性验证 (same as previewpc fetchIconConfig)
+function ensurePlus() {
+  if (plusPromise) return plusPromise;
+  plusPromise = (async () => {
+    try {
+      const resp = await fetch(GET_CONFIG);
+      if (!resp.ok) {
+        plusState = false;
+        return false;
+      }
+      iconConfig = await resp.json();
+      const linear = iconConfig.colors?.find(
+        (c) => c.type === "linear" || c.type === "通用色"
+      );
+      defaultColorId =
+        linear?.id || iconConfig.colors?.[0]?.id || "";
+      plusState = true;
+      return true;
+    } catch (e) {
+      plusState = false;
+      return false;
+    }
+  })();
+  return plusPromise;
+}
+
+// pick the best icon-plus match for a keyword (prefer system-icon group, then name contains keyword, else first)
+function selectBestIcon(icons, keyword) {
+  return (
+    icons.find(
+      (i) => Array.isArray(i.group) && i.group.some((g) => g.includes("系统图标"))
+    ) ||
+    icons.find((i) => i.name?.toLowerCase().includes(keyword.toLowerCase())) ||
+    icons[0]
+  );
+}
+
+// name -> { name, url } via getIconInfo (cached in iconInfoMap)
+async function resolveIconInfo(name) {
+  if (iconInfoMap[name]) return iconInfoMap[name];
+  try {
+    const resp = await fetch(
+      `${GET_ICON_INFO}?keyword=${encodeURIComponent(name)}&topK=2&source_id=6`
+    );
+    const data = await resp.json(); // [{ keyword, icons: [{ icon_id, name, category, group[], url }] }]
+    const entry = (Array.isArray(data) ? data : [data]).find(
+      (d) => d.icons?.length
+    );
+    const selected = selectBestIcon(entry?.icons || [], name);
+    if (!selected?.url) return null;
+    iconInfoMap[name] = { name: selected.name, url: selected.url };
+    return iconInfoMap[name];
+  } catch (e) {
+    return null;
+  }
+}
+
+// fetch the SVG text for a name via getIcon (url + size + variant + colorId + fileType=svg)
+async function fetchSvg(name, variant, colorHex) {
+  const info = await resolveIconInfo(name);
+  if (!info) return "";
+  const styleValue = getStyleValue(STYLE_KEY[variant] || "border");
+  const colorId = resolveColorId(variant, colorHex);
+  try {
+    const resp = await fetch(
+      `${GET_ICON}?url=${encodeURIComponent(info.url)}&size=16&style=${encodeURIComponent(
+        styleValue
+      )}&color=${encodeURIComponent(colorId)}&fileType=svg`
+    );
+    const data = await resp.json(); // { url, name, data } or array
+    const item = Array.isArray(data) ? data[0] : data;
+    return item?.data || ""; // raw SVG text, injected as-is
+  } catch (e) {
+    return "";
+  }
+}
+
+function Icon({
+  name,
+  src,
+  size = 16,
+  color,
+  className = "",
+  style,
+  strokeWidth = 2,
+  variant = "lined",
+}) {
+  const [plus, setPlus] = useState(plusState); // reuse already-probed result
+  const [svg, setSvg] = useState(
+    () => svgCache.get(`${name}&${variant}&${color}`) || ""
+  );
+
+  useEffect(() => {
+    if (src) return; // user-asset mode: no network needed
+    let alive = true;
+    ensurePlus().then((ok) => {
+      if (!alive) return;
+      setPlus(ok);
+      if (!ok) return; // getConfig probe failed → Lucide branch
+      const key = `${name}&${variant}&${color}`;
+      if (svgCache.has(key)) {
+        setSvg(svgCache.get(key));
+        return;
+      }
+      fetchSvg(name, variant, color).then((s) => {
+        if (!alive) return;
+        svgCache.set(key, s);
+        setSvg(s);
+      });
+    });
+    return () => {
+      alive = false;
+    };
+  }, [src, name, variant, color]);
+
+  // user-provided asset (svg/png/jpg) via relative path — overrides name when both are set
+  if (src) {
+    return React.createElement("img", {
+      src: src,
+      width: size,
+      height: size,
+      className: className,
+      alt: "",
+      "aria-hidden": true,
+      style: { ...style, display: "inline-block", verticalAlign: "middle" },
+    });
+  }
+
+  // probe not finished yet → render nothing
+  if (plus === null) return null;
+
+  // icon-plus unavailable (offline) → Lucide fallback (original behavior)
+  if (plus === false) {
+    const nodes = lookupIcon(name);
+    if (!nodes) return null;
+    return React.createElement(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: size,
+        height: size,
+        viewBox: "0 0 24 24",
+        fill: "none",
+        strokeWidth: strokeWidth,
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        className: className,
+        "aria-hidden": true,
+        style: { ...style, stroke: color || "currentColor" },
+      },
+      nodes.map(([tag, attrs], i) =>
+        React.createElement(tag, { key: i, ...attrs })
+      )
+    );
+  }
+
+  // icon-plus available → render fetched SVG text as-is (only width/height on the wrapper)
+  if (!svg) {
+    return React.createElement("span", {
+      className,
+      "aria-hidden": true,
+      style: { ...style, width: size, height: size },
+    });
+  }
+  
+  return React.createElement("span", {
+    className,
+    "aria-hidden": true,
+    style: { ...style, width: size, height: size },
+    dangerouslySetInnerHTML: { __html: svg },
+  });
+}
+  Object.assign(__export, { Icon });
+})();
+
+/* ===== src/views/header-bar/index.jsx ===== */
+(function () {
+  const { Button, Menu, Input, Segmented, Badge, Tooltip } = antd;
+  const { FormattedMessage, useIntl } = ReactIntl;
+  const { Icon, useApp } = __export;
+// Layer 4: 顶部导航栏 — 品牌 / 全局导航 / 国际化切换 / 明暗切换 / 用户区
+function HeaderBar() {
+  const { isDark, lang, collapsed, setLang, toggleDark, toggleCollapsed } = useApp();
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  const topNav = [
+    { key: "overview", icon: <Icon name="layout-dashboard" size={16} />, label: t("nav.overview") },
+    { key: "strategy", icon: <Icon name="scroll-text" size={16} />, label: t("nav.strategy") },
+    { key: "device", icon: <Icon name="network" size={16} />, label: t("nav.device") },
+    { key: "alarm", icon: <Icon name="bell" size={16} />, label: t("nav.alarm") },
+    { key: "report", icon: <Icon name="chart-column" size={16} />, label: t("nav.report") },
+  ];
+
+  return (
+    <header className="header-bar">
+      <div className="header-bar__brand">
+        <Tooltip title={t("nav.toggleSider")}>
+          <Button
+            type="text"
+            shape="circle"
+            size="small"
+            aria-label={t("nav.toggleSider")}
+            onClick={toggleCollapsed}
+            icon={<Icon name={collapsed ? "panel-left-open" : "panel-left-close"} size={16} />}
+          />
+        </Tooltip>
+        <span className="header-bar__logo">
+          <Icon name="shield-check" size={18} />
+        </span>
+        <span className="header-bar__names">
+          <strong className="header-bar__title">{t("app.name")}</strong>
+          <span className="header-bar__sub">
+            {lang === "zh" ? t("app.brandSub") : t("app.brandSub")}
+          </span>
+        </span>
+      </div>
+
+      <Menu
+        mode="horizontal"
+        selectedKeys={["strategy"]}
+        items={topNav}
+        style={{ flex: 1, minWidth: 0, borderBottom: "none", background: "transparent" }}
+      />
+
+      <div className="header-bar__tools">
+        <Input
+          className="header-bar__search"
+          prefix={<Icon name="search" size={14} />}
+          placeholder={t("top.search")}
+          allowClear
+        />
+
+        <Tooltip title={t("top.lang")}>
+          <Segmented
+            className="header-bar__lang"
+            size="small"
+            value={lang}
+            onChange={setLang}
+            options={[
+              { label: "中", value: "zh" },
+              { label: "EN", value: "en" },
+            ]}
+          />
+        </Tooltip>
+
+        <Tooltip title={isDark ? t("top.theme.toLight") : t("top.theme.toDark")}>
+          <Button
+            type="text"
+            shape="circle"
+            aria-label={isDark ? t("top.theme.toLight") : t("top.theme.toDark")}
+            onClick={toggleDark}
+            icon={<Icon name={isDark ? "sun" : "moon"} size={16} />}
+          />
+        </Tooltip>
+
+        <Tooltip title={t("top.notify")}>
+          <Badge count={6} size="small" offset={[-2, 2]}>
+            <Button type="text" shape="circle" aria-label={t("top.notify")} icon={<Icon name="bell" size={16} />} />
+          </Badge>
+        </Tooltip>
+
+        <Tooltip title={t("top.help")}>
+          <Button type="text" shape="circle" aria-label={t("top.help")} icon={<Icon name="circle-question-mark" size={16} />} />
+        </Tooltip>
+
+        <div className="header-bar__divider" />
+
+        <div className="header-bar__user">
+          <img className="header-bar__avatar" src="./assets/uploads/user.png" alt="" />
+          <span className="header-bar__user-text">
+            <strong>{lang === "zh" ? "李伟" : "Li Wei"}</strong>
+            <em>
+              <FormattedMessage id="top.role" defaultMessage="网络运维管理员" />
+            </em>
+          </span>
+        </div>
+
+        <Tooltip title={t("top.logout")}>
+          <Button type="text" shape="circle" aria-label={t("top.logout")} icon={<Icon name="log-out" size={16} />} />
+        </Tooltip>
+      </div>
+    </header>
+  );
+}
+  Object.assign(__export, { HeaderBar });
+})();
+
+/* ===== src/views/side-nav/index.jsx ===== */
+(function () {
+  const { useState } = React;
+  const { Menu } = antd;
+  const { useIntl } = ReactIntl;
+  const { Icon, useApp } = __export;
+// Layer 4: 侧边导航 — 一级模块 + 策略/设备二级菜单，支持折叠
+function SideNav() {
+  const { collapsed } = useApp();
+  const [current, setCurrent] = useState("strategy-form");
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  const items = [
+    { key: "overview", icon: <Icon name="layout-dashboard" size={16} />, label: t("nav.overview") },
+    {
+      key: "strategy",
+      icon: <Icon name="scroll-text" size={16} />,
+      label: t("nav.strategy"),
+      children: [
+        { key: "strategy-form", icon: <Icon name="sliders-horizontal" size={16} />, label: t("nav.strategy.form") },
+        { key: "strategy-list", icon: <Icon name="list-checks" size={16} />, label: t("nav.strategy.list") },
+        { key: "strategy-tpl", icon: <Icon name="copy" size={16} />, label: t("nav.strategy.template") },
+      ],
+    },
+    {
+      key: "device",
+      icon: <Icon name="network" size={16} />,
+      label: t("nav.device"),
+      children: [
+        { key: "device-list", icon: <Icon name="router" size={16} />, label: t("nav.device.list") },
+        { key: "device-group", icon: <Icon name="users" size={16} />, label: t("nav.device.group") },
+        { key: "device-firmware", icon: <Icon name="hard-drive" size={16} />, label: t("nav.device.firmware") },
+      ],
+    },
+    {
+      key: "alarm",
+      icon: <Icon name="bell" size={16} />,
+      label: t("nav.alarm"),
+      children: [
+        { key: "alarm-rule", icon: <Icon name="triangle-alert" size={16} />, label: t("nav.alarm.rule") },
+        { key: "alarm-history", icon: <Icon name="activity" size={16} />, label: t("nav.alarm.history") },
+      ],
+    },
+    { key: "report", icon: <Icon name="chart-column" size={16} />, label: t("nav.report") },
+    { key: "audit", icon: <Icon name="shield-check" size={16} />, label: t("nav.audit") },
+    { key: "settings", icon: <Icon name="settings" size={16} />, label: t("nav.settings") },
+  ];
+
+  return (
+    <aside className={`side-nav${collapsed ? " is-collapsed" : ""}`}>
+      <Menu
+        className="side-nav__menu"
+        mode="inline"
+        inlineCollapsed={collapsed}
+        selectedKeys={[current]}
+        defaultOpenKeys={["strategy", "device"]}
+        items={items}
+        onClick={(e) => setCurrent(e.key)}
+        style={{ borderRight: "none", width: collapsed ? 48 : "100%" }}
+      />
+      <div className="side-nav__footer">
+        <Icon name="wifi" size={14} />
+        {collapsed ? null : <span>{t("nav.version")}</span>}
+      </div>
+    </aside>
+  );
+}
+  Object.assign(__export, { SideNav });
+})();
+
+/* ===== src/mock/strategy.js ===== */
+(function () {
+// Layer 2: 策略域 mock 数据 — 选项集 + 策略清单（24 条，状态多样）
+
+const deviceTypeOptions = [
+  { value: "gateway", labelId: "opt.device.gateway" },
+  { value: "switch", labelId: "opt.device.switch" },
+  { value: "camera", labelId: "opt.device.camera" },
+  { value: "sensor", labelId: "opt.device.sensor" },
+  { value: "edge", labelId: "opt.device.edge" },
+  { value: "ap", labelId: "opt.device.ap" },
+];
+
+const levelOptions = [
+  { value: "critical", labelId: "opt.level.critical" },
+  { value: "warning", labelId: "opt.level.warning" },
+  { value: "info", labelId: "opt.level.info" },
+];
+
+const notifyOptions = [
+  { value: "inbox", labelId: "opt.notify.inbox" },
+  { value: "email", labelId: "opt.notify.email" },
+  { value: "sms", labelId: "opt.notify.sms" },
+  { value: "webhook", labelId: "opt.notify.webhook" },
+];
+
+// tone 映射到语义色（success / warning / error / info / neutral）
+const statusMeta = {
+  enabled: { labelId: "opt.status.enabled", tone: "success" },
+  disabled: { labelId: "opt.status.disabled", tone: "neutral" },
+  draft: { labelId: "opt.status.draft", tone: "info" },
+  expired: { labelId: "opt.status.expired", tone: "warning" },
+};
+
+const levelTone = {
+  critical: "error",
+  warning: "warning",
+  info: "info",
+};
+
+function labelOf(options, value, dict) {
+  const hit = options.find((o) => o.value === value);
+  if (!hit) return value;
+  const pack = dict[hit.labelId];
+  return pack || hit.labelId;
+}
+
+const strategyRows = [
+  { id: "STY-2609-001", name: "网关在线率监测", nameEn: "Gateway online rate", deviceType: "gateway", intervalSec: 30, level: "critical", status: "enabled", devices: 128, owner: "李伟", ownerEn: "Li Wei", updatedAt: "2026-09-18 14:32", threshold: 99, retry: 3, notify: ["inbox", "sms"], flap: true },
+  { id: "STY-2609-002", name: "汇聚交换机端口抖动", nameEn: "Switch port flapping", deviceType: "switch", intervalSec: 15, level: "critical", status: "enabled", devices: 64, owner: "王倩", ownerEn: "Wang Qian", updatedAt: "2026-09-18 11:05", threshold: 95, retry: 2, notify: ["inbox", "email"], flap: true },
+  { id: "STY-2609-003", name: "智能摄像头离线告警", nameEn: "Camera offline alarm", deviceType: "camera", intervalSec: 60, level: "warning", status: "enabled", devices: 256, owner: "陈涛", ownerEn: "Chen Tao", updatedAt: "2026-09-17 20:18", threshold: 90, retry: 5, notify: ["inbox"], flap: false },
+  { id: "STY-2609-004", name: "机房温湿度超限", nameEn: "Room temp/humidity limit", deviceType: "sensor", intervalSec: 120, level: "warning", status: "enabled", devices: 42, owner: "周敏", ownerEn: "Zhou Min", updatedAt: "2026-09-17 16:47", threshold: 80, retry: 3, notify: ["inbox", "sms", "email"], flap: true },
+  { id: "STY-2609-005", name: "边缘节点算力过载", nameEn: "Edge node CPU overload", deviceType: "edge", intervalSec: 10, level: "critical", status: "enabled", devices: 18, owner: "李伟", ownerEn: "Li Wei", updatedAt: "2026-09-17 09:24", threshold: 85, retry: 1, notify: ["inbox", "webhook"], flap: false },
+  { id: "STY-2609-006", name: "无线 AP 关联数异常", nameEn: "AP association anomaly", deviceType: "ap", intervalSec: 45, level: "info", status: "disabled", devices: 96, owner: "赵磊", ownerEn: "Zhao Lei", updatedAt: "2026-09-16 19:02", threshold: 70, retry: 3, notify: ["inbox"], flap: false },
+  { id: "STY-2609-007", name: "网关固件版本合规", nameEn: "Gateway firmware compliance", deviceType: "gateway", intervalSec: 3600, level: "info", status: "enabled", devices: 128, owner: "王倩", ownerEn: "Wang Qian", updatedAt: "2026-09-16 15:31", threshold: 100, retry: 1, notify: ["email"], flap: false },
+  { id: "STY-2609-008", name: "交换机链路丢包率", nameEn: "Switch packet loss", deviceType: "switch", intervalSec: 20, level: "critical", status: "enabled", devices: 64, owner: "陈涛", ownerEn: "Chen Tao", updatedAt: "2026-09-16 10:12", threshold: 98, retry: 2, notify: ["inbox", "sms"], flap: true },
+  { id: "STY-2609-009", name: "摄像头存储空间预警", nameEn: "Camera storage warning", deviceType: "camera", intervalSec: 300, level: "warning", status: "draft", devices: 140, owner: "周敏", ownerEn: "Zhou Min", updatedAt: "2026-09-15 22:40", threshold: 75, retry: 4, notify: ["inbox", "email"], flap: false },
+  { id: "STY-2609-010", name: "传感器电量低于阈值", nameEn: "Sensor low battery", deviceType: "sensor", intervalSec: 600, level: "warning", status: "enabled", devices: 42, owner: "赵磊", ownerEn: "Zhao Lei", updatedAt: "2026-09-15 18:05", threshold: 20, retry: 2, notify: ["inbox"], flap: false },
+  { id: "STY-2609-011", name: "边缘节点磁盘写满", nameEn: "Edge node disk full", deviceType: "edge", intervalSec: 60, level: "critical", status: "enabled", devices: 18, owner: "李伟", ownerEn: "Li Wei", updatedAt: "2026-09-15 13:58", threshold: 90, retry: 3, notify: ["inbox", "sms", "webhook"], flap: true },
+  { id: "STY-2609-012", name: "AP 信道干扰检测", nameEn: "AP channel interference", deviceType: "ap", intervalSec: 30, level: "info", status: "draft", devices: 96, owner: "王倩", ownerEn: "Wang Qian", updatedAt: "2026-09-14 21:16", threshold: 60, retry: 2, notify: ["inbox"], flap: false },
+  { id: "STY-2609-013", name: "网关双机热备切换", nameEn: "Gateway HA failover", deviceType: "gateway", intervalSec: 5, level: "critical", status: "enabled", devices: 32, owner: "陈涛", ownerEn: "Chen Tao", updatedAt: "2026-09-14 17:44", threshold: 100, retry: 1, notify: ["inbox", "sms", "email"], flap: true },
+  { id: "STY-2609-014", name: "交换机风扇转速异常", nameEn: "Switch fan speed abnormal", deviceType: "switch", intervalSec: 120, level: "warning", status: "disabled", devices: 24, owner: "周敏", ownerEn: "Zhou Min", updatedAt: "2026-09-14 09:33", threshold: 65, retry: 3, notify: ["inbox"], flap: false },
+  { id: "STY-2609-015", name: "摄像头视频流中断", nameEn: "Camera stream interrupted", deviceType: "camera", intervalSec: 10, level: "critical", status: "enabled", devices: 256, owner: "赵磊", ownerEn: "Zhao Lei", updatedAt: "2026-09-13 20:09", threshold: 97, retry: 2, notify: ["inbox", "webhook"], flap: true },
+  { id: "STY-2609-016", name: "机房漏水检测联动", nameEn: "Water leak linkage", deviceType: "sensor", intervalSec: 15, level: "critical", status: "enabled", devices: 12, owner: "李伟", ownerEn: "Li Wei", updatedAt: "2026-09-13 14:26", threshold: 100, retry: 1, notify: ["inbox", "sms"], flap: false },
+  { id: "STY-2609-017", name: "边缘节点容器重启", nameEn: "Edge container restart", deviceType: "edge", intervalSec: 45, level: "warning", status: "draft", devices: 18, owner: "王倩", ownerEn: "Wang Qian", updatedAt: "2026-09-12 19:51", threshold: 88, retry: 4, notify: ["email", "webhook"], flap: true },
+  { id: "STY-2609-018", name: "AP 空口利用率过载", nameEn: "AP airtime utilization", deviceType: "ap", intervalSec: 60, level: "warning", status: "enabled", devices: 96, owner: "陈涛", ownerEn: "Chen Tao", updatedAt: "2026-09-12 11:37", threshold: 78, retry: 3, notify: ["inbox", "email"], flap: false },
+  { id: "STY-2609-019", name: "网关配置漂移检测", nameEn: "Gateway config drift", deviceType: "gateway", intervalSec: 1800, level: "info", status: "expired", devices: 128, owner: "周敏", ownerEn: "Zhou Min", updatedAt: "2026-08-30 10:02", threshold: 100, retry: 1, notify: ["inbox"], flap: false },
+  { id: "STY-2609-020", name: "交换机堆叠状态巡检", nameEn: "Switch stack health", deviceType: "switch", intervalSec: 300, level: "info", status: "enabled", devices: 40, owner: "赵磊", ownerEn: "Zhao Lei", updatedAt: "2026-09-11 16:18", threshold: 92, retry: 2, notify: ["inbox"], flap: false },
+  { id: "STY-2609-021", name: "摄像头遮挡智能识别", nameEn: "Camera occlusion detection", deviceType: "camera", intervalSec: 20, level: "warning", status: "disabled", devices: 180, owner: "李伟", ownerEn: "Li Wei", updatedAt: "2026-09-10 15:44", threshold: 85, retry: 3, notify: ["inbox", "email"], flap: false },
+  { id: "STY-2609-022", name: "传感器数据上报中断", nameEn: "Sensor reporting interrupted", deviceType: "sensor", intervalSec: 90, level: "critical", status: "enabled", devices: 42, owner: "王倩", ownerEn: "Wang Qian", updatedAt: "2026-09-10 09:07", threshold: 96, retry: 2, notify: ["inbox", "sms"], flap: true },
+  { id: "STY-2609-023", name: "边缘节点证书到期", nameEn: "Edge certificate expiry", deviceType: "edge", intervalSec: 86400, level: "warning", status: "expired", devices: 18, owner: "陈涛", ownerEn: "Chen Tao", updatedAt: "2026-08-22 08:15", threshold: 70, retry: 1, notify: ["email"], flap: false },
+  { id: "STY-2609-024", name: "无线 AP 固件批量升级", nameEn: "AP bulk firmware upgrade", deviceType: "ap", intervalSec: 7200, level: "info", status: "disabled", devices: 96, owner: "周敏", ownerEn: "Zhou Min", updatedAt: "2026-09-09 13:29", threshold: 100, retry: 5, notify: ["inbox", "email", "webhook"], flap: false },
+];
+
+function displayName(row, lang) {
+  return lang === "zh" ? row.name : row.nameEn;
+}
+
+function displayOwner(row, lang) {
+  return lang === "zh" ? row.owner : row.ownerEn;
+}
+  Object.assign(__export, { labelOf, displayName, displayOwner, deviceTypeOptions, levelOptions, notifyOptions, statusMeta, levelTone, strategyRows });
+})();
+
+/* ===== src/components/strategy-fields/index.jsx ===== */
+(function () {
+  const { Form, Input, InputNumber, Select, TimePicker, Checkbox, Switch } = antd;
+  const { useIntl } = ReactIntl;
+  const { Icon, deviceTypeOptions, levelOptions, notifyOptions } = __export;
+// Layer 3: 策略参数字段组 — 表单卡片与弹窗共用同一套字段，保证两处填写体验一致
+// StrategyFields：基础参数（默认导出）；StrategyAdvanced：高级参数面板（开关打开后渲染）
+
+function toOptions(list, t) {
+  return list.map((item) => ({ value: item.value, label: t(item.labelId) }));
+}
+
+function StrategyFields() {
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  return (
+    <div className="strategy-fields">
+      <div className="strategy-fields__group">
+        <span className="strategy-fields__group-title">{t("form.basicTitle")}</span>
+        <span className="strategy-fields__group-line" />
+      </div>
+
+      <div className="strategy-fields__grid">
+        <Form.Item
+          label={t("form.name")}
+          name="name"
+          rules={[{ required: true, message: t("form.name.required") }]}
+        >
+          <Input placeholder={t("form.name.ph")} allowClear maxLength={40} />
+        </Form.Item>
+
+        <Form.Item
+          label={t("form.deviceType")}
+          name="deviceType"
+          rules={[{ required: true, message: t("form.deviceType.required") }]}
+        >
+          <Select
+            placeholder={t("form.deviceType.ph")}
+            options={toOptions(deviceTypeOptions, t)}
+          />
+        </Form.Item>
+
+        <Form.Item
+          label={t("form.interval")}
+          name="intervalSec"
+          rules={[{ required: true, message: t("form.interval.required") }]}
+        >
+          <InputNumber
+            min={5}
+            max={86400}
+            step={5}
+            style={{ width: "100%" }}
+            addonAfter={t("form.interval.unit")}
+          />
+        </Form.Item>
+
+        <Form.Item label={t("form.level")} name="level">
+          <Select options={toOptions(levelOptions, t)} />
+        </Form.Item>
+
+        <Form.Item label={t("form.timeRange")} name="timeRange">
+          <TimePicker.RangePicker
+            style={{ width: "100%" }}
+            format="HH:mm"
+            minuteStep={15}
+            placeholder={["00:00", "23:59"]}
+          />
+        </Form.Item>
+
+        <Form.Item label={t("form.desc2")} name="desc" className="strategy-fields__full">
+          <Input.TextArea rows={3} maxLength={200} showCount placeholder={t("form.desc2.ph")} />
+        </Form.Item>
+      </div>
+    </div>
+  );
+}
+
+function StrategyAdvanced() {
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  return (
+    <div className="strategy-fields__advanced">
+      <div className="strategy-fields__group">
+        <span className="strategy-fields__group-title">{t("form.advancedTitle")}</span>
+        <span className="strategy-fields__group-line" />
+        <span className="strategy-fields__group-chip">
+          <Icon name="sliders-horizontal" size={12} />
+          {intl.formatMessage({ id: "form.advancedBadge" }, { count: 6 })}
+        </span>
+      </div>
+
+      <div className="strategy-fields__grid">
+        <Form.Item label={t("form.threshold")} name="threshold">
+          <InputNumber
+            min={0}
+            max={100}
+            style={{ width: "100%" }}
+            addonAfter={t("form.threshold.unit")}
+          />
+        </Form.Item>
+
+        <Form.Item label={t("form.retry")} name="retry">
+          <InputNumber
+            min={1}
+            max={10}
+            style={{ width: "100%" }}
+            addonAfter={t("form.retry.unit")}
+          />
+        </Form.Item>
+
+        <div className="switch-row switch-row--inset">
+          <div className="switch-row__text">
+            <span className="switch-row__label">{t("form.flap")}</span>
+            <span className="switch-row__desc">{t("form.flapDesc")}</span>
+          </div>
+          <Form.Item name="flap" valuePropName="checked" noStyle>
+            <Switch />
+          </Form.Item>
+        </div>
+
+        <Form.Item label={t("form.silent")} name="silent">
+          <TimePicker.RangePicker
+            style={{ width: "100%" }}
+            format="HH:mm"
+            minuteStep={30}
+            placeholder={["22:00", "06:00"]}
+          />
+        </Form.Item>
+
+        <Form.Item label={t("form.notify")} name="notify" className="strategy-fields__full">
+          <Checkbox.Group
+            options={toOptions(notifyOptions, t)}
+            className="strategy-fields__checks"
+          />
+        </Form.Item>
+
+        <Form.Item label={t("form.memo")} name="memo" className="strategy-fields__full">
+          <Input.TextArea rows={2} maxLength={120} placeholder={t("form.memo.ph")} />
+        </Form.Item>
+      </div>
+    </div>
+  );
+}
+  Object.assign(__export, { StrategyFields, StrategyAdvanced });
+})();
+
+/* ===== src/views/strategy-form/index.jsx ===== */
+(function () {
+  const { useState } = React;
+  const { Button, Form, Switch, message } = antd;
+  const { useIntl } = ReactIntl;
+  const { Icon, StrategyAdvanced } = __export;
+  const StrategyFields = __export.StrategyFields;
+// Layer 4: 策略参数表单卡片 — 开关打开后展开高级参数面板
+function StrategyForm({ onOpenModal }) {
+  const [form] = Form.useForm();
+  const [submitting, setSubmitting] = useState(false);
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  // 表单内字段即开关状态：打开后展开更详细的填写项
+  const advancedOn = Form.useWatch("advanced", form) === true;
+
+  const handleSubmit = async () => {
+    try {
+      await form.validateFields();
+      setSubmitting(true);
+      message.success(t("toast.created"));
+      setTimeout(() => setSubmitting(false), 600);
+    } catch (err) {
+      // 校验失败时由 Form.Item 就地提示
+    }
+  };
+
+  return (
+    <section className="panel-card strategy-form">
+      <header className="panel-card__head">
+        <div className="panel-card__titles">
+          <h2 className="panel-card__title">
+            <Icon name="sliders-horizontal" size={16} />
+            {t("form.title")}
+          </h2>
+          <p className="panel-card__desc">{t("form.desc")}</p>
+        </div>
+        <div className="panel-card__actions">
+          <span className="strategy-form__draft">
+            <Icon name="pencil-line" size={12} />
+            {t("form.draftTag")}
+          </span>
+          <Button
+            type="link"
+            icon={<Icon name="external-link" size={14} />}
+            onClick={onOpenModal}
+          >
+            {t("form.openModal")}
+          </Button>
+        </div>
+      </header>
+
+      <Form
+        form={form}
+        layout="vertical"
+        requiredMark
+        initialValues={{
+          advanced: false,
+          level: "warning",
+          intervalSec: 60,
+          flap: true,
+          notify: ["inbox", "email"],
+        }}
+      >
+        <StrategyFields />
+
+        <div className="switch-row strategy-form__toggle">
+          <div className="switch-row__text">
+            <span className="switch-row__label">{t("form.advanced.toggle")}</span>
+            <span className="switch-row__desc">{t("form.advanced.toggleDesc")}</span>
+          </div>
+          <Form.Item name="advanced" valuePropName="checked" noStyle>
+            <Switch />
+          </Form.Item>
+        </div>
+
+        {advancedOn ? <StrategyAdvanced /> : null}
+
+        {advancedOn ? (
+          <p className="strategy-form__hint">
+            <Icon name="info" size={12} />
+            {t("form.hint")}
+          </p>
+        ) : null}
+
+        <div className="strategy-form__footer">
+          <Button
+            icon={<Icon name="undo-2" size={14} />}
+            onClick={() => {
+              form.resetFields();
+            }}
+          >
+            {t("form.reset")}
+          </Button>
+          <div className="strategy-form__footer-main">
+            <Button onClick={() => message.success(t("toast.draft"))}>
+              {t("form.saveDraft")}
+            </Button>
+            <Button
+              type="primary"
+              loading={submitting}
+              icon={<Icon name="save" size={14} />}
+              onClick={handleSubmit}
+            >
+              {t("form.submit")}
+            </Button>
+          </div>
+        </div>
+      </Form>
+    </section>
+  );
+}
+  Object.assign(__export, { StrategyForm });
+})();
+
+/* ===== src/components/status-tag/index.jsx ===== */
+(function () {
+  const { FormattedMessage } = ReactIntl;
+// Layer 3: 通用状态标签 — 策略状态 / 触发级别复用同一套语义色
+const TONES = ["success", "warning", "error", "info", "neutral"];
+
+function StatusTag({ labelId, fallback, tone = "neutral", dot = true }) {
+  const safeTone = TONES.includes(tone) ? tone : "neutral";
+  return (
+    <span className={`status-tag status-tag--${safeTone}`}>
+      {dot ? <i className="status-tag__dot" aria-hidden="true" /> : null}
+      <FormattedMessage id={labelId} defaultMessage={fallback || labelId} />
+    </span>
+  );
+}
+  Object.assign(__export, { StatusTag });
+})();
+
+/* ===== src/views/strategy-table/index.jsx ===== */
+(function () {
+  const { useMemo, useState } = React;
+  const { Button, Input, Segmented, Table, Tooltip, message } = antd;
+  const { useIntl } = ReactIntl;
+  const { Icon, deviceTypeOptions, levelOptions, levelTone, notifyOptions, statusMeta, strategyRows, displayName, displayOwner, labelOf, useApp } = __export;
+  const StatusTag = __export.StatusTag;
+// Layer 4: 策略清单表格 — Segmented 视图筛选 + 搜索 + 行选择批量操作
+function StrategyTable({ onEdit }) {
+  const { lang } = useApp();
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  const [view, setView] = useState("all");
+  const [keyword, setKeyword] = useState("");
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+  const dataSource = useMemo(() => {
+    const kw = keyword.trim().toLowerCase();
+    return strategyRows.filter((row) => {
+      const matchView =
+        view === "all" ? true : view === "enabled" ? row.status === "enabled" : row.status !== "enabled";
+      const matchKw =
+        !kw ||
+        row.id.toLowerCase().includes(kw) ||
+        row.name.toLowerCase().includes(kw) ||
+        row.nameEn.toLowerCase().includes(kw);
+      return matchView && matchKw;
+    });
+  }, [view, keyword]);
+
+  const enabledCount = strategyRows.filter((r) => r.status === "enabled").length;
+
+  // 选项集统一译一次，表格单元格内复用
+  const optionDict = {};
+  deviceTypeOptions.concat(levelOptions, notifyOptions).forEach((o) => {
+    optionDict[o.labelId] = intl.formatMessage({ id: o.labelId, defaultMessage: o.labelId });
+  });
+
+  const translator = (id) => intl.formatMessage({ id, defaultMessage: id });
+
+  const columns = [
+    {
+      title: t("table.col.id"),
+      dataIndex: "id",
+      width: 132,
+      render: (value) => <span className="strategy-table__code">{value}</span>,
+    },
+    {
+      title: t("table.col.name"),
+      dataIndex: "name",
+      width: 208,
+      render: (_, row) => (
+        <Button type="link" className="strategy-table__link" onClick={() => onEdit(row)}>
+          {displayName(row, lang)}
+        </Button>
+      ),
+    },
+    {
+      title: t("table.col.deviceType"),
+      dataIndex: "deviceType",
+      width: 148,
+      render: (value) => (
+        <span className="strategy-table__type">
+          {labelOf(deviceTypeOptions, value, optionDict)}
+        </span>
+      ),
+    },
+    {
+      title: t("table.col.interval"),
+      dataIndex: "intervalSec",
+      width: 110,
+      align: "right",
+      render: (value) => `${value} ${t("table.unit.second")}`,
+    },
+    {
+      title: t("table.col.level"),
+      dataIndex: "level",
+      width: 108,
+      render: (value) => <StatusTag labelId={`opt.level.${value}`} tone={levelTone[value]} />,
+    },
+    {
+      title: t("table.col.devices"),
+      dataIndex: "devices",
+      width: 100,
+      align: "right",
+    },
+    {
+      title: t("table.col.status"),
+      dataIndex: "status",
+      width: 110,
+      render: (value) => (
+        <StatusTag labelId={statusMeta[value].labelId} tone={statusMeta[value].tone} />
+      ),
+    },
+    {
+      title: t("table.col.owner"),
+      dataIndex: "owner",
+      width: 104,
+      render: (_, row) => displayOwner(row, lang),
+    },
+    {
+      title: t("table.col.updatedAt"),
+      dataIndex: "updatedAt",
+      width: 152,
+      render: (value) => <span className="strategy-table__time">{value}</span>,
+    },
+    {
+      title: t("table.col.actions"),
+      key: "actions",
+      width: 176,
+      align: "center",
+      render: (_, row) => (
+        <div className="strategy-table__ops">
+          <Tooltip title={t("table.action.edit")}>
+            <Button
+              size="small"
+              shape="circle"
+              aria-label={t("table.action.edit")}
+              icon={<Icon name="pencil" size={13} />}
+              onClick={() => onEdit(row)}
+            />
+          </Tooltip>
+          <Tooltip title={t("table.action.copy")}>
+            <Button
+              size="small"
+              shape="circle"
+              aria-label={t("table.action.copy")}
+              icon={<Icon name="copy" size={13} />}
+              onClick={() => message.success(t("toast.copied"))}
+            />
+          </Tooltip>
+          <Tooltip title={row.status === "enabled" ? t("table.action.disable") : t("table.action.enable")}>
+            <Button
+              size="small"
+              shape="circle"
+              aria-label={row.status === "enabled" ? t("table.action.disable") : t("table.action.enable")}
+              icon={<Icon name={row.status === "enabled" ? "pause" : "play"} size={13} />}
+              onClick={() =>
+                message.success(
+                  row.status === "enabled"
+                    ? intl.formatMessage({ id: "toast.disabled" }, { count: 1 })
+                    : intl.formatMessage({ id: "toast.enabled" }, { count: 1 })
+                )
+              }
+            />
+          </Tooltip>
+          <Tooltip title={t("table.action.delete")}>
+            <Button
+              size="small"
+              shape="circle"
+              danger
+              aria-label={t("table.action.delete")}
+              icon={<Icon name="trash-2" size={13} />}
+              onClick={() => message.success(t("toast.deleted"))}
+            />
+          </Tooltip>
+        </div>
+      ),
+    },
+  ];
+
+  const batch = (action) => {
+    if (!selectedRowKeys.length) {
+      message.warning(t("toast.selectFirst"));
+      return;
+    }
+    message.success(
+      intl.formatMessage(
+        { id: action === "enable" ? "toast.enabled" : "toast.disabled" },
+        { count: selectedRowKeys.length }
+      )
+    );
+    setSelectedRowKeys([]);
+  };
+
+  return (
+    <section className="panel-card strategy-table">
+      <header className="panel-card__head">
+        <div className="panel-card__titles">
+          <h2 className="panel-card__title">
+            <Icon name="list-checks" size={16} />
+            {t("table.title")}
+          </h2>
+          <p className="panel-card__desc">
+            {intl.formatMessage(
+              { id: "table.desc" },
+              { total: strategyRows.length, enabled: enabledCount }
+            )}
+          </p>
+        </div>
+        <Segmented
+          value={view}
+          onChange={setView}
+          options={[
+            { label: t("table.filter.all"), value: "all" },
+            { label: t("table.filter.enabled"), value: "enabled" },
+            { label: t("table.filter.disabled"), value: "disabled" },
+          ]}
+        />
+      </header>
+
+      <div className="strategy-table__toolbar">
+        <Input
+          className="strategy-table__search"
+          prefix={<Icon name="search" size={14} />}
+          placeholder={t("table.search.ph")}
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          allowClear
+        />
+        <span className="strategy-table__count">
+          {selectedRowKeys.length
+            ? intl.formatMessage({ id: "table.selected" }, { count: selectedRowKeys.length })
+            : `${dataSource.length} / ${strategyRows.length}`}
+        </span>
+        <div className="strategy-table__toolbar-ops">
+          <Button
+            icon={<Icon name="play" size={14} />}
+            disabled={!selectedRowKeys.length}
+            onClick={() => batch("enable")}
+          >
+            {t("table.batch.enable")}
+          </Button>
+          <Button
+            icon={<Icon name="pause" size={14} />}
+            disabled={!selectedRowKeys.length}
+            onClick={() => batch("disable")}
+          >
+            {t("table.batch.disable")}
+          </Button>
+          <Tooltip title={t("table.refresh")}>
+            <Button
+              shape="circle"
+              aria-label={t("table.refresh")}
+              icon={<Icon name="refresh-cw" size={14} />}
+              onClick={() => message.success(t("table.refresh"))}
+            />
+          </Tooltip>
+        </div>
+      </div>
+
+      <Table
+        rowKey="id"
+        size="middle"
+        columns={columns}
+        dataSource={dataSource}
+        scroll={{ x: 1290 }}
+        locale={{
+          emptyText: (
+            <div className="strategy-table__empty">
+              <Icon name="file-text" size={24} />
+              <strong>{t("table.empty")}</strong>
+              <span>{t("table.emptyHint")}</span>
+            </div>
+          ),
+        }}
+        rowSelection={{
+          selectedRowKeys,
+          onChange: setSelectedRowKeys,
+        }}
+        pagination={{
+          pageSize: 8,
+          showSizeChanger: true,
+          showQuickJumper: true,
+          pageSizeOptions: [8, 16, 24],
+        }}
+        expandable={{
+          expandedRowRender: (row) => (
+            <div className="strategy-table__expand">
+              <div className="strategy-table__expand-item">
+                <span className="strategy-table__expand-k">{t("table.expand.threshold")}</span>
+                <span className="strategy-table__expand-v">{row.threshold}%</span>
+              </div>
+              <div className="strategy-table__expand-item">
+                <span className="strategy-table__expand-k">{t("table.expand.retry")}</span>
+                <span className="strategy-table__expand-v">
+                  {row.retry} {t("form.retry.unit")}
+                </span>
+              </div>
+              <div className="strategy-table__expand-item">
+                <span className="strategy-table__expand-k">{t("table.expand.notify")}</span>
+                <span className="strategy-table__expand-v">
+                  {row.notify
+                    .map((n) => translator(notifyOptions.find((o) => o.value === n).labelId))
+                    .join(" / ")}
+                </span>
+              </div>
+              <div className="strategy-table__expand-item">
+                <span className="strategy-table__expand-k">{t("table.expand.flap")}</span>
+                <span className="strategy-table__expand-v">
+                  {row.flap ? t("table.expand.on") : t("table.expand.off")}
+                </span>
+              </div>
+            </div>
+          ),
+        }}
+      />
+    </section>
+  );
+}
+  Object.assign(__export, { StrategyTable });
+})();
+
+/* ===== src/views/strategy-modal/index.jsx ===== */
+(function () {
+  const { useEffect } = React;
+  const { Modal, Form, Switch, Button, message } = antd;
+  const { useIntl } = ReactIntl;
+  const { Icon } = __export;
+  const StrategyFields = __export.StrategyFields;
+// Layer 4: 策略弹窗表单 — 页面头/表格行均可唤起，复用同一套参数字段
+function StrategyModal({ open, record, onClose }) {
+  const [form] = Form.useForm();
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  const enableNow = Form.useWatch("enableNow", form) !== false;
+
+  useEffect(() => {
+    if (!open) return;
+    if (record) {
+      form.setFieldsValue({
+        name: record.name,
+        deviceType: record.deviceType,
+        intervalSec: record.intervalSec,
+        level: record.level,
+        enableNow: record.status === "enabled",
+      });
+    } else {
+      form.resetFields();
+    }
+  }, [open, record]);
+
+  const submit = async (asDraft) => {
+    if (!asDraft) {
+      try {
+        await form.validateFields();
+      } catch (err) {
+        return;
+      }
+    }
+    message.success(
+      asDraft ? t("toast.draft") : record ? t("toast.updated") : t("toast.created")
+    );
+    onClose();
+  };
+
+  return (
+    <Modal
+      open={open}
+      onCancel={onClose}
+      width={680}
+      title={
+        <span className="strategy-modal__title">
+          <Icon name="circle-plus" size={16} />
+          {record ? t("modal.title.edit") : t("modal.title.new")}
+        </span>
+      }
+      footer={[
+        <Button key="cancel" onClick={onClose}>
+          {t("modal.cancel")}
+        </Button>,
+        <Button key="draft" onClick={() => submit(true)}>
+          {t("modal.draft")}
+        </Button>,
+        <Button key="ok" type="primary" onClick={() => submit(false)}>
+          {t("modal.ok")}
+        </Button>,
+      ]}
+    >
+      <p className="strategy-modal__desc">{t("modal.desc")}</p>
+
+      <Form
+        form={form}
+        layout="vertical"
+        requiredMark
+        initialValues={{ enableNow: true, level: "warning", intervalSec: 60, flap: true }}
+      >
+        <StrategyFields advanced={false} />
+
+        <div className="switch-row">
+          <div className="switch-row__text">
+            <span className="switch-row__label">{t("modal.enableNow")}</span>
+            <span className="switch-row__desc">{t("modal.enableNowDesc")}</span>
+          </div>
+          <Form.Item name="enableNow" valuePropName="checked" noStyle>
+            <Switch />
+          </Form.Item>
+        </div>
+
+        <p className="strategy-modal__status">
+          <Icon name={enableNow ? "circle-check" : "pencil-line"} size={12} />
+          {enableNow ? t("opt.status.enabled") : t("opt.status.draft")}
+        </p>
+      </Form>
+    </Modal>
+  );
+}
+  Object.assign(__export, { StrategyModal });
+})();
+
+/* ===== app.jsx ===== */
+(function () {
+  const { useEffect, useState } = React;
+  const { ConfigProvider } = antd;
+  const { IntlProvider } = ReactIntl;
+  const { AppProvider, useApp, messages, Icon } = __export;
+  const zhCN = __export.zhCN;
+  const HeaderBar = __export.HeaderBar;
+  const SideNav = __export.SideNav;
+  const StrategyForm = __export.StrategyForm;
+  const StrategyTable = __export.StrategyTable;
+  const StrategyModal = __export.StrategyModal;
+// App entry — ICT React page
+// Layering convention (one folder per component, kebab-case + index.jsx/index.css):
+//   Layer 1 global state  → src/context.jsx        (AppProvider: 皮肤 / 语言 / 侧边栏折叠)
+//   Layer 2 mock data     → src/mock/              (strategy.js: 选项集 + 策略清单)
+//   Layer 3 reusable      → src/components/        (status-tag / strategy-fields)
+//   Layer 4 views         → src/views/             (header-bar / side-nav / strategy-form / strategy-table / strategy-modal)
+//   Layer 5 layout        → app.jsx                (Provider + 根容器装配)
+//
+// Styling: custom styles in component folder's index.css; prefer tokens for visual values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function Shell() {
+  const { lang } = useApp();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editing, setEditing] = useState(null);
+
+  // 语言切换需同步 dayjs（antd 文案由 ConfigProvider locale 驱动）
+  useEffect(() => {
+    dayjs.locale(lang === "zh" ? "zh-cn" : "en");
+  }, [lang]);
+
+  const openModal = (record) => {
+    setEditing(record || null);
+    setModalOpen(true);
+  };
+
+  return (
+    <IntlProvider locale={lang === "zh" ? "zh-CN" : "en-US"} messages={messages[lang]}>
+      <ConfigProvider locale={lang === "zh" ? zhCN : undefined}>
+        <div className="app-root">
+          <HeaderBar />
+
+          <div className="app-body">
+            <SideNav />
+
+            <main className="app-main">
+              <div className="app-page-head">
+                <div className="app-page-head__text">
+                  <span className="app-page-head__crumb">
+                    {lang === "zh" ? "首页 / 策略配置 / 参数配置" : "Home / Strategy / Parameters"}
+                  </span>
+                  <h1 className="app-page-head__title">
+                    {lang === "zh" ? "策略配置" : "Strategy Configuration"}
+                  </h1>
+                  <p className="app-page-head__desc">
+                    {lang === "zh"
+                      ? "按设备类型下发采集与告警策略，保存后 5 分钟内自动生效。"
+                      : "Deliver collection and alarm strategies per device type. Changes take effect within 5 minutes."}
+                  </p>
+                </div>
+                <div className="app-page-head__actions">
+                  <button type="button" className="app-page-head__btn" onClick={() => openModal(null)}>
+                    <Icon name="download" size={14} />
+                    {lang === "zh" ? "导入配置" : "Import"}
+                  </button>
+                  <button
+                    type="button"
+                    className="app-page-head__btn app-page-head__btn--primary"
+                    onClick={() => openModal(null)}
+                  >
+                    <Icon name="plus" size={14} />
+                    {lang === "zh" ? "新建策略" : "New Strategy"}
+                  </button>
+                </div>
+              </div>
+
+              <div className="app-main__stack">
+                <StrategyForm onOpenModal={() => openModal(null)} />
+                <StrategyTable onEdit={openModal} />
+              </div>
+            </main>
+          </div>
+
+          <StrategyModal open={modalOpen} record={editing} onClose={() => setModalOpen(false)} />
+        </div>
+      </ConfigProvider>
+    </IntlProvider>
+  );
+}
+
+function App() {
+  return (
+    <AppProvider>
+      <Shell />
+    </AppProvider>
+  );
+}
+  Object.assign(__export, { App });
+})();
+/* ===== render ===== */
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(__export.App));
+</script>
+</body>
+</html>

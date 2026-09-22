@@ -1,0 +1,70 @@
+/* 步骤流面板 — token 优先 */
+.step-panel {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+}
+
+.step-content {
+  margin-top: var(--spacing-section);
+  min-height: 320px;
+  padding: var(--spacing-inset);
+  background: var(--surface-container-low);
+  border-radius: var(--radius-container);
+}
+
+.step-form {
+  max-width: 640px;
+}
+
+.step-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-gutter);
+}
+
+.confirm-alert {
+  margin-bottom: var(--spacing-stack);
+}
+
+.confirm-group {
+  margin-top: var(--spacing-stack);
+}
+
+.confirm-group + .confirm-group {
+  margin-top: var(--spacing-section);
+}
+
+/* 底部按钮组靠右:次要(上一步)在左,主操作(下一步/提交)在最右(原 Space 组件 → flex+gap) */
+.step-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-inline);
+  margin-top: var(--spacing-section);
+  padding-top: var(--spacing-stack);
+  border-top: 1px solid var(--divider);
+}
+
+/* eview-react Form.Item 无 extra,手写提示行 */
+.form-extra {
+  margin-top: var(--spacing-1);
+  margin-bottom: var(--spacing-stack);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+/* 手写键值详情块标题(替代原 Descriptions title) */
+.confirm-group-title {
+  margin: 0 0 var(--spacing-2);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+/* 窄屏时双列表单退化为单列 */
+@media (max-width: 768px) {
+  .step-form-row {
+    grid-template-columns: 1fr;
+  }
+}

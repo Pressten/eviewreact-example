@@ -1,0 +1,5067 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT椤甸潰</title>
+<!-- 1. Core Libraries (local UMD) -->
+<script src="./assets/library/react.production.min.js"></script>
+<script src="./assets/library/react-dom.production.min.js"></script>
+<script src="./assets/library/dayjs.min.js"></script>
+<!-- 2. react-intl (offline, exposes ReactIntl) -->
+<script src="./assets/library/react-intl.umd.js"></script>
+<!-- 3. Babel Transpiler (local) -->
+<script src="./assets/library/babel.min.js"></script>
+<!-- 4. 浜斿眰 CSS(base 鈫?light 鈫?theme 鈫?dark)鍐呰仈 -->
+<style>
+:root {
+  /* ==========================================================================
+    1. 鍩虹鑹查樁 (Primitive Colors)
+    ========================================================================== */
+  /* brand */
+  --brand-05: #E6F2FD;
+  --brand-10: #B8D9F9;
+  --brand-20: #8ABEF3;
+  --brand-30: #5CA2E9;
+  --brand-40: #2E86DE;
+  --brand-50: #0067D1;
+  --brand-60: #004EA8;
+  --brand-70: #003D83;
+  --brand-80: #002E6A;
+  --brand-90: #00214B;
+
+  /* gray */
+  --gray-0: #FFFFFF;
+  --gray-05: #F3F3F3;
+  --gray-10: #DFDFDF;
+  --gray-20: #C9C9C9; 
+  --gray-30: #AEAEAE;
+  --gray-40: #939393;
+  --gray-50: #777777;
+  --gray-60: #595959;
+  --gray-70: #393939;
+  --gray-80: #2A2A2A;
+  --gray-90: #191919;
+  --gray-100: #000000;
+
+  /* red */
+  --red-05: #FEE7E8;
+  --red-10: #FABDC1;
+  --red-20: #F59297;
+  --red-30: #EE696F;
+  --red-40: #E7434A;
+  --red-50: #E02128;
+  --red-60: #C7000B;
+  --red-70: #850F12;
+  --red-80: #59080A;
+  --red-90: #350305;
+
+  /* rose */
+  --rose-05: #FEE5F2;
+  --rose-10: #FCC3E0;
+  --rose-20: #F99AC7;
+  --rose-30: #F470AB;
+  --rose-40: #ED448A;
+  --rose-50: #E61866;
+  --rose-60: #C40054;
+  --rose-70: #811439;
+  --rose-80: #540D24;
+  --rose-90: #330614;
+
+  /* orange */
+  --orange-05: #FEF5E8;
+  --orange-10: #FDE2BD;
+  --orange-20: #FCCE92;
+  --orange-30: #F9B766;
+  --orange-40: #F69E39;
+  --orange-50: #F4840C;
+  --orange-60: #C76207;
+  --orange-70: #954304;
+  --orange-80: #642802;
+  --orange-90: #3D1601;
+
+  /* yellow */
+  --yellow-05: #FEFCE0;
+  --yellow-10: #FEF8B8;
+  --yellow-20: #FEF08A;
+  --yellow-30: #FDE55C;
+  --yellow-40: #FCD72E;
+  --yellow-50: #FCC800;
+  --yellow-60: #D19F00;
+  --yellow-70: #9E7400;
+  --yellow-80: #614500;
+  --yellow-90: #2E1F00;
+
+  /* green */
+  --green-05: #F2FBE9;
+  --green-10: #DFF4CC;
+  --green-20: #C6E9A8;
+  --green-30: #A8DB81;
+  --green-40: #87C859;
+  --green-50: #62B42E;
+  --green-60: #488E20;
+  --green-70: #316614;
+  --green-80: #1B3E0A;
+  --green-90: #0C2004;
+
+  /* mint */
+  --mint-05: #E7FBF2;
+  --mint-10: #BCF2DB;
+  --mint-20: #8FE5C2;
+  --mint-30: #63D5A8;
+  --mint-40: #36C18D;
+  --mint-50: #09AA71;
+  --mint-60: #058358;
+  --mint-70: #036142;
+  --mint-80: #02422E;
+  --mint-90: #00291D;
+
+  /* cyan */
+  --cyan-05: #E8FCFD;
+  --cyan-10: #C9F6F9;
+  --cyan-20: #A4ECF1;
+  --cyan-30: #7DDFE7;
+  --cyan-40: #55CCD9;
+  --cyan-50: #2CB8C9;
+  --cyan-60: #1C94A4;
+  --cyan-70: #127180;
+  --cyan-80: #094C57;
+  --cyan-90: #04282F;
+
+  /* blue */
+  --blue-05: #EEF3FE;
+  --blue-10: #D0D8FD;
+  --blue-20: #B0BFFD;
+  --blue-30: #8CA3FA;
+  --blue-40: #668CF7;
+  --blue-50: #2070F3;
+  --blue-60: #1F55B5;
+  --blue-70: #1B3F86;
+  --blue-80: #112857;
+  --blue-90: #081635;
+
+  /* indigo */
+  --indigo-05: #EEEEFE;
+  --indigo-10: #D5D3FD;
+  --indigo-20: #BFB9FA;
+  --indigo-30: #A89FF9;
+  --indigo-40: #8E81F4;
+  --indigo-50: #715AFB;
+  --indigo-60: #5531EB;
+  --indigo-70: #3F21B5;
+  --indigo-80: #281675;
+  --indigo-90: #160B48;
+
+  /* purple */
+  --purple-05: #F7EDFE;
+  --purple-10: #E8CFFE;
+  --purple-20: #D9B1FD;
+  --purple-30: #CB8EFB;
+  --purple-40: #BF68FA;
+  --purple-50: #B62BF7;
+  --purple-60: #8A21BC;
+  --purple-70: #651B8B;
+  --purple-80: #41125A;
+  --purple-90: #260937;
+
+  /* pink */
+  --pink-05: #FDE6FC;
+  --pink-10: #F9C5F6;
+  --pink-20: #F39DEC;
+  --pink-30: #EB74DF;
+  --pink-40: #E049CE;
+  --pink-50: #D41DBC;
+  --pink-60: #9F1C8D;
+  --pink-70: #751868;
+  --pink-80: #4C0F43;
+  --pink-90: #2E0728;
+
+  /* ==========================================================================
+    2. 灏哄涓庡舰鐘?(Sizes & Shapes)
+    ========================================================================== */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-base: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+    3. 鏂囨湰鎺掔増 (Typography)
+    ========================================================================== */
+  /* Font Family */
+  --font-family: 'HarmonyOS Sans', 'Microsoft YaHei', Arial, 'PingFang SC', 'San Francisco', sans-serif;
+
+  /* Font Size (10px 鈫?72px) */
+  --font-size-sm: 0.625rem;    /* 10px */
+  --font-size-base: 0.75rem;   /* 12px */
+  --font-size-md: 0.875rem;    /* 14px */
+  --font-size-lg: 1rem;        /* 16px */
+  --font-size-xl: 1.125rem;    /* 18px */
+  --font-size-2xl: 1.25rem;    /* 20px */
+  --font-size-3xl: 1.5rem;     /* 24px */
+  --font-size-4xl: 1.75rem;    /* 28px */
+  --font-size-5xl: 2.25rem;    /* 36px */
+  --font-size-6xl: 3rem;       /* 48px */
+  --font-size-7xl: 3.75rem;    /* 60px */
+  --font-size-8xl: 4.5rem;     /* 72px */
+
+  /* Line Height (鍒诲害,1.25 鈫?1.8) */
+  --line-height-xs: 1.25;
+  --line-height-sm: 1.375;
+  --line-height-base: 1.5;
+  --line-height-md: 1.625;
+  --line-height-lg: 1.8;
+
+  /* Font Weight */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ==========================================================================
+    4. 闂磋窛 (Spacing)
+    ========================================================================== */
+  /* 4px 缃戞牸 + 鍗婃妗?0 鈫?80px 灏侀《(鏇村ぇ鐣欑櫧鐢?px 瀛楅潰閲忔寜闇€鍐? */
+  --spacing-0: 0px;
+  --spacing-0-5: 2px;
+  --spacing-1: 4px;
+  --spacing-1-5: 6px;
+  --spacing-2: 8px;
+  --spacing-2-5: 10px;
+  --spacing-3: 12px;
+  --spacing-3-5: 14px;
+  --spacing-4: 16px;
+  --spacing-4-5: 18px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-11: 44px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-15: 60px;
+  --spacing-16: 64px;
+  --spacing-17: 68px;
+  --spacing-18: 72px;
+  --spacing-19: 76px;
+  --spacing-20: 80px;
+}
+
+/* ==========================================================================
+  5. 鍝嶅簲寮?rem 鍩哄噯 (Responsive rem base) 鈥?html font-size 闅忚鍙ｅ搴﹀彉鍖?
+  ========================================================================== */
+@media (max-width: 1366px) {
+  html { font-size: 12px; }
+}
+@media (min-width: 1367px) and (max-width: 1680px) {
+  html { font-size: 14px; }
+}
+@media (min-width: 1681px) and (max-width: 1920px) {
+  html { font-size: 16px; }
+}
+@media (min-width: 1921px) {
+  html { font-size: 20px; }
+}
+
+/* ==========================================================================
+  6. 瀛椾綋娉ㄥ唽 (Font Face)
+  ========================================================================== */
+/* Light */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Regular */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Medium */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+/* 鈹€鈹€ body base 鈹€鈹€ */
+body {
+  margin: 0;
+  font: var(--font-body-m);
+  background-color: var(--surface);
+  color: var(--on-surface);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+  7. 鍩虹婊氬姩鏉℃牱寮?(Scrollbar)
+  ========================================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 4px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #dededf;
+}
+
+
+:root {
+  /* 鍝佺墝鑹?*/
+  --color-brand: var(--brand-50);
+  --color-brand-hover: var(--brand-40);
+  --color-brand-focus: var(--brand-50);
+  --color-brand-active: var(--brand-60);
+  --color-brand-disabled: var(--brand-20);
+  /* 鏂囨湰鑹?*/
+  --color-text-primary: var(--gray-90);
+  --color-text-secondary: var(--gray-50);
+  --color-text-placeholder: var(--gray-30);
+  --color-text-disabled: var(--gray-20);
+  --color-text-inverse: var(--gray-0);
+  --color-text-inverse-disabled: var(--gray-0);
+  --color-text-on: var(--brand-50);
+  --color-link: var(--brand-50);
+  --color-link-hover: var(--brand-40);
+  --color-link-active: var(--brand-60);
+  --color-link-visited: var(--indigo-50);
+  --color-link-disabled: var(--brand-20);
+  /* 鑳屾櫙鑹?*/
+  --color-bg-1: var(--gray-05);
+  --color-bg-2: var(--gray-0);
+  --color-bg-3: var(--gray-0);
+  --color-bg-4: var(--gray-0);
+  --color-bg-5: var(--gray-0);
+  --color-bg-6: rgb(from var(--gray-20) r g b / 0.2);
+  --color-bg-mask: rgb(from var(--gray-90) r g b / 0.3);
+  /* 濉厖鑹?*/
+  --color-fill-disabled: var(--gray-10);
+  --color-hover: rgb(from var(--gray-90) r g b / 0.05);
+  --color-fill-disabled-subtle: rgb(from var(--gray-90) r g b / 0.05);
+  --color-fill: rgb(from var(--gray-90) r g b / 0.05);
+  --color-select: var(--brand-05);
+  --color-fill-subtle: var(--gray-0);
+  /* 鍥炬爣鑹?*/
+  --color-icon-primary: var(--gray-90);
+  --color-icon-secondary: var(--gray-50);
+  --color-icon-tertiary: var(--gray-40);
+  --color-icon-placeholder: var(--gray-30);
+  --color-icon-disabled: var(--gray-20);
+  --color-icon-inverse: var(--gray-0);
+  --color-icon-hover: var(--brand-40);
+  --color-icon-focus: var(--brand-50);
+  --color-icon-active: var(--brand-60);
+  /* 杈规鑹?*/
+  --color-border: var(--gray-20);
+  --color-border-hover: var(--gray-90);
+  --color-border-focus: var(--brand-50);
+  --color-border-active: var(--brand-10);
+  --color-border-disabled: var(--gray-20);
+  --color-border-separator: var(--gray-10);
+  --color-border-separator-sbutle: var(--gray-05);
+  /* 鍔熻兘鑹?閿欒 */
+  --color-error: var(--red-50);
+  --color-error-hover: var(--red-40);
+  --color-error-active: var(--red-60);
+  --color-error-disabled: var(--red-10);
+  --color-error-subtle: var(--red-20);
+  --color-error-subtler: var(--red-05);
+  /* 鍔熻兘鑹?鍛婅 */
+  --color-alert: var(--orange-50);
+  --color-alert-hover: var(--orange-40);
+  --color-alert-active: var(--orange-60);
+  --color-alert-disabled: var(--orange-10);
+  --color-alert-subtle: var(--orange-20);
+  --color-alert-subtler: var(--orange-05);
+  /* 鍔熻兘鑹?鎻愰啋 */
+  --color-warning: var(--yellow-50);
+  --color-warning-hover: var(--yellow-40);
+  --color-warning-active: var(--yellow-60);
+  --color-warning-disabled: var(--yellow-10);
+  --color-warning-bold: var(--yellow-60);
+  --color-warning-subtle: var(--yellow-20);
+  --color-warning-subtler: var(--yellow-05);
+  /* 鍔熻兘鑹?鎴愬姛 */
+  --color-success: var(--mint-50);
+  --color-success-hover: var(--mint-40);
+  --color-success-active: var(--mint-60);
+  --color-success-disabled: var(--mint-10);
+  --color-success-subtle: var(--mint-20);
+  --color-success-subtler: var(--mint-05);
+  /* 鍔熻兘鑹?淇℃伅 */
+  --color-info-primary: var(--blue-50);
+  --color-info-primary-subtle: var(--blue-30);
+  --color-info-primary-subtler: var(--blue-05);
+  --color-info-secondary: var(--blue-30);
+  --color-info-secondary-hover: var(--blue-20);
+  --color-info-secondary-active: var(--blue-40);
+  --color-info-secondary-disabled: var(--blue-10);
+  --color-info-secondary-subtle: var(--blue-05);
+  /* 鍔熻兘鑹?澶辨晥 */
+  --color-none: var(--gray-30);
+  --color-none-hover: var(--gray-20);
+  --color-none-active: var(--gray-40);
+  --color-none-disabled: var(--gray-10);
+  --color-none-subtle: var(--gray-05);
+  /* 鎺ㄨ崘鍥捐〃鑹?*/
+  --color-chart-1: var(--blue-50);
+  --color-chart-2: var(--green-50);
+  --color-chart-3: var(--indigo-50);
+  --color-chart-4: var(--cyan-50);
+  --color-chart-5: var(--orange-40);
+  --color-chart-6: var(--brand-30);
+  --color-chart-7: var(--purple-40);
+  --color-chart-8: var(--rose-40);
+  --color-chart-9: var(--indigo-20);
+  --color-chart-10: var(--yellow-60);
+  --color-chart-11: var(--brand-10);
+  --color-chart-12: var(--green-60);
+  --color-chart-13: var(--purple-20);
+  --color-chart-14: var(--cyan-60);
+  --color-chart-15: var(--orange-20);
+  --color-chart-16: var(--rose-60);
+  --color-chart-17: var(--cyan-20);
+  --color-chart-18: var(--blue-60);
+  --color-chart-19: var(--green-20);
+  --color-chart-20: var(--indigo-70);
+  --color-chart-21: var(--rose-10);
+  --color-chart-22: var(--cyan-70);
+  --color-chart-23: var(--yellow-20);
+  --color-chart-24: var(--purple-70);
+  --color-chart-25: var(--mint-20);
+  /* 鐗规畩鍦烘櫙 */
+  --color-scrollbar: var(--gray-10);
+  --color-scrollbar-hover: var(--gray-30);
+  --color-card-gray-disabled: rgb(from var(--gray-30) r g b / 0.05);
+  --color-card-white-disabled: rgb(from var(--gray-0) r g b / 0.5);
+  --color-sidenav-bg: rgb(from var(--gray-05) r g b / 0.5);
+  --color-table-header: rgb(from var(--gray-90) r g b / 0.05);
+  --color-table-zebra: rgb(from var(--gray-40) r g b / 0.05);
+  --color-message-bg-info: var(--blue-05);
+  --color-message-bg-success: var(--mint-05);
+  --color-message-bg-warning: var(--yellow-05);
+  --color-message-bg-alert: var(--orange-05);
+  --color-message-bg-error: var(--red-05);
+  /* ICT3.0 3.0鍛婅鑹?*/
+  --color-alert-urgent: #F43146;
+  --color-alert-primary: #EC6F1A;
+  --color-alert-secondary: #EEBA18;
+  --color-alert-success: #2DA769;
+  --color-alert-running: #5990FD;
+  --color-alert-none: #939393;
+  /* ICT3.1 琛ㄦ牸 */
+  --color-table-1: var(--brand-05);
+  --color-table-2: var(--brand-10);
+  --color-table-sticky-1: var(--brand-05);
+  --color-table-sticky-2: var(--brand-10);
+  --color-table-sticky-bg: var(--gray-0);
+  --color-table-sticky-header: var(--gray-05);
+  /* 鏍囩閰嶈壊 */
+  --color-tag-text-purple: var(--purple-60);
+  --color-tag-bg-purple: rgb(from var(--purple-10) r g b / 0.6);
+  --color-tag-text-cyan: var(--cyan-80);
+  --color-tag-bg-cyan: rgb(from var(--cyan-60) r g b / 0.15);
+  --color-tag-text-rose: var(--rose-60);
+  --color-tag-bg-rose: var(--rose-05);
+  --color-tag-text-green: var(--green-70);
+  --color-tag-bg-green: var(--green-10);
+  --color-tag-text-pink: var(--pink-60);
+  --color-tag-bg-pink: var(--pink-05);
+  --color-tag-text-indigo: var(--indigo-80);
+  --color-tag-bg-indigo: rgb(from var(--indigo-10) r g b / 0.6);
+  --color-tag-text-none: var(--gray-70);
+  --color-tag-bg-none: rgb(from var(--gray-90) r g b / 0.05);
+  --color-tag-text-error: var(--red-60);
+  --color-tag-bg-error: var(--red-05);
+  --color-tag-text-alert: var(--orange-70);
+  --color-tag-bg-alert: var(--orange-10);
+  --color-tag-text-warning: var(--yellow-80);
+  --color-tag-bg-warning: rgb(from var(--yellow-30) r g b / 0.6);
+  --color-tag-text-success: var(--mint-70);
+  --color-tag-bg-success: rgb(from var(--mint-10) r g b / 0.6);
+  --color-tag-text-info: var(--blue-60);
+  --color-tag-bg-info: rgb(from var(--blue-10) r g b / 0.5);
+  /* Border */
+  --border: var(--gray-20);
+  --border-light: var(--gray-10);
+  --border-primary: var(--brand-50);
+  --border-success: var(--mint-20);
+  --border-warning: var(--yellow-20);
+  --border-alert: var(--orange-20);
+  --border-error: var(--red-20);
+  /* Icon */
+  --icon-primary: var(--brand-50);
+  --icon-success: var(--mint-50);
+  --icon-warning: var(--yellow-50);
+  --icon-critical: var(--orange-50);
+  --icon-alert: var(--orange-50);
+  --icon-error: var(--red-50);
+  /* Shadow */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.08);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.16);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+  --shadow-r-sm: 1px 0 6px 0 rgba(0, 0, 0, 0.08);
+  --shadow-t-sm: 0 -1px 6px rgba(0, 0, 0, 0.08);
+  --shadow-l-base: -2px 0 12px 0 rgba(0, 0, 0, 0.08);
+  --shadow-l-md: -2px 0 24px 0 rgba(0, 0, 0, 0.08);
+}
+
+
+:root {
+  --primary: var(--color-brand);
+  --on-primary: var(--color-text-inverse);
+  --primary-hover: var(--color-brand-hover);
+  --primary-active: var(--color-brand-active);
+  --primary-disabled: var(--color-brand-disabled);
+  --primary-container: var(--color-info-primary-subtler);
+  --on-primary-container: var(--color-text-primary);
+  --primary-fixed: var(--color-brand);
+  --primary-fixed-dim: var(--color-brand-active);
+  --on-primary-fixed: var(--color-text-inverse);
+  --on-primary-fixed-variant: var(--color-text-inverse);
+
+  --surface: var(--color-bg-1);
+  --surface-dim: var(--color-bg-2);
+  --surface-bright: var(--color-bg-2);
+  --on-surface: var(--color-text-primary);
+  --surface-variant: var(--color-bg-1);
+  --on-surface-variant: var(--color-text-secondary);
+  --surface-container-lowest: var(--color-bg-1);
+  --surface-container-low: var(--color-bg-2);
+  --surface-container: var(--color-bg-2);
+  --surface-container-high: var(--color-bg-2);
+  --surface-container-highest: var(--color-bg-2);
+
+  --inverse-surface: var(--color-text-primary);
+  --inverse-on-surface: var(--color-text-inverse);
+  --inverse-on-surface-variant: var(--color-text-inverse-disabled);
+  --inverse-primary: var(--color-brand);
+
+  --error: var(--color-error);
+  --on-error: var(--color-text-inverse);
+  --error-container: var(--color-message-bg-error);
+  --on-error-container: var(--color-text-primary);
+
+  --success: var(--color-success);
+  --on-success: var(--color-text-inverse);
+  --success-container: var(--color-message-bg-success);
+  --on-success-container: var(--color-text-primary);
+
+  --critical: var(--color-alert);
+  --on-critical: var(--color-text-inverse);
+  --critical-container: var(--color-message-bg-alert);
+  --on-critical-container: var(--color-text-primary);
+
+  --warning: var(--color-warning);
+  --on-warning: var(--color-text-inverse);
+  --warning-container: var(--color-message-bg-warning);
+  --on-warning-container: var(--color-text-primary);
+
+  --info: var(--color-info-primary);
+  --on-info: var(--color-text-inverse);
+  --info-container: var(--color-message-bg-info);
+  --on-info-container: var(--color-text-primary);
+
+  --text-placeholder: var(--color-text-placeholder);
+  --text-disabled: var(--color-text-disabled);
+  --text-inverse-disabled: var(--color-text-inverse-disabled);
+
+  --interactive-link: var(--color-link);
+  --interactive-link-hover: var(--color-link-hover);
+  --interactive-link-active: var(--color-link-active);
+  --interactive-link-visited: var(--color-link-visited);
+  --interactive-link-disabled: var(--color-link-disabled);
+  
+  --scrim: var(--color-bg-mask);
+  --outline: var(--color-border);
+  --outline-variant: var(--color-border-separator);
+  --divider: var(--color-border-separator);
+  --focus-ring: var(--color-border-focus);
+  --selected: var(--color-border-focus);
+
+  /* 鈹€鈹€ spacing 鈫?--spacing-* 鈹€鈹€ */
+  --spacing-inline: var(--spacing-2);   /* 8px */
+  --spacing-stack: var(--spacing-3);    /* 12px */
+  --spacing-gutter: var(--spacing-4);  /* 16px */
+  --spacing-inset: var(--spacing-6);    /* 24px */
+  --spacing-section: var(--spacing-4); /* 16px */
+  --spacing-page: var(--spacing-8);      /* 32px */
+
+  /* 鈹€鈹€ boxShadow 鈹€鈹€ */
+  --shadow-card: var(--shadow-sm);
+  --shadow-popover: var(--shadow-lg);
+  --shadow-modal: var(--shadow-xl);
+
+  /* 鈹€鈹€ borderRadius 鈫?--radius-* 鈹€鈹€ */
+  --radius-badge: var(--radius-base);  /* 4px */
+  --radius-action: var(--radius-base); /* 4px */
+  --radius-container: var(--radius-lg); /* 8px */
+  --radius-overlay: var(--radius-lg);  /* 8px */
+
+  /* 鈹€鈹€ border & outline width 鈹€鈹€ */
+  --border-width-thin: 1px;    
+  --border-width-thick: 2px;  
+  --outline-width-focus: 1px;
+  --outline-offset-gap: 2px;
+
+  /* 鈹€鈹€ typography 鈫?--font-*锛堣鑹插寲 font 绠€鍐欙細瀛楀彿/琛岄珮 瀛楁棌锛涘瓧閲嶅彟琛岀敤 --font-weight-* 缁勫悎锛夆攢鈹€ */
+  /* Display 灞曠ず鏂囨湰 鈥?鑻遍泟鏍囪銆佹暟鎹湅鏉垮ぇ鏁板瓧 */
+  --font-display-l: var(--font-size-7xl)/var(--line-height-xs) var(--font-family);    /* 60px/1.25 */
+  --font-display-m: var(--font-size-6xl)/var(--line-height-sm) var(--font-family);    /* 48px/1.375 */
+  --font-display-s: var(--font-size-5xl)/var(--line-height-sm) var(--font-family);    /* 36px/1.375 */
+  /* Headline 鏍囬 鈥?椤甸潰鍖哄潡鏍囬(H3)鈫掑崱鐗囨爣棰樷啋琛ㄥ崟鍖烘爣棰?*/
+  --font-headline-l: var(--font-size-2xl)/var(--line-height-sm) var(--font-family);   /* 20px/1.375 */
+  --font-headline-m: var(--font-size-xl)/var(--line-height-sm) var(--font-family);    /* 18px/1.375 */
+  --font-headline-s: var(--font-size-lg)/var(--line-height-base) var(--font-family);  /* 16px/1.5 */
+  /* Body 姝ｆ枃 鈥?琛ㄥ崟鏍囩/鎸夐挳鏂囧瓧鈫掕〃鏍兼鏂団啋杈呭姪璇存槑 */
+  --font-body-l: var(--font-size-lg)/var(--line-height-base) var(--font-family);      /* 16px/1.5 */
+  --font-body-m: var(--font-size-md)/var(--line-height-base) var(--font-family);      /* 14px/1.5 */
+  --font-body-s: var(--font-size-base)/var(--line-height-md) var(--font-family);      /* 12px/1.625 */
+  /* Caption 娉ㄩ噴 鈥?鏃堕棿鎴?琛ㄦ牸闄勫姞淇℃伅鈫掑簳閮ㄥ厤璐ｅ０鏄?*/
+  --font-caption-m: var(--font-size-base)/var(--line-height-md) var(--font-family);   /* 12px/1.625 */
+  --font-caption-s: var(--font-size-sm)/var(--line-height-lg) var(--font-family);    /* 10px/1.8 */
+}
+
+.dark {
+  /* 鍝佺墝鑹?*/
+  --color-brand: var(--brand-50);
+  --color-brand-hover: var(--brand-40);
+  --color-brand-focus: var(--brand-50);
+  --color-brand-active: var(--brand-60);
+  --color-brand-disabled: var(--brand-70);
+  /* 鏂囨湰鑹?*/
+  --color-text-primary: var(--gray-0);
+  --color-text-secondary: var(--gray-20);
+  --color-text-placeholder: var(--gray-40);
+  --color-text-disabled: var(--gray-40);
+  --color-text-inverse: var(--gray-0);
+  --color-text-inverse-disabled: rgb(from var(--gray-05) r g b / 0.3);
+  --color-text-on: var(--gray-0);
+  --color-link: var(--brand-30);
+  --color-link-hover: var(--brand-20);
+  --color-link-active: var(--brand-40);
+  --color-link-visited: var(--indigo-50);
+  --color-link-disabled: var(--brand-60);
+  /* 鑳屾櫙鑹?*/
+  --color-bg-1: var(--gray-100);
+  --color-bg-2: var(--gray-90);
+  --color-bg-3: var(--gray-80);
+  --color-bg-4: var(--gray-70);
+  --color-bg-5: rgb(from var(--gray-05) r g b / 0.1);
+  --color-bg-6: rgb(from var(--gray-05) r g b / 0.1);
+  --color-bg-mask: rgb(from var(--gray-0) r g b / 0.7);
+  /* 濉厖鑹?*/
+  --color-fill-disabled: var(--gray-60);
+  --color-hover: rgb(from var(--gray-05) r g b / 0.2);
+  --color-fill-disabled-subtle: rgb(from var(--gray-05) r g b / 0.2);
+  --color-fill: rgb(from var(--gray-05) r g b / 0.2);
+  --color-select: rgb(from var(--brand-50) r g b / 0.4);
+  --color-fill-subtle: rgb(from var(--gray-100) r g b / 0);
+  /* 鍥炬爣鑹?*/
+  --color-icon-primary: var(--gray-10);
+  --color-icon-secondary: var(--gray-30);
+  --color-icon-tertiary: var(--gray-50);
+  --color-icon-placeholder: var(--gray-40);
+  --color-icon-disabled: var(--gray-40);
+  --color-icon-inverse: var(--gray-0);
+  --color-icon-hover: var(--brand-20);
+  --color-icon-focus: var(--brand-30);
+  --color-icon-active: var(--brand-40);
+  /* 杈规鑹?*/
+  --color-border: var(--gray-50);
+  --color-border-hover: var(--gray-05);
+  --color-border-focus: var(--brand-40);
+  --color-border-active: var(--brand-80);
+  --color-border-disabled: var(--gray-60);
+  --color-border-separator: rgb(from var(--gray-05) r g b / 0.15);
+  --color-border-separator-sbutle: rgb(from var(--gray-05) r g b / 0.1);
+  /* 鍔熻兘鑹?閿欒 */
+  --color-error: var(--red-40);
+  --color-error-hover: var(--red-30);
+  --color-error-active: var(--red-50);
+  --color-error-disabled: var(--red-80);
+  --color-error-subtle: var(--red-60);
+  --color-error-subtler: var(--red-80);
+  /* 鍔熻兘鑹?鍛婅 */
+  --color-alert: var(--orange-50);
+  --color-alert-hover: var(--orange-40);
+  --color-alert-active: var(--orange-60);
+  --color-alert-disabled: var(--orange-80);
+  --color-alert-subtle: var(--orange-60);
+  --color-alert-subtler: var(--orange-80);
+  /* 鍔熻兘鑹?鎻愰啋 */
+  --color-warning: var(--yellow-40);
+  --color-warning-hover: var(--yellow-30);
+  --color-warning-active: var(--yellow-50);
+  --color-warning-disabled: var(--yellow-80);
+  --color-warning-bold: var(--yellow-60);
+  --color-warning-subtle: var(--yellow-60);
+  --color-warning-subtler: var(--yellow-80);
+  /* 鍔熻兘鑹?鎴愬姛 */
+  --color-success: var(--mint-60);
+  --color-success-hover: var(--mint-50);
+  --color-success-active: var(--mint-60);
+  --color-success-disabled: var(--mint-80);
+  --color-success-subtle: var(--mint-60);
+  --color-success-subtler: var(--mint-80);
+  /* 鍔熻兘鑹?淇℃伅 */
+  --color-info-primary: var(--blue-50);
+  --color-info-primary-subtle: var(--blue-60);
+  --color-info-primary-subtler: var(--blue-80);
+  --color-info-secondary: var(--blue-60);
+  --color-info-secondary-hover: var(--blue-40);
+  --color-info-secondary-active: var(--blue-60);
+  --color-info-secondary-disabled: var(--blue-80);
+  --color-info-secondary-subtle: var(--blue-80);
+  /* 鍔熻兘鑹?澶辨晥 */
+  --color-none: var(--gray-60);
+  --color-none-hover: rgb(from var(--gray-05) r g b / 0.2);
+  --color-none-active: var(--gray-50);
+  --color-none-disabled: var(--gray-90);
+  --color-none-subtle: var(--gray-90);
+  /* 鎺ㄨ崘鍥捐〃鑹?*/
+  --color-chart-1: var(--blue-50);
+  --color-chart-2: var(--green-50);
+  --color-chart-3: var(--indigo-50);
+  --color-chart-4: var(--cyan-50);
+  --color-chart-5: var(--orange-40);
+  --color-chart-6: var(--brand-30);
+  --color-chart-7: var(--purple-60);
+  --color-chart-8: var(--rose-60);
+  --color-chart-9: var(--indigo-60);
+  --color-chart-10: var(--yellow-60);
+  --color-chart-11: var(--brand-60);
+  --color-chart-12: var(--green-60);
+  --color-chart-13: var(--purple-70);
+  --color-chart-14: var(--cyan-60);
+  --color-chart-15: var(--orange-70);
+  --color-chart-16: var(--rose-60);
+  --color-chart-17: var(--cyan-70);
+  --color-chart-18: var(--blue-60);
+  --color-chart-19: var(--green-70);
+  --color-chart-20: var(--indigo-70);
+  --color-chart-21: var(--rose-70);
+  --color-chart-22: var(--cyan-30);
+  --color-chart-23: var(--yellow-70);
+  --color-chart-24: var(--purple-50);
+  --color-chart-25: var(--mint-70);
+  /* 鐗规畩鍦烘櫙 */
+  --color-scrollbar: var(--gray-60);
+  --color-scrollbar-hover: var(--gray-40);
+  --color-card-gray-disabled: rgb(from var(--gray-40) r g b / 0.05);
+  --color-card-white-disabled: rgb(from var(--gray-40) r g b / 0.1);
+  --color-sidenav-bg: var(--gray-70);
+  --color-table-header: rgb(from var(--gray-05) r g b / 0.1);
+  --color-table-zebra: rgb(from var(--gray-50) r g b / 0.15);
+  --color-message-bg-info: rgb(from var(--blue-50) r g b / 0.15);
+  --color-message-bg-success: rgb(from var(--mint-60) r g b / 0.15);
+  --color-message-bg-warning: rgb(from var(--yellow-40) r g b / 0.15);
+  --color-message-bg-alert: rgb(from var(--orange-50) r g b / 0.15);
+  --color-message-bg-error: rgb(from var(--red-40) r g b / 0.15);
+  /* ICT3.0 3.0鍛婅鑹?*/
+  --color-alert-urgent: #F43146;
+  --color-alert-primary: #EC6F1A;
+  --color-alert-secondary: #EEBA18;
+  --color-alert-success: #0D9458;
+  --color-alert-running: #5990FD;
+  --color-alert-none: #818181;
+  /* ICT3.1 琛ㄦ牸 */
+  --color-table-1: rgb(from var(--brand-50) r g b / 0.2);
+  --color-table-2: rgb(from var(--brand-50) r g b / 0.4);
+  --color-table-sticky-1: var(--brand-80);
+  --color-table-sticky-2: var(--brand-70);
+  --color-table-sticky-bg: var(--gray-70);
+  --color-table-sticky-header: var(--gray-70);
+  /* 鏍囩閰嶈壊 */
+  --color-tag-text-purple: var(--purple-30);
+  --color-tag-bg-purple: rgb(from var(--purple-30) r g b / 0.15);
+  --color-tag-text-cyan: var(--cyan-40);
+  --color-tag-bg-cyan: rgb(from var(--cyan-50) r g b / 0.15);
+  --color-tag-text-rose: var(--rose-30);
+  --color-tag-bg-rose: rgb(from var(--rose-30) r g b / 0.15);
+  --color-tag-text-green: var(--green-50);
+  --color-tag-bg-green: rgb(from var(--green-40) r g b / 0.15);
+  --color-tag-text-pink: var(--pink-30);
+  --color-tag-bg-pink: rgb(from var(--pink-30) r g b / 0.15);
+  --color-tag-text-indigo: var(--indigo-30);
+  --color-tag-bg-indigo: rgb(from var(--indigo-30) r g b / 0.15);
+  --color-tag-text-none: var(--gray-30);
+  --color-tag-bg-none: rgb(from var(--gray-30) r g b / 0.15);
+  --color-tag-text-error: var(--red-40);
+  --color-tag-bg-error: rgb(from var(--red-30) r g b / 0.15);
+  --color-tag-text-alert: var(--orange-40);
+  --color-tag-bg-alert: rgb(from var(--orange-50) r g b / 0.15);
+  --color-tag-text-warning: var(--yellow-50);
+  --color-tag-bg-warning: rgb(from var(--yellow-30) r g b / 0.15);
+  --color-tag-text-success: var(--mint-40);
+  --color-tag-bg-success: rgb(from var(--mint-50) r g b / 0.15);
+  --color-tag-text-info: var(--blue-30);
+  --color-tag-bg-info: rgb(from var(--blue-40) r g b / 0.15);
+  /* Border */
+  --border: var(--gray-50);
+  --border-light: rgb(from var(--gray-05) r g b / 0.15);
+  --border-primary: var(--brand-30);
+  --border-success: var(--mint-20);
+  --border-warning: var(--yellow-20);
+  --border-alert: var(--orange-20);
+  --border-error: var(--red-20);
+  /* Icon */
+  --icon-primary: var(--brand-30);
+  --icon-success: var(--mint-30);
+  --icon-warning: var(--yellow-30);
+  --icon-critical: var(--orange-30);
+  --icon-alert: var(--orange-30);
+  --icon-error: var(--red-30);
+  /* Shadow (鏆楄壊妯″紡涓嬮槾褰辨洿寮? */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.5);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-r-sm: 1px 0 6px 0 rgba(0, 0, 0, 0.5);
+  --shadow-t-sm: 0 -1px 6px rgba(0, 0, 0, 0.5);
+  --shadow-l-base: -2px 0 12px 0 rgba(0, 0, 0, 0.5);
+  --shadow-l-md: -2px 0 24px 0 rgba(0, 0, 0, 0.5);
+}
+
+
+/* 缁勪欢鏍峰紡姹囨€伙細鐢?npm run build:css 鐢熸垚锛屽嬁鎵嬫敼 */
+.ant-table {
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+}
+
+/* Divider 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-divider {
+  border-color: var(--gray-10);
+}
+.dark .ant-divider {
+  border-color: var(--color-border-separator);
+}
+
+/* Button 缁勪欢鏍峰紡锛坱oken 鏄犲皠锛?*/
+.ant-btn {
+  font-size: var(--font-size-md);
+  border-radius: var(--radius-base);
+  font-weight: var(--font-weight-normal);
+  min-width: calc(var(--spacing-4) * 5.5);
+  box-shadow: none !important;
+  gap: 4px;
+}
+.ant-btn.ant-btn-color-default {
+  color: var(--color-text-primary);
+}
+.ant-btn.ant-btn-color-default:not(:disabled):hover {
+  color: var(--color-text-primary);
+  border-color: var(--gray-90);
+  background-color: var(--color-bg-2);
+}
+.ant-btn.ant-btn-color-default:not(:disabled):active {
+  color: var(--color-text-primary);
+  border-color: var(--border-primary);
+  background-color: var(--color-bg-2);
+}
+.ant-btn.ant-btn-color-default:disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--gray-10);
+}
+.ant-btn.ant-btn-color-primary {
+  color: var(--gray-0);
+  background-color: var(--color-brand);
+}
+.ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  color: var(--gray-0);
+  background-color: var(--brand-40);
+}
+.ant-btn.ant-btn-color-primary:not(:disabled):active {
+  color: var(--gray-0);
+  background-color: var(--brand-60);
+}
+.ant-btn.ant-btn-color-primary:disabled {
+  color: var(--gray-0);
+  background-color: var(--brand-20);
+  border-color: var(--brand-20);
+}
+.ant-btn.ant-btn-dangerous {
+  color: var(--gray-0);
+  background-color: var(--red-50);
+}
+.ant-btn.ant-btn-dangerous:not(:disabled):hover {
+  color: var(--gray-0);
+  background-color: var(--red-40);
+}
+.ant-btn.ant-btn-dangerous:not(:disabled):active {
+  color: var(--gray-0);
+  background-color: var(--red-60);
+}
+.ant-btn.ant-btn-dangerous:disabled {
+  color: var(--gray-0);
+  background-color: var(--red-10);
+  border-color: var(--red-10);
+}
+.ant-btn.ant-btn-sm {
+  height: 28px;
+}
+.ant-btn.ant-btn-lg {
+  height: 36px;
+  padding: var(--spacing-0) var(--spacing-5);
+  min-width: 96px;
+  font-size: var(--font-size-md);
+}
+.ant-btn.ant-btn-icon-only {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: auto !important;
+  border: none !important;
+  background-color: transparent !important;
+  padding: var(--spacing-0);
+}
+.ant-btn.ant-btn-icon-only .anticon {
+  font-size: var(--font-size-2xl);
+}
+.ant-btn.ant-btn-icon-only.ant-btn-sm {
+  width: 24px !important;
+  height: 24px !important;
+}
+.ant-btn.ant-btn-icon-only.ant-btn-sm .anticon {
+  font-size: var(--font-size-md);
+}
+.ant-btn.ant-btn-icon-only:hover,
+.ant-btn.ant-btn-icon-only:focus {
+  background-color: transparent !important;
+}
+.ant-btn.ant-btn-variant-link {
+  min-width: unset;
+  line-height: 22px;
+  padding: var(--spacing-0);
+  border: none !important;
+  background-color: transparent;
+  color: var(--color-brand);
+}
+.ant-btn.ant-btn-variant-link:not(:disabled):hover {
+  color: var(--brand-40);
+}
+.ant-btn.ant-btn-variant-link:not(:disabled):active {
+  color: var(--brand-60);
+}
+.dark .ant-btn.ant-btn-color-default {
+  border-color: var(--gray-50);
+  background-color: rgb(from var(--gray-100) r g b / 0);
+}
+.dark .ant-btn.ant-btn-color-default:not(:disabled):hover {
+  background-color: rgb(from var(--gray-100) r g b / 0);
+  border-color: var(--gray-05);
+}
+.dark .ant-btn.ant-btn-color-default:not(:disabled):active {
+  color: var(--color-text-primary);
+  border-color: var(--brand-40);
+  background-color: rgb(from var(--gray-100) r g b / 0);
+}
+.dark .ant-btn.ant-btn-color-default:disabled {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-60);
+}
+.dark .ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  background-color: var(--brand-40);
+}
+.dark .ant-btn.ant-btn-color-primary:not(:disabled):active {
+  background-color: var(--brand-60);
+}
+.dark .ant-btn.ant-btn-color-primary:disabled {
+  color: rgb(from var(--gray-05) r g b / 0.3);
+  background-color: var(--brand-70);
+  border-color: var(--brand-70);
+}
+.dark .ant-btn.ant-btn-color-dangerous {
+  background-color: var(--red-40);
+}
+.dark .ant-btn.ant-btn-color-dangerous:not(:disabled):hover {
+  background-color: var(--red-30);
+}
+.dark .ant-btn.ant-btn-color-dangerous:not(:disabled):active {
+  background-color: var(--red-50);
+}
+.dark .ant-btn.ant-btn-color-dangerous:disabled {
+  color: var(--gray-0);
+  background-color: var(--red-80);
+  border-color: var(--red-80);
+}
+.dark .ant-btn.ant-btn-variant-link {
+  color: var(--brand-30);
+}
+.dark .ant-btn.ant-btn-variant-link:not(:disabled):hover {
+  color: var(--brand-20);
+}
+.dark .ant-btn.ant-btn-variant-link:not(:disabled):active {
+  color: var(--brand-40);
+}
+.dark .ant-btn.ant-btn-icon-only {
+  color: var(--gray-10);
+}
+.dark .ant-btn.ant-btn-icon-only:hover .anticon {
+  color: var(--brand-20);
+}
+.dark .ant-btn.ant-btn-icon-only:active .anticon {
+  color: var(--brand-40);
+}
+
+/* Input 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+input.ant-input {
+  padding: 0 var(--spacing-3);
+  height: 32px;
+  font-size: var(--font-size-md);
+  line-height: 24px;
+  border-radius: var(--radius-base);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+  background-color: var(--color-fill-subtle);
+  caret-color: var(--brand-50);
+}
+input.ant-input::placeholder {
+  color: var(--color-text-placeholder);
+}
+input.ant-input.ant-input-lg {
+  height: 40px;
+  padding: 0 var(--spacing-3);
+  font-size: var(--font-size-md);
+  border-radius: var(--radius-base);
+}
+input.ant-input.ant-input-sm {
+  padding: 0 var(--spacing-3);
+  height: 28px;
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-base);
+}
+.ant-input-affix-wrapper {
+  padding: 0 var(--spacing-3);
+  height: 32px;
+}
+.ant-input-affix-wrapper .ant-input {
+  height: 100%;
+}
+.ant-input-affix-wrapper .ant-input[type="password"] {
+  letter-spacing: var(--spacing-1);
+  color: var(--color-icon-primary);
+}
+.ant-input-affix-wrapper > input.ant-input {
+  color: var(--color-text-primary);
+}
+.ant-input-affix-wrapper .anticon {
+  color: var(--color-icon-secondary);
+}
+.ant-input-affix-wrapper .ant-input-suffix {
+  color: var(--color-text-primary);
+}
+.ant-input-outlined {
+  border-color: var(--color-border);
+  background-color: var(--color-fill-subtle);
+}
+.ant-input-outlined.ant-input-disabled {
+  border-color: var(--color-border-disabled);
+  background-color: var(--color-fill-disabled-subtle);
+  color: var(--color-text-disabled);
+}
+.ant-input-outlined.ant-input-disabled:hover {
+  border-color: var(--color-border-disabled);
+}
+.ant-input-outlined:hover {
+  border-color: var(--color-border-hover);
+}
+.ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
+  border-color: var(--color-error);
+  background-color: var(--color-fill-subtle);
+}
+.ant-input-outlined:focus,
+.ant-input-outlined:focus-within {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px var(--color-brand-disabled);
+  background-color: var(--color-fill-subtle);
+}
+/* textarea style start*/
+.ant-input-textarea-affix-wrapper,
+.ant-flex-align-center {
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+  padding: 0px !important;
+  height: auto;
+}
+.ant-input-textarea-affix-wrapper textarea,
+.ant-flex-align-center textarea {
+  color: var(--color-text-primary);
+  caret-color: var(--brand-50);
+  padding: 6px 16px;
+}
+.ant-input-textarea-affix-wrapper .ant-input-suffix,
+.ant-flex-align-center .ant-input-suffix {
+  font-size: var(--font-size-base);
+}
+.ant-input-textarea-affix-wrapper .ant-input-suffix .ant-input-data-count,
+.ant-flex-align-center .ant-input-suffix .ant-input-data-count {
+  color: var(--color-text-secondary);
+}
+.ant-input-textarea-affix-wrapper.ant-input-affix-wrapper-focused,
+.ant-flex-align-center.ant-input-affix-wrapper-focused {
+  border-color: var(--brand-50);
+}
+.dark .ant-input-textarea-affix-wrapper,
+.dark .ant-flex-align-center {
+  border-color: var(--color-border);
+}
+.dark .ant-input-textarea-affix-wrapper.ant-input-affix-wrapper-focused,
+.dark .ant-flex-align-center.ant-input-affix-wrapper-focused {
+  border-color: var(--brand-40);
+}
+/* textarea style end*/
+
+/* InputNumber 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-input-number {
+  height: 32px;
+  border-color: var(--gray-20);
+  box-shadow: none;
+}
+.ant-input-number .ant-input-number-action-down {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.ant-input-number .ant-input-number-action-up {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.ant-input-number .ant-input-number-input {
+  font-size: 14px;
+}
+.ant-input-number-outlined:hover {
+  border-color: var(--gray-100);
+}
+.ant-input-number-outlined:active {
+  border-color: var(--gray-10);
+}
+.ant-input-number-inlined:active {
+  border-color: var(--gray-50);
+}
+.ant-input-number-focused {
+  border: 1px solid var(--gray-50);
+}
+.dark {
+  /* InputNumber 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+}
+.dark .ant-input-number {
+  color: var(--gray-0);
+  height: 32px;
+  border-color: var(--gray-20);
+  box-shadow: none;
+}
+.dark .ant-input-number .ant-input-number-action-down {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.dark .ant-input-number .ant-input-number-action-up {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.dark .ant-input-number .ant-input-number-input {
+  font-size: 14px;
+}
+.dark .ant-input-number-outlined:hover {
+  border-color: var(--gray-0);
+}
+.dark .ant-input-number-outlined:active {
+  border-color: var(--brand-40);
+}
+.dark .ant-input-number-inlined:active {
+  border-color: var(--brand-40);
+}
+.dark .ant-input-number-focused {
+  border: 1px solid var(--brand-40) !important;
+}
+
+.ant-select-sm {
+  --ant-select-height: 28px;
+}
+.ant-select {
+  --ant-select-border-radius: var(--radius-base);
+  background: var(--color-bg-4);
+  color: var(--color-text-primary);
+}
+.ant-select.ant-select-outlined {
+  --ant-select-border-color: var(--color-border);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled):hover {
+  --ant-select-border-color: var(--color-border-hover);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled):hover .ant-select-suffix {
+  color: var(--color-icon-primary);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled).ant-select-focused {
+  --ant-select-border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px var(--color-border-active);
+}
+.ant-select.ant-select-outlined.ant-select-disabled {
+  --ant-select-border-color: var(--color-border-disabled);
+}
+.ant-select:not(.ant-select-disabled) .ant-select-placeholder {
+  color: var(--color-text-placeholder);
+}
+.ant-select:not(.ant-select-disabled) .ant-select-suffix {
+  color: var(--color-icon-secondary);
+}
+.ant-select:not(.ant-select-disabled):not(.ant-select-multiple).ant-select-focused.ant-select-open .ant-select-suffix {
+  transform: rotate(180deg);
+}
+.ant-select.ant-select-disabled {
+  --ant-select-color: var(--color-text-disabled);
+  color: var(--color-text-disabled);
+  background: var(--color-hover);
+}
+.ant-select.ant-select-disabled.ant-select-multiple {
+  background: var(--color-fill-disabled-subtle);
+}
+.ant-select.ant-select-disabled.ant-select-multiple .ant-select-content .ant-select-selection-item {
+  background: var(--color-fill-disabled-subtle);
+}
+.ant-select.ant-select-disabled .ant-select-placeholder {
+  color: var(--color-text-disabled);
+}
+.ant-select.ant-select-disabled .ant-select-suffix {
+  color: var(--color-icon-disabled);
+}
+.ant-select .ant-select-suffix svg {
+  width: 10px;
+  height: 10px;
+}
+.ant-select-multiple .ant-select-content .ant-select-selection-item-remove {
+  color: var(--color-icon-primary);
+}
+.ant-select-dropdown {
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-4);
+}
+.ant-select-dropdown .ant-select-item-option-disabled {
+  color: var(--color-text-disabled);
+}
+.ant-select-dropdown .ant-select-item {
+  padding: 5px var(--spacing-2);
+}
+.ant-select-dropdown .ant-select-item:not(.ant-select-item-option-disabled) {
+  color: var(--color-text-primary);
+}
+.ant-select-dropdown .ant-select-item-option-selected.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-select);
+  color: var(--color-text-on);
+}
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-select);
+  color: var(--color-text-on);
+}
+.ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-hover);
+}
+.ant-select-single:not(.ant-select-customize).ant-select-open .ant-select-content-has-value {
+  opacity: unset;
+}
+.ant-select-dropdown-list-holder-inner {
+  gap: var(--spacing-1);
+}
+.ant-select-multiple .ant-select-content .ant-select-selection-item {
+  margin-inline-end: var(--spacing-2);
+  background: var(--color-hover);
+}
+
+/* TimePicker 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-picker.ant-picker-css-var {
+  --ant-color-border: var(--gray-20);
+  --ant-border-radius: 4px;
+  --ant-date-picker-padding-block-sm: 1px;
+  --ant-date-picker-padding-inline: 12px;
+  --ant-date-picker-padding-inline-sm: 12px;
+  --ant-date-picker-padding-inline-lg: 12px;
+  --ant-color-text-quaternary: var(--gray-50);
+  --ant-date-picker-active-border-color: var(--brand-50);
+  --ant-date-picker-active-shadow: 0 0 0 1px var(--brand-10);
+  --ant-date-picker-hover-border-color: var(--gray-0);
+  color: var(--color-text-primary);
+}
+.ant-picker.ant-picker-css-var.ant-picker-focused {
+  --ant-color-text-quaternary: var(--gray-90);
+}
+.ant-picker.ant-picker-css-var.ant-picker-disabled {
+  color: var(--color-text-disabled) !important;
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+  border-color: var(--gray-20);
+}
+.ant-picker.ant-picker-css-var.ant-picker-disabled .ant-picker-input > input {
+  color: var(--color-text-disabled);
+}
+.ant-picker.ant-picker-css-var.ant-picker-disabled .ant-picker-suffix {
+  color: var(--color-text-disabled) !important;
+}
+.ant-picker.ant-picker-css-var .ant-picker-input > input {
+  z-index: 1;
+  color: var(--color-text-primary);
+}
+.ant-picker.ant-picker-css-var .ant-picker-input > input::placeholder {
+  color: var(--color-text-placeholder);
+}
+.ant-picker-range .ant-picker-active-bar {
+  bottom: 4px;
+  height: 22px;
+  background: var(--brand-05);
+  border-radius: 2px;
+}
+.ant-picker-range .ant-picker-input > input {
+  padding-left: 4px;
+}
+.ant-picker-range .ant-picker-range-separator {
+  padding: 0px;
+}
+.ant-picker-range .ant-picker-separator {
+  text-align: center;
+}
+.ant-picker-range .ant-picker-separator span {
+  display: none;
+}
+.ant-picker-range .ant-picker-separator::before {
+  content: '-';
+  color: var(--color-text-primary);
+}
+.dark .ant-picker.ant-picker-css-var {
+  --ant-color-border: var(--gray-50);
+  --ant-color-text-quaternary: var(--gray-30);
+  --ant-date-picker-active-border-color: var(--brand-40);
+  --ant-date-picker-active-shadow: 0 0 0 1px var(--brand-80);
+  --ant-date-picker-hover-border-color: var(--brand-40);
+  color: var(--color-text-primary);
+}
+.dark .ant-picker.ant-picker-css-var.ant-picker-focused {
+  --ant-color-text-quaternary: var(--gray-10);
+}
+.dark .ant-picker.ant-picker-css-var.ant-picker-disabled {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-20);
+}
+.dark .ant-picker-range .ant-picker-active-bar {
+  background: rgb(from var(--brand-50) r g b / 0.4);
+}
+
+/* Radio 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-radio-wrapper:hover .ant-radio {
+  border-color: var(--brand-40);
+}
+.ant-radio-wrapper:hover .ant-radio.ant-radio-checked {
+  background-color: var(--brand-40);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio-label {
+  color: var(--color-text-disabled);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+  border-color: var(--color-border-disabled);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked {
+  background-color: var(--brand-20);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked::after {
+  background-color: var(--gray-0);
+}
+.ant-radio-wrapper .ant-radio {
+  background-color: var(--gray-0);
+  border-color: var(--gray-40);
+}
+.ant-radio-wrapper .ant-radio.ant-radio-checked {
+  background-color: var(--brand-50);
+  border-color: transparent;
+}
+.ant-radio-wrapper .ant-radio-label {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.dark .ant-radio {
+  background-color: var(--gray-100);
+  border-color: var(--gray-50);
+}
+.dark .ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-50);
+}
+.dark .ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked {
+  background-color: var(--brand-70);
+  border-color: transparent;
+}
+.dark .ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked::after {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+
+/* Checkbox 缁勪欢鏍峰紡锛坱oken 鏄犲皠锛岃浆鎹㈣嚜鏍圭洰褰?checkbox.css锛?*/
+.ant-checkbox-wrapper {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked):hover .ant-checkbox {
+  border-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox-disabled.ant-checkbox {
+  background-color: rgb(from var(--gray-100) r g b / 0.05);
+  border-color: var(--color-border-disabled) !important;
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox-disabled + .ant-checkbox-label {
+  color: var(--color-text-disabled);
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox {
+  border-color: var(--gray-40);
+  background-color: var(--gray-0);
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked:hover .ant-checkbox {
+  background-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled.ant-checkbox {
+  background-color: var(--brand-20) !important;
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled + .ant-checkbox-label {
+  color: var(--color-text-disabled);
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled:after {
+  border-color: var(--gray-0);
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox {
+  background-color: var(--brand-50);
+  border-color: transparent ;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate {
+  background-color: var(--brand-50) !important;
+  border-color: transparent !important;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate:hover {
+  background-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate::after {
+  height: 2px;
+  background-color: var(--gray-0);
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate.ant-checkbox-disabled {
+  background-color: var(--brand-20) !important;
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox {
+  border-color: var(--gray-50);
+  background-color: var(--gray-100);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-disabled.ant-checkbox {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-60) !important;
+}
+.dark .ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled.ant-checkbox {
+  background-color: var(--brand-70) !important;
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled:after {
+  border-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate {
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate::after {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate.ant-checkbox-disabled {
+  background-color: var(--brand-70) !important;
+}
+
+/* Switch 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-switch {
+  height: 20px;
+  line-height: 20px;
+  min-width: 38px;
+  background-color: var(--gray-30);
+}
+.ant-switch .ant-switch-handle {
+  width: 16px;
+  height: 16px;
+}
+.ant-switch.ant-switch-checked {
+  background-color: var(--brand-50);
+}
+.ant-switch.ant-switch-checked .ant-switch-handle {
+  inset-inline-start: calc(100% - 18px);
+}
+.ant-switch.ant-switch-disabled {
+  background-color: var(--gray-10);
+}
+.ant-switch.ant-switch-disabled.ant-switch-checked {
+  background-color: var(--brand-20);
+}
+.ant-switch .ant-switch-inner .ant-switch-inner-unchecked {
+  margin-top: -20px;
+}
+.ant-switch .ant-switch-inner .ant-switch-inner-checked,
+.ant-switch .ant-switch-inner .ant-switch-inner-unchecked {
+  min-height: 20px;
+}
+.dark .ant-switch {
+  background-color: var(--gray-60);
+}
+.dark .ant-switch.ant-switch-checked {
+  background-color: var(--brand-50);
+}
+.dark .ant-switch.ant-switch-disabled {
+  background-color: var(--gray-60);
+}
+.dark .ant-switch.ant-switch-disabled.ant-switch-checked {
+  background-color: var(--brand-70);
+}
+.dark .ant-switch.ant-switch-disabled .ant-switch-handle::before {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+
+/* Slider 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-slider .ant-slider-rail {
+  background-color: var(--gray-10);
+}
+.ant-slider .ant-slider-track {
+  background-color: var(--brand-50) !important;
+}
+.ant-slider .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.ant-slider .ant-slider-mark .ant-slider-mark-text {
+  font-size: 14px;
+  color: var(--gray-100);
+}
+.ant-slider:hover .ant-slider-rail {
+  background-color: var(--gray-10);
+}
+.ant-slider:hover .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.ant-slider:hover .ant-slider-handle:not(.ant-slider-handle-disabled)::after {
+  box-shadow: 0 0 0 2px var(--brand-50);
+}
+.dark .ant-slider .ant-slider-rail {
+  background-color: color-mix(in srgb, var(--gray-05) 15%, transparent);
+}
+.dark .ant-slider .ant-slider-track {
+  background-color: var(--brand-50) !important;
+}
+.dark .ant-slider .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  background-color: var(--gray-0);
+  box-shadow: 0 0 0 2px var(--brand-70);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dark .ant-slider .ant-slider-mark .ant-slider-mark-text {
+  font-size: 14px;
+  color: var(--gray-0);
+}
+.dark .ant-slider:hover .ant-slider-rail {
+  background-color: color-mix(in srgb, var(--gray-05) 15%, transparent);
+}
+.dark .ant-slider:hover .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dark .ant-slider:hover .ant-slider-handle:not(.ant-slider-handle-disabled)::after {
+  box-shadow: 0 0 0 2px var(--brand-50);
+}
+
+/* Rate 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-rate .ant-rate-star {
+  margin-inline-end: var(--spacing-2);
+}
+.ant-rate .anticon svg {
+  color: var(--yellow-50);
+}
+
+/* Table 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-table .ant-table-content {
+  border-start-start-radius: 0 !important;
+  border-start-end-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-column-sorters {
+  justify-content: flex-start;
+}
+.ant-table .ant-table-content .ant-table-column-sorters .ant-table-column-title {
+  flex: none;
+}
+.ant-table .ant-table-content .ant-table-column-sorters .ant-table-column-sorter {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  margin-inline-start: 8px;
+}
+.ant-table .ant-table-content .ant-table-filter-column {
+  justify-content: flex-start;
+}
+.ant-table .ant-table-content .ant-table-filter-column .ant-table-column-title {
+  flex: none;
+}
+.ant-table .ant-table-content .ant-table-filter-column .ant-table-filter-trigger {
+  margin-inline-start: 8px;
+  margin-inline-end: 0;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px;
+  color: var(--color-text-primary);
+  background-color: var(--gray-05);
+  border-top: none !important;
+  border-bottom: none !important;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th::before {
+  background-color: var(--gray-20) !important;
+  height: 1em !important;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th:first-child {
+  border-start-start-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th:last-child {
+  border-start-end-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-tbody > tr > td {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 8px;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--gray-05);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-row > .ant-table-cell-row-hover {
+  background-color: var(--brand-10);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-row.ant-table-row-selected > .ant-table-cell {
+  background-color: var(--brand-05);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-expanded-row .ant-table-cell {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-column-sort {
+  background: initial;
+}
+.dark .ant-table .ant-table-content .ant-table-thead > tr > th {
+  color: var(--color-text-primary);
+  background-color: var(--gray-70);
+}
+.dark .ant-table .ant-table-content .ant-table-thead > tr > th::before {
+  background-color: var(--gray-50) !important;
+}
+.dark .ant-table .ant-table-content .ant-table-tbody > tr > td {
+  color: var(--color-text-primary);
+  border-bottom: 1px solid rgb(from var(--gray-05) r g b / 0.1);
+  background-color: transparent;
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-row > .ant-table-cell-row-hover {
+  background-color: rgb(from var(--brand-50) r g b / 0.4);
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-row.ant-table-row-selected > .ant-table-cell {
+  background-color: rgb(from var(--brand-50) r g b / 0.2);
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-expanded-row .ant-table-cell {
+  background-color: rgb(from var(--gray-05) r g b / 0.1);
+}
+
+/* Tabs 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-tabs .ant-tabs-tab {
+  color: var(--color-text-secondary);
+}
+.ant-tabs .ant-tabs-tab:not(.ant-tabs-tab-disabled):hover {
+  color: var(--color-text-primary);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--color-link);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-remove {
+  color: var(--color-link);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-disabled {
+  color: var(--color-text-disabled);
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
+  background-color: var(--color-card-gray-disabled);
+  border-color: transparent;
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab.ant-tabs-tab-active {
+  border-color: var(--color-border-separator);
+  border-bottom-color: var(--color-card-gray-disabled);
+  background-color: var(--color-bg-3);
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-nav-add {
+  border: none;
+}
+.ant-tabs .ant-tabs-tab-remove {
+  padding: 0;
+  font-size: var(--font-size-md);
+}
+.ant-tabs-top > .ant-tabs-nav::before {
+  border-color: var(--color-border-separator);
+}
+
+/* Collapse 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-collapse .ant-collapse-item {
+  border-color: var(--color-border-separator);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-header {
+  color: var(--color-text-primary);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-header .ant-collapse-expand-icon {
+  margin-inline-end: var(--spacing-1);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-panel {
+  border-color: var(--color-border-separator);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-panel .ant-collapse-body {
+  padding: var(--spacing-3) var(--spacing-4) var(--spacing-4) var(--spacing-8);
+}
+.dark .ant-collapse .ant-collapse-item {
+  border-color: var(--color-text-inverse-disabled);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-header {
+  color: var(--color-text-primary);
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-header .ant-collapse-expand-icon {
+  color: var(--gray-10);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-panel {
+  border-color: var(--color-text-inverse-disabled);
+}
+
+/* Tag 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-tag {
+  border-color: transparent;
+  padding: 0 var(--spacing-2);
+  line-height: 24px;
+  background-color: var(--color-tag-bg-none);
+  color: var(--color-text-primary);
+}
+.ant-tag.ant-tag-processing:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-info);
+  color: var(--color-tag-text-info);
+}
+.ant-tag.ant-tag-error:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-error);
+  color: var(--color-tag-text-error);
+}
+.ant-tag.ant-tag-warning:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-warning);
+  color: var(--color-tag-text-warning);
+}
+.ant-tag.ant-tag-gold:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-alert);
+  color: var(--color-tag-text-alert);
+}
+.ant-tag.ant-tag-success:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-success);
+  color: var(--color-tag-text-success);
+}
+.ant-tag.ant-tag-green:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-green);
+  color: var(--color-tag-text-green);
+}
+.ant-tag.ant-tag-magenta:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-rose);
+  color: var(--color-tag-text-rose);
+}
+.ant-tag.ant-tag-pink:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-pink);
+  color: var(--color-tag-text-pink);
+}
+.ant-tag.ant-tag-purple:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-purple);
+  color: var(--color-tag-text-purple);
+}
+.ant-tag.ant-tag-geekblue:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-indigo);
+  color: var(--color-tag-text-indigo);
+}
+.ant-tag.ant-tag-cyan:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-cyan);
+  color: var(--color-tag-text-cyan);
+}
+.ant-tag.ant-tag-disabled {
+  background-color: var(--color-tag-bg-none);
+  color: var(--color-text-disabled);
+}
+.ant-tag.ant-tag-disabled .anticon {
+  color: var(--color-text-disabled);
+}
+.ant-tag > .anticon + span,
+.ant-tag > span + .anticon {
+  margin-left: var(--spacing-1);
+}
+.ant-tag .anticon {
+  color: var(--color-text-primary);
+}
+
+/* Badge 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-badge .ant-badge-count {
+  min-width: 16px;
+  border: none;
+  padding: var(--spacing-0-5) var(--spacing-1);
+  font-size: var(--font-size-base);
+  line-height: 12px;
+  height: 18px;
+  border: 1px solid var(--gray-0);
+  box-shadow: 0 0 0 1px var(--gray-0);
+  background-color: var(--color-error);
+  color: var(--color-text-inverse);
+}
+.ant-badge .ant-badge-dot {
+  box-shadow: 0 0 0 1px var(--gray-0);
+  border: 1px solid var(--gray-0);
+  background-color: var(--color-error);
+}
+.dark .ant-badge .ant-badge-count {
+  border: 1px solid rgb(from var(--gray-0) r g b / 0);
+  box-shadow: 0 0 0 1px rgb(from var(--gray-0) r g b / 0);
+}
+.dark .ant-badge .ant-badge-dot {
+  box-shadow: 0 0 0 1px rgb(from var(--gray-0) r g b / 0);
+  border: 1px solid rgb(from var(--gray-0) r g b / 0);
+}
+
+/* Progress 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-progress .ant-progress-indicator {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+}
+.ant-progress.ant-progress-line .ant-progress-rail {
+  background-color: var(--color-border-separator);
+}
+.ant-progress.ant-progress-line .ant-progress-track {
+  background-color: var(--color-brand);
+}
+.ant-progress.ant-progress-line.ant-progress-status-success .ant-progress-track {
+  background-color: var(--mint-50);
+}
+.dark .ant-progress.ant-progress-line.ant-progress-status-success .ant-progress-track {
+  background-color: var(--mint-40);
+}
+
+/* Steps 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item-wrapper {
+  column-gap: var(--spacing-3);
+}
+.ant-steps-small.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item-wrapper {
+  column-gap: var(--spacing-2);
+}
+.ant-steps-title-vertical > .ant-steps-item .ant-steps-item-wrapper {
+  row-gap: var(--spacing-2);
+}
+.ant-steps-title-horizontal.ant-steps-vertical .ant-steps-item-wrapper {
+  column-gap: var(--spacing-3);
+}
+.ant-steps-small.ant-steps-title-horizontal.ant-steps-vertical .ant-steps-item-wrapper {
+  column-gap: var(--spacing-2);
+}
+.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item:not(:first-child) {
+  margin-inline-start: var(--spacing-3);
+}
+.ant-steps-small.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item:not(:first-child) {
+  margin-inline-start: var(--spacing-2);
+}
+.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item-rail {
+  margin-inline-start: var(--spacing-3);
+}
+.ant-steps-title-vertical > .ant-steps-item .ant-steps-item-rail {
+  width: calc(100% - var(--ant-cmp-steps-icon-size) - var(--spacing-2) * 2);
+  inset-inline-start: calc(50% + var(--ant-cmp-steps-icon-size) / 2 + var(--spacing-2));
+}
+.ant-steps-small.ant-steps-title-vertical > .ant-steps-item .ant-steps-item-rail {
+  width: calc(100% - var(--ant-cmp-steps-icon-size) - var(--spacing-2) * 2);
+  inset-inline-start: calc(50% + var(--ant-cmp-steps-icon-size) / 2 + var(--spacing-2));
+  margin-inline-start: 0;
+}
+.ant-steps .ant-steps-item-rail {
+  border-color: var(--color-border-separator);
+}
+.ant-steps .ant-steps-item-rail-process {
+  border-color: var(--brand-50);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item:not(.ant-steps-item-custom) .ant-steps-item-icon,
+.ant-steps:not(.ant-steps-dot) .ant-steps-item:not(.ant-steps-item-wait) .ant-steps-item-icon {
+  border-color: var(--color-border-focus);
+  background-color: var(--color-info-primary-subtler);
+  color: var(--color-border-focus);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item.ant-steps-item-wait .ant-steps-item-icon {
+  color: var(--color-text-placeholder);
+  background-color: var(--color-fill);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item-wait.ant-steps-item:not(.ant-steps-item-custom) .ant-steps-item-icon {
+  border-color: var(--color-border);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item:not(.ant-steps-item-custom).ant-steps-item-active .ant-steps-item-icon {
+  border-color: transparent;
+}
+.ant-steps .ant-steps-item:not(.ant-steps-item-wait) .ant-steps-item-title {
+  color: var(--color-text-primary);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait.ant-steps-item-active .ant-steps-item-title {
+  color: var(--color-link);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait.ant-steps-item-active .ant-steps-item-content {
+  color: var(--color-link);
+}
+.ant-steps .ant-steps-item .ant-steps-item-title {
+  color: var(--color-text-secondary);
+}
+.ant-steps .ant-steps-item .ant-steps-item-content {
+  color: var(--color-text-secondary);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait .ant-steps-item-icon {
+  color: var(--color-text-placeholder);
+}
+.ant-steps .ant-steps-item-content {
+  color: var(--color-text-secondary);
+}
+.ant-steps.ant-steps-small .ant-steps-item-content {
+  font-size: var(--font-size-base);
+}
+.ant-steps.ant-steps-small .ant-steps-item-rail {
+  margin-inline-start: var(--spacing-2);
+}
+.ant-steps.ant-steps-panel .ant-steps-item .ant-steps-item-content {
+  font-size: var(--font-size-base);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish {
+  background-color: var(--color-info-primary-subtler);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish .ant-steps-item-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish .ant-steps-panel-arrow path {
+  fill: var(--color-info-primary-subtler);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active {
+  background-color: var(--color-brand);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active .ant-steps-item-title {
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active .ant-steps-panel-arrow path {
+  fill: var(--color-brand);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait {
+  background-color: var(--color-fill);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait .ant-steps-item-title {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait .ant-steps-panel-arrow path {
+  fill: var(--color-fill);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error {
+  background-color: var(--red-05);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-item-title {
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-panel-arrow path {
+  fill: var(--red-05);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error.ant-steps-item-active {
+  color: var(--color-text-inverse);
+  background-color: var(--color-error);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error.ant-steps-item-active .ant-steps-panel-arrow path {
+  fill: var(--color-error);
+}
+.dark .ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error {
+  background-color: rgba(238, 0, 34, 0.4);
+}
+.dark .ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-panel-arrow path {
+  fill: rgba(238, 0, 34, 0.4);
+}
+
+/* Pagination 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-pagination {
+  font-size: 14px;
+}
+.ant-pagination .ant-pagination-total-text {
+  color: var(--gray-90);
+  margin-right: var(--spacing-2);
+}
+.ant-pagination .ant-pagination-prev,
+.ant-pagination .ant-pagination-next {
+  margin-right: var(--spacing-2);
+  height: 24px !important;
+  min-width: 24px;
+  margin-inline-end: var(--spacing-2);
+}
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  width: 24px !important;
+}
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link .anticon,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link .anticon {
+  width: 10px;
+  height: 10px;
+}
+.ant-pagination .ant-pagination-item {
+  margin-right: var(--spacing-2);
+  color: var(--gray-90);
+  width: 32px;
+  height: 32px;
+}
+.ant-pagination .ant-pagination-item a:hover {
+  text-decoration: none;
+  background-color: color-mix(in srgb, var(--gray-90) 50%, transparent);
+  color: var(--gray-90);
+}
+.ant-pagination .ant-pagination-item-active {
+  background-color: var(--brand-05);
+  border: none;
+  font-weight: var(--font-weight-normal);
+  color: var(--brand-50);
+}
+.ant-pagination .ant-pagination-item-active:hover a {
+  color: var(--brand-50);
+  font-weight: var(--font-weight-normal);
+}
+.ant-pagination .ant-pagination-options {
+  margin-inline-start: 0;
+}
+.ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item .ant-select-item-option-content {
+  font-weight: var(--font-weight-normal) !important;
+}
+.ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item-option-selected {
+  background-color: var(--brand-05);
+}
+.ant-pagination .ant-pagination-options .ant-pagination-options-quick-jumper input {
+  color: var(--gray-90);
+  font-size: 14px;
+}
+.dark {
+  /* Pagination 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+}
+.dark .ant-pagination {
+  font-size: 14px;
+}
+.dark .ant-pagination .ant-pagination-total-text {
+  color: var(--gray-0);
+  margin-right: var(--spacing-2);
+}
+.dark .ant-pagination .ant-pagination-prev,
+.dark .ant-pagination .ant-pagination-next {
+  margin-right: var(--spacing-2);
+  height: 24px !important;
+  min-width: 24px;
+  margin-inline-end: var(--spacing-2);
+}
+.dark .ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.dark .ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  width: 24px !important;
+}
+.dark .ant-pagination .ant-pagination-prev .ant-pagination-item-link .anticon,
+.dark .ant-pagination .ant-pagination-next .ant-pagination-item-link .anticon {
+  width: 10px;
+  height: 10px;
+}
+.dark .ant-pagination .ant-pagination-item {
+  margin-right: var(--spacing-2);
+  color: var(--gray-0);
+  width: 32px;
+  height: 32px;
+}
+.dark .ant-pagination .ant-pagination-item a:hover {
+  text-decoration: none;
+  background-color: color-mix(in srgb, var(--brand-05) 20%, transparent);
+  color: var(--gray-0);
+}
+.dark .ant-pagination .ant-pagination-item-active {
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  border: none;
+  font-weight: var(--font-weight-normal);
+  color: var(--gray-0) !important;
+}
+.dark .ant-pagination .ant-pagination-item-active a {
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  border: none;
+  font-weight: var(--font-weight-normal);
+  color: var(--gray-0) !important;
+}
+.dark .ant-pagination .ant-pagination-item-active:hover a {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  font-weight: var(--font-weight-normal);
+}
+.dark .ant-pagination .ant-pagination-options {
+  margin-inline-start: 0;
+}
+.dark .ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item .ant-select-item-option-content {
+  font-weight: var(--font-weight-normal) !important;
+}
+.dark .ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item-option-selected {
+  background-color: var(--brand-05);
+}
+.dark .ant-pagination .ant-pagination-options .ant-pagination-options-quick-jumper input {
+  color: var(--gray-90);
+  font-size: 14px;
+}
+
+.ant-tooltip {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-tooltip .ant-tooltip-container {
+  color: var(--color-text-primary);
+  padding: var(--spacing-4);
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-tooltip .ant-tooltip-arrow:before {
+  background-color: var(--color-bg-4);
+}
+
+.ant-popover .ant-popover-container {
+  padding: var(--spacing-4);
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-popover .ant-popover-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-lg);
+}
+.ant-popover .ant-popover-content {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+}
+
+/* Timeline 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-steps .ant-steps-item .ant-steps-item-wrapper {
+  column-gap: var(--spacing-2);
+}
+.ant-steps .ant-steps-item .ant-steps-item-wrapper .ant-steps-item-icon {
+  font-size: var(--font-size-md);
+}
+.ant-steps .ant-steps-item .ant-steps-item-wrapper .ant-steps-item-section {
+  gap: var(--spacing-8) !important;
+}
+.ant-steps .ant-steps-item .ant-steps-item-wrapper .ant-steps-item-section .ant-steps-item-header .ant-steps-item-rail {
+  margin-top: var(--spacing-1);
+  margin-bottom: var(--spacing-1);
+}
+
+/* Tree 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-tree {
+  color: var(--color-text-primary);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-treenode {
+  margin-bottom: var(--spacing-0);
+  line-height: var(--spacing-7);
+  padding: var(--spacing-1) 0;
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  line-height: var(--spacing-4);
+  margin-right: var(--spacing-2);
+  align-self: center;
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher:hover {
+  background: var(--color-fill);
+  border-radius: var(--radius-base);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher::before {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-checkbox {
+  margin-top: var(--spacing-0);
+  align-self: center;
+  margin-right: var(--spacing-2);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-node-content-wrapper:hover {
+  background: var(--color-fill);
+  border-radius: var(--radius-base);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-node-content-wrapper.ant-tree-node-selected {
+  background: var(--color-select);
+}
+
+/* Segmented 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-segmented .ant-segmented-group {
+  gap: var(--spacing-1);
+  background: var(--color-fill);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-label {
+  padding: 0 var(--spacing-4);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-90);
+  background: var(--color-fill);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled {
+  color: var(--gray-20);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected-text {
+  color: var(--gray-0);
+  background: var(--brand-50);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected-text:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+  background: var(--brand-40);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected-text.ant-segmented-item-disabled {
+  color: var(--gray-0);
+  background: var(--brand-20);
+}
+.dark .ant-segmented-group .ant-segmented-item .ant-segmented-item-icon {
+  color: var(--gray-30);
+}
+.dark .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover .ant-segmented-item-icon {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled {
+  color: var(--gray-40);
+}
+.dark .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled .ant-segmented-item-icon {
+  color: var(--gray-40);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text {
+  color: var(--gray-0);
+  background: var(--brand-50);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text .ant-segmented-item-icon {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+  background: var(--brand-40);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text.ant-segmented-item-disabled {
+  color: var(--color-text-inverse-disabled);
+  background: var(--brand-70);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text.ant-segmented-item-disabled .ant-segmented-item-icon {
+  color: var(--color-text-inverse-disabled);
+}
+
+/* Drawer 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-drawer .ant-drawer-content-wrapper {
+  box-shadow: var(--shadow-l-base);
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header {
+  padding: 20px 24px 16px;
+  border-bottom: none;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close {
+  order: 2;
+  margin-inline-start: auto;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close .anticon {
+  font-size: 14px;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close .anticon svg {
+  width: 14px;
+  height: 14px;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-body {
+  padding: 0 24px 24px;
+}
+.dark .ant-drawer .ant-drawer-content-wrapper .ant-drawer-section {
+  background-color: var(--gray-80);
+}
+
+/* Modal 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container {
+  position: relative;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: var(--radius-lg);
+  pointer-events: auto;
+  padding: var(--spacing-6);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header {
+  color: var(--gray-90);
+  margin-bottom: var();
+  padding: var(--ant-modal-header-padding);
+  border-bottom: var(--spacing-4);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header .ant-modal-title {
+  font-size: 20px;
+  color: var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-secondary,
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-link.ant-typography-secondary {
+  color: var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn {
+  border-radius: var(--radius-base);
+  height: 36px;
+  line-height: 36px;
+  border: 1px solid var(--gray-20);
+  color: var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn span {
+  font-size: 14px;
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:hover {
+  border: 1px solid var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:active {
+  border: 1px solid var(--brand-50);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary {
+  background-color: var(--brand-50);
+  color: var(--gray-0);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:hover {
+  background-color: var(--brand-40);
+  color: var(--gray-0);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:active {
+  background-color: var(--brand-60);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container {
+  position: relative;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: var(--radius-lg);
+  pointer-events: auto;
+  padding: var(--spacing-6);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header {
+  color: var(--gray-0);
+  margin-bottom: var();
+  padding: var(--ant-modal-header-padding);
+  border-bottom: var(--spacing-4);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header .ant-modal-title {
+  font-size: 20px;
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-secondary,
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-link.ant-typography-secondary {
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn {
+  border-radius: var(--radius-base);
+  height: 36px;
+  line-height: 36px;
+  border: 1px solid var(--gray-50);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn span {
+  font-size: 14px;
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:hover {
+  border: 1px solid var(--gray-05);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:active {
+  border: 1px solid var(--brand-40);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary {
+  background-color: var(--brand-50);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:hover {
+  background-color: var(--brand-40);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:active {
+  background-color: var(--brand-60);
+  color: var(--gray-0);
+}
+
+/* Breadcrumb 缁勪欢鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-breadcrumb .ant-breadcrumb-item {
+  color: var(--gray-50);
+  font-size: 14px;
+}
+.ant-breadcrumb .ant-breadcrumb-item:last-child {
+  color: var(--gray-90);
+}
+.ant-breadcrumb .ant-breadcrumb-separator {
+  width: 12px;
+  text-align: center;
+  margin-inline: var(--spacing-1);
+  color: var(--gray-20);
+}
+.dark .ant-breadcrumb .ant-breadcrumb-item {
+  color: var(--gray-20);
+  font-size: 14px;
+}
+.dark .ant-breadcrumb .ant-breadcrumb-item:last-child {
+  color: var(--gray-0);
+}
+.dark .ant-breadcrumb .ant-breadcrumb-separator {
+  width: 12px;
+  text-align: center;
+  margin-inline: var(--spacing-1);
+  color: var(--gray-40);
+}
+
+/* Dropdown 涓嬫媺鑿滃崟鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-dropdown .ant-dropdown-menu {
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
+  padding: var(--spacing-1) var(--spacing-2);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-base);
+  line-height: 32px;
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item-icon {
+  font-size: var(--font-size-md);
+  margin-right: var(--spacing-1);
+}
+.dark .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+  background-color: var(--gray-70);
+}
+
+/* Menu 瀵艰埅鑿滃崟鏍峰紡锛堝崰浣嶏紝寰呭～鍏?token 鏄犲皠锛?*/
+.ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title {
+  padding-left: var(--spacing-3);
+  padding-right: var(--spacing-3);
+  color: var(--gray-90);
+  font-size: 14px;
+}
+.ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title:active {
+  color: var(--brand-50);
+  background-color: var(--brand-05);
+}
+.ant-menu-inline .ant-menu-submenu-selecte {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item {
+  font-size: 14px;
+}
+.ant-menu-light .ant-menu-item-selected,
+.ant-menu-light > .ant-menu .ant-menu-item-selected {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item:active {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item:hover {
+  color: var(--gray-90);
+  background-color: color-mix(in srgb, var(--gray-90) 5%, transparent);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title {
+  padding-left: var(--spacing-3);
+  padding-right: var(--spacing-3);
+  color: var(--gray-0);
+  font-size: 14px;
+  background-color: var(--gray-90);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title .ant-menu-item-icon {
+  color: var(--gray-10);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title:active {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+}
+.dark .ant-menu-inline .ant-menu-submenu-selecte {
+  color: var(--gray-0) !important;
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-item {
+  font-size: 14px;
+}
+.dark .ant-menu-light .ant-menu-item-selected,
+.dark .ant-menu-light > .ant-menu .ant-menu-item-selected {
+  color: var(--gray-0) !important;
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-item:active {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-item:hover {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--gray-05) 20%, transparent);
+}
+.ant-menu-vertical .ant-menu-item {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.ant-menu-horizontal .ant-menu-item {
+  color: var(--gray-50);
+  font-size: 16px;
+}
+.ant-menu-horizontal .ant-menu-item::after {
+  border-bottom: 0 !important;
+}
+.ant-menu-horizontal .ant-menu-item:hover {
+  color: var(--gray-90);
+}
+.ant-menu-horizontal .ant-menu-item:active {
+  background-color: transparent !important;
+}
+.ant-menu-horizontal .ant-menu-item:hover::after {
+  border-bottom: 0;
+}
+.ant-menu-horizontal .ant-menu-item-selected {
+  background-color: transparent !important;
+}
+.ant-menu-horizontal .ant-menu-item-selected::after {
+  border-bottom: 2px solid var(--brand-50) !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item {
+  color: var(--gray-20);
+  font-size: 16px;
+}
+.dark .ant-menu-horizontal .ant-menu-item::after {
+  border-bottom: 0 !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item:hover {
+  color: var(--gray-0);
+}
+.dark .ant-menu-horizontal .ant-menu-item:active {
+  color: var(--brand-30);
+  background-color: transparent !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item:hover::after {
+  border-bottom: 0;
+}
+.dark .ant-menu-horizontal .ant-menu-item-selected {
+  color: var(--brand-30) !important;
+  background-color: transparent !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item-selected::after {
+  border-bottom: 2px solid var(--brand-30) !important;
+}
+
+.ant-form-item .ant-form-item-label > label {
+  font-size: 14px;
+  color: var(--gray-90);
+}
+.ant-form-item .ant-form-item-label label:not(.ant-form-item-required)::before {
+  content: "*";
+  display: inline-block;
+  margin-inline-end: var(--ant-margin-xxs);
+  font-size: var(--ant-font-size);
+  font-family: sans-serif;
+  line-height: 1;
+  visibility: hidden;
+}
+.ant-form-item .ant-form-item-extra {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--gray-30);
+}
+.ant-form-item .ant-form-item-explain-error {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--red-50);
+}
+.ant-form-item .ant-form-item-explain-warning {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--yellow-50);
+}
+.dark .ant-form-item .ant-form-item-label > label {
+  color: var(--gray-0);
+}
+.dark .ant-form-item-extra {
+  color: var(--gray-40);
+}
+.dark .ant-form-item-explain-error {
+  color: var(--red-40);
+}
+.dark .ant-form-item-explain-warning {
+  color: var(--orange-50);
+}
+
+
+/* 搴旂敤绾у熀纭€鏍峰紡 鈥?椤甸潰楠ㄦ灦涓庨€氱敤鍗＄墖瀹瑰櫒 */
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+/* 鈹€鈹€ 涓讳綋楠ㄦ灦锛氫晶杈瑰鑸?+ 鍐呭鍖?鈹€鈹€ */
+.app-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  padding: var(--spacing-page);
+  background: var(--surface-container-lowest);
+}
+
+.app-main__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+}
+
+/* 鈹€鈹€ 椤靛ご锛氭爣棰?+ 涓绘搷浣?鈹€鈹€ */
+.app-page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  margin-bottom: var(--spacing-6);
+}
+
+.app-page-head__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+  min-width: 0;
+}
+
+.app-page-head__crumb {
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.app-page-head__title {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-semibold);
+}
+
+.app-page-head__desc {
+  margin: 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.app-page-head__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: none;
+}
+
+.app-page-head__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  height: 32px;
+  padding: 0 var(--spacing-4);
+  border: var(--border-width-thin) solid var(--outline);
+  border-radius: var(--radius-action);
+  background: var(--surface-container-highest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.app-page-head__btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.app-page-head__btn--primary {
+  border-color: transparent;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.app-page-head__btn--primary:hover {
+  background: var(--primary-hover);
+  color: var(--on-primary);
+}
+
+/* 鈹€鈹€ 閫氱敤鍐呭鍗＄墖锛圠evel 1锛氭渶楂樺眰瀹瑰櫒 + 鍗＄墖闃村奖锛屼笉鍔犳弿杈癸級 鈹€鈹€ */
+.panel-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.panel-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  border-bottom: var(--border-width-thin) solid var(--divider);
+}
+
+.panel-card__titles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+  min-width: 0;
+}
+
+.panel-card__title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+}
+
+.panel-card__desc {
+  margin: 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.panel-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: none;
+}
+
+@media (max-width: 1024px) {
+  .app-main {
+    padding: var(--spacing-4);
+  }
+
+  .app-page-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  height: 48px;
+  flex: none;
+  padding: 0 var(--spacing-4) 0 var(--spacing-3);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-t-sm);
+  position: relative;
+  z-index: 20;
+}
+
+/* 鈹€鈹€ 鍝佺墝鍖?鈹€鈹€ */
+.header-bar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: none;
+}
+
+.header-bar__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md);
+  background: var(--primary-fixed);
+  color: var(--on-primary-fixed);
+}
+
+.header-bar__names {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.header-bar__title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.header-bar__sub {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+/* 鈹€鈹€ 鍏ㄥ眬宸ュ叿鍖?鈹€鈹€ */
+.header-bar__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: none;
+}
+
+.header-bar__search {
+  width: 220px;
+}
+
+.header-bar__lang {
+  flex: none;
+}
+
+.header-bar__divider {
+  width: var(--border-width-thin);
+  height: 20px;
+  background: var(--divider);
+  margin: 0 var(--spacing-1);
+}
+
+.header-bar__user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding-left: var(--spacing-1);
+}
+
+.header-bar__avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  background: var(--surface-variant);
+}
+
+.header-bar__user-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.header-bar__user-text strong {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.header-bar__user-text em {
+  font: var(--font-caption-s);
+  font-style: normal;
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+@media (max-width: 1280px) {
+  .header-bar__search,
+  .header-bar__user-text {
+    display: none;
+  }
+}
+
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  width: 248px;
+  height: 100%;
+  padding: var(--spacing-2) 0 var(--spacing-3);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-r-sm);
+  transition: width 0.18s ease;
+  overflow: hidden auto;
+}
+
+.side-nav.is-collapsed {
+  width: 48px;
+}
+
+.side-nav__menu {
+  flex: 1;
+}
+
+.side-nav__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: var(--spacing-2) var(--spacing-3) 0;
+  padding-top: var(--spacing-3);
+  border-top: var(--border-width-thin) solid var(--divider);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-s);
+  white-space: nowrap;
+}
+
+.side-nav.is-collapsed .side-nav__footer {
+  justify-content: center;
+  margin: var(--spacing-2) var(--spacing-1) 0;
+}
+
+
+.strategy-form {
+  padding: var(--spacing-inset);
+}
+
+.strategy-form__draft {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: 2px var(--spacing-2);
+  border-radius: var(--radius-badge);
+  background: var(--warning-container);
+  color: var(--critical);
+  font: var(--font-caption-m);
+  white-space: nowrap;
+}
+
+/* 鎵撳紑楂樼骇鍙傛暟鏃剁殑鎻愮ず琛?*/
+.strategy-form__hint {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin: 0 0 var(--spacing-4);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.strategy-form__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding-top: var(--spacing-4);
+  border-top: var(--border-width-thin) solid var(--divider);
+}
+
+.strategy-form__footer-main {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+
+/* Layer 3: 绛栫暐瀛楁缁勬牱寮?鈥?涓ゅ垪鑷€傚簲鏍呮牸 + 楂樼骇鍙傛暟浜岀骇瀹瑰櫒 */
+
+.strategy-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.strategy-fields__group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.strategy-fields__group-title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.strategy-fields__group-line {
+  flex: 1;
+  height: var(--border-width-thin);
+  background: var(--divider);
+}
+
+.strategy-fields__group-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: 2px var(--spacing-2);
+  border-radius: var(--radius-badge);
+  background: var(--primary-container);
+  color: var(--primary);
+  font: var(--font-caption-m);
+}
+
+.strategy-fields__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--spacing-gutter);
+  row-gap: var(--spacing-0);
+}
+
+.strategy-fields__full {
+  grid-column: 1 / -1;
+}
+
+/* 楂樼骇鍙傛暟闈㈡澘 = 鍗＄墖鍐呯殑浜岀骇鍖哄煙锛坱heme: Level 2 鐢?surface-variant锛?*/
+.strategy-fields__advanced {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-inset);
+  border-radius: var(--radius-container);
+  background: var(--surface-variant);
+  animation: fields-expand 0.18s ease-out;
+}
+
+@keyframes fields-expand {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.strategy-fields__checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-inline);
+}
+
+/* 寮€鍏宠锛歀abel + 璇存槑鍦ㄨ棣栵紝Switch 鍦ㄨ灏?*/
+.switch-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-3) var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+  border-radius: var(--radius-container);
+  background: var(--surface-container-high);
+}
+
+.strategy-fields__advanced .switch-row,
+.switch-row--inset {
+  background: var(--surface-container-highest);
+}
+
+.switch-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+  min-width: 0;
+}
+
+.switch-row__label {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.switch-row__desc {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+@media (max-width: 1024px) {
+  .strategy-fields__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+
+.strategy-table {
+  padding: var(--spacing-inset) var(--spacing-inset) var(--spacing-4);
+}
+
+/* 鈹€鈹€ 宸ュ叿鍖?鈹€鈹€ */
+.strategy-table__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) 0;
+}
+
+.strategy-table__search {
+  width: 260px;
+}
+
+.strategy-table__count {
+  padding: 2px var(--spacing-2);
+  border-radius: var(--radius-badge);
+  background: var(--primary-container);
+  color: var(--primary);
+  font: var(--font-caption-m);
+  white-space: nowrap;
+}
+
+.strategy-table__toolbar-ops {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-left: auto;
+}
+
+/* 鈹€鈹€ 鍗曞厓鏍?鈹€鈹€ */
+.strategy-table__code {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  letter-spacing: 0.02em;
+}
+
+.strategy-table__link {
+  height: auto;
+  padding: 0;
+  font: var(--font-body-m);
+  text-align: left;
+  white-space: normal;
+}
+
+.strategy-table__type {
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.strategy-table__time {
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.strategy-table__ops {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+/* 灞曞紑琛岋細鍗＄墖鍐呬簩绾у尯鍩?*/
+.strategy-table__expand {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-container);
+  background: var(--surface-variant);
+}
+
+.strategy-table__expand-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+}
+
+.strategy-table__expand-k {
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.strategy-table__expand-v {
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+}
+
+/* 鈹€鈹€ 绌虹姸鎬?鈹€鈹€ */
+.strategy-table__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-8) 0;
+  color: var(--on-surface-variant);
+}
+
+.strategy-table__empty strong {
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.strategy-table__empty span {
+  font: var(--font-body-s);
+}
+
+@media (max-width: 1024px) {
+  .strategy-table__expand {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: 0 var(--spacing-2);
+  border-radius: var(--radius-badge);
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  line-height: 20px;
+}
+
+.status-tag__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+}
+
+/* 杞簳鐘舵€佽壊锛氬簳鑹茬敤 *-container锛屾枃瀛楃敤鐘舵€佷富鑹诧紝鏆楄壊妯″紡闅?token 鑷姩缈昏浆 */
+.status-tag--success {
+  color: var(--success);
+  background: var(--success-container);
+}
+
+.status-tag--warning {
+  color: var(--critical);
+  background: var(--critical-container);
+}
+
+.status-tag--error {
+  color: var(--error);
+  background: var(--error-container);
+}
+
+.status-tag--info {
+  color: var(--info);
+  background: var(--info-container);
+}
+
+.status-tag--neutral {
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+}
+
+
+.strategy-modal__title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.strategy-modal__desc {
+  margin: 0 0 var(--spacing-4);
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.strategy-modal__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin: 0;
+  padding: 2px var(--spacing-2);
+  border-radius: var(--radius-badge);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+</style>
+<!-- 6. Base styles -->
+<style>
+body, html { margin: 0; padding: 0; height: 100%; font-family: var(--font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif); }
+#root { height: 100%; }
+</style>
+</head>
+<body>
+<div id="root">Loading...</div>
+<script>
+// 娉ㄥ唽 classic JSX 杩愯鏃?preset(鏂扮増 babel-standalone 榛樿 automatic,
+// 浜у嚭鐨?import "react/jsx-runtime" 鏃犳硶鍦ㄧ粡鍏歌剼鏈腑鎵ц)
+Babel.registerPreset("react-classic", {
+  presets: [[Babel.availablePresets["react"], { runtime: "classic" }]],
+});
+</script>
+<script type="text/babel" data-presets="react-classic">
+var __export = {};
+/* ===== assets/shared/locale-zh.js — removed (eview-react uses IntlProvider + componentsLocales) ===== */
+
+/* ===== src/context.jsx ===== */
+(function () {
+  const { useState, useEffect, createContext, useContext } = React;
+// Layer 1: 鍏ㄥ眬鐘舵€?鈥?鐨偆妯″紡銆佺晫闈㈣瑷€銆佷晶杈规爮鎶樺彔
+// 鎹㈣偆鍗曡建椹卞姩锛歩sDark 鍙垏鎹?<html> 鐨?.dark class锛?// 鏅€?H5 鍏冪礌(token 鍥涘眰)涓?eview-react 缁勪欢(aui3_1_dark.css 鎹㈣偆灞?鍚屾簮璺熼殢锛屾棤闇€ React 鍙備笌鎹㈣偆銆?const AppContext = createContext(null);
+
+function AppProvider({ children }) {
+  const [isDark, setIsDark] = useState(false);
+  const [lang, setLang] = useState("zh");
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    // 暗色模式同时切两处：aui3_1_dark 挂 <body>（eview-react 组件暗色变量生效），.dark 挂 <html>（原始 token 暗色覆盖生效）
+    document.body.classList.toggle("aui3_1_dark", isDark);
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+  }, [lang]);
+
+  const value = {
+    isDark,
+    lang,
+    collapsed,
+    setLang,
+    toggleDark: () => setIsDark((d) => !d),
+    toggleCollapsed: () => setCollapsed((c) => !c),
+  };
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+}
+
+function useApp() {
+  return useContext(AppContext);
+}
+  Object.assign(__export, { AppProvider, useApp });
+})();
+
+/* ===== src/i18n.js ===== */
+(function () {
+// 鐣岄潰鏂囨瀛楀吀锛坺h / en锛夆€?缁勪欢鍐呬娇鐢?FormattedMessage / useIntl锛宒efaultMessage 蹇呭～
+
+const messages = {
+  zh: {
+    "app.name": "浜戠綉鏅烘帶骞冲彴",
+    "app.brandSub": "CloudNet Console",
+
+    "nav.toggleSider": "鏀惰捣 / 灞曞紑瀵艰埅",
+    "top.search": "鎼滅储璁惧銆佺瓥鐣ユ垨 IP",
+    "top.lang": "鐣岄潰璇█",
+    "top.theme.toDark": "鍒囨崲涓烘繁鑹叉ā寮?,
+    "top.theme.toLight": "鍒囨崲涓烘祬鑹叉ā寮?,
+    "top.notify": "閫氱煡",
+    "top.help": "甯姪涓績",
+    "top.logout": "閫€鍑虹櫥褰?,
+    "top.role": "缃戠粶杩愮淮绠＄悊鍛?,
+
+    "nav.overview": "杩愯姒傝",
+    "nav.strategy": "绛栫暐閰嶇疆",
+    "nav.strategy.form": "鍙傛暟閰嶇疆",
+    "nav.strategy.list": "绛栫暐娓呭崟",
+    "nav.strategy.template": "绛栫暐妯℃澘",
+    "nav.device": "璁惧绠＄悊",
+    "nav.device.list": "璁惧娓呭崟",
+    "nav.device.group": "璁惧鍒嗙粍",
+    "nav.device.firmware": "鍥轰欢鍗囩骇",
+    "nav.alarm": "鍛婅涓績",
+    "nav.alarm.rule": "鍛婅瑙勫垯",
+    "nav.alarm.history": "鍛婅璁板綍",
+    "nav.report": "鎶ヨ〃鍒嗘瀽",
+    "nav.audit": "瀹¤鏃ュ織",
+    "nav.settings": "绯荤粺璁剧疆",
+    "nav.version": "鐗堟湰 v5.4.2 路 鐢熶骇鐜",
+
+    "page.breadcrumb.home": "棣栭〉",
+    "page.breadcrumb.current": "绛栫暐閰嶇疆",
+    "page.title": "绛栫暐閰嶇疆",
+    "page.desc": "鎸夎澶囩被鍨嬩笅鍙戦噰闆嗕笌鍛婅绛栫暐锛屼繚瀛樺悗 5 鍒嗛挓鍐呰嚜鍔ㄧ敓鏁堛€?,
+    "page.import": "瀵煎叆閰嶇疆",
+    "page.export": "瀵煎嚭",
+    "page.new": "鏂板缓绛栫暐",
+
+    "form.title": "绛栫暐鍙傛暟閰嶇疆",
+    "form.desc": "鍩虹鍙傛暟瀵规墍鏈夎澶囩敓鏁堬紝寮€鍚珮绾у弬鏁板悗鍙粏鍖栭槇鍊间笌閫氱煡閾捐矾銆?,
+    "form.draftTag": "鑽夌鏈彁浜?,
+    "form.basicTitle": "鍩虹鍙傛暟",
+    "form.advancedTitle": "楂樼骇鍙傛暟",
+    "form.name": "绛栫暐鍚嶇О",
+    "form.name.ph": "濡傦細缃戝叧鍦ㄧ嚎鐜囩洃娴?,
+    "form.name.required": "璇疯緭鍏ョ瓥鐣ュ悕绉?,
+    "form.deviceType": "閫傜敤璁惧绫诲瀷",
+    "form.deviceType.ph": "璇烽€夋嫨璁惧绫诲瀷",
+    "form.deviceType.required": "璇烽€夋嫨璁惧绫诲瀷",
+    "form.interval": "閲囬泦鍛ㄦ湡",
+    "form.interval.required": "璇疯緭鍏ラ噰闆嗗懆鏈?,
+    "form.interval.unit": "绉?,
+    "form.level": "瑙﹀彂绾у埆",
+    "form.timeRange": "鐢熸晥鏃舵",
+    "form.desc2": "绛栫暐鎻忚堪",
+    "form.desc2.ph": "璇存槑璇ョ瓥鐣ョ殑閫傜敤鍦烘櫙涓庡鐞嗚姹傦紝渚夸簬鍏朵粬杩愮淮浜哄憳澶嶇敤銆?,
+    "form.advanced.toggle": "鍚敤楂樼骇鍙傛暟",
+    "form.advanced.toggleDesc": "寮€鍚悗鍙厤缃憡璀﹂槇鍊笺€佸け璐ラ噸璇曘€佹姈鍔ㄦ姂鍒朵笌閫氱煡鏂瑰紡銆?,
+    "form.threshold": "鍛婅闃堝€?,
+    "form.threshold.unit": "%",
+    "form.retry": "澶辫触閲嶈瘯娆℃暟",
+    "form.retry.unit": "娆?,
+    "form.flap": "鎶栧姩鎶戝埗",
+    "form.flapDesc": "杩炵画涓ゆ瑙﹀彂闂撮殧灏忎簬 60 绉掓椂鍚堝苟涓轰竴鏉″憡璀︺€?,
+    "form.notify": "閫氱煡鏂瑰紡",
+    "form.silent": "闈欓粯绐楀彛",
+    "form.memo": "澶囨敞",
+    "form.memo.ph": "琛ュ厖璇存槑锛堥€夊～锛?,
+    "form.hint": "鎻愮ず锛氶珮绾у弬鏁板紑鍚悗锛岄潰鏉垮唴瀛楁浼氫竴骞跺弬涓庢牎楠屻€?,
+    "form.reset": "閲嶇疆",
+    "form.saveDraft": "淇濆瓨鑽夌",
+    "form.submit": "鎻愪氦骞跺惎鐢?,
+    "form.openModal": "鍦ㄥ脊绐椾腑濉啓",
+    "form.advancedBadge": "宸插睍寮€ {count} 椤归珮绾у弬鏁?,
+
+    "opt.device.gateway": "杈圭紭缃戝叧",
+    "opt.device.switch": "姹囪仛浜ゆ崲鏈?,
+    "opt.device.camera": "鏅鸿兘鎽勫儚澶?,
+    "opt.device.sensor": "娓╂箍搴︿紶鎰熷櫒",
+    "opt.device.edge": "杈圭紭璁＄畻鑺傜偣",
+    "opt.device.ap": "鏃犵嚎 AP",
+
+    "opt.level.critical": "绱ф€?,
+    "opt.level.warning": "璀﹀憡",
+    "opt.level.info": "鎻愮ず",
+
+    "opt.notify.inbox": "绔欏唴淇?,
+    "opt.notify.email": "閭欢",
+    "opt.notify.sms": "鐭俊",
+    "opt.notify.webhook": "Webhook",
+
+    "opt.status.enabled": "宸插惎鐢?,
+    "opt.status.disabled": "宸插仠鐢?,
+    "opt.status.draft": "閰嶇疆涓?,
+    "opt.status.expired": "宸茶繃鏈?,
+
+    "table.title": "绛栫暐娓呭崟",
+    "table.desc": "鍏?{total} 鏉＄瓥鐣ワ紝鍏朵腑 {enabled} 鏉″浜庡惎鐢ㄧ姸鎬併€?,
+    "table.filter.all": "鍏ㄩ儴",
+    "table.filter.enabled": "宸插惎鐢?,
+    "table.filter.disabled": "宸插仠鐢?,
+    "table.search.ph": "鎼滅储绛栫暐鍚嶇О鎴栫紪鍙?,
+    "table.batch.enable": "鎵归噺鍚敤",
+    "table.batch.disable": "鎵归噺鍋滅敤",
+    "table.selected": "宸查€?{count} 椤?,
+    "table.clear": "鍙栨秷閫夋嫨",
+    "table.refresh": "鍒锋柊鏁版嵁",
+    "table.col.id": "绛栫暐缂栧彿",
+    "table.col.name": "绛栫暐鍚嶇О",
+    "table.col.deviceType": "閫傜敤璁惧绫诲瀷",
+    "table.col.interval": "閲囬泦鍛ㄦ湡",
+    "table.col.level": "瑙﹀彂绾у埆",
+    "table.col.devices": "鍏宠仈璁惧",
+    "table.col.status": "鐘舵€?,
+    "table.col.owner": "鏇存柊浜?,
+    "table.col.updatedAt": "鏇存柊鏃堕棿",
+    "table.col.actions": "鎿嶄綔",
+    "table.unit.second": "绉?,
+    "table.unit.device": "鍙?,
+    "table.action.edit": "缂栬緫",
+    "table.action.copy": "澶嶅埗",
+    "table.action.enable": "鍚敤",
+    "table.action.disable": "鍋滅敤",
+    "table.action.delete": "鍒犻櫎",
+    "table.expand.threshold": "鍛婅闃堝€?,
+    "table.expand.retry": "閲嶈瘯娆℃暟",
+    "table.expand.notify": "閫氱煡鏂瑰紡",
+    "table.expand.flap": "鎶栧姩鎶戝埗",
+    "table.expand.on": "宸插紑鍚?,
+    "table.expand.off": "鏈紑鍚?,
+    "table.empty": "娌℃湁绗﹀悎鏉′欢鐨勭瓥鐣?,
+    "table.emptyHint": "璋冩暣绛涢€夋潯浠舵垨鏂板缓涓€鏉＄瓥鐣ャ€?,
+
+    "modal.title.new": "鏂板缓绛栫暐",
+    "modal.title.edit": "缂栬緫绛栫暐",
+    "modal.desc": "寮圭獥鍐呬粎濉啓鏍稿績鍙傛暟锛屼繚瀛樺悗鍙湪鍙充晶鍒楄〃涓户缁ˉ鍏呴珮绾у弬鏁般€?,
+    "modal.enableNow": "鍒涘缓鍚庣珛鍗冲惎鐢?,
+    "modal.enableNowDesc": "鍏抽棴鏃朵互鈥滈厤缃腑鈥濈姸鎬佷繚瀛橈紝涓嶄細涓嬪彂鍒拌澶囥€?,
+    "modal.cancel": "鍙栨秷",
+    "modal.draft": "淇濆瓨鑽夌",
+    "modal.ok": "纭畾骞跺惎鐢?,
+    "modal.namePh": "璇疯緭鍏ョ瓥鐣ュ悕绉?,
+
+    "toast.created": "绛栫暐宸插垱寤哄苟涓嬪彂",
+    "toast.updated": "绛栫暐宸叉洿鏂?,
+    "toast.draft": "鑽夌宸蹭繚瀛?,
+    "toast.enabled": "宸插惎鐢?{count} 鏉＄瓥鐣?,
+    "toast.disabled": "宸插仠鐢?{count} 鏉＄瓥鐣?,
+    "toast.deleted": "绛栫暐宸插垹闄?,
+    "toast.copied": "宸插鍒朵负鏂扮瓥鐣?,
+    "toast.imported": "閰嶇疆鏂囦欢瑙ｆ瀽涓紝璇风◢鍊?,
+    "toast.selectFirst": "璇峰厛閫夋嫨闇€瑕佹搷浣滅殑绛栫暐",
+  },
+  en: {
+    "app.name": "CloudNet Console",
+    "app.brandSub": "浜戠綉鏅烘帶骞冲彴",
+
+    "nav.toggleSider": "Collapse / Expand navigation",
+    "top.search": "Search device, strategy or IP",
+    "top.lang": "Language",
+    "top.theme.toDark": "Switch to dark mode",
+    "top.theme.toLight": "Switch to light mode",
+    "top.notify": "Notifications",
+    "top.help": "Help center",
+    "top.logout": "Sign out",
+    "top.role": "Network O&M Admin",
+
+    "nav.overview": "Overview",
+    "nav.strategy": "Strategy",
+    "nav.strategy.form": "Parameters",
+    "nav.strategy.list": "Strategy List",
+    "nav.strategy.template": "Templates",
+    "nav.device": "Devices",
+    "nav.device.list": "Device List",
+    "nav.device.group": "Device Groups",
+    "nav.device.firmware": "Firmware",
+    "nav.alarm": "Alarms",
+    "nav.alarm.rule": "Alarm Rules",
+    "nav.alarm.history": "Alarm History",
+    "nav.report": "Reports",
+    "nav.audit": "Audit Log",
+    "nav.settings": "Settings",
+    "nav.version": "Version v5.4.2 路 Production",
+
+    "page.breadcrumb.home": "Home",
+    "page.breadcrumb.current": "Strategy",
+    "page.title": "Strategy Configuration",
+    "page.desc": "Deliver collection and alarm strategies per device type. Changes take effect within 5 minutes.",
+    "page.import": "Import",
+    "page.export": "Export",
+    "page.new": "New Strategy",
+
+    "form.title": "Strategy Parameters",
+    "form.desc": "Basic parameters apply to every device. Turn on advanced parameters to refine thresholds and notification paths.",
+    "form.draftTag": "Unsaved draft",
+    "form.basicTitle": "Basic parameters",
+    "form.advancedTitle": "Advanced parameters",
+    "form.name": "Strategy name",
+    "form.name.ph": "e.g. Gateway online rate",
+    "form.name.required": "Please enter a strategy name",
+    "form.deviceType": "Device type",
+    "form.deviceType.ph": "Select device type",
+    "form.deviceType.required": "Please select a device type",
+    "form.interval": "Collection interval",
+    "form.interval.required": "Please enter the collection interval",
+    "form.interval.unit": "s",
+    "form.level": "Trigger level",
+    "form.timeRange": "Active window",
+    "form.desc2": "Description",
+    "form.desc2.ph": "Describe the scenario and handling requirements so other engineers can reuse it.",
+    "form.advanced.toggle": "Advanced parameters",
+    "form.advanced.toggleDesc": "Configure alarm thresholds, retries, flap damping and notification channels.",
+    "form.threshold": "Alarm threshold",
+    "form.threshold.unit": "%",
+    "form.retry": "Retry attempts",
+    "form.retry.unit": "times",
+    "form.flap": "Flap damping",
+    "form.flapDesc": "Merge alarms triggered twice within 60 seconds into a single event.",
+    "form.notify": "Notification channels",
+    "form.silent": "Silence window",
+    "form.memo": "Memo",
+    "form.memo.ph": "Additional notes (optional)",
+    "form.hint": "Note: fields inside the panel join validation once advanced parameters are on.",
+    "form.reset": "Reset",
+    "form.saveDraft": "Save draft",
+    "form.submit": "Submit & enable",
+    "form.openModal": "Fill in dialog",
+    "form.advancedBadge": "{count} advanced fields expanded",
+
+    "opt.device.gateway": "Edge gateway",
+    "opt.device.switch": "Aggregation switch",
+    "opt.device.camera": "Smart camera",
+    "opt.device.sensor": "Temp/Humidity sensor",
+    "opt.device.edge": "Edge node",
+    "opt.device.ap": "Wireless AP",
+
+    "opt.level.critical": "Critical",
+    "opt.level.warning": "Warning",
+    "opt.level.info": "Info",
+
+    "opt.notify.inbox": "Inbox",
+    "opt.notify.email": "Email",
+    "opt.notify.sms": "SMS",
+    "opt.notify.webhook": "Webhook",
+
+    "opt.status.enabled": "Enabled",
+    "opt.status.disabled": "Disabled",
+    "opt.status.draft": "Draft",
+    "opt.status.expired": "Expired",
+
+    "table.title": "Strategy List",
+    "table.desc": "{total} strategies in total, {enabled} of them enabled.",
+    "table.filter.all": "All",
+    "table.filter.enabled": "Enabled",
+    "table.filter.disabled": "Disabled",
+    "table.search.ph": "Search strategy name or ID",
+    "table.batch.enable": "Enable",
+    "table.batch.disable": "Disable",
+    "table.selected": "{count} selected",
+    "table.clear": "Clear selection",
+    "table.refresh": "Refresh",
+    "table.col.id": "Strategy ID",
+    "table.col.name": "Strategy name",
+    "table.col.deviceType": "Device type",
+    "table.col.interval": "Interval",
+    "table.col.level": "Level",
+    "table.col.devices": "Devices",
+    "table.col.status": "Status",
+    "table.col.owner": "Owner",
+    "table.col.updatedAt": "Updated",
+    "table.col.actions": "Actions",
+    "table.unit.second": "s",
+    "table.unit.device": "",
+    "table.action.edit": "Edit",
+    "table.action.copy": "Duplicate",
+    "table.action.enable": "Enable",
+    "table.action.disable": "Disable",
+    "table.action.delete": "Delete",
+    "table.expand.threshold": "Alarm threshold",
+    "table.expand.retry": "Retry attempts",
+    "table.expand.notify": "Notification channels",
+    "table.expand.flap": "Flap damping",
+    "table.expand.on": "On",
+    "table.expand.off": "Off",
+    "table.empty": "No strategy matches the filter",
+    "table.emptyHint": "Adjust the filter or create a new strategy.",
+
+    "modal.title.new": "New Strategy",
+    "modal.title.edit": "Edit Strategy",
+    "modal.desc": "Fill in the core parameters here, then refine advanced parameters from the list.",
+    "modal.enableNow": "Enable right after creation",
+    "modal.enableNowDesc": "When off, the strategy is saved as a draft and is not delivered to devices.",
+    "modal.cancel": "Cancel",
+    "modal.draft": "Save draft",
+    "modal.ok": "Confirm & enable",
+    "modal.namePh": "Enter strategy name",
+
+    "toast.created": "Strategy created and delivered",
+    "toast.updated": "Strategy updated",
+    "toast.draft": "Draft saved",
+    "toast.enabled": "{count} strategies enabled",
+    "toast.disabled": "{count} strategies disabled",
+    "toast.deleted": "Strategy deleted",
+    "toast.copied": "Duplicated as a new strategy",
+    "toast.imported": "Parsing the configuration file, please wait",
+    "toast.selectFirst": "Select at least one strategy first",
+  },
+};
+  Object.assign(__export, { messages });
+})();
+
+/* ===== assets/shared/icons.js ===== */
+(function () {
+  const LUCIDE = {
+    "activity": [["path",{"d":"M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"}]],
+    "bell": [["path",{"d":"M10.268 21a2 2 0 0 0 3.464 0"}],["path",{"d":"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"}]],
+    "chart-column": [["path",{"d":"M3 3v16a2 2 0 0 0 2 2h16"}],["path",{"d":"M18 17V9"}],["path",{"d":"M13 17V5"}],["path",{"d":"M8 17v-3"}]],
+    "circle-check": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"m9 12 2 2 4-4"}]],
+    "circle-plus": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M8 12h8"}],["path",{"d":"M12 8v8"}]],
+    "circle-question-mark": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"}],["path",{"d":"M12 17h.01"}]],
+    "copy": [["rect",{"width":"14","height":"14","x":"8","y":"8","rx":"2","ry":"2"}],["path",{"d":"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"}]],
+    "download": [["path",{"d":"M12 15V3"}],["path",{"d":"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"}],["path",{"d":"m7 10 5 5 5-5"}]],
+    "external-link": [["path",{"d":"M15 3h6v6"}],["path",{"d":"M10 14 21 3"}],["path",{"d":"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"}]],
+    "file-text": [["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5"}],["path",{"d":"M10 9H8"}],["path",{"d":"M16 13H8"}],["path",{"d":"M16 17H8"}]],
+    "hard-drive": [["path",{"d":"M10 16h.01"}],["path",{"d":"M2.212 11.577a2 2 0 0 0-.212.896V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.527a2 2 0 0 0-.212-.896L18.55 5.11A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"}],["path",{"d":"M21.946 12.013H2.054"}],["path",{"d":"M6 16h.01"}]],
+    "info": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M12 16v-4"}],["path",{"d":"M12 8h.01"}]],
+    "layout-dashboard": [["rect",{"width":"7","height":"9","x":"3","y":"3","rx":"1"}],["rect",{"width":"7","height":"5","x":"14","y":"3","rx":"1"}],["rect",{"width":"7","height":"9","x":"14","y":"12","rx":"1"}],["rect",{"width":"7","height":"5","x":"3","y":"16","rx":"1"}]],
+    "list-checks": [["path",{"d":"M13 5h8"}],["path",{"d":"M13 12h8"}],["path",{"d":"M13 19h8"}],["path",{"d":"m3 17 2 2 4-4"}],["path",{"d":"m3 7 2 2 4-4"}]],
+    "log-out": [["path",{"d":"m16 17 5-5-5-5"}],["path",{"d":"M21 12H9"}],["path",{"d":"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"}]],
+    "moon": [["path",{"d":"M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"}]],
+    "network": [["rect",{"x":"16","y":"16","width":"6","height":"6","rx":"1"}],["rect",{"x":"2","y":"16","width":"6","height":"6","rx":"1"}],["rect",{"x":"9","y":"2","width":"6","height":"6","rx":"1"}],["path",{"d":"M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"}],["path",{"d":"M12 12V8"}]],
+    "panel-left-close": [["rect",{"width":"18","height":"18","x":"3","y":"3","rx":"2"}],["path",{"d":"M9 3v18"}],["path",{"d":"m16 15-3-3 3-3"}]],
+    "panel-left-open": [["rect",{"width":"18","height":"18","x":"3","y":"3","rx":"2"}],["path",{"d":"M9 3v18"}],["path",{"d":"m14 9 3 3-3 3"}]],
+    "pause": [["rect",{"x":"14","y":"3","width":"5","height":"18","rx":"1"}],["rect",{"x":"5","y":"3","width":"5","height":"18","rx":"1"}]],
+    "pencil": [["path",{"d":"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"}],["path",{"d":"m15 5 4 4"}]],
+    "pencil-line": [["path",{"d":"M13 21h8"}],["path",{"d":"m15 5 4 4"}],["path",{"d":"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"}]],
+    "play": [["path",{"d":"M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"}]],
+    "plus": [["path",{"d":"M5 12h14"}],["path",{"d":"M12 5v14"}]],
+    "refresh-cw": [["path",{"d":"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"}],["path",{"d":"M21 3v5h-5"}],["path",{"d":"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"}],["path",{"d":"M8 16H3v5"}]],
+    "router": [["rect",{"width":"20","height":"8","x":"2","y":"14","rx":"2"}],["path",{"d":"M6.01 18H6"}],["path",{"d":"M10.01 18H10"}],["path",{"d":"M15 10v4"}],["path",{"d":"M17.84 7.17a4 4 0 0 0-5.66 0"}],["path",{"d":"M20.66 4.34a8 8 0 0 0-11.31 0"}]],
+    "save": [["path",{"d":"M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"}],["path",{"d":"M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"}],["path",{"d":"M7 3v4a1 1 0 0 0 1 1h7"}]],
+    "scroll-text": [["path",{"d":"M15 12h-5"}],["path",{"d":"M15 8h-5"}],["path",{"d":"M19 17V5a2 2 0 0 0-2-2H4"}],["path",{"d":"M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"}]],
+    "search": [["path",{"d":"m21 21-4.34-4.34"}],["circle",{"cx":"11","cy":"11","r":"8"}]],
+    "settings": [["path",{"d":"M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"}],["circle",{"cx":"12","cy":"12","r":"3"}]],
+    "shield-check": [["path",{"d":"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"}],["path",{"d":"m9 12 2 2 4-4"}]],
+    "sliders-horizontal": [["path",{"d":"M10 5H3"}],["path",{"d":"M12 19H3"}],["path",{"d":"M14 3v4"}],["path",{"d":"M16 17v4"}],["path",{"d":"M21 12h-9"}],["path",{"d":"M21 19h-5"}],["path",{"d":"M21 5h-7"}],["path",{"d":"M8 10v4"}],["path",{"d":"M8 12H3"}]],
+    "sun": [["circle",{"cx":"12","cy":"12","r":"4"}],["path",{"d":"M12 2v2"}],["path",{"d":"M12 20v2"}],["path",{"d":"m4.93 4.93 1.41 1.41"}],["path",{"d":"m17.66 17.66 1.41 1.41"}],["path",{"d":"M2 12h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"m6.34 17.66-1.41 1.41"}],["path",{"d":"m19.07 4.93-1.41 1.41"}]],
+    "trash-2": [["path",{"d":"M10 11v6"}],["path",{"d":"M14 11v6"}],["path",{"d":"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"}],["path",{"d":"M3 6h18"}],["path",{"d":"M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"}]],
+    "triangle-alert": [["path",{"d":"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"}],["path",{"d":"M12 9v4"}],["path",{"d":"M12 17h.01"}]],
+    "undo-2": [["path",{"d":"M9 14 4 9l5-5"}],["path",{"d":"M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"}]],
+    "users": [["path",{"d":"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"}],["path",{"d":"M16 3.128a4 4 0 0 1 0 7.744"}],["path",{"d":"M22 21v-2a4 4 0 0 0-3-3.87"}],["circle",{"cx":"9","cy":"7","r":"4"}]],
+    "wifi": [["path",{"d":"M12 20h.01"}],["path",{"d":"M2 8.82a15 15 0 0 1 20 0"}],["path",{"d":"M5 12.859a10 10 0 0 1 14 0"}],["path",{"d":"M8.5 16.429a5 5 0 0 1 7 0"}]],
+  };
+  const { useState, useEffect } = React;
+// ---- Lucide (offline fallback, table injected at build time) ----
+const ICONS = typeof LUCIDE !== "undefined" ? LUCIDE : {};
+
+function camelToKebab(s) {
+  return s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+}
+
+function lookupIcon(name) {
+  if (!name) return null;
+  return (
+    ICONS[name] ||
+    ICONS[camelToKebab(name)] ||
+    ICONS[name.replace(/-([a-z])/g, (_m, c) => c.toUpperCase())] ||
+    null
+  );
+}
+
+// ---- icon-plus (鑱旈€? online flow, same as packages/previewpc ----
+const ICON_API_BASE = "https://octo.hdesign.huawei.com";
+const GET_CONFIG = `${ICON_API_BASE}/assetRepository/iconPlus/getConfig`;
+const GET_ICON_INFO = `${ICON_API_BASE}/assetRepository/iconPlus/getIconInfo`;
+const GET_ICON = `${ICON_API_BASE}/assetRepository/iconPlus/getIcon`;
+
+let plusState = null; // null = probing, true = icon-plus available, false = fall back to Lucide
+let plusPromise = null; // singleton getConfig probe promise
+let iconConfig = null;
+let defaultColorId = "";
+const iconInfoMap = {}; // name -> { name, url }
+const svgCache = new Map(); // "name&variant&color" -> svg text
+
+// variant prop -> getConfig style key (matches previewpc's shapeToStyleKey)
+const STYLE_KEY = {
+  lined: "border",
+  filled: "filled",
+  "two-tone": "two_colors1",
+  circle: "round_bottom2",
+  square: "square_bottom2",
+};
+
+function getStyleValue(styleKey) {
+  return iconConfig?.style?.find((s) => s.key === styleKey)?.value || styleKey;
+}
+
+// resolve an API color id from the requested hex against getConfig colors
+function resolveColorId(variant, colorHex) {
+  const styleValue = getStyleValue(STYLE_KEY[variant] || "border");
+  const colors = (iconConfig?.colors || []).filter((c) => c.style === styleValue);
+  if (colorHex) {
+    const m = colors.find((c) =>
+      c.value.split(",").map((v) => v.trim()).includes(colorHex)
+    );
+    if (m) return m.id;
+  }
+  return defaultColorId || colors[0]?.id || "";
+}
+
+// getConfig probe == 鑱旈€氬彲鐢ㄦ€ч獙璇?(same as previewpc fetchIconConfig)
+function ensurePlus() {
+  if (plusPromise) return plusPromise;
+  plusPromise = (async () => {
+    try {
+      const resp = await fetch(GET_CONFIG);
+      if (!resp.ok) {
+        plusState = false;
+        return false;
+      }
+      iconConfig = await resp.json();
+      const linear = iconConfig.colors?.find(
+        (c) => c.type === "linear" || c.type === "閫氱敤鑹?
+      );
+      defaultColorId =
+        linear?.id || iconConfig.colors?.[0]?.id || "";
+      plusState = true;
+      return true;
+    } catch (e) {
+      plusState = false;
+      return false;
+    }
+  })();
+  return plusPromise;
+}
+
+// pick the best icon-plus match for a keyword (prefer system-icon group, then name contains keyword, else first)
+function selectBestIcon(icons, keyword) {
+  return (
+    icons.find(
+      (i) => Array.isArray(i.group) && i.group.some((g) => g.includes("绯荤粺鍥炬爣"))
+    ) ||
+    icons.find((i) => i.name?.toLowerCase().includes(keyword.toLowerCase())) ||
+    icons[0]
+  );
+}
+
+// name -> { name, url } via getIconInfo (cached in iconInfoMap)
+async function resolveIconInfo(name) {
+  if (iconInfoMap[name]) return iconInfoMap[name];
+  try {
+    const resp = await fetch(
+      `${GET_ICON_INFO}?keyword=${encodeURIComponent(name)}&topK=2&source_id=6`
+    );
+    const data = await resp.json(); // [{ keyword, icons: [{ icon_id, name, category, group[], url }] }]
+    const entry = (Array.isArray(data) ? data : [data]).find(
+      (d) => d.icons?.length
+    );
+    const selected = selectBestIcon(entry?.icons || [], name);
+    if (!selected?.url) return null;
+    iconInfoMap[name] = { name: selected.name, url: selected.url };
+    return iconInfoMap[name];
+  } catch (e) {
+    return null;
+  }
+}
+
+// fetch the SVG text for a name via getIcon (url + size + variant + colorId + fileType=svg)
+async function fetchSvg(name, variant, colorHex) {
+  const info = await resolveIconInfo(name);
+  if (!info) return "";
+  const styleValue = getStyleValue(STYLE_KEY[variant] || "border");
+  const colorId = resolveColorId(variant, colorHex);
+  try {
+    const resp = await fetch(
+      `${GET_ICON}?url=${encodeURIComponent(info.url)}&size=16&style=${encodeURIComponent(
+        styleValue
+      )}&color=${encodeURIComponent(colorId)}&fileType=svg`
+    );
+    const data = await resp.json(); // { url, name, data } or array
+    const item = Array.isArray(data) ? data[0] : data;
+    return item?.data || ""; // raw SVG text, injected as-is
+  } catch (e) {
+    return "";
+  }
+}
+
+function Icon({
+  name,
+  src,
+  size = 16,
+  color,
+  className = "",
+  style,
+  strokeWidth = 2,
+  variant = "lined",
+}) {
+  const [plus, setPlus] = useState(plusState); // reuse already-probed result
+  const [svg, setSvg] = useState(
+    () => svgCache.get(`${name}&${variant}&${color}`) || ""
+  );
+
+  useEffect(() => {
+    if (src) return; // user-asset mode: no network needed
+    let alive = true;
+    ensurePlus().then((ok) => {
+      if (!alive) return;
+      setPlus(ok);
+      if (!ok) return; // getConfig probe failed 鈫?Lucide branch
+      const key = `${name}&${variant}&${color}`;
+      if (svgCache.has(key)) {
+        setSvg(svgCache.get(key));
+        return;
+      }
+      fetchSvg(name, variant, color).then((s) => {
+        if (!alive) return;
+        svgCache.set(key, s);
+        setSvg(s);
+      });
+    });
+    return () => {
+      alive = false;
+    };
+  }, [src, name, variant, color]);
+
+  // user-provided asset (svg/png/jpg) via relative path 鈥?overrides name when both are set
+  if (src) {
+    return React.createElement("img", {
+      src: src,
+      width: size,
+      height: size,
+      className: className,
+      alt: "",
+      "aria-hidden": true,
+      style: { ...style, display: "inline-block", verticalAlign: "middle" },
+    });
+  }
+
+  // probe not finished yet 鈫?render nothing
+  if (plus === null) return null;
+
+  // icon-plus unavailable (offline) 鈫?Lucide fallback (original behavior)
+  if (plus === false) {
+    const nodes = lookupIcon(name);
+    if (!nodes) return null;
+    return React.createElement(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: size,
+        height: size,
+        viewBox: "0 0 24 24",
+        fill: "none",
+        strokeWidth: strokeWidth,
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        className: className,
+        "aria-hidden": true,
+        style: { ...style, stroke: color || "currentColor" },
+      },
+      nodes.map(([tag, attrs], i) =>
+        React.createElement(tag, { key: i, ...attrs })
+      )
+    );
+  }
+
+  // icon-plus available 鈫?render fetched SVG text as-is (only width/height on the wrapper)
+  if (!svg) {
+    return React.createElement("span", {
+      className,
+      "aria-hidden": true,
+      style: { ...style, width: size, height: size },
+    });
+  }
+  
+  return React.createElement("span", {
+    className,
+    "aria-hidden": true,
+    style: { ...style, width: size, height: size },
+    dangerouslySetInnerHTML: { __html: svg },
+  });
+}
+  Object.assign(__export, { Icon });
+})();
+
+/* ===== src/views/header-bar/index.jsx ===== */
+(function () {
+  const { Button, Badge, TipBox, SelectCard, TextField } = window.EviewReact || {};
+  const { FormattedMessage, useIntl } = ReactIntl;
+  const { Icon, useApp } = __export;
+// Layer 4: 椤堕儴瀵艰埅鏍?鈥?鍝佺墝 / 鍏ㄥ眬瀵艰埅 / 鍥介檯鍖栧垏鎹?/ 鏄庢殫鍒囨崲 / 鐢ㄦ埛鍖?function HeaderBar() {
+  const { isDark, lang, collapsed, setLang, toggleDark, toggleCollapsed } = useApp();
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  const topNav = [
+    { key: "overview", icon: <Icon name="layout-dashboard" size={16} />, label: t("nav.overview") },
+    { key: "strategy", icon: <Icon name="scroll-text" size={16} />, label: t("nav.strategy") },
+    { key: "device", icon: <Icon name="network" size={16} />, label: t("nav.device") },
+    { key: "alarm", icon: <Icon name="bell" size={16} />, label: t("nav.alarm") },
+    { key: "report", icon: <Icon name="chart-column" size={16} />, label: t("nav.report") },
+  ];
+
+  return (
+    <header className="header-bar">
+      <div className="header-bar__brand">
+        <TipBox content={t("nav.toggleSider")}>
+          <Button
+            status="text"
+            leftIcon={<Icon name={collapsed ? "panel-left-open" : "panel-left-close"} size={16} />}
+            onClick={toggleCollapsed}
+          />
+        </TipBox>
+        <span className="header-bar__logo">
+          <Icon name="shield-check" size={18} />
+        </span>
+        <span className="header-bar__names">
+          <strong className="header-bar__title">{t("app.name")}</strong>
+          <span className="header-bar__sub">
+            {lang === "zh" ? t("app.brandSub") : t("app.brandSub")}
+          </span>
+        </span>
+      </div>
+
+      <nav className="header-bar__nav" style={{ flex: 1, minWidth: 0 }}>
+        {topNav.map((m) => (
+          <button
+            key={m.key}
+            type="button"
+            className={`header-bar__nav-item${m.key === "strategy" ? " is-active" : ""}`}
+          >
+            {m.icon}
+            <span>{m.label}</span>
+          </button>
+        ))}
+      </nav>
+
+      <div className="header-bar__tools">
+        <TextField className="header-bar__search" placeholder={t("top.search")} />
+
+        <TipBox content={t("top.lang")}>
+          <SelectCard
+            className="header-bar__lang"
+            value={lang}
+            data={[
+              { text: "\u4e2d", value: "zh" },
+              { text: "EN", value: "en" },
+            ]}
+            onChange={(v) => setLang(v)}
+          />
+        </TipBox>
+
+        <TipBox content={isDark ? t("top.theme.toLight") : t("top.theme.toDark")}>
+          <Button
+            status="text"
+            leftIcon={<Icon name={isDark ? "sun" : "moon"} size={16} />}
+            onClick={toggleDark}
+          />
+        </TipBox>
+
+        <TipBox content={t("top.notify")}>
+          <Badge content={6}>
+            <Button status="text" leftIcon={<Icon name="bell" size={16} />} />
+          </Badge>
+        </TipBox>
+
+        <TipBox content={t("top.help")}>
+          <Button status="text" leftIcon={<Icon name="circle-question-mark" size={16} />} />
+        </TipBox>
+
+        <div className="header-bar__divider" />
+
+        <div className="header-bar__user">
+          <img className="header-bar__avatar" src="./assets/uploads/user.png" alt="" />
+          <span className="header-bar__user-text">
+            <strong>{lang === "zh" ? "\u674e\u4f1f" : "Li Wei"}</strong>
+            <em>
+              <FormattedMessage id="top.role" defaultMessage="\u7f51\u7edc\u8fd0\u7ef4\u7ba1\u7406\u5458" />
+            </em>
+          </span>
+        </div>
+
+        <TipBox content={t("top.logout")}>
+          <Button status="text" leftIcon={<Icon name="log-out" size={16} />} />
+        </TipBox>
+      </div>
+    </header>
+  );
+}
+  Object.assign(__export, { HeaderBar });
+})();
+
+/* ===== src/views/side-nav/index.jsx ===== */
+(function () {
+  const { useState } = React;
+  const { useIntl } = ReactIntl;
+  const { Icon, useApp } = __export;
+// Layer 4: 渚ц竟瀵艰埅 鈥?涓€绾фā鍧?+ 绛栫暐/璁惧浜岀骇鑿滃崟锛屾敮鎸佹姌鍙?function SideNav() {
+  const { collapsed } = useApp();
+  const [current, setCurrent] = useState("strategy-form");
+  const [openKeys, setOpenKeys] = useState(() => new Set(["strategy", "device"]));
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  const toggleGroup = (key) => {
+    setOpenKeys((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
+
+  const items = [
+    { key: "overview", icon: <Icon name="layout-dashboard" size={16} />, label: t("nav.overview") },
+    {
+      key: "strategy",
+      icon: <Icon name="scroll-text" size={16} />,
+      label: t("nav.strategy"),
+      children: [
+        { key: "strategy-form", icon: <Icon name="sliders-horizontal" size={16} />, label: t("nav.strategy.form") },
+        { key: "strategy-list", icon: <Icon name="list-checks" size={16} />, label: t("nav.strategy.list") },
+        { key: "strategy-tpl", icon: <Icon name="copy" size={16} />, label: t("nav.strategy.template") },
+      ],
+    },
+    {
+      key: "device",
+      icon: <Icon name="network" size={16} />,
+      label: t("nav.device"),
+      children: [
+        { key: "device-list", icon: <Icon name="router" size={16} />, label: t("nav.device.list") },
+        { key: "device-group", icon: <Icon name="users" size={16} />, label: t("nav.device.group") },
+        { key: "device-firmware", icon: <Icon name="hard-drive" size={16} />, label: t("nav.device.firmware") },
+      ],
+    },
+    {
+      key: "alarm",
+      icon: <Icon name="bell" size={16} />,
+      label: t("nav.alarm"),
+      children: [
+        { key: "alarm-rule", icon: <Icon name="triangle-alert" size={16} />, label: t("nav.alarm.rule") },
+        { key: "alarm-history", icon: <Icon name="activity" size={16} />, label: t("nav.alarm.history") },
+      ],
+    },
+    { key: "report", icon: <Icon name="chart-column" size={16} />, label: t("nav.report") },
+    { key: "audit", icon: <Icon name="shield-check" size={16} />, label: t("nav.audit") },
+    { key: "settings", icon: <Icon name="settings" size={16} />, label: t("nav.settings") },
+  ];
+
+  return (
+    <aside className={`side-nav${collapsed ? " is-collapsed" : ""}`}>
+      <nav className="side-nav__menu" style={{ width: collapsed ? 48 : "100%" }}>
+        {items.map((m) => {
+          if (m.children) {
+            const open = openKeys.has(m.key);
+            return (
+              <div key={m.key} className="side-nav__group">
+                <button
+                  type="button"
+                  className={`side-nav__group-head${open ? " is-open" : ""}`}
+                  onClick={() => toggleGroup(m.key)}
+                >
+                  {m.icon}
+                  {!collapsed && <span className="side-nav__group-label">{m.label}</span>}
+                  {!collapsed && <Icon name="chevron-down" size={12} />}
+                </button>
+                {!collapsed && open && (
+                  <div className="side-nav__sub">
+                    {m.children.map((c) => (
+                      <button
+                        key={c.key}
+                        type="button"
+                        className={`side-nav__sub-item${current === c.key ? " is-active" : ""}`}
+                        onClick={() => setCurrent(c.key)}
+                      >
+                        {c.icon}
+                        <span>{c.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          }
+          return (
+            <button
+              key={m.key}
+              type="button"
+              className={`side-nav__top-item${current === m.key ? " is-active" : ""}`}
+              onClick={() => setCurrent(m.key)}
+            >
+              {m.icon}
+              {!collapsed && <span>{m.label}</span>}
+            </button>
+          );
+        })}
+      </nav>
+      <div className="side-nav__footer">
+        <Icon name="wifi" size={14} />
+        {collapsed ? null : <span>{t("nav.version")}</span>}
+      </div>
+    </aside>
+  );
+}
+  Object.assign(__export, { SideNav });
+})();
+
+/* ===== src/mock/strategy.js ===== */
+(function () {
+// Layer 2: 绛栫暐鍩?mock 鏁版嵁 鈥?閫夐」闆?+ 绛栫暐娓呭崟锛?4 鏉★紝鐘舵€佸鏍凤級
+
+const deviceTypeOptions = [
+  { value: "gateway", labelId: "opt.device.gateway" },
+  { value: "switch", labelId: "opt.device.switch" },
+  { value: "camera", labelId: "opt.device.camera" },
+  { value: "sensor", labelId: "opt.device.sensor" },
+  { value: "edge", labelId: "opt.device.edge" },
+  { value: "ap", labelId: "opt.device.ap" },
+];
+
+const levelOptions = [
+  { value: "critical", labelId: "opt.level.critical" },
+  { value: "warning", labelId: "opt.level.warning" },
+  { value: "info", labelId: "opt.level.info" },
+];
+
+const notifyOptions = [
+  { value: "inbox", labelId: "opt.notify.inbox" },
+  { value: "email", labelId: "opt.notify.email" },
+  { value: "sms", labelId: "opt.notify.sms" },
+  { value: "webhook", labelId: "opt.notify.webhook" },
+];
+
+// tone 鏄犲皠鍒拌涔夎壊锛坰uccess / warning / error / info / neutral锛?const statusMeta = {
+  enabled: { labelId: "opt.status.enabled", tone: "success" },
+  disabled: { labelId: "opt.status.disabled", tone: "neutral" },
+  draft: { labelId: "opt.status.draft", tone: "info" },
+  expired: { labelId: "opt.status.expired", tone: "warning" },
+};
+
+const levelTone = {
+  critical: "error",
+  warning: "warning",
+  info: "info",
+};
+
+function labelOf(options, value, dict) {
+  const hit = options.find((o) => o.value === value);
+  if (!hit) return value;
+  const pack = dict[hit.labelId];
+  return pack || hit.labelId;
+}
+
+const strategyRows = [
+  { id: "STY-2609-001", name: "缃戝叧鍦ㄧ嚎鐜囩洃娴?, nameEn: "Gateway online rate", deviceType: "gateway", intervalSec: 30, level: "critical", status: "enabled", devices: 128, owner: "鏉庝紵", ownerEn: "Li Wei", updatedAt: "2026-09-18 14:32", threshold: 99, retry: 3, notify: ["inbox", "sms"], flap: true },
+  { id: "STY-2609-002", name: "姹囪仛浜ゆ崲鏈虹鍙ｆ姈鍔?, nameEn: "Switch port flapping", deviceType: "switch", intervalSec: 15, level: "critical", status: "enabled", devices: 64, owner: "鐜嬪€?, ownerEn: "Wang Qian", updatedAt: "2026-09-18 11:05", threshold: 95, retry: 2, notify: ["inbox", "email"], flap: true },
+  { id: "STY-2609-003", name: "鏅鸿兘鎽勫儚澶寸绾垮憡璀?, nameEn: "Camera offline alarm", deviceType: "camera", intervalSec: 60, level: "warning", status: "enabled", devices: 256, owner: "闄堟稕", ownerEn: "Chen Tao", updatedAt: "2026-09-17 20:18", threshold: 90, retry: 5, notify: ["inbox"], flap: false },
+  { id: "STY-2609-004", name: "鏈烘埧娓╂箍搴﹁秴闄?, nameEn: "Room temp/humidity limit", deviceType: "sensor", intervalSec: 120, level: "warning", status: "enabled", devices: 42, owner: "鍛ㄦ晱", ownerEn: "Zhou Min", updatedAt: "2026-09-17 16:47", threshold: 80, retry: 3, notify: ["inbox", "sms", "email"], flap: true },
+  { id: "STY-2609-005", name: "杈圭紭鑺傜偣绠楀姏杩囪浇", nameEn: "Edge node CPU overload", deviceType: "edge", intervalSec: 10, level: "critical", status: "enabled", devices: 18, owner: "鏉庝紵", ownerEn: "Li Wei", updatedAt: "2026-09-17 09:24", threshold: 85, retry: 1, notify: ["inbox", "webhook"], flap: false },
+  { id: "STY-2609-006", name: "鏃犵嚎 AP 鍏宠仈鏁板紓甯?, nameEn: "AP association anomaly", deviceType: "ap", intervalSec: 45, level: "info", status: "disabled", devices: 96, owner: "璧电", ownerEn: "Zhao Lei", updatedAt: "2026-09-16 19:02", threshold: 70, retry: 3, notify: ["inbox"], flap: false },
+  { id: "STY-2609-007", name: "缃戝叧鍥轰欢鐗堟湰鍚堣", nameEn: "Gateway firmware compliance", deviceType: "gateway", intervalSec: 3600, level: "info", status: "enabled", devices: 128, owner: "鐜嬪€?, ownerEn: "Wang Qian", updatedAt: "2026-09-16 15:31", threshold: 100, retry: 1, notify: ["email"], flap: false },
+  { id: "STY-2609-008", name: "浜ゆ崲鏈洪摼璺涪鍖呯巼", nameEn: "Switch packet loss", deviceType: "switch", intervalSec: 20, level: "critical", status: "enabled", devices: 64, owner: "闄堟稕", ownerEn: "Chen Tao", updatedAt: "2026-09-16 10:12", threshold: 98, retry: 2, notify: ["inbox", "sms"], flap: true },
+  { id: "STY-2609-009", name: "鎽勫儚澶村瓨鍌ㄧ┖闂撮璀?, nameEn: "Camera storage warning", deviceType: "camera", intervalSec: 300, level: "warning", status: "draft", devices: 140, owner: "鍛ㄦ晱", ownerEn: "Zhou Min", updatedAt: "2026-09-15 22:40", threshold: 75, retry: 4, notify: ["inbox", "email"], flap: false },
+  { id: "STY-2609-010", name: "浼犳劅鍣ㄧ數閲忎綆浜庨槇鍊?, nameEn: "Sensor low battery", deviceType: "sensor", intervalSec: 600, level: "warning", status: "enabled", devices: 42, owner: "璧电", ownerEn: "Zhao Lei", updatedAt: "2026-09-15 18:05", threshold: 20, retry: 2, notify: ["inbox"], flap: false },
+  { id: "STY-2609-011", name: "杈圭紭鑺傜偣纾佺洏鍐欐弧", nameEn: "Edge node disk full", deviceType: "edge", intervalSec: 60, level: "critical", status: "enabled", devices: 18, owner: "鏉庝紵", ownerEn: "Li Wei", updatedAt: "2026-09-15 13:58", threshold: 90, retry: 3, notify: ["inbox", "sms", "webhook"], flap: true },
+  { id: "STY-2609-012", name: "AP 淇￠亾骞叉壈妫€娴?, nameEn: "AP channel interference", deviceType: "ap", intervalSec: 30, level: "info", status: "draft", devices: 96, owner: "鐜嬪€?, ownerEn: "Wang Qian", updatedAt: "2026-09-14 21:16", threshold: 60, retry: 2, notify: ["inbox"], flap: false },
+  { id: "STY-2609-013", name: "缃戝叧鍙屾満鐑鍒囨崲", nameEn: "Gateway HA failover", deviceType: "gateway", intervalSec: 5, level: "critical", status: "enabled", devices: 32, owner: "闄堟稕", ownerEn: "Chen Tao", updatedAt: "2026-09-14 17:44", threshold: 100, retry: 1, notify: ["inbox", "sms", "email"], flap: true },
+  { id: "STY-2609-014", name: "浜ゆ崲鏈洪鎵囪浆閫熷紓甯?, nameEn: "Switch fan speed abnormal", deviceType: "switch", intervalSec: 120, level: "warning", status: "disabled", devices: 24, owner: "鍛ㄦ晱", ownerEn: "Zhou Min", updatedAt: "2026-09-14 09:33", threshold: 65, retry: 3, notify: ["inbox"], flap: false },
+  { id: "STY-2609-015", name: "鎽勫儚澶磋棰戞祦涓柇", nameEn: "Camera stream interrupted", deviceType: "camera", intervalSec: 10, level: "critical", status: "enabled", devices: 256, owner: "璧电", ownerEn: "Zhao Lei", updatedAt: "2026-09-13 20:09", threshold: 97, retry: 2, notify: ["inbox", "webhook"], flap: true },
+  { id: "STY-2609-016", name: "鏈烘埧婕忔按妫€娴嬭仈鍔?, nameEn: "Water leak linkage", deviceType: "sensor", intervalSec: 15, level: "critical", status: "enabled", devices: 12, owner: "鏉庝紵", ownerEn: "Li Wei", updatedAt: "2026-09-13 14:26", threshold: 100, retry: 1, notify: ["inbox", "sms"], flap: false },
+  { id: "STY-2609-017", name: "杈圭紭鑺傜偣瀹瑰櫒閲嶅惎", nameEn: "Edge container restart", deviceType: "edge", intervalSec: 45, level: "warning", status: "draft", devices: 18, owner: "鐜嬪€?, ownerEn: "Wang Qian", updatedAt: "2026-09-12 19:51", threshold: 88, retry: 4, notify: ["email", "webhook"], flap: true },
+  { id: "STY-2609-018", name: "AP 绌哄彛鍒╃敤鐜囪繃杞?, nameEn: "AP airtime utilization", deviceType: "ap", intervalSec: 60, level: "warning", status: "enabled", devices: 96, owner: "闄堟稕", ownerEn: "Chen Tao", updatedAt: "2026-09-12 11:37", threshold: 78, retry: 3, notify: ["inbox", "email"], flap: false },
+  { id: "STY-2609-019", name: "缃戝叧閰嶇疆婕傜Щ妫€娴?, nameEn: "Gateway config drift", deviceType: "gateway", intervalSec: 1800, level: "info", status: "expired", devices: 128, owner: "鍛ㄦ晱", ownerEn: "Zhou Min", updatedAt: "2026-08-30 10:02", threshold: 100, retry: 1, notify: ["inbox"], flap: false },
+  { id: "STY-2609-020", name: "浜ゆ崲鏈哄爢鍙犵姸鎬佸贰妫€", nameEn: "Switch stack health", deviceType: "switch", intervalSec: 300, level: "info", status: "enabled", devices: 40, owner: "璧电", ownerEn: "Zhao Lei", updatedAt: "2026-09-11 16:18", threshold: 92, retry: 2, notify: ["inbox"], flap: false },
+  { id: "STY-2609-021", name: "鎽勫儚澶撮伄鎸℃櫤鑳借瘑鍒?, nameEn: "Camera occlusion detection", deviceType: "camera", intervalSec: 20, level: "warning", status: "disabled", devices: 180, owner: "鏉庝紵", ownerEn: "Li Wei", updatedAt: "2026-09-10 15:44", threshold: 85, retry: 3, notify: ["inbox", "email"], flap: false },
+  { id: "STY-2609-022", name: "浼犳劅鍣ㄦ暟鎹笂鎶ヤ腑鏂?, nameEn: "Sensor reporting interrupted", deviceType: "sensor", intervalSec: 90, level: "critical", status: "enabled", devices: 42, owner: "鐜嬪€?, ownerEn: "Wang Qian", updatedAt: "2026-09-10 09:07", threshold: 96, retry: 2, notify: ["inbox", "sms"], flap: true },
+  { id: "STY-2609-023", name: "杈圭紭鑺傜偣璇佷功鍒版湡", nameEn: "Edge certificate expiry", deviceType: "edge", intervalSec: 86400, level: "warning", status: "expired", devices: 18, owner: "闄堟稕", ownerEn: "Chen Tao", updatedAt: "2026-08-22 08:15", threshold: 70, retry: 1, notify: ["email"], flap: false },
+  { id: "STY-2609-024", name: "鏃犵嚎 AP 鍥轰欢鎵归噺鍗囩骇", nameEn: "AP bulk firmware upgrade", deviceType: "ap", intervalSec: 7200, level: "info", status: "disabled", devices: 96, owner: "鍛ㄦ晱", ownerEn: "Zhou Min", updatedAt: "2026-09-09 13:29", threshold: 100, retry: 5, notify: ["inbox", "email", "webhook"], flap: false },
+];
+
+function displayName(row, lang) {
+  return lang === "zh" ? row.name : row.nameEn;
+}
+
+function displayOwner(row, lang) {
+  return lang === "zh" ? row.owner : row.ownerEn;
+}
+  Object.assign(__export, { labelOf, displayName, displayOwner, deviceTypeOptions, levelOptions, notifyOptions, statusMeta, levelTone, strategyRows });
+})();
+
+/* ===== src/components/strategy-fields/index.jsx ===== */
+(function () {
+  const { Form, TextField, TextArea, Spinner, Select, CheckboxGroup, Toggle } = window.EviewReact || {};
+  const { useIntl } = ReactIntl;
+  const { Icon, deviceTypeOptions, levelOptions, notifyOptions } = __export;
+// Layer 3: 绛栫暐鍙傛暟瀛楁缁?鈥?琛ㄥ崟鍗＄墖涓庡脊绐楀叡鐢ㄥ悓涓€濂楀瓧娈碉紝淇濊瘉涓ゅ濉啓浣撻獙涓€鑷?// StrategyFields锛氬熀纭€鍙傛暟锛堥粯璁ゅ鍑猴級锛汼trategyAdvanced锛氶珮绾у弬鏁伴潰鏉匡紙寮€鍏虫墦寮€鍚庢覆鏌擄級
+
+function toOptions(list, t) {
+  return list.map((item) => ({ value: item.value, text: t(item.labelId) }));
+}
+
+function TimeRangePicker({ value, onChange }) {
+  const pair = Array.isArray(value) ? value : ["", ""];
+  const start = pair[0] || "";
+  const end = pair[1] || "";
+  return (
+    <div className="strategy-fields__timerange">
+      <Spinner type="time" timeFormat="HH:mm" value={start} onChange={(v) => onChange && onChange([v, end])} />
+      <span className="strategy-fields__timerange-sep">~</span>
+      <Spinner type="time" timeFormat="HH:mm" value={end} onChange={(v) => onChange && onChange([start, v])} />
+    </div>
+  );
+}
+
+function StrategyFields() {
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  return (
+    <div className="strategy-fields">
+      <div className="strategy-fields__group">
+        <span className="strategy-fields__group-title">{t("form.basicTitle")}</span>
+        <span className="strategy-fields__group-line" />
+      </div>
+
+      <div className="strategy-fields__grid">
+        <Form.Item
+          label={t("form.name")}
+          name="name"
+          rules={[{ required: true }]}
+        >
+          <TextField placeholder={t("form.name.ph")} maxLength={40} inputStyle={{ width: "100%" }} />
+        </Form.Item>
+
+        <Form.Item
+          label={t("form.deviceType")}
+          name="deviceType"
+          rules={[{ required: true }]}
+        >
+          <Select
+            defaultLabel={t("form.deviceType.ph")}
+            options={toOptions(deviceTypeOptions, t)}
+            enableClear
+            selectStyle={{ width: "100%" }}
+          />
+        </Form.Item>
+
+        <Form.Item
+          label={t("form.interval")}
+          name="intervalSec"
+          rules={[{ required: true }]}
+        >
+          <Spinner min={5} max={86400} step={5} style={{ width: "100%" }} />
+        </Form.Item>
+
+        <Form.Item label={t("form.level")} name="level">
+          <Select options={toOptions(levelOptions, t)} selectStyle={{ width: "100%" }} />
+        </Form.Item>
+
+        <Form.Item label={t("form.timeRange")} name="timeRange">
+          <TimeRangePicker />
+        </Form.Item>
+
+        <Form.Item label={t("form.desc2")} name="desc" className="strategy-fields__full">
+          <TextArea rows={3} maxLength={200} placeholder={t("form.desc2.ph")} inputStyle={{ width: "100%" }} />
+        </Form.Item>
+      </div>
+    </div>
+  );
+}
+
+function StrategyAdvanced() {
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  return (
+    <div className="strategy-fields__advanced">
+      <div className="strategy-fields__group">
+        <span className="strategy-fields__group-title">{t("form.advancedTitle")}</span>
+        <span className="strategy-fields__group-line" />
+        <span className="strategy-fields__group-chip">
+          <Icon name="sliders-horizontal" size={12} />
+          {intl.formatMessage({ id: "form.advancedBadge" }, { count: 6 })}
+        </span>
+      </div>
+
+      <div className="strategy-fields__grid">
+        <Form.Item label={t("form.threshold")} name="threshold">
+          <Spinner min={0} max={100} style={{ width: "100%" }} />
+        </Form.Item>
+
+        <Form.Item label={t("form.retry")} name="retry">
+          <Spinner min={1} max={10} style={{ width: "100%" }} />
+        </Form.Item>
+
+        <div className="switch-row switch-row--inset">
+          <div className="switch-row__text">
+            <span className="switch-row__label">{t("form.flap")}</span>
+            <span className="switch-row__desc">{t("form.flapDesc")}</span>
+          </div>
+          <Form.Item name="flap" valuePropName="toggled" updateTrigger="onToggle">
+            <Toggle />
+          </Form.Item>
+        </div>
+
+        <Form.Item label={t("form.silent")} name="silent">
+          <TimeRangePicker />
+        </Form.Item>
+
+        <Form.Item label={t("form.notify")} name="notify" className="strategy-fields__full">
+          <CheckboxGroup
+            data={toOptions(notifyOptions, t)}
+            className="strategy-fields__checks"
+          />
+        </Form.Item>
+
+        <Form.Item label={t("form.memo")} name="memo" className="strategy-fields__full">
+          <TextArea rows={2} maxLength={120} placeholder={t("form.memo.ph")} inputStyle={{ width: "100%" }} />
+        </Form.Item>
+      </div>
+    </div>
+  );
+}
+  Object.assign(__export, { StrategyFields, StrategyAdvanced });
+})();
+
+/* ===== src/views/strategy-form/index.jsx ===== */
+(function () {
+  const { useState, useRef } = React;
+  const { Button, Form, Toggle, DivMessage } = window.EviewReact || {};
+  const { useIntl } = ReactIntl;
+  const { Icon, StrategyAdvanced } = __export;
+  const StrategyFields = __export.StrategyFields;
+// Layer 4: 绛栫暐鍙傛暟琛ㄥ崟鍗＄墖 鈥?寮€鍏虫墦寮€鍚庡睍寮€楂樼骇鍙傛暟闈㈡澘
+function StrategyForm({ onOpenModal }) {
+  const formRef = useRef(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [advancedOn, setAdvancedOn] = useState(false);
+  const [toast, setToast] = useState(null);
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  const showToast = (msg) => setToast({ key: Date.now(), msg });
+
+  const handleSuccess = (values) => {
+    setSubmitting(true);
+    showToast(t("toast.created"));
+    setTimeout(() => setSubmitting(false), 600);
+  };
+
+  return (
+    <section className="panel-card strategy-form">
+      <header className="panel-card__head">
+        <div className="panel-card__titles">
+          <h2 className="panel-card__title">
+            <Icon name="sliders-horizontal" size={16} />
+            {t("form.title")}
+          </h2>
+          <p className="panel-card__desc">{t("form.desc")}</p>
+        </div>
+        <div className="panel-card__actions">
+          <span className="strategy-form__draft">
+            <Icon name="pencil-line" size={12} />
+            {t("form.draftTag")}
+          </span>
+          <Button
+            status="text"
+            leftIcon={<Icon name="external-link" size={14} />}
+            onClick={onOpenModal}
+          >
+            {t("form.openModal")}
+          </Button>
+        </div>
+      </header>
+
+      <Form
+        ref={formRef}
+        layout="vertical"
+        validateErrorType="tip"
+        onSuccess={handleSuccess}
+        onFailed={() => {}}
+        initialValues={{
+          level: "warning",
+          intervalSec: 60,
+          flap: true,
+          notify: ["inbox", "email"],
+        }}
+      >
+        <StrategyFields />
+
+        <div className="switch-row strategy-form__toggle">
+          <div className="switch-row__text">
+            <span className="switch-row__label">{t("form.advanced.toggle")}</span>
+            <span className="switch-row__desc">{t("form.advanced.toggleDesc")}</span>
+          </div>
+          <Toggle toggled={advancedOn} onToggle={(v) => setAdvancedOn(v)} />
+        </div>
+
+        {advancedOn ? <StrategyAdvanced /> : null}
+
+        {advancedOn ? (
+          <p className="strategy-form__hint">
+            <Icon name="info" size={12} />
+            {t("form.hint")}
+          </p>
+        ) : null}
+
+        <div className="strategy-form__footer">
+          <Button
+            leftIcon={<Icon name="undo-2" size={14} />}
+            onClick={() => formRef.current.resetFields()}
+          >
+            {t("form.reset")}
+          </Button>
+          <div className="strategy-form__footer-main">
+            <Button onClick={() => showToast(t("toast.draft"))}>
+              {t("form.saveDraft")}
+            </Button>
+            <Button
+              status="primary"
+              disabled={submitting}
+              leftIcon={<Icon name="save" size={14} />}
+              onClick={() => formRef.current.submit()}
+            >
+              {submitting ? t("form.submit") + "..." : t("form.submit")}
+            </Button>
+          </div>
+        </div>
+      </Form>
+
+      {toast ? (
+        <DivMessage key={toast.key} display type="success">
+          {toast.msg}
+        </DivMessage>
+      ) : null}
+    </section>
+  );
+}
+  Object.assign(__export, { StrategyForm });
+})();
+
+/* ===== src/components/status-tag/index.jsx ===== */
+(function () {
+  const { FormattedMessage } = ReactIntl;
+// Layer 3: 閫氱敤鐘舵€佹爣绛?鈥?绛栫暐鐘舵€?/ 瑙﹀彂绾у埆澶嶇敤鍚屼竴濂楄涔夎壊
+const TONES = ["success", "warning", "error", "info", "neutral"];
+
+function StatusTag({ labelId, fallback, tone = "neutral", dot = true }) {
+  const safeTone = TONES.includes(tone) ? tone : "neutral";
+  return (
+    <span className={`status-tag status-tag--${safeTone}`}>
+      {dot ? <i className="status-tag__dot" aria-hidden="true" /> : null}
+      <FormattedMessage id={labelId} defaultMessage={fallback || labelId} />
+    </span>
+  );
+}
+  Object.assign(__export, { StatusTag });
+})();
+
+/* ===== src/views/strategy-table/index.jsx ===== */
+(function () {
+  const { useMemo, useState } = React;
+  const { Button, TextField, SelectCard, Table, TipBox, DivMessage } = window.EviewReact || {};
+  const { useIntl } = ReactIntl;
+  const { Icon, deviceTypeOptions, levelOptions, levelTone, notifyOptions, statusMeta, strategyRows, displayName, displayOwner, labelOf, useApp } = __export;
+  const StatusTag = __export.StatusTag;
+// Layer 4: 绛栫暐娓呭崟琛ㄦ牸 鈥?Segmented 瑙嗗浘绛涢€?+ 鎼滅储 + 琛岄€夋嫨鎵归噺鎿嶄綔
+function StrategyTable({ onEdit }) {
+  const { lang } = useApp();
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  const [view, setView] = useState("all");
+  const [keyword, setKeyword] = useState("");
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [toast, setToast] = useState(null);
+  const showToast = (msg, type) => setToast({ key: Date.now(), msg, type: type || "success" });
+
+  const dataset = useMemo(() => {
+    const kw = keyword.trim().toLowerCase();
+    return strategyRows.filter((row) => {
+      const matchView =
+        view === "all" ? true : view === "enabled" ? row.status === "enabled" : row.status !== "enabled";
+      const matchKw =
+        !kw ||
+        row.id.toLowerCase().includes(kw) ||
+        row.name.toLowerCase().includes(kw) ||
+        row.nameEn.toLowerCase().includes(kw);
+      return matchView && matchKw;
+    });
+  }, [view, keyword]);
+
+  const enabledCount = strategyRows.filter((r) => r.status === "enabled").length;
+
+  // 閫夐」闆嗙粺涓€璇戜竴娆★紝琛ㄦ牸鍗曞厓鏍煎唴澶嶇敤
+  const optionDict = {};
+  deviceTypeOptions.concat(levelOptions, notifyOptions).forEach((o) => {
+    optionDict[o.labelId] = intl.formatMessage({ id: o.labelId, defaultMessage: o.labelId });
+  });
+
+  const translator = (id) => intl.formatMessage({ id, defaultMessage: id });
+
+  const columns = [
+    {
+      title: t("table.col.id"),
+      key: "id",
+      width: 132,
+      render: (value) => <span className="strategy-table__code">{value}</span>,
+    },
+    {
+      title: t("table.col.name"),
+      key: "name",
+      width: 208,
+      render: (_, row) => (
+        <Button status="text" className="strategy-table__link" onClick={() => onEdit(row)}>
+          {displayName(row, lang)}
+        </Button>
+      ),
+    },
+    {
+      title: t("table.col.deviceType"),
+      key: "deviceType",
+      width: 148,
+      render: (value) => (
+        <span className="strategy-table__type">
+          {labelOf(deviceTypeOptions, value, optionDict)}
+        </span>
+      ),
+    },
+    {
+      title: t("table.col.interval"),
+      key: "intervalSec",
+      width: 110,
+      align: "right",
+      render: (value) => `${value} ${t("table.unit.second")}`,
+    },
+    {
+      title: t("table.col.level"),
+      key: "level",
+      width: 108,
+      render: (value) => <StatusTag labelId={`opt.level.${value}`} tone={levelTone[value]} />,
+    },
+    {
+      title: t("table.col.devices"),
+      key: "devices",
+      width: 100,
+      align: "right",
+    },
+    {
+      title: t("table.col.status"),
+      key: "status",
+      width: 110,
+      render: (value) => (
+        <StatusTag labelId={statusMeta[value].labelId} tone={statusMeta[value].tone} />
+      ),
+    },
+    {
+      title: t("table.col.owner"),
+      key: "owner",
+      width: 104,
+      render: (_, row) => displayOwner(row, lang),
+    },
+    {
+      title: t("table.col.updatedAt"),
+      key: "updatedAt",
+      width: 152,
+      render: (value) => <span className="strategy-table__time">{value}</span>,
+    },
+    {
+      title: t("table.col.actions"),
+      key: "actions",
+      width: 176,
+      align: "center",
+      render: (_, row) => (
+        <div className="strategy-table__ops">
+          <TipBox content={t("table.action.edit")}>
+            <Button
+              leftIcon={<Icon name="pencil" size={13} />}
+              onClick={() => onEdit(row)}
+            />
+          </TipBox>
+          <TipBox content={t("table.action.copy")}>
+            <Button
+              leftIcon={<Icon name="copy" size={13} />}
+              onClick={() => showToast(t("toast.copied"))}
+            />
+          </TipBox>
+          <TipBox content={row.status === "enabled" ? t("table.action.disable") : t("table.action.enable")}>
+            <Button
+              leftIcon={<Icon name={row.status === "enabled" ? "pause" : "play"} size={13} />}
+              onClick={() =>
+                showToast(
+                  row.status === "enabled"
+                    ? intl.formatMessage({ id: "toast.disabled" }, { count: 1 })
+                    : intl.formatMessage({ id: "toast.enabled" }, { count: 1 })
+                )
+              }
+            />
+          </TipBox>
+          <TipBox content={t("table.action.delete")}>
+            <Button
+              status="risk"
+              leftIcon={<Icon name="trash-2" size={13} />}
+              onClick={() => showToast(t("toast.deleted"))}
+            />
+          </TipBox>
+        </div>
+      ),
+    },
+  ];
+
+  const batch = (action) => {
+    if (!selectedRowKeys.length) {
+      showToast(t("toast.selectFirst"), "warn");
+      return;
+    }
+    showToast(
+      intl.formatMessage(
+        { id: action === "enable" ? "toast.enabled" : "toast.disabled" },
+        { count: selectedRowKeys.length }
+      )
+    );
+    setSelectedRowKeys([]);
+  };
+
+  return (
+    <section className="panel-card strategy-table">
+      <header className="panel-card__head">
+        <div className="panel-card__titles">
+          <h2 className="panel-card__title">
+            <Icon name="list-checks" size={16} />
+            {t("table.title")}
+          </h2>
+          <p className="panel-card__desc">
+            {intl.formatMessage(
+              { id: "table.desc" },
+              { total: strategyRows.length, enabled: enabledCount }
+            )}
+          </p>
+        </div>
+        <SelectCard
+          value={view}
+          data={[
+            { text: t("table.filter.all"), value: "all" },
+            { text: t("table.filter.enabled"), value: "enabled" },
+            { text: t("table.filter.disabled"), value: "disabled" },
+          ]}
+          onChange={(v) => setView(v)}
+        />
+      </header>
+
+      <div className="strategy-table__toolbar">
+        <TextField
+          className="strategy-table__search"
+          placeholder={t("table.search.ph")}
+          value={keyword}
+          onChange={(v) => setKeyword(v)}
+        />
+        <span className="strategy-table__count">
+          {selectedRowKeys.length
+            ? intl.formatMessage({ id: "table.selected" }, { count: selectedRowKeys.length })
+            : `${dataset.length} / ${strategyRows.length}`}
+        </span>
+        <div className="strategy-table__toolbar-ops">
+          <Button
+            leftIcon={<Icon name="play" size={14} />}
+            disabled={!selectedRowKeys.length}
+            onClick={() => batch("enable")}
+          >
+            {t("table.batch.enable")}
+          </Button>
+          <Button
+            leftIcon={<Icon name="pause" size={14} />}
+            disabled={!selectedRowKeys.length}
+            onClick={() => batch("disable")}
+          >
+            {t("table.batch.disable")}
+          </Button>
+          <TipBox content={t("table.refresh")}>
+            <Button
+              leftIcon={<Icon name="refresh-cw" size={14} />}
+              onClick={() => showToast(t("table.refresh"))}
+            />
+          </TipBox>
+        </div>
+      </div>
+
+      <Table
+        keyIndex="id"
+        columns={columns}
+        dataset={dataset}
+        scroll={{ x: 1290 }}
+        emptyTableMsg={
+          <div className="strategy-table__empty">
+            <Icon name="file-text" size={24} />
+            <strong>{t("table.empty")}</strong>
+            <span>{t("table.emptyHint")}</span>
+          </div>
+        }
+        enableCheckBox
+        onRowCheck={(keys) => setSelectedRowKeys(keys)}
+        enablePagination
+        pagingProps={{
+          defaultPageSize: 8,
+          showSizeChanger: true,
+          showQuickJumper: true,
+          pageSizeOptions: [8, 16, 24],
+        }}
+        expandable={{
+          expandedRowRender: (row) => (
+            <div className="strategy-table__expand">
+              <div className="strategy-table__expand-item">
+                <span className="strategy-table__expand-k">{t("table.expand.threshold")}</span>
+                <span className="strategy-table__expand-v">{row.threshold}%</span>
+              </div>
+              <div className="strategy-table__expand-item">
+                <span className="strategy-table__expand-k">{t("table.expand.retry")}</span>
+                <span className="strategy-table__expand-v">
+                  {row.retry} {t("form.retry.unit")}
+                </span>
+              </div>
+              <div className="strategy-table__expand-item">
+                <span className="strategy-table__expand-k">{t("table.expand.notify")}</span>
+                <span className="strategy-table__expand-v">
+                  {row.notify
+                    .map((n) => translator(notifyOptions.find((o) => o.value === n).labelId))
+                    .join(" / ")}
+                </span>
+              </div>
+              <div className="strategy-table__expand-item">
+                <span className="strategy-table__expand-k">{t("table.expand.flap")}</span>
+                <span className="strategy-table__expand-v">
+                  {row.flap ? t("table.expand.on") : t("table.expand.off")}
+                </span>
+              </div>
+            </div>
+          ),
+        }}
+      />
+
+      {toast ? (
+        <DivMessage key={toast.key} display type={toast.type}>
+          {toast.msg}
+        </DivMessage>
+      ) : null}
+    </section>
+  );
+}
+  Object.assign(__export, { StrategyTable });
+})();
+
+/* ===== src/views/strategy-modal/index.jsx ===== */
+(function () {
+  const { useEffect, useRef, useState } = React;
+  const { Dialog, Form, Toggle, Button, DivMessage } = window.EviewReact || {};
+  const { useIntl } = ReactIntl;
+  const { Icon } = __export;
+  const StrategyFields = __export.StrategyFields;
+// Layer 4: 绛栫暐寮圭獥琛ㄥ崟 鈥?椤甸潰澶?琛ㄦ牸琛屽潎鍙敜璧凤紝澶嶇敤鍚屼竴濂楀弬鏁板瓧娈?function StrategyModal({ open, record, onClose }) {
+  const formRef = useRef(null);
+  const [enableNow, setEnableNow] = useState(true);
+  const [toast, setToast] = useState(null);
+  const intl = useIntl();
+  const t = (id, fallback) => intl.formatMessage({ id, defaultMessage: fallback || id });
+
+  const showToast = (msg) => setToast({ key: Date.now(), msg });
+
+  useEffect(() => {
+    if (!open) return;
+    if (record) {
+      setEnableNow(record.status === "enabled");
+      formRef.current && formRef.current.setFieldsValue({
+        name: record.name,
+        deviceType: record.deviceType,
+        intervalSec: record.intervalSec,
+        level: record.level,
+      });
+    } else {
+      setEnableNow(true);
+      formRef.current && formRef.current.resetFields();
+    }
+  }, [open, record]);
+
+  const handleSuccess = (values) => {
+    showToast(record ? t("toast.updated") : t("toast.created"));
+    onClose();
+  };
+
+  const handleDraft = () => {
+    showToast(t("toast.draft"));
+    onClose();
+  };
+
+  return (
+    <>
+      <Dialog
+        isOpen={open}
+        onClose={onClose}
+        title={
+          <span className="strategy-modal__title">
+            <Icon name="circle-plus" size={16} />
+            {record ? t("modal.title.edit") : t("modal.title.new")}
+          </span>
+        }
+        buttons={[
+          { text: t("modal.cancel"), onClick: () => onClose() },
+          { text: t("modal.draft"), onClick: handleDraft },
+          { text: t("modal.ok"), status: "primary", onClick: () => formRef.current && formRef.current.submit() },
+        ]}
+      >
+        <p className="strategy-modal__desc">{t("modal.desc")}</p>
+
+        <Form
+          ref={formRef}
+          layout="vertical"
+          validateErrorType="tip"
+          onSuccess={handleSuccess}
+          onFailed={() => {}}
+          initialValues={{ level: "warning", intervalSec: 60, flap: true }}
+        >
+          <StrategyFields advanced={false} />
+
+          <div className="switch-row">
+            <div className="switch-row__text">
+              <span className="switch-row__label">{t("modal.enableNow")}</span>
+              <span className="switch-row__desc">{t("modal.enableNowDesc")}</span>
+            </div>
+            <Toggle toggled={enableNow} onToggle={(v) => setEnableNow(v)} />
+          </div>
+
+          <p className="strategy-modal__status">
+            <Icon name={enableNow ? "circle-check" : "pencil-line"} size={12} />
+            {enableNow ? t("opt.status.enabled") : t("opt.status.draft")}
+          </p>
+        </Form>
+      </Dialog>
+
+      {toast ? (
+        <DivMessage key={toast.key} display type="success">
+          {toast.msg}
+        </DivMessage>
+      ) : null}
+    </>
+  );
+}
+  Object.assign(__export, { StrategyModal });
+})();
+
+/* ===== app.jsx ===== */
+(function () {
+  const { useEffect, useState } = React;
+  const { ConfigProvider } = window.EviewReact || {};
+  const { IntlProvider } = ReactIntl;
+  const { AppProvider, useApp, messages, Icon } = __export;
+  const HeaderBar = __export.HeaderBar;
+  const SideNav = __export.SideNav;
+  const StrategyForm = __export.StrategyForm;
+  const StrategyTable = __export.StrategyTable;
+  const StrategyModal = __export.StrategyModal;
+// App entry 鈥?ICT React page
+// Layering convention (one folder per component, kebab-case + index.jsx/index.css):
+//   Layer 1 global state  鈫?src/context.jsx        (AppProvider: 鐨偆 / 璇█ / 渚ц竟鏍忔姌鍙?
+//   Layer 2 mock data     鈫?src/mock/              (strategy.js: 閫夐」闆?+ 绛栫暐娓呭崟)
+//   Layer 3 reusable      鈫?src/components/        (status-tag / strategy-fields)
+//   Layer 4 views         鈫?src/views/             (header-bar / side-nav / strategy-form / strategy-table / strategy-modal)
+//   Layer 5 layout        鈫?app.jsx                (Provider + 鏍瑰鍣ㄨ閰?
+//
+// Styling: custom styles in component folder's index.css; prefer tokens for visual values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function Shell() {
+  const { lang } = useApp();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editing, setEditing] = useState(null);
+
+  // 璇█鍒囨崲闇€鍚屾 dayjs锛坅ntd 鏂囨鐢?ConfigProvider locale 椹卞姩锛?  useEffect(() => {
+    dayjs.locale(lang === "zh" ? "zh-cn" : "en");
+  }, [lang]);
+
+  const openModal = (record) => {
+    setEditing(record || null);
+    setModalOpen(true);
+  };
+
+  return (
+    <IntlProvider locale={lang} messages={messages[lang]}>
+      <ConfigProvider>
+        <div className="app-root">
+          <HeaderBar />
+
+          <div className="app-body">
+            <SideNav />
+
+            <main className="app-main">
+              <div className="app-page-head">
+                <div className="app-page-head__text">
+                  <span className="app-page-head__crumb">
+                    {lang === "zh" ? "棣栭〉 / 绛栫暐閰嶇疆 / 鍙傛暟閰嶇疆" : "Home / Strategy / Parameters"}
+                  </span>
+                  <h1 className="app-page-head__title">
+                    {lang === "zh" ? "绛栫暐閰嶇疆" : "Strategy Configuration"}
+                  </h1>
+                  <p className="app-page-head__desc">
+                    {lang === "zh"
+                      ? "鎸夎澶囩被鍨嬩笅鍙戦噰闆嗕笌鍛婅绛栫暐锛屼繚瀛樺悗 5 鍒嗛挓鍐呰嚜鍔ㄧ敓鏁堛€?
+                      : "Deliver collection and alarm strategies per device type. Changes take effect within 5 minutes."}
+                  </p>
+                </div>
+                <div className="app-page-head__actions">
+                  <button type="button" className="app-page-head__btn" onClick={() => openModal(null)}>
+                    <Icon name="download" size={14} />
+                    {lang === "zh" ? "瀵煎叆閰嶇疆" : "Import"}
+                  </button>
+                  <button
+                    type="button"
+                    className="app-page-head__btn app-page-head__btn--primary"
+                    onClick={() => openModal(null)}
+                  >
+                    <Icon name="plus" size={14} />
+                    {lang === "zh" ? "鏂板缓绛栫暐" : "New Strategy"}
+                  </button>
+                </div>
+              </div>
+
+              <div className="app-main__stack">
+                <StrategyForm onOpenModal={() => openModal(null)} />
+                <StrategyTable onEdit={openModal} />
+              </div>
+            </main>
+          </div>
+
+          <StrategyModal open={modalOpen} record={editing} onClose={() => setModalOpen(false)} />
+        </div>
+      </ConfigProvider>
+    </IntlProvider>
+  );
+}
+
+function App() {
+  return (
+    <AppProvider>
+      <Shell />
+    </AppProvider>
+  );
+}
+  Object.assign(__export, { App });
+})();
+/* ===== render ===== */
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(__export.App));
+</script>
+</body>
+</html>

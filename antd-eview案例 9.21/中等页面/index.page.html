@@ -1,0 +1,4528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT页面</title>
+<!-- 1. Core Libraries (local UMD) -->
+<script src="./assets/library/react.production.min.js"></script>
+<script src="./assets/library/react-dom.production.min.js"></script>
+<script src="./assets/library/dayjs.min.js"></script>
+<!-- 2. UI Components (eview-react UMD; @nce 未本地安装，仅静态引用，组件从 window.EviewReact 解构) -->
+<script src="./assets/library/eview-react.umd.js"></script>
+<link rel="stylesheet" href="./assets/library/aui3_1.css" />
+<link rel="stylesheet" href="./assets/library/aui3_1_dark.css" />
+<!-- 3. react-intl (offline, exposes ReactIntl) -->
+<script src="./assets/library/react-intl.umd.js"></script>
+<!-- 4. Babel Transpiler (local) -->
+<script src="./assets/library/babel.min.js"></script>
+<!-- 5. 五层 CSS(base → light → theme → dark → ant 组件换肤层)内联 -->
+<style>
+:root {
+  /* ==========================================================================
+    1. 基础色阶 (Primitive Colors)
+    ========================================================================== */
+  /* brand */
+  --brand-05: #E6F2FD;
+  --brand-10: #B8D9F9;
+  --brand-20: #8ABEF3;
+  --brand-30: #5CA2E9;
+  --brand-40: #2E86DE;
+  --brand-50: #0067D1;
+  --brand-60: #004EA8;
+  --brand-70: #003D83;
+  --brand-80: #002E6A;
+  --brand-90: #00214B;
+
+  /* gray */
+  --gray-0: #FFFFFF;
+  --gray-05: #F3F3F3;
+  --gray-10: #DFDFDF;
+  --gray-20: #C9C9C9; 
+  --gray-30: #AEAEAE;
+  --gray-40: #939393;
+  --gray-50: #777777;
+  --gray-60: #595959;
+  --gray-70: #393939;
+  --gray-80: #2A2A2A;
+  --gray-90: #191919;
+  --gray-100: #000000;
+
+  /* red */
+  --red-05: #FEE7E8;
+  --red-10: #FABDC1;
+  --red-20: #F59297;
+  --red-30: #EE696F;
+  --red-40: #E7434A;
+  --red-50: #E02128;
+  --red-60: #C7000B;
+  --red-70: #850F12;
+  --red-80: #59080A;
+  --red-90: #350305;
+
+  /* rose */
+  --rose-05: #FEE5F2;
+  --rose-10: #FCC3E0;
+  --rose-20: #F99AC7;
+  --rose-30: #F470AB;
+  --rose-40: #ED448A;
+  --rose-50: #E61866;
+  --rose-60: #C40054;
+  --rose-70: #811439;
+  --rose-80: #540D24;
+  --rose-90: #330614;
+
+  /* orange */
+  --orange-05: #FEF5E8;
+  --orange-10: #FDE2BD;
+  --orange-20: #FCCE92;
+  --orange-30: #F9B766;
+  --orange-40: #F69E39;
+  --orange-50: #F4840C;
+  --orange-60: #C76207;
+  --orange-70: #954304;
+  --orange-80: #642802;
+  --orange-90: #3D1601;
+
+  /* yellow */
+  --yellow-05: #FEFCE0;
+  --yellow-10: #FEF8B8;
+  --yellow-20: #FEF08A;
+  --yellow-30: #FDE55C;
+  --yellow-40: #FCD72E;
+  --yellow-50: #FCC800;
+  --yellow-60: #D19F00;
+  --yellow-70: #9E7400;
+  --yellow-80: #614500;
+  --yellow-90: #2E1F00;
+
+  /* green */
+  --green-05: #F2FBE9;
+  --green-10: #DFF4CC;
+  --green-20: #C6E9A8;
+  --green-30: #A8DB81;
+  --green-40: #87C859;
+  --green-50: #62B42E;
+  --green-60: #488E20;
+  --green-70: #316614;
+  --green-80: #1B3E0A;
+  --green-90: #0C2004;
+
+  /* mint */
+  --mint-05: #E7FBF2;
+  --mint-10: #BCF2DB;
+  --mint-20: #8FE5C2;
+  --mint-30: #63D5A8;
+  --mint-40: #36C18D;
+  --mint-50: #09AA71;
+  --mint-60: #058358;
+  --mint-70: #036142;
+  --mint-80: #02422E;
+  --mint-90: #00291D;
+
+  /* cyan */
+  --cyan-05: #E8FCFD;
+  --cyan-10: #C9F6F9;
+  --cyan-20: #A4ECF1;
+  --cyan-30: #7DDFE7;
+  --cyan-40: #55CCD9;
+  --cyan-50: #2CB8C9;
+  --cyan-60: #1C94A4;
+  --cyan-70: #127180;
+  --cyan-80: #094C57;
+  --cyan-90: #04282F;
+
+  /* blue */
+  --blue-05: #EEF3FE;
+  --blue-10: #D0D8FD;
+  --blue-20: #B0BFFD;
+  --blue-30: #8CA3FA;
+  --blue-40: #668CF7;
+  --blue-50: #2070F3;
+  --blue-60: #1F55B5;
+  --blue-70: #1B3F86;
+  --blue-80: #112857;
+  --blue-90: #081635;
+
+  /* indigo */
+  --indigo-05: #EEEEFE;
+  --indigo-10: #D5D3FD;
+  --indigo-20: #BFB9FA;
+  --indigo-30: #A89FF9;
+  --indigo-40: #8E81F4;
+  --indigo-50: #715AFB;
+  --indigo-60: #5531EB;
+  --indigo-70: #3F21B5;
+  --indigo-80: #281675;
+  --indigo-90: #160B48;
+
+  /* purple */
+  --purple-05: #F7EDFE;
+  --purple-10: #E8CFFE;
+  --purple-20: #D9B1FD;
+  --purple-30: #CB8EFB;
+  --purple-40: #BF68FA;
+  --purple-50: #B62BF7;
+  --purple-60: #8A21BC;
+  --purple-70: #651B8B;
+  --purple-80: #41125A;
+  --purple-90: #260937;
+
+  /* pink */
+  --pink-05: #FDE6FC;
+  --pink-10: #F9C5F6;
+  --pink-20: #F39DEC;
+  --pink-30: #EB74DF;
+  --pink-40: #E049CE;
+  --pink-50: #D41DBC;
+  --pink-60: #9F1C8D;
+  --pink-70: #751868;
+  --pink-80: #4C0F43;
+  --pink-90: #2E0728;
+
+  /* ==========================================================================
+    2. 尺寸与形状 (Sizes & Shapes)
+    ========================================================================== */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-base: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+    3. 文本排版 (Typography)
+    ========================================================================== */
+  /* Font Family */
+  --font-family: 'HarmonyOS Sans', 'Microsoft YaHei', Arial, 'PingFang SC', 'San Francisco', sans-serif;
+
+  /* Font Size (10px → 72px) */
+  --font-size-sm: 0.625rem;    /* 10px */
+  --font-size-base: 0.75rem;   /* 12px */
+  --font-size-md: 0.875rem;    /* 14px */
+  --font-size-lg: 1rem;        /* 16px */
+  --font-size-xl: 1.125rem;    /* 18px */
+  --font-size-2xl: 1.25rem;    /* 20px */
+  --font-size-3xl: 1.5rem;     /* 24px */
+  --font-size-4xl: 1.75rem;    /* 28px */
+  --font-size-5xl: 2.25rem;    /* 36px */
+  --font-size-6xl: 3rem;       /* 48px */
+  --font-size-7xl: 3.75rem;    /* 60px */
+  --font-size-8xl: 4.5rem;     /* 72px */
+
+  /* Line Height (刻度,1.25 → 1.8) */
+  --line-height-xs: 1.25;
+  --line-height-sm: 1.375;
+  --line-height-base: 1.5;
+  --line-height-md: 1.625;
+  --line-height-lg: 1.8;
+
+  /* Font Weight */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ==========================================================================
+    4. 间距 (Spacing)
+    ========================================================================== */
+  /* 4px 网格 + 半步档,0 → 80px 封顶(更大留白用 px 字面量按需写) */
+  --spacing-0: 0px;
+  --spacing-0-5: 2px;
+  --spacing-1: 4px;
+  --spacing-1-5: 6px;
+  --spacing-2: 8px;
+  --spacing-2-5: 10px;
+  --spacing-3: 12px;
+  --spacing-3-5: 14px;
+  --spacing-4: 16px;
+  --spacing-4-5: 18px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-11: 44px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-15: 60px;
+  --spacing-16: 64px;
+  --spacing-17: 68px;
+  --spacing-18: 72px;
+  --spacing-19: 76px;
+  --spacing-20: 80px;
+}
+
+/* ==========================================================================
+  5. 响应式 rem 基准 (Responsive rem base) — html font-size 随视口宽度变化
+  ========================================================================== */
+@media (max-width: 1366px) {
+  html { font-size: 12px; }
+}
+@media (min-width: 1367px) and (max-width: 1680px) {
+  html { font-size: 14px; }
+}
+@media (min-width: 1681px) and (max-width: 1920px) {
+  html { font-size: 16px; }
+}
+@media (min-width: 1921px) {
+  html { font-size: 20px; }
+}
+
+/* ==========================================================================
+  6. 字体注册 (Font Face)
+  ========================================================================== */
+/* Light */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Regular */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Medium */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+/* ── body base ── */
+body {
+  margin: 0;
+  font: var(--font-body-m);
+  background-color: var(--surface);
+  color: var(--on-surface);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+  7. 基础滚动条样式 (Scrollbar)
+  ========================================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 4px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #dededf;
+}
+
+
+:root {
+  /* 品牌色 */
+  --color-brand: var(--brand-50);
+  --color-brand-hover: var(--brand-40);
+  --color-brand-focus: var(--brand-50);
+  --color-brand-active: var(--brand-60);
+  --color-brand-disabled: var(--brand-20);
+  /* 文本色 */
+  --color-text-primary: var(--gray-90);
+  --color-text-secondary: var(--gray-50);
+  --color-text-placeholder: var(--gray-30);
+  --color-text-disabled: var(--gray-20);
+  --color-text-inverse: var(--gray-0);
+  --color-text-inverse-disabled: var(--gray-0);
+  --color-text-on: var(--brand-50);
+  --color-link: var(--brand-50);
+  --color-link-hover: var(--brand-40);
+  --color-link-active: var(--brand-60);
+  --color-link-visited: var(--indigo-50);
+  --color-link-disabled: var(--brand-20);
+  /* 背景色 */
+  --color-bg-1: var(--gray-05);
+  --color-bg-2: var(--gray-0);
+  --color-bg-3: var(--gray-0);
+  --color-bg-4: var(--gray-0);
+  --color-bg-5: var(--gray-0);
+  --color-bg-6: rgb(from var(--gray-20) r g b / 0.2);
+  --color-bg-mask: rgb(from var(--gray-90) r g b / 0.3);
+  /* 填充色 */
+  --color-fill-disabled: var(--gray-10);
+  --color-hover: rgb(from var(--gray-90) r g b / 0.05);
+  --color-fill-disabled-subtle: rgb(from var(--gray-90) r g b / 0.05);
+  --color-fill: rgb(from var(--gray-90) r g b / 0.05);
+  --color-select: var(--brand-05);
+  --color-fill-subtle: var(--gray-0);
+  /* 图标色 */
+  --color-icon-primary: var(--gray-90);
+  --color-icon-secondary: var(--gray-50);
+  --color-icon-tertiary: var(--gray-40);
+  --color-icon-placeholder: var(--gray-30);
+  --color-icon-disabled: var(--gray-20);
+  --color-icon-inverse: var(--gray-0);
+  --color-icon-hover: var(--brand-40);
+  --color-icon-focus: var(--brand-50);
+  --color-icon-active: var(--brand-60);
+  /* 边框色 */
+  --color-border: var(--gray-20);
+  --color-border-hover: var(--gray-90);
+  --color-border-focus: var(--brand-50);
+  --color-border-active: var(--brand-10);
+  --color-border-disabled: var(--gray-20);
+  --color-border-separator: var(--gray-10);
+  --color-border-separator-sbutle: var(--gray-05);
+  /* 功能色-错误 */
+  --color-error: var(--red-50);
+  --color-error-hover: var(--red-40);
+  --color-error-active: var(--red-60);
+  --color-error-disabled: var(--red-10);
+  --color-error-subtle: var(--red-20);
+  --color-error-subtler: var(--red-05);
+  /* 功能色-告警 */
+  --color-alert: var(--orange-50);
+  --color-alert-hover: var(--orange-40);
+  --color-alert-active: var(--orange-60);
+  --color-alert-disabled: var(--orange-10);
+  --color-alert-subtle: var(--orange-20);
+  --color-alert-subtler: var(--orange-05);
+  /* 功能色-提醒 */
+  --color-warning: var(--yellow-50);
+  --color-warning-hover: var(--yellow-40);
+  --color-warning-active: var(--yellow-60);
+  --color-warning-disabled: var(--yellow-10);
+  --color-warning-bold: var(--yellow-60);
+  --color-warning-subtle: var(--yellow-20);
+  --color-warning-subtler: var(--yellow-05);
+  /* 功能色-成功 */
+  --color-success: var(--mint-50);
+  --color-success-hover: var(--mint-40);
+  --color-success-active: var(--mint-60);
+  --color-success-disabled: var(--mint-10);
+  --color-success-subtle: var(--mint-20);
+  --color-success-subtler: var(--mint-05);
+  /* 功能色-信息 */
+  --color-info-primary: var(--blue-50);
+  --color-info-primary-subtle: var(--blue-30);
+  --color-info-primary-subtler: var(--blue-05);
+  --color-info-secondary: var(--blue-30);
+  --color-info-secondary-hover: var(--blue-20);
+  --color-info-secondary-active: var(--blue-40);
+  --color-info-secondary-disabled: var(--blue-10);
+  --color-info-secondary-subtle: var(--blue-05);
+  /* 功能色-失效 */
+  --color-none: var(--gray-30);
+  --color-none-hover: var(--gray-20);
+  --color-none-active: var(--gray-40);
+  --color-none-disabled: var(--gray-10);
+  --color-none-subtle: var(--gray-05);
+  /* 推荐图表色 */
+  --color-chart-1: var(--blue-50);
+  --color-chart-2: var(--green-50);
+  --color-chart-3: var(--indigo-50);
+  --color-chart-4: var(--cyan-50);
+  --color-chart-5: var(--orange-40);
+  --color-chart-6: var(--brand-30);
+  --color-chart-7: var(--purple-40);
+  --color-chart-8: var(--rose-40);
+  --color-chart-9: var(--indigo-20);
+  --color-chart-10: var(--yellow-60);
+  --color-chart-11: var(--brand-10);
+  --color-chart-12: var(--green-60);
+  --color-chart-13: var(--purple-20);
+  --color-chart-14: var(--cyan-60);
+  --color-chart-15: var(--orange-20);
+  --color-chart-16: var(--rose-60);
+  --color-chart-17: var(--cyan-20);
+  --color-chart-18: var(--blue-60);
+  --color-chart-19: var(--green-20);
+  --color-chart-20: var(--indigo-70);
+  --color-chart-21: var(--rose-10);
+  --color-chart-22: var(--cyan-70);
+  --color-chart-23: var(--yellow-20);
+  --color-chart-24: var(--purple-70);
+  --color-chart-25: var(--mint-20);
+  /* 特殊场景 */
+  --color-scrollbar: var(--gray-10);
+  --color-scrollbar-hover: var(--gray-30);
+  --color-card-gray-disabled: rgb(from var(--gray-30) r g b / 0.05);
+  --color-card-white-disabled: rgb(from var(--gray-0) r g b / 0.5);
+  --color-sidenav-bg: rgb(from var(--gray-05) r g b / 0.5);
+  --color-table-header: rgb(from var(--gray-90) r g b / 0.05);
+  --color-table-zebra: rgb(from var(--gray-40) r g b / 0.05);
+  --color-message-bg-info: var(--blue-05);
+  --color-message-bg-success: var(--mint-05);
+  --color-message-bg-warning: var(--yellow-05);
+  --color-message-bg-alert: var(--orange-05);
+  --color-message-bg-error: var(--red-05);
+  /* ICT3.0 3.0告警色 */
+  --color-alert-urgent: #F43146;
+  --color-alert-primary: #EC6F1A;
+  --color-alert-secondary: #EEBA18;
+  --color-alert-success: #2DA769;
+  --color-alert-running: #5990FD;
+  --color-alert-none: #939393;
+  /* ICT3.1 表格 */
+  --color-table-1: var(--brand-05);
+  --color-table-2: var(--brand-10);
+  --color-table-sticky-1: var(--brand-05);
+  --color-table-sticky-2: var(--brand-10);
+  --color-table-sticky-bg: var(--gray-0);
+  --color-table-sticky-header: var(--gray-05);
+  /* 标签配色 */
+  --color-tag-text-purple: var(--purple-60);
+  --color-tag-bg-purple: rgb(from var(--purple-10) r g b / 0.6);
+  --color-tag-text-cyan: var(--cyan-80);
+  --color-tag-bg-cyan: rgb(from var(--cyan-60) r g b / 0.15);
+  --color-tag-text-rose: var(--rose-60);
+  --color-tag-bg-rose: var(--rose-05);
+  --color-tag-text-green: var(--green-70);
+  --color-tag-bg-green: var(--green-10);
+  --color-tag-text-pink: var(--pink-60);
+  --color-tag-bg-pink: var(--pink-05);
+  --color-tag-text-indigo: var(--indigo-80);
+  --color-tag-bg-indigo: rgb(from var(--indigo-10) r g b / 0.6);
+  --color-tag-text-none: var(--gray-70);
+  --color-tag-bg-none: rgb(from var(--gray-90) r g b / 0.05);
+  --color-tag-text-error: var(--red-60);
+  --color-tag-bg-error: var(--red-05);
+  --color-tag-text-alert: var(--orange-70);
+  --color-tag-bg-alert: var(--orange-10);
+  --color-tag-text-warning: var(--yellow-80);
+  --color-tag-bg-warning: rgb(from var(--yellow-30) r g b / 0.6);
+  --color-tag-text-success: var(--mint-70);
+  --color-tag-bg-success: rgb(from var(--mint-10) r g b / 0.6);
+  --color-tag-text-info: var(--blue-60);
+  --color-tag-bg-info: rgb(from var(--blue-10) r g b / 0.5);
+  /* Border */
+  --border: var(--gray-20);
+  --border-light: var(--gray-10);
+  --border-primary: var(--brand-50);
+  --border-success: var(--mint-20);
+  --border-warning: var(--yellow-20);
+  --border-alert: var(--orange-20);
+  --border-error: var(--red-20);
+  /* Icon */
+  --icon-primary: var(--brand-50);
+  --icon-success: var(--mint-50);
+  --icon-warning: var(--yellow-50);
+  --icon-critical: var(--orange-50);
+  --icon-alert: var(--orange-50);
+  --icon-error: var(--red-50);
+  /* Shadow */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.08);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.16);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+  --shadow-r-sm: 1px 0 6px 0 rgba(0, 0, 0, 0.08);
+  --shadow-t-sm: 0 -1px 6px rgba(0, 0, 0, 0.08);
+  --shadow-l-base: -2px 0 12px 0 rgba(0, 0, 0, 0.08);
+  --shadow-l-md: -2px 0 24px 0 rgba(0, 0, 0, 0.08);
+}
+
+
+:root {
+  --primary: var(--color-brand);
+  --on-primary: var(--color-text-inverse);
+  --primary-hover: var(--color-brand-hover);
+  --primary-active: var(--color-brand-active);
+  --primary-disabled: var(--color-brand-disabled);
+  --primary-container: var(--color-info-primary-subtler);
+  --on-primary-container: var(--color-text-primary);
+  --primary-fixed: var(--color-brand);
+  --primary-fixed-dim: var(--color-brand-active);
+  --on-primary-fixed: var(--color-text-inverse);
+  --on-primary-fixed-variant: var(--color-text-inverse);
+
+  --surface: var(--color-bg-1);
+  --surface-dim: var(--color-bg-2);
+  --surface-bright: var(--color-bg-2);
+  --on-surface: var(--color-text-primary);
+  --surface-variant: var(--color-bg-1);
+  --on-surface-variant: var(--color-text-secondary);
+  --surface-container-lowest: var(--color-bg-1);
+  --surface-container-low: var(--color-bg-2);
+  --surface-container: var(--color-bg-2);
+  --surface-container-high: var(--color-bg-2);
+  --surface-container-highest: var(--color-bg-2);
+
+  --inverse-surface: var(--color-text-primary);
+  --inverse-on-surface: var(--color-text-inverse);
+  --inverse-on-surface-variant: var(--color-text-inverse-disabled);
+  --inverse-primary: var(--color-brand);
+
+  --error: var(--color-error);
+  --on-error: var(--color-text-inverse);
+  --error-container: var(--color-message-bg-error);
+  --on-error-container: var(--color-text-primary);
+
+  --success: var(--color-success);
+  --on-success: var(--color-text-inverse);
+  --success-container: var(--color-message-bg-success);
+  --on-success-container: var(--color-text-primary);
+
+  --critical: var(--color-alert);
+  --on-critical: var(--color-text-inverse);
+  --critical-container: var(--color-message-bg-alert);
+  --on-critical-container: var(--color-text-primary);
+
+  --warning: var(--color-warning);
+  --on-warning: var(--color-text-inverse);
+  --warning-container: var(--color-message-bg-warning);
+  --on-warning-container: var(--color-text-primary);
+
+  --info: var(--color-info-primary);
+  --on-info: var(--color-text-inverse);
+  --info-container: var(--color-message-bg-info);
+  --on-info-container: var(--color-text-primary);
+
+  --text-placeholder: var(--color-text-placeholder);
+  --text-disabled: var(--color-text-disabled);
+  --text-inverse-disabled: var(--color-text-inverse-disabled);
+
+  --interactive-link: var(--color-link);
+  --interactive-link-hover: var(--color-link-hover);
+  --interactive-link-active: var(--color-link-active);
+  --interactive-link-visited: var(--color-link-visited);
+  --interactive-link-disabled: var(--color-link-disabled);
+  
+  --scrim: var(--color-bg-mask);
+  --outline: var(--color-border);
+  --outline-variant: var(--color-border-separator);
+  --divider: var(--color-border-separator);
+  --focus-ring: var(--color-border-focus);
+  --selected: var(--color-border-focus);
+
+  /* ── spacing → --spacing-* ── */
+  --spacing-inline: var(--spacing-2);   /* 8px */
+  --spacing-stack: var(--spacing-3);    /* 12px */
+  --spacing-gutter: var(--spacing-4);  /* 16px */
+  --spacing-inset: var(--spacing-6);    /* 24px */
+  --spacing-section: var(--spacing-4); /* 16px */
+  --spacing-page: var(--spacing-8);      /* 32px */
+
+  /* ── boxShadow ── */
+  --shadow-card: var(--shadow-sm);
+  --shadow-popover: var(--shadow-lg);
+  --shadow-modal: var(--shadow-xl);
+
+  /* ── borderRadius → --radius-* ── */
+  --radius-badge: var(--radius-base);  /* 4px */
+  --radius-action: var(--radius-base); /* 4px */
+  --radius-container: var(--radius-lg); /* 8px */
+  --radius-overlay: var(--radius-lg);  /* 8px */
+
+  /* ── border & outline width ── */
+  --border-width-thin: 1px;    
+  --border-width-thick: 2px;  
+  --outline-width-focus: 1px;
+  --outline-offset-gap: 2px;
+
+  /* ── typography → --font-*（角色化 font 简写：字号/行高 字族；字重另行用 --font-weight-* 组合）── */
+  /* Display 展示文本 — 英雄标语、数据看板大数字 */
+  --font-display-l: var(--font-size-7xl)/var(--line-height-xs) var(--font-family);    /* 60px/1.25 */
+  --font-display-m: var(--font-size-6xl)/var(--line-height-sm) var(--font-family);    /* 48px/1.375 */
+  --font-display-s: var(--font-size-5xl)/var(--line-height-sm) var(--font-family);    /* 36px/1.375 */
+  /* Headline 标题 — 页面区块标题(H3)→卡片标题→表单区标题 */
+  --font-headline-l: var(--font-size-2xl)/var(--line-height-sm) var(--font-family);   /* 20px/1.375 */
+  --font-headline-m: var(--font-size-xl)/var(--line-height-sm) var(--font-family);    /* 18px/1.375 */
+  --font-headline-s: var(--font-size-lg)/var(--line-height-base) var(--font-family);  /* 16px/1.5 */
+  /* Body 正文 — 表单标签/按钮文字→表格正文→辅助说明 */
+  --font-body-l: var(--font-size-lg)/var(--line-height-base) var(--font-family);      /* 16px/1.5 */
+  --font-body-m: var(--font-size-md)/var(--line-height-base) var(--font-family);      /* 14px/1.5 */
+  --font-body-s: var(--font-size-base)/var(--line-height-md) var(--font-family);      /* 12px/1.625 */
+  /* Caption 注释 — 时间戳/表格附加信息→底部免责声明 */
+  --font-caption-m: var(--font-size-base)/var(--line-height-md) var(--font-family);   /* 12px/1.625 */
+  --font-caption-s: var(--font-size-sm)/var(--line-height-lg) var(--font-family);    /* 10px/1.8 */
+}
+
+.dark {
+  /* 品牌色 */
+  --color-brand: var(--brand-50);
+  --color-brand-hover: var(--brand-40);
+  --color-brand-focus: var(--brand-50);
+  --color-brand-active: var(--brand-60);
+  --color-brand-disabled: var(--brand-70);
+  /* 文本色 */
+  --color-text-primary: var(--gray-0);
+  --color-text-secondary: var(--gray-20);
+  --color-text-placeholder: var(--gray-40);
+  --color-text-disabled: var(--gray-40);
+  --color-text-inverse: var(--gray-0);
+  --color-text-inverse-disabled: rgb(from var(--gray-05) r g b / 0.3);
+  --color-text-on: var(--gray-0);
+  --color-link: var(--brand-30);
+  --color-link-hover: var(--brand-20);
+  --color-link-active: var(--brand-40);
+  --color-link-visited: var(--indigo-50);
+  --color-link-disabled: var(--brand-60);
+  /* 背景色 */
+  --color-bg-1: var(--gray-100);
+  --color-bg-2: var(--gray-90);
+  --color-bg-3: var(--gray-80);
+  --color-bg-4: var(--gray-70);
+  --color-bg-5: rgb(from var(--gray-05) r g b / 0.1);
+  --color-bg-6: rgb(from var(--gray-05) r g b / 0.1);
+  --color-bg-mask: rgb(from var(--gray-0) r g b / 0.7);
+  /* 填充色 */
+  --color-fill-disabled: var(--gray-60);
+  --color-hover: rgb(from var(--gray-05) r g b / 0.2);
+  --color-fill-disabled-subtle: rgb(from var(--gray-05) r g b / 0.2);
+  --color-fill: rgb(from var(--gray-05) r g b / 0.2);
+  --color-select: rgb(from var(--brand-50) r g b / 0.4);
+  --color-fill-subtle: rgb(from var(--gray-100) r g b / 0);
+  /* 图标色 */
+  --color-icon-primary: var(--gray-10);
+  --color-icon-secondary: var(--gray-30);
+  --color-icon-tertiary: var(--gray-50);
+  --color-icon-placeholder: var(--gray-40);
+  --color-icon-disabled: var(--gray-40);
+  --color-icon-inverse: var(--gray-0);
+  --color-icon-hover: var(--brand-20);
+  --color-icon-focus: var(--brand-30);
+  --color-icon-active: var(--brand-40);
+  /* 边框色 */
+  --color-border: var(--gray-50);
+  --color-border-hover: var(--gray-05);
+  --color-border-focus: var(--brand-40);
+  --color-border-active: var(--brand-80);
+  --color-border-disabled: var(--gray-60);
+  --color-border-separator: rgb(from var(--gray-05) r g b / 0.15);
+  --color-border-separator-sbutle: rgb(from var(--gray-05) r g b / 0.1);
+  /* 功能色-错误 */
+  --color-error: var(--red-40);
+  --color-error-hover: var(--red-30);
+  --color-error-active: var(--red-50);
+  --color-error-disabled: var(--red-80);
+  --color-error-subtle: var(--red-60);
+  --color-error-subtler: var(--red-80);
+  /* 功能色-告警 */
+  --color-alert: var(--orange-50);
+  --color-alert-hover: var(--orange-40);
+  --color-alert-active: var(--orange-60);
+  --color-alert-disabled: var(--orange-80);
+  --color-alert-subtle: var(--orange-60);
+  --color-alert-subtler: var(--orange-80);
+  /* 功能色-提醒 */
+  --color-warning: var(--yellow-40);
+  --color-warning-hover: var(--yellow-30);
+  --color-warning-active: var(--yellow-50);
+  --color-warning-disabled: var(--yellow-80);
+  --color-warning-bold: var(--yellow-60);
+  --color-warning-subtle: var(--yellow-60);
+  --color-warning-subtler: var(--yellow-80);
+  /* 功能色-成功 */
+  --color-success: var(--mint-60);
+  --color-success-hover: var(--mint-50);
+  --color-success-active: var(--mint-60);
+  --color-success-disabled: var(--mint-80);
+  --color-success-subtle: var(--mint-60);
+  --color-success-subtler: var(--mint-80);
+  /* 功能色-信息 */
+  --color-info-primary: var(--blue-50);
+  --color-info-primary-subtle: var(--blue-60);
+  --color-info-primary-subtler: var(--blue-80);
+  --color-info-secondary: var(--blue-60);
+  --color-info-secondary-hover: var(--blue-40);
+  --color-info-secondary-active: var(--blue-60);
+  --color-info-secondary-disabled: var(--blue-80);
+  --color-info-secondary-subtle: var(--blue-80);
+  /* 功能色-失效 */
+  --color-none: var(--gray-60);
+  --color-none-hover: rgb(from var(--gray-05) r g b / 0.2);
+  --color-none-active: var(--gray-50);
+  --color-none-disabled: var(--gray-90);
+  --color-none-subtle: var(--gray-90);
+  /* 推荐图表色 */
+  --color-chart-1: var(--blue-50);
+  --color-chart-2: var(--green-50);
+  --color-chart-3: var(--indigo-50);
+  --color-chart-4: var(--cyan-50);
+  --color-chart-5: var(--orange-40);
+  --color-chart-6: var(--brand-30);
+  --color-chart-7: var(--purple-60);
+  --color-chart-8: var(--rose-60);
+  --color-chart-9: var(--indigo-60);
+  --color-chart-10: var(--yellow-60);
+  --color-chart-11: var(--brand-60);
+  --color-chart-12: var(--green-60);
+  --color-chart-13: var(--purple-70);
+  --color-chart-14: var(--cyan-60);
+  --color-chart-15: var(--orange-70);
+  --color-chart-16: var(--rose-60);
+  --color-chart-17: var(--cyan-70);
+  --color-chart-18: var(--blue-60);
+  --color-chart-19: var(--green-70);
+  --color-chart-20: var(--indigo-70);
+  --color-chart-21: var(--rose-70);
+  --color-chart-22: var(--cyan-30);
+  --color-chart-23: var(--yellow-70);
+  --color-chart-24: var(--purple-50);
+  --color-chart-25: var(--mint-70);
+  /* 特殊场景 */
+  --color-scrollbar: var(--gray-60);
+  --color-scrollbar-hover: var(--gray-40);
+  --color-card-gray-disabled: rgb(from var(--gray-40) r g b / 0.05);
+  --color-card-white-disabled: rgb(from var(--gray-40) r g b / 0.1);
+  --color-sidenav-bg: var(--gray-70);
+  --color-table-header: rgb(from var(--gray-05) r g b / 0.1);
+  --color-table-zebra: rgb(from var(--gray-50) r g b / 0.15);
+  --color-message-bg-info: rgb(from var(--blue-50) r g b / 0.15);
+  --color-message-bg-success: rgb(from var(--mint-60) r g b / 0.15);
+  --color-message-bg-warning: rgb(from var(--yellow-40) r g b / 0.15);
+  --color-message-bg-alert: rgb(from var(--orange-50) r g b / 0.15);
+  --color-message-bg-error: rgb(from var(--red-40) r g b / 0.15);
+  /* ICT3.0 3.0告警色 */
+  --color-alert-urgent: #F43146;
+  --color-alert-primary: #EC6F1A;
+  --color-alert-secondary: #EEBA18;
+  --color-alert-success: #0D9458;
+  --color-alert-running: #5990FD;
+  --color-alert-none: #818181;
+  /* ICT3.1 表格 */
+  --color-table-1: rgb(from var(--brand-50) r g b / 0.2);
+  --color-table-2: rgb(from var(--brand-50) r g b / 0.4);
+  --color-table-sticky-1: var(--brand-80);
+  --color-table-sticky-2: var(--brand-70);
+  --color-table-sticky-bg: var(--gray-70);
+  --color-table-sticky-header: var(--gray-70);
+  /* 标签配色 */
+  --color-tag-text-purple: var(--purple-30);
+  --color-tag-bg-purple: rgb(from var(--purple-30) r g b / 0.15);
+  --color-tag-text-cyan: var(--cyan-40);
+  --color-tag-bg-cyan: rgb(from var(--cyan-50) r g b / 0.15);
+  --color-tag-text-rose: var(--rose-30);
+  --color-tag-bg-rose: rgb(from var(--rose-30) r g b / 0.15);
+  --color-tag-text-green: var(--green-50);
+  --color-tag-bg-green: rgb(from var(--green-40) r g b / 0.15);
+  --color-tag-text-pink: var(--pink-30);
+  --color-tag-bg-pink: rgb(from var(--pink-30) r g b / 0.15);
+  --color-tag-text-indigo: var(--indigo-30);
+  --color-tag-bg-indigo: rgb(from var(--indigo-30) r g b / 0.15);
+  --color-tag-text-none: var(--gray-30);
+  --color-tag-bg-none: rgb(from var(--gray-30) r g b / 0.15);
+  --color-tag-text-error: var(--red-40);
+  --color-tag-bg-error: rgb(from var(--red-30) r g b / 0.15);
+  --color-tag-text-alert: var(--orange-40);
+  --color-tag-bg-alert: rgb(from var(--orange-50) r g b / 0.15);
+  --color-tag-text-warning: var(--yellow-50);
+  --color-tag-bg-warning: rgb(from var(--yellow-30) r g b / 0.15);
+  --color-tag-text-success: var(--mint-40);
+  --color-tag-bg-success: rgb(from var(--mint-50) r g b / 0.15);
+  --color-tag-text-info: var(--blue-30);
+  --color-tag-bg-info: rgb(from var(--blue-40) r g b / 0.15);
+  /* Border */
+  --border: var(--gray-50);
+  --border-light: rgb(from var(--gray-05) r g b / 0.15);
+  --border-primary: var(--brand-30);
+  --border-success: var(--mint-20);
+  --border-warning: var(--yellow-20);
+  --border-alert: var(--orange-20);
+  --border-error: var(--red-20);
+  /* Icon */
+  --icon-primary: var(--brand-30);
+  --icon-success: var(--mint-30);
+  --icon-warning: var(--yellow-30);
+  --icon-critical: var(--orange-30);
+  --icon-alert: var(--orange-30);
+  --icon-error: var(--red-30);
+  /* Shadow (暗色模式下阴影更强) */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.5);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-r-sm: 1px 0 6px 0 rgba(0, 0, 0, 0.5);
+  --shadow-t-sm: 0 -1px 6px rgba(0, 0, 0, 0.5);
+  --shadow-l-base: -2px 0 12px 0 rgba(0, 0, 0, 0.5);
+  --shadow-l-md: -2px 0 24px 0 rgba(0, 0, 0, 0.5);
+}
+
+
+/* 组件样式汇总：由 npm run build:css 生成，勿手改 */
+
+/* Divider 组件样式（占位，待填充 token 映射） */
+.ant-divider {
+  border-color: var(--gray-10);
+}
+.dark .ant-divider {
+  border-color: var(--color-border-separator);
+}
+
+/* Button 组件样式（token 映射） */
+.ant-btn {
+  font-size: var(--font-size-md);
+  border-radius: var(--radius-base);
+  font-weight: var(--font-weight-normal);
+  min-width: calc(var(--spacing-4) * 5.5);
+  box-shadow: none !important;
+  gap: 4px;
+}
+.ant-btn.ant-btn-color-default {
+  color: var(--color-text-primary);
+}
+.ant-btn.ant-btn-color-default:not(:disabled):hover {
+  color: var(--color-text-primary);
+  border-color: var(--gray-90);
+  background-color: var(--color-bg-2);
+}
+.ant-btn.ant-btn-color-default:not(:disabled):active {
+  color: var(--color-text-primary);
+  border-color: var(--border-primary);
+  background-color: var(--color-bg-2);
+}
+.ant-btn.ant-btn-color-default:disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--gray-10);
+}
+.ant-btn.ant-btn-color-primary {
+  color: var(--gray-0);
+  background-color: var(--color-brand);
+}
+.ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  color: var(--gray-0);
+  background-color: var(--brand-40);
+}
+.ant-btn.ant-btn-color-primary:not(:disabled):active {
+  color: var(--gray-0);
+  background-color: var(--brand-60);
+}
+.ant-btn.ant-btn-color-primary:disabled {
+  color: var(--gray-0);
+  background-color: var(--brand-20);
+  border-color: var(--brand-20);
+}
+.ant-btn.ant-btn-dangerous {
+  color: var(--gray-0);
+  background-color: var(--red-50);
+}
+.ant-btn.ant-btn-dangerous:not(:disabled):hover {
+  color: var(--gray-0);
+  background-color: var(--red-40);
+}
+.ant-btn.ant-btn-dangerous:not(:disabled):active {
+  color: var(--gray-0);
+  background-color: var(--red-60);
+}
+.ant-btn.ant-btn-dangerous:disabled {
+  color: var(--gray-0);
+  background-color: var(--red-10);
+  border-color: var(--red-10);
+}
+.ant-btn.ant-btn-sm {
+  height: 28px;
+}
+.ant-btn.ant-btn-lg {
+  height: 36px;
+  padding: var(--spacing-0) var(--spacing-5);
+  min-width: 96px;
+  font-size: var(--font-size-md);
+}
+.ant-btn.ant-btn-icon-only {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: auto !important;
+  border: none !important;
+  background-color: transparent !important;
+  padding: var(--spacing-0);
+}
+.ant-btn.ant-btn-icon-only .anticon {
+  font-size: var(--font-size-2xl);
+}
+.ant-btn.ant-btn-icon-only.ant-btn-sm {
+  width: 24px !important;
+  height: 24px !important;
+}
+.ant-btn.ant-btn-icon-only.ant-btn-sm .anticon {
+  font-size: var(--font-size-md);
+}
+.ant-btn.ant-btn-icon-only:hover,
+.ant-btn.ant-btn-icon-only:focus {
+  background-color: transparent !important;
+}
+.ant-btn.ant-btn-variant-link {
+  min-width: unset;
+  line-height: 22px;
+  padding: var(--spacing-0);
+  border: none !important;
+  background-color: transparent;
+  color: var(--color-brand);
+}
+.ant-btn.ant-btn-variant-link:not(:disabled):hover {
+  color: var(--brand-40);
+}
+.ant-btn.ant-btn-variant-link:not(:disabled):active {
+  color: var(--brand-60);
+}
+.dark .ant-btn.ant-btn-color-default {
+  border-color: var(--gray-50);
+  background-color: rgb(from var(--gray-100) r g b / 0);
+}
+.dark .ant-btn.ant-btn-color-default:not(:disabled):hover {
+  background-color: rgb(from var(--gray-100) r g b / 0);
+  border-color: var(--gray-05);
+}
+.dark .ant-btn.ant-btn-color-default:not(:disabled):active {
+  color: var(--color-text-primary);
+  border-color: var(--brand-40);
+  background-color: rgb(from var(--gray-100) r g b / 0);
+}
+.dark .ant-btn.ant-btn-color-default:disabled {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-60);
+}
+.dark .ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  background-color: var(--brand-40);
+}
+.dark .ant-btn.ant-btn-color-primary:not(:disabled):active {
+  background-color: var(--brand-60);
+}
+.dark .ant-btn.ant-btn-color-primary:disabled {
+  color: rgb(from var(--gray-05) r g b / 0.3);
+  background-color: var(--brand-70);
+  border-color: var(--brand-70);
+}
+.dark .ant-btn.ant-btn-color-dangerous {
+  background-color: var(--red-40);
+}
+.dark .ant-btn.ant-btn-color-dangerous:not(:disabled):hover {
+  background-color: var(--red-30);
+}
+.dark .ant-btn.ant-btn-color-dangerous:not(:disabled):active {
+  background-color: var(--red-50);
+}
+.dark .ant-btn.ant-btn-color-dangerous:disabled {
+  color: var(--gray-0);
+  background-color: var(--red-80);
+  border-color: var(--red-80);
+}
+.dark .ant-btn.ant-btn-variant-link {
+  color: var(--brand-30);
+}
+.dark .ant-btn.ant-btn-variant-link:not(:disabled):hover {
+  color: var(--brand-20);
+}
+.dark .ant-btn.ant-btn-variant-link:not(:disabled):active {
+  color: var(--brand-40);
+}
+.dark .ant-btn.ant-btn-icon-only {
+  color: var(--gray-10);
+}
+.dark .ant-btn.ant-btn-icon-only:hover .anticon {
+  color: var(--brand-20);
+}
+.dark .ant-btn.ant-btn-icon-only:active .anticon {
+  color: var(--brand-40);
+}
+
+/* Input 组件样式（占位，待填充 token 映射） */
+input.ant-input {
+  padding: 0 var(--spacing-3);
+  height: 32px;
+  font-size: var(--font-size-md);
+  line-height: 24px;
+  border-radius: var(--radius-base);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+  background-color: var(--color-fill-subtle);
+  caret-color: var(--brand-50);
+}
+input.ant-input::placeholder {
+  color: var(--color-text-placeholder);
+}
+input.ant-input.ant-input-lg {
+  height: 40px;
+  padding: 0 var(--spacing-3);
+  font-size: var(--font-size-md);
+  border-radius: var(--radius-base);
+}
+input.ant-input.ant-input-sm {
+  padding: 0 var(--spacing-3);
+  height: 28px;
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-base);
+}
+.ant-input-affix-wrapper {
+  padding: 0 var(--spacing-3);
+  height: 32px;
+}
+.ant-input-affix-wrapper .ant-input {
+  height: 100%;
+}
+.ant-input-affix-wrapper .ant-input[type="password"] {
+  letter-spacing: var(--spacing-1);
+  color: var(--color-icon-primary);
+}
+.ant-input-affix-wrapper > input.ant-input {
+  color: var(--color-text-primary);
+}
+.ant-input-affix-wrapper .anticon {
+  color: var(--color-icon-secondary);
+}
+.ant-input-affix-wrapper .ant-input-suffix {
+  color: var(--color-text-primary);
+}
+.ant-input-outlined {
+  border-color: var(--color-border);
+  background-color: var(--color-fill-subtle);
+}
+.ant-input-outlined.ant-input-disabled {
+  border-color: var(--color-border-disabled);
+  background-color: var(--color-fill-disabled-subtle);
+  color: var(--color-text-disabled);
+}
+.ant-input-outlined.ant-input-disabled:hover {
+  border-color: var(--color-border-disabled);
+}
+.ant-input-outlined:hover {
+  border-color: var(--color-border-hover);
+}
+.ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
+  border-color: var(--color-error);
+  background-color: var(--color-fill-subtle);
+}
+.ant-input-outlined:focus,
+.ant-input-outlined:focus-within {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px var(--color-brand-disabled);
+  background-color: var(--color-fill-subtle);
+}
+/* textarea style start*/
+.ant-input-textarea-affix-wrapper,
+.ant-flex-align-center {
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+  padding: 0px !important;
+  height: auto;
+}
+.ant-input-textarea-affix-wrapper textarea,
+.ant-flex-align-center textarea {
+  color: var(--color-text-primary);
+  caret-color: var(--brand-50);
+  padding: 6px 16px;
+}
+.ant-input-textarea-affix-wrapper .ant-input-suffix,
+.ant-flex-align-center .ant-input-suffix {
+  font-size: var(--font-size-base);
+}
+.ant-input-textarea-affix-wrapper .ant-input-suffix .ant-input-data-count,
+.ant-flex-align-center .ant-input-suffix .ant-input-data-count {
+  color: var(--color-text-secondary);
+}
+.ant-input-textarea-affix-wrapper.ant-input-affix-wrapper-focused,
+.ant-flex-align-center.ant-input-affix-wrapper-focused {
+  border-color: var(--brand-50);
+}
+.dark .ant-input-textarea-affix-wrapper,
+.dark .ant-flex-align-center {
+  border-color: var(--color-border);
+}
+.dark .ant-input-textarea-affix-wrapper.ant-input-affix-wrapper-focused,
+.dark .ant-flex-align-center.ant-input-affix-wrapper-focused {
+  border-color: var(--brand-40);
+}
+/* textarea style end*/
+
+/* InputNumber 组件样式（占位，待填充 token 映射） */
+.ant-input-number {
+  height: 32px;
+  border-color: var(--gray-20);
+  box-shadow: none;
+}
+.ant-input-number .ant-input-number-action-down {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.ant-input-number .ant-input-number-action-up {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.ant-input-number .ant-input-number-input {
+  font-size: 14px;
+}
+.ant-input-number-outlined:hover {
+  border-color: var(--gray-100);
+}
+.ant-input-number-outlined:active {
+  border-color: var(--gray-10);
+}
+.ant-input-number-inlined:active {
+  border-color: var(--gray-50);
+}
+.ant-input-number-focused {
+  border: 1px solid var(--gray-50);
+}
+.dark {
+  /* InputNumber 组件样式（占位，待填充 token 映射） */
+}
+.dark .ant-input-number {
+  color: var(--gray-0);
+  height: 32px;
+  border-color: var(--gray-20);
+  box-shadow: none;
+}
+.dark .ant-input-number .ant-input-number-action-down {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.dark .ant-input-number .ant-input-number-action-up {
+  padding-left: var(--spacing-2);
+  padding-right: var(--spacing-2);
+}
+.dark .ant-input-number .ant-input-number-input {
+  font-size: 14px;
+}
+.dark .ant-input-number-outlined:hover {
+  border-color: var(--gray-0);
+}
+.dark .ant-input-number-outlined:active {
+  border-color: var(--brand-40);
+}
+.dark .ant-input-number-inlined:active {
+  border-color: var(--brand-40);
+}
+.dark .ant-input-number-focused {
+  border: 1px solid var(--brand-40) !important;
+}
+
+.ant-select-sm {
+  --ant-select-height: 28px;
+}
+.ant-select {
+  --ant-select-border-radius: var(--radius-base);
+  background: var(--color-bg-4);
+  color: var(--color-text-primary);
+}
+.ant-select.ant-select-outlined {
+  --ant-select-border-color: var(--color-border);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled):hover {
+  --ant-select-border-color: var(--color-border-hover);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled):hover .ant-select-suffix {
+  color: var(--color-icon-primary);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled).ant-select-focused {
+  --ant-select-border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px var(--color-border-active);
+}
+.ant-select.ant-select-outlined.ant-select-disabled {
+  --ant-select-border-color: var(--color-border-disabled);
+}
+.ant-select:not(.ant-select-disabled) .ant-select-placeholder {
+  color: var(--color-text-placeholder);
+}
+.ant-select:not(.ant-select-disabled) .ant-select-suffix {
+  color: var(--color-icon-secondary);
+}
+.ant-select:not(.ant-select-disabled):not(.ant-select-multiple).ant-select-focused.ant-select-open .ant-select-suffix {
+  transform: rotate(180deg);
+}
+.ant-select.ant-select-disabled {
+  --ant-select-color: var(--color-text-disabled);
+  color: var(--color-text-disabled);
+  background: var(--color-hover);
+}
+.ant-select.ant-select-disabled.ant-select-multiple {
+  background: var(--color-fill-disabled-subtle);
+}
+.ant-select.ant-select-disabled.ant-select-multiple .ant-select-content .ant-select-selection-item {
+  background: var(--color-fill-disabled-subtle);
+}
+.ant-select.ant-select-disabled .ant-select-placeholder {
+  color: var(--color-text-disabled);
+}
+.ant-select.ant-select-disabled .ant-select-suffix {
+  color: var(--color-icon-disabled);
+}
+.ant-select .ant-select-suffix svg {
+  width: 10px;
+  height: 10px;
+}
+.ant-select-multiple .ant-select-content .ant-select-selection-item-remove {
+  color: var(--color-icon-primary);
+}
+.ant-select-dropdown {
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-4);
+}
+.ant-select-dropdown .ant-select-item-option-disabled {
+  color: var(--color-text-disabled);
+}
+.ant-select-dropdown .ant-select-item {
+  padding: 5px var(--spacing-2);
+}
+.ant-select-dropdown .ant-select-item:not(.ant-select-item-option-disabled) {
+  color: var(--color-text-primary);
+}
+.ant-select-dropdown .ant-select-item-option-selected.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-select);
+  color: var(--color-text-on);
+}
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-select);
+  color: var(--color-text-on);
+}
+.ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-hover);
+}
+.ant-select-single:not(.ant-select-customize).ant-select-open .ant-select-content-has-value {
+  opacity: unset;
+}
+.ant-select-dropdown-list-holder-inner {
+  gap: var(--spacing-1);
+}
+.ant-select-multiple .ant-select-content .ant-select-selection-item {
+  margin-inline-end: var(--spacing-2);
+  background: var(--color-hover);
+}
+
+/* TimePicker 组件样式（占位，待填充 token 映射） */
+.ant-picker.ant-picker-css-var {
+  --ant-color-border: var(--gray-20);
+  --ant-border-radius: 4px;
+  --ant-date-picker-padding-block-sm: 1px;
+  --ant-date-picker-padding-inline: 12px;
+  --ant-date-picker-padding-inline-sm: 12px;
+  --ant-date-picker-padding-inline-lg: 12px;
+  --ant-color-text-quaternary: var(--gray-50);
+  --ant-date-picker-active-border-color: var(--brand-50);
+  --ant-date-picker-active-shadow: 0 0 0 1px var(--brand-10);
+  --ant-date-picker-hover-border-color: var(--gray-0);
+  color: var(--color-text-primary);
+}
+.ant-picker.ant-picker-css-var.ant-picker-focused {
+  --ant-color-text-quaternary: var(--gray-90);
+}
+.ant-picker.ant-picker-css-var.ant-picker-disabled {
+  color: var(--color-text-disabled) !important;
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+  border-color: var(--gray-20);
+}
+.ant-picker.ant-picker-css-var.ant-picker-disabled .ant-picker-input > input {
+  color: var(--color-text-disabled);
+}
+.ant-picker.ant-picker-css-var.ant-picker-disabled .ant-picker-suffix {
+  color: var(--color-text-disabled) !important;
+}
+.ant-picker.ant-picker-css-var .ant-picker-input > input {
+  z-index: 1;
+  color: var(--color-text-primary);
+}
+.ant-picker.ant-picker-css-var .ant-picker-input > input::placeholder {
+  color: var(--color-text-placeholder);
+}
+.ant-picker-range .ant-picker-active-bar {
+  bottom: 4px;
+  height: 22px;
+  background: var(--brand-05);
+  border-radius: 2px;
+}
+.ant-picker-range .ant-picker-input > input {
+  padding-left: 4px;
+}
+.ant-picker-range .ant-picker-range-separator {
+  padding: 0px;
+}
+.ant-picker-range .ant-picker-separator {
+  text-align: center;
+}
+.ant-picker-range .ant-picker-separator span {
+  display: none;
+}
+.ant-picker-range .ant-picker-separator::before {
+  content: '-';
+  color: var(--color-text-primary);
+}
+.dark .ant-picker.ant-picker-css-var {
+  --ant-color-border: var(--gray-50);
+  --ant-color-text-quaternary: var(--gray-30);
+  --ant-date-picker-active-border-color: var(--brand-40);
+  --ant-date-picker-active-shadow: 0 0 0 1px var(--brand-80);
+  --ant-date-picker-hover-border-color: var(--brand-40);
+  color: var(--color-text-primary);
+}
+.dark .ant-picker.ant-picker-css-var.ant-picker-focused {
+  --ant-color-text-quaternary: var(--gray-10);
+}
+.dark .ant-picker.ant-picker-css-var.ant-picker-disabled {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-20);
+}
+.dark .ant-picker-range .ant-picker-active-bar {
+  background: rgb(from var(--brand-50) r g b / 0.4);
+}
+
+/* Radio 组件样式（占位，待填充 token 映射） */
+.ant-radio-wrapper:hover .ant-radio {
+  border-color: var(--brand-40);
+}
+.ant-radio-wrapper:hover .ant-radio.ant-radio-checked {
+  background-color: var(--brand-40);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio-label {
+  color: var(--color-text-disabled);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+  border-color: var(--color-border-disabled);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked {
+  background-color: var(--brand-20);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked::after {
+  background-color: var(--gray-0);
+}
+.ant-radio-wrapper .ant-radio {
+  background-color: var(--gray-0);
+  border-color: var(--gray-40);
+}
+.ant-radio-wrapper .ant-radio.ant-radio-checked {
+  background-color: var(--brand-50);
+  border-color: transparent;
+}
+.ant-radio-wrapper .ant-radio-label {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.dark .ant-radio {
+  background-color: var(--gray-100);
+  border-color: var(--gray-50);
+}
+.dark .ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-50);
+}
+.dark .ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked {
+  background-color: var(--brand-70);
+  border-color: transparent;
+}
+.dark .ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-checked::after {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+
+/* Checkbox 组件样式（token 映射，转换自根目录 checkbox.css） */
+.ant-checkbox-wrapper {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked):hover .ant-checkbox {
+  border-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox-disabled.ant-checkbox {
+  background-color: rgb(from var(--gray-100) r g b / 0.05);
+  border-color: var(--color-border-disabled) !important;
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox-disabled + .ant-checkbox-label {
+  color: var(--color-text-disabled);
+}
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox {
+  border-color: var(--gray-40);
+  background-color: var(--gray-0);
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked:hover .ant-checkbox {
+  background-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled.ant-checkbox {
+  background-color: var(--brand-20) !important;
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled + .ant-checkbox-label {
+  color: var(--color-text-disabled);
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled:after {
+  border-color: var(--gray-0);
+}
+.ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox {
+  background-color: var(--brand-50);
+  border-color: transparent ;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate {
+  background-color: var(--brand-50) !important;
+  border-color: transparent !important;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate:hover {
+  background-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate::after {
+  height: 2px;
+  background-color: var(--gray-0);
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate.ant-checkbox-disabled {
+  background-color: var(--brand-20) !important;
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper:not(.ant-checkbox-wrapper-checked) .ant-checkbox {
+  border-color: var(--gray-50);
+  background-color: var(--gray-100);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-disabled.ant-checkbox {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-60) !important;
+}
+.dark .ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled.ant-checkbox {
+  background-color: var(--brand-70) !important;
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper.ant-checkbox-wrapper-checked .ant-checkbox-disabled:after {
+  border-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate {
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate::after {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate.ant-checkbox-disabled {
+  background-color: var(--brand-70) !important;
+}
+
+/* Switch 组件样式（占位，待填充 token 映射） */
+.ant-switch {
+  height: 20px;
+  line-height: 20px;
+  min-width: 38px;
+  background-color: var(--gray-30);
+}
+.ant-switch .ant-switch-handle {
+  width: 16px;
+  height: 16px;
+}
+.ant-switch.ant-switch-checked {
+  background-color: var(--brand-50);
+}
+.ant-switch.ant-switch-checked .ant-switch-handle {
+  inset-inline-start: calc(100% - 18px);
+}
+.ant-switch.ant-switch-disabled {
+  background-color: var(--gray-10);
+}
+.ant-switch.ant-switch-disabled.ant-switch-checked {
+  background-color: var(--brand-20);
+}
+.ant-switch .ant-switch-inner .ant-switch-inner-unchecked {
+  margin-top: -20px;
+}
+.ant-switch .ant-switch-inner .ant-switch-inner-checked,
+.ant-switch .ant-switch-inner .ant-switch-inner-unchecked {
+  min-height: 20px;
+}
+.dark .ant-switch {
+  background-color: var(--gray-60);
+}
+.dark .ant-switch.ant-switch-checked {
+  background-color: var(--brand-50);
+}
+.dark .ant-switch.ant-switch-disabled {
+  background-color: var(--gray-60);
+}
+.dark .ant-switch.ant-switch-disabled.ant-switch-checked {
+  background-color: var(--brand-70);
+}
+.dark .ant-switch.ant-switch-disabled .ant-switch-handle::before {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+
+/* Slider 组件样式（占位，待填充 token 映射） */
+.ant-slider .ant-slider-rail {
+  background-color: var(--gray-10);
+}
+.ant-slider .ant-slider-track {
+  background-color: var(--brand-50) !important;
+}
+.ant-slider .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.ant-slider .ant-slider-mark .ant-slider-mark-text {
+  font-size: 14px;
+  color: var(--gray-100);
+}
+.ant-slider:hover .ant-slider-rail {
+  background-color: var(--gray-10);
+}
+.ant-slider:hover .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.ant-slider:hover .ant-slider-handle:not(.ant-slider-handle-disabled)::after {
+  box-shadow: 0 0 0 2px var(--brand-50);
+}
+.dark .ant-slider .ant-slider-rail {
+  background-color: color-mix(in srgb, var(--gray-05) 15%, transparent);
+}
+.dark .ant-slider .ant-slider-track {
+  background-color: var(--brand-50) !important;
+}
+.dark .ant-slider .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  background-color: var(--gray-0);
+  box-shadow: 0 0 0 2px var(--brand-70);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dark .ant-slider .ant-slider-mark .ant-slider-mark-text {
+  font-size: 14px;
+  color: var(--gray-0);
+}
+.dark .ant-slider:hover .ant-slider-rail {
+  background-color: color-mix(in srgb, var(--gray-05) 15%, transparent);
+}
+.dark .ant-slider:hover .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dark .ant-slider:hover .ant-slider-handle:not(.ant-slider-handle-disabled)::after {
+  box-shadow: 0 0 0 2px var(--brand-50);
+}
+
+/* Rate 组件样式（占位，待填充 token 映射） */
+.ant-rate .ant-rate-star {
+  margin-inline-end: var(--spacing-2);
+}
+.ant-rate .anticon svg {
+  color: var(--yellow-50);
+}
+
+/* Table 组件样式（占位，待填充 token 映射） */
+.ant-table .ant-table-content {
+  border-start-start-radius: 0 !important;
+  border-start-end-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-column-sorters {
+  justify-content: flex-start;
+}
+.ant-table .ant-table-content .ant-table-column-sorters .ant-table-column-title {
+  flex: none;
+}
+.ant-table .ant-table-content .ant-table-column-sorters .ant-table-column-sorter {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  margin-inline-start: 8px;
+}
+.ant-table .ant-table-content .ant-table-filter-column {
+  justify-content: flex-start;
+}
+.ant-table .ant-table-content .ant-table-filter-column .ant-table-column-title {
+  flex: none;
+}
+.ant-table .ant-table-content .ant-table-filter-column .ant-table-filter-trigger {
+  margin-inline-start: 8px;
+  margin-inline-end: 0;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px;
+  color: var(--color-text-primary);
+  background-color: var(--gray-05);
+  border-top: none !important;
+  border-bottom: none !important;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th::before {
+  background-color: var(--gray-20) !important;
+  height: 1em !important;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th:first-child {
+  border-start-start-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th:last-child {
+  border-start-end-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-tbody > tr > td {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 8px;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--gray-05);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-row > .ant-table-cell-row-hover {
+  background-color: var(--brand-10);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-row.ant-table-row-selected > .ant-table-cell {
+  background-color: var(--brand-05);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-expanded-row .ant-table-cell {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-column-sort {
+  background: initial;
+}
+.dark .ant-table .ant-table-content .ant-table-thead > tr > th {
+  color: var(--color-text-primary);
+  background-color: var(--gray-70);
+}
+.dark .ant-table .ant-table-content .ant-table-thead > tr > th::before {
+  background-color: var(--gray-50) !important;
+}
+.dark .ant-table .ant-table-content .ant-table-tbody > tr > td {
+  color: var(--color-text-primary);
+  border-bottom: 1px solid rgb(from var(--gray-05) r g b / 0.1);
+  background-color: transparent;
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-row > .ant-table-cell-row-hover {
+  background-color: rgb(from var(--brand-50) r g b / 0.4);
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-row.ant-table-row-selected > .ant-table-cell {
+  background-color: rgb(from var(--brand-50) r g b / 0.2);
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-expanded-row .ant-table-cell {
+  background-color: rgb(from var(--gray-05) r g b / 0.1);
+}
+
+/* Tabs 组件样式（占位，待填充 token 映射） */
+.ant-tabs .ant-tabs-tab {
+  color: var(--color-text-secondary);
+}
+.ant-tabs .ant-tabs-tab:not(.ant-tabs-tab-disabled):hover {
+  color: var(--color-text-primary);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--color-link);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-remove {
+  color: var(--color-link);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-disabled {
+  color: var(--color-text-disabled);
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
+  background-color: var(--color-card-gray-disabled);
+  border-color: transparent;
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab.ant-tabs-tab-active {
+  border-color: var(--color-border-separator);
+  border-bottom-color: var(--color-card-gray-disabled);
+  background-color: var(--color-bg-3);
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-nav-add {
+  border: none;
+}
+.ant-tabs .ant-tabs-tab-remove {
+  padding: 0;
+  font-size: var(--font-size-md);
+}
+.ant-tabs-top > .ant-tabs-nav::before {
+  border-color: var(--color-border-separator);
+}
+
+/* Collapse 组件样式（占位，待填充 token 映射） */
+.ant-collapse .ant-collapse-item {
+  border-color: var(--color-border-separator);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-header {
+  color: var(--color-text-primary);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-header .ant-collapse-expand-icon {
+  margin-inline-end: var(--spacing-1);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-panel {
+  border-color: var(--color-border-separator);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-panel .ant-collapse-body {
+  padding: var(--spacing-3) var(--spacing-4) var(--spacing-4) var(--spacing-8);
+}
+.dark .ant-collapse .ant-collapse-item {
+  border-color: var(--color-text-inverse-disabled);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-header {
+  color: var(--color-text-primary);
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-header .ant-collapse-expand-icon {
+  color: var(--gray-10);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-panel {
+  border-color: var(--color-text-inverse-disabled);
+}
+
+/* Tag 组件样式（占位，待填充 token 映射） */
+.ant-tag {
+  border-color: transparent;
+  padding: 0 var(--spacing-2);
+  line-height: 24px;
+  background-color: var(--color-tag-bg-none);
+  color: var(--color-text-primary);
+}
+.ant-tag.ant-tag-processing:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-info);
+  color: var(--color-tag-text-info);
+}
+.ant-tag.ant-tag-error:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-error);
+  color: var(--color-tag-text-error);
+}
+.ant-tag.ant-tag-warning:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-warning);
+  color: var(--color-tag-text-warning);
+}
+.ant-tag.ant-tag-gold:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-alert);
+  color: var(--color-tag-text-alert);
+}
+.ant-tag.ant-tag-success:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-success);
+  color: var(--color-tag-text-success);
+}
+.ant-tag.ant-tag-green:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-green);
+  color: var(--color-tag-text-green);
+}
+.ant-tag.ant-tag-magenta:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-rose);
+  color: var(--color-tag-text-rose);
+}
+.ant-tag.ant-tag-pink:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-pink);
+  color: var(--color-tag-text-pink);
+}
+.ant-tag.ant-tag-purple:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-purple);
+  color: var(--color-tag-text-purple);
+}
+.ant-tag.ant-tag-geekblue:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-indigo);
+  color: var(--color-tag-text-indigo);
+}
+.ant-tag.ant-tag-cyan:not(.ant-tag-disabled).ant-tag-filled {
+  background-color: var(--color-tag-bg-cyan);
+  color: var(--color-tag-text-cyan);
+}
+.ant-tag.ant-tag-disabled {
+  background-color: var(--color-tag-bg-none);
+  color: var(--color-text-disabled);
+}
+.ant-tag.ant-tag-disabled .anticon {
+  color: var(--color-text-disabled);
+}
+.ant-tag > .anticon + span,
+.ant-tag > span + .anticon {
+  margin-left: var(--spacing-1);
+}
+.ant-tag .anticon {
+  color: var(--color-text-primary);
+}
+
+/* Badge 组件样式（占位，待填充 token 映射） */
+.ant-badge .ant-badge-count {
+  min-width: 16px;
+  border: none;
+  padding: var(--spacing-0-5) var(--spacing-1);
+  font-size: var(--font-size-base);
+  line-height: 12px;
+  height: 18px;
+  border: 1px solid var(--gray-0);
+  box-shadow: 0 0 0 1px var(--gray-0);
+  background-color: var(--color-error);
+  color: var(--color-text-inverse);
+}
+.ant-badge .ant-badge-dot {
+  box-shadow: 0 0 0 1px var(--gray-0);
+  border: 1px solid var(--gray-0);
+  background-color: var(--color-error);
+}
+.dark .ant-badge .ant-badge-count {
+  border: 1px solid rgb(from var(--gray-0) r g b / 0);
+  box-shadow: 0 0 0 1px rgb(from var(--gray-0) r g b / 0);
+}
+.dark .ant-badge .ant-badge-dot {
+  box-shadow: 0 0 0 1px rgb(from var(--gray-0) r g b / 0);
+  border: 1px solid rgb(from var(--gray-0) r g b / 0);
+}
+
+/* Progress 组件样式（占位，待填充 token 映射） */
+.ant-progress .ant-progress-indicator {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+}
+.ant-progress.ant-progress-line .ant-progress-rail {
+  background-color: var(--color-border-separator);
+}
+.ant-progress.ant-progress-line .ant-progress-track {
+  background-color: var(--color-brand);
+}
+.ant-progress.ant-progress-line.ant-progress-status-success .ant-progress-track {
+  background-color: var(--mint-50);
+}
+.dark .ant-progress.ant-progress-line.ant-progress-status-success .ant-progress-track {
+  background-color: var(--mint-40);
+}
+
+/* Steps 组件样式（占位，待填充 token 映射） */
+.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item-wrapper {
+  column-gap: var(--spacing-3);
+}
+.ant-steps-small.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item-wrapper {
+  column-gap: var(--spacing-2);
+}
+.ant-steps-title-vertical > .ant-steps-item .ant-steps-item-wrapper {
+  row-gap: var(--spacing-2);
+}
+.ant-steps-title-horizontal.ant-steps-vertical .ant-steps-item-wrapper {
+  column-gap: var(--spacing-3);
+}
+.ant-steps-small.ant-steps-title-horizontal.ant-steps-vertical .ant-steps-item-wrapper {
+  column-gap: var(--spacing-2);
+}
+.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item:not(:first-child) {
+  margin-inline-start: var(--spacing-3);
+}
+.ant-steps-small.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item:not(:first-child) {
+  margin-inline-start: var(--spacing-2);
+}
+.ant-steps-title-horizontal.ant-steps-horizontal .ant-steps-item-rail {
+  margin-inline-start: var(--spacing-3);
+}
+.ant-steps-title-vertical > .ant-steps-item .ant-steps-item-rail {
+  width: calc(100% - var(--ant-cmp-steps-icon-size) - var(--spacing-2) * 2);
+  inset-inline-start: calc(50% + var(--ant-cmp-steps-icon-size) / 2 + var(--spacing-2));
+}
+.ant-steps-small.ant-steps-title-vertical > .ant-steps-item .ant-steps-item-rail {
+  width: calc(100% - var(--ant-cmp-steps-icon-size) - var(--spacing-2) * 2);
+  inset-inline-start: calc(50% + var(--ant-cmp-steps-icon-size) / 2 + var(--spacing-2));
+  margin-inline-start: 0;
+}
+.ant-steps .ant-steps-item-rail {
+  border-color: var(--color-border-separator);
+}
+.ant-steps .ant-steps-item-rail-process {
+  border-color: var(--brand-50);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item:not(.ant-steps-item-custom) .ant-steps-item-icon,
+.ant-steps:not(.ant-steps-dot) .ant-steps-item:not(.ant-steps-item-wait) .ant-steps-item-icon {
+  border-color: var(--color-border-focus);
+  background-color: var(--color-info-primary-subtler);
+  color: var(--color-border-focus);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item.ant-steps-item-wait .ant-steps-item-icon {
+  color: var(--color-text-placeholder);
+  background-color: var(--color-fill);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item-wait.ant-steps-item:not(.ant-steps-item-custom) .ant-steps-item-icon {
+  border-color: var(--color-border);
+}
+.ant-steps:not(.ant-steps-dot) .ant-steps-item:not(.ant-steps-item-custom).ant-steps-item-active .ant-steps-item-icon {
+  border-color: transparent;
+}
+.ant-steps .ant-steps-item:not(.ant-steps-item-wait) .ant-steps-item-title {
+  color: var(--color-text-primary);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait.ant-steps-item-active .ant-steps-item-title {
+  color: var(--color-link);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait.ant-steps-item-active .ant-steps-item-content {
+  color: var(--color-link);
+}
+.ant-steps .ant-steps-item .ant-steps-item-title {
+  color: var(--color-text-secondary);
+}
+.ant-steps .ant-steps-item .ant-steps-item-content {
+  color: var(--color-text-secondary);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait .ant-steps-item-icon {
+  color: var(--color-text-placeholder);
+}
+.ant-steps .ant-steps-item-content {
+  color: var(--color-text-secondary);
+}
+.ant-steps.ant-steps-small .ant-steps-item-content {
+  font-size: var(--font-size-base);
+}
+.ant-steps.ant-steps-small .ant-steps-item-rail {
+  margin-inline-start: var(--spacing-2);
+}
+.ant-steps.ant-steps-panel .ant-steps-item .ant-steps-item-content {
+  font-size: var(--font-size-base);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish {
+  background-color: var(--color-info-primary-subtler);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish .ant-steps-item-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish .ant-steps-panel-arrow path {
+  fill: var(--color-info-primary-subtler);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active {
+  background-color: var(--color-brand);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active .ant-steps-item-title {
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active .ant-steps-panel-arrow path {
+  fill: var(--color-brand);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait {
+  background-color: var(--color-fill);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait .ant-steps-item-title {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait .ant-steps-panel-arrow path {
+  fill: var(--color-fill);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error {
+  background-color: var(--red-05);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-item-title {
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-panel-arrow path {
+  fill: var(--red-05);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error.ant-steps-item-active {
+  color: var(--color-text-inverse);
+  background-color: var(--color-error);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error.ant-steps-item-active .ant-steps-panel-arrow path {
+  fill: var(--color-error);
+}
+.dark .ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error {
+  background-color: rgba(238, 0, 34, 0.4);
+}
+.dark .ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-panel-arrow path {
+  fill: rgba(238, 0, 34, 0.4);
+}
+
+/* Pagination 组件样式（占位，待填充 token 映射） */
+.ant-pagination {
+  font-size: 14px;
+}
+.ant-pagination .ant-pagination-total-text {
+  color: var(--gray-90);
+  margin-right: var(--spacing-2);
+}
+.ant-pagination .ant-pagination-prev,
+.ant-pagination .ant-pagination-next {
+  margin-right: var(--spacing-2);
+  height: 24px !important;
+  min-width: 24px;
+  margin-inline-end: var(--spacing-2);
+}
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  width: 24px !important;
+}
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link .anticon,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link .anticon {
+  width: 10px;
+  height: 10px;
+}
+.ant-pagination .ant-pagination-item {
+  margin-right: var(--spacing-2);
+  color: var(--gray-90);
+  width: 32px;
+  height: 32px;
+}
+.ant-pagination .ant-pagination-item a:hover {
+  text-decoration: none;
+  background-color: color-mix(in srgb, var(--gray-90) 50%, transparent);
+  color: var(--gray-90);
+}
+.ant-pagination .ant-pagination-item-active {
+  background-color: var(--brand-05);
+  border: none;
+  font-weight: var(--font-weight-normal);
+  color: var(--brand-50);
+}
+.ant-pagination .ant-pagination-item-active:hover a {
+  color: var(--brand-50);
+  font-weight: var(--font-weight-normal);
+}
+.ant-pagination .ant-pagination-options {
+  margin-inline-start: 0;
+}
+.ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item .ant-select-item-option-content {
+  font-weight: var(--font-weight-normal) !important;
+}
+.ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item-option-selected {
+  background-color: var(--brand-05);
+}
+.ant-pagination .ant-pagination-options .ant-pagination-options-quick-jumper input {
+  color: var(--gray-90);
+  font-size: 14px;
+}
+.dark {
+  /* Pagination 组件样式（占位，待填充 token 映射） */
+}
+.dark .ant-pagination {
+  font-size: 14px;
+}
+.dark .ant-pagination .ant-pagination-total-text {
+  color: var(--gray-0);
+  margin-right: var(--spacing-2);
+}
+.dark .ant-pagination .ant-pagination-prev,
+.dark .ant-pagination .ant-pagination-next {
+  margin-right: var(--spacing-2);
+  height: 24px !important;
+  min-width: 24px;
+  margin-inline-end: var(--spacing-2);
+}
+.dark .ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.dark .ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  width: 24px !important;
+}
+.dark .ant-pagination .ant-pagination-prev .ant-pagination-item-link .anticon,
+.dark .ant-pagination .ant-pagination-next .ant-pagination-item-link .anticon {
+  width: 10px;
+  height: 10px;
+}
+.dark .ant-pagination .ant-pagination-item {
+  margin-right: var(--spacing-2);
+  color: var(--gray-0);
+  width: 32px;
+  height: 32px;
+}
+.dark .ant-pagination .ant-pagination-item a:hover {
+  text-decoration: none;
+  background-color: color-mix(in srgb, var(--brand-05) 20%, transparent);
+  color: var(--gray-0);
+}
+.dark .ant-pagination .ant-pagination-item-active {
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  border: none;
+  font-weight: var(--font-weight-normal);
+  color: var(--gray-0) !important;
+}
+.dark .ant-pagination .ant-pagination-item-active a {
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  border: none;
+  font-weight: var(--font-weight-normal);
+  color: var(--gray-0) !important;
+}
+.dark .ant-pagination .ant-pagination-item-active:hover a {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  font-weight: var(--font-weight-normal);
+}
+.dark .ant-pagination .ant-pagination-options {
+  margin-inline-start: 0;
+}
+.dark .ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item .ant-select-item-option-content {
+  font-weight: var(--font-weight-normal) !important;
+}
+.dark .ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item-option-selected {
+  background-color: var(--brand-05);
+}
+.dark .ant-pagination .ant-pagination-options .ant-pagination-options-quick-jumper input {
+  color: var(--gray-90);
+  font-size: 14px;
+}
+
+.ant-tooltip {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-tooltip .ant-tooltip-container {
+  color: var(--color-text-primary);
+  padding: var(--spacing-4);
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-tooltip .ant-tooltip-arrow:before {
+  background-color: var(--color-bg-4);
+}
+
+.ant-popover .ant-popover-container {
+  padding: var(--spacing-4);
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-popover .ant-popover-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-lg);
+}
+.ant-popover .ant-popover-content {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+}
+
+/* Timeline 组件样式（占位，待填充 token 映射） */
+.ant-steps .ant-steps-item .ant-steps-item-wrapper {
+  column-gap: var(--spacing-2);
+}
+.ant-steps .ant-steps-item .ant-steps-item-wrapper .ant-steps-item-icon {
+  font-size: var(--font-size-md);
+}
+.ant-steps .ant-steps-item .ant-steps-item-wrapper .ant-steps-item-section {
+  gap: var(--spacing-8) !important;
+}
+.ant-steps .ant-steps-item .ant-steps-item-wrapper .ant-steps-item-section .ant-steps-item-header .ant-steps-item-rail {
+  margin-top: var(--spacing-1);
+  margin-bottom: var(--spacing-1);
+}
+
+/* Tree 组件样式（占位，待填充 token 映射） */
+.ant-tree {
+  color: var(--color-text-primary);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-treenode {
+  margin-bottom: var(--spacing-0);
+  line-height: var(--spacing-7);
+  padding: var(--spacing-1) 0;
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  line-height: var(--spacing-4);
+  margin-right: var(--spacing-2);
+  align-self: center;
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher:hover {
+  background: var(--color-fill);
+  border-radius: var(--radius-base);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher::before {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-checkbox {
+  margin-top: var(--spacing-0);
+  align-self: center;
+  margin-right: var(--spacing-2);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-node-content-wrapper:hover {
+  background: var(--color-fill);
+  border-radius: var(--radius-base);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-node-content-wrapper.ant-tree-node-selected {
+  background: var(--color-select);
+}
+
+/* Segmented 组件样式（占位，待填充 token 映射） */
+.ant-segmented .ant-segmented-group {
+  gap: var(--spacing-1);
+  background: var(--color-fill);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-label {
+  padding: 0 var(--spacing-4);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-90);
+  background: var(--color-fill);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled {
+  color: var(--gray-20);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected-text {
+  color: var(--gray-0);
+  background: var(--brand-50);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected-text:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+  background: var(--brand-40);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected-text.ant-segmented-item-disabled {
+  color: var(--gray-0);
+  background: var(--brand-20);
+}
+.dark .ant-segmented-group .ant-segmented-item .ant-segmented-item-icon {
+  color: var(--gray-30);
+}
+.dark .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover .ant-segmented-item-icon {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled {
+  color: var(--gray-40);
+}
+.dark .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled .ant-segmented-item-icon {
+  color: var(--gray-40);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text {
+  color: var(--gray-0);
+  background: var(--brand-50);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text .ant-segmented-item-icon {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+  background: var(--brand-40);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text.ant-segmented-item-disabled {
+  color: var(--color-text-inverse-disabled);
+  background: var(--brand-70);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected-text.ant-segmented-item-disabled .ant-segmented-item-icon {
+  color: var(--color-text-inverse-disabled);
+}
+
+/* Drawer 组件样式（占位，待填充 token 映射） */
+.ant-drawer .ant-drawer-content-wrapper {
+  box-shadow: var(--shadow-l-base);
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header {
+  padding: 20px 24px 16px;
+  border-bottom: none;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close {
+  order: 2;
+  margin-inline-start: auto;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close .anticon {
+  font-size: 14px;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close .anticon svg {
+  width: 14px;
+  height: 14px;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-body {
+  padding: 0 24px 24px;
+}
+.dark .ant-drawer .ant-drawer-content-wrapper .ant-drawer-section {
+  background-color: var(--gray-80);
+}
+
+/* Modal 组件样式（占位，待填充 token 映射） */
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container {
+  position: relative;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: var(--radius-lg);
+  pointer-events: auto;
+  padding: var(--spacing-6);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header {
+  color: var(--gray-90);
+  margin-bottom: var();
+  padding: var(--ant-modal-header-padding);
+  border-bottom: var(--spacing-4);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header .ant-modal-title {
+  font-size: 20px;
+  color: var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-secondary,
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-link.ant-typography-secondary {
+  color: var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn {
+  border-radius: var(--radius-base);
+  height: 36px;
+  line-height: 36px;
+  border: 1px solid var(--gray-20);
+  color: var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn span {
+  font-size: 14px;
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:hover {
+  border: 1px solid var(--gray-90);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:active {
+  border: 1px solid var(--brand-50);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary {
+  background-color: var(--brand-50);
+  color: var(--gray-0);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:hover {
+  background-color: var(--brand-40);
+  color: var(--gray-0);
+}
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:active {
+  background-color: var(--brand-60);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container {
+  position: relative;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: var(--radius-lg);
+  pointer-events: auto;
+  padding: var(--spacing-6);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header {
+  color: var(--gray-0);
+  margin-bottom: var();
+  padding: var(--ant-modal-header-padding);
+  border-bottom: var(--spacing-4);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-header .ant-modal-title {
+  font-size: 20px;
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-secondary,
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-body .ant-typography.ant-typography-link.ant-typography-secondary {
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn {
+  border-radius: var(--radius-base);
+  height: 36px;
+  line-height: 36px;
+  border: 1px solid var(--gray-50);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn span {
+  font-size: 14px;
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:hover {
+  border: 1px solid var(--gray-05);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-default:active {
+  border: 1px solid var(--brand-40);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary {
+  background-color: var(--brand-50);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:hover {
+  background-color: var(--brand-40);
+  color: var(--gray-0);
+}
+.dark .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-container .ant-modal-footer .ant-btn-primary:active {
+  background-color: var(--brand-60);
+  color: var(--gray-0);
+}
+
+/* Breadcrumb 组件样式（占位，待填充 token 映射） */
+.ant-breadcrumb .ant-breadcrumb-item {
+  color: var(--gray-50);
+  font-size: 14px;
+}
+.ant-breadcrumb .ant-breadcrumb-item:last-child {
+  color: var(--gray-90);
+}
+.ant-breadcrumb .ant-breadcrumb-separator {
+  width: 12px;
+  text-align: center;
+  margin-inline: var(--spacing-1);
+  color: var(--gray-20);
+}
+.dark .ant-breadcrumb .ant-breadcrumb-item {
+  color: var(--gray-20);
+  font-size: 14px;
+}
+.dark .ant-breadcrumb .ant-breadcrumb-item:last-child {
+  color: var(--gray-0);
+}
+.dark .ant-breadcrumb .ant-breadcrumb-separator {
+  width: 12px;
+  text-align: center;
+  margin-inline: var(--spacing-1);
+  color: var(--gray-40);
+}
+
+/* Dropdown 下拉菜单样式（占位，待填充 token 映射） */
+.ant-dropdown .ant-dropdown-menu {
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
+  padding: var(--spacing-1) var(--spacing-2);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-base);
+  line-height: 32px;
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item-icon {
+  font-size: var(--font-size-md);
+  margin-right: var(--spacing-1);
+}
+.dark .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+  background-color: var(--gray-70);
+}
+
+/* Menu 导航菜单样式（占位，待填充 token 映射） */
+.ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title {
+  padding-left: var(--spacing-3);
+  padding-right: var(--spacing-3);
+  color: var(--gray-90);
+  font-size: 14px;
+}
+.ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title:active {
+  color: var(--brand-50);
+  background-color: var(--brand-05);
+}
+.ant-menu-inline .ant-menu-submenu-selecte {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item {
+  font-size: 14px;
+}
+.ant-menu-light .ant-menu-item-selected,
+.ant-menu-light > .ant-menu .ant-menu-item-selected {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item:active {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item:hover {
+  color: var(--gray-90);
+  background-color: color-mix(in srgb, var(--gray-90) 5%, transparent);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title {
+  padding-left: var(--spacing-3);
+  padding-right: var(--spacing-3);
+  color: var(--gray-0);
+  font-size: 14px;
+  background-color: var(--gray-90);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title .ant-menu-item-icon {
+  color: var(--gray-10);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title:active {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+}
+.dark .ant-menu-inline .ant-menu-submenu-selecte {
+  color: var(--gray-0) !important;
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-item {
+  font-size: 14px;
+}
+.dark .ant-menu-light .ant-menu-item-selected,
+.dark .ant-menu-light > .ant-menu .ant-menu-item-selected {
+  color: var(--gray-0) !important;
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-item:active {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-item:hover {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--gray-05) 20%, transparent);
+}
+.ant-menu-vertical .ant-menu-item {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.ant-menu-horizontal .ant-menu-item {
+  color: var(--gray-50);
+  font-size: 16px;
+}
+.ant-menu-horizontal .ant-menu-item::after {
+  border-bottom: 0 !important;
+}
+.ant-menu-horizontal .ant-menu-item:hover {
+  color: var(--gray-90);
+}
+.ant-menu-horizontal .ant-menu-item:active {
+  background-color: transparent !important;
+}
+.ant-menu-horizontal .ant-menu-item:hover::after {
+  border-bottom: 0;
+}
+.ant-menu-horizontal .ant-menu-item-selected {
+  background-color: transparent !important;
+}
+.ant-menu-horizontal .ant-menu-item-selected::after {
+  border-bottom: 2px solid var(--brand-50) !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item {
+  color: var(--gray-20);
+  font-size: 16px;
+}
+.dark .ant-menu-horizontal .ant-menu-item::after {
+  border-bottom: 0 !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item:hover {
+  color: var(--gray-0);
+}
+.dark .ant-menu-horizontal .ant-menu-item:active {
+  color: var(--brand-30);
+  background-color: transparent !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item:hover::after {
+  border-bottom: 0;
+}
+.dark .ant-menu-horizontal .ant-menu-item-selected {
+  color: var(--brand-30) !important;
+  background-color: transparent !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item-selected::after {
+  border-bottom: 2px solid var(--brand-30) !important;
+}
+
+.ant-form-item .ant-form-item-label > label {
+  font-size: 14px;
+  color: var(--gray-90);
+}
+.ant-form-item .ant-form-item-label label:not(.ant-form-item-required)::before {
+  content: "*";
+  display: inline-block;
+  margin-inline-end: var(--ant-margin-xxs);
+  font-size: var(--ant-font-size);
+  font-family: sans-serif;
+  line-height: 1;
+  visibility: hidden;
+}
+.ant-form-item .ant-form-item-extra {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--gray-30);
+}
+.ant-form-item .ant-form-item-explain-error {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--red-50);
+}
+.ant-form-item .ant-form-item-explain-warning {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--yellow-50);
+}
+.dark .ant-form-item .ant-form-item-label > label {
+  color: var(--gray-0);
+}
+.dark .ant-form-item-extra {
+  color: var(--gray-40);
+}
+.dark .ant-form-item-explain-error {
+  color: var(--red-40);
+}
+.dark .ant-form-item-explain-warning {
+  color: var(--orange-50);
+}
+
+
+/* 应用级基础样式 — 页面根节点与内容区的 token 消费示例 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.page-main {
+  padding: 0 var(--spacing-page) var(--spacing-page);
+}
+
+/* 内容容器：Level 1 卡片（有阴影则不加边框） */
+.card-surface {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+
+.page-header {
+  padding: var(--spacing-page) var(--spacing-page) var(--spacing-section);
+}
+
+.page-header__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  flex-wrap: wrap;
+}
+
+.page-header__crumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.page-header__crumb-current {
+  color: var(--on-surface);
+}
+
+.page-header__title {
+  margin: 6px 0 0;
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.page-header__desc {
+  margin: var(--spacing-inline) 0 0;
+  max-width: 720px;
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+}
+
+.page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.page-header__kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+  margin-top: var(--spacing-page);
+}
+
+.kpi-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+  padding: var(--spacing-gutter);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.kpi-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: var(--radius-lg);
+}
+
+.kpi-card__icon--brand { background: var(--primary-container); color: var(--primary); }
+.kpi-card__icon--success { background: var(--success-container); color: var(--success); }
+.kpi-card__icon--critical { background: var(--critical-container); color: var(--critical); }
+.kpi-card__icon--error { background: var(--error-container); color: var(--error); }
+
+.kpi-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.kpi-card__label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.kpi-card__value {
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.kpi-card__unit {
+  margin-left: 4px;
+  font: var(--font-caption-m);
+  font-style: normal;
+  color: var(--on-surface-variant);
+}
+
+@media (max-width: 1024px) {
+  .page-header__kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+.data-tabs {
+  padding: 0 var(--spacing-inset) var(--spacing-inset);
+}
+
+.tab-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tab-label__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.data-tabs .ant-tabs-tab-active .tab-label__count {
+  background: var(--primary-container);
+  color: var(--primary);
+}
+
+
+.metric-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 表格工具区 */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-stack);
+}
+
+.table-toolbar__filters,
+.table-toolbar__extra {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+}
+
+.toolbar-search {
+  width: 280px;
+}
+
+.toolbar-select {
+  width: 148px;
+}
+
+.table-toolbar__count {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.table-toolbar__count em,
+.selection-bar__text em {
+  font-style: normal;
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+}
+
+/* 下钻提示 */
+.table-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px var(--spacing-stack);
+  margin-bottom: var(--spacing-stack);
+  border-radius: var(--radius-base);
+  background: var(--info-container);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+.table-hint svg {
+  color: var(--primary);
+  flex: none;
+}
+
+/* 选中态工具区 */
+.selection-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+  padding: 8px var(--spacing-stack);
+  margin-bottom: var(--spacing-stack);
+  border-radius: var(--radius-base);
+  background: var(--primary-container);
+}
+
+.selection-bar__text {
+  font: var(--font-caption-m);
+  color: var(--on-primary-container);
+}
+
+.selection-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+/* 表格内链接与数字 */
+.cell-link {
+  padding-inline: 0;
+  height: auto;
+  font: var(--font-body-m);
+}
+
+.num-cell {
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface);
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--radius-badge);
+  font: var(--font-caption-m);
+  white-space: nowrap;
+}
+
+/* 软色徽标：底色用 *-container，文字用主状态色 */
+.status-tag--success { background: var(--success-container); color: var(--success); }
+.status-tag--critical { background: var(--critical-container); color: var(--critical); }
+.status-tag--warning { background: var(--warning-container); color: var(--on-warning-container); }
+.status-tag--error { background: var(--error-container); color: var(--error); }
+.status-tag--info { background: var(--info-container); color: var(--info); }
+.status-tag--brand { background: var(--primary-container); color: var(--primary); }
+.status-tag--neutral { background: var(--surface-variant); color: var(--on-surface-variant); }
+
+/* 非语义分类色：血缘「下游」层级 */
+.status-tag--violet { background: rgba(113, 90, 251, 0.12); color: var(--interactive-link-visited); }
+
+.dark .status-tag--warning { color: var(--warning); }
+
+
+.record-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.record-detail__stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-inline);
+  margin-bottom: var(--spacing-gutter);
+}
+
+.mini-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--spacing-stack) var(--spacing-gutter);
+  border-radius: var(--radius-container);
+  background: var(--surface-variant);
+}
+
+.mini-stat__label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.mini-stat__value {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.mini-stat__value--success { color: var(--success); }
+.mini-stat__value--error { color: var(--error); }
+
+@media (max-width: 1024px) {
+  .record-detail__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+.context-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  padding: var(--spacing-stack) var(--spacing-gutter);
+  margin-bottom: var(--spacing-section);
+  background: var(--surface-variant);
+  border-radius: var(--radius-container);
+}
+
+.context-banner__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: var(--radius-full);
+  background: var(--primary-container);
+  color: var(--primary);
+}
+
+.context-banner__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.context-banner__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+}
+
+.context-banner__title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.context-banner__crumb {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.context-banner__fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-gutter);
+  margin-top: 2px;
+}
+
+.context-banner__field {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.context-banner__field-label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.context-banner__field-value {
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+
+.lineage-trace {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 血缘链路示意 */
+.lineage-path {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+  margin-bottom: var(--spacing-gutter);
+}
+
+.lineage-path__group {
+  position: relative;
+  padding: var(--spacing-stack);
+  border-radius: var(--radius-container);
+  background: var(--surface-variant);
+}
+
+.lineage-path__head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  margin-bottom: var(--spacing-inline);
+}
+
+.lineage-path__head-name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.lineage-path__head-desc {
+  flex: 1;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.lineage-path__head-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-semibold);
+}
+
+.lineage-path__head--info .lineage-path__head-num { background: var(--info-container); color: var(--info); }
+.lineage-path__head--brand .lineage-path__head-num { background: var(--primary-container); color: var(--primary); }
+.lineage-path__head--violet .lineage-path__head-num { background: rgba(113, 90, 251, 0.12); color: var(--interactive-link-visited); }
+
+.lineage-path__nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lineage-path__node {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: var(--radius-base);
+  background: var(--surface-container-highest);
+}
+
+.lineage-path__node-type {
+  font: var(--font-caption-s);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.4px;
+  color: var(--primary);
+}
+
+.lineage-path__node-name {
+  font: var(--font-body-s);
+  color: var(--on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lineage-path__more {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.lineage-path__arrow {
+  position: absolute;
+  top: 50%;
+  right: -13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--surface-container-highest);
+  color: var(--primary);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.type-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--radius-badge);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+}
+
+@media (max-width: 1024px) {
+  .lineage-path {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lineage-path__arrow {
+    display: none;
+  }
+}
+
+</style>
+<!-- 6. Base styles -->
+<style>
+body, html { margin: 0; padding: 0; height: 100%; font-family: var(--font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif); }
+#root { height: 100%; }
+</style>
+</head>
+<body class="aui3_1 ev_no_wcag">
+<div id="root">Loading...</div>
+<script>
+// 注册 classic JSX 运行时 preset(新版 babel-standalone 默认 automatic,
+// 产出的 import "react/jsx-runtime" 无法在经典脚本中执行)
+Babel.registerPreset("react-classic", {
+  presets: [[Babel.availablePresets["react"], { runtime: "classic" }]],
+});
+</script>
+<script type="text/babel" data-presets="react-classic">
+var __export = {};
+// eview-react UMD 全局：@nce/eview-react 未本地安装，取 window.EviewReact；
+// 静态迁移对应 import X from "@nce/eview-react/X" 默认导出，组件从 UMD 全局解构
+const EviewReact = (typeof window !== "undefined" && window.EviewReact) || {};
+/* ===== assets/shared/eview-locales.js ===== */
+(function () {
+// eview-locales.js — 中文 locale 补丁包
+// dayjs / eview-react UMD 均不含完整中文 locale,本文件补齐:
+//   1. 注册 dayjs zh-cn locale(星期/月份/相对时间中文化)
+//   2. 导出 eview-react IntlProvider 可用的 componentsLocales 语言包
+//
+// 用法(页面入口):
+//   <ConfigProvider><IntlProvider locale="zh" messages={componentsLocales["zh"]}> ... </IntlProvider></ConfigProvider>
+
+// ---- 1. 注册 dayjs zh-cn locale(dayjs.min.js 核心包不带任何 locale) ----
+dayjs.locale(
+  "zh-cn",
+  {
+    name: "zh-cn",
+    weekdays: "星期日_星期一_星期二_星期三_星期四_星期五_星期六".split("_"),
+    weekdaysShort: "周日_周一_周二_周三_周四_周五_周六".split("_"),
+    weekdaysMin: "日_一_二_三_四_五_六".split("_"),
+    months: "一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月".split("_"),
+    monthsShort: "1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月".split("_"),
+    weekStart: 1,
+    formats: {
+      LT: "HH:mm",
+      LTS: "HH:mm:ss",
+      L: "YYYY/MM/DD",
+      LL: "YYYY年M月D日",
+      LLL: "YYYY年M月D日 Ah点mm分",
+      LLLL: "YYYY年M月D日ddddAh点mm分",
+      l: "YYYY/M/D",
+      ll: "YYYY年M月D日",
+      lll: "YYYY年M月D日 HH:mm",
+      llll: "YYYY年M月D日dddd HH:mm",
+    },
+    relativeTime: {
+      future: "%s内",
+      past: "%s前",
+      s: "几秒",
+      m: "1 分钟",
+      mm: "%d 分钟",
+      h: "1 小时",
+      hh: "%d 小时",
+      d: "1 天",
+      dd: "%d 天",
+      M: "1 个月",
+      MM: "%d 个月",
+      y: "1 年",
+      yy: "%d 年",
+    },
+    meridiem(hour, minute) {
+      const hm = hour * 100 + minute;
+      if (hm < 600) return "凌晨";
+      if (hm < 900) return "早上";
+      if (hm < 1130) return "上午";
+      if (hm < 1230) return "中午";
+      if (hm < 1800) return "下午";
+      return "晚上";
+    },
+    ordinal(number, period) {
+      switch (period) {
+        case "W":
+          return `${number}周`;
+        default:
+          return `${number}日`;
+      }
+    },
+  },
+  true
+);
+  // eview-react 用 react-intl：componentsLocales 为组件库语言包（@nce 未本地安装，此处给最小占位）
+  const componentsLocales = {
+    zh: {
+      "global.placeholder": "请选择",
+      "table.emptyText": "暂无数据",
+      "table.selectAll": "全选当页",
+      "pagination.page": "页",
+      "modal.okText": "确定",
+      "modal.cancelText": "取消",
+    },
+  };
+  Object.assign(__export, { componentsLocales });
+})();
+
+/* ===== src/context.jsx ===== */
+(function () {
+  const { useState, useEffect, createContext, useContext } = React;
+// Layer 1: 全局状态 — 主题模式与业务状态
+// 换肤单轨驱动:isDark 只切换 <html> 的 .dark class;
+// 普通 H5 元素(token 四层)与 antd 组件(ant.css 换肤层)同源跟随,无需 React 参与换肤。
+const AppContext = createContext(null);
+
+function AppProvider({ children }) {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+    document.body.classList.toggle("aui3_1_dark", isDark);
+  }, [isDark]);
+
+  const value = {
+    isDark,
+    toggleDark: () => setIsDark((d) => !d),
+  };
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+}
+
+function useApp() {
+  return useContext(AppContext);
+}
+  Object.assign(__export, { AppProvider, useApp });
+})();
+
+/* ===== assets/shared/icons.js ===== */
+(function () {
+  const LUCIDE = {
+    "arrow-left": [["path",{"d":"m12 19-7-7 7-7"}],["path",{"d":"M19 12H5"}]],
+    "arrow-right": [["path",{"d":"M5 12h14"}],["path",{"d":"m12 5 7 7-7 7"}]],
+    "bell": [["path",{"d":"M10.268 21a2 2 0 0 0 3.464 0"}],["path",{"d":"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"}]],
+    "chart-column": [["path",{"d":"M3 3v16a2 2 0 0 0 2 2h16"}],["path",{"d":"M18 17V9"}],["path",{"d":"M13 17V5"}],["path",{"d":"M8 17v-3"}]],
+    "chevron-right": [["path",{"d":"m9 18 6-6-6-6"}]],
+    "circle-check": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"m9 12 2 2 4-4"}]],
+    "circle-dot": [["circle",{"cx":"12","cy":"12","r":"10"}],["circle",{"cx":"12","cy":"12","r":"1"}]],
+    "circle-slash": [["circle",{"cx":"12","cy":"12","r":"10"}],["line",{"x1":"9","x2":"15","y1":"15","y2":"9"}]],
+    "circle-x": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"m15 9-6 6"}],["path",{"d":"m9 9 6 6"}]],
+    "clock": [["circle",{"cx":"12","cy":"12","r":"10"}],["path",{"d":"M12 6v6l4 2"}]],
+    "corner-down-right": [["path",{"d":"m15 10 5 5-5 5"}],["path",{"d":"M4 4v7a4 4 0 0 0 4 4h12"}]],
+    "database": [["ellipse",{"cx":"12","cy":"5","rx":"9","ry":"3"}],["path",{"d":"M3 5V19A9 3 0 0 0 21 19V5"}],["path",{"d":"M3 12A9 3 0 0 0 21 12"}]],
+    "download": [["path",{"d":"M12 15V3"}],["path",{"d":"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"}],["path",{"d":"m7 10 5 5 5-5"}]],
+    "file-text": [["path",{"d":"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"}],["path",{"d":"M14 2v5a1 1 0 0 0 1 1h5"}],["path",{"d":"M10 9H8"}],["path",{"d":"M16 13H8"}],["path",{"d":"M16 17H8"}]],
+    "git-branch": [["path",{"d":"M15 6a9 9 0 0 0-9 9V3"}],["circle",{"cx":"18","cy":"6","r":"3"}],["circle",{"cx":"6","cy":"18","r":"3"}]],
+    "link-2": [["path",{"d":"M9 17H7A5 5 0 0 1 7 7h2"}],["path",{"d":"M15 7h2a5 5 0 1 1 0 10h-2"}],["line",{"x1":"8","x2":"16","y1":"12","y2":"12"}]],
+    "list-checks": [["path",{"d":"M13 5h8"}],["path",{"d":"M13 12h8"}],["path",{"d":"M13 19h8"}],["path",{"d":"m3 17 2 2 4-4"}],["path",{"d":"m3 7 2 2 4-4"}]],
+    "maximize-2": [["path",{"d":"M15 3h6v6"}],["path",{"d":"m21 3-7 7"}],["path",{"d":"m3 21 7-7"}],["path",{"d":"M9 21H3v-6"}]],
+    "moon": [["path",{"d":"M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"}]],
+    "network": [["rect",{"x":"16","y":"16","width":"6","height":"6","rx":"1"}],["rect",{"x":"2","y":"16","width":"6","height":"6","rx":"1"}],["rect",{"x":"9","y":"2","width":"6","height":"6","rx":"1"}],["path",{"d":"M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"}],["path",{"d":"M12 12V8"}]],
+    "plus": [["path",{"d":"M5 12h14"}],["path",{"d":"M12 5v14"}]],
+    "refresh-cw": [["path",{"d":"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"}],["path",{"d":"M21 3v5h-5"}],["path",{"d":"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"}],["path",{"d":"M8 16H3v5"}]],
+    "rotate-ccw": [["path",{"d":"M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"}],["path",{"d":"M3 3v5h5"}]],
+    "search": [["path",{"d":"m21 21-4.34-4.34"}],["circle",{"cx":"11","cy":"11","r":"8"}]],
+    "settings": [["path",{"d":"M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"}],["circle",{"cx":"12","cy":"12","r":"3"}]],
+    "share-2": [["circle",{"cx":"18","cy":"5","r":"3"}],["circle",{"cx":"6","cy":"12","r":"3"}],["circle",{"cx":"18","cy":"19","r":"3"}],["line",{"x1":"8.59","x2":"15.42","y1":"13.51","y2":"17.49"}],["line",{"x1":"15.41","x2":"8.59","y1":"6.51","y2":"10.49"}]],
+    "sun": [["circle",{"cx":"12","cy":"12","r":"4"}],["path",{"d":"M12 2v2"}],["path",{"d":"M12 20v2"}],["path",{"d":"m4.93 4.93 1.41 1.41"}],["path",{"d":"m17.66 17.66 1.41 1.41"}],["path",{"d":"M2 12h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"m6.34 17.66-1.41 1.41"}],["path",{"d":"m19.07 4.93-1.41 1.41"}]],
+    "table-2": [["path",{"d":"M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"}]],
+    "triangle-alert": [["path",{"d":"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"}],["path",{"d":"M12 9v4"}],["path",{"d":"M12 17h.01"}]],
+  };
+  const { useState, useEffect } = React;
+// ---- Lucide (offline fallback, table injected at build time) ----
+const ICONS = typeof LUCIDE !== "undefined" ? LUCIDE : {};
+
+function camelToKebab(s) {
+  return s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+}
+
+function lookupIcon(name) {
+  if (!name) return null;
+  return (
+    ICONS[name] ||
+    ICONS[camelToKebab(name)] ||
+    ICONS[name.replace(/-([a-z])/g, (_m, c) => c.toUpperCase())] ||
+    null
+  );
+}
+
+// ---- icon-plus (联通) online flow, same as packages/previewpc ----
+const ICON_API_BASE = "https://octo.hdesign.huawei.com";
+const GET_CONFIG = `${ICON_API_BASE}/assetRepository/iconPlus/getConfig`;
+const GET_ICON_INFO = `${ICON_API_BASE}/assetRepository/iconPlus/getIconInfo`;
+const GET_ICON = `${ICON_API_BASE}/assetRepository/iconPlus/getIcon`;
+
+let plusState = null; // null = probing, true = icon-plus available, false = fall back to Lucide
+let plusPromise = null; // singleton getConfig probe promise
+let iconConfig = null;
+let defaultColorId = "";
+const iconInfoMap = {}; // name -> { name, url }
+const svgCache = new Map(); // "name&variant&color" -> svg text
+
+// variant prop -> getConfig style key (matches previewpc's shapeToStyleKey)
+const STYLE_KEY = {
+  lined: "border",
+  filled: "filled",
+  "two-tone": "two_colors1",
+  circle: "round_bottom2",
+  square: "square_bottom2",
+};
+
+function getStyleValue(styleKey) {
+  return iconConfig?.style?.find((s) => s.key === styleKey)?.value || styleKey;
+}
+
+// resolve an API color id from the requested hex against getConfig colors
+function resolveColorId(variant, colorHex) {
+  const styleValue = getStyleValue(STYLE_KEY[variant] || "border");
+  const colors = (iconConfig?.colors || []).filter((c) => c.style === styleValue);
+  if (colorHex) {
+    const m = colors.find((c) =>
+      c.value.split(",").map((v) => v.trim()).includes(colorHex)
+    );
+    if (m) return m.id;
+  }
+  return defaultColorId || colors[0]?.id || "";
+}
+
+// getConfig probe == 联通可用性验证 (same as previewpc fetchIconConfig)
+function ensurePlus() {
+  if (plusPromise) return plusPromise;
+  plusPromise = (async () => {
+    try {
+      const resp = await fetch(GET_CONFIG);
+      if (!resp.ok) {
+        plusState = false;
+        return false;
+      }
+      iconConfig = await resp.json();
+      const linear = iconConfig.colors?.find(
+        (c) => c.type === "linear" || c.type === "通用色"
+      );
+      defaultColorId =
+        linear?.id || iconConfig.colors?.[0]?.id || "";
+      plusState = true;
+      return true;
+    } catch (e) {
+      plusState = false;
+      return false;
+    }
+  })();
+  return plusPromise;
+}
+
+// pick the best icon-plus match for a keyword (prefer system-icon group, then name contains keyword, else first)
+function selectBestIcon(icons, keyword) {
+  return (
+    icons.find(
+      (i) => Array.isArray(i.group) && i.group.some((g) => g.includes("系统图标"))
+    ) ||
+    icons.find((i) => i.name?.toLowerCase().includes(keyword.toLowerCase())) ||
+    icons[0]
+  );
+}
+
+// name -> { name, url } via getIconInfo (cached in iconInfoMap)
+async function resolveIconInfo(name) {
+  if (iconInfoMap[name]) return iconInfoMap[name];
+  try {
+    const resp = await fetch(
+      `${GET_ICON_INFO}?keyword=${encodeURIComponent(name)}&topK=2&source_id=6`
+    );
+    const data = await resp.json(); // [{ keyword, icons: [{ icon_id, name, category, group[], url }] }]
+    const entry = (Array.isArray(data) ? data : [data]).find(
+      (d) => d.icons?.length
+    );
+    const selected = selectBestIcon(entry?.icons || [], name);
+    if (!selected?.url) return null;
+    iconInfoMap[name] = { name: selected.name, url: selected.url };
+    return iconInfoMap[name];
+  } catch (e) {
+    return null;
+  }
+}
+
+// fetch the SVG text for a name via getIcon (url + size + variant + colorId + fileType=svg)
+async function fetchSvg(name, variant, colorHex) {
+  const info = await resolveIconInfo(name);
+  if (!info) return "";
+  const styleValue = getStyleValue(STYLE_KEY[variant] || "border");
+  const colorId = resolveColorId(variant, colorHex);
+  try {
+    const resp = await fetch(
+      `${GET_ICON}?url=${encodeURIComponent(info.url)}&size=16&style=${encodeURIComponent(
+        styleValue
+      )}&color=${encodeURIComponent(colorId)}&fileType=svg`
+    );
+    const data = await resp.json(); // { url, name, data } or array
+    const item = Array.isArray(data) ? data[0] : data;
+    return item?.data || ""; // raw SVG text, injected as-is
+  } catch (e) {
+    return "";
+  }
+}
+
+function Icon({
+  name,
+  src,
+  size = 16,
+  color,
+  className = "",
+  style,
+  strokeWidth = 2,
+  variant = "lined",
+}) {
+  const [plus, setPlus] = useState(plusState); // reuse already-probed result
+  const [svg, setSvg] = useState(
+    () => svgCache.get(`${name}&${variant}&${color}`) || ""
+  );
+
+  useEffect(() => {
+    if (src) return; // user-asset mode: no network needed
+    let alive = true;
+    ensurePlus().then((ok) => {
+      if (!alive) return;
+      setPlus(ok);
+      if (!ok) return; // getConfig probe failed → Lucide branch
+      const key = `${name}&${variant}&${color}`;
+      if (svgCache.has(key)) {
+        setSvg(svgCache.get(key));
+        return;
+      }
+      fetchSvg(name, variant, color).then((s) => {
+        if (!alive) return;
+        svgCache.set(key, s);
+        setSvg(s);
+      });
+    });
+    return () => {
+      alive = false;
+    };
+  }, [src, name, variant, color]);
+
+  // user-provided asset (svg/png/jpg) via relative path — overrides name when both are set
+  if (src) {
+    return React.createElement("img", {
+      src: src,
+      width: size,
+      height: size,
+      className: className,
+      alt: "",
+      "aria-hidden": true,
+      style: { ...style, display: "inline-block", verticalAlign: "middle" },
+    });
+  }
+
+  // probe not finished yet → render nothing
+  if (plus === null) return null;
+
+  // icon-plus unavailable (offline) → Lucide fallback (original behavior)
+  if (plus === false) {
+    const nodes = lookupIcon(name);
+    if (!nodes) return null;
+    return React.createElement(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: size,
+        height: size,
+        viewBox: "0 0 24 24",
+        fill: "none",
+        strokeWidth: strokeWidth,
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        className: className,
+        "aria-hidden": true,
+        style: { ...style, stroke: color || "currentColor" },
+      },
+      nodes.map(([tag, attrs], i) =>
+        React.createElement(tag, { key: i, ...attrs })
+      )
+    );
+  }
+
+  // icon-plus available → render fetched SVG text as-is (only width/height on the wrapper)
+  if (!svg) {
+    return React.createElement("span", {
+      className,
+      "aria-hidden": true,
+      style: { ...style, width: size, height: size },
+    });
+  }
+  
+  return React.createElement("span", {
+    className,
+    "aria-hidden": true,
+    style: { ...style, width: size, height: size },
+    dangerouslySetInnerHTML: { __html: svg },
+  });
+}
+  Object.assign(__export, { Icon });
+})();
+
+/* ===== src/views/page-header/index.jsx ===== */
+(function () {
+  const { Button, TipBox } = EviewReact;
+  const { Icon, useApp } = __export;
+// Layer 4: 页面头部 — 面包屑 + 标题 + 全局操作 + 指标概览卡
+const KPIS = [
+  { key: "total", label: "指标总数", value: "24", unit: "个", icon: "list-checks", tone: "brand" },
+  { key: "normal", label: "运行正常", value: "17", unit: "个", icon: "circle-check", tone: "success" },
+  { key: "warning", label: "预警指标", value: "4", unit: "个", icon: "triangle-alert", tone: "critical" },
+  { key: "error", label: "异常指标", value: "2", unit: "个", icon: "circle-x", tone: "error" },
+];
+
+function PageHeader() {
+  const { isDark, toggleDark } = useApp();
+
+  return (
+    <header className="page-header">
+      <div className="page-header__top">
+        <div className="page-header__heading">
+          <nav className="page-header__crumb" aria-label="面包屑">
+            <span>数据治理</span>
+            <Icon name="chevron-right" size={12} />
+            <span>指标管理</span>
+            <Icon name="chevron-right" size={12} />
+            <span className="page-header__crumb-current">数据管理指标</span>
+          </nav>
+          <h1 className="page-header__title">数据管理指标</h1>
+          <p className="page-header__desc">
+            统一维护指标口径、采集明细与血缘链路，支持从指标清单逐级下钻至批次明细与上下游节点。
+          </p>
+        </div>
+        <div className="page-header__actions">
+          <TipBox direction="top" content={isDark ? "切换为浅色模式" : "切换为深色模式"}>
+            <Button
+              status="text"
+             
+              leftIcon={<Icon name={isDark ? "sun" : "moon"} size={16} />}
+              onClick={toggleDark}
+            />
+          </TipBox>
+          <Button leftIcon={<Icon name="refresh-cw" size={14} />}>刷新</Button>
+          <Button leftIcon={<Icon name="download" size={14} />}>导出报告</Button>
+          <Button status="primary" leftIcon={<Icon name="plus" size={14} />}>
+            新建指标
+          </Button>
+        </div>
+      </div>
+
+      <div className="page-header__kpis">
+        {KPIS.map((kpi) => (
+          <div className="kpi-card" key={kpi.key}>
+            <span className={`kpi-card__icon kpi-card__icon--${kpi.tone}`}>
+              <Icon name={kpi.icon} size={16} />
+            </span>
+            <div className="kpi-card__body">
+              <span className="kpi-card__label">{kpi.label}</span>
+              <span className="kpi-card__value">
+                {kpi.value}
+                <em className="kpi-card__unit">{kpi.unit}</em>
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </header>
+  );
+}
+  Object.assign(__export, { PageHeader });
+})();
+
+/* ===== src/components/status-tag/index.jsx ===== */
+(function () {
+  const { Icon } = __export;
+// Layer 3: 通用状态标签 — 统一全站状态语义（表内状态列、统计卡、血缘层级）
+const STATUS_MAP = {
+  normal: { text: "正常", tone: "success", icon: "circle-check" },
+  warning: { text: "预警", tone: "critical", icon: "triangle-alert" },
+  error: { text: "异常", tone: "error", icon: "circle-x" },
+  audit: { text: "待审核", tone: "warning", icon: "clock" },
+  offline: { text: "已下线", tone: "neutral", icon: "circle-slash" },
+  success: { text: "成功", tone: "success", icon: "circle-check" },
+  failed: { text: "失败", tone: "error", icon: "circle-x" },
+  skipped: { text: "已跳过", tone: "neutral", icon: "circle-slash" },
+  上游: { text: "上游", tone: "info", icon: "arrow-left" },
+  当前: { text: "当前", tone: "brand", icon: "circle-dot" },
+  下游: { text: "下游", tone: "violet", icon: "arrow-right" },
+};
+
+function StatusTag({ status, text, showIcon = true }) {
+  const meta = STATUS_MAP[status] || { text: status, tone: "neutral", icon: "circle-dot" };
+  return (
+    <span className={`status-tag status-tag--${meta.tone}`}>
+      {showIcon ? <Icon name={meta.icon} size={12} /> : null}
+      <span>{text || meta.text}</span>
+    </span>
+  );
+}
+  Object.assign(__export, { StatusTag });
+})();
+
+/* ===== src/mock/metrics.js ===== */
+(function () {
+// Layer 2: 指标清单 mock 数据
+// 语义化字段：code / name / domain / source / frequency / owner / score / rows / status / updatedAt
+
+const metricList = [
+  { id: "MTR-10001", code: "DM_USER_ACTIVE", name: "日活跃用户数", domain: "用户域", source: "dws_user_active_di", frequency: "T+1", owner: "张明", score: 96.4, rows: 1284560, status: "normal", updatedAt: "2026-09-19 08:12" },
+  { id: "MTR-10002", code: "DM_USER_NEW", name: "新增注册用户数", domain: "用户域", source: "dws_user_register_di", frequency: "T+1", owner: "张明", score: 94.1, rows: 38620, status: "normal", updatedAt: "2026-09-19 08:14" },
+  { id: "MTR-10003", code: "DM_USER_RETENTION", name: "用户次日留存率", domain: "用户域", source: "ads_user_retention_df", frequency: "T+1", owner: "李婉", score: 88.7, rows: 15240, status: "warning", updatedAt: "2026-09-19 09:02" },
+  { id: "MTR-10004", code: "DM_ORDER_GMV", name: "交易总额（GMV）", domain: "交易域", source: "dws_order_pay_di", frequency: "小时", owner: "王海涛", score: 98.2, rows: 864230, status: "normal", updatedAt: "2026-09-20 10:00" },
+  { id: "MTR-10005", code: "DM_ORDER_CNT", name: "有效订单量", domain: "交易域", source: "dws_order_valid_di", frequency: "小时", owner: "王海涛", score: 97.5, rows: 742180, status: "normal", updatedAt: "2026-09-20 10:00" },
+  { id: "MTR-10006", code: "DM_ORDER_REFUND", name: "订单退款率", domain: "交易域", source: "ads_order_refund_df", frequency: "T+1", owner: "王海涛", score: 79.3, rows: 42310, status: "error", updatedAt: "2026-09-19 07:48" },
+  { id: "MTR-10007", code: "DM_PAY_SUCCESS", name: "支付成功率", domain: "交易域", source: "dws_pay_result_di", frequency: "15分钟", owner: "陈嘉", score: 99.1, rows: 2310450, status: "normal", updatedAt: "2026-09-20 10:45" },
+  { id: "MTR-10008", code: "DM_DEV_ONLINE", name: "在线设备数", domain: "设备域", source: "dws_device_online_di", frequency: "5分钟", owner: "刘晨", score: 95.8, rows: 4126800, status: "normal", updatedAt: "2026-09-20 10:50" },
+  { id: "MTR-10009", code: "DM_DEV_FAULT", name: "设备故障率", domain: "设备域", source: "dws_device_fault_df", frequency: "T+1", owner: "刘晨", score: 82.6, rows: 96240, status: "warning", updatedAt: "2026-09-19 06:30" },
+  { id: "MTR-10010", code: "DM_DEV_UPGRADE", name: "固件升级成功率", domain: "设备域", source: "ads_firmware_upgrade_df", frequency: "T+1", owner: "刘晨", score: 91.2, rows: 153870, status: "normal", updatedAt: "2026-09-19 06:42" },
+  { id: "MTR-10011", code: "DM_NET_LATENCY", name: "网络平均时延", domain: "网络域", source: "dws_net_latency_di", frequency: "5分钟", owner: "赵启", score: 93.4, rows: 7820400, status: "normal", updatedAt: "2026-09-20 10:52" },
+  { id: "MTR-10012", code: "DM_NET_LOSS", name: "网络丢包率", domain: "网络域", source: "dws_net_loss_di", frequency: "5分钟", owner: "赵启", score: 76.8, rows: 5612300, status: "error", updatedAt: "2026-09-20 10:52" },
+  { id: "MTR-10013", code: "DM_NET_FLOW", name: "骨干网流量总量", domain: "网络域", source: "dws_net_flow_di", frequency: "小时", owner: "赵启", score: 96.9, rows: 3284500, status: "normal", updatedAt: "2026-09-20 10:00" },
+  { id: "MTR-10014", code: "DM_ALARM_TOTAL", name: "告警总数", domain: "运维域", source: "dws_alarm_event_di", frequency: "实时", owner: "孙倩", score: 99.4, rows: 186320, status: "normal", updatedAt: "2026-09-20 10:59" },
+  { id: "MTR-10015", code: "DM_ALARM_MTTR", name: "平均修复时长（MTTR）", domain: "运维域", source: "ads_alarm_mttr_df", frequency: "T+1", owner: "孙倩", score: 87.1, rows: 12480, status: "normal", updatedAt: "2026-09-19 05:20" },
+  { id: "MTR-10016", code: "DM_SRV_AVAIL", name: "核心服务可用率", domain: "运维域", source: "dws_service_avail_di", frequency: "15分钟", owner: "孙倩", score: 99.8, rows: 92160, status: "normal", updatedAt: "2026-09-20 10:45" },
+  { id: "MTR-10017", code: "DM_SRV_CPU", name: "CPU 平均利用率", domain: "资源域", source: "dws_resource_cpu_di", frequency: "5分钟", owner: "周航", score: 90.5, rows: 6540200, status: "normal", updatedAt: "2026-09-20 10:55" },
+  { id: "MTR-10018", code: "DM_SRV_STORE", name: "存储使用量", domain: "资源域", source: "dws_resource_store_di", frequency: "小时", owner: "周航", score: 84.2, rows: 421860, status: "warning", updatedAt: "2026-09-20 10:00" },
+  { id: "MTR-10019", code: "DM_MKT_CONV", name: "营销活动转化率", domain: "营销域", source: "ads_mkt_convert_df", frequency: "T+1", owner: "吴桐", score: 89.6, rows: 286400, status: "normal", updatedAt: "2026-09-19 09:30" },
+  { id: "MTR-10020", code: "DM_MKT_COST", name: "获客成本（CAC）", domain: "营销域", source: "ads_mkt_cac_df", frequency: "T+1", owner: "吴桐", score: 81.7, rows: 35260, status: "offline", updatedAt: "2026-08-31 18:20" },
+  { id: "MTR-10021", code: "DM_FIN_REVENUE", name: "营业收入", domain: "财务域", source: "dws_fin_revenue_df", frequency: "T+1", owner: "郑楠", score: 98.8, rows: 74520, status: "normal", updatedAt: "2026-09-19 04:10" },
+  { id: "MTR-10022", code: "DM_FIN_COST", name: "成本支出", domain: "财务域", source: "dws_fin_cost_df", frequency: "T+1", owner: "郑楠", score: 92.3, rows: 68430, status: "audit", updatedAt: "2026-09-19 04:26" },
+  { id: "MTR-10023", code: "DM_RISK_FRAUD", name: "风险交易拦截数", domain: "风控域", source: "dws_risk_fraud_di", frequency: "实时", owner: "何静", score: 95.1, rows: 24680, status: "normal", updatedAt: "2026-09-20 10:59" },
+  { id: "MTR-10024", code: "DM_SEC_ATTACK", name: "安全攻击拦截次数", domain: "安全域", source: "dws_sec_attack_di", frequency: "实时", owner: "何静", score: 97.6, rows: 18340, status: "audit", updatedAt: "2026-09-20 10:58" },
+];
+
+const domainOptions = [
+  { text: "全部数据域", value: "all" },
+  { text: "用户域", value: "用户域" },
+  { text: "交易域", value: "交易域" },
+  { text: "设备域", value: "设备域" },
+  { text: "网络域", value: "网络域" },
+  { text: "运维域", value: "运维域" },
+  { text: "资源域", value: "资源域" },
+  { text: "营销域", value: "营销域" },
+  { text: "财务域", value: "财务域" },
+  { text: "风控域", value: "风控域" },
+  { text: "安全域", value: "安全域" },
+];
+
+const frequencyOptions = [
+  { text: "全部频率", value: "all" },
+  { text: "实时", value: "实时" },
+  { text: "5分钟", value: "5分钟" },
+  { text: "15分钟", value: "15分钟" },
+  { text: "小时", value: "小时" },
+  { text: "T+1", value: "T+1" },
+];
+
+const statusOptions = [
+  { text: "全部状态", value: "all" },
+  { text: "正常", value: "normal" },
+  { text: "预警", value: "warning" },
+  { text: "异常", value: "error" },
+  { text: "待审核", value: "audit" },
+  { text: "已下线", value: "offline" },
+];
+  Object.assign(__export, { metricList, domainOptions, frequencyOptions, statusOptions });
+})();
+
+/* ===== src/views/metric-list/index.jsx ===== */
+(function () {
+  const { useMemo, useState } = React;
+  const { Button, SearchInput, Select, Table, TipBox } = EviewReact;
+  const { Icon, metricList, domainOptions, frequencyOptions, statusOptions } = __export;
+  const StatusTag = __export.StatusTag;
+// Layer 4: 一级页签「指标清单」— 链接列点击后下钻到采集明细页签
+function MetricList({ onDrill }) {
+  const [keyword, setKeyword] = useState("");
+  const [domain, setDomain] = useState("all");
+  const [frequency, setFrequency] = useState("all");
+  const [status, setStatus] = useState("all");
+  const [selectedKeys, setSelectedKeys] = useState([]);
+
+  const dataSource = useMemo(() => {
+    const kw = keyword.trim().toLowerCase();
+    return metricList.filter((item) => {
+      const hitKeyword =
+        !kw ||
+        item.name.toLowerCase().includes(kw) ||
+        item.code.toLowerCase().includes(kw) ||
+        item.source.toLowerCase().includes(kw);
+      const hitDomain = domain === "all" || item.domain === domain;
+      const hitFrequency = frequency === "all" || item.frequency === frequency;
+      const hitStatus = status === "all" || item.status === status;
+      return hitKeyword && hitDomain && hitFrequency && hitStatus;
+    });
+  }, [keyword, domain, frequency, status]);
+
+  const resetFilters = () => {
+    setKeyword("");
+    setDomain("all");
+    setFrequency("all");
+    setStatus("all");
+  };
+
+  const columns = [
+    { title: "指标编码", key: "code", width: 200 },
+    {
+      title: "指标名称",
+      key: "name",
+      width: 190,
+      render: (text, record) => (
+        <Button status="text" size="small" className="cell-link" onClick={() => onDrill(record)}>
+          {text}
+        </Button>
+      ),
+    },
+    { title: "数据域", key: "domain", width: 100 },
+    { title: "数据源表", key: "source", width: 220 },
+    { title: "更新频率", key: "frequency", width: 100 },
+    { title: "负责人", key: "owner", width: 90 },
+    {
+      title: "质量评分",
+      key: "score",
+      width: 100,
+      align: "right",
+      sorter: (a, b) => a.score - b.score,
+      render: (value) => <span className="num-cell">{value.toFixed(1)}</span>,
+    },
+    {
+      title: "记录数",
+      key: "rows",
+      width: 120,
+      align: "right",
+      sorter: (a, b) => a.rows - b.rows,
+      render: (value) => <span className="num-cell">{value.toLocaleString("zh-CN")}</span>,
+    },
+    {
+      title: "状态",
+      key: "status",
+      width: 110,
+      render: (value) => <StatusTag status={value} />,
+    },
+    { title: "更新时间", key: "updatedAt", width: 170 },
+    {
+      title: "操作",
+      key: "action",
+      width: 120,
+      fixed: "right",
+      render: (_, record) => (
+        <div className="row-actions">
+          <TipBox direction="top" content="查看采集明细">
+            <Button
+              status="text"
+             
+              size="small"
+              leftIcon={<Icon name="table-2" size={14} />}
+              onClick={() => onDrill(record)}
+            />
+          </TipBox>
+          <TipBox direction="top" content="指标配置">
+            <Button status="text" size="small" leftIcon={<Icon name="settings" size={14} />} />
+          </TipBox>
+          <TipBox direction="top" content="血缘溯源">
+            <Button
+              status="text"
+             
+              size="small"
+              leftIcon={<Icon name="git-branch" size={14} />}
+              onClick={() => onDrill(record)}
+            />
+          </TipBox>
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <div className="metric-list">
+      <div className="table-toolbar">
+        <div className="table-toolbar__filters">
+          <SearchInput
+            className="toolbar-search"
+            placeholder="搜索指标名称、编码或数据源表"
+            value={keyword}
+            onSearch={(value) => setKeyword(value)} onClear={() => setKeyword("")}
+          />
+          <Select className="toolbar-select" options={domainOptions} value={domain} onChange={setDomain} />
+          <Select className="toolbar-select" options={frequencyOptions} value={frequency} onChange={setFrequency} />
+          <Select className="toolbar-select" options={statusOptions} value={status} onChange={setStatus} />
+          <Button leftIcon={<Icon name="rotate-ccw" size={14} />} onClick={resetFilters}>
+            重置
+          </Button>
+        </div>
+        <div className="table-toolbar__extra">
+          <span className="table-toolbar__count">
+            共 <em>{dataSource.length}</em> 条指标
+          </span>
+          <Button leftIcon={<Icon name="download" size={14} />}>导出</Button>
+        </div>
+      </div>
+
+      <div className="table-hint">
+        <Icon name="link-2" size={14} />
+        <span>点击指标名称或「查看采集明细」图标，可下钻至该指标的采集明细页签。</span>
+      </div>
+
+      {selectedKeys.length > 0 ? (
+        <div className="selection-bar">
+          <span className="selection-bar__text">
+            已选择 <em>{selectedKeys.length}</em> 项指标
+          </span>
+          <div className="selection-bar__actions">
+            <Button size="small" leftIcon={<Icon name="chart-column" size={14} />}>
+              批量生成报告
+            </Button>
+            <Button size="small" leftIcon={<Icon name="bell" size={14} />}>
+              批量设置告警
+            </Button>
+            <Button size="small" status="text" onClick={() => setSelectedKeys([])}>
+              取消选择
+            </Button>
+          </div>
+        </div>
+      ) : null}
+
+      <Table
+        keyIndex="id"
+       
+        columns={columns}
+        dataset={dataSource}
+        scroll={{ x: 1620 }}
+        enableCheckBox onRowCheck={(keys) => setSelectedKeys(keys)}
+        enablePagination pagingProps={{ pageSize: 10 }}
+      />
+    </div>
+  );
+}
+  Object.assign(__export, { MetricList });
+})();
+
+/* ===== src/components/context-banner/index.jsx ===== */
+(function () {
+  const { Button } = EviewReact;
+  const { Icon } = __export;
+// Layer 3: 下钻上下文条 — 二级/三级页签中展示「当前基于哪条记录下钻」，并提供回退入口
+function ContextBanner({ icon = "link-2", title, crumb, fields = [], onBack, backText = "返回上一级" }) {
+  return (
+    <div className="context-banner">
+      <span className="context-banner__icon">
+        <Icon name={icon} size={16} />
+      </span>
+      <div className="context-banner__body">
+        <div className="context-banner__head">
+          <span className="context-banner__title">{title}</span>
+          {crumb ? <span className="context-banner__crumb">{crumb}</span> : null}
+        </div>
+        {fields.length > 0 ? (
+          <div className="context-banner__fields">
+            {fields.map((f) => (
+              <span className="context-banner__field" key={f.label}>
+                <span className="context-banner__field-label">{f.label}</span>
+                <span className="context-banner__field-value">{f.value}</span>
+              </span>
+            ))}
+          </div>
+        ) : null}
+      </div>
+      {onBack ? (
+        <Button size="small" leftIcon={<Icon name="arrow-left" size={14} />} onClick={onBack}>
+          {backText}
+        </Button>
+      ) : null}
+    </div>
+  );
+}
+  Object.assign(__export, { ContextBanner });
+})();
+
+/* ===== src/mock/records.js ===== */
+(function () {
+// Layer 2: 采集明细 mock 数据（二级页签数据源）
+// 语义化字段：batch / task / node / partition / rows / cost / quality / status / finishedAt
+
+const recordList = [
+  { id: "REC-20260920-01", batch: "BATCH_20260920_0100", task: "DWS 用户活跃日汇总", node: "dwd_user_login_di", partition: "2026-09-20 01:00", rows: 1284560, cost: "12m 34s", quality: 98.2, status: "success", finishedAt: "2026-09-20 01:12" },
+  { id: "REC-20260920-02", batch: "BATCH_20260920_0200", task: "新增注册用户聚合", node: "dwd_user_register_di", partition: "2026-09-20 02:00", rows: 38620, cost: "3m 08s", quality: 97.4, status: "success", finishedAt: "2026-09-20 02:03" },
+  { id: "REC-20260920-03", batch: "BATCH_20260920_0300", task: "次日留存计算", node: "dws_user_retention_di", partition: "2026-09-20 03:00", rows: 15240, cost: "8m 41s", quality: 86.5, status: "warning", finishedAt: "2026-09-20 03:09" },
+  { id: "REC-20260920-04", batch: "BATCH_20260920_0400", task: "交易支付明细归集", node: "dwd_order_pay_di", partition: "2026-09-20 04:00", rows: 864230, cost: "15m 02s", quality: 99.0, status: "success", finishedAt: "2026-09-20 04:15" },
+  { id: "REC-20260920-05", batch: "BATCH_20260920_0500", task: "有效订单口径清洗", node: "dws_order_valid_di", partition: "2026-09-20 05:00", rows: 742180, cost: "11m 27s", quality: 98.6, status: "success", finishedAt: "2026-09-20 05:11" },
+  { id: "REC-20260920-06", batch: "BATCH_20260920_0600", task: "退款率回溯重算", node: "ads_order_refund_df", partition: "2026-09-20 06:00", rows: 42310, cost: "6m 55s", quality: 68.9, status: "failed", finishedAt: "2026-09-20 06:07" },
+  { id: "REC-20260920-07", batch: "BATCH_20260920_0700", task: "支付结果实时汇总", node: "dws_pay_result_di", partition: "2026-09-20 07:00", rows: 2310450, cost: "4m 12s", quality: 99.4, status: "success", finishedAt: "2026-09-20 07:04" },
+  { id: "REC-20260920-08", batch: "BATCH_20260920_0800", task: "在线设备心跳归集", node: "dws_device_online_di", partition: "2026-09-20 08:00", rows: 4126800, cost: "9m 38s", quality: 96.1, status: "success", finishedAt: "2026-09-20 08:10" },
+  { id: "REC-20260920-09", batch: "BATCH_20260920_0900", task: "设备故障归因分析", node: "dws_device_fault_df", partition: "2026-09-20 09:00", rows: 96240, cost: "13m 20s", quality: 81.3, status: "warning", finishedAt: "2026-09-20 09:13" },
+  { id: "REC-20260920-10", batch: "BATCH_20260920_1000", task: "固件升级结果统计", node: "ads_firmware_upgrade_df", partition: "2026-09-20 10:00", rows: 153870, cost: "5m 46s", quality: 92.7, status: "success", finishedAt: "2026-09-20 10:06" },
+  { id: "REC-20260920-11", batch: "BATCH_20260920_1100", task: "网络时延分钟级聚合", node: "dwd_net_latency_di", partition: "2026-09-20 11:00", rows: 7820400, cost: "18m 09s", quality: 94.8, status: "success", finishedAt: "2026-09-20 11:18" },
+  { id: "REC-20260920-12", batch: "BATCH_20260920_1200", task: "丢包率异常检测", node: "dws_net_loss_di", partition: "2026-09-20 12:00", rows: 5612300, cost: "16m 32s", quality: 71.2, status: "failed", finishedAt: "2026-09-20 12:17" },
+  { id: "REC-20260920-13", batch: "BATCH_20260920_1300", task: "骨干网流量结算", node: "dws_net_flow_di", partition: "2026-09-20 13:00", rows: 3284500, cost: "14m 51s", quality: 97.9, status: "success", finishedAt: "2026-09-20 13:15" },
+  { id: "REC-20260920-14", batch: "BATCH_20260920_1400", task: "告警事件流式入库", node: "dwd_alarm_event_di", partition: "2026-09-20 14:00", rows: 186320, cost: "1m 24s", quality: 99.6, status: "success", finishedAt: "2026-09-20 14:01" },
+  { id: "REC-20260920-15", batch: "BATCH_20260920_1500", task: "工单修复时长统计", node: "ads_alarm_mttr_df", partition: "2026-09-20 15:00", rows: 12480, cost: "2m 37s", quality: 88.4, status: "success", finishedAt: "2026-09-20 15:03" },
+  { id: "REC-20260920-16", batch: "BATCH_20260920_1600", task: "服务可用率巡检", node: "dws_service_avail_di", partition: "2026-09-20 16:00", rows: 92160, cost: "4m 05s", quality: 99.9, status: "success", finishedAt: "2026-09-20 16:04" },
+  { id: "REC-20260920-17", batch: "BATCH_20260920_1700", task: "CPU 利用率采样归集", node: "dws_resource_cpu_di", partition: "2026-09-20 17:00", rows: 6540200, cost: "10m 18s", quality: 91.6, status: "success", finishedAt: "2026-09-20 17:10" },
+  { id: "REC-20260920-18", batch: "BATCH_20260920_1800", task: "存储水位巡检", node: "dws_resource_store_di", partition: "2026-09-20 18:00", rows: 421860, cost: "7m 22s", quality: 83.5, status: "warning", finishedAt: "2026-09-20 18:07" },
+  { id: "REC-20260920-19", batch: "BATCH_20260920_1900", task: "营销转化漏斗计算", node: "ads_mkt_convert_df", partition: "2026-09-20 19:00", rows: 286400, cost: "9m 47s", quality: 90.2, status: "success", finishedAt: "2026-09-20 19:10" },
+  { id: "REC-20260920-20", batch: "BATCH_20260920_2000", task: "获客成本口径核对", node: "ads_mkt_cac_df", partition: "2026-09-20 20:00", rows: 35260, cost: "3m 51s", quality: 0, status: "skipped", finishedAt: "2026-09-20 20:04" },
+  { id: "REC-20260920-21", batch: "BATCH_20260920_2100", task: "风控拦截实时统计", node: "dws_risk_fraud_di", partition: "2026-09-20 21:00", rows: 24680, cost: "1m 09s", quality: 95.7, status: "success", finishedAt: "2026-09-20 21:01" },
+  { id: "REC-20260920-22", batch: "BATCH_20260920_2200", task: "安全攻击事件归集", node: "dws_sec_attack_di", partition: "2026-09-20 22:00", rows: 18340, cost: "1m 43s", quality: 97.8, status: "success", finishedAt: "2026-09-20 22:02" },
+];
+
+const recordStatusOptions = [
+  { text: "全部状态", value: "all" },
+  { text: "成功", value: "success" },
+  { text: "预警", value: "warning" },
+  { text: "失败", value: "failed" },
+  { text: "已跳过", value: "skipped" },
+];
+  Object.assign(__export, { recordList, recordStatusOptions });
+})();
+
+/* ===== src/views/record-detail/index.jsx ===== */
+(function () {
+  const { useMemo, useState } = React;
+  const { Button, SearchInput, Select, Table, TipBox } = EviewReact;
+  const { Icon, recordList, recordStatusOptions } = __export;
+  const StatusTag = __export.StatusTag;
+  const ContextBanner = __export.ContextBanner;
+// Layer 4: 二级页签「采集明细」— 由指标清单下钻进入；批次号链接再下钻到血缘溯源页签
+function RecordDetail({ metric, onDrill, onBack }) {
+  const [keyword, setKeyword] = useState("");
+  const [status, setStatus] = useState("all");
+
+  const dataSource = useMemo(() => {
+    const kw = keyword.trim().toLowerCase();
+    return recordList.filter((item) => {
+      const hitKeyword =
+        !kw ||
+        item.batch.toLowerCase().includes(kw) ||
+        item.task.toLowerCase().includes(kw) ||
+        item.node.toLowerCase().includes(kw);
+      const hitStatus = status === "all" || item.status === status;
+      return hitKeyword && hitStatus;
+    });
+  }, [keyword, status]);
+
+  const successCount = recordList.filter((r) => r.status === "success").length;
+  const failedCount = recordList.filter((r) => r.status === "failed").length;
+  const avgQuality = (
+    recordList.reduce((sum, r) => sum + r.quality, 0) / recordList.length
+  ).toFixed(1);
+
+  const columns = [
+    {
+      title: "批次号",
+      key: "batch",
+      width: 210,
+      fixed: "left",
+      render: (text, record) => (
+        <Button status="text" size="small" className="cell-link" onClick={() => onDrill(record)}>
+          {text}
+        </Button>
+      ),
+    },
+    { title: "采集任务", key: "task", width: 200 },
+    { title: "来源节点", key: "node", width: 200 },
+    { title: "分区时间", key: "partition", width: 160 },
+    {
+      title: "记录数",
+      key: "rows",
+      width: 120,
+      align: "right",
+      sorter: (a, b) => a.rows - b.rows,
+      render: (value) => <span className="num-cell">{value.toLocaleString("zh-CN")}</span>,
+    },
+    {
+      title: "耗时",
+      key: "cost",
+      width: 100,
+      align: "right",
+    },
+    {
+      title: "质量分",
+      key: "quality",
+      width: 100,
+      align: "right",
+      sorter: (a, b) => a.quality - b.quality,
+      render: (value) => <span className="num-cell">{value.toFixed(1)}</span>,
+    },
+    {
+      title: "执行状态",
+      key: "status",
+      width: 110,
+      render: (value) => <StatusTag status={value} />,
+    },
+    { title: "完成时间", key: "finishedAt", width: 170 },
+    {
+      title: "操作",
+      key: "action",
+      width: 120,
+      fixed: "right",
+      render: (_, record) => (
+        <div className="row-actions">
+          <TipBox direction="top" content="查看血缘溯源">
+            <Button
+              status="text"
+             
+              size="small"
+              leftIcon={<Icon name="git-branch" size={14} />}
+              onClick={() => onDrill(record)}
+            />
+          </TipBox>
+          <TipBox direction="top" content="运行日志">
+            <Button status="text" size="small" leftIcon={<Icon name="file-text" size={14} />} />
+          </TipBox>
+          <TipBox direction="top" content="重新调度">
+            <Button status="text" size="small" leftIcon={<Icon name="rotate-ccw" size={14} />} />
+          </TipBox>
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <div className="record-detail">
+      <ContextBanner
+        icon="database"
+        title={metric ? metric.name : "全部指标"}
+        crumb={metric ? `${metric.code} · ${metric.domain} · 数据源 ${metric.source}` : "未选择指标，展示全部采集记录"}
+        fields={
+          metric
+            ? [
+                { label: "更新频率", value: metric.frequency },
+                { label: "负责人", value: metric.owner },
+                { label: "质量评分", value: metric.score.toFixed(1) },
+              ]
+            : []
+        }
+        onBack={onBack}
+        backText="返回指标清单"
+      />
+
+      <div className="record-detail__stats">
+        <div className="mini-stat">
+          <span className="mini-stat__label">采集批次</span>
+          <span className="mini-stat__value">{recordList.length}</span>
+        </div>
+        <div className="mini-stat">
+          <span className="mini-stat__label">成功批次</span>
+          <span className="mini-stat__value mini-stat__value--success">{successCount}</span>
+        </div>
+        <div className="mini-stat">
+          <span className="mini-stat__label">失败批次</span>
+          <span className="mini-stat__value mini-stat__value--error">{failedCount}</span>
+        </div>
+        <div className="mini-stat">
+          <span className="mini-stat__label">平均质量分</span>
+          <span className="mini-stat__value">{avgQuality}</span>
+        </div>
+      </div>
+
+      <div className="table-toolbar">
+        <div className="table-toolbar__filters">
+          <SearchInput
+            className="toolbar-search"
+            placeholder="搜索批次号、采集任务或来源节点"
+            value={keyword}
+            onSearch={(value) => setKeyword(value)} onClear={() => setKeyword("")}
+          />
+          <Select className="toolbar-select" options={recordStatusOptions} value={status} onChange={setStatus} />
+          <Button
+            leftIcon={<Icon name="rotate-ccw" size={14} />}
+            onClick={() => {
+              setKeyword("");
+              setStatus("all");
+            }}
+          >
+            重置
+          </Button>
+        </div>
+        <div className="table-toolbar__extra">
+          <span className="table-toolbar__count">
+            共 <em>{dataSource.length}</em> 条批次记录
+          </span>
+          <Button leftIcon={<Icon name="download" size={14} />}>导出</Button>
+        </div>
+      </div>
+
+      <div className="table-hint">
+        <Icon name="corner-down-right" size={14} />
+        <span>点击批次号或「查看血缘溯源」图标，可继续下钻至该批次的血缘溯源页签。</span>
+      </div>
+
+      <Table
+        keyIndex="id"
+       
+        columns={columns}
+        dataset={dataSource}
+        scroll={{ x: 1500 }}
+        enablePagination pagingProps={{ pageSize: 10 }}
+      />
+    </div>
+  );
+}
+  Object.assign(__export, { RecordDetail });
+})();
+
+/* ===== src/mock/lineage.js ===== */
+(function () {
+// Layer 2: 血缘溯源 mock 数据（三级页签数据源）
+// 语义化字段：nodeCode / level / nodeType / nodeName / tableName / owner / rows / latency / status / updatedAt
+
+const lineageList = [
+  { id: "LN-001", nodeCode: "ODS.USER.001", level: "上游", nodeType: "ODS", nodeName: "用户登录日志原始表", tableName: "ods.ods_user_login_log", owner: "数据平台组", rows: 98203400, latency: "实时", status: "normal", updatedAt: "2026-09-20 10:59" },
+  { id: "LN-002", nodeCode: "ODS.USER.002", level: "上游", nodeType: "ODS", nodeName: "用户注册流水表", tableName: "ods.ods_user_register_log", owner: "数据平台组", rows: 4218600, latency: "实时", status: "normal", updatedAt: "2026-09-20 10:59" },
+  { id: "LN-003", nodeCode: "ODS.DEV.011", level: "上游", nodeType: "ODS", nodeName: "设备心跳上报表", tableName: "ods.ods_device_heartbeat", owner: "设备接入组", rows: 428061000, latency: "实时", status: "normal", updatedAt: "2026-09-20 10:58" },
+  { id: "LN-004", nodeCode: "DWD.USER.101", level: "上游", nodeType: "DWD", nodeName: "登录会话明细", tableName: "dwd.dwd_user_login_di", owner: "用户数据组", rows: 126402300, latency: "T+1", status: "normal", updatedAt: "2026-09-20 01:12" },
+  { id: "LN-005", nodeCode: "DWD.USER.102", level: "上游", nodeType: "DWD", nodeName: "注册用户明细", tableName: "dwd.dwd_user_register_di", owner: "用户数据组", rows: 6421800, latency: "T+1", status: "normal", updatedAt: "2026-09-20 02:03" },
+  { id: "LN-006", nodeCode: "DWD.DEV.121", level: "上游", nodeType: "DWD", nodeName: "设备状态快照", tableName: "dwd.dwd_device_status_di", owner: "设备数据组", rows: 96012400, latency: "5分钟", status: "warning", updatedAt: "2026-09-20 09:13" },
+  { id: "LN-007", nodeCode: "DWS.USER.201", level: "当前", nodeType: "DWS", nodeName: "用户活跃轻度汇总", tableName: "dws.dws_user_active_di", owner: "用户数据组", rows: 1284560, latency: "T+1", status: "normal", updatedAt: "2026-09-20 08:12" },
+  { id: "LN-008", nodeCode: "DWS.USER.202", level: "当前", nodeType: "DWS", nodeName: "用户留存宽表", tableName: "dws.dws_user_retention_di", owner: "用户数据组", rows: 15240, latency: "T+1", status: "warning", updatedAt: "2026-09-20 09:02" },
+  { id: "LN-009", nodeCode: "DWS.DEV.221", level: "当前", nodeType: "DWS", nodeName: "设备在线汇总", tableName: "dws.dws_device_online_di", owner: "设备数据组", rows: 4126800, latency: "5分钟", status: "normal", updatedAt: "2026-09-20 10:50" },
+  { id: "LN-010", nodeCode: "ADS.USER.301", level: "下游", nodeType: "ADS", nodeName: "用户指标看板", tableName: "ads.ads_user_metric_df", owner: "指标平台组", rows: 86420, latency: "T+1", status: "normal", updatedAt: "2026-09-20 09:30" },
+  { id: "LN-011", nodeCode: "ADS.MKT.302", level: "下游", nodeType: "ADS", nodeName: "营销转化分析表", tableName: "ads.ads_mkt_convert_df", owner: "营销数据组", rows: 286400, latency: "T+1", status: "normal", updatedAt: "2026-09-20 19:10" },
+  { id: "LN-012", nodeCode: "ADS.FIN.303", level: "下游", nodeType: "ADS", nodeName: "财务收入口径表", tableName: "ads.ads_fin_revenue_df", owner: "财务数据组", rows: 74520, latency: "T+1", status: "normal", updatedAt: "2026-09-19 04:10" },
+  { id: "LN-013", nodeCode: "API.USER.401", level: "下游", nodeType: "API", nodeName: "指标查询开放接口", tableName: "api.metric.query.v2", owner: "指标平台组", rows: 0, latency: "实时", status: "normal", updatedAt: "2026-09-20 10:59" },
+  { id: "LN-014", nodeCode: "API.RISK.402", level: "下游", nodeType: "API", nodeName: "风控指标订阅接口", tableName: "api.risk.metric.subscribe", owner: "风控数据组", rows: 0, latency: "实时", status: "normal", updatedAt: "2026-09-20 10:59" },
+  { id: "LN-015", nodeCode: "ADS.OPS.304", level: "下游", nodeType: "ADS", nodeName: "运维告警分析表", tableName: "ads.ads_ops_alarm_df", owner: "运维数据组", rows: 186320, latency: "实时", status: "audit", updatedAt: "2026-09-20 14:01" },
+  { id: "LN-016", nodeCode: "ADS.RES.305", level: "下游", nodeType: "ADS", nodeName: "资源水位报表", tableName: "ads.ads_resource_level_df", owner: "资源数据组", rows: 421860, latency: "小时", status: "offline", updatedAt: "2026-08-31 18:20" },
+];
+
+const levelOptions = [
+  { text: "全部层级", value: "all" },
+  { text: "上游", value: "上游" },
+  { text: "当前", value: "当前" },
+  { text: "下游", value: "下游" },
+];
+
+const nodeTypeOptions = [
+  { text: "全部类型", value: "all" },
+  { text: "ODS", value: "ODS" },
+  { text: "DWD", value: "DWD" },
+  { text: "DWS", value: "DWS" },
+  { text: "ADS", value: "ADS" },
+  { text: "API", value: "API" },
+];
+  Object.assign(__export, { lineageList, levelOptions, nodeTypeOptions });
+})();
+
+/* ===== src/views/lineage-trace/index.jsx ===== */
+(function () {
+  const { useMemo, useState } = React;
+  const { Button, SearchInput, Select, Table, TipBox } = EviewReact;
+  const { Icon, lineageList, levelOptions, nodeTypeOptions } = __export;
+  const StatusTag = __export.StatusTag;
+  const ContextBanner = __export.ContextBanner;
+// Layer 4: 三级页签「血缘溯源」— 由采集明细下钻进入，展示上下游链路与节点明细
+const LEVEL_META = [
+  { key: "上游", tone: "info", desc: "数据来源节点" },
+  { key: "当前", tone: "brand", desc: "当前加工节点" },
+  { key: "下游", tone: "violet", desc: "消费与输出节点" },
+];
+
+function LineageTrace({ metric, record, onBack }) {
+  const [keyword, setKeyword] = useState("");
+  const [level, setLevel] = useState("all");
+  const [nodeType, setNodeType] = useState("all");
+
+  const dataSource = useMemo(() => {
+    const kw = keyword.trim().toLowerCase();
+    return lineageList.filter((item) => {
+      const hitKeyword =
+        !kw ||
+        item.nodeName.toLowerCase().includes(kw) ||
+        item.nodeCode.toLowerCase().includes(kw) ||
+        item.tableName.toLowerCase().includes(kw);
+      const hitLevel = level === "all" || item.level === level;
+      const hitType = nodeType === "all" || item.nodeType === nodeType;
+      return hitKeyword && hitLevel && hitType;
+    });
+  }, [keyword, level, nodeType]);
+
+  const columns = [
+    { title: "节点编码", key: "nodeCode", width: 150 },
+    {
+      title: "血缘层级",
+      key: "level",
+      width: 110,
+      render: (value) => <StatusTag status={value} />,
+    },
+    {
+      title: "节点类型",
+      key: "nodeType",
+      width: 100,
+      render: (value) => <span className="type-chip">{value}</span>,
+    },
+    { title: "节点名称", key: "nodeName", width: 200 },
+    { title: "物理表 / 接口", key: "tableName", width: 230 },
+    { title: "归属团队", key: "owner", width: 130 },
+    {
+      title: "数据量",
+      key: "rows",
+      width: 140,
+      align: "right",
+      sorter: (a, b) => a.rows - b.rows,
+      render: (value) => (
+        <span className="num-cell">{value === 0 ? "—" : value.toLocaleString("zh-CN")}</span>
+      ),
+    },
+    { title: "时效", key: "latency", width: 100 },
+    {
+      title: "状态",
+      key: "status",
+      width: 110,
+      render: (value) => <StatusTag status={value} />,
+    },
+    { title: "更新时间", key: "updatedAt", width: 170 },
+    {
+      title: "操作",
+      key: "action",
+      width: 96,
+      fixed: "right",
+      render: () => (
+        <div className="row-actions">
+          <TipBox direction="top" content="查看节点详情">
+            <Button status="text" size="small" leftIcon={<Icon name="maximize-2" size={14} />} />
+          </TipBox>
+          <TipBox direction="top" content="分享链路">
+            <Button status="text" size="small" leftIcon={<Icon name="share-2" size={14} />} />
+          </TipBox>
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <div className="lineage-trace">
+      <ContextBanner
+        icon="git-branch"
+        title={`血缘溯源 · ${metric ? metric.name : "全部指标"}`}
+        crumb={
+          record
+            ? `批次 ${record.batch} · 任务 ${record.task} · 来源节点 ${record.node}`
+            : "未选择批次，展示指标全量血缘节点"
+        }
+        fields={
+          record
+            ? [
+                { label: "分区时间", value: record.partition },
+                { label: "记录数", value: record.rows.toLocaleString("zh-CN") },
+                { label: "质量分", value: record.quality.toFixed(1) },
+              ]
+            : []
+        }
+        onBack={onBack}
+        backText="返回采集明细"
+      />
+
+      <div className="lineage-path">
+        {LEVEL_META.map((meta, index) => {
+          const nodes = lineageList.filter((n) => n.level === meta.key);
+          return (
+            <div className="lineage-path__group" key={meta.key}>
+              <div className={`lineage-path__head lineage-path__head--${meta.tone}`}>
+                <span className="lineage-path__head-name">{meta.key}节点</span>
+                <span className="lineage-path__head-desc">{meta.desc}</span>
+                <span className="lineage-path__head-num">{nodes.length}</span>
+              </div>
+              <div className="lineage-path__nodes">
+                {nodes.slice(0, 3).map((node) => (
+                  <span className="lineage-path__node" key={node.id} title={node.tableName}>
+                    <span className="lineage-path__node-type">{node.nodeType}</span>
+                    <span className="lineage-path__node-name">{node.nodeName}</span>
+                  </span>
+                ))}
+                {nodes.length > 3 ? (
+                  <span className="lineage-path__more">+{nodes.length - 3} 个节点</span>
+                ) : null}
+              </div>
+              {index < LEVEL_META.length - 1 ? (
+                <span className="lineage-path__arrow">
+                  <Icon name="arrow-right" size={16} />
+                </span>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="table-toolbar">
+        <div className="table-toolbar__filters">
+          <SearchInput
+            className="toolbar-search"
+            placeholder="搜索节点名称、编码或物理表"
+            value={keyword}
+            onSearch={(value) => setKeyword(value)} onClear={() => setKeyword("")}
+          />
+          <Select className="toolbar-select" options={levelOptions} value={level} onChange={setLevel} />
+          <Select className="toolbar-select" options={nodeTypeOptions} value={nodeType} onChange={setNodeType} />
+          <Button
+            leftIcon={<Icon name="rotate-ccw" size={14} />}
+            onClick={() => {
+              setKeyword("");
+              setLevel("all");
+              setNodeType("all");
+            }}
+          >
+            重置
+          </Button>
+        </div>
+        <div className="table-toolbar__extra">
+          <span className="table-toolbar__count">
+            共 <em>{dataSource.length}</em> 个血缘节点
+          </span>
+          <Button leftIcon={<Icon name="network" size={14} />}>全屏血缘视图</Button>
+          <Button leftIcon={<Icon name="download" size={14} />}>导出</Button>
+        </div>
+      </div>
+
+      <Table
+        keyIndex="id"
+       
+        columns={columns}
+        dataset={dataSource}
+        scroll={{ x: 1540 }}
+        enablePagination pagingProps={{ pageSize: 10 }}
+      />
+    </div>
+  );
+}
+  Object.assign(__export, { LineageTrace });
+})();
+
+/* ===== src/views/data-tabs/index.jsx ===== */
+(function () {
+  const { useState } = React;
+  const { Tab, TabItem } = EviewReact;
+  const { Icon } = __export;
+  const MetricList = __export.MetricList;
+  const RecordDetail = __export.RecordDetail;
+  const LineageTrace = __export.LineageTrace;
+// Layer 4: 页签容器 — 承载三级下钻导航（指标清单 → 采集明细 → 血缘溯源）
+function TabLabel({ icon, text, count }) {
+  return (
+    <span className="tab-label">
+      <Icon name={icon} size={14} />
+      <span>{text}</span>
+      <span className="tab-label__count">{count}</span>
+    </span>
+  );
+}
+
+function DataTabs() {
+  // 受控 selectedIndex：表格内链接通过 onDrill 直接改写页签，实现跨页签跳转
+  // eview-react Tab/TabItem：children 驱动，切换回调 onClick(index,title,event)
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [metric, setMetric] = useState(null);
+  const [record, setRecord] = useState(null);
+
+  const drillToDetail = (row) => {
+    setMetric(row);
+    setRecord(null);
+    setSelectedIndex(1);
+  };
+
+  const drillToLineage = (row) => {
+    setRecord(row);
+    setSelectedIndex(2);
+  };
+
+  return (
+    <section className="data-tabs card-surface">
+      <Tab
+        selectedIndex={selectedIndex}
+        onClick={(index) => setSelectedIndex(index)}
+        draggable={false}
+      >
+        <TabItem title={<TabLabel icon="list-checks" text="指标清单" count={24} />}>
+          <MetricList onDrill={drillToDetail} />
+        </TabItem>
+        <TabItem title={<TabLabel icon="table-2" text="采集明细" count={22} />}>
+          <RecordDetail
+            metric={metric}
+            onDrill={drillToLineage}
+            onBack={() => setSelectedIndex(0)}
+          />
+        </TabItem>
+        <TabItem title={<TabLabel icon="git-branch" text="血缘溯源" count={16} />}>
+          <LineageTrace metric={metric} record={record} onBack={() => setSelectedIndex(1)} />
+        </TabItem>
+      </Tab>
+    </section>
+  );
+}
+  Object.assign(__export, { DataTabs });
+})();
+
+/* ===== app.jsx ===== */
+(function () {
+  const { ConfigProvider, IntlProvider } = EviewReact;
+  const { AppProvider } = __export;
+  const componentsLocales = __export.componentsLocales;
+  const PageHeader = __export.PageHeader;
+  const DataTabs = __export.DataTabs;
+// App entry — ICT React page
+// Layering convention (one folder per component, kebab-case + index.jsx/index.css):
+//   Layer 1 global state  → src/context.jsx        (AppProvider: global state + dark mode toggle)
+//   Layer 2 mock data     → src/mock/              (metrics / records / lineage)
+//   Layer 3 reusable      → src/components/{name}/ (status-tag / context-banner)
+//   Layer 4 views         → src/views/{name}/      (page-header / data-tabs / metric-list / record-detail / lineage-trace)
+//   Layer 5 layout        → app.jsx                (Provider + root container assembly)
+//
+// Styling: custom styles in component folder's index.css; prefer tokens for visual values.
+
+
+
+
+
+
+
+
+function App() {
+  return (
+    <AppProvider>
+      <ConfigProvider><IntlProvider locale="zh" messages={componentsLocales["zh"]}>
+        <div className="app-root">
+          <PageHeader />
+          <main className="page-main">
+            <DataTabs />
+          </main>
+        </div>
+      </IntlProvider></ConfigProvider>
+    </AppProvider>
+  );
+}
+  Object.assign(__export, { App });
+})();
+/* ===== render ===== */
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(__export.App));
+</script>
+</body>
+</html>
