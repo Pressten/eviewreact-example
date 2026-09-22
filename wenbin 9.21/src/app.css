@@ -1,0 +1,50 @@
+/* 应用级基础样式 — 页面布局骨架与跨视图通用样式 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-inset);
+}
+
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  margin-bottom: var(--spacing-section);
+  flex-wrap: wrap;
+}
+
+.page-head h2 {
+  margin: 0;
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.page-head p {
+  margin: 4px 0 0;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.page-head-actions {
+  display: flex;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+}

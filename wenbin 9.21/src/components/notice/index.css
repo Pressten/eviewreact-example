@@ -1,0 +1,16 @@
+.notice-toast {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  pointer-events: none;
+  min-width: 240px;
+  max-width: 80vw;
+}
+
+.notice-toast > div {
+  pointer-events: auto;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-base);
+}

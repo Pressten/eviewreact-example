@@ -1,0 +1,326 @@
+{
+  "summary": {
+    "total": 45,
+    "passed": 45,
+    "failed": 0,
+    "warnings": 0,
+    "blockNext": false
+  },
+  "checks": [
+    {
+      "id": "package-json-exists",
+      "category": "structure",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "package-json-react-dep",
+      "category": "structure",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "package-json-eview-dep",
+      "category": "structure",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "package-json-scripts",
+      "category": "structure",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "entry-file-exists",
+      "category": "structure",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "index-html-exists",
+      "category": "structure",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "build-config-exists",
+      "category": "structure",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "no-antd-import",
+      "category": "import",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "no-antd-locale",
+      "category": "import",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "no-antd-icons",
+      "category": "import",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "eview-import-path",
+      "category": "import",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "no-src-prefix-in-src",
+      "category": "import",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "css-imports-in-entry",
+      "category": "import",
+      "severity": "block",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "button-status",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "select-defaultLabel",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "toggle-toggled",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "toggle-onToggle",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "toggle-taggled-children",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "crumbs-seprator",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "selectcard-disable",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "fileupload-disable",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "dialog-isOpen",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "drawer-visible",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "loading-isOpen",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "steps-currentStep",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "badge-content",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "tag-no-closable",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "table-dataset",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "table-keyIndex",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "table-key-in-columns",
+      "category": "api",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "form-ref-not-useForm",
+      "category": "mode",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "form-no-validateFields",
+      "category": "mode",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "form-no-onFinish",
+      "category": "mode",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "message-imperial-gone",
+      "category": "mode",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "popconfirm-to-messagedialog",
+      "category": "mode",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "body-aui3_1",
+      "category": "style",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "body-ev-no-wcag",
+      "category": "style",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "config-provider-present",
+      "category": "style",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "intl-provider-present",
+      "category": "style",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "dark-useeffect-two-classes",
+      "category": "style",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "dark-on-body-not-root",
+      "category": "style",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "no-dead-color-in-css",
+      "category": "style",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "no-ev-class-prefix",
+      "category": "style",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "clickable-is-button",
+      "category": "style",
+      "severity": "fail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "id": "no-etarget-value",
+      "category": "callback",
+      "severity": "warn",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}
