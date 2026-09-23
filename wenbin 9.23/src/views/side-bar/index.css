@@ -1,0 +1,48 @@
+.sb-aside {
+  width: 248px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-highest);
+  border-right: 1px solid var(--divider);
+  position: sticky;
+  top: 48px;
+  height: calc(100vh - 48px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: width 0.2s ease;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.sb-aside.collapsed {
+  width: 64px;
+}
+
+.sb-item-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sb-collapse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-inline);
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-base);
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.sb-collapse:hover {
+  background: var(--surface-variant);
+  color: var(--on-surface);
+}

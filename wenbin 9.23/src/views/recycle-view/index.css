@@ -1,0 +1,27 @@
+.rc-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+}
+
+.rc-alert {
+  border-radius: var(--radius-container);
+}
+
+.rc-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-stack);
+}
+
+.rc-name {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+
+.rc-owner {
+  font: var(--font-body-s);
+  color: var(--on-surface);
+}
