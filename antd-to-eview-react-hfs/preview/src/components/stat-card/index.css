@@ -1,0 +1,113 @@
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+  padding: 18px 20px;
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  text-align: left;
+  transition: box-shadow 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  font: var(--font-body-m);
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-base);
+  transform: translateY(-2px);
+}
+
+.stat-card:focus-visible {
+  outline: var(--outline-width-focus) solid var(--focus-ring);
+  outline-offset: var(--outline-offset-gap);
+}
+
+.stat-card.is-active {
+  background: var(--primary-container);
+  box-shadow: var(--shadow-base);
+}
+
+.stat-icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+}
+
+.stat-icon-primary {
+  color: var(--primary);
+  background: var(--info-container);
+}
+
+.stat-icon-success {
+  color: var(--success);
+  background: var(--success-container);
+}
+
+.stat-icon-error {
+  color: var(--error);
+  background: var(--error-container);
+}
+
+.stat-icon-critical {
+  color: var(--critical);
+  background: var(--critical-container);
+}
+
+.stat-icon-neutral {
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+}
+
+.stat-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.stat-label {
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.stat-value {
+  color: var(--on-surface);
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+}
+
+.stat-unit {
+  margin-left: 4px;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+  font-style: normal;
+}
+
+.stat-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: var(--font-caption-m);
+}
+
+.stat-delta-primary,
+.stat-delta-neutral {
+  color: var(--on-surface-variant);
+}
+
+.stat-delta-success {
+  color: var(--success);
+}
+
+.stat-delta-error {
+  color: var(--error);
+}
+
+.stat-delta-critical {
+  color: var(--critical);
+}
