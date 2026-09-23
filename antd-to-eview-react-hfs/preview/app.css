@@ -1,0 +1,102 @@
+/* 应用级基础样式 — 页面骨架与共享面板卡片 */
+.app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.page-body {
+  flex: 1;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: var(--spacing-section) var(--spacing-page) 40px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+}
+
+/* 内容卡片(Level 1 容器) */
+.panel-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding: 16px 20px 8px;
+}
+
+.panel-title {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+}
+
+.panel-hint {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 4px 0 0;
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+}
+
+@media (max-width: 1280px) {
+  .stat-overview {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .chart-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* body 基础样式（源项目 assets/style/base.css 迁入；@font-face 已由 src/styles/font.css 预制） */
+body {
+  margin: 0;
+  font: var(--font-body-m);
+  background-color: var(--surface);
+  color: var(--on-surface);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* 细滚动条（源项目迁移，保持原视觉） */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 4px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #dededf;
+}

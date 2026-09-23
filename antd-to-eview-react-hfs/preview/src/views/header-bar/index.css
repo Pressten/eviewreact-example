@@ -1,0 +1,118 @@
+.header-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+  height: 48px;
+  padding: 0 var(--spacing-page) 0 20px;
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-card);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex: none;
+}
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: var(--on-primary-fixed);
+}
+
+.brand-name {
+  color: var(--on-surface);
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.header-nav {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+  gap: var(--spacing-gutter);
+  align-self: stretch;
+}
+
+.header-nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.header-nav-item:hover {
+  color: var(--on-surface);
+}
+
+.header-nav-item.is-active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.header-nav-item:focus-visible {
+  outline: var(--outline-width-focus) solid var(--focus-ring);
+  outline-offset: var(--outline-offset-gap);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex: none;
+}
+
+.bell-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.bell-dot {
+  position: absolute;
+  top: -4px;
+  right: -5px;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--error);
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: var(--spacing-inline);
+  padding-left: var(--spacing-gutter);
+  border-left: var(--border-width-thin) solid var(--divider);
+  color: var(--on-surface);
+  cursor: pointer;
+}
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.user-name {
+  font: var(--font-body-m);
+}

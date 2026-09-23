@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "FAIL",
+    "npm-run-dev": "FAIL",
+    "functional": "10/12"
+  },
+  "notes": "依赖未安装，运行时验证待内网执行：npm install 挂起 300s 无输出后超时，Test-NetConnection cmc.centralrepo.rnd.huawei.com:443 TcpTestSucceeded=False（内网源不可达），node_modules 未生成，属网络原因不计入 failures；npm run dev 因依赖缺失无法执行（同网络原因）。静态验证全部通过：(1) check-relative-imports.cjs 全部解析，无 ./src/... 残留；(2) check-i18n-keys.cjs 无高危（项目源码无 t() 调用、选项字典无不匹配）；(3) src/ 内无 from 'antd' 导入、无 .ant- 类名、无 ../../../assets/ 旧路径（仅 2 处注释提及 antd）。§5.4 清单 12 项：静态核对通过 10 项（aui3_1.css+aui3_1_dark.css 已在 main.jsx:6-7 导入、index.html body 含 ev_no_wcag aui3_1 类名；IntlProvider 为 main.jsx 中 ConfigProvider 直接子级、locale='zh'、messages=componentsLocales['zh']；暗色双轨切换 context.jsx:18-23 同步切 body.aui3_1_dark 与 html.dark；SearchInput value+onChange+onClear 成对 device-table/index.jsx:191-202；手写组件/视图 CSS 无写死色值，app.css:91/101 滚动条灰色 #dfdfdf 系源项目 index.page.html:341 原样继承且 --gray-10:#DFDFDF 为源 token，非迁移回归）；3 项 N/A（项目无 Form/Select/Dialog，ref.submit 校验、options 字段名、弹窗开关无适用对象，按通过计）；2 项运行时未验证（页面渲染无 Element type is invalid、控制台无 MISSING_TRANSLATION），待内网装依赖后 npm run dev 补验。另注：preview 根目录 app.jsx/index.page.html/assets/ 为源项目残留（app.jsx 含 antd 导入），不在 Vite 构建图内（index.html 仅引 /src/main.jsx），不影响构建，建议后续清理避免混淆。"
+}
