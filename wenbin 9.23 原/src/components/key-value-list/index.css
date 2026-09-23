@@ -1,0 +1,34 @@
+.kvl {
+  display: grid;
+  gap: 10px 16px;
+  margin: 0;
+}
+
+.kvl-dt {
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+  white-space: nowrap;
+}
+
+.kvl-dd {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-body-s);
+  word-break: break-word;
+}
+
+.kvl-row-full {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  grid-column: 1 / -1;
+}
+
+.kvl-row-full .kvl-dt {
+  flex-shrink: 0;
+}
+
+.kvl-row-full .kvl-dd {
+  flex: 1;
+  min-width: 0;
+}

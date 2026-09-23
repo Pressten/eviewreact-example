@@ -1,0 +1,18 @@
+{
+  "status": "PARTIAL",
+  "round": 1,
+  "failures": [
+    "npm-install: 跳过（外网环境，@nce/eview-react 及 peer 依赖托管在华为内网 npm 源 cmc.centralrepo.rnd.huawei.com，需到内网/VPN 执行 npm install）",
+    "npm-run-dev: 跳过（同上，依赖未安装无法启动构建）",
+    "TextField leftIcon: TextField 无 prefix/leftIcon prop（API 明确无），搜索框前缀图标不显示（非阻断，输入功能正常）",
+    "Segmented→SelectCard / Dropdown→TipBox / RadioGroup 自定义 JSX 等：需内网起 dev 后实测视觉与交互"
+  ],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP",
+    "npm-run-dev": "SKIP",
+    "functional": "N/A"
+  },
+  "notes": "外网环境仅完成 L0 静态检查（相对导入解析 + i18n 动态 key，均通过）。源项目无 react-intl，数据为纯中文 label，无 i18n key 前缀问题。所有 antd 导入已替换为 @nce/eview-react，message→DivMessage、Modal.confirm→MessageDialog、Form→useRef+onSuccess 模式转换完成，CSS token 已提取到 tokens.css/theme-dark.css。需到内网执行 npm install && npm run dev 完成构建与功能验证。"
+}

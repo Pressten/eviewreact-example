@@ -1,0 +1,42 @@
+.app-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.app-progress-track {
+  flex: 1;
+  height: 8px;
+  background: var(--hover, rgba(0, 0, 0, 0.05));
+  border-radius: 4px;
+  overflow: hidden;
+}
+.app-progress-small .app-progress-track {
+  height: 6px;
+}
+.app-progress-fill {
+  height: 100%;
+  transition: width 0.2s;
+}
+.app-progress-primary {
+  background: var(--primary, #0067d1);
+}
+.app-progress-success {
+  background: var(--success, #62b42e);
+}
+.app-progress-error {
+  background: var(--error, #e02128);
+}
+.app-progress-warning {
+  background: var(--warning, #f4840c);
+}
+.app-progress-text {
+  color: var(--on-surface-variant, #777);
+  min-width: 36px;
+  text-align: right;
+  font-size: 12px;
+}
+.app-progress-small .app-progress-text {
+  min-width: 30px;
+  font-size: 11px;
+}

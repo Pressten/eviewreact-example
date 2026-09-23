@@ -1,0 +1,107 @@
+.sb-aside {
+  width: 248px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-highest);
+  border-right: 1px solid var(--divider);
+  position: sticky;
+  top: 48px;
+  height: calc(100vh - 48px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: width 0.2s ease;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.sb-aside.collapsed {
+  width: 64px;
+}
+
+.sb-item-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sb-collapse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-inline);
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-base);
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.sb-collapse:hover {
+  background: var(--surface-variant);
+  color: var(--on-surface);
+}
+
+.app-sb-nav {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-sb-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-base);
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.app-sb-item:hover {
+  background: var(--surface-variant);
+  color: var(--on-surface);
+}
+
+.app-sb-item.active {
+  background: var(--surface-variant);
+  color: var(--primary);
+  font-weight: var(--font-weight-medium);
+  border-left: 2px solid var(--primary);
+}
+
+.app-sb-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.app-sb-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-sb-group-label {
+  padding: 12px 12px 4px;
+  color: var(--on-surface-variant);
+  font: var(--font-caption-s);
+  letter-spacing: 0.04em;
+}

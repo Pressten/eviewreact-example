@@ -1,0 +1,53 @@
+.stag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: var(--radius-badge);
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.stag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.stag-success {
+  color: var(--success);
+  background: var(--success-container);
+}
+
+.stag-error {
+  color: var(--error);
+  background: var(--error-container);
+}
+
+.stag-processing {
+  color: var(--info);
+  background: var(--info-container);
+}
+
+.stag-neutral {
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+}
+
+.stag-processing .stag-dot {
+  animation: stag-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes stag-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}

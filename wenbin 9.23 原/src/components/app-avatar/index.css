@@ -1,0 +1,15 @@
+.app-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.app-avatar-text {
+  background: var(--primary, #0067d1);
+  color: var(--on-primary, #fff);
+  font-weight: 500;
+  line-height: 1;
+}

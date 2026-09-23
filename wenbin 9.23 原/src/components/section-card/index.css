@@ -1,0 +1,59 @@
+.sec-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sec-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+  padding: 14px var(--spacing-inset);
+  border-bottom: 1px solid var(--divider);
+  flex-wrap: wrap;
+}
+
+.sec-card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  min-width: 0;
+}
+
+.sec-card-icon {
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sec-card-text {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sec-card-sub {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.sec-card-extra {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.sec-card-body {
+  padding: 16px var(--spacing-inset) var(--spacing-inset);
+  flex: 1;
+  min-width: 0;
+}
