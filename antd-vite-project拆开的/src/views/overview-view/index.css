@@ -1,0 +1,136 @@
+.ov-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+}
+
+.ov-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+}
+
+.ov-grid-2 {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--spacing-gutter);
+}
+
+.ov-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  gap: var(--spacing-gutter);
+  align-items: stretch;
+}
+
+.ov-gauge-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-inline);
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-base);
+  background: var(--surface-variant);
+}
+
+.ov-gauge-info div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ov-gauge-info span {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+}
+
+.ov-gauge-info b {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.ov-tl {
+  display: flex;
+  flex-direction: column;
+}
+
+.ov-tl-item {
+  position: relative;
+  padding: 0 0 16px 20px;
+}
+
+.ov-tl-item:last-child {
+  padding-bottom: 0;
+}
+
+.ov-tl-item::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--divider);
+}
+
+.ov-tl-item:last-child::before {
+  display: none;
+}
+
+.ov-tl-dot {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--surface-container-highest);
+  box-sizing: content-box;
+  background: var(--on-surface-variant);
+}
+
+.ov-tl-dot.tone-success {
+  background: var(--success);
+}
+
+.ov-tl-dot.tone-error {
+  background: var(--error);
+}
+
+.ov-tl-dot.tone-processing {
+  background: var(--info);
+}
+
+.ov-tl-main p {
+  margin: 0;
+  font: var(--font-body-s);
+  color: var(--on-surface);
+  line-height: 1.5;
+}
+
+.ov-tl-main i {
+  font-style: normal;
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+}
+
+.ov-foot-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+@media (max-width: 1280px) {
+  .ov-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ov-grid-2,
+  .ov-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}

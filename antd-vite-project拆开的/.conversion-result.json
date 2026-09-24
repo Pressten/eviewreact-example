@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "npm-install": "PASS",
+    "npm-run-dev": "PASS",
+    "functional": "5/5"
+  },
+  "notes": "UMD 单 HTML 工程已标准化为 antd Vite + npm 工程。token CSS 外置（tokens.css 455 变量 / theme-dark.css 186 变量 / font.css 4 @font-face / base.css 569 规则）。源项目 src/ 23 个文件全部搬入，相对导入已修正。antd ConfigProvider + zhCN locale 保留，暗色方案双轨保留（.dark 类 + theme.darkAlgorithm）。echarts+hui-charts 作为全局脚本在 index.html 加载以支持 HUICharts 图表。icon.jsx 保留原版（Lucide 兜底 + icon-plus 在线，vite.config.js 已配 proxy/transform）。npm run build 通过（1501 模块），dev 启动正常（page 200 / app.jsx transform 200）。"
+}

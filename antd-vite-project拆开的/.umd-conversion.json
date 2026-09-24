@@ -1,0 +1,209 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "antd-vite-project",
+  "antdComponents": {
+    "Avatar": [
+      "src/views/header-bar/index.jsx",
+      "src/views/management-view/index.jsx",
+      "src/views/recycle-view/index.jsx"
+    ],
+    "Badge": [
+      "src/views/header-bar/index.jsx",
+      "src/views/side-bar/index.jsx"
+    ],
+    "Button": [
+      "src/views/header-bar/index.jsx",
+      "src/views/management-view/detail-drawer.jsx",
+      "src/views/management-view/export-modal.jsx",
+      "src/views/management-view/index.jsx",
+      "src/views/overview-view/index.jsx",
+      "src/views/recycle-view/index.jsx",
+      "src/views/sync-view/index.jsx"
+    ],
+    "Divider": [
+      "src/views/header-bar/index.jsx"
+    ],
+    "Dropdown": [
+      "src/views/header-bar/index.jsx",
+      "src/views/management-view/index.jsx",
+      "src/views/sync-view/index.jsx"
+    ],
+    "Input": [
+      "src/views/header-bar/index.jsx",
+      "src/views/management-view/dataset-form-modal.jsx",
+      "src/views/management-view/index.jsx",
+      "src/views/recycle-view/index.jsx",
+      "src/views/sync-view/index.jsx"
+    ],
+    "Popover": [
+      "src/views/header-bar/index.jsx",
+      "src/views/management-view/index.jsx"
+    ],
+    "Tooltip": [
+      "src/views/header-bar/index.jsx",
+      "src/views/management-view/dataset-form-modal.jsx",
+      "src/views/management-view/index.jsx"
+    ],
+    "message": [
+      "src/views/header-bar/index.jsx",
+      "src/views/management-view/detail-drawer.jsx",
+      "src/views/management-view/export-modal.jsx",
+      "src/views/management-view/index.jsx",
+      "src/views/overview-view/index.jsx",
+      "src/views/recycle-view/index.jsx",
+      "src/views/side-bar/index.jsx",
+      "src/views/sync-view/index.jsx"
+    ],
+    "AutoComplete": [
+      "src/views/management-view/dataset-form-modal.jsx"
+    ],
+    "Checkbox": [
+      "src/views/management-view/dataset-form-modal.jsx",
+      "src/views/management-view/export-modal.jsx"
+    ],
+    "DatePicker": [
+      "src/views/management-view/dataset-form-modal.jsx",
+      "src/views/management-view/index.jsx"
+    ],
+    "Form": [
+      "src/views/management-view/dataset-form-modal.jsx"
+    ],
+    "InputNumber": [
+      "src/views/management-view/dataset-form-modal.jsx",
+      "src/views/management-view/export-modal.jsx",
+      "src/views/management-view/index.jsx"
+    ],
+    "Modal": [
+      "src/views/management-view/dataset-form-modal.jsx",
+      "src/views/management-view/export-modal.jsx",
+      "src/views/management-view/index.jsx",
+      "src/views/recycle-view/index.jsx",
+      "src/views/sync-view/index.jsx"
+    ],
+    "Radio": [
+      "src/views/management-view/dataset-form-modal.jsx",
+      "src/views/management-view/export-modal.jsx",
+      "src/views/management-view/index.jsx"
+    ],
+    "Select": [
+      "src/views/management-view/dataset-form-modal.jsx",
+      "src/views/management-view/index.jsx",
+      "src/views/recycle-view/index.jsx",
+      "src/views/sync-view/index.jsx"
+    ],
+    "Slider": [
+      "src/views/management-view/dataset-form-modal.jsx",
+      "src/views/management-view/index.jsx"
+    ],
+    "Switch": [
+      "src/views/management-view/dataset-form-modal.jsx",
+      "src/views/management-view/index.jsx"
+    ],
+    "Descriptions": [
+      "src/views/management-view/detail-drawer.jsx",
+      "src/views/management-view/index.jsx"
+    ],
+    "Drawer": [
+      "src/views/management-view/detail-drawer.jsx"
+    ],
+    "Progress": [
+      "src/views/management-view/detail-drawer.jsx",
+      "src/views/management-view/export-modal.jsx",
+      "src/views/management-view/index.jsx",
+      "src/views/sync-view/index.jsx"
+    ],
+    "Table": [
+      "src/views/management-view/detail-drawer.jsx",
+      "src/views/management-view/index.jsx",
+      "src/views/recycle-view/index.jsx"
+    ],
+    "Tabs": [
+      "src/views/management-view/detail-drawer.jsx"
+    ],
+    "Tag": [
+      "src/views/management-view/detail-drawer.jsx",
+      "src/views/management-view/index.jsx",
+      "src/views/recycle-view/index.jsx"
+    ],
+    "Alert": [
+      "src/views/management-view/export-modal.jsx",
+      "src/views/recycle-view/index.jsx"
+    ],
+    "Rate": [
+      "src/views/management-view/index.jsx"
+    ],
+    "Segmented": [
+      "src/views/overview-view/index.jsx",
+      "src/views/sync-view/index.jsx"
+    ],
+    "Menu": [
+      "src/views/side-bar/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 186,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/section-card/index.css",
+    "src/components/section-card/index.jsx",
+    "src/components/stat-card/index.css",
+    "src/components/stat-card/index.jsx",
+    "src/components/status-tag/index.css",
+    "src/components/status-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/dataset.js",
+    "src/views/header-bar/index.css",
+    "src/views/header-bar/index.jsx",
+    "src/views/management-view/dataset-form-modal.jsx",
+    "src/views/management-view/detail-drawer.jsx",
+    "src/views/management-view/export-modal.jsx",
+    "src/views/management-view/index.css",
+    "src/views/management-view/index.jsx",
+    "src/views/overview-view/index.css",
+    "src/views/overview-view/index.jsx",
+    "src/views/recycle-view/index.css",
+    "src/views/recycle-view/index.jsx",
+    "src/views/side-bar/index.css",
+    "src/views/side-bar/index.jsx",
+    "src/views/sync-view/index.css",
+    "src/views/sync-view/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + antd-darkAlgorithm",
+    "darkClass": ".dark on <html>",
+    "algorithm": "antd theme.darkAlgorithm"
+  },
+  "verification": { "relativeImports": "PASS", "npmInstall": "PASS", "npmRunDev": "PASS" },
+  "eviewMigration": {
+    "skill": "antd-to-eview-react",
+    "status": "PASS",
+    "round": 1,
+    "componentsMigrated": 24,
+    "componentsHandwritten": 5,
+    "componentsTotal": 29,
+    "checks": {
+      "relative-imports": "PASS",
+      "i18n-keys": "PASS",
+      "npm-install": "FAIL",
+      "npm-run-dev": "SKIP",
+      "npm-run-build": "SKIP"
+    },
+    "provider": "eview-react ConfigProvider + IntlProvider (locale=zh)",
+    "darkMode": "aui3_1_dark (body) + .dark (html)",
+    "formMode": "useRef + submit() + onSuccess callback",
+    "handwritten": ["Avatar (AppAvatar)", "Descriptions (KeyValueList)", "Menu (handwritten nav)", "Dropdown (AppDropdown)", "Progress (SimpleProgress)", "Tag.CheckableTag (CheckableTag)"],
+    "resultFile": ".migration-result.json",
+    "notes": "需要华为内网安装 @nce/eview-react 依赖"
+  },
+  "notes": "UMD 单 HTML 工程已标准化为 antd Vite + npm 工程。token CSS 外置完成，src/ 23 文件全部搬入并修正相对导入，暗色方案双轨保留，npm build/dev 均通过。echarts+hui-charts 作为全局脚本在 index.html 加载，icon.jsx 保留原版。"
+}
