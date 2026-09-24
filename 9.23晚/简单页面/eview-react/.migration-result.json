@@ -1,0 +1,14 @@
+{
+  "status": "pass",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "pass",
+    "i18n-keys": "pass",
+    "npm-install": "skipped",
+    "npm-run-dev": "skipped",
+    "antd-residue": "pass",
+    "import-paths": "pass"
+  },
+  "notes": "外网环境，跳过 npm install/build/dev，仅做静态验证。静态检查全过：check-relative-imports.cjs 报告 all relative imports resolved；check-i18n-keys.cjs 报告未发现高危动态 key（本页业务文案为中文直写，无 t() 调用）；无残留 antd 导入/@ant-design/./assets/shared/./src 相对导入；所有组件导入均为 @nce/eview-react/<Component> 子路径格式。运行时未验证项（需内网 npm install + dev 才能确认，列出供后续核对）：1) IconButton 的 iconName 传入自定义 <Icon> shim（icon-plus 在线）能否正常渲染——文档示例用 icon+ 静态组件，shim 走运行时 fetch，外网 icon-plus 不可达时图标渲染为空属预期；2) Table freezeColPosition 仅设 left（冻结指标名称列），操作列未做 right 冻结（双向冻结 API 不确定，降级为单方向）；3) SearchInput onSearch 行为（值变化触发，已用 applyFilters({keyword:v}) 规避 setState 过期）；4) DatePicker 在 Form.Item 内由 Form 托管，effectiveAt 以 new Date() 回填、saveMetric 用 toEffectiveDate 兼容 Date/字符串/dayjs；5) Form itemCol={12} + Form.Item.col={24} 分节标题与全宽说明字段。源项目 antd 组件清单：Button/Input/Input.TextArea/Select/InputNumber/DatePicker/Switch/Badge/Tooltip/Table/Dropdown/Modal.confirm/Drawer/Form/Form.Item/message/ConfigProvider+locale。Dropdown 无对应→手写 ActionMenu；Modal.confirm→MessageDialog；message.success→DivMessage（context.notify）。"
+}

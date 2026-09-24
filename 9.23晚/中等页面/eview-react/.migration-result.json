@@ -1,0 +1,5 @@
+{
+  "status": "pass",
+  "failures": [],
+  "notes": "外网环境，跳过 npm install/build/dev，仅做静态验证。静态检查全部通过：check-relative-imports（所有相对导入已解析）、check-i18n-keys（无高危动态 key，业务文案全部硬编码中文）。以下为无法在静态阶段验证的运行时 API 待实测项（不影响静态 pass 判定，需内网 npm install + npm run dev 后验证）：1) Tab.activeItem 受控属性名（映射表未列，按常见命名猜测）；2) TabItem 导入路径 @nce/eview-react/TabItem（可能为 Tab 的命名导出）；3) Table.onRowCheck 回调签名（映射表标注 enableCheckBox+onRowCheck 但未列参数签名）；4) Table.pagingProps 结构（映射表标注 enablePagination+pagingProps 但未列详细字段）；5) SearchInput 受控 value 支持（映射表标注 onSearch 值变化也触发，未明确是否支持 value 受控）；6) Table.freezeCol 固定列位置（映射表标注取值待实测确认）。"
+}

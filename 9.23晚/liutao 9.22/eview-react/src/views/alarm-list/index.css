@@ -1,0 +1,41 @@
+/* 告警列表视图 */
+.alarm-list-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+}
+
+.alarm-list-view__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  flex-wrap: wrap;
+}
+
+.alarm-list-view__device {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.alarm-list-view__device-name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.alarm-list-view__device-id {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.alarm-list-view__actions {
+  display: flex;
+  gap: var(--spacing-inline);
+}
+
+.alarm-device-link {
+  padding: 0 !important;
+  height: auto !important;
+}

@@ -1,0 +1,104 @@
+.ip-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-md);
+  background: var(--surface-variant);
+}
+
+.ip-toggle-text {
+  min-width: 0;
+}
+
+.ip-toggle-title {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-body-l);
+  font-weight: var(--font-weight-medium);
+}
+
+.ip-toggle-desc {
+  margin: var(--spacing-0-5) 0 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.ip-tabs {
+  margin-top: var(--spacing-2);
+}
+
+.ip-tab-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.ip-tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 var(--spacing-1);
+  border-radius: var(--radius-full);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+  line-height: 0;
+}
+
+.ip-tab-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+  padding-top: var(--spacing-2);
+}
+
+/* —— 使用率进度 —— */
+.usage-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+}
+
+.usage-value {
+  min-width: 40px;
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  text-align: right;
+}
+
+.usage-track {
+  position: relative;
+  width: 56px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--surface-variant);
+  overflow: hidden;
+}
+
+.usage-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+}
+
+.usage-cell.is-mid .usage-fill {
+  background: var(--critical);
+}
+
+.usage-cell.is-high .usage-fill {
+  background: var(--error);
+}
+
+/* —— 操作列（纯图标，左对齐）—— */
+.row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--spacing-1);
+}

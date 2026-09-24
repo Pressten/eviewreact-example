@@ -1,0 +1,65 @@
+.notice-bar {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-md);
+}
+
+/* 图标盒与标题行等高并居中，保证与标题第一行光学对齐 */
+.notice-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: calc(var(--font-size-md) * var(--line-height-base));
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.notice-content {
+  min-width: 0;
+}
+
+.notice-title {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-base);
+}
+
+.notice-desc {
+  margin: var(--spacing-0-5) 0 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+/* 语义配色：浅色底 + 语义图标色 */
+.notice-bar.is-warning {
+  background: var(--warning-container);
+}
+.notice-bar.is-warning .notice-icon {
+  color: var(--critical);
+}
+
+.notice-bar.is-error {
+  background: var(--error-container);
+}
+.notice-bar.is-error .notice-icon {
+  color: var(--error);
+}
+
+.notice-bar.is-info {
+  background: var(--info-container);
+}
+.notice-bar.is-info .notice-icon {
+  color: var(--info);
+}
+
+.notice-bar.is-success {
+  background: var(--success-container);
+}
+.notice-bar.is-success .notice-icon {
+  color: var(--success);
+}

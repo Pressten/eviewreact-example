@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP",
+    "npm-run-dev": "SKIP",
+    "functional": "static-only"
+  },
+  "notes": "外网环境，跳过 npm install/build/dev，仅做静态验证。check-relative-imports 通过（all relative imports resolved）；check-i18n-keys 通过（0 高危调用，源项目业务文案全中文硬编码、Table render 无 t(value) 动态 key）。所有 antd 组件已替换为 @nce/eview-react：Button(status/leftIcon/text)、IconButton(iconName/tipText)、Select(options=[{text,value}])、SelectCard(data=[{text,value}])、SearchInput(value/onChange/onClear/placeholder)、TipBox(type=content/direction/trigger)、Table(dataset/keyIndex/render 第4参 row/enableAutoPaging/enableCheckBox/freezeCol/freezeColPosition)、Tag(className 自定义保留源样式)。图表 import 由 ./assets/shared/chart.jsx 改为 @nce/eview-react/Chart（调用点零改动）；图标 import 由 ../../../assets/shared/icon.jsx 改为 ../../shared/icon.jsx（调用点零改动，复用 scaffold 预制 shim）。无对应组件手写补位：antd Menu(水平)→手写 nav button 列表；antd Dropdown→TipBox trigger=click + 自定义菜单 + key 重挂关闭。Provider 入口：main.jsx 装 ConfigProvider>IntlProvider(locale=zh,messages=componentsLocales.zh)>AppProvider；app.jsx 仅 PageShell；context.jsx 暗色双轨切 body.aui3_1_dark + html.dark。token CSS 提取：tokens.css(三段 :root primitive+semantic+role + @media 响应式)、theme-dark.css(.dark 覆盖)、app.css 追加 body/#root/scrollbar。index.html body 已带 ev_no_wcag aui3_1。待内网环境验证运行时：npm install + npm run dev + 暗色切换 + 图表渲染 + Table 分页/勾选/排序 + Dropdown 菜单关闭 + SelectCard 切换。"
+}

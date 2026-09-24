@@ -1,0 +1,34 @@
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 var(--spacing-2);
+  border-radius: var(--radius-badge);
+  font: var(--font-body-s);
+  white-space: nowrap;
+}
+
+.status-tag.is-success {
+  background: var(--success-container);
+  color: var(--success);
+}
+
+.status-tag.is-warning {
+  background: var(--warning-container);
+  color: var(--critical);
+}
+
+.status-tag.is-error {
+  background: var(--error-container);
+  color: var(--error);
+}
+
+.status-tag.is-info {
+  background: var(--info-container);
+  color: var(--info);
+}
+
+.status-tag.is-neutral {
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+}

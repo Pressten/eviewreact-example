@@ -1,0 +1,18 @@
+/* 应用级基础样式 — 页面根节点与内容区的 token 消费示例 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.page-main {
+  padding: 0 var(--spacing-page) var(--spacing-page);
+}
+
+/* 内容容器：Level 1 卡片（有阴影则不加边框） */
+.card-surface {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}

@@ -1,0 +1,108 @@
+.trend-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-gutter);
+  align-items: stretch;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-4) var(--spacing-inset) var(--spacing-inset);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  margin-bottom: var(--spacing-3);
+}
+
+.panel-head-title h2 {
+  margin: 0;
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.panel-head-title p {
+  margin: var(--spacing-1) 0 0;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.panel-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+  white-space: nowrap;
+}
+
+.panel-body {
+  flex: 1;
+  min-height: 0;
+}
+
+.panel-body--gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.gauge-verdict {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.gauge-verdict-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.gauge-meta {
+  display: flex;
+  gap: var(--spacing-gutter);
+  width: 100%;
+  margin: 0;
+  padding: var(--spacing-3) 0 0;
+  border-top: 1px solid var(--divider);
+  list-style: none;
+}
+
+.gauge-meta li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+}
+
+.gauge-meta li span {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.gauge-meta li strong {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.gauge-meta .is-success {
+  color: var(--success);
+}
+
+.gauge-meta .is-error {
+  color: var(--error);
+}

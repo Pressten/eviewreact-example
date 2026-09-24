@@ -1,0 +1,43 @@
+/* 键值详情块 — 对齐 antd Descriptions bordered 视觉,token 驱动,暗色自动跟随 */
+.key-value-list {
+  display: grid;
+  margin: 0;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-container);
+  overflow: hidden;
+}
+
+.key-value-list__label,
+.key-value-list__value {
+  margin: 0;
+  padding: var(--spacing-gutter) var(--spacing-inset);
+  border-right: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+  font: var(--font-body-m);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.key-value-list__label {
+  background: var(--surface-container-highest);
+  color: var(--on-surface-variant);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.key-value-list__value {
+  background: var(--surface-container-low);
+  color: var(--on-surface);
+}
+
+/* 每行最后一列去掉右边框 */
+.key-value-list__label:nth-child(4n),
+.key-value-list__value:nth-child(4n) {
+  border-right: none;
+}
+
+/* 最后一行去掉下边框 */
+.key-value-list__label:nth-last-child(-n + 2),
+.key-value-list__value:nth-last-child(-n + 2) {
+  border-bottom: none;
+}

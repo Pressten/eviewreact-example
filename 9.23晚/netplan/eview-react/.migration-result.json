@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "residual-antd-imports": "PASS",
+    "residual-assets-shared-paths": "PASS",
+    "residual-ant-css-classes": "PASS",
+    "eview-react-import-format": "PASS",
+    "npm-install": "SKIPPED",
+    "npm-run-dev": "SKIPPED",
+    "functional": "static-only"
+  },
+  "notes": "外网环境，跳过 npm install/build/dev，仅做静态验证。源项目 antd 组件已全部按映射表替换：Button(→status/leftIcon/text)、Breadcrumb(→Crumbs)、Segmented(→SelectCard)、Form(→ref 托管 itemCol)、Input(→TextField/SearchInput)、Select(→options text/value)、Radio.Group(→RadioGroup data)、Tabs(→Tab/TabItem children)、Table(→dataset/keyIndex/freezeCol/enableAutoPaging)、Switch(→Toggle toggled/onToggle)、Badge(→content)。无对应组件手写补位：Layout/Header/Sider/Content(保留原 H5 div+CSS 骨架)、Menu 横向导航(header-bar)、Menu 内联可折叠侧导航(side-nav，含分组/子项)、Dropdown 用户菜单(header-bar，click 触发手写下拉)、Radio.Group 自定义卡片单选(topology mode-group)。图标走 scaffold 预制 src/shared/icon.jsx shim(A 范式，调用点零改动，import 路径 ../../../assets/shared/icon.jsx→../../shared/icon.jsx)。antd 纯图标按钮(ip-plan RowActions)按硬约束#13 用 IconButton+Icon shim；header-bar/topology-plan 源生 H5 图标按钮保留原生 button+Icon(非 antd Button 退化)并标 TODO。CSS token 保留原始体系：:root 三块+@media 提取到 tokens.css，.dark 提取到 theme-dark.css，与 eview-react aui3_1/aui3_1_dark 并存；布局/组件 CSS 一行不改(仅 topology-plan .plan-form 去掉 antd grid 改用 Form itemCol，.mode-option 加 button 重置)。暗色模式 context.jsx 同时切 body.aui3_1_dark + html.dark。运行时待内网验证项(非静态失败)：(1) IconButton+Icon shim 渲染兼容性；(2) ClassicConfig Form 无 onSuccess(纯展示无提交，Form 仅作布局+值容器)；(3) RadioGroup 在 Form.Item 内 onChange 顺序冲突(官方 demo 已用此模式，预计正常)；(4) Table 无 scroll prop 改靠列宽+freezeCol 触发横向滚动；(5) Select/TextField/Tab 等 eview-react 组件实际样式需内网 dev 验证。"
+}

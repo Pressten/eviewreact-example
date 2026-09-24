@@ -1,0 +1,50 @@
+/* 状态标签 — 语义色 token 驱动,暗色自动跟随 */
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  font: var(--font-body-s);
+  white-space: nowrap;
+}
+
+.status-tag__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.status-tag--success {
+  color: var(--success);
+}
+.status-tag--success .status-tag__dot {
+  background: var(--success);
+}
+
+.status-tag--error {
+  color: var(--error);
+}
+.status-tag--error .status-tag__dot {
+  background: var(--error);
+}
+
+.status-tag--warning {
+  color: var(--critical);
+}
+.status-tag--warning .status-tag__dot {
+  background: var(--critical);
+}
+
+.status-tag--info {
+  color: var(--info);
+}
+.status-tag--info .status-tag__dot {
+  background: var(--info);
+}
+
+.status-tag--neutral {
+  color: var(--on-surface-variant);
+}
+.status-tag--neutral .status-tag__dot {
+  background: var(--on-surface-variant);
+}

@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIPPED",
+    "npm-run-dev": "SKIPPED",
+    "functional": "static-only"
+  },
+  "notes": "外网环境，跳过 npm install/build/dev，仅做静态验证。check-relative-imports.cjs 与 check-i18n-keys.cjs 均通过；人工核查所有 import 路径为 @nce/eview-react/Component 格式、无残留 antd 导入或 ./src/ 旧路径。已知限制：1) TimePicker.RangePicker 无直接对应，用 DatePicker range 替代（时间格式可能不完美）；2) StrategyAdvanced 面板背景样式因 Form.Item 须为直接子级约束而省略；3) 表格行内删除按钮的 danger 红色由 IconButton 承载（IconButton 无 status 属性）；4) Form.useWatch 改为 useState 本地状态（advanced/enableNow 非表单字段）。"
+}

@@ -1,0 +1,61 @@
+/* 头部导航栏 — 48px 高,最高层级 surface,轻微投影 */
+.header-bar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--spacing-page);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 10;
+  gap: var(--spacing-gutter);
+}
+
+.header-bar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-shrink: 0;
+}
+
+.header-bar__brand-name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.header-bar__nav {
+  flex: 1;
+  min-width: 0;
+  border-bottom: none !important;
+  background: transparent !important;
+}
+
+.header-bar__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-shrink: 0;
+}
+
+.header-bar__theme-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.header-bar__divider {
+  width: 1px;
+  height: 20px;
+  background: var(--divider);
+  margin: 0 var(--spacing-inline);
+}
+
+.header-bar__user {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  white-space: nowrap;
+}

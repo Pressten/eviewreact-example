@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIPPED",
+    "npm-run-dev": "SKIPPED",
+    "functional": "static-only"
+  },
+  "notes": "外网环境，跳过 npm install/build/dev，仅做静态验证。check-relative-imports.cjs 全部解析通过；check-i18n-keys.cjs 无高危调用（源项目业务文案硬编码中文，无 t()/FormattedMessage，IntlProvider 仅承载 eview-react 组件内置文案）。人工核对：无 antd/@ant-design/assets/shared/antd-zh/./src/ 残留导入，所有组件导入均为 @nce/eview-react/<Component> 格式，API 用法符合组件映射表与命名速查。需到内网执行 npm install + npm run dev 做运行时验证。已知功能差异（非失败项，记录备查）：1) antd Table 列级 filters/onFilter 下拉筛选（device-table 的设备类型/状态、alarm-list 的告警级别）在 eview-react Table 无等价 API，已移除——device-table 已有高级搜索 Drawer 覆盖类型/状态筛选，alarm-list 告警级别筛选需后续按需补外部控件；2) antd Drawer 的 extra 属性在 eview-react Drawer 无对应，底部按钮已移入 Drawer children；3) antd Switch defaultChecked（非受控）改为 eview-react Switch 受控 toggled+onToggle+本地 state。"
+}

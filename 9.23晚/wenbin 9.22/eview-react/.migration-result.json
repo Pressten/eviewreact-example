@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "failures": [],
+  "notes": "外网环境，跳过 npm install/build/dev，仅做静态验证。check-relative-imports.cjs 通过（0 残留）；check-i18n-keys.cjs 通过（源项目业务文案硬编码中文，无 t() 动态 key，0 高危）。人工核对：所有 antd 组件已替换为 @nce/eview-react 组件或手写补位；import 路径均为 @nce/eview-react/X 格式；Form 模式已按 form-migration.md 转换（useForm→useRef、validateFields→submit+onSuccess、itemCol/Form.Item.col 替代 div 栅格、Switch data=[false,true]+valuePropName=toggled）；IntlProvider 在 main.jsx 为 ConfigProvider 直接子级、locale='zh'；<body> 常驻 aui3_1、暗色切 aui3_1_dark+.dark；CSS token 提取到 tokens.css/theme-dark.css 与 aui3_1.css 并存。手写补位：Avatar/KeyValueList(Descriptions)/Dropdown/SimpleProgress(Progress)/CheckGroup(CheckboxGroup)/SideMenu(Menu)/toast(message shim)/useConfirm(Modal.confirm shim)/原生 range+date(Slider/RangePicker)。待内网实测项：Drawer title 传 JSX（API 标 string，可能需调）、SelectCard/Rating/CheckboxGroup 等 eview-react 控件在 Form 内托管行为、TipBox direction 取值、Table freezeCol 未启用（列固定能力缺失）。",
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIPPED（外网无法安装 @nce/eview-react 及 peer 依赖）",
+    "npm-run-dev": "SKIPPED（外网无法安装依赖）",
+    "manual-api-review": "PASS"
+  }
+}
