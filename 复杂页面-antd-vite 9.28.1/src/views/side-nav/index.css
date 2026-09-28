@@ -1,0 +1,113 @@
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  width: 248px;
+  height: 100%;
+  padding: var(--spacing-2) 0 var(--spacing-3);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-r-sm);
+  transition: width 0.18s ease;
+  overflow: hidden auto;
+}
+
+.side-nav.is-collapsed {
+  width: 48px;
+}
+
+.side-nav__menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 var(--spacing-2);
+}
+
+.side-nav__item-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-nav__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding: 8px var(--spacing-3);
+  border: none;
+  border-radius: var(--radius-action);
+  background: transparent;
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.side-nav__item:hover {
+  background: var(--surface-container-high);
+  color: var(--on-surface);
+}
+
+.side-nav__item.active {
+  background: var(--primary-container);
+  color: var(--primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.side-nav__arrow {
+  margin-left: auto;
+}
+
+.side-nav.is-collapsed .side-nav__item {
+  justify-content: center;
+  padding: 8px;
+}
+
+.side-nav__sub {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: var(--spacing-5);
+}
+
+.side-nav__sub-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding: 6px var(--spacing-3);
+  border: none;
+  border-radius: var(--radius-action);
+  background: transparent;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.side-nav__sub-item:hover {
+  background: var(--surface-container-high);
+  color: var(--on-surface);
+}
+
+.side-nav__sub-item.active {
+  color: var(--primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.side-nav__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: var(--spacing-2) var(--spacing-3) 0;
+  padding-top: var(--spacing-3);
+  border-top: var(--border-width-thin) solid var(--divider);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-s);
+  white-space: nowrap;
+}
+
+.side-nav.is-collapsed .side-nav__footer {
+  justify-content: center;
+  margin: var(--spacing-2) var(--spacing-1) 0;
+}

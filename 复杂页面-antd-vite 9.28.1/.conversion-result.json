@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "npm-install": "PASS",
+    "npm-run-dev": "PASS",
+    "functional": "6/6"
+  },
+  "notes": "check-relative-imports 全部解析；npm install 成功(149 包,新增 react-intl@6.8.9)；vite build 成功(1602 模块全图编译)；npm run dev 启动成功(446ms)，curl / 、/src/main.jsx 、/src/app.jsx 均 HTTP 200 无 stderr；app.jsx 为源项目 Shell(HeaderBar/SideNav/StrategyForm/StrategyTable/StrategyModal，非 'app root' 空壳)；暗色双轨保留(.dark class via context.jsx + theme.darkAlgorithm via app.jsx ConfigProvider)。修复记录:首轮用 PowerShell Set-Content 改 icon 导入路径导致 6 个 jsx 文件中文 mojibake(中→涓?)，改用 Node fs readFileSync/writeFileSync(utf8) 重写修复后通过。LUCIDE 全局经 lucide-bootstrap.js(index.html 前置 module) 注入，复刻 UMD 行为，icon.jsx 原版未改。"
+}
