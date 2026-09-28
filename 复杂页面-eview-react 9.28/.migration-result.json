@@ -1,0 +1,38 @@
+{
+  "status": "FAIL",
+  "round": 1,
+  "failures": [
+    "npm-install 失败：华为内网 npm 源（cmc.centralrepo.rnd.huawei.com）DNS 无法解析，当前环境无内网访问权限，@nce/eview-react / @cloudsop/horizon / @nce/icon-plus 等内网依赖无法安装",
+    "npm-run-dev 跳过：依赖未安装，无法启动 Vite dev server 进行动态验证"
+  ],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "FAIL",
+    "npm-run-dev": "SKIP",
+    "functional": "0/0"
+  },
+  "componentsMigrated": [
+    "Form → @nce/eview-react/Form（useForm→useRef；validateFields()→ref.submit()→onSuccess；Form.useWatch→onValuesChange+useState；Form.Item name+rules 托管；itemCol={12} 多列；StrategyFields/StrategyAdvanced 返回数组使 Form.Item 作为 Form 直接子级）",
+    "Input → @nce/eview-react/TextField（onChange 首参为 value；删除 allowClear/prefix；header-bar 搜索框用本地 state）",
+    "Input.TextArea → @nce/eview-react/TextArea（maxLength 自带右下角计数，删 showCount）",
+    "InputNumber → @nce/eview-react/Spinner（min/max/step 保留；doNotFocusWhenValueUpdate 防焦点跳动；addonAfter 不支持，单位合并到 label）",
+    "Select → @nce/eview-react/Select（options label→text；placeholder→defaultLabel；allowClear→enableClear；Form.Item 内不传 value/onChange）",
+    "TimePicker.RangePicker → 手写 TimeRangePicker（两个 Spinner type=time；value=[start,end]；onChange 数组；无直接对应）",
+    "Checkbox.Group → @nce/eview-react/CheckboxGroup（data=[{text,value}]；options label→text）",
+    "Switch → @nce/eview-react/Switch（checked→toggled；onChange→onToggle；Form 内 data=[false,true] 布尔值 + valuePropName=toggled updateTrigger=onToggle）",
+    "Button → @nce/eview-react/Button（type→status：primary→primary, link→text, danger→risk；loading→disabled+文案切换；htmlType 删除；icon→leftIcon；纯图标 Button type=text shape=circle icon → IconButton tipText）",
+    "Table → @nce/eview-react/Table（dataSource→dataset；dataIndex→key；rowSelection→enableCheckBox+checkedRows+onRowCheck+onHeaderCheck；pagination→enablePagination+enableAutoPaging+pagingProps；expandable→enableRowExpand+onRowExpend；render 行数据取第 4 参 row.rawData；locale.emptyText→emptyTableMsg）",
+    "Modal → @nce/eview-react/Dialog（open→isOpen；footer→buttons 数组；onCancel→onClose 需手动 setIsOpen=false；width→size=[w,'auto']）",
+    "Badge → @nce/eview-react/Badge（count→content）",
+    "Tooltip → @nce/eview-react/TipBox（包裹式 <TipBox content><目标/></TipBox>；title→content；placement→direction）",
+    "message → @nce/eview-react/DivMessage（无命令式 API；notice state + key 重挂；display/type/text/disposeTimeOut/onClose）"
+  ],
+  "componentsHandwritten": [
+    "Menu（header-bar horizontal）→ 手写 app-topnav（div + button + CSS 变量，active 项高亮）",
+    "Menu（side-nav inline + 子菜单）→ 手写 app-sidenav（一级 button + 可折叠分组 + openKeys state；折叠态居中显示图标）",
+    "Segmented（header-bar 语言切换 + strategy-table 视图筛选）→ 手写 app-segmented（div + button + active 项高亮；app-segmented--sm 小尺寸变体）",
+    "TimePicker.RangePicker → 手写 TimeRangePicker（两个 Spinner type=time 拼接 + 分隔符；无 eview-react 直接对应）"
+  ],
+  "notes": "静态层迁移全部完成并通过验证（relative-imports PASS / i18n-keys PASS）。Provider 与入口已按硬约束重构：ConfigProvider + IntlProvider 在 main.jsx（IntlProvider 是 ConfigProvider 直接子级，locale 用 'zh'）；合并 componentsLocales + 业务语言包（src/i18n.js messages）；<body> 加 aui3_1 类（index.html），暗色切 aui3_1_dark（body）+ .dark（html）双轨；dayjs locale 在 Root useEffect 同步。Form 模式严格按 form-migration.md 转换（useForm→useRef、validateFields→submit/onSuccess、Switch data=[false,true]+valuePropName=toggled、Form.Item 通过数组返回保持直接子级）。CSS 全部用源项目 token 变量，类名 app- 前缀。图标复用 src/shared/icon.jsx shim（A 范式，调用点零改动）。BLOCKER：@nce/eview-react 在华为内网 npm 源（cmc.centralrepo.rnd.huawei.com），当前环境无内网访问（DNS 解析失败），npm install 无法拉取 @nce scope 依赖，因此 npm-run-dev 无法执行动态验证。需在内网环境重跑 npm install + npm run dev 完成功能验证。"
+}
