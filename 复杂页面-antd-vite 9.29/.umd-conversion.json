@@ -1,0 +1,121 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "复杂页面-antd-vite",
+  "antdComponents": {
+    "Form": [
+      "src/components/strategy-fields/index.jsx",
+      "src/views/strategy-form/index.jsx",
+      "src/views/strategy-modal/index.jsx"
+    ],
+    "Input": [
+      "src/components/strategy-fields/index.jsx",
+      "src/views/header-bar/index.jsx",
+      "src/views/strategy-table/index.jsx"
+    ],
+    "InputNumber": [
+      "src/components/strategy-fields/index.jsx"
+    ],
+    "Select": [
+      "src/components/strategy-fields/index.jsx"
+    ],
+    "TimePicker": [
+      "src/components/strategy-fields/index.jsx"
+    ],
+    "Checkbox": [
+      "src/components/strategy-fields/index.jsx"
+    ],
+    "Switch": [
+      "src/components/strategy-fields/index.jsx",
+      "src/views/strategy-form/index.jsx",
+      "src/views/strategy-modal/index.jsx"
+    ],
+    "Button": [
+      "src/views/header-bar/index.jsx",
+      "src/views/strategy-form/index.jsx",
+      "src/views/strategy-modal/index.jsx",
+      "src/views/strategy-table/index.jsx"
+    ],
+    "Menu": [
+      "src/views/header-bar/index.jsx",
+      "src/views/side-nav/index.jsx"
+    ],
+    "Segmented": [
+      "src/views/header-bar/index.jsx",
+      "src/views/strategy-table/index.jsx"
+    ],
+    "Badge": [
+      "src/views/header-bar/index.jsx"
+    ],
+    "Tooltip": [
+      "src/views/header-bar/index.jsx",
+      "src/views/strategy-table/index.jsx"
+    ],
+    "message": [
+      "src/views/strategy-form/index.jsx",
+      "src/views/strategy-modal/index.jsx",
+      "src/views/strategy-table/index.jsx"
+    ],
+    "Modal": [
+      "src/views/strategy-modal/index.jsx"
+    ],
+    "Table": [
+      "src/views/strategy-table/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 186,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/status-tag/index.css",
+    "src/components/status-tag/index.jsx",
+    "src/components/strategy-fields/index.css",
+    "src/components/strategy-fields/index.jsx",
+    "src/context.jsx",
+    "src/i18n.js",
+    "src/mock/strategy.js",
+    "src/views/header-bar/index.css",
+    "src/views/header-bar/index.jsx",
+    "src/views/side-nav/index.css",
+    "src/views/side-nav/index.jsx",
+    "src/views/strategy-form/index.css",
+    "src/views/strategy-form/index.jsx",
+    "src/views/strategy-modal/index.css",
+    "src/views/strategy-modal/index.jsx",
+    "src/views/strategy-table/index.css",
+    "src/views/strategy-table/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + antd-darkAlgorithm",
+    "darkClass": ".dark on <html>",
+    "algorithm": "antd theme.darkAlgorithm"
+  },
+  "verification": { "relativeImports": "PASS", "npmInstall": "PASS" },
+  "migrationPlan": [
+    { "antd": "Form", "category": "C", "eview": "Form", "keyDiffs": "useForm()→useRef; validateFields() Promise→submit()+onSuccess 回调; Form 内不能用 div/Row/Col 做栅格,多列用 itemCol/Form.Item.col", "ref": "form-migration.md", "files": ["src/components/strategy-fields/index.jsx", "src/views/strategy-form/index.jsx", "src/views/strategy-modal/index.jsx"] },
+    { "antd": "Input", "category": "A", "eview": "TextField", "keyDiffs": "onChange(value,oldValue,event) 首参是值; validator 返回 {result,message}; required 自带星号; 无 allowClear/prefix/rules", "ref": "components/TextField.md", "files": ["src/components/strategy-fields/index.jsx", "src/views/header-bar/index.jsx", "src/views/strategy-table/index.jsx"] },
+    { "antd": "InputNumber", "category": "A", "eview": "Spinner", "keyDiffs": "onChange(value) 只在有效值触发; onInputError(value) 接无效值; min/max/step/precision", "ref": "components/Spinner.md", "files": ["src/components/strategy-fields/index.jsx"] },
+    { "antd": "Select", "category": "A", "eview": "Select", "keyDiffs": "options 字段 label→text; placeholder→defaultLabel; onChange(value,oldValue,text,oldText,event) 五参; enableClear", "ref": "components/Select.md", "files": ["src/components/strategy-fields/index.jsx"] },
+    { "antd": "TimePicker", "category": "A", "eview": "Spinner type=\"time\"", "keyDiffs": "值是字符串 'hh:mm:ss'; timeFormat", "ref": "components/Spinner.md", "files": ["src/components/strategy-fields/index.jsx"] },
+    { "antd": "Checkbox", "category": "A", "eview": "Checkbox", "keyDiffs": "onChange(value,checked,event,additionalData); onPreChange 拦截", "ref": "components/Checkbox.md", "files": ["src/components/strategy-fields/index.jsx"] },
+    { "antd": "Switch", "category": "A", "eview": "Toggle", "keyDiffs": "checked→toggled; onChange→onToggle(value); data=[关,开]; taggledChildren(拼错)", "ref": "components/Toggle.md", "files": ["src/components/strategy-fields/index.jsx", "src/views/strategy-form/index.jsx", "src/views/strategy-modal/index.jsx"] },
+    { "antd": "Button", "category": "A", "eview": "Button", "keyDiffs": "type→status(default/primary/risk/text); 无 loading/htmlType/danger; 纯图标按钮走 IconButton(不要退化原生 button); 文字+图标用 leftIcon/rightIcon", "ref": "components/Button.md", "files": ["src/views/header-bar/index.jsx", "src/views/strategy-form/index.jsx", "src/views/strategy-modal/index.jsx", "src/views/strategy-table/index.jsx"] },
+    { "antd": "Menu", "category": "B", "eview": "手写", "keyDiffs": "无对应组件; 手写导航列表(顶部 Menu + 侧边 Menu 都需手写)", "ref": "handwrite-templates.md §5", "files": ["src/views/header-bar/index.jsx", "src/views/side-nav/index.jsx"] },
+    { "antd": "Segmented", "category": "A", "eview": "SelectCard", "keyDiffs": "antd Segmented 在映射表未显式列出,UI 模式等同 Radio.Button; eview SelectCard 用 data=[{text,value}]; onChange(value,event); 禁用是 disable(不是 disabled)", "ref": "components/SelectCard.md", "files": ["src/views/header-bar/index.jsx", "src/views/strategy-table/index.jsx"] },
+    { "antd": "Badge", "category": "A", "eview": "Badge", "keyDiffs": "count→content; dot; status 五态+text; max/showZero", "ref": "components/Badge.md", "files": ["src/views/header-bar/index.jsx"] },
+    { "antd": "Tooltip", "category": "A", "eview": "TipBox", "keyDiffs": "包裹式 <TipBox content><目标/></TipBox>; direction 12 方位; trigger='hover'/'click'/'focus'", "ref": "components/TipBox.md", "files": ["src/views/header-bar/index.jsx", "src/views/strategy-table/index.jsx"] },
+    { "antd": "message", "category": "C", "eview": "DivMessage", "keyDiffs": "无命令式 API(message.success() 不能用); 只能渲染 <DivMessage display type='success'>; 需把命令式调用改为组件渲染+state 控制 display", "ref": "components/DivMessage.md", "files": ["src/views/strategy-form/index.jsx", "src/views/strategy-modal/index.jsx", "src/views/strategy-table/index.jsx"] },
+    { "antd": "Modal", "category": "C", "eview": "Dialog", "keyDiffs": "open→isOpen; footer→buttons=[{text,status,onClick}] 数组; onClose 不会自动关闭(需自己 setIsOpen(false)); size/position", "ref": "components/Dialog.md", "files": ["src/views/strategy-modal/index.jsx"] },
+    { "antd": "Table", "category": "A", "eview": "Table", "keyDiffs": "dataSource→dataset; columns[].dataIndex→key; rowSelection→enableCheckBox+onRowCheck; pagination→enablePagination+pagingProps; render 取第4参 row.rawData(可能 undefined,用 row.rawData?.xxx); fixed→freezeCol+freezeColPosition", "ref": "components/Table.md", "files": ["src/views/strategy-table/index.jsx"] }
+  ],
+  "notes": "antd-zh.js 注释改写避免误匹配; font.css URL 改绝对路径; user.png 改绝对路径; app.jsx 合并源 Shell + 暗色逻辑; react-intl 加入依赖(源已使用)。migrationPlan 已前置生成(15 组件全分类): C 模式转换 3 个(Form/message/Modal), B 手写 1 个(Menu), A 有对应 11 个。antdIcons 为空(源用自定义 Icon 组件,非 @ant-design/icons),图标走 antd-to-eview-react scaffold shim 或方案 C 离线匹配。"
+}
