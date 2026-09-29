@@ -1,0 +1,185 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "手写form-vite",
+  "antdComponents": {
+    "Progress": [
+      "src/views/form-aside/index.jsx"
+    ],
+    "Button": [
+      "src/views/page-header/index.jsx",
+      "src/views/work-order-form/index.jsx"
+    ],
+    "Input": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "Select": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "DatePicker": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "Radio": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "Checkbox": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "Modal": [
+      "src/app.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/app.jsx",
+    "src/app.css",
+    "src/context.jsx",
+    "src/use-form.js",
+    "src/components/form-field/index.css",
+    "src/components/form-field/index.jsx",
+    "src/components/form-section/index.css",
+    "src/components/form-section/index.jsx",
+    "src/components/status-tag/index.css",
+    "src/components/status-tag/index.jsx",
+    "src/components/upload-dropzone/index.css",
+    "src/components/upload-dropzone/index.jsx",
+    "src/mock/workOrder.js",
+    "src/shared/icon.jsx",
+    "src/shared/chart.jsx",
+    "src/shared/antd-zh.js",
+    "src/shared/lucide-data.js",
+    "src/views/form-aside/index.css",
+    "src/views/form-aside/index.jsx",
+    "src/views/page-header/index.css",
+    "src/views/page-header/index.jsx",
+    "src/views/work-order-form/index.css",
+    "src/views/work-order-form/index.jsx",
+    "src/views/work-order-form/schema.js"
+  ],
+  "darkMode": {
+    "method": "css-vars (.dark class via context.jsx AppProvider); antd 组件换肤靠 base.css 内 CSS 覆盖，无 darkAlgorithm",
+    "darkClass": ".dark on <html> (由 context.jsx AppProvider isDark 切换)",
+    "algorithm": "none (源项目单轨驱动：token 四层 + ant.css 换肤层同源跟随 .dark class，不使用 antd theme.darkAlgorithm)"
+  },
+  "verification": {
+    "relativeImports": "PASS"
+  },
+  "migrationPlan": [
+    {
+      "antd": "Progress",
+      "category": "B",
+      "eview": "手写",
+      "keyDiffs": "eview-react 无导出；需手写进度条（div+CSS）；源用 percent/strokeColor=var(--primary)/showInfo=false",
+      "ref": "handwrite-templates.md §9",
+      "files": [
+        "src/views/form-aside/index.jsx"
+      ]
+    },
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button",
+      "keyDiffs": "type→status（primary/default/risk/text）；无 loading/htmlType/danger；icon+children→leftIcon；htmlType=submit 需手动挂 onSubmit（eview Button 无 htmlType）；纯图标按钮走 IconButton",
+      "ref": "components/Button.md",
+      "files": [
+        "src/views/page-header/index.jsx",
+        "src/views/work-order-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField / TextArea",
+      "keyDiffs": "Input→TextField：onChange(value,oldValue,event) 首参是值不是 event；无 allowClear/prefix；status=error→validator 返回 {result,message}；TextArea→TextArea：onChange(targetValue,value,event)，onBlur(event) 无 value，maxLength 自带右下角计数替代 showCount；无 autoSize/allowClear/ref 方法",
+      "ref": "components/TextField.md",
+      "files": [
+        "src/views/work-order-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Select",
+      "category": "A",
+      "eview": "Select / MultipleSelect / InputSelect",
+      "keyDiffs": "三种子模式：basic→Select（options label→text，placeholder→defaultLabel，onChange(value,oldValue,text,oldText,event) 五参）；mode=multiple→MultipleSelect（value 数组，onChange(value[],changeValue[],event)，删 mode）；showSearch→InputSelect（onlySelect 决定输入是否可作值）；allowClear→enableClear；suffixIcon 需另行处理",
+      "ref": "components/Select.md",
+      "files": [
+        "src/views/work-order-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "DatePicker",
+      "category": "A",
+      "eview": "DatePicker",
+      "keyDiffs": "不要无条件回写 onChange 的字符串到 value（官方反例）；用 defaultValue+ref.getValue() 或有效 Date 才回写；showTime/format 保留",
+      "ref": "components/DatePicker.md",
+      "files": [
+        "src/views/work-order-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Radio",
+      "category": "A",
+      "eview": "RadioGroup",
+      "keyDiffs": "Radio.Group→RadioGroup：data=[{text,value}]（label→text）；需 isControlled 才受控；onChange 参数顺序有冲突，用兼容写法；options 写法改为 data",
+      "ref": "components/Radio.md",
+      "files": [
+        "src/views/work-order-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Checkbox",
+      "category": "A",
+      "eview": "Checkbox / CheckboxGroup",
+      "keyDiffs": "Checkbox→Checkbox：onChange(value,checked,event,additionalData)，onPreChange 可拦截；Checkbox.Group→CheckboxGroup：data=[{text,value}]，value[]，selectAll；源用 onChange(checked) 需改签名",
+      "ref": "components/Checkbox.md",
+      "files": [
+        "src/views/work-order-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "InputNumber",
+      "category": "A",
+      "eview": "Spinner",
+      "keyDiffs": "onChange(value) 只在有效值触发；onInputError(value) 接无效值；min/max/step/precision 保留；源用 mode=spinner/variant=outlined 需删除（eview 无此属性）",
+      "ref": "components/Spinner.md",
+      "files": [
+        "src/views/work-order-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Modal",
+      "category": "C",
+      "eview": "Dialog",
+      "keyDiffs": "open→isOpen；footer→buttons=[{text,status,onClick}] 数组；onOk/onCancel→buttons 内 onClick + 手动 setIsOpen(false)（onClose 不自动关闭）；width→size；title 保留",
+      "ref": "components/Dialog.md",
+      "files": [
+        "src/app.jsx"
+      ]
+    },
+    {
+      "antd": "message",
+      "category": "C",
+      "eview": "DivMessage",
+      "keyDiffs": "eview-react 无命令式 API；message.success/error/info() → 渲染 <DivMessage display type=\"success/error\">；需把 app.jsx 内 6 处命令式调用改为状态驱动渲染（display 控制，默认 10s 消失）；error 需 enableDisposeTimeOut={false} 常驻",
+      "ref": "components/DivMessage.md",
+      "files": [
+        "src/app.jsx"
+      ]
+    }
+  ],
+  "notes": "源项目表单用 div+antd 输入控件拼合（无 antd Form/Form.Item），校验由 use-form.js 自绘。app.jsx 的 ConfigProvider 仅传 locale，暗色不经过 React。Modal/message 在 app.jsx 使用（extract-umd 仅扫描原 src/ 未覆盖根 app.jsx，已手工补入 antdComponents）。icon.jsx 保留源原版（Lucide 兜底 + icon-plus 在线），lucide-data.js 提取自 HTML 内联 LUCIDE 子集挂 window.LUCIDE。chart.jsx 未被任何视图引用（保留备查）。"
+}

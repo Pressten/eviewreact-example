@@ -1,0 +1,197 @@
+// App entry — ICT React page（eview-react 版）
+// 暗色方案：aui3_1_dark 挂 <body>（eview-react 组件暗色）+ .dark 挂 <html>（原始 token 暗色覆盖）
+// 由 context.jsx 的 AppProvider isDark 同步切换（main.jsx 已引 aui3_1.css + aui3_1_dark.css）
+
+import { useEffect, useRef, useState } from "react";
+import dayjs from "dayjs";
+import Dialog from "@nce/eview-react/Dialog";
+import DivMessage from "@nce/eview-react/DivMessage";
+import { IconPlusIcPublicAlert } from "@nce/icon-plus";
+import { AppProvider } from "./context.jsx";
+import { useForm } from "./use-form.js";
+import PageHeader from "./views/page-header/index.jsx";
+import WorkOrderForm from "./views/work-order-form/index.jsx";
+import FormAside from "./views/form-aside/index.jsx";
+import { orderSchema, orderInitialValues } from "./views/work-order-form/schema.js";
+import {
+  sampleValues,
+  requiredKeys,
+  workOrderTypes,
+  priorities,
+  teams,
+  assignees,
+  devices,
+} from "./mock/workOrder.js";
+import "./app.css";
+
+function computeProgress(values) {
+  const filled = requiredKeys.filter(function (key) {
+    const v = values[key];
+    if (v === undefined || v === null || v === "" || v === false) return false;
+    if (Array.isArray(v)) return v.length > 0;
+    return true;
+  }).length;
+  return Math.round((filled / requiredKeys.length) * 100);
+}
+
+function labelOf(list, value) {
+  const hit = list.find(function (item) { return item.value === value; });
+  return hit ? hit.label : "—";
+}
+
+export default function App() {
+  return (
+    <AppProvider>
+      <WorkOrderPage />
+    </AppProvider>
+  );
+}
+
+function WorkOrderPage() {
+  const form = useForm(orderSchema, orderInitialValues);
+  const [progress, setProgress] = useState(0);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [summary, setSummary] = useState({});
+  const [notice, setNotice] = useState(null);
+  const startNewRef = useRef(false);
+
+  useEffect(function () {
+    setProgress(computeProgress(form.values));
+  }, [form.values]);
+
+  function notify(type, text, persist) {
+    setNotice({ key: Date.now(), type: type, text: text, persist: !!persist });
+  }
+
+  function handleFill() {
+    form.setValues(
+      Object.assign({}, sampleValues, {
+        dueTime: dayjs().add(1, "day").hour(18).minute(0).second(0).toDate(),
+      })
+    );
+    notify("success", "已填充示例数据，请按实际情况调整后提交");
+  }
+
+  function handleSaveDraft() {
+    notify("success", "草稿已保存，可在“我的工单 - 草稿箱”中继续填写");
+  }
+
+  function handleCancel() {
+    form.reset();
+    notify("default", "已清空表单内容");
+  }
+
+  function focusField(name) {
+    const el = document.getElementById(name);
+    if (!el) return;
+    if (el.scrollIntoView) el.scrollIntoView({ block: "center", behavior: "smooth" });
+    try {
+      el.focus({ preventScroll: true });
+    } catch (e) {
+      /* 部分控件不支持 focus，忽略 */
+    }
+  }
+
+  function submit(startNew) {
+    const result = form.validate();
+    if (!result.ok) {
+      notify("error", "表单存在未填写或格式有误的必填项，请检查标红字段", true);
+      focusField(result.firstError);
+      return;
+    }
+    setSummary(result.values);
+    startNewRef.current = !!startNew;
+    setConfirmOpen(true);
+  }
+
+  function handleConfirmed() {
+    setConfirmOpen(false);
+    if (startNewRef.current) {
+      form.reset();
+      notify("success", "工单已提交，已为你打开新的空白工单");
+    } else {
+      notify("success", "工单已提交，处理进展将通过短信与邮件通知");
+    }
+  }
+
+  const summaryRows = [
+    { label: "工单标题", value: summary.title || "—", full: true },
+    { label: "工单类型", value: labelOf(workOrderTypes, summary.type) },
+    { label: "优先级", value: labelOf(priorities, summary.priority) },
+    { label: "期望完成时间", value: summary.dueTime ? dayjs(summary.dueTime).format("YYYY-MM-DD HH:mm") : "—" },
+    { label: "计划工时", value: summary.planHours ? summary.planHours + " 小时" : "—" },
+    { label: "关联设备", value: labelOf(devices, summary.device) },
+    { label: "指派团队", value: labelOf(teams, summary.team) },
+    { label: "处理人", value: labelOf(assignees, summary.assignee) },
+    {
+      label: "联系人",
+      value: summary.contactName ? summary.contactName + " · " + (summary.contactPhone || "") : "—",
+    },
+  ];
+
+  return (
+    <div className="page-shell">
+      {notice ? (
+        <DivMessage
+          key={notice.key}
+          display
+          type={notice.type}
+          text={notice.text}
+          enableDisposeTimeOut={!notice.persist}
+          onClose={function () { setNotice(null); }}
+          style={{ margin: "0 var(--spacing-page)", marginTop: "var(--spacing-3)" }}
+        />
+      ) : null}
+
+      <PageHeader
+        onFill={handleFill}
+        onReset={handleCancel}
+        onSave={handleSaveDraft}
+        onSubmit={function () { submit(false); }}
+        onSubmitAndNew={function () { submit(true); }}
+      />
+
+      <div className="page-body">
+        <main className="page-form-card">
+          <WorkOrderForm
+            form={form}
+            onCancel={handleCancel}
+            onSaveDraft={handleSaveDraft}
+            onSubmit={submit}
+          />
+        </main>
+
+        <aside className="page-aside">
+          <FormAside progress={progress} />
+        </aside>
+      </div>
+
+      <Dialog
+        title="提交工单确认"
+        isOpen={confirmOpen}
+        onClose={function () { setConfirmOpen(false); }}
+        size={[620, "auto"]}
+        style={{ maxHeight: "80vh" }}
+        buttons={[
+          { text: "再检查一下", onClick: function () { setConfirmOpen(false); } },
+          { text: "确认提交", status: "primary", onClick: handleConfirmed },
+        ]}
+      >
+        <p className="confirm-lead">
+          <IconPlusIcPublicAlert iconSize="1rem" iconColor={["var(--critical)"]} />
+          提交后工单将进入审批流，标题、优先级与关联设备不可直接修改。
+        </p>
+        <div className="confirm-grid">
+          {summaryRows.map(function (row) {
+            return (
+              <div className={"confirm-grid__row" + (row.full ? " confirm-grid__row--full" : "")} key={row.label}>
+                <span className="confirm-grid__label">{row.label}</span>
+                <span className="confirm-grid__value">{row.value}</span>
+              </div>
+            );
+          })}
+        </div>
+      </Dialog>
+    </div>
+  );
+}

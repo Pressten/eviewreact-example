@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "relative-imports=PASS（.umd-conversion.json verification.relativeImports=PASS，跳过 check-relative-imports.cjs）。i18n-keys=PASS（check-i18n-keys.cjs 未发现 t(x,x) 缺前缀调用；源项目无 react-intl t() 使用，无 MISSING_TRANSLATION 风险）。npm-install=SKIP（外网无法访问 @nce 内网源 cmc.centralrepo.rnd.huawei.com，30s 超时；不影响整体 status）。组件迁移：10/10 完成（Progress 手写、Button/Input/TextArea/Select/MultipleSelect/InputSelect/DatePicker/RadioGroup/Checkbox/CheckboxGroup/Spinner/Button 替换、Modal→Dialog、message→DivMessage）。图标走方案 C（icon-plus 静态 import），21 个 Lucide 名离线匹配 @nce/icon-plus（其中 chevron-right→IctRightArrow、circle-alert→PublicAlert、circle-check→PublicCheckmark、file-text→PublicNotes、lightbulb→PublicInfo、list-checks/clipboard-list→PublicClipboard、save→PublicDisk、sparkles→PublicStar、phone→PublicTelephone、server→IctBuiltServer、shield-check→IctProtectNetworkSecurity、users→PublicPerson、hash→IctIdcard 等为近似匹配；search/send/upload/eraser/clock/paperclip/x 为精确匹配）。scaffold shim src/shared/icon.jsx 保留作为 A 范式兜底（未删除）。"
+}
