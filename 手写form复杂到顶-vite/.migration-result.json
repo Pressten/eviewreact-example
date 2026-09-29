@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "17 个 antd 组件全部替换为 @nce/eview-react（A12/B2/C3）。i18n 检查通过（0 个 t(x,x) 调用、0 个 value≠msgId 字段）。npm install 超时 SKIP——外网无法访问 @nce 内网源，仅静态检查 i18n-keys 生效。图标保留 scaffold <Icon> shim（备选 A）：40+ 个 Lucide 风格图标名多数在 icon-plus catalog 中无直接匹配，shim 已就位且 import 路径正确，内网环境下走 icon-plus 在线 fetch。"
+}
