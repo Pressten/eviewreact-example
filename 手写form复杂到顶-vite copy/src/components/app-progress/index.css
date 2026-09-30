@@ -1,0 +1,9 @@
+.app-progress { display: inline-flex; align-items: center; gap: 8px; }
+.app-progress--circle { position: relative; justify-content: center; align-items: center; }
+.app-progress--circle .app-progress__num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 600; color: var(--on-surface, #1a1a1a); }
+.app-progress--line { width: 100%; }
+.app-progress--line .app-progress__outer { flex: 1; border-radius: 4px; overflow: hidden; background: var(--hover, rgba(0,0,0,0.06)); }
+.app-progress--line .app-progress__bar { height: 100%; border-radius: 4px; transition: width .2s ease; }
+.app-progress--line .app-progress__num { min-width: 36px; text-align: right; color: var(--on-surface-variant, #666); font-size: 0.8125rem; }
+.app-progress__track { stroke: var(--hover, rgba(0,0,0,0.06)); }
+.app-progress__bar { transition: stroke-dashoffset .2s ease; }

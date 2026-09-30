@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "check-relative-imports.cjs: all relative imports resolved (incl. ../../../assets/shared/icon.jsx cross-root imports to assets/shared/icon.jsx, kept at source path). No ./src/ residue in src/ files."
+}

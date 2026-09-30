@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP",
+    "relative-imports": "SKIP(已由上游 PASS)"
+  },
+  "notes": "antd→@nce/eview-react 迁移完成。check-i18n-keys 0 高危调用（源项目硬编码中文场景A，main.jsx IntlProvider 已就位 locale=zh）。npm install 30s 超时 SKIP（@nce/eview-react/@nce/icon-plus/@cloudsop/* 等内网依赖，外网 npm 不可达；node_modules 未预装）。相对导入已由 umd-to-antd-vite 上游 PASS 跳过。17 个 antd 组件全部替换：A 类有对应 14 个（Tooltip/Popover→TipBox、Select→Select/InputSelect/MultipleSelect、Input→TextField/TextArea、InputNumber→Spinner、Radio.Group→RadioGroup、Switch→Toggle、Button→Button/IconButton、Breadcrumb→Crumbs、Menu→Accordion、DatePicker→DatePicker range、Checkbox.Group→CheckboxGroup、message→DivMessage）、B 类无对应 2 个手写（Progress→AppProgress 线形/环形、Timeline→AppTimeline）、C 类模式转换 2 个（Modal→Dialog isOpen/buttons/onClose、Steps→currentStep/data/onClick）。图标：match-icons.cjs --apply 转换 15 字面量+3 三元为 @nce/icon-plus 静态 import，13 字面量(siren/save/square-pen/file-clock/file-check/inbox/phone/bell/circle-user/settings/shield-check/rotate-ccw/square-menu)+1 三元(panel-left-open/close)+6 动态名(group.icon/n.icon/item.icon/tpl.icon/FILE_KIND_ICON/icon prop)保留方案A shim(src/shared/icon.jsx 运行时 fetch icon-plus，需内网)。遗留：DatePicker 改 uncontrolled+onOkClick(官方反例规避)重置不视觉清空；Select 无 status 红框靠 FieldRow error 文本提示；Button 无 type=dashed/block 用 style width 替代；Radio.Group button 样式降级为普通 RadioGroup；TextField 无 prefix 联系电话/搜索图标改用 suffix 或丢弃；Accordion expanded/onExpand 语义反转处理；Dialog buttons leftIcon 依赖 buttons=Button props 解释。"
+}
