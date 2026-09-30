@@ -1,0 +1,45 @@
+.app-progress {
+  display: flex;
+  align-items: center;
+}
+
+.app-progress__track {
+  flex: 1;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  background: var(--surface-variant);
+  overflow: hidden;
+}
+
+.app-progress__fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.2s ease;
+}
+
+.app-progress-circle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-progress-circle__svg {
+  display: block;
+}
+
+.app-progress-circle__bg {
+  stroke: var(--surface-variant);
+}
+
+.app-progress-circle__bar {
+  transition: stroke-dashoffset 0.2s ease;
+}
+
+.app-progress-circle__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,308 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "手写form-eview",
+  "antdComponents": {
+    "Progress": [
+      "src/views/form-aside/index.jsx",
+      "src/views/side-nav/index.jsx",
+      "src/views/workorder-form/index.jsx"
+    ],
+    "Timeline": [
+      "src/views/form-aside/index.jsx"
+    ],
+    "Tooltip": [
+      "src/views/form-aside/index.jsx",
+      "src/views/page-header/index.jsx",
+      "src/views/side-nav/index.jsx",
+      "src/views/top-bar/index.jsx",
+      "src/views/workorder-form/index.jsx"
+    ],
+    "Modal": [
+      "src/views/inspect-entry-modal/index.jsx",
+      "src/views/workorder-page/index.jsx"
+    ],
+    "Select": [
+      "src/views/inspect-entry-modal/index.jsx",
+      "src/views/workorder-form/index.jsx"
+    ],
+    "Input": [
+      "src/views/inspect-entry-modal/index.jsx",
+      "src/views/top-bar/index.jsx",
+      "src/views/workorder-form/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/inspect-entry-modal/index.jsx",
+      "src/views/workorder-form/index.jsx"
+    ],
+    "Radio": [
+      "src/views/inspect-entry-modal/index.jsx",
+      "src/views/workorder-form/index.jsx"
+    ],
+    "Switch": [
+      "src/views/inspect-entry-modal/index.jsx",
+      "src/views/workorder-form/index.jsx"
+    ],
+    "Button": [
+      "src/views/inspect-entry-modal/index.jsx",
+      "src/views/page-header/index.jsx",
+      "src/views/top-bar/index.jsx",
+      "src/views/workorder-form/index.jsx",
+      "src/views/workorder-page/index.jsx"
+    ],
+    "Breadcrumb": [
+      "src/views/page-header/index.jsx"
+    ],
+    "Menu": [
+      "src/views/side-nav/index.jsx"
+    ],
+    "Popover": [
+      "src/views/top-bar/index.jsx"
+    ],
+    "DatePicker": [
+      "src/views/workorder-form/index.jsx"
+    ],
+    "Checkbox": [
+      "src/views/workorder-form/index.jsx"
+    ],
+    "Steps": [
+      "src/views/workorder-page/index.jsx"
+    ],
+    "message": [
+      "src/views/workorder-page/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/field-row/index.css",
+    "src/components/field-row/index.jsx",
+    "src/components/panel-card/index.css",
+    "src/components/panel-card/index.jsx",
+    "src/components/status-tag/index.css",
+    "src/components/status-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/workorder.js",
+    "src/views/form-aside/index.css",
+    "src/views/form-aside/index.jsx",
+    "src/views/inspect-entry-modal/index.css",
+    "src/views/inspect-entry-modal/index.jsx",
+    "src/views/page-header/index.css",
+    "src/views/page-header/index.jsx",
+    "src/views/side-nav/index.css",
+    "src/views/side-nav/index.jsx",
+    "src/views/top-bar/index.css",
+    "src/views/top-bar/index.jsx",
+    "src/views/workorder-form/index.css",
+    "src/views/workorder-form/index.jsx",
+    "src/views/workorder-page/index.css",
+    "src/views/workorder-page/index.jsx",
+    "src/views/workorder-page/validate.js"
+  ],
+  "darkMode": {
+    "method": "css-vars + antd-darkAlgorithm",
+    "darkClass": ".dark on <html>",
+    "algorithm": "antd theme.darkAlgorithm"
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button / IconButton",
+      "keyDiffs": "type→status(default/primary/risk/text)；纯图标按钮(shape=circle+icon+无children)用 IconButton iconName tipText；有图标时必须用 text= 不能用 children；无 loading/htmlType/danger",
+      "ref": "components/Button.md",
+      "files": [
+        "src/views/inspect-entry-modal/index.jsx",
+        "src/views/page-header/index.jsx",
+        "src/views/top-bar/index.jsx",
+        "src/views/workorder-form/index.jsx",
+        "src/views/workorder-page/index.jsx"
+      ]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField / TextArea",
+      "keyDiffs": "Input→TextField onChange(value,oldValue,event) 首参是值；Input.TextArea→TextArea maxLength 自带右下角计数(替代 showCount)；无 allowClear/prefix/onPressEnter/rules；validator 返回 {result,message}",
+      "ref": "components/TextField.md",
+      "files": [
+        "src/views/inspect-entry-modal/index.jsx",
+        "src/views/top-bar/index.jsx",
+        "src/views/workorder-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "InputNumber",
+      "category": "A",
+      "eview": "Spinner",
+      "keyDiffs": "onChange(value) 只在有效值触发；onInputError(value) 接无效值；min/max/step/precision 保留；重置加 doNotFocusWhenValueUpdate；mode/variant 是 antd 私有 props 需删除",
+      "ref": "components/Spinner.md",
+      "files": [
+        "src/views/inspect-entry-modal/index.jsx",
+        "src/views/workorder-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Select",
+      "category": "A",
+      "eview": "Select / MultipleSelect / InputSelect",
+      "keyDiffs": "options label→text；placeholder→defaultLabel；onChange(value,oldValue,text,oldText,event) 五参；enableClear 替代 allowClear；mode=multiple→MultipleSelect(删 mode,value 数组,placeholder 不变)；showSearch→InputSelect(onlySelect 决定输入是否可作值)",
+      "ref": "components/Select.md",
+      "files": [
+        "src/views/inspect-entry-modal/index.jsx",
+        "src/views/workorder-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Radio",
+      "category": "A",
+      "eview": "Radio / RadioGroup / SelectCard",
+      "keyDiffs": "Radio.Group→RadioGroup 用 data=[{text,value}]；需 isControlled 才受控；onChange 参数顺序有冲突用兼容写法；Radio.Button+optionType=button→SelectCard(data=[{text,value}],onChange(value,event),禁用是 disable)",
+      "ref": "components/Radio.md",
+      "files": [
+        "src/views/inspect-entry-modal/index.jsx",
+        "src/views/workorder-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Switch",
+      "category": "A",
+      "eview": "Toggle",
+      "keyDiffs": "checked→toggled；onChange→onToggle(value)；data=[关,开]；checkedChildren/unCheckedChildren→taggledChildren(官方拼错)；isControlToggled 二次确认",
+      "ref": "components/Toggle.md",
+      "files": [
+        "src/views/inspect-entry-modal/index.jsx",
+        "src/views/workorder-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Checkbox",
+      "category": "A",
+      "eview": "Checkbox / CheckboxGroup",
+      "keyDiffs": "Checkbox.Group→CheckboxGroup 用 data=[{text,value}]；value[]；selectAll；onChange(value,checked,event,additionalData)；onPreChange 拦截",
+      "ref": "components/Checkbox.md",
+      "files": [
+        "src/views/workorder-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "DatePicker",
+      "category": "A",
+      "eview": "DatePicker",
+      "keyDiffs": "不要无条件回写 onChange 字符串到 value(官方反例)；用 defaultValue+ref.getValue() 或有效 Date 才回写；RangePicker→range={[]}；onOkClick 取 fromDateObj/toDateObj；回调里要 setTimeout 再 setState",
+      "ref": "components/DatePicker.md",
+      "files": [
+        "src/views/workorder-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tooltip",
+      "category": "A",
+      "eview": "TipBox",
+      "keyDiffs": "包裹式 <TipBox content><目标/></TipBox>(不是 antd 的 children 包裹)；direction 12 方位；trigger=hover/click/focus；title→content",
+      "ref": "components/TipBox.md",
+      "files": [
+        "src/views/form-aside/index.jsx",
+        "src/views/page-header/index.jsx",
+        "src/views/side-nav/index.jsx",
+        "src/views/top-bar/index.jsx",
+        "src/views/workorder-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Popover",
+      "category": "A",
+      "eview": "TipBox",
+      "keyDiffs": "trigger=click；content 自定义；包裹式用法 <TipBox content={panel}><触发器/></TipBox>；arrow 等部分 props 无对应",
+      "ref": "components/TipBox.md",
+      "files": [
+        "src/views/top-bar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Breadcrumb",
+      "category": "A",
+      "eview": "Crumbs",
+      "keyDiffs": "items→data=[{title,url?}]；最后一项无 url；seprator(官方拼错)替代 separator；onClick(data,event) 组件级",
+      "ref": "components/Crumbs.md",
+      "files": [
+        "src/views/page-header/index.jsx"
+      ]
+    },
+    {
+      "antd": "Menu",
+      "category": "A",
+      "eview": "Accordion",
+      "keyDiffs": "items→data(key/label→value/title)；selectedKeys 数组→selectedValue 单 string；onClick({key})→onClick(node)；inlineCollapsed→expanded/onExpand(⚠️ expanded={true}=收起 语义反转)；多级导航用 Accordion，简单平铺列表仍可手写",
+      "ref": "components/Accordion.md",
+      "files": [
+        "src/views/side-nav/index.jsx"
+      ]
+    },
+    {
+      "antd": "Progress",
+      "category": "B",
+      "eview": "手写",
+      "keyDiffs": "无导出；line/circle 进度条手写(CSS+token)",
+      "ref": "handwrite-templates.md §9",
+      "files": [
+        "src/views/form-aside/index.jsx",
+        "src/views/side-nav/index.jsx",
+        "src/views/workorder-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Timeline",
+      "category": "B",
+      "eview": "手写",
+      "keyDiffs": "导出名 TimeLine 存在但无 Reference API 文档；手写时间线(CSS+token+节点数组 map)",
+      "ref": "handwrite-templates.md",
+      "files": [
+        "src/views/form-aside/index.jsx"
+      ]
+    },
+    {
+      "antd": "Steps",
+      "category": "C",
+      "eview": "Steps",
+      "keyDiffs": "current→currentStep(对应 data[].value 不是下标)；items→data=[{text,value}]；onClick(index) 只允许回跳；onChange 不存在",
+      "ref": "components/Steps.md",
+      "files": [
+        "src/views/workorder-page/index.jsx"
+      ]
+    },
+    {
+      "antd": "Modal",
+      "category": "C",
+      "eview": "Dialog",
+      "keyDiffs": "open→isOpen；footer→buttons=[{text,status,onClick}] 数组；onClose 不会自动关闭需自己 setIsOpen(false)；size/position；title 保留",
+      "ref": "components/Dialog.md",
+      "files": [
+        "src/views/inspect-entry-modal/index.jsx",
+        "src/views/workorder-page/index.jsx"
+      ]
+    },
+    {
+      "antd": "message",
+      "category": "A",
+      "eview": "DivMessage",
+      "keyDiffs": "无命令式 API(message.useMessage()+contextHolder 需改成渲染式 <DivMessage display type=success/error/info>)；display 控制显隐；默认 10s 消失换 key 重挂；错误用 enableDisposeTimeOut={false} 常驻",
+      "ref": "components/DivMessage.md",
+      "files": [
+        "src/views/workorder-page/index.jsx"
+      ]
+    }
+  ],
+  "notes": "Source uses custom <Icon name=\"...\" /> component (48 call sites) backed by icon-plus online + Lucide fallback; vite.config.js proxy already configured. No antd icons imported (antdIcons empty). Source form uses div+输入组件拼合, no Form/Form.Item wrapper. message.useMessage() contextHolder pattern in workorder-page needs conversion to declarative DivMessage rendering. Steps+Modal in workorder-page are category C pattern conversions."
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP",
+    "build": "SKIP"
+  },
+  "notes": "All 17 antd components migrated to @nce/eview-react. i18n check passed (no t(x,x) calls; source has no react-intl, all Chinese hardcoded per i18n-migration scenario A). npm-install SKIP: .npmrc points to Huawei internal registries (cmc.centralrepo.rnd.huawei.com) unreachable from external environment; build also SKIP as it depends on node_modules/@nce/eview-react. Icons: 方案A shim reuse, 46 call sites across 9 files, zero changes (src/shared/icon.jsx retained). Handwritten: Progress (AppProgress line + AppProgressCircle SVG) in src/components/app-progress/, Timeline inline in form-aside. Pattern conversions: Steps current→currentStep(data[].value), Modal open→isOpen/footer→buttons/onClose manual close, message.useMessage()→declarative DivMessage with fixed positioning. CSS: all .ant-* selectors removed from view/component CSS; theme-dark.css retains legacy antd dark overrides (dead CSS, harmless). Key prop renames verified: taggledChildren/unTaggledChildren (official misspelling), defaultLabel (not placeholder) for Select, enableClear (not allowClear), doNotFocusWhenValueUpdate for Spinner, data={[false,true]} booleans for Toggle, expanded={true}=收起 semantic reversal for Accordion."
+}
