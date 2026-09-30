@@ -1,0 +1,262 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "云数据资产管理平台-vite",
+  "antdComponents": {
+    "Tag": [
+      "src/components/status-tag/index.jsx"
+    ],
+    "Modal": [
+      "src/views/confirm-modal/index.jsx",
+      "src/views/datasource-modal/index.jsx"
+    ],
+    "Button": [
+      "src/views/confirm-modal/index.jsx",
+      "src/views/datasource-modal/index.jsx",
+      "src/views/datasource-table/index.jsx",
+      "src/views/filter-panel/index.jsx",
+      "src/views/header-bar/index.jsx",
+      "src/views/side-nav/index.jsx"
+    ],
+    "message": [
+      "src/views/confirm-modal/index.jsx",
+      "src/views/datasource-modal/index.jsx",
+      "src/views/datasource-table/index.jsx"
+    ],
+    "Input": [
+      "src/views/datasource-modal/index.jsx",
+      "src/views/filter-panel/index.jsx"
+    ],
+    "Select": [
+      "src/views/datasource-modal/index.jsx",
+      "src/views/filter-panel/index.jsx"
+    ],
+    "Segmented": [
+      "src/views/datasource-modal/index.jsx",
+      "src/views/datasource-table/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/datasource-modal/index.jsx"
+    ],
+    "Table": [
+      "src/views/datasource-table/index.jsx"
+    ],
+    "Dropdown": [
+      "src/views/datasource-table/index.jsx",
+      "src/views/header-bar/index.jsx"
+    ],
+    "Tooltip": [
+      "src/views/datasource-table/index.jsx",
+      "src/views/header-bar/index.jsx",
+      "src/views/side-nav/index.jsx"
+    ],
+    "DatePicker": [
+      "src/views/filter-panel/index.jsx"
+    ],
+    "Menu": [
+      "src/views/header-bar/index.jsx",
+      "src/views/side-nav/index.jsx"
+    ],
+    "Breadcrumb": [
+      "src/app.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/form-field/index.css",
+    "src/components/form-field/index.jsx",
+    "src/components/page-card/index.css",
+    "src/components/page-card/index.jsx",
+    "src/components/status-tag/index.css",
+    "src/components/status-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/datasource.js",
+    "src/views/confirm-modal/index.css",
+    "src/views/confirm-modal/index.jsx",
+    "src/views/datasource-modal/index.css",
+    "src/views/datasource-modal/index.jsx",
+    "src/views/datasource-table/index.css",
+    "src/views/datasource-table/index.jsx",
+    "src/views/filter-panel/index.css",
+    "src/views/filter-panel/index.jsx",
+    "src/views/header-bar/index.css",
+    "src/views/header-bar/index.jsx",
+    "src/views/side-nav/index.css",
+    "src/views/side-nav/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + antd-darkAlgorithm",
+    "darkClass": ".dark on <html>",
+    "algorithm": "antd theme.darkAlgorithm"
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "Tag",
+      "category": "A",
+      "eview": "Tag",
+      "keyDiffs": "无 closable（删除靠数组+onClick）；color→六语义色 default/primary/success/warning/caution/danger；fill=\"outline\" 描边替代 bordered",
+      "ref": "components/Tag.md",
+      "files": [
+        "src/components/status-tag/index.jsx"
+      ]
+    },
+    {
+      "antd": "Modal",
+      "category": "C",
+      "eview": "Dialog",
+      "keyDiffs": "open→isOpen；footer→buttons=[{text,status,onClick}] 数组；onClose 不会自动关闭需自己 setIsOpen(false)；size/position",
+      "ref": "components/Dialog.md",
+      "files": [
+        "src/views/confirm-modal/index.jsx",
+        "src/views/datasource-modal/index.jsx"
+      ]
+    },
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button",
+      "keyDiffs": "type→status（primary/risk/text）；danger→status=risk；纯图标按钮(shape=circle+type=text+icon+无 children)→IconButton；有 children+icon→leftIcon/rightIcon 且文字搬 text= 不能保留 children；无 loading/htmlType",
+      "ref": "components/Button.md",
+      "files": [
+        "src/views/confirm-modal/index.jsx",
+        "src/views/datasource-modal/index.jsx",
+        "src/views/datasource-table/index.jsx",
+        "src/views/filter-panel/index.jsx",
+        "src/views/header-bar/index.jsx",
+        "src/views/side-nav/index.jsx"
+      ]
+    },
+    {
+      "antd": "message",
+      "category": "A",
+      "eview": "DivMessage",
+      "keyDiffs": "无命令式 API；只能渲染 <DivMessage display type=\"success\">；需把 message.success() 调用点改为声明式组件 + 状态驱动 display；默认 10s 消失",
+      "ref": "components/DivMessage.md",
+      "files": [
+        "src/views/confirm-modal/index.jsx",
+        "src/views/datasource-modal/index.jsx",
+        "src/views/datasource-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField",
+      "keyDiffs": "Input→TextField：onChange(value,oldValue,event) 首参是值不是 event；无 allowClear/prefix/onPressEnter；Input.TextArea→TextArea 独立组件 onChange(targetValue,value,event) maxLength 自带右下角计数替代 showCount；无 autoSize/allowClear/ref 方法",
+      "ref": "components/TextField.md",
+      "files": [
+        "src/views/datasource-modal/index.jsx",
+        "src/views/filter-panel/index.jsx"
+      ]
+    },
+    {
+      "antd": "Select",
+      "category": "A",
+      "eview": "Select",
+      "keyDiffs": "options label→text；placeholder→defaultLabel；onChange(value,oldValue,text,oldText,event) 五参；allowClear→enableClear；virtualScroll >100 项",
+      "ref": "components/Select.md",
+      "files": [
+        "src/views/datasource-modal/index.jsx",
+        "src/views/filter-panel/index.jsx"
+      ]
+    },
+    {
+      "antd": "Segmented",
+      "category": "A",
+      "eview": "SelectCard",
+      "keyDiffs": "无同名对应；近似 SelectCard（Radio.Button 的映射）；data=[{text,value}]；onChange(value,event)；禁用是 disable（不是 disabled）；block 无对应需 CSS 补",
+      "ref": "components/SelectCard.md",
+      "files": [
+        "src/views/datasource-modal/index.jsx",
+        "src/views/datasource-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "InputNumber",
+      "category": "A",
+      "eview": "Spinner",
+      "keyDiffs": "onChange(value) 只在有效值触发；onInputError(value) 接无效值；min/max/step/precision 保留；重置加 doNotFocusWhenValueUpdate",
+      "ref": "components/Spinner.md",
+      "files": [
+        "src/views/datasource-modal/index.jsx"
+      ]
+    },
+    {
+      "antd": "Table",
+      "category": "A",
+      "eview": "Table",
+      "keyDiffs": "dataSource→dataset；columns[].dataIndex→key；fixed→freezeCol+freezeColPosition；pagination→enablePagination+pagingProps+onPageChange；rowSelection→enableCheckBox+onRowCheck；render 函数取第4参 row.rawData（不是第2参 rowData，且可能 undefined 需 ?.）；并检查 i18n key 对齐",
+      "ref": "components/Table.md",
+      "files": [
+        "src/views/datasource-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "Dropdown",
+      "category": "B",
+      "eview": "手写",
+      "keyDiffs": "无直接对应组件；可借 TipBox trigger=\"click\" + 自定义 content 承载弹出层 + 手写菜单项列表；menu.items 结构需转为自定义渲染",
+      "ref": "handwrite-templates.md",
+      "files": [
+        "src/views/datasource-table/index.jsx",
+        "src/views/header-bar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tooltip",
+      "category": "A",
+      "eview": "TipBox",
+      "keyDiffs": "包裹式 <TipBox content><目标/></TipBox>（不再是目标上的属性）；direction 12 方位；trigger=\"hover\"/\"click\"/\"focus\"",
+      "ref": "components/TipBox.md",
+      "files": [
+        "src/views/datasource-table/index.jsx",
+        "src/views/header-bar/index.jsx",
+        "src/views/side-nav/index.jsx"
+      ]
+    },
+    {
+      "antd": "DatePicker",
+      "category": "A",
+      "eview": "DatePicker",
+      "keyDiffs": "不要无条件回写 onChange 字符串到 value（官方反例）；用 defaultValue+ref.getValue() 或有效 Date 才回写；RangePicker→DatePicker range=[] + onOkClick 取 fromDateObj/toDateObj，回调里要 setTimeout 再 setState",
+      "ref": "components/DatePicker.md",
+      "files": [
+        "src/views/filter-panel/index.jsx"
+      ]
+    },
+    {
+      "antd": "Menu",
+      "category": "A",
+      "eview": "Accordion",
+      "keyDiffs": "items→data（key→value、label→title）；selectedKeys 数组→selectedValue 单 string；onClick({key})→onClick(node)；inlineCollapsed→expanded（⚠️ expanded=true=收起 语义反转）；多级导航用 Accordion，简单平铺列表仍可手写",
+      "ref": "components/Accordion.md",
+      "files": [
+        "src/views/header-bar/index.jsx",
+        "src/views/side-nav/index.jsx"
+      ]
+    },
+    {
+      "antd": "Breadcrumb",
+      "category": "A",
+      "eview": "Crumbs",
+      "keyDiffs": "items→data=[{title,url?}]；最后一项无 url；seprator（官方拼错）设分隔符；onClick(data,event) 组件级回调",
+      "ref": "components/Crumbs.md",
+      "files": [
+        "src/app.jsx"
+      ]
+    }
+  ],
+  "notes": ""
+}

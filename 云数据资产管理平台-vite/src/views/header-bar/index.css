@@ -1,0 +1,114 @@
+.header-bar {
+  flex: none;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  padding: 0 var(--spacing-4);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 10;
+}
+
+.header-bar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: none;
+}
+
+.header-bar__logo {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-base);
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.header-bar__name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.header-bar__nav {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.app-nav-item {
+  position: relative;
+  height: 3rem;
+  padding: 0 0.875rem;
+  border: none;
+  background: transparent;
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.app-nav-item:hover {
+  color: var(--on-surface);
+}
+
+.app-nav-item.active {
+  color: var(--primary);
+}
+
+.app-nav-item.active::after {
+  content: "";
+  position: absolute;
+  left: 0.875rem;
+  right: 0.875rem;
+  bottom: 0;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 1px;
+}
+
+.header-bar__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  flex: none;
+}
+
+.header-bar__user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  height: 2rem;
+  padding: 0 var(--spacing-2);
+  border: none;
+  border-radius: var(--radius-base);
+  background: transparent;
+  cursor: pointer;
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.header-bar__user:hover {
+  background: var(--surface-variant);
+}
+
+.header-bar__avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex: none;
+}
+
+.header-bar__caret {
+  color: var(--on-surface-variant);
+}

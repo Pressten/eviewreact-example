@@ -1,0 +1,44 @@
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-inline-end: 0;
+  padding: 0 var(--spacing-2);
+  border-radius: var(--radius-badge);
+  font: var(--font-body-s);
+  line-height: 1.5rem;
+  white-space: nowrap;
+}
+
+.status-tag__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  flex: none;
+}
+
+.status-tag--success {
+  color: var(--success);
+  background: var(--success-container);
+}
+
+.status-tag--error {
+  color: var(--error);
+  background: var(--error-container);
+}
+
+.status-tag--warning {
+  color: var(--critical);
+  background: var(--critical-container);
+}
+
+.status-tag--info {
+  color: var(--info);
+  background: var(--info-container);
+}
+
+.status-tag--neutral {
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+}

@@ -1,0 +1,36 @@
+.side-nav {
+  flex: none;
+  width: 15.5rem;
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-r-sm);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.2s ease;
+  position: relative;
+  z-index: 5;
+}
+
+.side-nav.is-collapsed {
+  width: 3rem;
+}
+
+.side-nav__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--spacing-3) 0;
+}
+
+.side-nav__caption {
+  padding: 0 var(--spacing-4) var(--spacing-2);
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  letter-spacing: 0.05em;
+}
+
+.side-nav__foot {
+  flex: none;
+  padding: var(--spacing-2);
+  border-top: var(--border-width-thin) solid var(--divider);
+}

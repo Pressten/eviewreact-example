@@ -1,0 +1,11 @@
+.ds-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2rem;
+  row-gap: 1.5rem;
+  padding-top: var(--spacing-2);
+}
+
+.ds-form__full {
+  grid-column: 1 / -1;
+}
