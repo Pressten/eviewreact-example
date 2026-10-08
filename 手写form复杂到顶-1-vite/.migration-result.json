@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "npm install SKIP due to external network (@nce/eview-react, @nce/icon-plus, @cloudsop/horizon internal dependencies not reachable). Static checks (i18n-keys) PASS. All 17 antd components replaced with @nce/eview-react equivalents or handwrite. match-icons.cjs --apply converted 44/46 Icon call sites to icon+ static imports; 2 sites remain as 方案A shim (runtime data: FILE_KIND_ICON[f.kind] and PanelCard icon prop). mock/workorder.js renamed to .jsx by script."
+}
