@@ -1,0 +1,159 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "表单填充+表格-vite",
+  "antdComponents": {
+    "Menu": [
+      "src/views/app-sidebar/index.jsx"
+    ],
+    "Input": [
+      "src/views/rule-form/index.jsx",
+      "src/views/rule-table/index.jsx"
+    ],
+    "Select": [
+      "src/views/rule-form/index.jsx",
+      "src/views/rule-table/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Switch": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Segmented": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Button": [
+      "src/views/rule-form/index.jsx",
+      "src/views/rule-table/index.jsx"
+    ],
+    "message": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Table": [
+      "src/views/rule-table/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/soft-tag/index.css",
+    "src/components/soft-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/rules.js",
+    "src/views/app-header/index.css",
+    "src/views/app-header/index.jsx",
+    "src/views/app-sidebar/index.css",
+    "src/views/app-sidebar/index.jsx",
+    "src/views/rule-form/index.css",
+    "src/views/rule-form/index.jsx",
+    "src/views/rule-table/index.css",
+    "src/views/rule-table/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": ["app.jsx: import zhCN from \"./assets/shared/antd-zh.js\" (removed in step 3)"],
+    "antdLocaleFiles": ["assets/shared/antd-zh.js (not copied to target)"],
+    "businessLocaleFiles": [],
+    "hasDayjs": false,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "Menu",
+      "category": "A",
+      "eview": "Accordion",
+      "keyDiffs": "items→data（key/label→value/title）；selectedKeys 数组→selectedValue 单 string；onClick({key})→onClick(node)；expanded 语义反转（true=收起）；多级子菜单 children→嵌套 data",
+      "ref": "components/Accordion.md",
+      "files": ["src/views/app-sidebar/index.jsx"]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField",
+      "keyDiffs": "onChange(value,event) 首参是值不是 event；无 prefix/suffix/allowClear（prefix 图标改 leftIcon，suffix/allowClear 需另处理）；status='error' 保留；rule-form 有 prefix Icon，rule-table 有 allowClear+suffix 搜索框（后者可考虑 SearchInput）",
+      "ref": "components/TextField.md",
+      "files": ["src/views/rule-form/index.jsx", "src/views/rule-table/index.jsx"]
+    },
+    {
+      "antd": "Select",
+      "category": "A",
+      "eview": "Select / MultipleSelect",
+      "keyDiffs": "单选 Select：options label→text；placeholder→defaultLabel；onChange 五参(value,oldValue,text,oldText,event)；enableClear 替代 allowClear。多选 Select mode='multiple'→MultipleSelect：删 mode；value 数组；onChange(value[],changeValue[],event)；placeholder 保留（非 defaultLabel）；selectAll/searchable",
+      "ref": "components/Select.md",
+      "files": ["src/views/rule-form/index.jsx", "src/views/rule-table/index.jsx"]
+    },
+    {
+      "antd": "InputNumber",
+      "category": "A",
+      "eview": "Spinner",
+      "keyDiffs": "onChange(value) 只在有效值触发；onInputError 接无效值；min/max/step 保留；addonAfter 需手写后缀；mode='spinner'/variant='outlined' 为 antd 专有需删除；doNotFocusWhenValueUpdate 防抖",
+      "ref": "components/Spinner.md",
+      "files": ["src/views/rule-form/index.jsx"]
+    },
+    {
+      "antd": "Switch",
+      "category": "A",
+      "eview": "Toggle",
+      "keyDiffs": "checked→toggled；onChange→onToggle(value)；size='small' 无对应（用 data/样式）；data=[关,开] 文案",
+      "ref": "components/Toggle.md",
+      "files": ["src/views/rule-form/index.jsx"]
+    },
+    {
+      "antd": "Segmented",
+      "category": "A",
+      "eview": "SelectCard",
+      "keyDiffs": "block 全宽保留；options→data（label→text）；onChange(value,event)；选项内 icon 需单独处理（SelectCard data 无 icon 字段，可能需自定义渲染）；禁用用 disable（不是 disabled）",
+      "ref": "components/SelectCard.md",
+      "files": ["src/views/rule-form/index.jsx"]
+    },
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button / IconButton",
+      "keyDiffs": "type→status（primary/risk/text）；有文字+图标用 Button leftIcon/rightIcon+text（不用 children）；纯图标按钮（type='text' shape='circle' 无 children）→IconButton iconName+tipText；danger→status='risk'；无 htmlType（用 type='submit' 或 form onSubmit）；无 loading（用 disabled+文案）",
+      "ref": "components/Button.md",
+      "files": ["src/views/rule-form/index.jsx", "src/views/rule-table/index.jsx"]
+    },
+    {
+      "antd": "message",
+      "category": "C",
+      "eview": "DivMessage",
+      "keyDiffs": "模式转换：message.success()/error() 命令式调用→DivMessage 声明式渲染（<DivMessage display type='success/error'>）；需在组件中管理 display state 触发渲染；无命令式 API",
+      "ref": "components/DivMessage.md",
+      "files": ["src/views/rule-form/index.jsx"]
+    },
+    {
+      "antd": "Table",
+      "category": "A",
+      "eview": "Table",
+      "keyDiffs": "dataSource→dataset；rowKey→废弃（onRowCheck 用行序号）；columns[].dataIndex→key；pagination→enablePagination+pagingProps+onPageChange；rowSelection→enableCheckBox+onRowCheck；render 保留但行数据取第 4 参 row.rawData（非第 2 参）；emptyText→emptyTableMsg；scroll→freezeCol",
+      "ref": "components/Table.md",
+      "files": ["src/views/rule-table/index.jsx"]
+    }
+  ],
+  "notes": "Step 3: moved 12 src files + app.css + icon.jsx into target src/. app.jsx rewritten — removed antd ConfigProvider + zhCN import, fixed ./src/ paths to ./, dark mode effect (aui3_1_dark on body + .dark on html) added to context.jsx AppProvider. icon.jsx import path fixed from ../../../ to ../../ in 5 view/component files. antd ^5.21.0 added to package.json. font.css restored to scaffold version (correct /font/ public paths). user.png copied to public/assets/uploads/. main.jsx unchanged (scenario A, IntlProvider+componentsLocales preset). check-relative-imports.cjs: PASS. ConfigProvider was in root-level app.jsx (not detected by scanner) and was removed in step 3 — already handled, omitted from migrationPlan. antdIcons is [] because the project uses a custom <Icon name> runtime shim (assets/shared/icon.jsx), not @ant-design/icons — icon call sites are preserved AS-IS for downstream."
+}

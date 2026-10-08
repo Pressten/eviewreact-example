@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "All 9 migrationPlan entries replaced. i18n scenario A (wired=true, skip wiring). check-i18n-keys.cjs: 0 issues (project uses hardcoded Chinese, no t() calls). npm install SKIP: @nce is intranet scope, timed out on public network after 30s — expected, not a failure. No antd import remains in src/. Icons NOT touched (§3.0 skipped) — 4 pure-icon buttons kept as eview Button with <Icon> children for downstream icon stage."
+}
