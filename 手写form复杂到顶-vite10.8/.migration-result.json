@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "i18n-keys check passed (0 high-risk calls). npm-install timed out after 30s (external environment, @nce internal registry unreachable) — SKIP per skill rules. All 17 antd components replaced with @nce/eview-react equivalents or handwrite. 48 <Icon name> sites converted to @nce/icon-plus static imports via match-icons.cjs --apply (15 confirmed auto-applied, 33 residual resolved by LLM). workorder.js renamed to workorder.jsx by script (contains JSX icon elements in data arrays)."
+}
