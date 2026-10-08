@@ -1,0 +1,5288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT页面</title>
+<!-- 1. Core Libraries (local UMD) -->
+<script src="./assets/library/react.production.min.js"></script>
+<script src="./assets/library/react-dom.production.min.js"></script>
+<script src="./assets/library/dayjs.min.js"></script>
+<!-- 2. UI Components (local UMD, antd 内置图标随包携带) -->
+<script src="./assets/library/antd.min.js"></script>
+<!-- 3. Charts (local UMD, echarts → hui-charts 全局 HUICharts) -->
+<script src="./assets/library/echarts.min.js"></script>
+<script src="./assets/library/hui-charts.umd.js"></script>
+<!-- 4. react-intl (offline, exposes ReactIntl) -->
+<script src="./assets/library/react-intl.umd.js"></script>
+<!-- 5. Babel Transpiler (local) -->
+<script src="./assets/library/babel.min.js"></script>
+<!-- 6. 五层 CSS(base → light → theme → dark → ant 组件换肤层)内联 -->
+<style>
+:root {
+  /* ==========================================================================
+    1. 基础色阶 (Primitive Colors)
+    ========================================================================== */
+  /* brand */
+  --brand-05: #E6F2FD;
+  --brand-10: #B8D9F9;
+  --brand-20: #8ABEF3;
+  --brand-30: #5CA2E9;
+  --brand-40: #2E86DE;
+  --brand-50: #0067D1;
+  --brand-60: #004EA8;
+  --brand-70: #003D83;
+  --brand-80: #002E6A;
+  --brand-90: #00214B;
+
+  /* gray */
+  --gray-0: #FFFFFF;
+  --gray-05: #F3F3F3;
+  --gray-10: #DFDFDF;
+  --gray-20: #C9C9C9; 
+  --gray-30: #AEAEAE;
+  --gray-40: #939393;
+  --gray-50: #777777;
+  --gray-60: #595959;
+  --gray-70: #393939;
+  --gray-80: #2A2A2A;
+  --gray-90: #191919;
+  --gray-100: #000000;
+
+  /* red */
+  --red-05: #FEE7E8;
+  --red-10: #FABDC1;
+  --red-20: #F59297;
+  --red-30: #EE696F;
+  --red-40: #E7434A;
+  --red-50: #E02128;
+  --red-60: #C7000B;
+  --red-70: #850F12;
+  --red-80: #59080A;
+  --red-90: #350305;
+
+  /* rose */
+  --rose-05: #FEE5F2;
+  --rose-10: #FCC3E0;
+  --rose-20: #F99AC7;
+  --rose-30: #F470AB;
+  --rose-40: #ED448A;
+  --rose-50: #E61866;
+  --rose-60: #C40054;
+  --rose-70: #811439;
+  --rose-80: #540D24;
+  --rose-90: #330614;
+
+  /* orange */
+  --orange-05: #FEF5E8;
+  --orange-10: #FDE2BD;
+  --orange-20: #FCCE92;
+  --orange-30: #F9B766;
+  --orange-40: #F69E39;
+  --orange-50: #F4840C;
+  --orange-60: #C76207;
+  --orange-70: #954304;
+  --orange-80: #642802;
+  --orange-90: #3D1601;
+
+  /* yellow */
+  --yellow-05: #FEFCE0;
+  --yellow-10: #FEF8B8;
+  --yellow-20: #FEF08A;
+  --yellow-30: #FDE55C;
+  --yellow-40: #FCD72E;
+  --yellow-50: #FCC800;
+  --yellow-60: #D19F00;
+  --yellow-70: #9E7400;
+  --yellow-80: #614500;
+  --yellow-90: #2E1F00;
+
+  /* green */
+  --green-05: #F2FBE9;
+  --green-10: #DFF4CC;
+  --green-20: #C6E9A8;
+  --green-30: #A8DB81;
+  --green-40: #87C859;
+  --green-50: #62B42E;
+  --green-60: #488E20;
+  --green-70: #316614;
+  --green-80: #1B3E0A;
+  --green-90: #0C2004;
+
+  /* mint */
+  --mint-05: #E7FBF2;
+  --mint-10: #BCF2DB;
+  --mint-20: #8FE5C2;
+  --mint-30: #63D5A8;
+  --mint-40: #36C18D;
+  --mint-50: #09AA71;
+  --mint-60: #058358;
+  --mint-70: #036142;
+  --mint-80: #02422E;
+  --mint-90: #00291D;
+
+  /* cyan */
+  --cyan-05: #E8FCFD;
+  --cyan-10: #C9F6F9;
+  --cyan-20: #A4ECF1;
+  --cyan-30: #7DDFE7;
+  --cyan-40: #55CCD9;
+  --cyan-50: #2CB8C9;
+  --cyan-60: #1C94A4;
+  --cyan-70: #127180;
+  --cyan-80: #094C57;
+  --cyan-90: #04282F;
+
+  /* blue */
+  --blue-05: #EEF3FE;
+  --blue-10: #D0D8FD;
+  --blue-20: #B0BFFD;
+  --blue-30: #8CA3FA;
+  --blue-40: #668CF7;
+  --blue-50: #2070F3;
+  --blue-60: #1F55B5;
+  --blue-70: #1B3F86;
+  --blue-80: #112857;
+  --blue-90: #081635;
+
+  /* indigo */
+  --indigo-05: #EEEEFE;
+  --indigo-10: #D5D3FD;
+  --indigo-20: #BFB9FA;
+  --indigo-30: #A89FF9;
+  --indigo-40: #8E81F4;
+  --indigo-50: #715AFB;
+  --indigo-60: #5531EB;
+  --indigo-70: #3F21B5;
+  --indigo-80: #281675;
+  --indigo-90: #160B48;
+
+  /* purple */
+  --purple-05: #F7EDFE;
+  --purple-10: #E8CFFE;
+  --purple-20: #D9B1FD;
+  --purple-30: #CB8EFB;
+  --purple-40: #BF68FA;
+  --purple-50: #B62BF7;
+  --purple-60: #8A21BC;
+  --purple-70: #651B8B;
+  --purple-80: #41125A;
+  --purple-90: #260937;
+
+  /* pink */
+  --pink-05: #FDE6FC;
+  --pink-10: #F9C5F6;
+  --pink-20: #F39DEC;
+  --pink-30: #EB74DF;
+  --pink-40: #E049CE;
+  --pink-50: #D41DBC;
+  --pink-60: #9F1C8D;
+  --pink-70: #751868;
+  --pink-80: #4C0F43;
+  --pink-90: #2E0728;
+
+  /* ==========================================================================
+    2. 尺寸与形状 (Sizes & Shapes)
+    ========================================================================== */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-base: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+    3. 文本排版 (Typography)
+    ========================================================================== */
+  /* Font Family */
+  --font-family: 'HarmonyOS Sans', 'Microsoft YaHei', Arial, 'PingFang SC', 'San Francisco', sans-serif;
+
+  /* Font Size (10px → 72px) */
+  --font-size-sm: 0.625rem;    /* 10px */
+  --font-size-base: 0.75rem;   /* 12px */
+  --font-size-md: 0.875rem;    /* 14px */
+  --font-size-lg: 1rem;        /* 16px */
+  --font-size-xl: 1.125rem;    /* 18px */
+  --font-size-2xl: 1.25rem;    /* 20px */
+  --font-size-3xl: 1.5rem;     /* 24px */
+  --font-size-4xl: 1.75rem;    /* 28px */
+  --font-size-5xl: 2.25rem;    /* 36px */
+  --font-size-6xl: 3rem;       /* 48px */
+  --font-size-7xl: 3.75rem;    /* 60px */
+  --font-size-8xl: 4.5rem;     /* 72px */
+
+  /* Line Height (刻度,1.25 → 1.8) */
+  --line-height-xs: 1.25;
+  --line-height-sm: 1.375;
+  --line-height-base: 1.5;
+  --line-height-md: 1.625;
+  --line-height-lg: 1.8;
+
+  /* Font Weight */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ==========================================================================
+    4. 间距 (Spacing)
+    ========================================================================== */
+  /* rem 单位,随视口等比缩放(设计画布 rem=16px 时 0.125rem=2px);更大留白用 rem 按需写 */
+  --spacing-0: 0;
+  --spacing-0-5: 0.125rem;
+  --spacing-1: 0.25rem;
+  --spacing-1-5: 0.375rem;
+  --spacing-2: 0.5rem;
+  --spacing-2-5: 0.625rem;
+  --spacing-3: 0.75rem;
+  --spacing-3-5: 0.875rem;
+  --spacing-4: 1rem;
+  --spacing-4-5: 1.125rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-7: 1.75rem;
+  --spacing-8: 2rem;
+  --spacing-9: 2.25rem;
+  --spacing-10: 2.5rem;
+  --spacing-11: 2.75rem;
+  --spacing-12: 3rem;
+  --spacing-14: 3.5rem;
+  --spacing-15: 3.75rem;
+  --spacing-16: 4rem;
+  --spacing-17: 4.25rem;
+  --spacing-18: 4.5rem;
+  --spacing-19: 4.75rem;
+  --spacing-20: 5rem;
+}
+
+/* ==========================================================================
+  5. 响应式 rem 基准 (Responsive rem base) — html font-size 随视口宽度变化
+  ========================================================================== */
+@media (max-width: 1366px) {
+  html { font-size: 12px; }
+}
+@media (min-width: 1367px) and (max-width: 1680px) {
+  html { font-size: 14px; }
+}
+@media (min-width: 1681px) and (max-width: 1920px) {
+  html { font-size: 16px; }
+}
+@media (min-width: 1921px) {
+  html { font-size: 20px; }
+}
+
+/* ==========================================================================
+  6. 字体注册 (Font Face)
+  ========================================================================== */
+/* Light */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Regular */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Medium */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'HarmonyOS Sans';
+  src: url('assets/font/HarmonyOS_SansSC/Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+/* ── body base ── */
+body {
+  margin: 0;
+  font: var(--font-body-m);
+  background-color: var(--surface);
+  color: var(--on-surface);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+  7. 基础滚动条样式 (Scrollbar)
+  ========================================================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 4px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #dededf;
+}
+
+
+:root {
+  /* 品牌色 */
+  --color-brand: var(--brand-50);
+  --color-brand-hover: var(--brand-40);
+  --color-brand-focus: var(--brand-50);
+  --color-brand-active: var(--brand-60);
+  --color-brand-disabled: var(--brand-20);
+  /* 文本色 */
+  --color-text-primary: var(--gray-90);
+  --color-text-secondary: var(--gray-50);
+  --color-text-placeholder: var(--gray-30);
+  --color-text-disabled: var(--gray-20);
+  --color-text-inverse: var(--gray-0);
+  --color-text-inverse-disabled: var(--gray-0);
+  --color-text-on: var(--brand-50);
+  --color-link: var(--brand-50);
+  --color-link-hover: var(--brand-40);
+  --color-link-active: var(--brand-60);
+  --color-link-visited: var(--indigo-50);
+  --color-link-disabled: var(--brand-20);
+  /* 背景色 */
+  --color-bg-1: var(--gray-05);
+  --color-bg-2: var(--gray-0);
+  --color-bg-3: var(--gray-0);
+  --color-bg-4: var(--gray-0);
+  --color-bg-5: var(--gray-0);
+  --color-bg-6: rgb(from var(--gray-20) r g b / 0.2);
+  --color-bg-mask: rgb(from var(--gray-90) r g b / 0.3);
+  /* 填充色 */
+  --color-fill-disabled: var(--gray-10);
+  --color-hover: rgb(from var(--gray-90) r g b / 0.05);
+  --color-fill-disabled-subtle: rgb(from var(--gray-90) r g b / 0.05);
+  --color-fill: rgb(from var(--gray-90) r g b / 0.05);
+  --color-select: var(--brand-05);
+  --color-fill-subtle: var(--gray-0);
+  /* 图标色 */
+  --color-icon-primary: var(--gray-90);
+  --color-icon-secondary: var(--gray-50);
+  --color-icon-tertiary: var(--gray-40);
+  --color-icon-placeholder: var(--gray-30);
+  --color-icon-disabled: var(--gray-20);
+  --color-icon-inverse: var(--gray-0);
+  --color-icon-hover: var(--brand-40);
+  --color-icon-focus: var(--brand-50);
+  --color-icon-active: var(--brand-60);
+  /* 边框色 */
+  --color-border: var(--gray-20);
+  --color-border-hover: var(--gray-90);
+  --color-border-focus: var(--brand-50);
+  --color-border-active: var(--brand-10);
+  --color-border-disabled: var(--gray-20);
+  --color-border-separator: var(--gray-10);
+  --color-border-separator-sbutle: var(--gray-05);
+  /* 功能色-错误 */
+  --color-error: var(--red-50);
+  --color-error-hover: var(--red-40);
+  --color-error-active: var(--red-60);
+  --color-error-disabled: var(--red-10);
+  --color-error-subtle: var(--red-20);
+  --color-error-subtler: var(--red-05);
+  /* 功能色-告警 */
+  --color-alert: var(--orange-50);
+  --color-alert-hover: var(--orange-40);
+  --color-alert-active: var(--orange-60);
+  --color-alert-disabled: var(--orange-10);
+  --color-alert-subtle: var(--orange-20);
+  --color-alert-subtler: var(--orange-05);
+  /* 功能色-提醒 */
+  --color-warning: var(--yellow-50);
+  --color-warning-hover: var(--yellow-40);
+  --color-warning-active: var(--yellow-60);
+  --color-warning-disabled: var(--yellow-10);
+  --color-warning-bold: var(--yellow-60);
+  --color-warning-subtle: var(--yellow-20);
+  --color-warning-subtler: var(--yellow-05);
+  /* 功能色-成功 */
+  --color-success: var(--mint-50);
+  --color-success-hover: var(--mint-40);
+  --color-success-active: var(--mint-60);
+  --color-success-disabled: var(--mint-10);
+  --color-success-subtle: var(--mint-20);
+  --color-success-subtler: var(--mint-05);
+  /* 功能色-信息 */
+  --color-info-primary: var(--blue-50);
+  --color-info-primary-subtle: var(--blue-30);
+  --color-info-primary-subtler: var(--blue-05);
+  --color-info-secondary: var(--blue-30);
+  --color-info-secondary-hover: var(--blue-20);
+  --color-info-secondary-active: var(--blue-40);
+  --color-info-secondary-disabled: var(--blue-10);
+  --color-info-secondary-subtle: var(--blue-05);
+  /* 功能色-失效 */
+  --color-none: var(--gray-30);
+  --color-none-hover: var(--gray-20);
+  --color-none-active: var(--gray-40);
+  --color-none-disabled: var(--gray-10);
+  --color-none-subtle: var(--gray-05);
+  /* 推荐图表色 */
+  --color-chart-1: var(--blue-50);
+  --color-chart-2: var(--green-50);
+  --color-chart-3: var(--indigo-50);
+  --color-chart-4: var(--cyan-50);
+  --color-chart-5: var(--orange-40);
+  --color-chart-6: var(--brand-30);
+  --color-chart-7: var(--purple-40);
+  --color-chart-8: var(--rose-40);
+  --color-chart-9: var(--indigo-20);
+  --color-chart-10: var(--yellow-60);
+  --color-chart-11: var(--brand-10);
+  --color-chart-12: var(--green-60);
+  --color-chart-13: var(--purple-20);
+  --color-chart-14: var(--cyan-60);
+  --color-chart-15: var(--orange-20);
+  --color-chart-16: var(--rose-60);
+  --color-chart-17: var(--cyan-20);
+  --color-chart-18: var(--blue-60);
+  --color-chart-19: var(--green-20);
+  --color-chart-20: var(--indigo-70);
+  --color-chart-21: var(--rose-10);
+  --color-chart-22: var(--cyan-70);
+  --color-chart-23: var(--yellow-20);
+  --color-chart-24: var(--purple-70);
+  --color-chart-25: var(--mint-20);
+  /* 特殊场景 */
+  --color-scrollbar: var(--gray-10);
+  --color-scrollbar-hover: var(--gray-30);
+  --color-card-gray-disabled: rgb(from var(--gray-30) r g b / 0.05);
+  --color-card-white-disabled: rgb(from var(--gray-0) r g b / 0.5);
+  --color-sidenav-bg: rgb(from var(--gray-05) r g b / 0.5);
+  --color-table-header: rgb(from var(--gray-90) r g b / 0.05);
+  --color-table-zebra: rgb(from var(--gray-40) r g b / 0.05);
+  --color-message-bg-info: var(--blue-05);
+  --color-message-bg-success: var(--mint-05);
+  --color-message-bg-warning: var(--yellow-05);
+  --color-message-bg-alert: var(--orange-05);
+  --color-message-bg-error: var(--red-05);
+  /* ICT3.0 3.0告警色 */
+  --color-alert-urgent: #F43146;
+  --color-alert-primary: #EC6F1A;
+  --color-alert-secondary: #EEBA18;
+  --color-alert-success: #2DA769;
+  --color-alert-running: #5990FD;
+  --color-alert-none: #939393;
+  /* ICT3.1 表格 */
+  --color-table-1: var(--brand-05);
+  --color-table-2: var(--brand-10);
+  --color-table-sticky-1: var(--brand-05);
+  --color-table-sticky-2: var(--brand-10);
+  --color-table-sticky-bg: var(--gray-0);
+  --color-table-sticky-header: var(--gray-05);
+  /* 标签配色 */
+  --color-tag-text-purple: var(--purple-60);
+  --color-tag-bg-purple: rgb(from var(--purple-10) r g b / 0.6);
+  --color-tag-text-cyan: var(--cyan-80);
+  --color-tag-bg-cyan: rgb(from var(--cyan-60) r g b / 0.15);
+  --color-tag-text-rose: var(--rose-60);
+  --color-tag-bg-rose: var(--rose-05);
+  --color-tag-text-green: var(--green-70);
+  --color-tag-bg-green: var(--green-10);
+  --color-tag-text-pink: var(--pink-60);
+  --color-tag-bg-pink: var(--pink-05);
+  --color-tag-text-indigo: var(--indigo-80);
+  --color-tag-bg-indigo: rgb(from var(--indigo-10) r g b / 0.6);
+  --color-tag-text-none: var(--gray-70);
+  --color-tag-bg-none: rgb(from var(--gray-90) r g b / 0.05);
+  --color-tag-text-error: var(--red-60);
+  --color-tag-bg-error: var(--red-05);
+  --color-tag-text-alert: var(--orange-70);
+  --color-tag-bg-alert: var(--orange-10);
+  --color-tag-text-warning: var(--yellow-80);
+  --color-tag-bg-warning: rgb(from var(--yellow-30) r g b / 0.6);
+  --color-tag-text-success: var(--mint-70);
+  --color-tag-bg-success: rgb(from var(--mint-10) r g b / 0.6);
+  --color-tag-text-info: var(--blue-60);
+  --color-tag-bg-info: rgb(from var(--blue-10) r g b / 0.5);
+  /* Border */
+  --border: var(--gray-20);
+  --border-light: var(--gray-10);
+  --border-primary: var(--brand-50);
+  --border-success: var(--mint-20);
+  --border-warning: var(--yellow-20);
+  --border-alert: var(--orange-20);
+  --border-error: var(--red-20);
+  /* Icon */
+  --icon-primary: var(--brand-50);
+  --icon-success: var(--mint-50);
+  --icon-warning: var(--yellow-50);
+  --icon-critical: var(--orange-50);
+  --icon-alert: var(--orange-50);
+  --icon-error: var(--red-50);
+  /* Shadow */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.08);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.16);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+  --shadow-r-sm: 1px 0 6px 0 rgba(0, 0, 0, 0.08);
+  --shadow-t-sm: 0 -1px 6px rgba(0, 0, 0, 0.08);
+  --shadow-l-base: -2px 0 12px 0 rgba(0, 0, 0, 0.08);
+  --shadow-l-md: -2px 0 24px 0 rgba(0, 0, 0, 0.08);
+}
+
+
+:root {
+  --primary: var(--color-brand);
+  --on-primary: var(--color-text-inverse);
+  --primary-hover: var(--color-brand-hover);
+  --primary-active: var(--color-brand-active);
+  --primary-disabled: var(--color-brand-disabled);
+  --primary-container: var(--color-info-primary-subtler);
+  --on-primary-container: var(--color-text-primary);
+  --primary-fixed: var(--color-brand);
+  --primary-fixed-dim: var(--color-brand-active);
+  --on-primary-fixed: var(--color-text-inverse);
+  --on-primary-fixed-variant: var(--color-text-inverse);
+
+  --surface: var(--color-bg-1);
+  --surface-dim: var(--color-bg-2);
+  --surface-bright: var(--color-bg-2);
+  --on-surface: var(--color-text-primary);
+  --surface-variant: var(--color-bg-1);
+  --on-surface-variant: var(--color-text-secondary);
+  --surface-container-lowest: var(--color-bg-1);
+  --surface-container-low: var(--color-bg-2);
+  --surface-container: var(--color-bg-2);
+  --surface-container-high: var(--color-bg-2);
+  --surface-container-highest: var(--color-bg-2);
+
+  --inverse-surface: var(--color-text-primary);
+  --inverse-on-surface: var(--color-text-inverse);
+  --inverse-on-surface-variant: var(--color-text-inverse-disabled);
+  --inverse-primary: var(--color-brand);
+
+  --error: var(--color-error);
+  --on-error: var(--color-text-inverse);
+  --error-container: var(--color-message-bg-error);
+  --on-error-container: var(--color-text-primary);
+
+  --success: var(--color-success);
+  --on-success: var(--color-text-inverse);
+  --success-container: var(--color-message-bg-success);
+  --on-success-container: var(--color-text-primary);
+
+  --critical: var(--color-alert);
+  --on-critical: var(--color-text-inverse);
+  --critical-container: var(--color-message-bg-alert);
+  --on-critical-container: var(--color-text-primary);
+
+  --warning: var(--color-warning);
+  --on-warning: var(--color-text-inverse);
+  --warning-container: var(--color-message-bg-warning);
+  --on-warning-container: var(--color-text-primary);
+
+  --info: var(--color-info-primary);
+  --on-info: var(--color-text-inverse);
+  --info-container: var(--color-message-bg-info);
+  --on-info-container: var(--color-text-primary);
+
+  --text-placeholder: var(--color-text-placeholder);
+  --text-disabled: var(--color-text-disabled);
+  --text-inverse-disabled: var(--color-text-inverse-disabled);
+
+  --interactive-link: var(--color-link);
+  --interactive-link-hover: var(--color-link-hover);
+  --interactive-link-active: var(--color-link-active);
+  --interactive-link-visited: var(--color-link-visited);
+  --interactive-link-disabled: var(--color-link-disabled);
+  
+  --scrim: var(--color-bg-mask);
+  --outline: var(--color-border);
+  --outline-variant: var(--color-border-separator);
+  --divider: var(--color-border-separator);
+  --focus-ring: var(--color-border-focus);
+  --selected: var(--color-border-focus);
+
+  /* ── spacing → --spacing-* ── */
+  --spacing-inline: var(--spacing-2);   /* 8px */
+  --spacing-stack: var(--spacing-3);    /* 12px */
+  --spacing-gutter: var(--spacing-4);  /* 16px */
+  --spacing-inset: var(--spacing-6);    /* 24px */
+  --spacing-section: var(--spacing-4); /* 16px */
+  --spacing-page: var(--spacing-8);      /* 32px */
+
+  /* ── boxShadow ── */
+  --shadow-card: var(--shadow-sm);
+  --shadow-popover: var(--shadow-lg);
+  --shadow-modal: var(--shadow-xl);
+
+  /* ── borderRadius → --radius-* ── */
+  --radius-badge: var(--radius-base);  /* 4px */
+  --radius-action: var(--radius-base); /* 4px */
+  --radius-container: var(--radius-lg); /* 8px */
+  --radius-overlay: var(--radius-lg);  /* 8px */
+
+  /* ── border & outline width ── */
+  --border-width-thin: 1px;    
+  --border-width-thick: 2px;  
+  --outline-width-focus: 1px;
+  --outline-offset-gap: 2px;
+
+  /* ── typography → --font-*（角色化 font 简写：字号/行高 字族；字重另行用 --font-weight-* 组合）── */
+  /* Display 展示文本 — 英雄标语、数据看板大数字 */
+  --font-display-l: var(--font-size-7xl)/var(--line-height-xs) var(--font-family);    /* 60px/1.25 */
+  --font-display-m: var(--font-size-6xl)/var(--line-height-sm) var(--font-family);    /* 48px/1.375 */
+  --font-display-s: var(--font-size-5xl)/var(--line-height-sm) var(--font-family);    /* 36px/1.375 */
+  /* Headline 标题 — 页面区块标题(H3)→卡片标题→表单区标题 */
+  --font-headline-l: var(--font-size-2xl)/var(--line-height-sm) var(--font-family);   /* 20px/1.375 */
+  --font-headline-m: var(--font-size-xl)/var(--line-height-sm) var(--font-family);    /* 18px/1.375 */
+  --font-headline-s: var(--font-size-lg)/var(--line-height-base) var(--font-family);  /* 16px/1.5 */
+  /* Body 正文 — 表单标签/按钮文字→表格正文→辅助说明 */
+  --font-body-l: var(--font-size-lg)/var(--line-height-base) var(--font-family);      /* 16px/1.5 */
+  --font-body-m: var(--font-size-md)/var(--line-height-base) var(--font-family);      /* 14px/1.5 */
+  --font-body-s: var(--font-size-base)/var(--line-height-md) var(--font-family);      /* 12px/1.625 */
+  /* Caption 注释 — 时间戳/表格附加信息→底部免责声明 */
+  --font-caption-m: var(--font-size-base)/var(--line-height-md) var(--font-family);   /* 12px/1.625 */
+  --font-caption-s: var(--font-size-sm)/var(--line-height-lg) var(--font-family);    /* 10px/1.8 */
+}
+
+.dark {
+  /* 品牌色 */
+  --color-brand: var(--brand-50);
+  --color-brand-hover: var(--brand-40);
+  --color-brand-focus: var(--brand-50);
+  --color-brand-active: var(--brand-60);
+  --color-brand-disabled: var(--brand-70);
+  /* 文本色 */
+  --color-text-primary: var(--gray-0);
+  --color-text-secondary: var(--gray-20);
+  --color-text-placeholder: var(--gray-40);
+  --color-text-disabled: var(--gray-40);
+  --color-text-inverse: var(--gray-0);
+  --color-text-inverse-disabled: rgb(from var(--gray-05) r g b / 0.3);
+  --color-text-on: var(--gray-0);
+  --color-link: var(--brand-30);
+  --color-link-hover: var(--brand-20);
+  --color-link-active: var(--brand-40);
+  --color-link-visited: var(--indigo-50);
+  --color-link-disabled: var(--brand-60);
+  /* 背景色 */
+  --color-bg-1: var(--gray-100);
+  --color-bg-2: var(--gray-90);
+  --color-bg-3: var(--gray-80);
+  --color-bg-4: var(--gray-70);
+  --color-bg-5: rgb(from var(--gray-05) r g b / 0.1);
+  --color-bg-6: rgb(from var(--gray-05) r g b / 0.1);
+  --color-bg-mask: rgb(from var(--gray-0) r g b / 0.7);
+  /* 填充色 */
+  --color-fill-disabled: var(--gray-60);
+  --color-hover: rgb(from var(--gray-05) r g b / 0.2);
+  --color-fill-disabled-subtle: rgb(from var(--gray-05) r g b / 0.2);
+  --color-fill: rgb(from var(--gray-05) r g b / 0.2);
+  --color-select: rgb(from var(--brand-50) r g b / 0.4);
+  --color-fill-subtle: rgb(from var(--gray-100) r g b / 0);
+  /* 图标色 */
+  --color-icon-primary: var(--gray-10);
+  --color-icon-secondary: var(--gray-30);
+  --color-icon-tertiary: var(--gray-50);
+  --color-icon-placeholder: var(--gray-40);
+  --color-icon-disabled: var(--gray-40);
+  --color-icon-inverse: var(--gray-0);
+  --color-icon-hover: var(--brand-20);
+  --color-icon-focus: var(--brand-30);
+  --color-icon-active: var(--brand-40);
+  /* 边框色 */
+  --color-border: var(--gray-50);
+  --color-border-hover: var(--gray-05);
+  --color-border-focus: var(--brand-40);
+  --color-border-active: var(--brand-80);
+  --color-border-disabled: var(--gray-60);
+  --color-border-separator: rgb(from var(--gray-05) r g b / 0.15);
+  --color-border-separator-sbutle: rgb(from var(--gray-05) r g b / 0.1);
+  /* 功能色-错误 */
+  --color-error: var(--red-40);
+  --color-error-hover: var(--red-30);
+  --color-error-active: var(--red-50);
+  --color-error-disabled: var(--red-80);
+  --color-error-subtle: var(--red-60);
+  --color-error-subtler: var(--red-80);
+  /* 功能色-告警 */
+  --color-alert: var(--orange-50);
+  --color-alert-hover: var(--orange-40);
+  --color-alert-active: var(--orange-60);
+  --color-alert-disabled: var(--orange-80);
+  --color-alert-subtle: var(--orange-60);
+  --color-alert-subtler: var(--orange-80);
+  /* 功能色-提醒 */
+  --color-warning: var(--yellow-40);
+  --color-warning-hover: var(--yellow-30);
+  --color-warning-active: var(--yellow-50);
+  --color-warning-disabled: var(--yellow-80);
+  --color-warning-bold: var(--yellow-60);
+  --color-warning-subtle: var(--yellow-60);
+  --color-warning-subtler: var(--yellow-80);
+  /* 功能色-成功 */
+  --color-success: var(--mint-60);
+  --color-success-hover: var(--mint-50);
+  --color-success-active: var(--mint-60);
+  --color-success-disabled: var(--mint-80);
+  --color-success-subtle: var(--mint-60);
+  --color-success-subtler: var(--mint-80);
+  /* 功能色-信息 */
+  --color-info-primary: var(--blue-50);
+  --color-info-primary-subtle: var(--blue-60);
+  --color-info-primary-subtler: var(--blue-80);
+  --color-info-secondary: var(--blue-60);
+  --color-info-secondary-hover: var(--blue-40);
+  --color-info-secondary-active: var(--blue-60);
+  --color-info-secondary-disabled: var(--blue-80);
+  --color-info-secondary-subtle: var(--blue-80);
+  /* 功能色-失效 */
+  --color-none: var(--gray-60);
+  --color-none-hover: rgb(from var(--gray-05) r g b / 0.2);
+  --color-none-active: var(--gray-50);
+  --color-none-disabled: var(--gray-90);
+  --color-none-subtle: var(--gray-90);
+  /* 推荐图表色 */
+  --color-chart-1: var(--blue-50);
+  --color-chart-2: var(--green-50);
+  --color-chart-3: var(--indigo-50);
+  --color-chart-4: var(--cyan-50);
+  --color-chart-5: var(--orange-40);
+  --color-chart-6: var(--brand-30);
+  --color-chart-7: var(--purple-60);
+  --color-chart-8: var(--rose-60);
+  --color-chart-9: var(--indigo-60);
+  --color-chart-10: var(--yellow-60);
+  --color-chart-11: var(--brand-60);
+  --color-chart-12: var(--green-60);
+  --color-chart-13: var(--purple-70);
+  --color-chart-14: var(--cyan-60);
+  --color-chart-15: var(--orange-70);
+  --color-chart-16: var(--rose-60);
+  --color-chart-17: var(--cyan-70);
+  --color-chart-18: var(--blue-60);
+  --color-chart-19: var(--green-70);
+  --color-chart-20: var(--indigo-70);
+  --color-chart-21: var(--rose-70);
+  --color-chart-22: var(--cyan-30);
+  --color-chart-23: var(--yellow-70);
+  --color-chart-24: var(--purple-50);
+  --color-chart-25: var(--mint-70);
+  /* 特殊场景 */
+  --color-scrollbar: var(--gray-60);
+  --color-scrollbar-hover: var(--gray-40);
+  --color-card-gray-disabled: rgb(from var(--gray-40) r g b / 0.05);
+  --color-card-white-disabled: rgb(from var(--gray-40) r g b / 0.1);
+  --color-sidenav-bg: var(--gray-70);
+  --color-table-header: rgb(from var(--gray-05) r g b / 0.1);
+  --color-table-zebra: rgb(from var(--gray-50) r g b / 0.15);
+  --color-message-bg-info: rgb(from var(--blue-50) r g b / 0.15);
+  --color-message-bg-success: rgb(from var(--mint-60) r g b / 0.15);
+  --color-message-bg-warning: rgb(from var(--yellow-40) r g b / 0.15);
+  --color-message-bg-alert: rgb(from var(--orange-50) r g b / 0.15);
+  --color-message-bg-error: rgb(from var(--red-40) r g b / 0.15);
+  /* ICT3.0 3.0告警色 */
+  --color-alert-urgent: #F43146;
+  --color-alert-primary: #EC6F1A;
+  --color-alert-secondary: #EEBA18;
+  --color-alert-success: #0D9458;
+  --color-alert-running: #5990FD;
+  --color-alert-none: #818181;
+  /* ICT3.1 表格 */
+  --color-table-1: rgb(from var(--brand-50) r g b / 0.2);
+  --color-table-2: rgb(from var(--brand-50) r g b / 0.4);
+  --color-table-sticky-1: var(--brand-80);
+  --color-table-sticky-2: var(--brand-70);
+  --color-table-sticky-bg: var(--gray-70);
+  --color-table-sticky-header: var(--gray-70);
+  /* 标签配色 */
+  --color-tag-text-purple: var(--purple-30);
+  --color-tag-bg-purple: rgb(from var(--purple-30) r g b / 0.15);
+  --color-tag-text-cyan: var(--cyan-40);
+  --color-tag-bg-cyan: rgb(from var(--cyan-50) r g b / 0.15);
+  --color-tag-text-rose: var(--rose-30);
+  --color-tag-bg-rose: rgb(from var(--rose-30) r g b / 0.15);
+  --color-tag-text-green: var(--green-50);
+  --color-tag-bg-green: rgb(from var(--green-40) r g b / 0.15);
+  --color-tag-text-pink: var(--pink-30);
+  --color-tag-bg-pink: rgb(from var(--pink-30) r g b / 0.15);
+  --color-tag-text-indigo: var(--indigo-30);
+  --color-tag-bg-indigo: rgb(from var(--indigo-30) r g b / 0.15);
+  --color-tag-text-none: var(--gray-30);
+  --color-tag-bg-none: rgb(from var(--gray-30) r g b / 0.15);
+  --color-tag-text-error: var(--red-40);
+  --color-tag-bg-error: rgb(from var(--red-30) r g b / 0.15);
+  --color-tag-text-alert: var(--orange-40);
+  --color-tag-bg-alert: rgb(from var(--orange-50) r g b / 0.15);
+  --color-tag-text-warning: var(--yellow-50);
+  --color-tag-bg-warning: rgb(from var(--yellow-30) r g b / 0.15);
+  --color-tag-text-success: var(--mint-40);
+  --color-tag-bg-success: rgb(from var(--mint-50) r g b / 0.15);
+  --color-tag-text-info: var(--blue-30);
+  --color-tag-bg-info: rgb(from var(--blue-40) r g b / 0.15);
+  /* Border */
+  --border: var(--gray-50);
+  --border-light: rgb(from var(--gray-05) r g b / 0.15);
+  --border-primary: var(--brand-30);
+  --border-success: var(--mint-20);
+  --border-warning: var(--yellow-20);
+  --border-alert: var(--orange-20);
+  --border-error: var(--red-20);
+  /* Icon */
+  --icon-primary: var(--brand-30);
+  --icon-success: var(--mint-30);
+  --icon-warning: var(--yellow-30);
+  --icon-critical: var(--orange-30);
+  --icon-alert: var(--orange-30);
+  --icon-error: var(--red-30);
+  /* Shadow (暗色模式下阴影更强) */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.5);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-r-sm: 1px 0 6px 0 rgba(0, 0, 0, 0.5);
+  --shadow-t-sm: 0 -1px 6px rgba(0, 0, 0, 0.5);
+  --shadow-l-base: -2px 0 12px 0 rgba(0, 0, 0, 0.5);
+  --shadow-l-md: -2px 0 24px 0 rgba(0, 0, 0, 0.5);
+}
+
+
+/* 组件样式汇总：由 npm run build:css 生成，勿手改 */
+
+/* Divider 组件样式（占位，待填充 token 映射） */
+.ant-divider {
+  border-color: var(--gray-10);
+}
+.dark .ant-divider {
+  border-color: var(--color-border-separator);
+}
+
+/* Button 组件样式（token 映射） */
+.ant-btn {
+  font-size: var(--font-size-md);
+  border-radius: var(--radius-base);
+  font-weight: var(--font-weight-normal);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  min-width: 6rem;
+  box-shadow: none !important;
+  gap: 4px;
+}
+.ant-btn.ant-btn-color-default {
+  color: var(--color-text-primary);
+}
+.ant-btn.ant-btn-color-default:not(:disabled):hover {
+  color: var(--color-text-primary);
+  border-color: var(--gray-90);
+  background-color: var(--color-bg-2);
+}
+.ant-btn.ant-btn-color-default:not(:disabled):active {
+  color: var(--color-text-primary);
+  border-color: var(--border-primary);
+  background-color: var(--color-bg-2);
+}
+.ant-btn.ant-btn-color-default:disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--gray-10);
+}
+.ant-btn.ant-btn-color-primary {
+  color: var(--gray-0);
+  background-color: var(--color-brand);
+}
+.ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  color: var(--gray-0);
+  background-color: var(--brand-40);
+}
+.ant-btn.ant-btn-color-primary:not(:disabled):active {
+  color: var(--gray-0);
+  background-color: var(--brand-60);
+}
+.ant-btn.ant-btn-color-primary:disabled {
+  color: var(--gray-0);
+  background-color: var(--brand-20);
+  border-color: var(--brand-20);
+}
+.ant-btn.ant-btn-dangerous {
+  color: var(--gray-0);
+  background-color: var(--red-50);
+}
+.ant-btn.ant-btn-dangerous:not(:disabled):hover {
+  color: var(--gray-0);
+  background-color: var(--red-40);
+}
+.ant-btn.ant-btn-dangerous:not(:disabled):active {
+  color: var(--gray-0);
+  background-color: var(--red-60);
+}
+.ant-btn.ant-btn-dangerous:disabled {
+  color: var(--gray-0);
+  background-color: var(--red-10);
+  border-color: var(--red-10);
+}
+.ant-btn.ant-btn-sm {
+  height: 1.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: var(--font-size-base);
+}
+.ant-btn.ant-btn-lg {
+  height: 2.25rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-size: var(--font-size-md);
+}
+.ant-btn.ant-btn-icon-only {
+  width: 2rem !important;
+  height: 2rem !important;
+  min-width: auto !important;
+  border: none !important;
+  background-color: transparent !important;
+  padding: var(--spacing-0);
+}
+.ant-btn.ant-btn-icon-only .anticon {
+  font-size: var(--font-size-2xl);
+}
+.ant-btn.ant-btn-icon-only.ant-btn-sm {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
+.ant-btn.ant-btn-icon-only.ant-btn-sm .anticon {
+  font-size: var(--font-size-md);
+}
+.ant-btn.ant-btn-icon-only:hover,
+.ant-btn.ant-btn-icon-only:focus {
+  background-color: transparent !important;
+}
+.ant-btn.ant-btn-variant-link {
+  min-width: unset;
+  line-height: var(--line-height-sm);
+  padding: var(--spacing-0);
+  border: none !important;
+  background-color: transparent;
+  color: var(--color-brand);
+}
+.ant-btn.ant-btn-variant-link:not(:disabled):hover {
+  color: var(--brand-40);
+}
+.ant-btn.ant-btn-variant-link:not(:disabled):active {
+  color: var(--brand-60);
+}
+.dark .ant-btn.ant-btn-color-default {
+  border-color: var(--gray-50);
+  background-color: rgb(from var(--gray-100) r g b / 0);
+}
+.dark .ant-btn.ant-btn-color-default:not(:disabled):hover {
+  background-color: rgb(from var(--gray-100) r g b / 0);
+  border-color: var(--gray-05);
+}
+.dark .ant-btn.ant-btn-color-default:not(:disabled):active {
+  color: var(--color-text-primary);
+  border-color: var(--brand-40);
+  background-color: rgb(from var(--gray-100) r g b / 0);
+}
+.dark .ant-btn.ant-btn-color-default:disabled {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-60);
+}
+.dark .ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  background-color: var(--brand-40);
+}
+.dark .ant-btn.ant-btn-color-primary:not(:disabled):active {
+  background-color: var(--brand-60);
+}
+.dark .ant-btn.ant-btn-color-primary:disabled {
+  color: rgb(from var(--gray-05) r g b / 0.3);
+  background-color: var(--brand-70);
+  border-color: var(--brand-70);
+}
+.dark .ant-btn.ant-btn-color-dangerous {
+  background-color: var(--red-40);
+}
+.dark .ant-btn.ant-btn-color-dangerous:not(:disabled):hover {
+  background-color: var(--red-30);
+}
+.dark .ant-btn.ant-btn-color-dangerous:not(:disabled):active {
+  background-color: var(--red-50);
+}
+.dark .ant-btn.ant-btn-color-dangerous:disabled {
+  color: var(--gray-0);
+  background-color: var(--red-80);
+  border-color: var(--red-80);
+}
+.dark .ant-btn.ant-btn-variant-link {
+  color: var(--brand-30);
+}
+.dark .ant-btn.ant-btn-variant-link:not(:disabled):hover {
+  color: var(--brand-20);
+}
+.dark .ant-btn.ant-btn-variant-link:not(:disabled):active {
+  color: var(--brand-40);
+}
+.dark .ant-btn.ant-btn-icon-only {
+  color: var(--gray-10);
+}
+.dark .ant-btn.ant-btn-icon-only:hover .anticon {
+  color: var(--brand-20);
+}
+.dark .ant-btn.ant-btn-icon-only:active .anticon {
+  color: var(--brand-40);
+}
+
+/* Input 组件样式（占位，待填充 token 映射） */
+.ant-input {
+  border-radius: var(--radius-base);
+}
+input.ant-input {
+  padding: 0 0.75rem;
+  height: 2rem;
+  font-size: var(--font-size-md);
+  line-height: 1.5rem;
+  border-radius: var(--radius-base);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+  background-color: var(--color-fill-subtle);
+  caret-color: var(--brand-50);
+}
+input.ant-input::placeholder {
+  color: var(--color-text-placeholder);
+}
+input.ant-input.ant-input-lg {
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  font-size: var(--font-size-md);
+  border-radius: var(--radius-base);
+}
+input.ant-input.ant-input-sm {
+  padding: 0 0.75rem;
+  height: 28px;
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-base);
+}
+.ant-input-affix-wrapper {
+  padding: 0 0.75rem;
+  height: 2rem;
+  border-radius: var(--radius-base);
+}
+.ant-input-affix-wrapper .ant-input {
+  height: 100%;
+}
+.ant-input-affix-wrapper .ant-input[type="password"] {
+  letter-spacing: 0.5rem;
+  color: var(--color-icon-primary);
+}
+.ant-input-affix-wrapper > input.ant-input {
+  color: var(--color-text-primary);
+}
+.ant-input-affix-wrapper .anticon {
+  color: var(--color-icon-secondary);
+}
+.ant-input-affix-wrapper .ant-input-suffix {
+  color: var(--color-text-primary);
+}
+.ant-input-outlined {
+  border-color: var(--color-border);
+  background-color: var(--color-fill-subtle);
+}
+.ant-input-outlined.ant-input-disabled {
+  border-color: var(--color-border-disabled);
+  background-color: var(--color-fill-disabled-subtle);
+  color: var(--color-text-disabled);
+}
+.ant-input-outlined.ant-input-disabled:hover {
+  border-color: var(--color-border-disabled);
+}
+.ant-input-outlined:hover {
+  border-color: var(--color-border-hover);
+}
+.ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
+  border-color: var(--color-error);
+  background-color: var(--color-fill-subtle);
+}
+.ant-input-outlined:focus,
+.ant-input-outlined:focus-within {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 1px var(--color-brand-disabled);
+  background-color: var(--color-fill-subtle);
+}
+/* textarea style start*/
+.ant-input-textarea-affix-wrapper,
+.ant-flex-align-center {
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+  padding: 0px !important;
+  height: auto;
+}
+.ant-input-textarea-affix-wrapper textarea,
+.ant-flex-align-center textarea {
+  color: var(--color-text-primary);
+  caret-color: var(--brand-50);
+  padding: 0.3125rem 0.75rem 1rem;
+}
+.ant-input-textarea-affix-wrapper .ant-input-suffix,
+.ant-flex-align-center .ant-input-suffix {
+  font-size: var(--font-size-base);
+}
+.ant-input-textarea-affix-wrapper .ant-input-suffix .ant-input-data-count,
+.ant-flex-align-center .ant-input-suffix .ant-input-data-count {
+  color: var(--color-text-secondary);
+}
+.ant-input-textarea-affix-wrapper.ant-input-affix-wrapper-focused,
+.ant-flex-align-center.ant-input-affix-wrapper-focused {
+  border-color: var(--brand-50);
+}
+.ant-input-textarea-show-count .ant-input-data-count {
+  bottom: 0px;
+  right: 0.75rem;
+  background-color: var(--color-fill-subtle);
+}
+.dark .ant-input-textarea-affix-wrapper,
+.dark .ant-flex-align-center {
+  border-color: var(--color-border);
+}
+.dark .ant-input-textarea-affix-wrapper.ant-input-affix-wrapper-focused,
+.dark .ant-flex-align-center.ant-input-affix-wrapper-focused {
+  border-color: var(--brand-40);
+}
+.dark .ant-input-textarea-show-count .ant-input-data-count {
+  background-color: var(--color-bg-1);
+}
+/* textarea style end*/
+
+/* InputNumber — 左(−)右(+) 两端布局（纯CSS零侵入换肤） */
+.ant-input-number {
+  position: relative !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  min-width: 128px !important;
+  height: 32px !important;
+  border-color: var(--gray-20);
+  box-shadow: none;
+}
+.ant-input-number-lg {
+  height: 40px !important;
+  padding: 0 !important;
+}
+.ant-input-number-sm {
+  height: 24px !important;
+  padding: 0 !important;
+}
+.ant-input-number .ant-input-number-input-wrap {
+  position: relative !important;
+  z-index: 1 !important;
+  margin-left: 36px !important;
+  margin-right: 36px !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.ant-input-number .ant-input-number-input {
+  text-align: center !important;
+  width: 100% !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  color: var(--color-text-primary) !important;
+  font-size: 14px !important;
+}
+.ant-input-number .ant-input-number-handler-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: inherit !important;
+  pointer-events: none !important;
+  display: flex !important;
+}
+.ant-input-number .ant-input-number-handler {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 100% !important;
+  width: 36px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  pointer-events: auto !important;
+  cursor: pointer;
+  background-color: var(--gray-05);
+  color: var(--color-text-primary);
+  border: none !important;
+  user-select: none;
+  transition: all 0.15s ease-in-out;
+}
+.ant-input-number .ant-input-number-handler-down {
+  left: 0 !important;
+  right: auto !important;
+  border-right: 1px solid var(--color-border) !important;
+  border-top-left-radius: 4px !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 4px !important;
+  border-bottom-right-radius: 0 !important;
+}
+.ant-input-number .ant-input-number-handler-up {
+  right: 0 !important;
+  left: auto !important;
+  border-left: 1px solid var(--color-border) !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 4px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 4px !important;
+}
+.ant-input-number .ant-input-number-handler-up-inner,
+.ant-input-number .ant-input-number-handler-down-inner {
+  display: none !important;
+}
+.ant-input-number-lg .ant-input-number-handler {
+  width: 40px !important;
+}
+.ant-input-number-lg .ant-input-number-input-wrap {
+  margin-left: 40px !important;
+  margin-right: 40px !important;
+}
+.ant-input-number-sm .ant-input-number-handler {
+  width: 28px !important;
+}
+.ant-input-number-sm .ant-input-number-input-wrap {
+  margin-left: 28px !important;
+  margin-right: 28px !important;
+}
+.ant-input-number .ant-input-number-handler-down::before {
+  content: "";
+  width: 12px;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+  display: block;
+}
+.ant-input-number .ant-input-number-handler-up::before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+.ant-input-number .ant-input-number-handler-up::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 12px;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+.ant-input-number .ant-input-number-handler:hover {
+  background-color: var(--brand-05) !important;
+  color: var(--color-brand) !important;
+}
+.ant-input-number .ant-input-number-handler:active {
+  background-color: var(--brand-10) !important;
+}
+.ant-input-number .ant-input-number-handler-down-disabled,
+.ant-input-number .ant-input-number-handler-up-disabled {
+  color: var(--color-text-disabled) !important;
+  background-color: var(--gray-05) !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+.ant-input-number-disabled {
+  background-color: var(--gray-05) !important;
+  border-color: var(--color-border) !important;
+}
+.ant-input-number-disabled .ant-input-number-handler {
+  background-color: var(--gray-05) !important;
+  color: var(--color-text-disabled) !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+.ant-input-number.ant-input-number-sm {
+  padding-left: 26px !important;
+  padding-right: 26px !important;
+}
+.ant-input-number.ant-input-number-sm .ant-input-number-handler {
+  width: 26px !important;
+}
+.ant-input-number.ant-input-number-sm .ant-input-number-handler-down::before,
+.ant-input-number.ant-input-number-sm .ant-input-number-handler-up::before {
+  width: 9px;
+}
+.ant-input-number.ant-input-number-sm .ant-input-number-handler-up::after {
+  height: 9px;
+}
+.ant-input-number.ant-input-number-lg {
+  padding-left: 42px !important;
+  padding-right: 42px !important;
+}
+.ant-input-number.ant-input-number-lg .ant-input-number-handler {
+  width: 42px !important;
+}
+.ant-input-number.ant-input-number-lg .ant-input-number-handler-down::before,
+.ant-input-number.ant-input-number-lg .ant-input-number-handler-up::before {
+  width: 14px;
+}
+.ant-input-number.ant-input-number-lg .ant-input-number-handler-up::after {
+  height: 14px;
+}
+.ant-input-number-outlined:hover {
+  border-color: var(--gray-100);
+}
+.ant-input-number-focused {
+  border: 1px solid var(--gray-50);
+}
+
+/* dark mode */
+.dark .ant-input-number {
+  color: var(--gray-0);
+  border-color: var(--gray-20);
+}
+.dark .ant-input-number .ant-input-number-handler {
+  background-color: var(--gray-90);
+  color: var(--gray-0);
+}
+.dark .ant-input-number .ant-input-number-handler-down {
+  border-right-color: var(--color-border) !important;
+}
+.dark .ant-input-number .ant-input-number-handler-up {
+  border-left-color: var(--color-border) !important;
+}
+.dark .ant-input-number .ant-input-number-handler:hover {
+  background-color: var(--brand-70) !important;
+  color: var(--gray-0) !important;
+}
+.dark .ant-input-number .ant-input-number-handler-down-disabled,
+.dark .ant-input-number .ant-input-number-handler-up-disabled {
+  color: var(--gray-40) !important;
+  background-color: var(--gray-90) !important;
+}
+.dark .ant-input-number-disabled {
+  background-color: var(--gray-90) !important;
+}
+.dark .ant-input-number-disabled .ant-input-number-handler {
+  background-color: var(--gray-90) !important;
+  color: var(--gray-40) !important;
+}
+.dark .ant-input-number-focused {
+  border: 1px solid var(--brand-40) !important;
+}
+
+.ant-select-sm {
+  --ant-select-height: 1.75rem;
+}
+.ant-select {
+  --ant-select-border-radius: var(--radius-base);
+  background: var(--color-bg-4);
+  color: var(--color-text-primary);
+}
+.ant-select.ant-select-lg .ant-select-selector,
+.ant-select.ant-select-sm .ant-select-selector,
+.ant-select .ant-select-selector {
+  border-radius: var(--radius-base);
+}
+.ant-select.ant-select-outlined {
+  --ant-select-border-color: var(--color-border);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled):hover {
+  --ant-select-border-color: var(--color-border-hover);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled):hover .ant-select-suffix {
+  color: var(--color-icon-primary);
+}
+.ant-select.ant-select-outlined:not(.ant-select-disabled).ant-select-focused {
+  --ant-select-border-color: var(--color-border-focus);
+}
+.ant-select.ant-select-outlined.ant-select-disabled {
+  --ant-select-border-color: var(--color-border-disabled);
+}
+.ant-select.ant-select-outlined.ant-select-status-error {
+  --ant-select-border-color: var(--color-error);
+}
+.ant-select.ant-select-outlined.ant-select-status-error:not(.ant-select-disabled):hover {
+  --ant-select-border-color: var(--color-error-hover);
+}
+.ant-select.ant-select-outlined.ant-select-status-warning {
+  --ant-select-border-color: var(--color-warning);
+}
+.ant-select.ant-select-outlined.ant-select-status-warning:not(.ant-select-disabled):hover {
+  --ant-select-border-color: var(--color-warning-hover);
+}
+.ant-select:not(.ant-select-disabled) .ant-select-placeholder {
+  color: var(--color-text-placeholder);
+}
+.ant-select:not(.ant-select-disabled) .ant-select-suffix {
+  color: var(--color-icon-secondary);
+}
+.ant-select:not(.ant-select-disabled):not(.ant-select-multiple).ant-select-focused.ant-select-open .ant-select-suffix {
+  transform: rotate(180deg);
+}
+.ant-select.ant-select-disabled {
+  --ant-select-color: var(--color-text-disabled);
+  color: var(--color-text-disabled);
+  background: var(--color-hover);
+}
+.ant-select.ant-select-disabled.ant-select-multiple {
+  background: var(--color-fill-disabled-subtle);
+}
+.ant-select.ant-select-disabled.ant-select-multiple .ant-select-content .ant-select-selection-item {
+  background: var(--color-fill-disabled-subtle);
+}
+.ant-select.ant-select-disabled .ant-select-placeholder {
+  color: var(--color-text-disabled);
+}
+.ant-select.ant-select-disabled .ant-select-suffix {
+  color: var(--color-icon-disabled);
+}
+.ant-select .ant-select-suffix svg {
+  width: 0.625rem;
+  height: 0.625rem;
+}
+.ant-select-multiple .ant-select-content .ant-select-selection-item-remove {
+  color: var(--color-icon-primary);
+}
+.ant-select-dropdown {
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-4);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-base);
+}
+.ant-select-dropdown .ant-select-item-option-disabled {
+  color: var(--color-text-disabled);
+}
+.ant-select-dropdown .ant-select-item {
+  padding: 0.3125rem 0.5rem;
+}
+.ant-select-dropdown .ant-select-item:not(.ant-select-item-option-disabled) {
+  color: var(--color-text-primary);
+}
+.ant-select-dropdown .ant-select-item-option-selected.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-select);
+  color: var(--color-text-on);
+}
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-select);
+  color: var(--color-text-on);
+  font-weight: normal;
+}
+.ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-hover);
+}
+.ant-select-single:not(.ant-select-customize).ant-select-open .ant-select-content-has-value {
+  opacity: unset;
+}
+.ant-select-dropdown-list-holder-inner {
+  gap: 0.25rem;
+}
+.ant-select-multiple .ant-select-content .ant-select-selection-item {
+  margin-inline-end: 0.5rem;
+  background: var(--color-hover);
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border-color: var(--color-border);
+}
+.ant-tree-select-dropdown {
+  padding: 0.25rem;
+}
+.ant-tree-select-dropdown .ant-select-tree {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-4);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode {
+  align-items: center;
+  margin-bottom: unset;
+  padding: 0.25rem 0;
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-checkbox {
+  margin-block-start: unset;
+  align-self: unset;
+  border: 1px solid var(--color-icon-tertiary);
+  border-radius: var(--radius-xs);
+  background-color: var(--color-fill-subtle);
+  color: var(--color-text-primary);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-checkbox .ant-select-tree-checkbox-inner {
+  border: none;
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-checkbox.ant-select-tree-checkbox-checked {
+  background-color: var(--color-brand);
+  border-color: var(--color-brand);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-checkbox.ant-select-tree-checkbox-checked + .ant-select-tree-node-content-wrapper {
+  background-color: var(--color-select);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-checkbox.ant-select-tree-checkbox-checked + .ant-select-tree-node-content-wrapper:hover {
+  background-color: var(--color-select);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-checkbox.ant-select-tree-checkbox-indeterminate:after {
+  background-color: var(--color-brand);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-checkbox.ant-select-tree-checkbox-indeterminate + .ant-select-tree-node-content-wrapper {
+  background-color: var(--color-select);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-checkbox.ant-select-tree-checkbox-indeterminate + .ant-select-tree-node-content-wrapper:hover {
+  background-color: var(--color-select);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-checkbox.ant-select-tree-checkbox-disabled {
+  border: 1px solid var(--color-border-disabled);
+  background-color: var(--color-fill-disabled-subtle);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode.ant-select-tree-treenode-disabled .ant-select-tree-node-content-wrapper {
+  color: var(--color-text-disabled);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode:not(.ant-select-tree-treenode-disabled) .ant-select-tree-node-content-wrapper.ant-select-tree-node-selected {
+  color: var(--color-text-on);
+  background-color: var(--color-select);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode:not(.ant-select-tree-treenode-disabled) .ant-select-tree-node-content-wrapper.ant-select-tree-node-selected:hover {
+  color: var(--color-text-on);
+  background-color: var(--color-select);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode:not(.ant-select-tree-treenode-disabled) .ant-select-tree-node-content-wrapper:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-hover);
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-node-content-wrapper {
+  min-height: unset;
+  border-radius: var(--radius-base);
+  padding: 0.1875rem 0.5rem 0.1875rem 0.25rem;
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-node-content-wrapper .ant-select-tree-iconEle {
+  width: 0.875rem;
+  height: 0.875rem;
+  vertical-align: baseline;
+  margin-right: 0.5rem;
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode::before {
+  display: none;
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-switcher {
+  width: 1rem;
+  height: 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-self: unset;
+  margin-inline-end: 0.5rem;
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-switcher .ant-select-tree-switcher-icon {
+  height: 0.625rem;
+  margin: auto;
+}
+.ant-tree-select-dropdown .ant-select-tree .ant-select-tree-treenode .ant-select-tree-switcher:before {
+  display: none;
+}
+
+/* TimePicker/DatePicker 组件样式（antd 5 常规属性覆盖，原 --ant-* 变量方案改写） */
+.ant-picker.ant-picker {
+  color: var(--color-text-primary);
+  border-color: var(--gray-20);
+  border-radius: var(--radius-base);
+  padding-inline: 0.75rem;
+}
+.ant-picker.ant-picker:not(.ant-picker-disabled):hover {
+  border-color: var(--gray-0);
+}
+.ant-picker.ant-picker:focus-within,
+.ant-picker.ant-picker.ant-picker-focused {
+  border-color: var(--brand-50);
+  box-shadow: 0 0 0 1px var(--brand-10);
+}
+.ant-picker.ant-picker.ant-picker-disabled {
+  color: var(--color-text-disabled) !important;
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+  border-color: var(--gray-20);
+}
+.ant-picker.ant-picker.ant-picker-disabled .ant-picker-input > input {
+  color: var(--color-text-disabled);
+}
+.ant-picker.ant-picker.ant-picker-disabled .ant-picker-suffix {
+  color: var(--color-text-disabled) !important;
+}
+.ant-picker.ant-picker .ant-picker-input > input {
+  z-index: 1;
+  color: var(--color-text-primary);
+}
+.ant-picker.ant-picker .ant-picker-input > input::placeholder {
+  color: var(--color-text-placeholder);
+}
+.ant-picker.ant-picker .ant-picker-suffix,
+.ant-picker.ant-picker .ant-picker-clear {
+  color: var(--gray-50);
+}
+.ant-picker.ant-picker.ant-picker-focused .ant-picker-suffix,
+.ant-picker.ant-picker.ant-picker-focused .ant-picker-clear {
+  color: var(--gray-90);
+}
+.ant-picker.ant-picker-small {
+  padding: 1px 0.75rem;
+}
+.ant-picker.ant-picker-large {
+  padding-inline: 0.75rem;
+  border-radius: var(--radius-base);
+}
+.ant-picker-range .ant-picker-active-bar {
+  bottom: 4px;
+  height: 1.375rem;
+  background: var(--brand-05);
+  border-radius: 2px;
+}
+.ant-picker-range .ant-picker-range-separator {
+  /* antd 5：'~' 为裸文本节点，font-size: 0 隐藏；连字符字形贴基线会偏下，改用绘制短线并 flex 居中 */
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.25rem;
+  font-size: 0px;
+}
+.ant-picker-range .ant-picker-range-separator::before {
+  content: '';
+  display: block;
+  width: 0.375rem;
+  height: 1px;
+  background-color: var(--color-text-primary);
+}
+.ant-picker-range .ant-picker-range-separator .ant-picker-separator {
+  display: none;
+}
+.dark .ant-picker.ant-picker {
+  color: var(--color-text-primary);
+  border-color: var(--gray-50);
+}
+.dark .ant-picker.ant-picker:not(.ant-picker-disabled):hover {
+  border-color: var(--brand-40);
+}
+.dark .ant-picker.ant-picker:focus-within,
+.dark .ant-picker.ant-picker.ant-picker-focused {
+  border-color: var(--brand-40);
+  box-shadow: 0 0 0 1px var(--brand-80);
+}
+.dark .ant-picker.ant-picker .ant-picker-suffix,
+.dark .ant-picker.ant-picker .ant-picker-clear {
+  color: var(--gray-30);
+}
+.dark .ant-picker.ant-picker.ant-picker-focused .ant-picker-suffix,
+.dark .ant-picker.ant-picker.ant-picker-focused .ant-picker-clear {
+  color: var(--gray-10);
+}
+.dark .ant-picker.ant-picker.ant-picker-disabled {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-20);
+}
+.dark .ant-picker-range .ant-picker-active-bar {
+  background: rgb(from var(--brand-50) r g b / 0.4);
+}
+
+/* Radio 组件样式（token 映射，antd 5 结构：可视圆为 .ant-radio-inner，内点为 .ant-radio-inner::after，
+   状态类以 .ant-radio 为准（defaultChecked 时 wrapper-checked 不会更新；radio 无 label 类名）） */
+.ant-radio-wrapper {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-radio-wrapper .ant-radio-inner {
+  width: 1rem;
+  height: 1rem;
+}
+.ant-radio-wrapper:hover .ant-radio:not(.ant-radio-checked):not(.ant-radio-disabled) .ant-radio-inner {
+  border-color: var(--brand-40);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled {
+  color: var(--color-text-disabled);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-disabled .ant-radio-inner {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+  border-color: var(--color-border-disabled);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-disabled.ant-radio-checked .ant-radio-inner {
+  background-color: var(--brand-20);
+}
+.ant-radio-wrapper.ant-radio-wrapper-disabled .ant-radio.ant-radio-disabled.ant-radio-checked .ant-radio-inner::after {
+  background-color: var(--gray-0);
+}
+.ant-radio-wrapper .ant-radio:not(.ant-radio-checked):not(.ant-radio-disabled) .ant-radio-inner {
+  background-color: var(--gray-0);
+  border-color: var(--gray-40);
+}
+.ant-radio-wrapper:hover .ant-radio-checked:not(.ant-radio-disabled) .ant-radio-inner {
+  background-color: var(--brand-40);
+}
+.ant-radio-wrapper .ant-radio-checked:not(.ant-radio-disabled) .ant-radio-inner {
+  background-color: var(--brand-50);
+  border-color: transparent;
+}
+.dark .ant-radio-wrapper .ant-radio:not(.ant-radio-checked):not(.ant-radio-disabled) .ant-radio-inner {
+  background-color: var(--gray-100);
+  border-color: var(--gray-50);
+}
+.dark .ant-radio-wrapper .ant-radio.ant-radio-disabled .ant-radio-inner {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-50);
+}
+.dark .ant-radio-wrapper .ant-radio.ant-radio-disabled.ant-radio-checked .ant-radio-inner {
+  background-color: var(--brand-70);
+  border-color: transparent;
+}
+.dark .ant-radio-wrapper .ant-radio.ant-radio-disabled.ant-radio-checked .ant-radio-inner::after {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+
+/* Checkbox 组件样式（token 映射，antd 5 结构：可视框为 .ant-checkbox-inner，
+   状态类以 .ant-checkbox 为准（defaultChecked 时 wrapper-checked 不会更新）） */
+.ant-checkbox-wrapper {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-checkbox-wrapper .ant-checkbox-inner {
+  width: 1rem;
+  height: 1rem;
+}
+.ant-checkbox-wrapper .ant-checkbox-inner::after {
+  width: 0.357rem;
+  height: 0.571rem;
+}
+.ant-checkbox-wrapper:hover .ant-checkbox:not(.ant-checkbox-checked) .ant-checkbox-inner {
+  border-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper .ant-checkbox.ant-checkbox-disabled:not(.ant-checkbox-checked) .ant-checkbox-inner {
+  background-color: rgb(from var(--gray-100) r g b / 0.05);
+  border-color: var(--color-border-disabled) !important;
+}
+.ant-checkbox-wrapper .ant-checkbox.ant-checkbox-disabled:not(.ant-checkbox-checked) + .ant-checkbox-label {
+  color: var(--color-text-disabled);
+}
+.ant-checkbox-wrapper .ant-checkbox:not(.ant-checkbox-checked) .ant-checkbox-inner {
+  border-color: var(--gray-40);
+  background-color: var(--gray-0);
+}
+.ant-checkbox-wrapper:hover .ant-checkbox-checked:not(.ant-checkbox-disabled) .ant-checkbox-inner {
+  background-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper .ant-checkbox-checked.ant-checkbox-disabled .ant-checkbox-inner {
+  background-color: var(--brand-20) !important;
+}
+.ant-checkbox-wrapper .ant-checkbox-checked.ant-checkbox-disabled .ant-checkbox-inner:after {
+  border-color: var(--gray-0);
+}
+.ant-checkbox-wrapper .ant-checkbox-checked.ant-checkbox-disabled + .ant-checkbox-label {
+  color: var(--color-text-disabled);
+}
+.ant-checkbox-wrapper .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: var(--brand-50);
+  border-color: transparent ;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate .ant-checkbox-inner {
+  background-color: var(--brand-50) !important;
+  border-color: transparent !important;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate .ant-checkbox-inner::after {
+  width: 10px;
+  height: 2px;
+  background-color: var(--gray-0);
+  border: 0;
+  border-radius: 2px;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate:hover .ant-checkbox-inner {
+  background-color: var(--brand-40) !important;
+}
+.ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate.ant-checkbox-disabled .ant-checkbox-inner {
+  background-color: var(--brand-20) !important;
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper .ant-checkbox:not(.ant-checkbox-checked) .ant-checkbox-inner {
+  border-color: var(--gray-50);
+  background-color: var(--gray-100);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox.ant-checkbox-disabled:not(.ant-checkbox-checked) .ant-checkbox-inner {
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+  border-color: var(--gray-60) !important;
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-checked.ant-checkbox-disabled .ant-checkbox-inner {
+  background-color: var(--brand-70) !important;
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-checked.ant-checkbox-disabled .ant-checkbox-inner:after {
+  border-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate .ant-checkbox-inner {
+  border-color: transparent !important;
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate .ant-checkbox-inner::after {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+.dark .ant-checkbox-wrapper .ant-checkbox-indeterminate.ant-checkbox-indeterminate.ant-checkbox-disabled .ant-checkbox-inner {
+  background-color: var(--brand-70) !important;
+  border-color: transparent !important;
+}
+
+/* Switch 组件样式（占位，待填充 token 映射） */
+.ant-switch {
+  height: 1.25rem;
+  line-height: 1.25rem;
+  min-width: 2.375rem;
+  background-color: var(--gray-30);
+}
+.ant-switch .ant-switch-handle {
+  width: 1rem;
+  height: 1rem;
+}
+.ant-switch.ant-switch-checked {
+  background-color: var(--brand-50);
+}
+.ant-switch.ant-switch-checked .ant-switch-handle {
+  inset-inline-start: calc(100% - 1.125rem);
+}
+.ant-switch.ant-switch-disabled {
+  background-color: var(--gray-10);
+}
+.ant-switch.ant-switch-disabled.ant-switch-checked {
+  background-color: var(--brand-20);
+}
+.ant-switch .ant-switch-inner .ant-switch-inner-unchecked {
+  margin-top: -1.25rem;
+}
+.ant-switch .ant-switch-inner .ant-switch-inner-checked,
+.ant-switch .ant-switch-inner .ant-switch-inner-unchecked {
+  min-height: 1.25rem;
+}
+.dark .ant-switch {
+  background-color: var(--gray-60);
+}
+.dark .ant-switch.ant-switch-checked {
+  background-color: var(--brand-50);
+}
+.dark .ant-switch.ant-switch-disabled {
+  background-color: var(--gray-60);
+}
+.dark .ant-switch.ant-switch-disabled.ant-switch-checked {
+  background-color: var(--brand-70);
+}
+.dark .ant-switch.ant-switch-disabled .ant-switch-handle::before {
+  background-color: rgb(from var(--gray-05) r g b / 0.3);
+}
+
+/* Slider 组件样式（占位，待填充 token 映射） */
+.ant-slider .ant-slider-rail {
+  background-color: var(--gray-10);
+}
+.ant-slider .ant-slider-track {
+  background-color: var(--brand-50) !important;
+}
+.ant-slider .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: var(--font-size-md);
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.ant-slider .ant-slider-mark .ant-slider-mark-text {
+  font-size: var(--font-size-md);
+  color: var(--gray-100);
+}
+.ant-slider:hover .ant-slider-rail {
+  background-color: var(--gray-10);
+}
+.ant-slider:hover .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  font-size: 14px;
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.ant-slider:hover .ant-slider-handle:not(.ant-slider-handle-disabled)::after {
+  box-shadow: 0 0 0 2px var(--brand-50);
+}
+.dark .ant-slider .ant-slider-rail {
+  background-color: color-mix(in srgb, var(--gray-05) 15%, transparent);
+}
+.dark .ant-slider .ant-slider-track {
+  background-color: var(--brand-50) !important;
+}
+.dark .ant-slider .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  background-color: var(--gray-0);
+  box-shadow: 0 0 0 2px var(--brand-70);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dark .ant-slider .ant-slider-mark .ant-slider-mark-text {
+  color: var(--gray-0);
+}
+.dark .ant-slider .ant-slider-step .ant-slider-dot-active {
+  background-color: var(--gray-0);
+  border: 1px solid var(--brand-70);
+}
+.dark .ant-slider:hover .ant-slider-rail {
+  background-color: color-mix(in srgb, var(--gray-05) 15%, transparent);
+}
+.dark .ant-slider:hover .ant-slider-handle::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  box-shadow: 0 0 0 2px var(--brand-50);
+  outline: 0px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dark .ant-slider:hover .ant-slider-handle:not(.ant-slider-handle-disabled)::after {
+  box-shadow: 0 0 0 2px var(--brand-50);
+}
+
+/* Rate 组件样式（占位，待填充 token 映射） */
+.ant-rate .ant-rate-star {
+  margin-inline-end: 0.5rem;
+}
+.ant-rate .anticon svg {
+  color: var(--yellow-50);
+}
+
+/* Table 组件样式（token 映射；单元格高度按尺寸区分，rem：大 2.5rem / 中 2rem / 小 1.75rem） */
+.ant-table {
+  font-family: var(--font-family);
+}
+.ant-table .ant-table-content {
+  border-start-start-radius: 0 !important;
+  border-start-end-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-column-sorters {
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.ant-table .ant-table-content .ant-table-column-sorters .ant-table-column-title {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ant-table .ant-table-content .ant-table-column-sorters .ant-table-column-sorter {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  margin-inline-start: 0.5rem;
+}
+.ant-table .ant-table-content .ant-table-filter-column {
+  justify-content: flex-start;
+  align-items: center;
+}
+.ant-table .ant-table-content .ant-table-filter-column > .ant-table-column-title:has(> .ant-table-column-sorters) {
+  display: contents;
+}
+.ant-table .ant-table-content .ant-table-filter-column .ant-table-column-sorters {
+  display: contents;
+}
+.ant-table .ant-table-content .ant-table-filter-column .ant-table-column-title {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ant-table .ant-table-content .ant-table-filter-column .ant-table-filter-trigger {
+  order: 1;
+  margin-inline-start: 0.5rem;
+  margin-inline-end: 0;
+}
+.ant-table .ant-table-content .ant-table-filter-column .ant-table-column-sorter {
+  order: 2;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th {
+  height: 2.5rem;
+  line-height: 2.5rem;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text-primary);
+  background-color: var(--gray-05);
+  border-top: none !important;
+  border-bottom: 1px solid var(--gray-05);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-normal);
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th::before {
+  background-color: var(--gray-20) !important;
+  height: 1em !important;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th:first-child {
+  border-start-start-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-thead > tr > th:last-child {
+  border-start-end-radius: 0 !important;
+}
+.ant-table .ant-table-content .ant-table-tbody > tr:not(.ant-table-measure-row) > td {
+  height: 2.5rem;
+  line-height: 1.5714;
+  vertical-align: middle;
+  /* 子元素顶部对齐行框顶，高内容铺满行框，消除 strut 基线对齐多出的高度 */
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+  border-bottom: 1px solid var(--gray-05);
+}
+.ant-table .ant-table-content .ant-table-tbody > tr:not(.ant-table-measure-row) > td > * {
+  vertical-align: top;
+}
+.ant-table .ant-table-content .ant-table-tbody > tr:not(.ant-table-measure-row):not(.ant-table-expanded-row) > td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-row > .ant-table-cell-row-hover {
+  background-color: rgb(from var(--gray-90) r g b / 0.05) !important;
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-row.ant-table-row-selected > .ant-table-cell {
+  background-color: initial;
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-expanded-row .ant-table-cell {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+}
+.ant-table .ant-table-content .ant-table-tbody .ant-table-column-sort {
+  background: initial;
+}
+.ant-table.ant-table-middle .ant-table-content .ant-table-thead > tr > th {
+  height: 2rem;
+  line-height: 2rem;
+  padding: 0 0.5rem;
+}
+.ant-table.ant-table-middle .ant-table-content .ant-table-tbody > tr:not(.ant-table-measure-row) > td {
+  height: 2rem;
+  line-height: 1.5714;
+  padding: 0 0.5rem;
+}
+.ant-table.ant-table-small .ant-table-content .ant-table-thead > tr > th {
+  height: 1.75rem;
+  line-height: 1.75rem;
+  padding: 0 0.5rem;
+}
+.ant-table.ant-table-small .ant-table-content .ant-table-tbody > tr:not(.ant-table-measure-row) > td {
+  height: 1.75rem;
+  line-height: 1.5714;
+  padding: 0 0.5rem;
+}
+.dark .ant-table .ant-table-content .ant-table-thead > tr > th {
+  color: var(--color-text-primary);
+  background-color: var(--gray-70);
+  border-bottom: 1px solid rgb(from var(--gray-05) r g b / 0.1);
+}
+.dark .ant-table .ant-table-content .ant-table-thead > tr > th::before {
+  background-color: var(--gray-50) !important;
+}
+.dark .ant-table .ant-table-content .ant-table-tbody > tr > td {
+  color: var(--color-text-primary);
+  border-bottom: 1px solid rgb(from var(--gray-05) r g b / 0.1);
+  background-color: transparent;
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-row > .ant-table-cell-row-hover {
+  background-color: rgb(from var(--gray-70) r g b / 0.4) !important;
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-row.ant-table-row-selected > .ant-table-cell {
+  background-color: initial;
+}
+.dark .ant-table .ant-table-content .ant-table-tbody .ant-table-expanded-row .ant-table-cell {
+  background-color: rgb(from var(--gray-05) r g b / 0.1);
+}
+
+/* Tabs 组件样式（占位，待填充 token 映射） */
+.ant-tabs .ant-tabs-tab {
+  color: var(--color-text-secondary);
+  padding: 0.375rem 0;
+}
+.ant-tabs .ant-tabs-tab:not(.ant-tabs-tab-disabled):hover {
+  color: var(--color-text-primary);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--color-link);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-remove {
+  color: var(--color-link);
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-disabled {
+  color: var(--color-text-disabled);
+}
+.ant-tabs.ant-tabs-card {
+  line-height: 1.5rem;
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
+  background-color: var(--color-card-gray-disabled);
+  border-color: transparent;
+  padding: 0.25rem 1rem;
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab.ant-tabs-tab-active {
+  border-color: var(--color-border-separator);
+  border-bottom-color: var(--color-card-gray-disabled);
+  background-color: var(--color-bg-3);
+}
+.ant-tabs.ant-tabs-card > .ant-tabs-nav .ant-tabs-nav-add {
+  border: none;
+}
+.ant-tabs .ant-tabs-tab-remove {
+  padding: 0;
+  font-size: var(--font-size-md);
+}
+.ant-tabs .ant-tabs-ink-bar {
+  background-color: var(--color-link);
+}
+.ant-tabs-top > .ant-tabs-nav::before {
+  border-color: var(--color-border-separator);
+}
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-add,
+.ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-add {
+  min-height: 1.875rem;
+}
+
+/* Collapse 组件样式（占位，待填充 token 映射） */
+.ant-collapse .ant-collapse-item {
+  border-color: var(--color-border-separator);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-header {
+  color: var(--color-text-primary);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-header .ant-collapse-expand-icon {
+  margin-inline-end: 0.25rem;
+  padding-inline-end: var(--spacing-0);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-content {
+  border-color: var(--color-border-separator);
+}
+.ant-collapse .ant-collapse-item .ant-collapse-content .ant-collapse-content-box {
+  padding: 0.75rem 1rem 1rem 2rem;
+}
+.dark .ant-collapse .ant-collapse-item {
+  border-color: var(--color-text-inverse-disabled);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-header {
+  color: var(--color-text-primary);
+  background-color: rgb(from var(--gray-05) r g b / 0.2);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-header .ant-collapse-expand-icon {
+  color: var(--gray-10);
+}
+.dark .ant-collapse .ant-collapse-item .ant-collapse-content {
+  border-color: var(--color-text-inverse-disabled);
+}
+
+/* Tag 组件样式（占位，待填充 token 映射） */
+.ant-tag {
+  border: none;
+  padding: 0 0.5rem;
+  line-height: 1.5rem;
+  background-color: var(--color-tag-bg-none);
+  color: var(--color-text-primary);
+}
+.ant-tag.ant-tag-processing {
+  background: var(--color-tag-bg-info);
+  color: var(--color-tag-text-info);
+}
+.ant-tag.ant-tag-error {
+  background: var(--color-tag-bg-error);
+  color: var(--color-tag-text-error);
+}
+.ant-tag.ant-tag-warning {
+  background: var(--color-tag-bg-warning);
+  color: var(--color-tag-text-warning);
+}
+.ant-tag.ant-tag-gold {
+  background: var(--color-tag-bg-alert);
+  color: var(--color-tag-text-alert);
+}
+.ant-tag.ant-tag-success {
+  background: var(--color-tag-bg-success);
+  color: var(--color-tag-text-success);
+}
+.ant-tag.ant-tag-green {
+  background: var(--color-tag-bg-green);
+  color: var(--color-tag-text-green);
+}
+.ant-tag.ant-tag-magenta {
+  background: var(--color-tag-bg-rose);
+  color: var(--color-tag-text-rose);
+}
+.ant-tag.ant-tag-pink {
+  background: var(--color-tag-bg-pink);
+  color: var(--color-tag-text-pink);
+}
+.ant-tag.ant-tag-purple {
+  background: var(--color-tag-bg-purple);
+  color: var(--color-tag-text-purple);
+}
+.ant-tag.ant-tag-geekblue {
+  background: var(--color-tag-bg-indigo);
+  color: var(--color-tag-text-indigo);
+}
+.ant-tag.ant-tag-cyan {
+  background: var(--color-tag-bg-cyan);
+  color: var(--color-tag-text-cyan);
+}
+.ant-tag.ant-tag-disabled {
+  background-color: var(--color-tag-bg-none);
+  color: var(--color-text-disabled);
+}
+.ant-tag.ant-tag-disabled .anticon {
+  color: var(--color-text-disabled);
+}
+.ant-tag > .anticon + span,
+.ant-tag > span + .anticon {
+  margin-left: 0.25rem;
+}
+.ant-tag .anticon {
+  color: var(--color-text-primary);
+}
+
+/* Badge 组件样式（占位，待填充 token 映射） */
+.ant-badge .ant-badge-count {
+  min-width: 1rem;
+  border: none;
+  padding: 0.125rem 0.25rem;
+  font-size: var(--font-size-base);
+  line-height: 0.75rem;
+  height: 1.125rem;
+  border: 1px solid var(--gray-0);
+  box-shadow: 0 0 0 1px var(--gray-0);
+  background-color: var(--color-error);
+  color: var(--color-text-inverse);
+}
+.ant-badge .ant-badge-dot {
+  box-shadow: 0 0 0 1px var(--gray-0);
+  border: 1px solid var(--gray-0);
+  background-color: var(--color-error);
+}
+.dark .ant-badge .ant-badge-count {
+  border: 1px solid rgb(from var(--gray-0) r g b / 0);
+  box-shadow: 0 0 0 1px rgb(from var(--gray-0) r g b / 0);
+}
+.dark .ant-badge .ant-badge-dot {
+  box-shadow: 0 0 0 1px rgb(from var(--gray-0) r g b / 0);
+  border: 1px solid rgb(from var(--gray-0) r g b / 0);
+}
+
+/* Progress 组件样式（占位，待填充 token 映射） */
+.ant-progress .ant-progress-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+}
+.ant-progress.ant-progress-line .ant-progress-bg {
+  background-color: var(--color-brand);
+}
+.ant-progress.ant-progress-line.ant-progress-status-success .ant-progress-bg {
+  background-color: var(--mint-50);
+}
+.ant-progress.ant-progress-line.ant-progress-status-success .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
+  stroke: var(--mint-50);
+}
+.ant-progress.ant-progress-line.ant-progress-status-exception .ant-progress-bg {
+  background-color: var(--color-error);
+}
+.ant-progress.ant-progress-line.ant-progress-status-exception .ant-progress-text {
+  color: var(--color-error);
+}
+.ant-progress.ant-progress-line.ant-progress-status-exception .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
+  stroke: var(--color-error);
+}
+.ant-progress.ant-progress-circle.ant-progress-status-success .ant-progress-text {
+  color: var(--mint-50);
+}
+.ant-progress.ant-progress-circle.ant-progress-status-success .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
+  stroke: var(--mint-50);
+}
+.ant-progress.ant-progress-circle.ant-progress-status-exception .ant-progress-text {
+  color: var(--color-error);
+}
+.ant-progress.ant-progress-circle.ant-progress-status-exception .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
+  stroke: var(--color-error);
+}
+.dark .ant-progress.ant-progress-line.ant-progress-status-success .ant-progress-bg {
+  background-color: var(--mint-40);
+}
+.dark .ant-progress.ant-progress-line.ant-progress-status-success .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
+  stroke: var(--mint-40);
+}
+
+/* Spin 组件样式（自定义指示符：loading.svg，由 ConfigProvider spin.indicator 全局注入） */
+.ant-spin {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+.ant-spin.ant-spin-sm {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+.ant-spin.ant-spin-lg {
+  width: 3rem;
+  height: 3rem;
+}
+.ant-spin .custom-spin-indicator {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: custom-spin-rotate 1.5s linear infinite;
+}
+@keyframes custom-spin-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Steps 组件样式（占位，待填充 token 映射） */
+.ant-steps .ant-steps-item.ant-steps-item-process.ant-steps-item-active .ant-steps-item-container .ant-steps-item-icon {
+  border-color: var(--color-border-focus);
+  background-color: var(--color-brand);
+  color: var(--color-border-focus);
+}
+.ant-steps .ant-steps-item.ant-steps-item-process.ant-steps-item-active .ant-steps-item-container .ant-steps-item-content .ant-steps-item-title {
+  color: var(--color-link);
+}
+.ant-steps .ant-steps-item.ant-steps-item-process.ant-steps-item-active .ant-steps-item-container .ant-steps-item-content .ant-steps-item-description {
+  color: var(--color-link);
+}
+.ant-steps .ant-steps-item.ant-steps-item-process .ant-steps-item-container .ant-steps-item-content .ant-steps-item-title::after {
+  background-color: var(--color-border-separator);
+}
+.ant-steps .ant-steps-item.ant-steps-item-process .ant-steps-item-container .ant-steps-item-tail::after {
+  background-color: var(--color-border-separator);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait .ant-steps-item-container .ant-steps-item-icon {
+  border-color: var(--color-border);
+  color: var(--color-text-placeholder);
+  background-color: var(--color-fill);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait .ant-steps-item-container .ant-steps-item-content .ant-steps-item-title {
+  color: var(--color-text-secondary);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait .ant-steps-item-container .ant-steps-item-content .ant-steps-item-title::after {
+  background-color: var(--color-border-separator);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait .ant-steps-item-container .ant-steps-item-content .ant-steps-item-description {
+  color: var(--color-text-secondary);
+}
+.ant-steps .ant-steps-item.ant-steps-item-wait .ant-steps-item-container .ant-steps-item-tail::after {
+  background-color: var(--color-border-separator);
+}
+.ant-steps .ant-steps-item .ant-steps-item-title {
+  font-size: var(--font-size-lg);
+}
+.ant-steps .ant-steps-item.ant-steps-item-finish .ant-steps-item-container .ant-steps-item-content .ant-steps-item-title {
+  color: var(--color-text-primary);
+}
+.ant-steps .ant-steps-item.ant-steps-item-finish .ant-steps-item-icon {
+  border-color: var(--color-border-focus);
+  background-color: var(--color-info-primary-subtler);
+  color: var(--color-border-focus);
+}
+.ant-steps .ant-steps-item .ant-steps-item-description {
+  font-size: var(--font-size-md);
+}
+.ant-steps .ant-steps-item .ant-steps-item-icon {
+  font-size: var(--font-size-md);
+  margin-inline-end: 0.75rem;
+}
+.ant-steps .ant-steps-item-content {
+  color: var(--color-text-secondary);
+}
+.ant-steps .ant-steps-item-title {
+  padding-inline-end: 0.75rem;
+}
+.ant-steps.ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
+  padding-inline-start: 0.75rem;
+}
+.ant-steps.ant-steps-small .ant-steps-item-content .ant-steps-item-title {
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-small .ant-steps-item-content .ant-steps-item-description {
+  font-size: var(--font-size-base);
+}
+.ant-steps.ant-steps-small .ant-steps-item-rail {
+  margin-inline-start: var(--spacing-2);
+}
+.ant-steps.ant-steps-small .ant-steps-item-title {
+  padding-inline-end: 0.5rem;
+}
+.ant-steps.ant-steps-small .ant-steps-item-icon {
+  margin-inline-end: 0.5rem;
+}
+.ant-steps.ant-steps-small.ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
+  padding-inline-start: 0.5rem;
+}
+.ant-steps.ant-steps-label-vertical .ant-steps-item-icon {
+  margin-inline-end: 0.5rem;
+}
+.ant-steps.ant-steps-label-vertical .ant-steps-item-content {
+  margin-top: 0.5rem;
+}
+.ant-steps.ant-steps-dot.ant-steps-label-vertical .ant-steps-item-content {
+  margin-top: 0.25rem;
+}
+.ant-steps.ant-steps-dot .ant-steps-item-title {
+  font-size: var(--font-size-base);
+}
+.ant-steps.ant-steps-dot .ant-steps-item-icon {
+  margin-inline-end: 0.25rem;
+  border: 1px solid transparent;
+}
+.ant-steps.ant-steps-dot .ant-steps-item-icon .ant-steps-icon-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+.ant-steps.ant-steps-dot .ant-steps-item-tail::after {
+  margin-inline-start: 0.5rem;
+  width: calc(100% - 1rem);
+  height: 1px;
+}
+.ant-steps.ant-steps-dot .ant-steps-item-process.ant-steps-item-active .ant-steps-item-container .ant-steps-item-icon {
+  border-color: transparent;
+}
+.ant-steps.ant-steps-dot .ant-steps-item-process .ant-steps-item-icon {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+.ant-steps.ant-steps-dot .ant-steps-item.ant-steps-item-wait .ant-steps-item-icon > .ant-steps-icon .ant-steps-icon-dot {
+  border-color: var(--color-border);
+  background-color: var(--color-fill);
+}
+.ant-steps.ant-steps-panel .ant-steps-item .ant-steps-item-content {
+  font-size: var(--font-size-base);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish {
+  background-color: var(--color-info-primary-subtler);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish .ant-steps-item-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-finish .ant-steps-panel-arrow path {
+  fill: var(--color-info-primary-subtler);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active {
+  background-color: var(--color-brand);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active .ant-steps-item-title {
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-active .ant-steps-panel-arrow path {
+  fill: var(--color-brand);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait {
+  background-color: var(--color-fill);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait .ant-steps-item-title {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-wait .ant-steps-panel-arrow path {
+  fill: var(--color-fill);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error {
+  background-color: var(--red-05);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-item-title {
+  font-size: var(--font-size-md);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-panel-arrow path {
+  fill: var(--red-05);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error.ant-steps-item-active {
+  color: var(--color-text-inverse);
+  background-color: var(--color-error);
+}
+.ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error.ant-steps-item-active .ant-steps-panel-arrow path {
+  fill: var(--color-error);
+}
+.dark .ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error {
+  background-color: rgba(238, 0, 34, 0.4);
+}
+.dark .ant-steps.ant-steps-panel .ant-steps-item.ant-steps-item-error .ant-steps-panel-arrow path {
+  fill: rgba(238, 0, 34, 0.4);
+}
+
+/* Pagination 组件样式（占位，待填充 token 映射） */
+.ant-pagination {
+  font-size: 0.875rem;
+}
+.ant-pagination .ant-pagination-total-text {
+  color: var(--gray-90);
+  margin-right: 0.5rem;
+}
+.ant-pagination .ant-pagination-prev,
+.ant-pagination .ant-pagination-next {
+  margin-right: 0.5rem;
+  height: 1.5rem !important;
+  min-width: 1.5rem;
+  margin-inline-end: 0.5rem;
+}
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  width: 1.5rem !important;
+}
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link .anticon,
+.ant-pagination .ant-pagination-next .ant-pagination-item-link .anticon {
+  width: 0.625rem;
+  height: 0.625rem;
+}
+.ant-pagination .ant-pagination-item {
+  margin-right: 0.5rem;
+  color: var(--gray-90);
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+}
+.ant-pagination .ant-pagination-item a:hover {
+  text-decoration: none;
+  background-color: color-mix(in srgb, var(--gray-90) 5%, transparent);
+  color: var(--gray-90);
+}
+.ant-pagination .ant-pagination-item-active {
+  background-color: var(--brand-05);
+  border: none;
+  font-weight: var(--font-weight-normal);
+  color: var(--brand-50);
+}
+.ant-pagination .ant-pagination-item-active:hover a {
+  color: var(--brand-50);
+  font-weight: var(--font-weight-normal);
+}
+.ant-pagination .ant-pagination-options {
+  margin-inline-start: 0;
+}
+.ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item .ant-select-item-option-content {
+  font-weight: var(--font-weight-normal) !important;
+}
+.ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item-option-selected {
+  background-color: var(--brand-05);
+}
+.ant-pagination .ant-pagination-options .ant-pagination-options-quick-jumper input {
+  color: var(--gray-90);
+  font-size: 0.875rem;
+}
+.dark {
+  /* Pagination 组件样式（占位，待填充 token 映射） */
+}
+.dark .ant-pagination .ant-pagination-total-text {
+  color: var(--gray-0);
+}
+.dark .ant-pagination .ant-pagination-item {
+  color: var(--gray-0);
+}
+.dark .ant-pagination .ant-pagination-item a:hover {
+  background-color: color-mix(in srgb, var(--brand-05) 20%, transparent);
+  color: var(--gray-0);
+}
+.dark .ant-pagination .ant-pagination-item-active {
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  font-weight: var(--font-weight-normal);
+  color: var(--gray-0) !important;
+}
+.dark .ant-pagination .ant-pagination-item-active a {
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  font-weight: var(--font-weight-normal);
+  color: var(--gray-0) !important;
+}
+.dark .ant-pagination .ant-pagination-item-active:hover a {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+  font-weight: var(--font-weight-normal);
+}
+.dark .ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item .ant-select-item-option-content {
+  font-weight: var(--font-weight-normal) !important;
+}
+.dark .ant-pagination .ant-pagination-options .ant-select-dropdown .ant-select-item-option-selected {
+  background-color: var(--brand-05);
+}
+.dark .ant-pagination .ant-pagination-options .ant-pagination-options-quick-jumper input {
+  color: var(--gray-90);
+}
+
+.ant-tooltip {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-tooltip .ant-tooltip-container {
+  color: var(--color-text-primary);
+  padding: var(--spacing-4);
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-tooltip .ant-tooltip-inner {
+  background-color: var(--color-bg-4);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+}
+.ant-tooltip .ant-tooltip-arrow:before {
+  background-color: var(--color-bg-4);
+}
+
+.ant-popover .ant-popover-container {
+  padding: var(--spacing-4);
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-popover .ant-popover-title {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-lg);
+}
+.ant-popover .ant-popover-content {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+}
+
+/* Empty 组件样式（占位，待填充 token 映射） */
+.ant-empty {
+  width: 100%;
+  margin-inline: 0;
+}
+.ant-empty .ant-empty-image {
+  height: auto;
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+.ant-empty .ant-empty-image > img {
+  width: 4.875rem;
+  height: 4.5rem;
+}
+.ant-empty .ant-empty-description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-placeholder);
+}
+
+/* Timeline 组件样式（占位，待填充 token 映射） */
+.ant-timeline .ant-timeline-item {
+  padding-bottom: 1rem;
+}
+.ant-timeline .ant-timeline-item .ant-timeline-item-head {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+.ant-timeline.ant-timeline-start .ant-timeline-item .ant-timeline-item-tail {
+  inset-inline-start: 0.375rem;
+}
+.ant-timeline.ant-timeline-alternate .ant-timeline-item .ant-timeline-item-head,
+.ant-timeline.ant-timeline-right .ant-timeline-item .ant-timeline-item-head {
+  margin-inline-start: -0.375rem;
+}
+
+/* Tree 组件样式（占位，待填充 token 映射） */
+.ant-tree {
+  color: var(--color-text-primary);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-treenode {
+  margin-bottom: var(--spacing-0);
+  line-height: 1.75rem;
+  padding: 0.25rem 0;
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher {
+  width: 1rem;
+  height: 1rem;
+  line-height: 1rem;
+  margin-right: 0.5rem;
+  align-self: center;
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher:hover {
+  background: var(--color-fill);
+  border-radius: var(--radius-base);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-switcher::before {
+  width: 1rem;
+  height: 1rem;
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-checkbox {
+  margin-top: var(--spacing-0);
+  align-self: center;
+  margin-right: 0.5rem;
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-node-content-wrapper:hover {
+  background: var(--color-fill);
+  border-radius: var(--radius-base);
+}
+.ant-tree .ant-tree-list .ant-tree-list-holder .ant-tree-list-holder-inner .ant-tree-node-content-wrapper.ant-tree-node-selected {
+  background: var(--color-select);
+}
+
+/* Segmented 组件样式（占位，待填充 token 映射） */
+.ant-segmented .ant-segmented-group {
+  gap: 0.25rem;
+  background: var(--color-fill);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-label {
+  padding: 0 1rem;
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-90);
+  background: var(--color-fill);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled {
+  color: var(--gray-20);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected {
+  color: var(--gray-0);
+  background: var(--brand-50);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+  background: var(--brand-40);
+}
+.ant-segmented .ant-segmented-group .ant-segmented-item-selected.ant-segmented-item-disabled {
+  color: var(--gray-0);
+  background: var(--brand-20);
+}
+.dark .ant-segmented-group .ant-segmented-item .ant-segmented-item-icon {
+  color: var(--gray-30);
+}
+.dark .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item:not(.ant-segmented-item-disabled):hover .ant-segmented-item-icon {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled {
+  color: var(--gray-40);
+}
+.dark .ant-segmented-group .ant-segmented-item.ant-segmented-item-disabled .ant-segmented-item-icon {
+  color: var(--gray-40);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected {
+  color: var(--gray-0);
+  background: var(--brand-50);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected .ant-segmented-item-icon {
+  color: var(--gray-0);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected:not(.ant-segmented-item-disabled):hover {
+  color: var(--gray-0);
+  background: var(--brand-40);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected.ant-segmented-item-disabled {
+  color: var(--color-text-inverse-disabled);
+  background: var(--brand-70);
+}
+.dark .ant-segmented-group .ant-segmented-item-selected.ant-segmented-item-disabled .ant-segmented-item-icon {
+  color: var(--color-text-inverse-disabled);
+}
+
+/* ColorPicker 组件样式（占位，待填充 token 映射） */
+.ant-color-picker-trigger {
+  min-width: 2rem;
+  min-height: 2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-20);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gray-0);
+}
+.ant-color-picker-trigger .ant-color-picker-color-block {
+  position: relative;
+  border-radius: var(--radius-base);
+  width: var(--font-size-3xl);
+  height: var(--font-size-3xl);
+}
+.ant-color-picker-trigger:hover {
+  border-color: var(--gray-90);
+}
+.ant-color-picker-trigger.ant-color-picker-trigger-active {
+  /* 1. 设置实线的主边框（内边框/整体边框）颜色 */
+  border-color: var(--brand-50);
+  border-inline-end-width: 1px;
+  /* 2. 外边框（外发光晕）颜色，将 #B8D9F9 转换为带透明度的 rgba，效果更自然 */
+  box-shadow: 0 0 0 2px #B8D9F9;
+  outline: 0;
+}
+.ant-color-picker-trigger-disabled {
+  border-color: var(--gray-20) !important;
+  background-color: color-mix(in srgb, #191919 5%, transparent) !important;
+}
+.dark {
+  /* ColorPicker 组件样式（占位，待填充 token 映射） */
+}
+.dark .ant-color-picker-trigger {
+  border: 1px solid var(--gray-50);
+  background: transparent;
+}
+.dark .ant-color-picker-trigger:hover {
+  border-color: var(--gray-05);
+}
+.dark .ant-color-picker-trigger.ant-color-picker-trigger-active {
+  /* 1. 设置实线的主边框（内边框/整体边框）颜色 */
+  border-color: var(--brand-40);
+  /* 2. 外边框（外发光晕）颜色，将 #B8D9F9 转换为带透明度的 rgba，效果更自然 */
+  box-shadow: 0 0 0 2px var(--brand-80);
+}
+.dark .ant-color-picker-trigger-disabled {
+  border-color: var(--gray-40) !important;
+  background-color: color-mix(in srgb, var(--gray-05) 20%, transparent) !important;
+}
+
+/* Drawer 组件样式（占位，待填充 token 映射） */
+.ant-drawer .ant-drawer-content-wrapper {
+  box-shadow: var(--shadow-l-base);
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header {
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: none;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close {
+  order: 2;
+  margin-inline-start: auto;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close .anticon {
+  font-size: var(--font-size-md);
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-header .ant-drawer-header-title .ant-drawer-close .anticon svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+.ant-drawer .ant-drawer-content-wrapper .ant-drawer-section .ant-drawer-body {
+  padding: 0 1.5rem 1.5rem;
+}
+.dark .ant-drawer .ant-drawer-content-wrapper .ant-drawer-section {
+  background-color: var(--gray-80);
+}
+
+/* Modal 组件样式（占位，待填充 token 映射） */
+.ant-modal .ant-modal-title {
+  font-size: var(--font-size-2xl);
+  color: var(--gray-90);
+}
+.ant-modal .ant-modal-content {
+  background-color: #ffffff;
+  position: relative;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: var(--radius-lg);
+  pointer-events: auto;
+  padding: var(--spacing-6) !important;
+}
+.ant-modal .ant-modal-header {
+  color: var(--gray-90);
+  border-bottom: var(--spacing-4);
+}
+.ant-modal .ant-modal-header .ant-modal-title {
+  font-size: var(--font-size-2xl);
+  color: var(--gray-90);
+}
+.ant-modal .ant-modal-body .ant-typography.ant-typography-secondary,
+.ant-modal .ant-modal-body .ant-typography.ant-typography-link.ant-typography-secondary {
+  color: var(--gray-90);
+}
+.ant-btn.ant-btn-color-default {
+  border-radius: var(--radius-base);
+}
+.ant-btn.ant-btn-color-primary {
+  background-color: var(--brand-50);
+  border-radius: var(--radius-base);
+  color: var(--gray-0);
+}
+.ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  background-color: var(--brand-60);
+  color: var(--gray-0);
+}
+.dark .ant-modal {
+  background-color: color-mix(in srgb, #000000 70%, transparent) !important;
+}
+.dark .ant-modal .ant-modal-title {
+  color: var(--gray-0);
+}
+.dark .ant-modal .ant-modal-content {
+  background-color: var(--gray-70);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6) !important;
+  color: var(--gray-0);
+}
+.dark .ant-modal .ant-modal-content .ant-modal-body .ant-typography.ant-typography-secondary,
+.dark .ant-modal .ant-modal-content .dark .ant-modal .ant-modal-body .ant-typography.ant-typography-link.ant-typography-secondary {
+  color: var(--gray-0);
+}
+.dark .ant-modal .ant-modal-header {
+  color: var(--gray-0);
+  border-bottom: var(--spacing-4);
+  background-color: var(--gray-70);
+}
+.dark .ant-modal .ant-modal-body .ant-typography.ant-typography-secondary,
+.dark .ant-modal .ant-modal-body .ant-typography.ant-typography-link.ant-typography-secondary {
+  color: var(--gray-90);
+}
+.dark .ant-btn.ant-btn-color-default {
+  border-radius: var(--radius-base);
+}
+.dark .ant-btn.ant-btn-color-primary {
+  background-color: var(--brand-50);
+  border-radius: var(--radius-base);
+  color: var(--gray-0);
+}
+.dark .ant-btn.ant-btn-color-primary:not(:disabled):hover {
+  background-color: var(--brand-60);
+  color: var(--gray-0);
+}
+
+/* Breadcrumb 组件样式（占位，待填充 token 映射） */
+.ant-breadcrumb .ant-breadcrumb-item {
+  color: var(--gray-50);
+  font-size: var(--font-size-md);
+}
+.ant-breadcrumb .ant-breadcrumb-item:last-child {
+  color: var(--gray-90);
+}
+.ant-breadcrumb .ant-breadcrumb-separator {
+  width: 0.75rem;
+  text-align: center;
+  margin-inline: 0.25rem;
+  color: var(--gray-20);
+}
+.dark .ant-breadcrumb .ant-breadcrumb-item {
+  color: var(--gray-20);
+  font-size: var(--font-size-md);
+}
+.dark .ant-breadcrumb .ant-breadcrumb-item:last-child {
+  color: var(--gray-0);
+}
+.dark .ant-breadcrumb .ant-breadcrumb-separator {
+  color: var(--gray-40);
+}
+
+/* Dropdown 下拉菜单样式（占位，待填充 token 映射） */
+.ant-dropdown .ant-dropdown-menu {
+  background-color: var(--color-bg-4);
+  border-radius: var(--radius-md);
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
+  padding: 0.25rem 0.5rem;
+  color: var(--color-text-primary);
+  border-radius: var(--radius-base);
+  line-height: 2rem;
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+  background-color: rgb(from var(--gray-90) r g b / 0.05);
+}
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item-icon {
+  font-size: var(--font-size-md);
+  margin-right: 0.25rem;
+}
+.dark .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+  background-color: var(--gray-70);
+}
+
+/* Menu 导航菜单样式（占位，待填充 token 映射） */
+.ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  color: var(--gray-90);
+  font-size: var(--font-size-md);
+}
+.ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title:active {
+  color: var(--brand-50);
+  background-color: var(--brand-05);
+}
+.ant-menu-inline .ant-menu-submenu-selecte {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item {
+  font-size: var(--font-size-md);
+}
+.ant-menu-light .ant-menu-item-selected,
+.ant-menu-light > .ant-menu .ant-menu-item-selected {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item:active {
+  color: var(--brand-50) !important;
+  background-color: var(--brand-05) !important;
+}
+.ant-menu-item:hover {
+  color: var(--gray-90);
+  background-color: color-mix(in srgb, var(--gray-90) 5%, transparent);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title {
+  color: var(--gray-0);
+  background-color: var(--gray-90);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title .ant-menu-item-icon {
+  color: var(--gray-10);
+}
+.dark .ant-menu-inline .ant-menu-submenu .ant-menu-submenu-title:active {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent);
+}
+.dark .ant-menu-inline .ant-menu-submenu-selecte {
+  color: var(--gray-0) !important;
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-light .ant-menu-item-selected,
+.dark .ant-menu-light > .ant-menu .ant-menu-item-selected {
+  color: var(--gray-0) !important;
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-item:active {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--brand-50) 40%, transparent) !important;
+}
+.dark .ant-menu-item:hover {
+  color: var(--gray-0);
+  background-color: color-mix(in srgb, var(--gray-05) 20%, transparent);
+}
+.ant-menu-vertical .ant-menu-item {
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.ant-menu-horizontal .ant-menu-item {
+  color: var(--gray-50);
+  font-size: var(--font-size-lg);
+}
+.ant-menu-horizontal .ant-menu-item::after {
+  border-bottom: 0 !important;
+}
+.ant-menu-horizontal .ant-menu-item:hover {
+  color: var(--gray-90);
+}
+.ant-menu-horizontal .ant-menu-item:active {
+  background-color: transparent !important;
+}
+.ant-menu-horizontal .ant-menu-item:hover::after {
+  border-bottom: 0;
+}
+.ant-menu-horizontal .ant-menu-item-selected {
+  background-color: transparent !important;
+}
+.ant-menu-horizontal .ant-menu-item-selected::after {
+  border-bottom: 2px solid var(--brand-50) !important;
+}
+.ant-menu-inline-collapsed > .ant-menu-item .ant-menu-item-icon + span {
+  position: absolute;
+}
+.dark .ant-menu-horizontal .ant-menu-item {
+  color: var(--gray-20);
+}
+.dark .ant-menu-horizontal .ant-menu-item:hover {
+  color: var(--gray-0);
+}
+.dark .ant-menu-horizontal .ant-menu-item:active {
+  color: var(--brand-30);
+  background-color: transparent !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item-selected {
+  color: var(--brand-30) !important;
+  background-color: transparent !important;
+}
+.dark .ant-menu-horizontal .ant-menu-item-selected::after {
+  border-bottom: 2px solid var(--brand-30) !important;
+}
+
+.ant-anchor-wrapper:not(.ant-anchor-wrapper-horizontal) .ant-anchor {
+  line-height: 1.5rem;
+}
+.ant-anchor-wrapper:not(.ant-anchor-wrapper-horizontal) .ant-anchor::before {
+  border-color: var(--color-border-separator);
+  border-radius: 1px;
+}
+.ant-anchor-wrapper:not(.ant-anchor-wrapper-horizontal) .ant-anchor .ant-anchor-ink {
+  background-color: var(--border-primary);
+  border-radius: 1px;
+}
+.ant-anchor-wrapper:not(.ant-anchor-wrapper-horizontal) .ant-anchor .ant-anchor-link.ant-anchor-link-active .ant-anchor-link-title.ant-anchor-link-title-active:hover {
+  color: var(--color-link);
+}
+.ant-anchor-wrapper:not(.ant-anchor-wrapper-horizontal) .ant-anchor .ant-anchor-link.ant-anchor-link-active .ant-anchor-link-title.ant-anchor-link-title-active {
+  color: var(--color-link);
+}
+.ant-anchor-wrapper:not(.ant-anchor-wrapper-horizontal) .ant-anchor .ant-anchor-link .ant-anchor-link-title {
+  color: var(--color-text-secondary);
+}
+.ant-anchor-wrapper:not(.ant-anchor-wrapper-horizontal) .ant-anchor .ant-anchor-link .ant-anchor-link-title:hover {
+  color: var(--color-text-primary);
+}
+
+/* Message 组件样式（占位，待填充 token 映射） */
+.ant-message {
+  color: var(--color-text-primary);
+}
+.ant-message .ant-message-notice-wrapper .ant-message-notice-content {
+  padding: 0.75rem 1rem;
+}
+.ant-message .ant-message-notice-wrapper .ant-message-notice-content .anticon {
+  font-size: var(--font-size-md);
+}
+
+/* Notification 组件样式（占位，待填充 token 映射） */
+.ant-notification .ant-notification-notice-wrapper .ant-notification-notice {
+  padding: var(--spacing-3) var(--spacing-4);
+  width: 24rem;
+  max-width: calc(100vw - 3rem);
+  word-wrap: break-word;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.ant-notification .ant-notification-notice-wrapper .ant-notification-notice-description {
+  color: var(--gray-50);
+  margin-top: var(--spacing-2);
+}
+.ant-notification .ant-notification-notice-wrapper .ant-notification-notice-with-icon .ant-notification-notice-message {
+  margin-inline-start: 36px;
+  font-size: var(--spacing-4);
+}
+.ant-notification .ant-notification-notice-wrapper .ant-notification-notice-message {
+  color: var(--gray-90);
+}
+.ant-notification .ant-notification-notice-wrapper .ant-notification-notice-description {
+  color: var(--gray-50);
+  margin-top: var(--spacing-2);
+}
+.ant-notification .ant-notification-notice-wrapper .ant-notification-notice-icon {
+  font-size: var(--font-size-lg);
+}
+.ant-notification .ant-notification-notice-wrapper .ant-notification-notice-icon-success.anticon {
+  color: var(--mint-50);
+}
+.ant-notification .ant-notification-notice-wrapper .ant-notification-notice-icon-info.anticon {
+  color: var(--blue-50);
+}
+.ant-notification .ant-notification-notice-wrapper .ant-notification-notice-icon-warning.anticon {
+  color: var(--yellow-50);
+}
+.ant-notification .ant-notification-notice-wrapper .ant-notification-notice-icon-error.anticon {
+  color: var(--red-50);
+}
+.ant-notification .ant-notification-notice-wrapper .ant-notification-notice-close {
+  color: var(--gray-90);
+}
+.dark .ant-notification .ant-notification-notice-wrapper {
+  background-color: var(--gray-70);
+}
+.dark .ant-notification .ant-notification-notice-wrapper .ant-notification-notice-description {
+  color: var(--gray-20);
+}
+.dark .ant-notification .ant-notification-notice-wrapper .ant-notification-notice-message {
+  color: var(--gray-0);
+}
+.dark .ant-notification .ant-notification-notice-wrapper .ant-notification-notice-description {
+  color: var(--gray-20);
+}
+.dark .ant-notification .ant-notification-notice-wrapper .ant-notification-notice-close {
+  color: var(--gray-0);
+}
+
+
+/* 应用级基础样式 — 页面根节点、导航骨架与内容流 */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.app-body {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+}
+
+/* 内容区：自上而下 —— 表单 → 表格 */
+.app-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-page);
+}
+
+@media (max-width: 900px) {
+  .app-sider {
+    display: none;
+  }
+}
+
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  height: 48px;
+  padding: 0 var(--spacing-page);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-header__left {
+  display: flex;
+  align-items: stretch;
+  gap: var(--spacing-page);
+  height: 100%;
+  min-width: 0;
+}
+
+.app-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.app-header__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-action);
+  background: var(--primary-container);
+  color: var(--primary);
+}
+
+.app-header__title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+/* ── 原生顶部导航 ── */
+.topnav {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.topnav__item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--spacing-4);
+  border-bottom: var(--border-width-thick) solid transparent;
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.topnav__item:hover {
+  color: var(--primary);
+}
+
+.topnav__item.is-active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.app-header__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.app-header__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: var(--radius-action);
+  background: transparent;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.app-header__icon-btn:hover {
+  background: var(--surface-variant);
+  color: var(--on-surface);
+}
+
+.app-header__divider {
+  width: var(--border-width-thin);
+  height: 1.25rem;
+  background: var(--divider);
+}
+
+.app-header__user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.app-header__avatar {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.app-header__username {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+
+
+.app-sider {
+  position: sticky;
+  top: 48px;
+  align-self: flex-start;
+  flex: none;
+  width: 248px;
+  height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding: var(--spacing-3) 0;
+  background: var(--surface-container-highest);
+  border-right: var(--border-width-thin) solid var(--divider);
+}
+
+
+.tf-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+}
+
+.tf-card__head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-stack);
+  padding-bottom: var(--spacing-inset);
+  margin-bottom: var(--spacing-inset);
+  border-bottom: var(--border-width-thin) solid var(--divider);
+}
+
+.tf-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-action);
+  background: var(--primary-container);
+  color: var(--primary);
+}
+
+.tf-card__title {
+  margin: 0;
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.tf-card__subtitle {
+  margin: 0.25rem 0 0;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.tf-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 44rem;
+}
+
+.tf-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.tf-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tf-group__title {
+  margin: 0;
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+/* ── 字段：标签居上、单列堆叠 ── */
+.tf-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tf-label {
+  position: relative;
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.tf-label--required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--error);
+  font: var(--font-body-m);
+}
+
+.tf-control {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.tf-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--error);
+}
+
+.tf-field--reveal {
+  animation: tf-reveal 0.24s ease;
+}
+
+@keyframes tf-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── 开关行 ── */
+.tf-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-container);
+  background: var(--surface-variant);
+}
+
+.tf-toggle__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-action);
+  background: var(--surface-container-highest);
+  color: var(--primary);
+}
+
+.tf-toggle__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.tf-toggle__title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.tf-toggle__desc {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.tf-toggle--inner {
+  background: var(--surface-container-highest);
+}
+
+.tf-toggle--inner .tf-toggle__icon {
+  background: var(--surface-variant);
+}
+
+/* ── 子表单面板（Level 2 内嵌区域） ── */
+.tf-subpanel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: var(--spacing-4);
+  border-radius: var(--radius-container);
+  background: var(--surface-variant);
+  animation: tf-reveal 0.24s ease;
+}
+
+/* ── 操作区 ── */
+.tf-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-inline);
+  padding-top: var(--spacing-inset);
+  margin-top: var(--spacing-inset);
+  border-top: var(--border-width-thin) solid var(--divider);
+}
+
+
+.rt-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+}
+
+.rt-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-gutter);
+}
+
+.rt-toolbar__title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-stack);
+}
+
+.rt-card__title {
+  margin: 0;
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.rt-count {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.rt-toolbar__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-stack);
+}
+
+.rt-selection {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  height: 2rem;
+  padding: 0 var(--spacing-3);
+  border-radius: var(--radius-action);
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  font: var(--font-body-s);
+}
+
+.rt-selection a {
+  color: var(--interactive-link);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.rt-selection a:hover {
+  color: var(--interactive-link-hover);
+}
+
+.rt-search {
+  width: 15rem;
+}
+
+/* ── 单元格 ── */
+.rt-link {
+  color: var(--interactive-link);
+  cursor: pointer;
+  text-decoration: none;
+  font: var(--font-body-m);
+}
+
+.rt-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+.rt-plain {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+
+.rt-plain--muted {
+  color: var(--on-surface-variant);
+}
+
+.rt-num {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+}
+
+.rt-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+
+.soft-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 1.5rem;
+  padding: 0 var(--spacing-2);
+  border-radius: var(--radius-badge);
+  font: var(--font-body-s);
+  white-space: nowrap;
+}
+
+.soft-tag--success {
+  color: var(--success);
+  background: var(--success-container);
+}
+
+.soft-tag--error {
+  color: var(--error);
+  background: var(--error-container);
+}
+
+.soft-tag--critical {
+  color: var(--critical);
+  background: var(--critical-container);
+}
+
+.soft-tag--info {
+  color: var(--info);
+  background: var(--info-container);
+}
+
+.soft-tag--brand {
+  color: var(--primary);
+  background: var(--primary-container);
+}
+
+.soft-tag--neutral {
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+}
+
+</style>
+<!-- 7. Base styles -->
+<style>
+body, html { margin: 0; padding: 0; height: 100%; font-family: var(--font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif); }
+#root { height: 100%; }
+</style>
+</head>
+<body>
+<div id="root">Loading...</div>
+<script>
+// 注册 classic JSX 运行时 preset(新版 babel-standalone 默认 automatic,
+// 产出的 import "react/jsx-runtime" 无法在经典脚本中执行)
+Babel.registerPreset("react-classic", {
+  presets: [[Babel.availablePresets["react"], { runtime: "classic" }]],
+});
+</script>
+<script type="text/babel" data-presets="react-classic">
+var __export = {};
+/* ===== assets/shared/antd-zh.js ===== */
+(function () {
+// antd-zh.js — 中文 locale 补丁包
+// antd.min.js / dayjs.min.js UMD 均不含 locale 包,本文件补齐:
+//   1. 注册 dayjs zh-cn locale(星期/月份/相对时间中文化)
+//   2. 导出 antd ConfigProvider 可用的 zhCN locale 对象
+//
+// 用法(页面入口):
+//   import zhCN from "./assets/shared/antd-zh.js";
+//   <ConfigProvider locale={zhCN}> ... </ConfigProvider>
+
+// ---- 1. 注册 dayjs zh-cn locale(dayjs.min.js 核心包不带任何 locale) ----
+dayjs.locale(
+  "zh-cn",
+  {
+    name: "zh-cn",
+    weekdays: "星期日_星期一_星期二_星期三_星期四_星期五_星期六".split("_"),
+    weekdaysShort: "周日_周一_周二_周三_周四_周五_周六".split("_"),
+    weekdaysMin: "日_一_二_三_四_五_六".split("_"),
+    months: "一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月".split("_"),
+    monthsShort: "1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月".split("_"),
+    weekStart: 1,
+    formats: {
+      LT: "HH:mm",
+      LTS: "HH:mm:ss",
+      L: "YYYY/MM/DD",
+      LL: "YYYY年M月D日",
+      LLL: "YYYY年M月D日 Ah点mm分",
+      LLLL: "YYYY年M月D日ddddAh点mm分",
+      l: "YYYY/M/D",
+      ll: "YYYY年M月D日",
+      lll: "YYYY年M月D日 HH:mm",
+      llll: "YYYY年M月D日dddd HH:mm",
+    },
+    relativeTime: {
+      future: "%s内",
+      past: "%s前",
+      s: "几秒",
+      m: "1 分钟",
+      mm: "%d 分钟",
+      h: "1 小时",
+      hh: "%d 小时",
+      d: "1 天",
+      dd: "%d 天",
+      M: "1 个月",
+      MM: "%d 个月",
+      y: "1 年",
+      yy: "%d 年",
+    },
+    meridiem(hour, minute) {
+      const hm = hour * 100 + minute;
+      if (hm < 600) return "凌晨";
+      if (hm < 900) return "早上";
+      if (hm < 1130) return "上午";
+      if (hm < 1230) return "中午";
+      if (hm < 1800) return "下午";
+      return "晚上";
+    },
+    ordinal(number, period) {
+      switch (period) {
+        case "W":
+          return `${number}周`;
+        default:
+          return `${number}日`;
+      }
+    },
+  },
+  true
+);
+// ---- 2. antd zh_CN locale(对齐 antd 5 官方 zh_CN,常用组件全量) ----
+const typeTemplate = "${label}不是一个有效的${type}";
+const zhCN = {
+  locale: "zh-cn",
+  dayjsLocale: "zh-cn",
+  Pagination: {
+    items_per_page: "条/页",
+    jump_to: "跳至",
+    jump_to_confirm: "确定",
+    page: "页",
+    prev_page: "上一页",
+    next_page: "下一页",
+    prev_5: "向前 5 页",
+    next_5: "向后 5 页",
+    prev_3: "向前 3 页",
+    next_3: "向后 3 页",
+  },
+  DatePicker: {
+    lang: {
+      placeholder: "请选择日期",
+      yearPlaceholder: "请选择年份",
+      quarterPlaceholder: "请选择季度",
+      monthPlaceholder: "请选择月份",
+      weekPlaceholder: "请选择周",
+      rangePlaceholder: ["开始日期", "结束日期"],
+      rangeYearPlaceholder: ["开始年份", "结束年份"],
+      rangeMonthPlaceholder: ["开始月份", "结束月份"],
+      rangeWeekPlaceholder: ["开始周", "结束周"],
+      locale: "zh_cn",
+      today: "今天",
+      now: "此刻",
+      backToToday: "返回今天",
+      ok: "确定",
+      timeSelect: "选择时间",
+      dateSelect: "选择日期",
+      weekSelect: "选择周",
+      clear: "清除",
+      month: "月",
+      year: "年",
+      previousMonth: "上个月 (翻页上键)",
+      nextMonth: "下个月 (翻页下键)",
+      monthSelect: "选择月份",
+      yearSelect: "选择年份",
+      decadeSelect: "选择年代",
+      yearFormat: "YYYY年",
+      dayFormat: "D日",
+      dateFormat: "YYYY年M月D日",
+      dateTimeFormat: "YYYY年M月D日 HH时mm分ss秒",
+      previousYear: "上一年 (Control键加左方向键)",
+      nextYear: "下一年 (Control键加右方向键)",
+      previousDecade: "上一年代",
+      nextDecade: "下一年代",
+      previousCentury: "上一世纪",
+      nextCentury: "下一世纪",
+      shortWeekDays: ["一", "二", "三", "四", "五", "六", "日"],
+    },
+    timePickerLocale: { placeholder: "请选择时间" },
+  },
+  TimePicker: { placeholder: "请选择时间" },
+  Calendar: {
+    lang: {
+      placeholder: "请选择日期",
+      yearPlaceholder: "请选择年份",
+      quarterPlaceholder: "请选择季度",
+      monthPlaceholder: "请选择月份",
+      weekPlaceholder: "请选择周",
+      rangePlaceholder: ["开始日期", "结束日期"],
+      locale: "zh_cn",
+      today: "今天",
+      now: "此刻",
+      backToToday: "返回今天",
+      ok: "确定",
+      timeSelect: "选择时间",
+      dateSelect: "选择日期",
+      weekSelect: "选择周",
+      clear: "清除",
+      month: "月",
+      year: "年",
+      previousMonth: "上个月 (翻页上键)",
+      nextMonth: "下个月 (翻页下键)",
+      monthSelect: "选择月份",
+      yearSelect: "选择年份",
+      decadeSelect: "选择年代",
+      yearFormat: "YYYY年",
+      dayFormat: "D日",
+      dateFormat: "YYYY年M月D日",
+      dateTimeFormat: "YYYY年M月D日 HH时mm分ss秒",
+      previousYear: "上一年 (Control键加左方向键)",
+      nextYear: "下一年 (Control键加右方向键)",
+      previousDecade: "上一年代",
+      nextDecade: "下一年代",
+      previousCentury: "上一世纪",
+      nextCentury: "下一世纪",
+      shortWeekDays: ["一", "二", "三", "四", "五", "六", "日"],
+    },
+    timePickerLocale: { placeholder: "请选择时间" },
+  },
+  global: { placeholder: "请选择" },
+  Table: {
+    filterTitle: "筛选",
+    filterConfirm: "确定",
+    filterReset: "重置",
+    filterEmptyText: "无筛选项",
+    filterCheckall: "全选",
+    filterSearchPlaceholder: "在筛选项中搜索",
+    emptyText: "暂无数据",
+    selectAll: "全选当页",
+    selectInvert: "反选当页",
+    selectNone: "清空所有",
+    selectionAll: "全选所有",
+    sortTitle: "排序",
+    expand: "展开行",
+    collapse: "关闭行",
+    triggerDesc: "点击降序",
+    triggerAsc: "点击升序",
+    cancelSort: "取消排序",
+  },
+  Modal: { okText: "确定", cancelText: "取消", justOkText: "知道了" },
+  Tour: { Next: "下一步", Previous: "上一步", Finish: "结束" },
+  Popconfirm: { okText: "确定", cancelText: "取消" },
+  Transfer: {
+    titles: ["", ""],
+    searchPlaceholder: "请输入搜索内容",
+    itemUnit: "项",
+    itemsUnit: "项",
+    remove: "删除",
+    selectCurrent: "全选当页",
+    removeCurrent: "删除当页",
+    selectAll: "全选所有",
+    removeAll: "删除全部",
+    selectInvert: "反选当页",
+  },
+  Upload: {
+    uploading: "文件上传中",
+    removeFile: "删除文件",
+    uploadError: "上传错误",
+    previewFile: "预览文件",
+    downloadFile: "下载文件",
+  },
+  Empty: { description: "暂无数据" },
+  Icon: { icon: "图标" },
+  Text: {
+    edit: "编辑",
+    copy: "复制",
+    copied: "复制成功",
+    expand: "展开",
+    collapse: "收起",
+  },
+  Form: {
+    optional: "（可选）",
+    defaultValidateMessages: {
+      default: "字段验证错误${label}",
+      required: "请输入${label}",
+      enum: "${label}必须是其中一个[${enum}]",
+      whitespace: "${label}不能为空字符",
+      date: {
+        format: "${label}日期格式无效",
+        parse: "${label}不能转换为日期",
+        invalid: "${label}是一个无效日期",
+      },
+      types: {
+        string: typeTemplate,
+        method: typeTemplate,
+        array: typeTemplate,
+        object: typeTemplate,
+        number: typeTemplate,
+        date: typeTemplate,
+        boolean: typeTemplate,
+        integer: typeTemplate,
+        float: typeTemplate,
+        regexp: typeTemplate,
+        email: typeTemplate,
+        url: typeTemplate,
+        hex: typeTemplate,
+      },
+      string: {
+        len: "${label}须为${len}个字符",
+        min: "${label}最少${min}个字符",
+        max: "${label}最多${max}个字符",
+        range: "${label}须在${min}-${max}个字符之间",
+      },
+      number: {
+        len: "${label}必须等于${len}",
+        min: "${label}最小值为${min}",
+        max: "${label}最大值为${max}",
+        range: "${label}须在${min}-${max}之间",
+      },
+      array: {
+        len: "须为${len}个${label}",
+        min: "最少${min}个${label}",
+        max: "最多${max}个${label}",
+        range: "${label}数量须在${min}-${max}之间",
+      },
+      pattern: { mismatch: "${label}与模式不匹配（${pattern}）" },
+    },
+  },
+  Image: { preview: "预览" },
+  QRCode: { expired: "二维码已过期", refresh: "点击刷新", scanned: "已扫描" },
+  ColorPicker: {
+    presetEmpty: "暂无",
+    transparent: "无色",
+    singleColor: "单色",
+    gradientColor: "渐变色",
+  },
+};
+  Object.assign(__export, { zhCN });
+})();
+
+/* ===== src/context.jsx ===== */
+(function () {
+  const { useState, useEffect, createContext, useContext } = React;
+// Layer 1: 全局状态 — 主题模式与业务状态
+// 换肤单轨驱动:isDark 只切换 <html> 的 .dark class;
+// 普通 H5 元素(token 四层)与 antd 组件(ant.css 换肤层)同源跟随,无需 React 参与换肤。
+const AppContext = createContext(null);
+
+function AppProvider({ children }) {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
+
+  const value = {
+    isDark,
+    toggleDark: () => setIsDark((d) => !d),
+  };
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+}
+
+function useApp() {
+  return useContext(AppContext);
+}
+  Object.assign(__export, { AppProvider, useApp });
+})();
+
+/* ===== assets/shared/icon.jsx ===== */
+(function () {
+  const LUCIDE = {
+    "archive": [["rect",{"width":"20","height":"5","x":"2","y":"3","rx":"1"}],["path",{"d":"M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"}],["path",{"d":"M10 12h4"}]],
+    "bell": [["path",{"d":"M10.268 21a2 2 0 0 0 3.464 0"}],["path",{"d":"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"}]],
+    "bell-ring": [["path",{"d":"M10.268 21a2 2 0 0 0 3.464 0"}],["path",{"d":"M22 8c0-2.3-.8-4.3-2-6"}],["path",{"d":"M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"}],["path",{"d":"M4 2C2.8 3.7 2 5.7 2 8"}]],
+    "circle-pause": [["circle",{"cx":"12","cy":"12","r":"10"}],["line",{"x1":"10","x2":"10","y1":"15","y2":"9"}],["line",{"x1":"14","x2":"14","y1":"15","y2":"9"}]],
+    "cpu": [["path",{"d":"M12 20v2"}],["path",{"d":"M12 2v2"}],["path",{"d":"M17 20v2"}],["path",{"d":"M17 2v2"}],["path",{"d":"M2 12h2"}],["path",{"d":"M2 17h2"}],["path",{"d":"M2 7h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"M20 17h2"}],["path",{"d":"M20 7h2"}],["path",{"d":"M7 20v2"}],["path",{"d":"M7 2v2"}],["rect",{"x":"4","y":"4","width":"16","height":"16","rx":"2"}],["rect",{"x":"8","y":"8","width":"8","height":"8","rx":"1"}]],
+    "database": [["ellipse",{"cx":"12","cy":"5","rx":"9","ry":"3"}],["path",{"d":"M3 5V19A9 3 0 0 0 21 19V5"}],["path",{"d":"M3 12A9 3 0 0 0 21 12"}]],
+    "link": [["path",{"d":"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"}],["path",{"d":"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"}]],
+    "mail": [["path",{"d":"m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"}],["rect",{"x":"2","y":"4","width":"20","height":"16","rx":"2"}]],
+    "message-square": [["path",{"d":"M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"}]],
+    "minimize-2": [["path",{"d":"m14 10 7-7"}],["path",{"d":"M20 10h-6V4"}],["path",{"d":"m3 21 7-7"}],["path",{"d":"M4 14h6v6"}]],
+    "moon": [["path",{"d":"M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"}]],
+    "play": [["path",{"d":"M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"}]],
+    "radio-tower": [["path",{"d":"M4.9 16.1C1 12.2 1 5.8 4.9 1.9"}],["path",{"d":"M7.8 4.7a6.14 6.14 0 0 0-.8 7.5"}],["circle",{"cx":"12","cy":"9","r":"2"}],["path",{"d":"M16.2 4.8c2 2 2.26 5.11.8 7.47"}],["path",{"d":"M19.1 1.9a9.96 9.96 0 0 1 0 14.1"}],["path",{"d":"M9.5 18h5"}],["path",{"d":"m8 22 4-11 4 11"}]],
+    "refresh-cw": [["path",{"d":"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"}],["path",{"d":"M21 3v5h-5"}],["path",{"d":"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"}],["path",{"d":"M8 16H3v5"}]],
+    "rotate-ccw": [["path",{"d":"M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"}],["path",{"d":"M3 3v5h5"}]],
+    "save": [["path",{"d":"M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"}],["path",{"d":"M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"}],["path",{"d":"M7 3v4a1 1 0 0 0 1 1h7"}]],
+    "search": [["path",{"d":"m21 21-4.34-4.34"}],["circle",{"cx":"11","cy":"11","r":"8"}]],
+    "settings": [["path",{"d":"M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"}],["circle",{"cx":"12","cy":"12","r":"3"}]],
+    "settings-2": [["path",{"d":"M14 17H5"}],["path",{"d":"M19 7h-9"}],["circle",{"cx":"17","cy":"17","r":"3"}],["circle",{"cx":"7","cy":"7","r":"3"}]],
+    "sliders-horizontal": [["path",{"d":"M10 5H3"}],["path",{"d":"M12 19H3"}],["path",{"d":"M14 3v4"}],["path",{"d":"M16 17v4"}],["path",{"d":"M21 12h-9"}],["path",{"d":"M21 19h-5"}],["path",{"d":"M21 5h-7"}],["path",{"d":"M8 10v4"}],["path",{"d":"M8 12H3"}]],
+    "square-pen": [["path",{"d":"M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"}],["path",{"d":"M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"}]],
+    "sun": [["circle",{"cx":"12","cy":"12","r":"4"}],["path",{"d":"M12 2v2"}],["path",{"d":"M12 20v2"}],["path",{"d":"m4.93 4.93 1.41 1.41"}],["path",{"d":"m17.66 17.66 1.41 1.41"}],["path",{"d":"M2 12h2"}],["path",{"d":"M20 12h2"}],["path",{"d":"m6.34 17.66-1.41 1.41"}],["path",{"d":"m19.07 4.93-1.41 1.41"}]],
+    "trash-2": [["path",{"d":"M10 11v6"}],["path",{"d":"M14 11v6"}],["path",{"d":"M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"}],["path",{"d":"M3 6h18"}],["path",{"d":"M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"}]],
+    "webhook": [["path",{"d":"M18 16.98h-5.99c-1.1 0-1.95.94-2.48 1.9A4 4 0 0 1 2 17c.01-.7.2-1.4.57-2"}],["path",{"d":"m6 17 3.13-5.78c.53-.97.1-2.18-.5-3.1a4 4 0 1 1 6.89-4.06"}],["path",{"d":"m12 6 3.13 5.73C15.66 12.7 16.9 13 18 13a4 4 0 0 1 0 8"}]],
+  };
+  const { useState, useEffect } = React;
+// ---- Lucide (offline fallback, table injected at build time) ----
+const ICONS = typeof LUCIDE !== "undefined" ? LUCIDE : {};
+
+function camelToKebab(s) {
+  return s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+}
+
+function lookupIcon(name) {
+  if (!name) return null;
+  return (
+    ICONS[name] ||
+    ICONS[camelToKebab(name)] ||
+    ICONS[name.replace(/-([a-z])/g, (_m, c) => c.toUpperCase())] ||
+    null
+  );
+}
+
+// ---- icon-plus (联通) online flow, same as packages/previewpc ----
+const ICON_API_BASE = "https://octo.hdesign.huawei.com";
+const GET_CONFIG = `${ICON_API_BASE}/assetRepository/iconPlus/getConfig`;
+const GET_ICON_INFO = `${ICON_API_BASE}/assetRepository/iconPlus/getIconInfo`;
+const GET_ICON = `${ICON_API_BASE}/assetRepository/iconPlus/getIcon`;
+
+let plusState = null; // null = probing, true = icon-plus available, false = fall back to Lucide
+let plusPromise = null; // singleton getConfig probe promise
+let iconConfig = null;
+let defaultColorId = "";
+const iconInfoMap = {}; // name -> { name, url }
+const svgCache = new Map(); // "name&variant&color" -> svg text
+
+// variant prop -> getConfig style key (matches previewpc's shapeToStyleKey)
+const STYLE_KEY = {
+  lined: "border",
+  filled: "filled",
+  "two-tone": "two_colors1",
+  circle: "round_bottom2",
+  square: "square_bottom2",
+};
+
+function getStyleValue(styleKey) {
+  return iconConfig?.style?.find((s) => s.key === styleKey)?.value || styleKey;
+}
+
+// resolve an API color id from the requested hex against getConfig colors
+function resolveColorId(variant, colorHex) {
+  const styleValue = getStyleValue(STYLE_KEY[variant] || "border");
+  const colors = (iconConfig?.colors || []).filter((c) => c.style === styleValue);
+  if (colorHex) {
+    const m = colors.find((c) =>
+      c.value.split(",").map((v) => v.trim()).includes(colorHex)
+    );
+    if (m) return m.id;
+  }
+  return defaultColorId || colors[0]?.id || "";
+}
+
+// getConfig probe == 联通可用性验证 (same as previewpc fetchIconConfig)
+function ensurePlus() {
+  if (plusPromise) return plusPromise;
+  plusPromise = (async () => {
+    try {
+      const resp = await fetch(GET_CONFIG);
+      if (!resp.ok) {
+        plusState = false;
+        return false;
+      }
+      iconConfig = await resp.json();
+      const linear = iconConfig.colors?.find(
+        (c) => c.type === "linear" || c.type === "通用色"
+      );
+      defaultColorId =
+        linear?.id || iconConfig.colors?.[0]?.id || "";
+      plusState = true;
+      return true;
+    } catch (e) {
+      plusState = false;
+      return false;
+    }
+  })();
+  return plusPromise;
+}
+
+// pick the best icon-plus match for a keyword (prefer system-icon group, then name contains keyword, else first)
+function selectBestIcon(icons, keyword) {
+  return (
+    icons.find(
+      (i) => Array.isArray(i.group) && i.group.some((g) => g.includes("系统图标"))
+    ) ||
+    icons.find((i) => i.name?.toLowerCase().includes(keyword.toLowerCase())) ||
+    icons[0]
+  );
+}
+
+// name -> { name, url } via getIconInfo (cached in iconInfoMap)
+async function resolveIconInfo(name) {
+  if (iconInfoMap[name]) return iconInfoMap[name];
+  try {
+    const resp = await fetch(
+      `${GET_ICON_INFO}?keyword=${encodeURIComponent(name)}&topK=2&source_id=6`
+    );
+    const data = await resp.json(); // [{ keyword, icons: [{ icon_id, name, category, group[], url }] }]
+    const entry = (Array.isArray(data) ? data : [data]).find(
+      (d) => d.icons?.length
+    );
+    const selected = selectBestIcon(entry?.icons || [], name);
+    if (!selected?.url) return null;
+    iconInfoMap[name] = { name: selected.name, url: selected.url };
+    return iconInfoMap[name];
+  } catch (e) {
+    return null;
+  }
+}
+
+// fetch the SVG text for a name via getIcon (url + size + variant + colorId + fileType=svg)
+async function fetchSvg(name, variant, colorHex) {
+  const info = await resolveIconInfo(name);
+  if (!info) return "";
+  const styleValue = getStyleValue(STYLE_KEY[variant] || "border");
+  const colorId = resolveColorId(variant, colorHex);
+  try {
+    const resp = await fetch(
+      `${GET_ICON}?url=${encodeURIComponent(info.url)}&size=16&style=${encodeURIComponent(
+        styleValue
+      )}&color=${encodeURIComponent(colorId)}&fileType=svg`
+    );
+    const data = await resp.json(); // { url, name, data } or array
+    const item = Array.isArray(data) ? data[0] : data;
+    return item?.data || ""; // raw SVG text, injected as-is
+  } catch (e) {
+    return "";
+  }
+}
+
+// size → rem 字符串;数字(设计画布 px)兜底转换为 rem
+function resolveSize(size) {
+  if (typeof size === "number") {
+    console.warn(`[Icon] size={${size}} is a number — use rem string instead (e.g. size="${(size / 16).toFixed(4).replace(/\.?0+$/, "")}rem")`);
+    const rem = size / 16;
+    return `${parseFloat(rem.toFixed(4))}rem`;
+  }
+  return size;
+}
+
+function Icon({
+  name,
+  src,
+  size = "1rem",
+  color,
+  className = "",
+  style,
+  strokeWidth = 2,
+  variant = "lined",
+}) {
+  const resolvedSize = resolveSize(size);
+  const [plus, setPlus] = useState(plusState); // reuse already-probed result
+  const [svg, setSvg] = useState(
+    () => svgCache.get(`${name}&${variant}&${color}`) || ""
+  );
+
+  useEffect(() => {
+    if (src) return; // user-asset mode: no network needed
+    let alive = true;
+    ensurePlus().then((ok) => {
+      if (!alive) return;
+      setPlus(ok);
+      if (!ok) return; // getConfig probe failed → Lucide branch
+      const key = `${name}&${variant}&${color}`;
+      if (svgCache.has(key)) {
+        setSvg(svgCache.get(key));
+        return;
+      }
+      fetchSvg(name, variant, color).then((s) => {
+        if (!alive) return;
+        svgCache.set(key, s);
+        setSvg(s);
+      });
+    });
+    return () => {
+      alive = false;
+    };
+  }, [src, name, variant, color]);
+
+  // user-provided asset (svg/png/jpg) via relative path — overrides name when both are set
+  if (src) {
+    return React.createElement("img", {
+      src: src,
+      width: resolvedSize,
+      height: resolvedSize,
+      className: className,
+      alt: "",
+      "aria-hidden": true,
+      style: { ...style, display: "inline-block", verticalAlign: "middle" },
+    });
+  }
+
+  // probe not finished yet → render nothing
+  if (plus === null) return null;
+
+  // icon-plus unavailable (offline) → Lucide fallback (original behavior)
+  if (plus === false) {
+    const nodes = lookupIcon(name);
+    if (!nodes) return null;
+    return React.createElement(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: resolvedSize,
+        height: resolvedSize,
+        viewBox: "0 0 24 24",
+        fill: "none",
+        strokeWidth: strokeWidth,
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        className: className,
+        "aria-hidden": true,
+        style: { ...style, stroke: color || "currentColor" },
+      },
+      nodes.map(([tag, attrs], i) =>
+        React.createElement(tag, { key: i, ...attrs })
+      )
+    );
+  }
+
+  // icon-plus available → render fetched SVG text as-is (only width/height on the wrapper)
+  if (!svg) {
+    return React.createElement("span", {
+      className,
+      "aria-hidden": true,
+      style: { ...style, width: resolvedSize, height: resolvedSize },
+    });
+  }
+  
+  return React.createElement("span", {
+    className,
+    "aria-hidden": true,
+    style: { ...style, width: resolvedSize, height: resolvedSize },
+    dangerouslySetInnerHTML: { __html: svg },
+  });
+}
+  Object.assign(__export, { Icon });
+})();
+
+/* ===== src/views/app-header/index.jsx ===== */
+(function () {
+  const { useState } = React;
+  const { useApp, Icon } = __export;
+// Layer 4: 顶部导航栏（品牌 + 原生 nav + 主题切换）
+
+
+
+
+
+const TOP_NAV = [
+  { key: "overview", label: "总览" },
+  { key: "acquisition", label: "数据采集" },
+  { key: "alarm", label: "告警中心" },
+  { key: "ops", label: "运维管理" },
+  { key: "system", label: "系统设置" },
+];
+
+function AppHeader() {
+  const { isDark, toggleDark } = useApp();
+  const [active, setActive] = useState("acquisition");
+
+  return (
+    <header className="app-header">
+      <div className="app-header__left">
+        <div className="app-header__brand">
+          <span className="app-header__logo">
+            <Icon name="radio-tower" size="1.25rem" />
+          </span>
+          <span className="app-header__title">物联网数据采集平台</span>
+        </div>
+
+        <nav className="topnav">
+          {TOP_NAV.map((item) => (
+            <a
+              key={item.key}
+              href={`#${item.key}`}
+              className={`topnav__item${active === item.key ? " is-active" : ""}`}
+              onClick={(e) => {
+                e.preventDefault();
+                setActive(item.key);
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <div className="app-header__tools">
+        <button
+          type="button"
+          className="app-header__icon-btn"
+          onClick={toggleDark}
+          title={isDark ? "切换到浅色模式" : "切换到深色模式"}
+        >
+          <Icon name={isDark ? "sun" : "moon"} size="1rem" />
+        </button>
+        <span className="app-header__divider" />
+        <div className="app-header__user">
+          <img className="app-header__avatar" src="./assets/uploads/user.png" alt="用户头像" />
+          <span className="app-header__username">王工</span>
+        </div>
+      </div>
+    </header>
+  );
+}
+  Object.assign(__export, { AppHeader });
+})();
+
+/* ===== src/views/app-sidebar/index.jsx ===== */
+(function () {
+  const { useState } = React;
+  const { Menu } = antd;
+  const { Icon } = __export;
+// Layer 4: 侧边导航栏（Menu inline）
+
+
+
+
+
+const MENU_ITEMS = [
+  {
+    key: "acquisition",
+    icon: <Icon name="database" size="1rem" />,
+    label: "数据采集",
+    children: [
+      { key: "rule-config", label: "采集规则配置" },
+      { key: "source-manage", label: "数据源管理" },
+      { key: "point-dict", label: "点位字典" },
+      { key: "task-monitor", label: "采集任务监控" },
+    ],
+  },
+  {
+    key: "alarm",
+    icon: <Icon name="bell" size="1rem" />,
+    label: "告警中心",
+    children: [
+      { key: "alarm-rule", label: "告警规则" },
+      { key: "notify-channel", label: "通知渠道" },
+    ],
+  },
+  {
+    key: "asset",
+    icon: <Icon name="cpu" size="1rem" />,
+    label: "设备资产",
+    children: [
+      { key: "device-ledger", label: "设备台账" },
+      { key: "gateway", label: "网关管理" },
+    ],
+  },
+  {
+    key: "system",
+    icon: <Icon name="settings" size="1rem" />,
+    label: "系统设置",
+    children: [
+      { key: "user-role", label: "用户与权限" },
+      { key: "op-log", label: "操作日志" },
+    ],
+  },
+];
+
+function AppSidebar() {
+  const [selectedKeys, setSelectedKeys] = useState(["rule-config"]);
+
+  return (
+    <aside className="app-sider">
+      <Menu
+        mode="inline"
+        items={MENU_ITEMS}
+        selectedKeys={selectedKeys}
+        defaultOpenKeys={["acquisition", "alarm"]}
+        onSelect={({ key }) => setSelectedKeys([key])}
+        style={{ borderInlineEnd: "none", background: "transparent" }}
+      />
+    </aside>
+  );
+}
+  Object.assign(__export, { AppSidebar });
+})();
+
+/* ===== src/mock/rules.js ===== */
+(function () {
+// Layer 2: 采集规则领域 mock 数据
+
+const dataSourceOptions = [
+  { value: "modbus", label: "Modbus TCP" },
+  { value: "opcua", label: "OPC UA" },
+  { value: "mqtt", label: "MQTT Broker" },
+  { value: "http", label: "HTTP REST API" },
+  { value: "snmp", label: "SNMP v2c" },
+];
+
+const frequencyOptions = [
+  { value: "1s", label: "1 秒" },
+  { value: "5s", label: "5 秒" },
+  { value: "30s", label: "30 秒" },
+  { value: "1m", label: "1 分钟" },
+  { value: "5m", label: "5 分钟" },
+];
+
+const formatOptions = [
+  { value: "json", label: "JSON" },
+  { value: "csv", label: "CSV" },
+  { value: "binary", label: "Binary (raw)" },
+];
+
+const pointOptions = [
+  { value: "voltage", label: "电压 / 电流" },
+  { value: "temperature", label: "温度" },
+  { value: "pressure", label: "压力" },
+  { value: "flow", label: "流量" },
+  { value: "vibration", label: "振动" },
+  { value: "power", label: "有功功率" },
+];
+
+const storageOptions = [
+  { value: "oss", label: "对象存储 OSS" },
+  { value: "tsdb", label: "时序库 TSDB" },
+  { value: "nas", label: "本地 NAS" },
+];
+
+const SOURCE_LABEL = {
+  modbus: "Modbus TCP",
+  opcua: "OPC UA",
+  mqtt: "MQTT Broker",
+  http: "HTTP REST API",
+  snmp: "SNMP v2c",
+};
+
+const sourceLabel = (key) => SOURCE_LABEL[key] || key;
+
+const ruleList = [
+  { id: "RULE-1001", name: "东区变频器实时采集", source: "modbus", frequency: "1s", frequencyLabel: "1 秒", points: 128, alarm: "on", status: "running", updatedAt: "2026-10-08 09:42" },
+  { id: "RULE-1002", name: "1# 锅炉温度监控", source: "opcua", frequency: "5s", frequencyLabel: "5 秒", points: 64, alarm: "on", status: "running", updatedAt: "2026-10-08 09:15" },
+  { id: "RULE-1003", name: "空压站压力采集", source: "modbus", frequency: "30s", frequencyLabel: "30 秒", points: 42, alarm: "off", status: "stopped", updatedAt: "2026-10-07 18:03" },
+  { id: "RULE-1004", name: "中控室网关遥测", source: "mqtt", frequency: "1s", frequencyLabel: "1 秒", points: 256, alarm: "on", status: "error", updatedAt: "2026-10-08 08:51" },
+  { id: "RULE-1005", name: "污水处理流量计量", source: "http", frequency: "1m", frequencyLabel: "1 分钟", points: 18, alarm: "off", status: "running", updatedAt: "2026-10-08 07:36" },
+  { id: "RULE-1006", name: "原料仓温湿度上报", source: "mqtt", frequency: "30s", frequencyLabel: "30 秒", points: 36, alarm: "on", status: "running", updatedAt: "2026-10-07 21:20" },
+  { id: "RULE-1007", name: "2# 汽轮机振动监测", source: "opcua", frequency: "1s", frequencyLabel: "1 秒", points: 96, alarm: "on", status: "running", updatedAt: "2026-10-08 09:58" },
+  { id: "RULE-1008", name: "配电柜电量汇总", source: "snmp", frequency: "5m", frequencyLabel: "5 分钟", points: 24, alarm: "off", status: "stopped", updatedAt: "2026-10-06 14:12" },
+  { id: "RULE-1009", name: "冷却塔风机转速", source: "modbus", frequency: "5s", frequencyLabel: "5 秒", points: 32, alarm: "off", status: "running", updatedAt: "2026-10-08 06:44" },
+  { id: "RULE-1010", name: "能源管理平台对接", source: "http", frequency: "1m", frequencyLabel: "1 分钟", points: 8, alarm: "on", status: "error", updatedAt: "2026-10-08 08:10" },
+  { id: "RULE-1011", name: "西区产线视觉检测", source: "http", frequency: "1s", frequencyLabel: "1 秒", points: 12, alarm: "on", status: "running", updatedAt: "2026-10-08 09:31" },
+  { id: "RULE-1012", name: "储罐液位采集", source: "modbus", frequency: "30s", frequencyLabel: "30 秒", points: 48, alarm: "on", status: "running", updatedAt: "2026-10-07 22:47" },
+  { id: "RULE-1013", name: "照明能耗统计", source: "mqtt", frequency: "5m", frequencyLabel: "5 分钟", points: 16, alarm: "off", status: "stopped", updatedAt: "2026-10-05 10:09" },
+  { id: "RULE-1014", name: "中央空调机组群控", source: "opcua", frequency: "5s", frequencyLabel: "5 秒", points: 74, alarm: "on", status: "running", updatedAt: "2026-10-08 08:28" },
+  { id: "RULE-1015", name: "燃气表远程抄表", source: "snmp", frequency: "5m", frequencyLabel: "5 分钟", points: 6, alarm: "off", status: "running", updatedAt: "2026-10-07 19:55" },
+  { id: "RULE-1016", name: "3# 注塑机节拍采集", source: "modbus", frequency: "1s", frequencyLabel: "1 秒", points: 88, alarm: "on", status: "error", updatedAt: "2026-10-08 09:02" },
+  { id: "RULE-1017", name: "消防主机状态回传", source: "mqtt", frequency: "30s", frequencyLabel: "30 秒", points: 40, alarm: "on", status: "running", updatedAt: "2026-10-08 05:19" },
+  { id: "RULE-1018", name: "立体库堆垛机遥测", source: "opcua", frequency: "1s", frequencyLabel: "1 秒", points: 112, alarm: "off", status: "stopped", updatedAt: "2026-10-04 16:40" },
+  { id: "RULE-1019", name: "光伏逆变器发电量", source: "http", frequency: "1m", frequencyLabel: "1 分钟", points: 22, alarm: "off", status: "running", updatedAt: "2026-10-08 07:58" },
+  { id: "RULE-1020", name: "除尘设备压差监控", source: "modbus", frequency: "5s", frequencyLabel: "5 秒", points: 30, alarm: "on", status: "running", updatedAt: "2026-10-07 23:14" },
+  { id: "RULE-1021", name: "门禁与周界报警接入", source: "snmp", frequency: "30s", frequencyLabel: "30 秒", points: 14, alarm: "on", status: "stopped", updatedAt: "2026-10-06 09:33" },
+  { id: "RULE-1022", name: "环保排放在线监测", source: "opcua", frequency: "5s", frequencyLabel: "5 秒", points: 58, alarm: "on", status: "running", updatedAt: "2026-10-08 09:47" },
+];
+  Object.assign(__export, { dataSourceOptions, frequencyOptions, formatOptions, pointOptions, storageOptions, sourceLabel, ruleList });
+})();
+
+/* ===== src/views/rule-form/index.jsx ===== */
+(function () {
+  const { useState } = React;
+  const { Input, Select, InputNumber, Switch, Segmented, Button, message } = antd;
+  const { Icon, dataSourceOptions, frequencyOptions, formatOptions, pointOptions, storageOptions } = __export;
+// Layer 4: 采集规则表单（纵向单列 + 开关驱动子表单）
+
+
+
+
+
+
+const DEFAULT_FORM = {
+  name: "",
+  source: undefined,
+  endpoint: "",
+  frequency: "30s",
+  points: [],
+  format: "json",
+  alarmEnabled: true,
+  alarmThreshold: 85,
+  notifyChannel: "email",
+  receivers: "",
+  webhookUrl: "",
+  advancedEnabled: false,
+  timeout: 3000,
+  retries: 2,
+  compress: false,
+  backupEndpoint: "",
+  archiveEnabled: true,
+  retentionDays: 90,
+  storage: "oss",
+};
+
+function ToggleRow({ icon, title, desc, checked, onChange }) {
+  return (
+    <div className="tf-toggle">
+      <span className="tf-toggle__icon">
+        <Icon name={icon} size="1rem" />
+      </span>
+      <div className="tf-toggle__text">
+        <span className="tf-toggle__title">{title}</span>
+        <span className="tf-toggle__desc">{desc}</span>
+      </div>
+      <Switch checked={checked} onChange={onChange} size="small" />
+    </div>
+  );
+}
+
+function RuleForm({ onCreate }) {
+  const [form, setForm] = useState(DEFAULT_FORM);
+  const [errors, setErrors] = useState({});
+
+  const setField = (key, value) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
+    setErrors((prev) => {
+      if (!prev[key]) return prev;
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
+  };
+
+  const validate = () => {
+    const next = {};
+    if (!form.name.trim()) next.name = "请输入规则名称";
+    if (!form.source) next.source = "请选择数据源类型";
+    if (!form.endpoint.trim()) next.endpoint = "请输入连接地址";
+    if (form.alarmEnabled) {
+      if (!form.receivers.trim()) next.receivers = "请至少填写一位接收人";
+      if (form.notifyChannel === "webhook" && !form.webhookUrl.trim()) {
+        next.webhookUrl = "请输入 Webhook 回调地址";
+      }
+    }
+    if (form.archiveEnabled && !(form.retentionDays > 0)) {
+      next.retentionDays = "保留天数需大于 0";
+    }
+    return next;
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const next = validate();
+    setErrors(next);
+    if (Object.keys(next).length > 0) {
+      message.error("请先修正表单中的校验项");
+      return;
+    }
+    const freqLabel =
+      (frequencyOptions.find((item) => item.value === form.frequency) || {}).label || "自定义";
+    onCreate({
+      id: `RULE-${Math.floor(1000 + Math.random() * 8999)}`,
+      name: form.name.trim(),
+      source: form.source,
+      frequency: form.frequency,
+      frequencyLabel: freqLabel,
+      points: form.points.length ? form.points.length * 6 : 12,
+      alarm: form.alarmEnabled ? "on" : "off",
+      status: "stopped",
+      updatedAt: "刚刚",
+    });
+    message.success(`规则「${form.name.trim()}」已保存`);
+    setForm(DEFAULT_FORM);
+  };
+
+  const handleReset = () => {
+    setForm(DEFAULT_FORM);
+    setErrors({});
+  };
+
+  return (
+    <section className="tf-card">
+      <header className="tf-card__head">
+        <span className="tf-card__icon">
+          <Icon name="sliders-horizontal" size="1.25rem" />
+        </span>
+        <div>
+          <h2 className="tf-card__title">新建采集规则</h2>
+          <p className="tf-card__subtitle">配置数据源、采集策略与扩展能力，保存后即刻下发</p>
+        </div>
+      </header>
+
+      <form className="tf-form" onSubmit={handleSubmit} noValidate>
+        <div className="tf-body">
+          <div className="tf-group">
+            <h3 className="tf-group__title">基础信息</h3>
+
+            <div className="tf-field">
+              <label className="tf-label tf-label--required" htmlFor="tf-name">
+                规则名称
+              </label>
+              <div className="tf-control">
+                <Input
+                  id="tf-name"
+                  placeholder="例如：1# 锅炉温度监控"
+                  value={form.name}
+                  status={errors.name ? "error" : undefined}
+                  onChange={(e) => setField("name", e.target.value)}
+                />
+                {errors.name && <span className="tf-error">{errors.name}</span>}
+              </div>
+            </div>
+
+            <div className="tf-field">
+              <label className="tf-label tf-label--required" htmlFor="tf-source">
+                数据源类型
+              </label>
+              <div className="tf-control">
+                <Select
+                  id="tf-source"
+                  placeholder="请选择数据源"
+                  style={{ width: "100%" }}
+                  value={form.source}
+                  options={dataSourceOptions}
+                  status={errors.source ? "error" : undefined}
+                  onChange={(v) => setField("source", v)}
+                />
+                {errors.source && <span className="tf-error">{errors.source}</span>}
+              </div>
+            </div>
+
+            <div className="tf-field">
+              <label className="tf-label tf-label--required" htmlFor="tf-endpoint">
+                连接地址
+              </label>
+              <div className="tf-control">
+                <Input
+                  id="tf-endpoint"
+                  placeholder="mqtt://10.20.31.7:1883 或 /dev/ttyS0"
+                  prefix={<Icon name="link" size="0.875rem" />}
+                  value={form.endpoint}
+                  status={errors.endpoint ? "error" : undefined}
+                  onChange={(e) => setField("endpoint", e.target.value)}
+                />
+                {errors.endpoint && <span className="tf-error">{errors.endpoint}</span>}
+              </div>
+            </div>
+          </div>
+
+          <div className="tf-group">
+            <h3 className="tf-group__title">采集策略</h3>
+
+            <div className="tf-field">
+              <label className="tf-label" htmlFor="tf-frequency">
+                采集频率
+              </label>
+              <div className="tf-control">
+                <Select
+                  id="tf-frequency"
+                  style={{ width: "100%" }}
+                  value={form.frequency}
+                  options={frequencyOptions}
+                  onChange={(v) => setField("frequency", v)}
+                />
+              </div>
+            </div>
+
+            <div className="tf-field">
+              <label className="tf-label" htmlFor="tf-points">
+                采集点位
+              </label>
+              <div className="tf-control">
+                <Select
+                  id="tf-points"
+                  mode="multiple"
+                  allowClear
+                  placeholder="选择需要采集的物理量"
+                  style={{ width: "100%" }}
+                  value={form.points}
+                  options={pointOptions}
+                  onChange={(v) => setField("points", v)}
+                />
+              </div>
+            </div>
+
+            <div className="tf-field">
+              <label className="tf-label" htmlFor="tf-format">
+                数据格式
+              </label>
+              <div className="tf-control">
+                <Select
+                  id="tf-format"
+                  style={{ width: "100%" }}
+                  value={form.format}
+                  options={formatOptions}
+                  onChange={(v) => setField("format", v)}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="tf-group">
+            <h3 className="tf-group__title">扩展能力</h3>
+
+            <ToggleRow
+              icon="bell-ring"
+              title="启用告警通知"
+              desc="数值越界时按所选渠道实时推送"
+              checked={form.alarmEnabled}
+              onChange={(v) => setField("alarmEnabled", v)}
+            />
+            {form.alarmEnabled && (
+              <div className="tf-subpanel">
+                <div className="tf-field">
+                  <label className="tf-label" htmlFor="tf-threshold">
+                    告警阈值（高于）
+                  </label>
+                  <div className="tf-control">
+                    <InputNumber
+                      id="tf-threshold"
+                      mode="spinner"
+                      variant="outlined"
+                      min={0}
+                      max={9999}
+                      style={{ width: "100%" }}
+                      value={form.alarmThreshold}
+                      addonAfter="单位值"
+                      onChange={(v) => setField("alarmThreshold", v)}
+                    />
+                  </div>
+                </div>
+
+                <div className="tf-field">
+                  <span className="tf-label">通知方式</span>
+                  <div className="tf-control">
+                    <Segmented
+                      block
+                      value={form.notifyChannel}
+                      onChange={(v) => setField("notifyChannel", v)}
+                      options={[
+                        { label: "邮件", value: "email", icon: <Icon name="mail" size="0.875rem" /> },
+                        { label: "短信", value: "sms", icon: <Icon name="message-square" size="0.875rem" /> },
+                        { label: "Webhook", value: "webhook", icon: <Icon name="webhook" size="0.875rem" /> },
+                      ]}
+                    />
+                  </div>
+                </div>
+
+                <div className="tf-field">
+                  <label className="tf-label tf-label--required" htmlFor="tf-receivers">
+                    接收人
+                  </label>
+                  <div className="tf-control">
+                    <Input
+                      id="tf-receivers"
+                      placeholder="多个邮箱/手机号用逗号分隔"
+                      value={form.receivers}
+                      status={errors.receivers ? "error" : undefined}
+                      onChange={(e) => setField("receivers", e.target.value)}
+                    />
+                    {errors.receivers && <span className="tf-error">{errors.receivers}</span>}
+                  </div>
+                </div>
+
+                {form.notifyChannel === "webhook" && (
+                  <div className="tf-field tf-field--reveal">
+                    <label className="tf-label tf-label--required" htmlFor="tf-webhook">
+                      Webhook 回调地址
+                    </label>
+                    <div className="tf-control">
+                      <Input
+                        id="tf-webhook"
+                        placeholder="https://alert.example.com/hook/iot"
+                        prefix={<Icon name="webhook" size="0.875rem" />}
+                        value={form.webhookUrl}
+                        status={errors.webhookUrl ? "error" : undefined}
+                        onChange={(e) => setField("webhookUrl", e.target.value)}
+                      />
+                      {errors.webhookUrl && <span className="tf-error">{errors.webhookUrl}</span>}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <ToggleRow
+              icon="settings-2"
+              title="开启高级采集模式"
+              desc="自定义超时、重试与传输压缩策略"
+              checked={form.advancedEnabled}
+              onChange={(v) => setField("advancedEnabled", v)}
+            />
+            {form.advancedEnabled && (
+              <div className="tf-subpanel">
+                <div className="tf-field">
+                  <label className="tf-label" htmlFor="tf-timeout">
+                    请求超时
+                  </label>
+                  <div className="tf-control">
+                    <InputNumber
+                      id="tf-timeout"
+                      mode="spinner"
+                      variant="outlined"
+                      min={100}
+                      max={60000}
+                      step={100}
+                      style={{ width: "100%" }}
+                      value={form.timeout}
+                      addonAfter="ms"
+                      onChange={(v) => setField("timeout", v)}
+                    />
+                  </div>
+                </div>
+
+                <div className="tf-field">
+                  <label className="tf-label" htmlFor="tf-retries">
+                    失败重试次数
+                  </label>
+                  <div className="tf-control">
+                    <InputNumber
+                      id="tf-retries"
+                      mode="spinner"
+                      variant="outlined"
+                      min={0}
+                      max={10}
+                      style={{ width: "100%" }}
+                      value={form.retries}
+                      addonAfter="次"
+                      onChange={(v) => setField("retries", v)}
+                    />
+                  </div>
+                </div>
+
+                <div className="tf-toggle tf-toggle--inner">
+                  <span className="tf-toggle__icon">
+                    <Icon name="minimize-2" size="1rem" />
+                  </span>
+                  <div className="tf-toggle__text">
+                    <span className="tf-toggle__title">启用传输压缩</span>
+                    <span className="tf-toggle__desc">降低带宽占用，适合高频大数据量场景</span>
+                  </div>
+                  <Switch
+                    checked={form.compress}
+                    size="small"
+                    onChange={(v) => setField("compress", v)}
+                  />
+                </div>
+
+                {form.compress && (
+                  <div className="tf-field tf-field--reveal">
+                    <label className="tf-label" htmlFor="tf-backup">
+                      备用连接地址
+                    </label>
+                    <div className="tf-control">
+                      <Input
+                        id="tf-backup"
+                        placeholder="主链路异常时自动切换"
+                        value={form.backupEndpoint}
+                        onChange={(e) => setField("backupEndpoint", e.target.value)}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <ToggleRow
+              icon="archive"
+              title="自动归档历史数据"
+              desc="按保留周期转入冷存储，释放在线库压力"
+              checked={form.archiveEnabled}
+              onChange={(v) => setField("archiveEnabled", v)}
+            />
+            {form.archiveEnabled && (
+              <div className="tf-subpanel">
+                <div className="tf-field">
+                  <label className="tf-label tf-label--required" htmlFor="tf-retention">
+                    数据保留天数
+                  </label>
+                  <div className="tf-control">
+                    <InputNumber
+                      id="tf-retention"
+                      mode="spinner"
+                      variant="outlined"
+                      min={1}
+                      max={3650}
+                      style={{ width: "100%" }}
+                      value={form.retentionDays}
+                      addonAfter="天"
+                      status={errors.retentionDays ? "error" : undefined}
+                      onChange={(v) => setField("retentionDays", v)}
+                    />
+                    {errors.retentionDays && <span className="tf-error">{errors.retentionDays}</span>}
+                  </div>
+                </div>
+
+                <div className="tf-field">
+                  <label className="tf-label" htmlFor="tf-storage">
+                    归档存储位置
+                  </label>
+                  <div className="tf-control">
+                    <Select
+                      id="tf-storage"
+                      style={{ width: "100%" }}
+                      value={form.storage}
+                      options={storageOptions}
+                      onChange={(v) => setField("storage", v)}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="tf-actions">
+          <Button icon={<Icon name="rotate-ccw" size="0.875rem" />} onClick={handleReset}>
+            重置
+          </Button>
+          <Button
+            type="primary"
+            htmlType="submit"
+            icon={<Icon name="save" size="0.875rem" />}
+          >
+            保存规则
+          </Button>
+        </div>
+      </form>
+    </section>
+  );
+}
+  Object.assign(__export, { RuleForm });
+})();
+
+/* ===== src/components/soft-tag/index.jsx ===== */
+(function () {
+  const { Icon } = __export;
+// Layer 3: 通用软色标签（状态 / 属性标记）
+
+
+
+function SoftTag({ tone, icon, children }) {
+  return (
+    <span className={`soft-tag soft-tag--${tone || "neutral"}`}>
+      {icon ? <Icon name={icon} size="0.75rem" /> : null}
+      <span>{children}</span>
+    </span>
+  );
+}
+  Object.assign(__export, { SoftTag });
+})();
+
+/* ===== src/views/rule-table/index.jsx ===== */
+(function () {
+  const { useState, useMemo } = React;
+  const { Table, Input, Select, Button } = antd;
+  const { Icon, dataSourceOptions, sourceLabel } = __export;
+  const SoftTag = __export.SoftTag;
+// Layer 4: 采集规则列表（表格 + 检索/筛选/批量操作）
+
+
+
+
+
+
+
+const STATUS_TONE = { running: "success", stopped: "neutral", error: "error" };
+const STATUS_LABEL = { running: "运行中", stopped: "已停用", error: "异常" };
+
+function RuleTable({ data }) {
+  const [keyword, setKeyword] = useState("");
+  const [sourceFilter, setSourceFilter] = useState(undefined);
+  const [selectedKeys, setSelectedKeys] = useState([]);
+  const [refreshAt, setRefreshAt] = useState("");
+
+  const filtered = useMemo(() => {
+    const kw = keyword.trim().toLowerCase();
+    return data.filter((row) => {
+      const hitKw =
+        !kw ||
+        row.name.toLowerCase().includes(kw) ||
+        row.id.toLowerCase().includes(kw);
+      const hitSource = !sourceFilter || row.source === sourceFilter;
+      return hitKw && hitSource;
+    });
+  }, [data, keyword, sourceFilter]);
+
+  const clearSelection = () => setSelectedKeys([]);
+
+  const columns = [
+    {
+      title: "规则名称",
+      dataIndex: "name",
+      key: "name",
+      width: 200,
+      render: (text) => (
+        <a href="#rule" className="rt-link" onClick={(e) => e.preventDefault()}>
+          {text}
+        </a>
+      ),
+    },
+    {
+      title: "规则 ID",
+      dataIndex: "id",
+      key: "id",
+      width: 120,
+      render: (value) => <span className="rt-plain rt-plain--muted">{value}</span>,
+    },
+    {
+      title: "数据源",
+      dataIndex: "source",
+      key: "source",
+      width: 140,
+      render: (value) => <span className="rt-plain">{sourceLabel(value)}</span>,
+    },
+    {
+      title: "采集频率",
+      dataIndex: "frequencyLabel",
+      key: "frequencyLabel",
+      width: 100,
+      render: (value) => <span className="rt-plain">{value}</span>,
+    },
+    {
+      title: "点位",
+      dataIndex: "points",
+      key: "points",
+      width: 90,
+      align: "right",
+      render: (value) => <span className="rt-num">{value}</span>,
+    },
+    {
+      title: "状态",
+      dataIndex: "status",
+      key: "status",
+      width: 110,
+      render: (value) => <SoftTag tone={STATUS_TONE[value]}>{STATUS_LABEL[value]}</SoftTag>,
+    },
+    {
+      title: "告警",
+      dataIndex: "alarm",
+      key: "alarm",
+      width: 110,
+      render: (value) =>
+        value === "on" ? (
+          <SoftTag tone="brand" icon="bell-ring">
+            已开启
+          </SoftTag>
+        ) : (
+          <SoftTag tone="neutral">未开启</SoftTag>
+        ),
+    },
+    {
+      title: "更新时间",
+      dataIndex: "updatedAt",
+      key: "updatedAt",
+      width: 160,
+      render: (value) => <span className="rt-plain rt-plain--muted">{value}</span>,
+    },
+    {
+      title: "操作",
+      key: "action",
+      width: 120,
+      align: "left",
+      render: (_text, record) => (
+        <div className="rt-actions">
+          <Button
+            type="text"
+            shape="circle"
+            size="small"
+            title="编辑规则"
+            icon={<Icon name="square-pen" size="0.875rem" />}
+          />
+          <Button
+            type="text"
+            shape="circle"
+            size="small"
+            title={record.status === "running" ? "停用规则" : "启用规则"}
+            icon={<Icon name={record.status === "running" ? "circle-pause" : "play"} size="0.875rem" />}
+          />
+          <Button
+            type="text"
+            shape="circle"
+            size="small"
+            danger
+            title="删除规则"
+            icon={<Icon name="trash-2" size="0.875rem" />}
+          />
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <section className="rt-card">
+      <header className="rt-toolbar">
+        <div className="rt-toolbar__title">
+          <h2 className="rt-card__title">已配置规则</h2>
+          <span className="rt-count">共 {filtered.length} 条</span>
+        </div>
+
+        <div className="rt-toolbar__tools">
+          {selectedKeys.length > 0 && (
+            <div className="rt-selection">
+              <span>已选 {selectedKeys.length} 项</span>
+              <a href="#batch" onClick={(e) => e.preventDefault()}>
+                批量停用
+              </a>
+              <a href="#clear" onClick={(e) => { e.preventDefault(); clearSelection(); }}>
+                取消选择
+              </a>
+            </div>
+          )}
+          <Input
+            className="rt-search"
+            allowClear
+            placeholder="搜索规则名称或 ID"
+            value={keyword}
+            suffix={<Icon name="search" size="0.875rem" />}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
+          <Select
+            className="rt-filter"
+            allowClear
+            placeholder="数据源"
+            style={{ width: "10rem" }}
+            value={sourceFilter}
+            options={dataSourceOptions}
+            onChange={(v) => setSourceFilter(v)}
+          />
+          <Button
+            type="text"
+            shape="circle"
+            title={refreshAt ? `最近刷新 ${refreshAt}` : "刷新列表"}
+            icon={<Icon name="refresh-cw" size="0.875rem" />}
+            onClick={() => setRefreshAt("刚刚")}
+          />
+        </div>
+      </header>
+
+      <Table
+        rowKey="id"
+        size="middle"
+        columns={columns}
+        dataSource={filtered}
+        rowSelection={{
+          selectedRowKeys: selectedKeys,
+          onChange: (keys) => setSelectedKeys(keys),
+        }}
+        pagination={{
+          pageSize: 8,
+          showSizeChanger: false,
+          showTotal: (total) => `共 ${total} 条规则`,
+        }}
+        scroll={{ x: 1140 }}
+      />
+    </section>
+  );
+}
+  Object.assign(__export, { RuleTable });
+})();
+
+/* ===== app.jsx ===== */
+(function () {
+  const { useState } = React;
+  const { ConfigProvider } = antd;
+  const { AppProvider, ruleList } = __export;
+  const zhCN = __export.zhCN;
+  const AppHeader = __export.AppHeader;
+  const AppSidebar = __export.AppSidebar;
+  const RuleForm = __export.RuleForm;
+  const RuleTable = __export.RuleTable;
+// App entry — 采集规则配置（顶部导航 + 侧边导航 + 表单向下列 + 表格）
+// Layering convention (one folder per component, kebab-case + index.jsx/index.css):
+//   Layer 1 global state  → src/context.jsx        (AppProvider: 主题模式)
+//   Layer 2 mock data     → src/mock/rules.js      (采集规则 mock + 选项字典)
+//   Layer 3 reusable      → src/components/soft-tag/
+//   Layer 4 views         → src/views/app-header | app-sidebar | rule-form | rule-table
+//   Layer 5 layout        → app.jsx
+
+
+
+
+
+
+
+
+
+
+
+
+function App() {
+  const [rules, setRules] = useState(ruleList);
+
+  const handleCreate = (rule) => {
+    setRules((prev) => [rule, ...prev]);
+  };
+
+  return (
+    <AppProvider>
+      <ConfigProvider locale={zhCN}>
+        <div className="app-root">
+          <AppHeader />
+          <div className="app-body">
+            <AppSidebar />
+            <main className="app-content">
+              <RuleForm onCreate={handleCreate} />
+              <RuleTable data={rules} />
+            </main>
+          </div>
+        </div>
+      </ConfigProvider>
+    </AppProvider>
+  );
+}
+  Object.assign(__export, { App });
+})();
+/* ===== render ===== */
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(__export.App));
+</script>
+</body>
+</html>
