@@ -1,0 +1,174 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "手写form-vite",
+  "antdComponents": {
+    "Progress": [
+      "src/views/form-aside/index.jsx"
+    ],
+    "Button": [
+      "src/views/page-header/index.jsx",
+      "src/views/work-order-form/index.jsx"
+    ],
+    "Input": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "Select": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "DatePicker": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "Radio": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "Checkbox": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/work-order-form/index.jsx"
+    ],
+    "Modal": [
+      "src/app.jsx"
+    ],
+    "message": [
+      "src/app.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/form-field/index.css",
+    "src/components/form-field/index.jsx",
+    "src/components/form-section/index.css",
+    "src/components/form-section/index.jsx",
+    "src/components/status-tag/index.css",
+    "src/components/status-tag/index.jsx",
+    "src/components/upload-dropzone/index.css",
+    "src/components/upload-dropzone/index.jsx",
+    "src/context.jsx",
+    "src/mock/workOrder.js",
+    "src/use-form.js",
+    "src/views/form-aside/index.css",
+    "src/views/form-aside/index.jsx",
+    "src/views/page-header/index.css",
+    "src/views/page-header/index.jsx",
+    "src/views/work-order-form/index.css",
+    "src/views/work-order-form/index.jsx",
+    "src/views/work-order-form/schema.js"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": [],
+    "antdLocaleFiles": [],
+    "businessLocaleFiles": [],
+    "hasDayjs": false,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "Progress",
+      "category": "B",
+      "eview": "手写",
+      "keyDiffs": "无导出，手写进度条（div+CSS var）",
+      "ref": "handwrite-templates.md §9",
+      "files": ["src/views/form-aside/index.jsx"]
+    },
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button",
+      "keyDiffs": "type→status；icon→leftIcon/rightIcon+text=（不能用children否则图标不渲染）；无loading/htmlType/danger；纯图标按钮用IconButton",
+      "ref": "components/Button.md",
+      "files": ["src/views/page-header/index.jsx", "src/views/work-order-form/index.jsx"]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField",
+      "keyDiffs": "onChange(value,oldValue,event)首参是值；validator返回{result,message}；required自带星号；无allowClear/prefix/rules/onPressEnter",
+      "ref": "components/TextField.md",
+      "files": ["src/views/work-order-form/index.jsx"]
+    },
+    {
+      "antd": "Select",
+      "category": "A",
+      "eview": "Select",
+      "keyDiffs": "options的label→text；placeholder→defaultLabel；onChange五参(value,oldValue,text,oldText,event)；enableClear；virtualScroll>100项",
+      "ref": "components/Select.md",
+      "files": ["src/views/work-order-form/index.jsx"]
+    },
+    {
+      "antd": "DatePicker",
+      "category": "A",
+      "eview": "DatePicker",
+      "keyDiffs": "不要无条件回写onChange字符串到value；用defaultValue+ref.getValue()或有效Date才回写",
+      "ref": "components/DatePicker.md",
+      "files": ["src/views/work-order-form/index.jsx"]
+    },
+    {
+      "antd": "Radio",
+      "category": "A",
+      "eview": "Radio/RadioGroup",
+      "keyDiffs": "Group用data=[{text,value}]；需isControlled才受控；onChange参数顺序有冲突用兼容写法",
+      "ref": "components/Radio.md",
+      "files": ["src/views/work-order-form/index.jsx"]
+    },
+    {
+      "antd": "Checkbox",
+      "category": "A",
+      "eview": "Checkbox",
+      "keyDiffs": "onChange(value,checked,event,additionalData)；onPreChange可拦截",
+      "ref": "components/Checkbox.md",
+      "files": ["src/views/work-order-form/index.jsx"]
+    },
+    {
+      "antd": "InputNumber",
+      "category": "A",
+      "eview": "Spinner",
+      "keyDiffs": "onChange(value)只在有效值触发；onInputError(value)接无效值；min/max/step/precision；重置加doNotFocusWhenValueUpdate",
+      "ref": "components/Spinner.md",
+      "files": ["src/views/work-order-form/index.jsx"]
+    },
+    {
+      "antd": "Modal",
+      "category": "C",
+      "eview": "Dialog",
+      "keyDiffs": "open→isOpen；footer→buttons=[{text,status,onClick}]数组；onClose不会自动关闭（需setIsOpen(false)）；size/position",
+      "ref": "components/Dialog.md",
+      "files": ["src/app.jsx"]
+    },
+    {
+      "antd": "message",
+      "category": "C",
+      "eview": "DivMessage",
+      "keyDiffs": "无命令式API；message.success()→渲染<DivMessage display type>；需state管理notice+在组件树渲染；注意DivMessage与表单输入组件同渲染树会导致失焦，需在onChange中setNotice(null)或用createPortal抽离",
+      "ref": "components/DivMessage.md",
+      "files": ["src/app.jsx"]
+    }
+  ],
+  "notes": "antdComponents 步骤2 补充 Modal+message（app.jsx 在项目根未被 extract-umd.cjs 扫描，步骤3 搬入 src/app.jsx 后补充）。migrationPlan 步骤5 生成，含 10 项（8 antdComponents + Modal + message）。i18n scenario A wired=true。图标走 <Icon name> 运行时 shim，antdIcons 恒 [] 但有 25 处调用点，由 antd-to-eview-react §3.0 处理。"
+}

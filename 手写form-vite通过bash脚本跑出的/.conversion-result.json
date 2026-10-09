@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "18 src/ files + app.jsx + app.css + icon.jsx + chart.jsx 搬入完成；6 个 JSX 文件 icon 导入路径修正（../../../assets/shared/ → ../../assets/shared/）；app.jsx 删除 antd ConfigProvider + zhCN locale，修正 ./src/ → ./ 相对路径；context.jsx 加 aui3_1_dark body 类切换；font.css URL 修正为 /font/ 根路径。i18n scenario A（硬编码中文），main.jsx 不改，IntlProvider + componentsLocales 已就绪。check-relative-imports.cjs 全部通过。"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "SKIP",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "i18n-keys check passed (0 issues). npm install SKIP: @nce/eview-react is an internal dependency on cmc.centralrepo.rnd.huawei.com which is unreachable from external network. relative-imports SKIP per instruction (paths already fixed by umd-to-antd-vite). All 10 migrationPlan items completed: 8 A-class component replacements (Button, Input→TextField, Select→Select/MultipleSelect, DatePicker, Radio→RadioGroup, Checkbox→Checkbox/CheckboxGroup, InputNumber→Spinner, TextArea), 1 B-class handwrite (Progress), 2 C-class pattern conversions (Modal→Dialog, message→DivMessage). 25 Icon call sites preserved unchanged."
+}
