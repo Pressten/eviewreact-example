@@ -1,0 +1,63 @@
+.device-table {
+  padding: var(--spacing-inset);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.device-table__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-stack);
+  margin-bottom: var(--spacing-gutter);
+}
+
+.device-table__title-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-inline);
+}
+
+.device-table__title {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+}
+
+.device-table__count {
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.device-table__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+}
+
+.device-table__search {
+  width: 14rem;
+}
+
+.device-table__link {
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+.device-table__link:hover {
+  color: var(--interactive-link-hover);
+}
+
+.device-table__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--on-surface-variant);
+}
+.device-table__actions > svg:hover,
+.device-table__actions > span:hover {
+  color: var(--primary);
+}

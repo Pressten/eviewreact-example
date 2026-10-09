@@ -1,0 +1,19 @@
+.side-menu {
+  width: 16rem;
+  flex: none;
+  padding: var(--spacing-inline) 0;
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-r-sm, var(--shadow-sm));
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width 0.2s ease;
+}
+
+.side-menu.is-collapsed {
+  width: 3rem;
+}
+
+.side-menu .ant-menu-inline,
+.side-menu .ant-menu-vertical {
+  border-inline-end: none;
+}

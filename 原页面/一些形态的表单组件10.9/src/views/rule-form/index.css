@@ -1,0 +1,133 @@
+.rule-form .form-body {
+  max-width: 46rem;
+}
+
+.form-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-field {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  column-gap: 1rem;
+  align-items: start;
+}
+
+.form-field--compact {
+  grid-template-columns: 7rem 1fr;
+}
+
+/* 标签：左对齐，行高与 medium 控件（2rem）对齐 */
+.form-label {
+  position: relative;
+  line-height: 2rem;
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+}
+
+/* 必填星号：悬挂在标签左侧，垂直居中，不占排版 */
+.form-label.required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 1rem;
+  transform: translateY(-50%);
+  color: var(--error);
+  font: var(--font-body-m);
+}
+
+.form-control {
+  position: relative;
+  min-width: 0;
+}
+
+/* 校验文案：覆盖在控件正下方，不占位、不顶布局 */
+.form-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--error);
+}
+
+.form-inline {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* 控件外单位文本：紧贴控件右侧，不进入输入框内部 */
+.form-inline__unit {
+  flex: none;
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.form-inline__note {
+  flex: none;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+/* 高级策略开关行：说明在行首，开关在行尾 */
+.form-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+}
+
+.form-switch-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.form-switch-row__label {
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.form-switch-row__desc {
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+/* 子表单：嵌套内层区域 */
+.sub-form {
+  padding: 1rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+}
+
+.sub-form__head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.sub-form__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-inline);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: var(--border-width-thin) solid var(--divider);
+}

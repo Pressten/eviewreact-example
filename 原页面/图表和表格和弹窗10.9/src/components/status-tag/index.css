@@ -1,0 +1,33 @@
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-badge);
+  font: var(--font-body-s);
+  white-space: nowrap;
+}
+
+.status-tag__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: var(--radius-full);
+  background: currentColor;
+}
+
+.status-tag--success {
+  background: var(--success-container);
+  color: var(--success);
+}
+.status-tag--info {
+  background: var(--info-container);
+  color: var(--info);
+}
+.status-tag--warning {
+  background: var(--warning-container);
+  color: var(--critical);
+}
+.status-tag--error {
+  background: var(--error-container);
+  color: var(--error);
+}

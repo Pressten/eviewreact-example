@@ -1,0 +1,97 @@
+.detail-modal__header {
+  padding-bottom: var(--spacing-gutter);
+  border-bottom: var(--border-width-thin) solid var(--divider);
+}
+
+.detail-modal__heading {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.detail-modal__name {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-semibold);
+}
+
+.detail-modal__meta {
+  margin: 0.5rem 0 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.detail-modal__info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-inline) var(--spacing-inset);
+  margin-top: var(--spacing-gutter);
+  padding: var(--spacing-gutter);
+  background: var(--surface-variant);
+  border-radius: var(--radius-container);
+}
+
+.detail-modal__info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+  min-width: 0;
+}
+
+.detail-modal__info-label {
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+  white-space: nowrap;
+}
+
+.detail-modal__info-value {
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detail-modal__section {
+  margin-top: var(--spacing-inset);
+}
+
+.detail-modal__section-title {
+  margin: 0 0 var(--spacing-stack);
+  color: var(--on-surface);
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+}
+
+.detail-modal__chart {
+  height: 11rem;
+}
+
+.detail-modal__event-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+}
+
+.detail-modal__event-title {
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.detail-modal__event-time {
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+  white-space: nowrap;
+}
+
+.detail-modal__event-desc {
+  margin: 0.25rem 0 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}

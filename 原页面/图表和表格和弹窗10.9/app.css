@@ -1,0 +1,26 @@
+/* 应用级基础样式 — 页面骨架的 token 消费示例 */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.app-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-page);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+  overflow-y: auto;
+}

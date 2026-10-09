@@ -1,0 +1,80 @@
+/* 应用级基础样式 — 页面根节点与共享版式 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.page {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: var(--spacing-page);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 页头 */
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+}
+
+.page-title {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-semibold);
+}
+
+.page-desc {
+  margin: 0.25rem 0 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+}
+
+/* 内容卡片（版式容器，非组件） */
+.card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  margin-bottom: 1.5rem;
+}
+
+.card-title {
+  margin: 0;
+  color: var(--on-surface);
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+}
+
+.card-sub {
+  margin: 0.25rem 0 0;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.card-head__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex: none;
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.card-head__hint .req {
+  color: var(--error);
+  font-style: normal;
+}
