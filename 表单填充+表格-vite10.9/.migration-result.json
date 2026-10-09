@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "All 10 antd components replaced with @nce/eview-react equivalents across 3 jsx files. ConfigProvider left as scaffold preset (main.jsx). No antd imports remain (only a comment in context.jsx). Icon call sites untouched per §3.0. DivMessage implemented via separate NoticeLayer component with createPortal to document.body and independent useState, avoiding focus loss on eview-react inputs. Spinners use doNotFocusWhenValueUpdate for form reset safety. addonAfter units hand-wrapped in flex divs. Select options mapped label→text at component layer via toOptions helper."
+}

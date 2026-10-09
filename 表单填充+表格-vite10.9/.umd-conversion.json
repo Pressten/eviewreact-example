@@ -1,0 +1,170 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "表单填充+表格-vite",
+  "antdComponents": {
+    "ConfigProvider": [
+      "src/app.jsx (deleted in step 3; scaffold main.jsx has eview-react ConfigProvider)"
+    ],
+    "Menu": [
+      "src/views/app-sidebar/index.jsx"
+    ],
+    "Input": [
+      "src/views/rule-form/index.jsx",
+      "src/views/rule-table/index.jsx"
+    ],
+    "Select": [
+      "src/views/rule-form/index.jsx",
+      "src/views/rule-table/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Switch": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Segmented": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Button": [
+      "src/views/rule-form/index.jsx",
+      "src/views/rule-table/index.jsx"
+    ],
+    "message": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Table": [
+      "src/views/rule-table/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/soft-tag/index.css",
+    "src/components/soft-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/rules.js",
+    "src/views/app-header/index.css",
+    "src/views/app-header/index.jsx",
+    "src/views/app-sidebar/index.css",
+    "src/views/app-sidebar/index.jsx",
+    "src/views/rule-form/index.css",
+    "src/views/rule-form/index.jsx",
+    "src/views/rule-table/index.css",
+    "src/views/rule-table/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": ["import zhCN from './assets/shared/antd-zh.js' (app.jsx, deleted in step 3)"],
+    "antdLocaleFiles": ["assets/shared/antd-zh.js (not moved; scaffold IntlProvider zh locale replaces it)"],
+    "businessLocaleFiles": [],
+    "hasDayjs": false,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "ConfigProvider",
+      "category": "A",
+      "eview": "ConfigProvider (scaffold preset)",
+      "keyDiffs": "scaffold main.jsx 已预设 eview-react ConfigProvider + IntlProvider zh locale；app.jsx 的 antd ConfigProvider + zhCN locale 已在步骤 3 删除，下游无需处理",
+      "ref": "components/INDEX.md",
+      "files": ["src/main.jsx (scaffold)", "src/app.jsx (ConfigProvider deleted in step 3)"]
+    },
+    {
+      "antd": "Menu",
+      "category": "A",
+      "eview": "Accordion",
+      "keyDiffs": "items→data（key/label→value/title）；selectedKeys 数组→selectedValue 单 string；onClick({key})→onClick(node)；expanded 语义反转（true=收起）；多级导航用 Accordion",
+      "ref": "components/Accordion.md",
+      "files": ["src/views/app-sidebar/index.jsx"]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField",
+      "keyDiffs": "onChange(value,oldValue,event) 首参是值不是 event；无 allowClear/prefix/rules/onPressEnter；prefix 需手写包裹或用 leftIcon；status error 用 validator 返回 {result,message}",
+      "ref": "components/TextField.md",
+      "files": ["src/views/rule-form/index.jsx", "src/views/rule-table/index.jsx"]
+    },
+    {
+      "antd": "Select",
+      "category": "A",
+      "eview": "Select / MultipleSelect",
+      "keyDiffs": "options label→text；placeholder→defaultLabel；onChange 五参(value,oldValue,text,oldText,event)；allowClear→enableClear；mode='multiple' 删 mode 换 MultipleSelect（value 数组，onChange(value[],changeValue[],event)）",
+      "ref": "components/Select.md",
+      "files": ["src/views/rule-form/index.jsx", "src/views/rule-table/index.jsx"]
+    },
+    {
+      "antd": "InputNumber",
+      "category": "A",
+      "eview": "Spinner",
+      "keyDiffs": "onChange(value) 只在有效值触发；onInputError(value) 接无效值；min/max/step 保留；antd 的 mode='spinner'/variant='outlined' prop 不存在需删除；addonAfter 需手写",
+      "ref": "components/Spinner.md",
+      "files": ["src/views/rule-form/index.jsx"]
+    },
+    {
+      "antd": "Switch",
+      "category": "A",
+      "eview": "Toggle",
+      "keyDiffs": "checked→toggled；onChange→onToggle(value)；size='small' 无对应（用 CSS 控制）；data=[关,开] 可配文字",
+      "ref": "components/Toggle.md",
+      "files": ["src/views/rule-form/index.jsx"]
+    },
+    {
+      "antd": "Segmented",
+      "category": "A",
+      "eview": "SelectCard",
+      "keyDiffs": "导出名 SelectCard（不是 Segmented）；options label→text；block 用 CSS；onChange(value,event)；disable（不是 disabled）；options 含 icon 需调整",
+      "ref": "components/SelectCard.md",
+      "files": ["src/views/rule-form/index.jsx"]
+    },
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button / IconButton",
+      "keyDiffs": "type→status（primary/risk/text）；无 loading/htmlType/danger；type='text' shape='circle' 无 children→IconButton（iconName+tipText）；icon+text children→Button leftIcon/rightIcon+text=（不能用 children）；submit 用 form onSubmit",
+      "ref": "components/Button.md",
+      "files": ["src/views/rule-form/index.jsx", "src/views/rule-table/index.jsx"]
+    },
+    {
+      "antd": "message",
+      "category": "A",
+      "eview": "DivMessage",
+      "keyDiffs": "无命令式 API；message.success/error() → 渲染 <DivMessage display type='success/error'>；需 useState 控制 display+key 切换重挂；默认 10s 消失",
+      "ref": "components/DivMessage.md",
+      "files": ["src/views/rule-form/index.jsx"]
+    },
+    {
+      "antd": "Table",
+      "category": "A",
+      "eview": "Table",
+      "keyDiffs": "dataSource→dataset；columns[].dataIndex→key；pagination→enablePagination+pagingProps+onPageChange；rowSelection→enableCheckBox+onRowCheck；render 第 4 参 row.rawData（不是第 2 参）；scroll→横向滚动配置",
+      "ref": "components/Table.md",
+      "files": ["src/views/rule-table/index.jsx"]
+    }
+  ],
+  "notes": "Step 3 completed: app.jsx replaced (ConfigProvider+zhCN deleted, ./src/ paths fixed to ./), context.jsx added aui3_1_dark body class toggle, icon.jsx moved from assets/shared/ to src/shared/ (Lucide fallback preserved), all icon import paths fixed from ../../../assets/shared/ to ../../shared/, uploads copied to public/assets/uploads/, standalone assets/style/*.css not moved (content already extracted by extract-umd.cjs). i18n scenario A: scaffold IntlProvider zh locale replaces antd zhCN."
+}

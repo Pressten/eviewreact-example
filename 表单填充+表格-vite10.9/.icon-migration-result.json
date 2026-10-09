@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "totalSites": 22,
+  "appliedConfirmed": 7,
+  "residualHandled": 13,
+  "shimPreserved": 2,
+  "shimSites": [
+    "src/components/soft-tag/index.jsx L8 (icon prop cross-component)",
+    "src/views/rule-form/index.jsx L51 (ToggleRow icon prop cross-component)"
+  ],
+  "jsToJsxConverted": 0,
+  "failures": [],
+  "notes": "match-icons.cjs --apply auto-applied 6 confirmed literals (database->HuaweiCloudDatabase, cpu->IctCpu, link->PublicLink, trash-2->PublicTrash, search->PublicSearch, refresh-cw->PublicRefreshClockwise) + 1 flat ternary (sun/moon->PublicSun/PublicMoon at app-header:53). 12 residual names + 1 chained ternary + 1 variable = 14 items reviewed. Residual decisions: radio-tower->IconPlusIcIctBaseStation (BaseStation=radio tower for IoT platform logo), bell->IconPlusIcIctAlarm (Alarm for 告警中心, no standalone Bell in catalog), settings->IconPlusIcPublicSetting (singular exact match), sliders-horizontal->IconPlusIcPublicFilter (no Slider/Adjust/Tune in catalog; Filter for acquisition rule form), mail->IconPlusIcPublicEnvelope (classic envelope), message-square->IconPlusIcPublicMessage (exact for SMS), webhook->IconPlusIcIctEndpoint (Endpoint=HTTP endpoint, no Webhook in catalog; 2 sites: data array + suffix prop), minimize-2->IconPlusIcPublicMinus (Minus for compression toggle), rotate-ccw->IconPlusIcPublicRestore (Restore for reset button, no counterclockwise rotate in catalog), save->IconPlusIcPublicCheckmark (no Save/Floppy in catalog; Checkmark for save/confirm), square-pen->IconPlusIcIctBulkEdit (closest Edit icon), circle-pause/play->IconPlusIcPublicPause/IconPlusIcPublicPlay (chained ternary misclassified by script due to optional chaining ?. in cond; manually converted to conditional render). bell-ring residual: script buildConstMap matched JSX prop icon=\"bell-ring\" and resolved ToggleRow variable to bell-ring (first of 3 values: bell-ring/settings-2/archive) — false positive, correctly preserved as shim. Files modified: app-header/index.jsx (import+radio-tower+remove shim import), app-sidebar/index.jsx (import+bell+settings+remove shim import), rule-form/index.jsx (import+8 tags, keep shim import for ToggleRow), rule-table/index.jsx (import+square-pen+ternary+remove shim import). check-relative-imports.cjs: all resolved. grep <Icon: only 2 shim sites remain."
+}
