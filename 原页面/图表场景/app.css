@@ -1,0 +1,14 @@
+/* 应用级基础样式 — 页面骨架 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.page-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+  padding: var(--spacing-gutter) var(--spacing-page) var(--spacing-page);
+}
