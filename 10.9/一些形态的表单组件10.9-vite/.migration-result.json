@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "外网环境，@nce 内网依赖 npm install SKIP（30s 超时），仅静态检查 i18n-keys 生效。所有 antd 组件已替换为 @nce/eview-react：Button/TextField/Spinner/Select/MultipleSelect/TreeSelect/Cascader/RadioGroup/Toggle/DatePicker/Table/Tag/DivMessage。mock/rule.js 中 deviceTypes/channels/alarmLevels 的 label→text 已改，regions 保留 label（Cascader 用），deviceGroups 保留 title（TreeSelect 调用侧 mapTreeData 转换 id/text），levelMeta 保留 label（内部数据）。message.useMessage 命令式 API 替换为 setNotice + DivMessage 渲染（position:fixed 顶部居中浮层）。"
+}

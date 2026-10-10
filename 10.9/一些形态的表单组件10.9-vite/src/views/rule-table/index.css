@@ -1,0 +1,66 @@
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-gutter);
+  margin-bottom: 1rem;
+}
+
+.table-toolbar__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+}
+
+.table-toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.table-toolbar__count {
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.table-toolbar__count em {
+  font-style: normal;
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+}
+
+/* 数据列中的链接式内容 */
+.cell-link {
+  color: var(--interactive-link);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.cell-link:hover {
+  color: var(--interactive-link-hover);
+  text-decoration: underline;
+}
+
+.cell-metric {
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+/* 操作列：纯图标，间距 1rem，hover 品牌色 */
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--on-surface-variant);
+}
+
+.row-actions svg,
+.row-actions span {
+  color: inherit;
+}
+
+.row-actions > *:hover {
+  color: var(--primary);
+}

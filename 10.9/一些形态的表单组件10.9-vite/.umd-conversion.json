@@ -1,0 +1,107 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "一些形态的表单组件10.9-vite",
+  "antdComponents": {
+    "Tag": [
+      "src/components/level-tag/index.jsx",
+      "src/views/rule-table/index.jsx"
+    ],
+    "Input": [
+      "src/views/rule-form/index.jsx",
+      "src/views/rule-table/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Select": [
+      "src/views/rule-form/index.jsx",
+      "src/views/rule-table/index.jsx"
+    ],
+    "TreeSelect": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Cascader": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Radio": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Switch": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "DatePicker": [
+      "src/views/rule-form/index.jsx"
+    ],
+    "Button": [
+      "src/views/rule-form/index.jsx",
+      "src/views/rule-table/index.jsx"
+    ],
+    "message": [
+      "src/views/rule-form/index.jsx",
+      "src/views/rule-table/index.jsx"
+    ],
+    "Table": [
+      "src/views/rule-table/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/level-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/rule.js",
+    "src/views/rule-form/index.css",
+    "src/views/rule-form/index.jsx",
+    "src/views/rule-table/index.css",
+    "src/views/rule-table/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": ["./assets/shared/antd-zh.js"],
+    "antdLocaleFiles": [],
+    "businessLocaleFiles": [],
+    "hasDayjs": false,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    { "antd": "Button", "category": "A", "eview": "Button", "keyDiffs": "type→status（default/primary/risk/text）；icon→leftIcon；带图标时文字必须用 text 不用 children（否则图标不渲染）；纯图标按钮剥 Button 外壳走 IconPlusIc*；无 loading/htmlType/danger", "ref": "components/Button.md", "files": ["src/app.jsx", "src/views/rule-form/index.jsx", "src/views/rule-table/index.jsx"] },
+    { "antd": "ConfigProvider", "category": "C", "eview": "已删除", "keyDiffs": "scaffold main.jsx 已配 IntlProvider + eview ConfigProvider，步骤3已删除源项目 antd ConfigProvider（含 locale + theme）", "ref": "无", "files": ["src/app.jsx"] },
+    { "antd": "Input", "category": "A", "eview": "TextField", "keyDiffs": "onChange(value,oldValue,event) 首参是值不是 event；无 allowClear/prefix；validator 返回 {result,message}；required 自带星号", "ref": "components/TextField.md", "files": ["src/views/rule-form/index.jsx", "src/views/rule-table/index.jsx"] },
+    { "antd": "InputNumber", "category": "A", "eview": "Spinner", "keyDiffs": "onChange(value) 只在有效值触发；onInputError(value) 接无效值；min/max/step/precision", "ref": "components/Spinner.md", "files": ["src/views/rule-form/index.jsx"] },
+    { "antd": "Select", "category": "A", "eview": "Select", "keyDiffs": "options label→text；placeholder→defaultLabel；onChange(value,oldValue,text,oldText,event) 五参；enableClear", "ref": "components/Select.md", "files": ["src/views/rule-form/index.jsx", "src/views/rule-table/index.jsx"] },
+    { "antd": "Select mode=multiple", "category": "A", "eview": "MultipleSelect", "keyDiffs": "删 mode；value 数组；onChange(value[],changeValue[],event)；placeholder（不是 defaultLabel）；selectAll/searchable", "ref": "components/MultipleSelect.md", "files": ["src/views/rule-form/index.jsx"] },
+    { "antd": "TreeSelect", "category": "A", "eview": "TreeSelect", "keyDiffs": "treeData；onChange(selectNode[]) 节点对象数组；enableCheckbox", "ref": "components/TreeSelect.md", "files": ["src/views/rule-form/index.jsx"] },
+    { "antd": "Cascader", "category": "A", "eview": "Cascader", "keyDiffs": "唯一用 label（不是 text）；selectedValue 路径数组；changeOnSelect", "ref": "components/Cascader.md", "files": ["src/views/rule-form/index.jsx"] },
+    { "antd": "Radio.Group", "category": "A", "eview": "RadioGroup", "keyDiffs": "options→data=[{text,value}]（label→text）；需 isControlled 才受控；onChange 参数顺序有冲突用兼容写法", "ref": "components/RadioGroup.md", "files": ["src/views/rule-form/index.jsx"] },
+    { "antd": "Switch", "category": "A", "eview": "Toggle", "keyDiffs": "checked→toggled；onChange→onToggle(value)；data=[关,开]；taggledChildren（拼错）", "ref": "components/Toggle.md", "files": ["src/views/rule-form/index.jsx"] },
+    { "antd": "DatePicker.RangePicker", "category": "C", "eview": "DatePicker range={...}", "keyDiffs": "不要用 onOkClick（不返回 fromDateObj/toDateObj）；改用 onChange 的 target 参数('from'/'to')分别收集起止日期", "ref": "components/DatePicker.md", "files": ["src/views/rule-form/index.jsx"] },
+    { "antd": "Table", "category": "A", "eview": "Table", "keyDiffs": "dataSource→dataset；columns[].dataIndex→key；rowKey→onRowCheck 用行序号；pagination→enablePagination+pagingProps；rowSelection→enableCheckBox+onRowCheck；render 取 row.rawData（第4参，可能 undefined 写 row.rawData?.xxx）", "ref": "components/Table.md", "files": ["src/views/rule-table/index.jsx"] },
+    { "antd": "Tag", "category": "A", "eview": "Tag", "keyDiffs": "无 closable；color 六语义色(default/primary/success/warning/caution/danger)；fill=outline 描边", "ref": "components/Tag.md", "files": ["src/views/rule-table/index.jsx", "src/components/level-tag/index.jsx"] },
+    { "antd": "message", "category": "B", "eview": "DivMessage", "keyDiffs": "无命令式 API；只能渲染 <DivMessage display type=...>；注意 DivMessage 与表单输入组件同渲染树会导致失焦，需在输入回调中关闭浮层或抽离为独立组件", "ref": "components/DivMessage.md", "files": ["src/views/rule-form/index.jsx", "src/views/rule-table/index.jsx"] }
+  ],
+  "notes": "步骤1-4 完成：骨架搭建 + token CSS 外置(455 root + 180 dark) + 代码搬运路径修正 + ConfigProvider 删除 + 暗色双轨切换(html .dark + body aui3_1_dark) + i18n scenario A 接线(antd locale 删除) + 相对导入验证 PASS。_extracted/ 已清理。"
+}

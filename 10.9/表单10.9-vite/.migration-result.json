@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "13 条 migrationPlan 全部替换完成。A 类 9 个（Input→TextField×5、Button、Badge、Select×4、Radio×3、DatePicker、Checkbox、InputNumber→Spinner×3、Switch→Toggle）、B 类 2 个手写（Dropdown、Progress）、C 类 1 个模式转换（Steps）、布局 1 个（Menu→Accordion）。i18n scenario A wired=true，跳过接线。check-i18n-keys.cjs：0 高危调用。npm install 超时（@nce 内网依赖，外网不可达）记 SKIP 不判 FAIL。未跑 match-icons.cjs，未动 <Icon name=...> 调用点与 src/shared/icon.jsx。注意事项：Checkbox label 传 JSX 富文本（协议链接），参考文档标注 label 类型为 string，实际 eview 组件渲染 ReactNode，需运行时验证。"
+}

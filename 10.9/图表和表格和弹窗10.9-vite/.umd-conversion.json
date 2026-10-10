@@ -1,0 +1,143 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "图表和表格和弹窗10.9-vite",
+  "antdComponents": {
+    "Segmented": [
+      "src/views/chart-board/index.jsx",
+      "src/views/device-table/index.jsx"
+    ],
+    "Modal": [
+      "src/views/detail-modal/index.jsx"
+    ],
+    "Button": [
+      "src/views/detail-modal/index.jsx",
+      "src/views/device-table/index.jsx"
+    ],
+    "Timeline": [
+      "src/views/detail-modal/index.jsx"
+    ],
+    "Table": [
+      "src/views/device-table/index.jsx"
+    ],
+    "Input": [
+      "src/views/device-table/index.jsx",
+      "src/views/top-nav/index.jsx"
+    ],
+    "Menu": [
+      "src/views/side-menu/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/stat-card/index.css",
+    "src/components/stat-card/index.jsx",
+    "src/components/status-tag/index.css",
+    "src/components/status-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/dashboard.js",
+    "src/views/chart-board/index.css",
+    "src/views/chart-board/index.jsx",
+    "src/views/detail-modal/index.css",
+    "src/views/detail-modal/index.jsx",
+    "src/views/device-table/index.css",
+    "src/views/device-table/index.jsx",
+    "src/views/kpi-row/index.css",
+    "src/views/kpi-row/index.jsx",
+    "src/views/side-menu/index.css",
+    "src/views/side-menu/index.jsx",
+    "src/views/top-nav/index.css",
+    "src/views/top-nav/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": [],
+    "antdLocaleFiles": [],
+    "businessLocaleFiles": [],
+    "hasDayjs": false,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "Segmented",
+      "category": "A",
+      "eview": "SelectCard",
+      "keyDiffs": "options→data=[{text,value}]；onChange(value,event)；功能等价于 Radio.Button 映射",
+      "ref": "components/SelectCard.md",
+      "files": ["src/views/chart-board/index.jsx", "src/views/device-table/index.jsx"]
+    },
+    {
+      "antd": "Modal",
+      "category": "C",
+      "eview": "Dialog",
+      "keyDiffs": "open→isOpen；footer→buttons=[{text,status,onClick}]；onClose 不自动关闭需手动 setIsOpen(false)",
+      "ref": "components/Dialog.md",
+      "files": ["src/views/detail-modal/index.jsx"]
+    },
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button",
+      "keyDiffs": "type→status(default/primary/risk/text)；无 loading/htmlType/danger；有图标时用 leftIcon/rightIcon+text 不能用 children",
+      "ref": "components/Button.md",
+      "files": ["src/views/detail-modal/index.jsx", "src/views/device-table/index.jsx"]
+    },
+    {
+      "antd": "Timeline",
+      "category": "B",
+      "eview": "手写",
+      "keyDiffs": "eview-react 有 TimeLine 导出名但无 Reference；需手写时间轴或验证导出组件",
+      "ref": "handwrite-templates.md",
+      "files": ["src/views/detail-modal/index.jsx"]
+    },
+    {
+      "antd": "Table",
+      "category": "A",
+      "eview": "Table",
+      "keyDiffs": "dataSource→dataset；columns[].dataIndex→key；pagination→enablePagination+pagingProps；render 第4参 row.rawData",
+      "ref": "components/Table.md",
+      "files": ["src/views/device-table/index.jsx"]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField",
+      "keyDiffs": "onChange(value,oldValue,event) 首参是值；无 allowClear/prefix/rules",
+      "ref": "components/TextField.md",
+      "files": ["src/views/device-table/index.jsx", "src/views/top-nav/index.jsx"]
+    },
+    {
+      "antd": "Menu",
+      "category": "A",
+      "eview": "Accordion",
+      "keyDiffs": "items→data(key/label→value/title)；selectedKeys→selectedValue 单值；inlineCollapsed→expanded(语义反转 expanded=true=收起)",
+      "ref": "components/Accordion.md",
+      "files": ["src/views/side-menu/index.jsx"]
+    }
+  ],
+  "notes": ""
+}
