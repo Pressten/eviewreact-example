@@ -1,0 +1,147 @@
+/* 表单区：纵向单列（标签左 / 控件 / 字段说明） */
+.access-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-inset);
+}
+
+.access-form__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-inset);
+  max-width: 56rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+}
+
+.form-group__title {
+  margin: 0;
+  padding-bottom: var(--spacing-3);
+  border-bottom: var(--border-width-thin) solid var(--divider);
+  color: var(--on-surface);
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+}
+
+.form-group__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 7rem 22rem minmax(0, 1fr);
+  column-gap: var(--spacing-4);
+  align-items: center;
+}
+
+.form-label {
+  position: relative;
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.form-label.required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-error);
+  font: var(--font-body-m);
+}
+
+.form-field {
+  position: relative;
+  min-width: 0;
+}
+
+.form-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.125rem;
+  font: var(--font-caption-m);
+  color: var(--color-error);
+  white-space: nowrap;
+}
+
+.form-helper {
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.form-unit {
+  margin-left: var(--spacing-inline);
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+  vertical-align: middle;
+}
+
+.cascader-trigger {
+  cursor: pointer;
+}
+
+/* 开关行 + 子项表单 */
+.form-toggle-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+}
+
+.form-switch-row__text {
+  min-width: 0;
+}
+
+.form-switch-row__title {
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.form-switch-row__desc {
+  margin-top: var(--spacing-1);
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.form-switch-row__control {
+  flex-shrink: 0;
+}
+
+.form-subpanel {
+  margin-top: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding: var(--spacing-inset);
+  border-radius: var(--radius-base);
+  background: var(--surface-variant);
+}
+
+.form-subpanel__title {
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+}
+
+/* 底部操作区 */
+.access-form__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-inline);
+  max-width: 56rem;
+  padding-top: var(--spacing-4);
+  border-top: var(--border-width-thin) solid var(--divider);
+}

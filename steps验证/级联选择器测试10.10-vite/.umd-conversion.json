@@ -1,0 +1,169 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "级联选择器测试10.10-vite",
+  "antdComponents": {
+    "Button": [
+      "src/views/access-form/index.jsx",
+      "src/views/device-table/index.jsx"
+    ],
+    "Cascader": [
+      "src/views/access-form/index.jsx"
+    ],
+    "Input": [
+      "src/views/access-form/index.jsx",
+      "src/views/device-table/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/access-form/index.jsx"
+    ],
+    "Select": [
+      "src/views/access-form/index.jsx"
+    ],
+    "Switch": [
+      "src/views/access-form/index.jsx"
+    ],
+    "TreeSelect": [
+      "src/views/access-form/index.jsx"
+    ],
+    "message": [
+      "src/views/access-form/index.jsx",
+      "src/views/device-table/index.jsx"
+    ],
+    "Dropdown": [
+      "src/views/device-table/index.jsx"
+    ],
+    "Table": [
+      "src/views/device-table/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/section-card/index.css",
+    "src/components/section-card/index.jsx",
+    "src/components/status-tag/index.css",
+    "src/components/status-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/devices.js",
+    "src/mock/form-options.js",
+    "src/views/access-form/index.css",
+    "src/views/access-form/index.jsx",
+    "src/views/device-table/index.css",
+    "src/views/device-table/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": ["app.jsx: import zhCN from \"./assets/shared/antd-zh.js\""],
+    "antdLocaleFiles": ["assets/shared/antd-zh.js"],
+    "businessLocaleFiles": [],
+    "hasDayjs": true,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button",
+      "keyDiffs": "type→status（default/primary/risk/text）；icon→leftIcon/rightIcon；无 loading/htmlType/danger；纯图标按钮剥外壳走 IconPlusIc*；有图标时必须用 text= 不能用 children",
+      "ref": "components/Button.md",
+      "files": ["src/views/access-form/index.jsx", "src/views/device-table/index.jsx"]
+    },
+    {
+      "antd": "Cascader",
+      "category": "A",
+      "eview": "PopupMenu",
+      "keyDiffs": "查阅 PopupMenu.md；级联选择用 PopupMenu 替代；源用 Cascader 包子 Input 作自定义触发器（readOnly+suffix），迁移时需适配 PopupMenu 触发方式",
+      "ref": "components/PopupMenu.md",
+      "files": ["src/views/access-form/index.jsx"]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField",
+      "keyDiffs": "onChange(value,oldValue,event) 首参是值非 event；无 allowClear/prefix/rules/onPressEnter；validator 返回 {result,message}；导入 @/shared/TextField 包壳",
+      "ref": "components/TextField.md",
+      "files": ["src/views/access-form/index.jsx", "src/views/device-table/index.jsx"]
+    },
+    {
+      "antd": "InputNumber",
+      "category": "A",
+      "eview": "Spinner",
+      "keyDiffs": "onChange(value) 只在有效值触发；onInputError(value) 接无效值；min/max/step/precision 保留；重置加 doNotFocusWhenValueUpdate",
+      "ref": "components/Spinner.md",
+      "files": ["src/views/access-form/index.jsx"]
+    },
+    {
+      "antd": "Select",
+      "category": "A",
+      "eview": "Select / MultipleSelect / InputSelect",
+      "keyDiffs": "options label→text；placeholder→defaultLabel；onChange 五参；mode=\"multiple\"→MultipleSelect（删 mode，value 数组，onChange(value[],changeValue[],event)）；showSearch→InputSelect；导入 @/shared/Select 包壳",
+      "ref": "components/Select.md",
+      "files": ["src/views/access-form/index.jsx"]
+    },
+    {
+      "antd": "Switch",
+      "category": "A",
+      "eview": "Toggle",
+      "keyDiffs": "checked→toggled；onChange→onToggle(value)；data=[关,开]；taggledChildren（拼错）；isControlToggled 二次确认",
+      "ref": "components/Toggle.md",
+      "files": ["src/views/access-form/index.jsx"]
+    },
+    {
+      "antd": "TreeSelect",
+      "category": "A",
+      "eview": "TreeSelect",
+      "keyDiffs": "onChange(selectNode[]) 节点对象数组非纯值；enableCheckbox；treeData 保留；allowClear→enableClear；showSearch→searchable",
+      "ref": "components/TreeSelect.md",
+      "files": ["src/views/access-form/index.jsx"]
+    },
+    {
+      "antd": "message",
+      "category": "C",
+      "eview": "DivMessage",
+      "keyDiffs": "无命令式 API；message.success/info/error()→渲染 <DivMessage display type=\"success\">；需 state 管理 display+key 换 key 重挂；display 控制（非 visible）",
+      "ref": "components/DivMessage.md",
+      "files": ["src/views/access-form/index.jsx", "src/views/device-table/index.jsx", "src/app.jsx"]
+    },
+    {
+      "antd": "Dropdown",
+      "category": "B",
+      "eview": "手写",
+      "keyDiffs": "无直接对应；可用 TipBox trigger=\"click\" 包菜单项或 PopupMenu 适配；menu.items/onClick→自定义菜单渲染",
+      "ref": "handwrite-templates.md",
+      "files": ["src/views/device-table/index.jsx"]
+    },
+    {
+      "antd": "Table",
+      "category": "A",
+      "eview": "Table",
+      "keyDiffs": "dataSource→dataset；columns dataIndex→key；rowSelection→enableCheckBox+onRowCheck（用行序号非 keyIndex）；pagination→enablePagination+pagingProps+onPageChange；render 取 row.rawData（第4参非第2参，访问写 row.rawData?.xxx）；fixed→freezeCol+freezeColPosition；emptyText→emptyTableMsg",
+      "ref": "components/Table.md",
+      "files": ["src/views/device-table/index.jsx"]
+    }
+  ],
+  "notes": "Step 3: antd ConfigProvider removed from app.jsx; zhCN locale import deleted; assets/shared/antd-zh.js not moved to target; dark mode useEffect updated in context.jsx to toggle both .dark on <html> and aui3_1_dark on <body>; chart.jsx not referenced, not moved; Icon.jsx uses source version with Lucide fallback."
+}

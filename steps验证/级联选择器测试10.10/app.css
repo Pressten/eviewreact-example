@@ -1,0 +1,56 @@
+/* 应用级基础样式 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部栏 — 仅承载页面标题与全局工具 */
+.top-bar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding: 0 var(--spacing-page);
+  background: var(--surface-container-highest);
+  border-bottom: var(--border-width-thin) solid var(--divider);
+}
+
+.top-bar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  color: var(--primary);
+}
+
+.top-bar__title {
+  color: var(--on-surface);
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+}
+
+.top-bar__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  color: var(--on-surface-variant);
+}
+
+.top-bar__hint {
+  font: var(--font-body-s);
+}
+
+.page__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+  padding: var(--spacing-page);
+}
