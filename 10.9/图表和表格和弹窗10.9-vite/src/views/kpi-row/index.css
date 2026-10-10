@@ -1,0 +1,11 @@
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-gutter);
+}
+
+@media (max-width: 1200px) {
+  .kpi-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
