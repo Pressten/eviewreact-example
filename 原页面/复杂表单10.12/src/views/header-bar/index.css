@@ -1,0 +1,137 @@
+.header-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding: 0 var(--spacing-page);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-card);
+}
+
+.header-bar__left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-width: 0;
+}
+
+.header-bar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-bar__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-action);
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.header-bar__brand-name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.header-bar__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 100%;
+}
+
+.header-bar__nav-item {
+  position: relative;
+  height: 3.5rem;
+  padding: 0 0.875rem;
+  border: none;
+  border-bottom: var(--border-width-thick) solid transparent;
+  background: transparent;
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.header-bar__nav-item:hover {
+  color: var(--primary);
+}
+
+.header-bar__nav-item.is-active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.header-bar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-bar__search {
+  width: 16rem;
+}
+
+.header-bar__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: var(--radius-action);
+  background: transparent;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.header-bar__icon-btn:hover {
+  background: var(--color-hover);
+  color: var(--primary);
+}
+
+.header-bar__user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--divider);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+}
+
+.header-bar__avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.header-bar__user-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.header-bar__user-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.header-bar__user-role {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
