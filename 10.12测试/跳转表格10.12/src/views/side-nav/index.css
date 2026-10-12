@@ -1,0 +1,44 @@
+.side-nav {
+  width: 16rem;
+  flex: 0 0 16rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-highest);
+  border-right: var(--border-width-thin) solid var(--divider);
+  transition: width 0.2s ease, flex-basis 0.2s ease;
+  overflow: hidden;
+}
+
+.side-nav.is-collapsed {
+  width: 3rem;
+  flex-basis: 3rem;
+}
+
+.side-nav__menu {
+  flex: 1 1 auto;
+  border-inline-end: none !important;
+  padding-top: var(--spacing-2);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.side-nav__toggle {
+  flex: 0 0 auto;
+  height: 2.5rem;
+  margin: var(--spacing-2);
+  border: none;
+  border-radius: var(--radius-base);
+  background: transparent;
+  color: var(--on-surface-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  font: var(--font-body-s);
+  cursor: pointer;
+}
+
+.side-nav__toggle:hover {
+  background: var(--surface-variant);
+  color: var(--primary);
+}

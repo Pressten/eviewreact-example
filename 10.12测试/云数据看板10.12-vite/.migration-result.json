@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "All 11 antd components migrated (9 A-class + 2 B-class handwrite). i18n scenario A (wired=true), IntlProvider already in main.jsx. npm install SKIP due to @nce internal dependency on external network. All <Icon name=...> call sites preserved untouched (32 occurrences) for phase 3 icon replacement."
+}

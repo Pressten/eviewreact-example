@@ -1,0 +1,228 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "云数据看板10.12-vite",
+  "antdComponents": {
+    "Segmented": [
+      "src/views/chart-board/index.jsx",
+      "src/views/page-header/index.jsx"
+    ],
+    "Drawer": [
+      "src/views/detail-drawer/index.jsx"
+    ],
+    "Button": [
+      "src/views/detail-drawer/index.jsx",
+      "src/views/page-header/index.jsx",
+      "src/views/table-board/index.jsx"
+    ],
+    "Progress": [
+      "src/views/detail-drawer/index.jsx",
+      "src/views/table-board/index.jsx"
+    ],
+    "DatePicker": [
+      "src/views/page-header/index.jsx"
+    ],
+    "Dropdown": [
+      "src/views/page-header/index.jsx",
+      "src/views/table-board/index.jsx",
+      "src/views/top-bar/index.jsx"
+    ],
+    "Menu": [
+      "src/views/side-nav/index.jsx"
+    ],
+    "Tooltip": [
+      "src/views/side-nav/index.jsx",
+      "src/views/table-board/index.jsx",
+      "src/views/top-bar/index.jsx"
+    ],
+    "Table": [
+      "src/views/table-board/index.jsx"
+    ],
+    "Input": [
+      "src/views/table-board/index.jsx",
+      "src/views/top-bar/index.jsx"
+    ],
+    "Badge": [
+      "src/views/top-bar/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/section-card/index.css",
+    "src/components/section-card/index.jsx",
+    "src/components/stat-card/index.css",
+    "src/components/stat-card/index.jsx",
+    "src/components/status-tag/index.css",
+    "src/components/status-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/dashboard.js",
+    "src/views/chart-board/index.css",
+    "src/views/chart-board/index.jsx",
+    "src/views/detail-drawer/index.css",
+    "src/views/detail-drawer/index.jsx",
+    "src/views/kpi-board/index.css",
+    "src/views/kpi-board/index.jsx",
+    "src/views/page-header/index.css",
+    "src/views/page-header/index.jsx",
+    "src/views/side-nav/index.css",
+    "src/views/side-nav/index.jsx",
+    "src/views/table-board/index.css",
+    "src/views/table-board/index.jsx",
+    "src/views/top-bar/index.css",
+    "src/views/top-bar/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": [],
+    "antdLocaleFiles": [],
+    "businessLocaleFiles": [],
+    "hasDayjs": false,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button",
+      "keyDiffs": "type→status（primary/risk/text）；icon→leftIcon/rightIcon（带图标必须用 text 不能 children）；无 loading/htmlType/danger",
+      "ref": "components/Button.md",
+      "files": [
+        "src/views/detail-drawer/index.jsx",
+        "src/views/page-header/index.jsx",
+        "src/views/table-board/index.jsx"
+      ]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField",
+      "keyDiffs": "onChange(value,oldValue,event) 首参是值；无 allowClear/prefix/rules/onPressEnter；导入 @/shared/TextField 包壳",
+      "ref": "components/TextField.md",
+      "files": [
+        "src/views/table-board/index.jsx",
+        "src/views/top-bar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Table",
+      "category": "A",
+      "eview": "Table",
+      "keyDiffs": "dataSource→dataset；columns[].dataIndex→key；rowKey→onRowCheck 行序号；pagination→enablePagination+pagingProps；rowSelection→enableCheckBox+onRowCheck；render 取 row.rawData(第4参)；fixed→freezeCol(仅真横向滚动时加)",
+      "ref": "components/Table.md",
+      "files": [
+        "src/views/table-board/index.jsx"
+      ]
+    },
+    {
+      "antd": "Menu",
+      "category": "A",
+      "eview": "Accordion",
+      "keyDiffs": "items→data(key/label→value/title)；selectedKeys[]→selectedValue 单 string；onClick({key})→onClick(node)；inlineCollapsed→expanded/onExpand(⚠️ expanded={true}=收起，语义反转)",
+      "ref": "components/Accordion.md",
+      "files": [
+        "src/views/side-nav/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tooltip",
+      "category": "A",
+      "eview": "TipBox",
+      "keyDiffs": "包裹式（<TipBox content><目标/></TipBox>）不是 children 模式；title→content；placement→direction；trigger 默认 hover",
+      "ref": "components/TipBox.md",
+      "files": [
+        "src/views/side-nav/index.jsx",
+        "src/views/table-board/index.jsx",
+        "src/views/top-bar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Dropdown",
+      "category": "B",
+      "eview": "手写",
+      "keyDiffs": "无直接对应；用 TipBox(trigger=click) 包裹 + menu.items 手写为 content JSX 替代 menu prop",
+      "ref": "handwrite-templates.md",
+      "files": [
+        "src/views/page-header/index.jsx",
+        "src/views/table-board/index.jsx",
+        "src/views/top-bar/index.jsx"
+      ]
+    },
+    {
+      "antd": "DatePicker",
+      "category": "A",
+      "eview": "DatePicker",
+      "keyDiffs": "onChange 不要无条件回写字符串到 value；RangePicker 用 range + onChange target='from'/'to' 分收起止日期（不要用 onOkClick）",
+      "ref": "components/DatePicker.md",
+      "files": [
+        "src/views/page-header/index.jsx"
+      ]
+    },
+    {
+      "antd": "Segmented",
+      "category": "A",
+      "eview": "SelectCard",
+      "keyDiffs": "无直接同名对应；功能等价 Radio.Button→SelectCard；options→data=[{text,value}]；label→text；disable(不是 disabled)",
+      "ref": "components/SelectCard.md",
+      "files": [
+        "src/views/chart-board/index.jsx",
+        "src/views/page-header/index.jsx"
+      ]
+    },
+    {
+      "antd": "Drawer",
+      "category": "A",
+      "eview": "Drawer",
+      "keyDiffs": "open→visible；onClose(isShowDrawer) 不会自动关闭（需自己 setVisible(false)）；footer 底部按钮自写",
+      "ref": "components/Drawer.md",
+      "files": [
+        "src/views/detail-drawer/index.jsx"
+      ]
+    },
+    {
+      "antd": "Progress",
+      "category": "B",
+      "eview": "手写",
+      "keyDiffs": "无对应组件；手写 CSS width% + token 色阶进度条",
+      "ref": "handwrite-templates.md §9",
+      "files": [
+        "src/views/detail-drawer/index.jsx",
+        "src/views/table-board/index.jsx"
+      ]
+    },
+    {
+      "antd": "Badge",
+      "category": "A",
+      "eview": "Badge",
+      "keyDiffs": "count→content；支持 dot/status 五态+text；max/showZero",
+      "ref": "components/Badge.md",
+      "files": [
+        "src/views/top-bar/index.jsx"
+      ]
+    }
+  ],
+  "notes": "antd ^5.22.0 added to package.json (business code dependency, not eview-react). echarts.min.js + hui-charts.umd.js copied to public/library/ + script tags added to index.html (HUICharts global for Chart component). uploads assets copied to public/assets/uploads/. LUCIDE global not loaded in Vite (Lucide fallback empty, icon-plus online via vite proxy is primary path). app.jsx ConfigProvider + zhCN antd locale removed; eview-react IntlProvider + componentsLocales in main.jsx (scenario A). context.jsx useEffect updated to toggle both .dark on <html> + aui3_1_dark on <body>."
+}

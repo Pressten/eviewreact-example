@@ -1,0 +1,11 @@
+/* 内容卡片(Level 1):白色容器 + 卡片阴影,无结构边框 */
+.content-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+}
+
+.data-tabs {
+  min-height: 32rem;
+}

@@ -1,0 +1,66 @@
+/* 表格区工具条与行内操作 */
+.device-table__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.device-table__search {
+  width: 16rem;
+}
+
+.toolbar-icon {
+  color: var(--on-surface-variant);
+  transition: color 0.2s;
+}
+
+.toolbar-icon:hover {
+  color: var(--interactive-link);
+}
+
+.device-table__selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  margin-bottom: var(--spacing-4);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-base);
+  background: var(--primary-container);
+}
+
+.device-table__selection-text {
+  color: var(--on-primary-container);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.device-table__selection-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.row-action {
+  color: var(--on-surface-variant);
+  transition: color 0.2s;
+}
+
+.row-action:hover {
+  color: var(--interactive-link);
+}
+
+.table-link {
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.table-link:hover {
+  color: var(--interactive-link-hover);
+}

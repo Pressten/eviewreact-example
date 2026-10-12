@@ -1,0 +1,62 @@
+.side-nav {
+  flex-shrink: 0;
+  width: 16rem;
+  min-width: 16rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-r-sm);
+  transition: width 0.2s ease, min-width 0.2s ease;
+  overflow: hidden;
+}
+
+.side-nav.is-collapsed {
+  width: 3rem;
+  min-width: 3rem;
+}
+
+.side-nav__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--spacing-2) var(--spacing-2);
+}
+
+.side-nav__menu {
+  border-inline-end: none !important;
+  background: transparent;
+}
+
+.side-nav__foot {
+  flex-shrink: 0;
+  padding: var(--spacing-2);
+  border-top: var(--border-width-thin) solid var(--divider);
+}
+
+.side-nav__collapse {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  width: 100%;
+  height: 2rem;
+  padding: 0 var(--spacing-3);
+  border: none;
+  border-radius: var(--radius-action);
+  background: transparent;
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.side-nav__collapse:hover {
+  background: var(--surface-variant);
+  color: var(--primary);
+}
+
+.side-nav.is-collapsed .side-nav__collapse {
+  justify-content: center;
+  padding: 0;
+}

@@ -1,0 +1,116 @@
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-5) var(--spacing-6);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.stat-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.stat-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-action);
+  color: var(--on-surface);
+}
+
+.stat-card__icon--info {
+  background: var(--info-container);
+  color: var(--info);
+}
+
+.stat-card__icon--success {
+  background: var(--success-container);
+  color: var(--success);
+}
+
+.stat-card__icon--warning {
+  background: var(--warning-container);
+  color: var(--warning);
+}
+
+.stat-card__icon--error {
+  background: var(--error-container);
+  color: var(--error);
+}
+
+.stat-card__label {
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+}
+
+.stat-card__value {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-1);
+}
+
+.stat-card__num {
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  line-height: 1.1;
+}
+
+.stat-card__unit {
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+}
+
+.stat-card__foot {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-inline);
+}
+
+.stat-card__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-0-5);
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+}
+
+.stat-card__delta--up {
+  color: var(--error);
+}
+
+.stat-card__delta--down {
+  color: var(--success);
+}
+
+.stat-card__cmp {
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+
+.stat-card__spark {
+  margin-left: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 1.75rem;
+}
+
+.stat-card__spark i {
+  display: block;
+  width: 4px;
+  min-height: 2px;
+  border-radius: var(--radius-xs);
+  background: var(--primary);
+  opacity: 0.55;
+}
+
+.stat-card__spark i:last-child {
+  opacity: 1;
+}

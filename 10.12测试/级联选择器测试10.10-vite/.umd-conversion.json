@@ -1,0 +1,192 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "级联选择器测试10.10-vite",
+  "antdComponents": {
+    "Button": [
+      "src/views/access-form/index.jsx",
+      "src/views/device-table/index.jsx"
+    ],
+    "Cascader": [
+      "src/views/access-form/index.jsx"
+    ],
+    "Input": [
+      "src/views/access-form/index.jsx",
+      "src/views/device-table/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/access-form/index.jsx"
+    ],
+    "Select": [
+      "src/views/access-form/index.jsx"
+    ],
+    "Switch": [
+      "src/views/access-form/index.jsx"
+    ],
+    "TreeSelect": [
+      "src/views/access-form/index.jsx"
+    ],
+    "message": [
+      "src/views/access-form/index.jsx",
+      "src/views/device-table/index.jsx"
+    ],
+    "Dropdown": [
+      "src/views/device-table/index.jsx"
+    ],
+    "Table": [
+      "src/views/device-table/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/section-card/index.css",
+    "src/components/section-card/index.jsx",
+    "src/components/status-tag/index.css",
+    "src/components/status-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/devices.js",
+    "src/mock/form-options.js",
+    "src/views/access-form/index.css",
+    "src/views/access-form/index.jsx",
+    "src/views/device-table/index.css",
+    "src/views/device-table/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": [],
+    "antdLocaleFiles": [],
+    "businessLocaleFiles": [],
+    "hasDayjs": true,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button",
+      "keyDiffs": "type→status（default/primary/risk/text）；icon→leftIcon/rightIcon + text=（有图标时必须用 text 不能用 children）；htmlType→无（用 form onSubmit）；无 loading/danger；纯图标按钮剥外壳走 <IconPlusIc* onClick title/>",
+      "ref": "components/Button.md",
+      "files": [
+        "src/views/access-form/index.jsx",
+        "src/views/device-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "Cascader",
+      "category": "A",
+      "eview": "PopUpMenu",
+      "keyDiffs": "options→options/submenus 结构变化（label→text）；children 自定义触发器保留；onChange(val,labels)→onClick(evt) 回调签名变化；expandTrigger→无直接对应；需查阅 PopUpMenu.md 确认级联选值模式",
+      "ref": "components/PopUpMenu.md",
+      "files": [
+        "src/views/access-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField",
+      "keyDiffs": "导入 @/shared/TextField（包壳）；onChange(e)→onChange(value,oldValue,event) 首参是值；allowClear→无；status='error'→validator 返回 {result,message}；prefix/suffix→无（suffix 的 Icon 需另行处理）；required 自带星号",
+      "ref": "components/TextField.md",
+      "files": [
+        "src/views/access-form/index.jsx",
+        "src/views/device-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "InputNumber",
+      "category": "A",
+      "eview": "Spinner",
+      "keyDiffs": "mode='spinner'/variant='outlined'→默认即 spinner；onChange(value) 签名一致；min/max/step 保留；onInputError(value) 接无效值；doNotFocusWhenValueUpdate 用于重置",
+      "ref": "components/Spinner.md",
+      "files": [
+        "src/views/access-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Select",
+      "category": "A",
+      "eview": "Select / MultipleSelect / InputSelect",
+      "keyDiffs": "单选→Select（导入 @/shared/Select）；多选 mode='multiple'→MultipleSelect（删 mode，导入 @/shared/MultipleSelect）；showSearch→InputSelect；options[].label→text；placeholder→defaultLabel（单选）/ placeholder（多选）；onChange(value,oldValue,text,oldText,event) 五参；allowClear→enableClear；maxTagCount→无直接对应",
+      "ref": "components/Select.md",
+      "files": [
+        "src/views/access-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "Switch",
+      "category": "A",
+      "eview": "Toggle",
+      "keyDiffs": "checked→toggled；onChange(checked)→onToggle(value)；data=[关文案,开文案]；taggledChildren（官方拼错）放开关内文案",
+      "ref": "components/Toggle.md",
+      "files": [
+        "src/views/access-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "TreeSelect",
+      "category": "A",
+      "eview": "TreeSelect",
+      "keyDiffs": "treeData 保留；onChange(value)→onChange(selectNode[]) 返回节点对象数组（非单值）；allowClear→无直接对应；showSearch→searchable；treeDefaultExpandAll→默认行为需验证；enableCheckbox 多选",
+      "ref": "components/TreeSelect.md",
+      "files": [
+        "src/views/access-form/index.jsx"
+      ]
+    },
+    {
+      "antd": "message",
+      "category": "C",
+      "eview": "DivMessage",
+      "keyDiffs": "命令式 message.success/error/info()→声明式 <DivMessage display type='success'> ；无命令式 API；需 state 管理 display + key 重挂；默认 10s 消失；外层需 position:fixed+居中复刻顶部浮层效果；所有调用点需重构为 state 驱动",
+      "ref": "components/DivMessage.md",
+      "files": [
+        "src/views/access-form/index.jsx",
+        "src/views/device-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "Dropdown",
+      "category": "A",
+      "eview": "PopUpMenu",
+      "keyDiffs": "menu.items→options（label→text）；menu.onClick({key})→onClick(evt) 回调签名变化；children 触发器保留；一级菜单可直接用 PopUpMenu options；DropDown 组件存在但无独立 ref 文件，参 PopUpMenu.md",
+      "ref": "components/PopUpMenu.md",
+      "files": [
+        "src/views/device-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "Table",
+      "category": "A",
+      "eview": "Table",
+      "keyDiffs": "dataSource→dataset；rowKey→onRowCheck 用行序号（keyIndex 已废弃）；columns[].dataIndex→key；fixed→freezeCol 仅条件迁移（源表 scroll.x 超容器宽时才加）；pagination→enablePagination+pagingProps+onPageChange；rowSelection→enableCheckBox+onRowCheck；render 第 4 参 row.rawData（非第 2 参）；allowSort 默认 true 需显式 false 关闭非排序列",
+      "ref": "components/Table.md",
+      "files": [
+        "src/views/device-table/index.jsx"
+      ]
+    }
+  ],
+  "notes": ""
+}

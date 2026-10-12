@@ -1,0 +1,91 @@
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+}
+
+.stat-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.stat-card__icon {
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-card__icon--brand {
+  color: var(--primary);
+  background: var(--primary-container);
+}
+
+.stat-card__icon--info {
+  color: var(--info);
+  background: var(--info-container);
+}
+
+.stat-card__icon--success {
+  color: var(--success);
+  background: var(--success-container);
+}
+
+.stat-card__icon--error {
+  color: var(--error);
+  background: var(--error-container);
+}
+
+.stat-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.stat-card__label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.stat-card__value {
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  line-height: 1.2;
+}
+
+.stat-card__unit {
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+  margin-left: 4px;
+  font-weight: var(--font-weight-normal);
+}
+
+.stat-card__trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: var(--font-caption-m);
+}
+
+.stat-card__trend.is-up {
+  color: var(--success);
+}
+
+.stat-card__trend.is-down {
+  color: var(--error);
+}
+
+.stat-card__note {
+  color: var(--on-surface-variant);
+  margin-left: 2px;
+}

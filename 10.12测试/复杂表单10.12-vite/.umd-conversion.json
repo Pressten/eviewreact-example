@@ -1,0 +1,208 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "复杂表单10.12-vite",
+  "antdComponents": {
+    "Switch": [
+      "src/components/section-panel/index.jsx",
+      "src/views/fill-form/index.jsx"
+    ],
+    "Button": [
+      "src/views/board-table/index.jsx",
+      "src/views/fill-form/index.jsx"
+    ],
+    "Input": [
+      "src/views/board-table/index.jsx",
+      "src/views/fill-form/index.jsx",
+      "src/views/header-bar/index.jsx"
+    ],
+    "Select": [
+      "src/views/board-table/index.jsx",
+      "src/views/fill-form/index.jsx"
+    ],
+    "Table": [
+      "src/views/board-table/index.jsx"
+    ],
+    "message": [
+      "src/views/board-table/index.jsx",
+      "src/views/fill-form/index.jsx"
+    ],
+    "Checkbox": [
+      "src/views/fill-form/index.jsx"
+    ],
+    "DatePicker": [
+      "src/views/fill-form/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/fill-form/index.jsx"
+    ],
+    "Radio": [
+      "src/views/fill-form/index.jsx"
+    ],
+    "Steps": [
+      "src/views/fill-form/index.jsx"
+    ],
+    "Badge": [
+      "src/views/header-bar/index.jsx"
+    ],
+    "Tooltip": [
+      "src/views/header-bar/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/form-field/index.css",
+    "src/components/form-field/index.jsx",
+    "src/components/section-panel/index.css",
+    "src/components/section-panel/index.jsx",
+    "src/components/status-tag/index.css",
+    "src/components/status-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/operator.js",
+    "src/views/board-table/index.css",
+    "src/views/board-table/index.jsx",
+    "src/views/fill-form/index.css",
+    "src/views/fill-form/index.jsx",
+    "src/views/header-bar/index.css",
+    "src/views/header-bar/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": [],
+    "antdLocaleFiles": [],
+    "businessLocaleFiles": [],
+    "hasDayjs": false,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "Switch",
+      "category": "A",
+      "eview": "Toggle",
+      "keyDiffs": "checked→toggled；onChange→onToggle(value)；data=[关,开]；taggledChildren(拼错)",
+      "ref": "components/Toggle.md",
+      "files": ["src/components/section-panel/index.jsx", "src/views/fill-form/index.jsx"]
+    },
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button",
+      "keyDiffs": "type→status(default/primary/risk/text)；纯图标按钮剥外壳走 IconPlusIc*；有图标时必须用 text 不能用 children",
+      "ref": "components/Button.md",
+      "files": ["src/views/board-table/index.jsx", "src/views/fill-form/index.jsx"]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField",
+      "keyDiffs": "onChange(value,oldValue,event)首参是值；无 allowClear/prefix；Input.TextArea→TextArea(导入@/shared/TextArea)；导入@/shared/TextField",
+      "ref": "components/TextField.md",
+      "files": ["src/views/board-table/index.jsx", "src/views/fill-form/index.jsx", "src/views/header-bar/index.jsx"]
+    },
+    {
+      "antd": "Select",
+      "category": "A",
+      "eview": "Select",
+      "keyDiffs": "options label→text；onChange 五参；enableClear；mode=\"multiple\"→MultipleSelect(导入@/shared/MultipleSelect，删 mode)；导入@/shared/Select",
+      "ref": "components/Select.md",
+      "files": ["src/views/board-table/index.jsx", "src/views/fill-form/index.jsx"]
+    },
+    {
+      "antd": "Table",
+      "category": "A",
+      "eview": "Table",
+      "keyDiffs": "dataSource→dataset；columns[].dataIndex→key；pagination→enablePagination+pagingProps；rowSelection→enableCheckBox+onRowCheck；render取row.rawData；allowSort默认true需显式false",
+      "ref": "components/Table.md",
+      "files": ["src/views/board-table/index.jsx"]
+    },
+    {
+      "antd": "message",
+      "category": "C",
+      "eview": "DivMessage",
+      "keyDiffs": "无命令式API；message.success()/error()/info() 调用改为渲染 <DivMessage display type> 声明式组件",
+      "ref": "components/DivMessage.md",
+      "files": ["src/views/board-table/index.jsx", "src/views/fill-form/index.jsx"]
+    },
+    {
+      "antd": "Checkbox",
+      "category": "A",
+      "eview": "Checkbox",
+      "keyDiffs": "Checkbox.Group→CheckboxGroup，data=[{text,value}]，selectAll；onChange(value,checked,event,additionalData)",
+      "ref": "components/Checkbox.md",
+      "files": ["src/views/fill-form/index.jsx"]
+    },
+    {
+      "antd": "DatePicker",
+      "category": "A",
+      "eview": "DatePicker",
+      "keyDiffs": "不要无条件回写 onChange 字符串到 value；用 defaultValue+ref.getValue() 或有效 Date 才回写",
+      "ref": "components/DatePicker.md",
+      "files": ["src/views/fill-form/index.jsx"]
+    },
+    {
+      "antd": "InputNumber",
+      "category": "A",
+      "eview": "Spinner",
+      "keyDiffs": "onChange(value)只在有效值触发；onInputError(value)接无效值；min/max/step/precision",
+      "ref": "components/Spinner.md",
+      "files": ["src/views/fill-form/index.jsx"]
+    },
+    {
+      "antd": "Radio",
+      "category": "A",
+      "eview": "Radio",
+      "keyDiffs": "Radio.Group→RadioGroup，data=[{text,value}]；需 isControlled 才受控；onChange 参数顺序有冲突用兼容写法",
+      "ref": "components/Radio.md",
+      "files": ["src/views/fill-form/index.jsx"]
+    },
+    {
+      "antd": "Steps",
+      "category": "C",
+      "eview": "Steps",
+      "keyDiffs": "current→currentStep(对应data[].value非下标)；items→data=[{text,value}]；onClick(index)只允许回跳",
+      "ref": "components/Steps.md",
+      "files": ["src/views/fill-form/index.jsx"]
+    },
+    {
+      "antd": "Badge",
+      "category": "A",
+      "eview": "Badge",
+      "keyDiffs": "count→content；dot；status五态+text；max/showZero",
+      "ref": "components/Badge.md",
+      "files": ["src/views/header-bar/index.jsx"]
+    },
+    {
+      "antd": "Tooltip",
+      "category": "A",
+      "eview": "TipBox",
+      "keyDiffs": "包裹式<TipBox content><目标/></TipBox>；direction 12方位；trigger=hover/click/focus",
+      "ref": "components/TipBox.md",
+      "files": ["src/views/header-bar/index.jsx"]
+    }
+  ],
+  "notes": ""
+}

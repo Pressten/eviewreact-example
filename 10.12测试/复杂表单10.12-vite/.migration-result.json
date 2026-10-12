@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "外网环境，@nce 内网依赖 npm install 超时 SKIP，仅静态 i18n-keys 检查生效（0 高危）。13 个 antd 组件全部替换为 @nce/eview-react / @/shared 包壳。19 处 <Icon name=...> 调用点原样保留未动。message.success/error/info 命令式 → DivMessage 声明式（fixed 浮层 + key 重挂），通知仅在点击触发非输入回调，失焦风险低，建议下游运行时验证。Steps current(下标)→currentStep(对应 data[].value)，labelPlacement=horizontal 对齐 antd 默认形态。Table dataSource→dataset、dataIndex→key、render 取 row.rawData、allowSort 默认 true 故无 sorter 列显式 false、rowSelection→enableCheckBox+onRowCheck(行序号)、filters/onFilter 移除（无 eview 对应，筛选由 Select 承担）。Select options label→text（mock/operator.js 12 个 option 数组统一改 text，board-table VENDOR_MAP 同步改 item.text）。"
+}

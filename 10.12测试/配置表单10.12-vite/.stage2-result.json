@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "i18n-keys": "PASS",
+    "components-replaced": "16/16"
+  },
+  "residualAntdImports": [],
+  "notes": "All 16 antd components replaced with @nce/eview-react / @/shared wrappers per migrationPlan. No `from 'antd'` remains in business code. check-i18n-keys.cjs PASS (0 issues — project uses hardcoded Chinese, scenario A wired=true, no t(value,value) calls). npm install NOT run (@nce is intranet-only; per instructions timeout/failure=SKIP, not FAIL) — build/runtime verification deferred to test stage. i18n runtime wiring preserved: IntlProvider + locale='zh' + componentsLocales + dayjs zh-cn all present in main.jsx from stage 1 (not touched). Icons deliberately NOT touched (stage 3): did not run match-icons.cjs, left all 31 `<Icon name>` call sites byte-identical (only moved some between Button `icon`->`leftIcon` prop and Dropdown children->`trigger` prop as required by component API migration; the <Icon name=\"...\" size=\"...\"/> elements themselves unchanged). Two new shared modules added: src/components/notice/index.jsx (useNotice hook — portal-based DivMessage for message->DivMessage, avoids eview input focus-loss) and src/components/dropdown/index.jsx + index.css (handwrite Dropdown for B-category). templates-view uses a local `message` shim object routing to DivMessage so the 2 Icon `onClick={()=>message.info(...)}` call sites stay byte-identical (honoring 'do not touch Icon call sites').",
+  "stage3IconNotes": {
+    "totalIconCallSites": 31,
+    "ternaryIconNames": 1,
+    "details": "31 `<Icon name>` call sites across 6 files (all literal string names except 1 ternary). (1) Ternary icon name: src/views/header-bar/index.jsx:80 `<Icon name={isDark ? 'sun' : 'moon'} .../>` — stage 3 residual (chain ternary, LLM static-resolve). (2) Data-array bound icon names in static menu arrays (match-icons.cjs --apply Phase B targets): EXPORT_MENU (src/views/config-table/index.jsx: file-text, sheet), USER_MENU (src/views/header-bar/index.jsx: user, shield-check, log-out), ROW_MENU (src/views/orders-view/index.jsx: eye, wallet, circle-slash) — each `{ icon: <Icon name=\"lit\"/> }`. NOTICE_MENU (header-bar) has no icons. (3) Button leftIcon icons (6): sparkles(config-form:218), sliders-horizontal+download+send(config-table:175,188,210), plus(orders-view:127, templates-view:94). (4) Bare clickable action icons (already target-form `<Icon name onClick title/>`, no Button wrapper to strip): square-pen/trash-2 in config-table:162-163 & templates-view:77-78; ellipsis in orders-view:101. (5) Suffix icons in TextField (4): search in config-table/orders-view/templates-view/header-bar. (6) Decorative icons: network/bell/chevron-down in header-bar. No icon-prop wrapper components (custom components receiving `icon` prop + internal `<Icon name={icon}/>`); the handwrite Dropdown renders `item.icon` directly via `<span>{item.icon}</span>` (NOT `<Icon name={icon}/>`), so stage 3 name conversion inside menu data renders cleanly with no shim residual. Icon shim src/shared/Icon/Icon.jsx preserved verbatim from source."
+  },
+  "componentsDetail": {
+    "Button": { "status": "replaced", "files": ["config-form", "config-table", "orders-view", "templates-view"], "transform": "type->status, children->text, icon->leftIcon; no pure-icon buttons (all had text); 6 leftIcon Icons preserved for stage 3" },
+    "Input": { "status": "replaced", "files": ["config-form(TextArea)", "config-table(TextField)", "header-bar(TextField)", "orders-view(TextField)", "templates-view(TextField)"], "transform": "Input.TextArea->@/shared/TextArea (onChange first param value); Input->@/shared/TextField (onChange(value), suffix kept, allowClear/size dropped)" },
+    "InputNumber": { "status": "replaced", "files": ["config-form"], "transform": "->Spinner; min/max kept, mode/variant/status dropped" },
+    "Select": { "status": "replaced", "files": ["batch-modal", "edit-modal", "config-form", "orders-view"], "transform": "->@/shared/Select; options label->text, placeholder->defaultLabel, allowClear->enableClear, onChange(value) first-param; showSearch/optionFilterProp/size/status dropped" },
+    "Radio": { "status": "replaced", "files": ["config-form"], "transform": "Radio.Group->RadioGroup (default import @nce/eview-react/RadioGroup); children->data=[{text,value}]; isControlled; onChange compatible 2-arg write (a===form.cycle?b:a)" },
+    "Switch": { "status": "replaced", "files": ["config-form"], "transform": "->Toggle; checked->toggled, onChange->onToggle(value), data=[false,true] booleans" },
+    "DatePicker": { "status": "replaced", "files": ["config-form"], "transform": "RangePicker->DatePicker type=date range=[]; onChange(dateString,date,target) collects from/to into [dayjs,dayjs]; only writes back valid Date (avoids official anti-pattern)" },
+    "Table": { "status": "replaced", "files": ["config-table", "orders-view", "resources-view", "templates-view"], "transform": "dataSource->dataset, dataIndex->key, rowKey->hidden id column(display:false), pagination->enablePagination+enableAutoPaging+pagingProps, rowSelection->enableCheckBox+onRowCheck(indexes->ids via dataset), render 4th param row.rawData, allowSort:false on non-sorter cols, customSortFun preserves antd sorter logic (bandwidth mbps/price/etc), filters/onFilter dropped (no eview row-filter equivalent), scroll/fixed dropped (no freezeCol), maxHeight set" },
+    "Tabs": { "status": "replaced", "files": ["app.jsx"], "transform": "->Tab/TabItem children-driven; activeKey(string)->selectedIndex(int) via TAB_KEYS map; onChange->onClick(index,title,event); draggable=false" },
+    "Tag": { "status": "replaced", "files": ["status-tag"], "transform": "->@/shared/Tag wrapper; call site keeps antd props (color/bordered) verbatim, wrapper maps color->token, bordered->fill" },
+    "Badge": { "status": "replaced", "files": ["header-bar"], "transform": "count->content; size dropped; offset kept" },
+    "Tooltip": { "status": "replaced", "files": ["header-bar"], "transform": "->TipBox type=simple wrapping; title->content; direction=bottom; trigger hover default" },
+    "Modal": { "status": "replaced (C-pattern)", "files": ["batch-modal", "edit-modal", "submit-modal"], "transform": "->Dialog; open->isOpen, onCancel->onClose, onOk+okText+cancelText->buttons=[{text,status,onClick}] array, width->size=[w,'auto']+maxHeight:80vh, destroyOnHidden->destroyOnClose" },
+    "message": { "status": "replaced (C-pattern)", "files": ["batch-modal", "config-form", "config-table", "orders-view", "templates-view"], "transform": "->declarative DivMessage via useNotice hook (createPortal to document.body, avoids eview input focus-loss); message.success->notify('success'), warning->'warn', info->'default'; templates-view uses local `message` shim object so Icon onClick call sites stay byte-identical" },
+    "Dropdown": { "status": "handwritten (B-category)", "files": ["config-table", "header-bar", "orders-view"], "transform": "no eview counterpart; handwrite src/components/dropdown (useState+click-outside+absolute menu); preserves menu.items data with <Icon name> icons verbatim; 4 instances (EXPORT_MENU, NOTICE_MENU, USER_MENU, ROW_MENU)" },
+    "Progress": { "status": "handwritten (B-category)", "files": ["resources-view"], "transform": "no eview export; handwrite SimpleProgress (percent+CSS bar using --error/--success/--primary tokens); exception->error, normal->primary, success->success" }
+  },
+  "filesChanged": [
+    "src/components/notice/index.jsx (NEW — useNotice hook, portal DivMessage)",
+    "src/components/dropdown/index.jsx (NEW — handwrite Dropdown)",
+    "src/components/dropdown/index.css (NEW — handwrite Dropdown CSS)",
+    "src/app.jsx (Tabs->Tab/TabItem)",
+    "src/components/status-tag/index.jsx (Tag->@/shared/Tag)",
+    "src/components/batch-modal/index.jsx (Modal->Dialog, Select->@/shared/Select, message->useNotice)",
+    "src/components/edit-modal/index.jsx (Modal->Dialog, Select->@/shared/Select)",
+    "src/components/submit-modal/index.jsx (Modal->Dialog)",
+    "src/views/config-form/index.jsx (Button/TextField/TextArea/Spinner/Select/RadioGroup/Toggle/DatePicker/DivMessage)",
+    "src/views/config-table/index.jsx (Table/Button/TextField/Dropdown-handwrite/DivMessage)",
+    "src/views/header-bar/index.jsx (TextField/Badge/TipBox/Dropdown-handwrite)",
+    "src/views/orders-view/index.jsx (Table/Button/Select/TextField/Dropdown-handwrite/DivMessage)",
+    "src/views/resources-view/index.jsx (Table/Progress-handwrite)",
+    "src/views/templates-view/index.jsx (Table/Button/TextField/DivMessage-via-message-shim)"
+  ],
+  "unverifiedAtRuntime": [
+    "Tab/TabItem import convention: used separate packages `@nce/eview-react/Tab` + `@nce/eview-react/TabItem` (per RadioGroup precedent that eview uses one-package-per-component). If TabItem is instead a named export of Tab, change to `import Tab, { TabItem } from '@nce/eview-react/Tab'`.",
+    "ConfigProvider absent from main.jsx (only IntlProvider present) — stage 1 handoff said it should be there; not touched in stage 2. If portal components (Dialog/DivMessage/TipBox) report MISSING_TRANSLATION at runtime, stage 1/test should add ConfigProvider as IntlProvider parent in main.jsx.",
+    "No npm install/build/dev run (@nce intranet-only) — build/runtime correctness unverified statically."
+  ]
+}

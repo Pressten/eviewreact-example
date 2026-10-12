@@ -1,0 +1,81 @@
+.step-flow {
+  max-width: 100%;
+}
+
+/* ── 表格内紧凑步骤轨道 ── */
+.step-track {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  max-width: 100%;
+}
+
+.step-track__dots {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.step-track__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  transition: background 0.15s ease;
+}
+
+.step-track__dot--done {
+  background: var(--primary);
+}
+
+.step-track__dot--active {
+  background: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-container);
+}
+
+.step-track__dot--error {
+  background: var(--error);
+  box-shadow: 0 0 0 3px var(--error-container);
+}
+
+.step-track__dot--todo {
+  background: transparent;
+  border: var(--border-width-thin) solid var(--outline);
+}
+
+.step-track__line {
+  width: 16px;
+  height: 2px;
+  background: var(--outline-variant);
+  flex: 0 0 auto;
+}
+
+.step-track__line.is-done {
+  background: var(--primary);
+}
+
+.step-track__label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.step-track__label.is-error {
+  color: var(--error);
+}
+
+.step-track__label.is-done {
+  color: var(--success);
+}
+
+/* ── 详情页完整步骤条 ── */
+.step-flow--detail {
+  padding: var(--spacing-2) 0;
+}
+
+.step-flow--detail .ant-steps-item-title {
+  font: var(--font-body-m);
+}

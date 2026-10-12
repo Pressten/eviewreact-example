@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "check-relative-imports.cjs passed on first attempt. All src/ files moved in, ./src/... imports fixed, icon imports switched to @/shared/Icon default import, antd ConfigProvider removed, dark mode CSS-class switching extended in context.jsx, dayjs zh-cn locale registered in main.jsx."
+}

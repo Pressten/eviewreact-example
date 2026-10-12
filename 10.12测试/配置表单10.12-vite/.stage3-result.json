@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "icon-call-sites-converted": "31/31",
+    "residual-shim-preservations": "0"
+  },
+  "matchIconsApply": {
+    "confirmed": 13,
+    "applied": 19,
+    "fuzzy": 5,
+    "unmatched": 4
+  },
+  "manualResiduals": [
+    { "file": "src/app.jsx", "line": 51, "name": "sliders-horizontal", "resolvedTo": "IconPlusIcIndustryConfiguration", "method": "catalog-semantic" },
+    { "file": "src/app.jsx", "line": 67, "name": "file-text", "resolvedTo": "IconPlusIcDigitalPowerDpFile", "method": "catalog-semantic" },
+    { "file": "src/app.jsx", "line": 78, "name": "server", "resolvedTo": "IconPlusIcIctServers", "method": "catalog-semantic" },
+    { "file": "src/app.jsx", "line": 87, "name": "layout-template", "resolvedTo": "IconPlusIcIctTemplate", "method": "catalog-semantic" },
+    { "file": "src/views/config-table/index.jsx", "line": 40, "name": "file-text", "resolvedTo": "IconPlusIcDigitalPowerDpFile", "method": "data-array-literal" },
+    { "file": "src/views/config-table/index.jsx", "line": 41, "name": "sheet", "resolvedTo": "IconPlusIcIctExcelFile", "method": "data-array-literal" },
+    { "file": "src/views/config-table/index.jsx", "line": 162, "name": "square-pen", "resolvedTo": "IconPlusIcPublicEdit", "method": "catalog-semantic" },
+    { "file": "src/views/config-table/index.jsx", "line": 175, "name": "sliders-horizontal", "resolvedTo": "IconPlusIcIndustryConfiguration", "method": "catalog-semantic" },
+    { "file": "src/views/header-bar/index.jsx", "line": 20, "name": "shield-check", "resolvedTo": "IconPlusIcPublicSecurity", "method": "data-array-literal" },
+    { "file": "src/views/header-bar/index.jsx", "line": 73, "name": "bell", "resolvedTo": "IconPlusIcPublicBellClock", "method": "catalog-semantic" },
+    { "file": "src/views/orders-view/index.jsx", "line": 25, "name": "wallet", "resolvedTo": "IconPlusIcPublicMoneyCircle", "method": "data-array-literal" },
+    { "file": "src/views/templates-view/index.jsx", "line": 77, "name": "square-pen", "resolvedTo": "IconPlusIcPublicEdit", "method": "catalog-semantic" }
+  ],
+  "shimPreservations": [],
+  "jsToJsxConversions": [],
+  "residualIconCallSites": [],
+  "notes": "Stage 3 (icon replacement) complete. 31/31 <Icon name> call sites converted to @nce/icon-plus static imports; 0 true-runtime shim preservations (all names are literals / ternary / static-array-bound; no name={runtimeVar} and no icon-prop wrapper crossing a component boundary). match-icons.cjs --apply auto-rewrote 13 confirmed names across 19 sites (incl. the isDark?sun:moon ternary -> {isDark ? <IconPlusIcPublicSun/> : <IconPlusIcPublicMoon/>}); 9 residual names across 12 sites resolved manually via icon-plus-names.json catalog semantic search. DELTA from stage-2 inventory: src/app.jsx had 4 nav-icon call sites (sliders-horizontal/file-text/server/layout-template) not enumerated in the stage-2 category breakdown -- included and converted here. IMPORTANT FIX: match-icons --apply DROPPED onClick+title on 3 auto-applied clickable icons (config-table trash, templates-view trash, orders-view ellipsis); restored them manually per Icon.md sec3 (clickable icons keep onClick + native title). FLAG FOR RUNTIME L1 VERIFICATION: square-pen -> IconPlusIcPublicEdit is doc-sourced per Icon.md sec3 line 149/158 (the skill's authoritative edit-icon example), NOT present in the local icon-plus-names.json catalog snapshot (catalog has no standalone Edit/Pen/Pencil -- only BulkEdit/EditMesh/TopoEdit compounds). 8 of 9 manually-chosen names are confirmed in the catalog (IndustryConfiguration/DigitalPowerDpFile/IctServers/IctTemplate/IctExcelFile/PublicSecurity/PublicBellClock/PublicMoneyCircle); PublicEdit is the only doc-sourced one. If the installed @nce/icon-plus package does not export IconPlusIcPublicEdit, swap to IconPlusIcIctBulkEdit (catalog-confirmed) as fallback. Icon shim src/shared/Icon/Icon.jsx preserved as scaffold per Icon.md (unused -- no <Icon name> call sites remain; only 2 comment references in dropdown/index.jsx:5 and templates-view/index.jsx:25). No .js->.jsx conversion needed: only src/mock/packages.js is .js and contains no icon data. npm install skipped (@nce intranet-only)."
+}

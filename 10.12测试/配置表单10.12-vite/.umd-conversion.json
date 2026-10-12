@@ -1,0 +1,155 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "配置表单10.12-vite",
+  "antdComponents": {
+    "Modal": [
+      "src/components/batch-modal/index.jsx",
+      "src/components/edit-modal/index.jsx",
+      "src/components/submit-modal/index.jsx"
+    ],
+    "Select": [
+      "src/components/batch-modal/index.jsx",
+      "src/components/edit-modal/index.jsx",
+      "src/views/config-form/index.jsx",
+      "src/views/orders-view/index.jsx"
+    ],
+    "message": [
+      "src/components/batch-modal/index.jsx",
+      "src/views/config-form/index.jsx",
+      "src/views/config-table/index.jsx",
+      "src/views/orders-view/index.jsx",
+      "src/views/templates-view/index.jsx"
+    ],
+    "Tag": [
+      "src/components/status-tag/index.jsx"
+    ],
+    "Input": [
+      "src/views/config-form/index.jsx",
+      "src/views/config-table/index.jsx",
+      "src/views/header-bar/index.jsx",
+      "src/views/orders-view/index.jsx",
+      "src/views/templates-view/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/config-form/index.jsx"
+    ],
+    "Radio": [
+      "src/views/config-form/index.jsx"
+    ],
+    "Switch": [
+      "src/views/config-form/index.jsx"
+    ],
+    "DatePicker": [
+      "src/views/config-form/index.jsx"
+    ],
+    "Button": [
+      "src/views/config-form/index.jsx",
+      "src/views/config-table/index.jsx",
+      "src/views/orders-view/index.jsx",
+      "src/views/templates-view/index.jsx"
+    ],
+    "Table": [
+      "src/views/config-table/index.jsx",
+      "src/views/orders-view/index.jsx",
+      "src/views/resources-view/index.jsx",
+      "src/views/templates-view/index.jsx"
+    ],
+    "Dropdown": [
+      "src/views/config-table/index.jsx",
+      "src/views/header-bar/index.jsx",
+      "src/views/orders-view/index.jsx"
+    ],
+    "Badge": [
+      "src/views/header-bar/index.jsx"
+    ],
+    "Tooltip": [
+      "src/views/header-bar/index.jsx"
+    ],
+    "Progress": [
+      "src/views/resources-view/index.jsx"
+    ],
+    "Tabs": [
+      "src/app.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/components/batch-modal/index.css",
+    "src/components/batch-modal/index.jsx",
+    "src/components/edit-modal/index.css",
+    "src/components/edit-modal/index.jsx",
+    "src/components/form-field/index.css",
+    "src/components/form-field/index.jsx",
+    "src/components/panel/index.css",
+    "src/components/panel/index.jsx",
+    "src/components/status-tag/index.jsx",
+    "src/components/submit-modal/index.css",
+    "src/components/submit-modal/index.jsx",
+    "src/context.jsx",
+    "src/mock/packages.js",
+    "src/views/config-form/index.css",
+    "src/views/config-form/index.jsx",
+    "src/views/config-table/index.css",
+    "src/views/config-table/index.jsx",
+    "src/views/header-bar/index.css",
+    "src/views/header-bar/index.jsx",
+    "src/views/orders-view/index.css",
+    "src/views/orders-view/index.jsx",
+    "src/views/resources-view/index.css",
+    "src/views/resources-view/index.jsx",
+    "src/views/templates-view/index.css",
+    "src/views/templates-view/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": [],
+    "antdLocaleFiles": ["assets/shared/antd-zh.js"],
+    "businessLocaleFiles": [],
+    "hasDayjs": true,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    { "antd": "Button", "category": "A", "eview": "Button", "keyDiffs": "type→status(default/primary/risk/text); 无 loading/htmlType/danger; 文字用 text(带图标时必须 text 不能 children); 纯图标按钮剥外壳走 IconPlusIc*", "ref": "components/Button.md", "files": ["src/views/config-form/index.jsx", "src/views/config-table/index.jsx", "src/views/orders-view/index.jsx", "src/views/templates-view/index.jsx"] },
+    { "antd": "Input", "category": "A", "eview": "TextField", "keyDiffs": "onChange(value,oldValue,event) 首参是值; validator 返回 {result,message}; required 自带星号; 无 allowClear/prefix/rules; 导入 @/shared/TextField 包壳", "ref": "components/TextField.md", "files": ["src/views/config-form/index.jsx", "src/views/config-table/index.jsx", "src/views/header-bar/index.jsx", "src/views/orders-view/index.jsx", "src/views/templates-view/index.jsx"] },
+    { "antd": "InputNumber", "category": "A", "eview": "Spinner", "keyDiffs": "onChange(value) 只在有效值触发; onInputError(value) 接无效值; min/max/step/precision; 重置加 doNotFocusWhenValueUpdate", "ref": "components/Spinner.md", "files": ["src/views/config-form/index.jsx"] },
+    { "antd": "Select", "category": "A", "eview": "Select", "keyDiffs": "options 字段 label→text; placeholder→defaultLabel; onChange(value,oldValue,text,oldText,event) 五参; enableClear; virtualScroll>100; 导入 @/shared/Select 包壳", "ref": "components/Select.md", "files": ["src/components/batch-modal/index.jsx", "src/components/edit-modal/index.jsx", "src/views/config-form/index.jsx", "src/views/orders-view/index.jsx"] },
+    { "antd": "Radio", "category": "A", "eview": "Radio/RadioGroup", "keyDiffs": "Group 用 data=[{text,value}]; 需 isControlled 才受控; onChange 参数顺序有冲突用兼容写法", "ref": "components/Radio.md", "files": ["src/views/config-form/index.jsx"] },
+    { "antd": "Switch", "category": "A", "eview": "Toggle", "keyDiffs": "checked→toggled; onChange→onToggle(value); data=[关,开]; taggledChildren(拼错)", "ref": "components/Toggle.md", "files": ["src/views/config-form/index.jsx"] },
+    { "antd": "DatePicker", "category": "A", "eview": "DatePicker", "keyDiffs": "不要无条件回写 onChange 字符串到 value(官方反例); 用 defaultValue+ref.getValue() 或有效 Date 才回写", "ref": "components/DatePicker.md", "files": ["src/views/config-form/index.jsx"] },
+    { "antd": "Table", "category": "A", "eview": "Table", "keyDiffs": "dataSource→dataset; columns[].dataIndex→key; rowKey→(keyIndex 废弃,onRowCheck 用行序号); pagination→enablePagination+pagingProps+onPageChange; rowSelection→enableCheckBox+onRowCheck; render 取第4参 row.rawData; fixed→freezeCol 仅真横向滚动时加; allowSort 默认 true 源未设 sorter 需显式 false", "ref": "components/Table.md", "files": ["src/views/config-table/index.jsx", "src/views/orders-view/index.jsx", "src/views/resources-view/index.jsx", "src/views/templates-view/index.jsx"] },
+    { "antd": "Tabs", "category": "A", "eview": "Tab/TabItem", "keyDiffs": "children 驱动(<TabItem title>); 切换回调 onClick(index,title,event)(不是 onChange); draggable 默认 true 需关; items 不存在", "ref": "components/Tab.md", "files": ["src/app.jsx"] },
+    { "antd": "Tag", "category": "A", "eview": "Tag", "keyDiffs": "导入 @/shared/Tag 包壳; 调用点保留 antd 写法不改 props—wrapper 映射 color→className token、bordered→fill、icon→iconName、closable/onClose 透传", "ref": "components/Tag.md", "files": ["src/components/status-tag/index.jsx"] },
+    { "antd": "Badge", "category": "A", "eview": "Badge", "keyDiffs": "count→content; dot; status 五态+text; max/showZero", "ref": "components/Badge.md", "files": ["src/views/header-bar/index.jsx"] },
+    { "antd": "Tooltip", "category": "A", "eview": "TipBox", "keyDiffs": "包裹式 <TipBox content><目标/></TipBox>; direction 12 方位; trigger=hover/click/focus", "ref": "components/TipBox.md", "files": ["src/views/header-bar/index.jsx"] },
+    { "antd": "Modal", "category": "C", "eview": "Dialog", "keyDiffs": "open→isOpen; footer→buttons=[{text,status,onClick}] 数组; onClose 不自动关闭需 setIsOpen(false); size/position", "ref": "components/Dialog.md", "files": ["src/components/batch-modal/index.jsx", "src/components/edit-modal/index.jsx", "src/components/submit-modal/index.jsx"] },
+    { "antd": "message", "category": "C", "eview": "DivMessage", "keyDiffs": "命令式 message.success/warning() 无对应 API; 改为声明式 <DivMessage display type=success/warn> 渲染(无命令式调用)", "ref": "components/DivMessage.md", "files": ["src/components/batch-modal/index.jsx", "src/views/config-form/index.jsx", "src/views/config-table/index.jsx", "src/views/orders-view/index.jsx", "src/views/templates-view/index.jsx"] },
+    { "antd": "Dropdown", "category": "B", "eview": "手写", "keyDiffs": "无对应组件; 用 PopUpMenu 或 TipBox(trigger=click)+自定义菜单内容手写(menu.items→自构 data)", "ref": "handwrite-templates.md", "files": ["src/views/config-table/index.jsx", "src/views/header-bar/index.jsx", "src/views/orders-view/index.jsx"] },
+    { "antd": "Progress", "category": "B", "eview": "手写", "keyDiffs": "无导出; 手写进度条(percent+ CSS)", "ref": "handwrite-templates.md §9", "files": ["src/views/resources-view/index.jsx"] }
+  ],
+  "notes": "Scanner only walks src/, so it missed two items outside src/: (1) Tabs imported in root app.jsx (now src/app.jsx) — manually added to antdComponents; (2) self-written antd locale file assets/shared/antd-zh.js (registers dayjs zh-cn locale + exports antd zhCN) — manually added to i18nScenario.antdLocaleFiles. Step 3 deleted the antd-zh.js import (antd ConfigProvider removed) and added dayjs zh-cn locale registration (import 'dayjs/locale/zh-cn' + dayjs.locale('zh-cn')) to main.jsx per i18n-migration.md §5 (downstream verifies runtime need). Source dark mode is pure CSS-class based (.dark on <html> via context.jsx); no antd theme.darkAlgorithm existed. Step 3 extended context.jsx useEffect to also toggle aui3_1_dark on <body>. Runtime asset <img src='./assets/uploads/user.png'> in header-bar resolved by copying assets/uploads/* to public/assets/uploads/. font.css restored to scaffold version (extract-umd overwrote it with source's relative-path @font-face; scaffold's /font/ paths + public/font/ files are correct)."
+}

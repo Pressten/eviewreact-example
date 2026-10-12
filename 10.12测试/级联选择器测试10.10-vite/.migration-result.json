@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "antd 组件全部替换为 @nce/eview-react。i18n scenario A wired=true 跳过接线，运行时验证并入后续 dev 实测。npm install=SKIP（@nce 为内网依赖，外网不可达，预期行为）。图标步骤（§3.0）按指令跳过，12 处 <Icon name=...> 调用点原样保留待阶段3处理。"
+}

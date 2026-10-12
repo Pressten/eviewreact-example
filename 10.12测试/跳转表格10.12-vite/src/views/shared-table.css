@@ -1,0 +1,74 @@
+/* Layer 4 共享样式:数据视图工具区 / 表格链接 / 操作列(任务清单 + 执行记录) */
+.data-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.data-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.data-toolbar__left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-width: 0;
+}
+
+.data-toolbar__hint {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.data-toolbar__selected {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  font: var(--font-body-s);
+  color: var(--on-surface);
+}
+
+.data-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* 表格数据链接 — <a> + 品牌色 */
+.table-link {
+  color: var(--interactive-link);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.table-link:hover {
+  color: var(--interactive-link-hover);
+  text-decoration: underline;
+}
+
+.table-link + .table-link {
+  margin-left: var(--spacing-3);
+}
+
+/* 表格 — 分页栏高度自适应,避免超出卡片 */
+.data-table .ev_table_has_paging {
+  height: auto;
+}
+
+/* 操作列 — 纯图标,间距 1rem */
+.table-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--on-surface-variant);
+}
+
+.table-actions svg:hover,
+.table-actions span:hover {
+  color: var(--primary);
+}
