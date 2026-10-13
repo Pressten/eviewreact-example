@@ -1,0 +1,8 @@
+/* data-display view — ancillary styles */
+
+.fv-badge-box { width: 2.5rem; height: 2.5rem; display: inline-flex; align-items: center; justify-content: center; background: var(--surface-variant); border-radius: var(--radius-base); }
+
+.fv-carousel { width: 100%; max-width: 32rem; border-radius: var(--radius-lg); overflow: hidden; }
+.fv-slide { height: 10rem; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--on-surface); padding: var(--spacing-inset); }
+.fv-slide-title { font: var(--font-headline-l); font-weight: var(--font-weight-semibold); }
+.fv-slide-sub { font: var(--font-body-m); color: var(--on-surface); margin-top: var(--spacing-1); }

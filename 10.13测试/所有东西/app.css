@@ -1,0 +1,31 @@
+/* app.css — page shell (H5 layout: header + sider nav + scrollable content).
+   Layout/Grid/Sider from antd are banned → pure H5 + tokens. */
+
+.app-shell { display: flex; flex-direction: column; height: 100vh; background: var(--surface-container-lowest); color: var(--on-surface); font: var(--font-body-m); }
+
+/* ---- Header ---- */
+.app-header { height: 3rem; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--spacing-page); background: var(--surface-container-highest); box-shadow: var(--shadow-sm); z-index: 10; }
+.app-header-left { display: flex; align-items: center; gap: var(--spacing-inline); }
+.app-header-logo { display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border-radius: var(--radius-md); background: var(--primary); color: var(--on-primary); }
+.app-header-title { font: var(--font-headline-m); color: var(--on-surface); font-weight: var(--font-weight-semibold); }
+.app-header-right { display: flex; align-items: center; gap: var(--spacing-inline); }
+
+/* ---- Body ---- */
+.app-body { flex: 1; display: flex; min-height: 0; }
+
+/* ---- Sider (custom nav) ---- */
+.app-sider { width: 16rem; flex: none; background: var(--surface-container-highest); border-right: 1px solid var(--divider); display: flex; flex-direction: column; }
+.app-sider-nav { flex: 1; overflow-y: auto; padding: var(--spacing-3) var(--spacing-2); display: flex; flex-direction: column; gap: var(--spacing-1); }
+.app-sider-group { font: var(--font-caption-m); color: var(--text-placeholder); padding: var(--spacing-2) var(--spacing-3); text-transform: none; }
+.app-sider-item { display: flex; align-items: center; gap: var(--spacing-inline); padding: var(--spacing-2) var(--spacing-3); border-radius: var(--radius-action); font: var(--font-body-m); color: var(--on-surface); cursor: pointer; border: none; background: transparent; width: 100%; text-align: left; }
+.app-sider-item:hover { background: var(--color-hover); color: var(--primary); }
+.app-sider-item.active { background: var(--primary-container); color: var(--on-primary-container); font-weight: var(--font-weight-medium); }
+.app-sider-item.active .app-sider-bar { background: var(--primary); }
+.app-sider-bar { width: 0.1875rem; height: 1rem; border-radius: var(--radius-full); background: transparent; flex: none; }
+
+/* ---- Content ---- */
+.app-content { flex: 1; overflow-y: auto; padding: var(--spacing-page); min-width: 0; }
+.app-content-inner { max-width: 80rem; margin: 0 auto; display: flex; flex-direction: column; gap: var(--spacing-page); }
+
+/* ---- breadcrumb strip ---- */
+.app-crumb { font: var(--font-body-s); color: var(--on-surface-variant); display: flex; align-items: center; gap: var(--spacing-1); }

@@ -1,0 +1,15 @@
+/* layout-nav view — ancillary styles */
+
+.fv-mini-layout { width: 100%; max-width: 32rem; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-card); }
+.fv-mini-header { height: 2rem; background: var(--primary); color: var(--on-primary); display: flex; align-items: center; padding-left: 0.75rem; font: var(--font-body-s); }
+.fv-mini-mid { display: flex; height: 6rem; }
+.fv-mini-sider { width: 5rem; background: var(--surface-container-highest); border-right: 1px solid var(--divider); display: flex; align-items: center; justify-content: center; font: var(--font-caption-m); color: var(--on-surface-variant); }
+.fv-mini-content { flex: 1; background: var(--surface-container-lowest); display: flex; align-items: center; justify-content: center; font: var(--font-caption-m); color: var(--on-surface-variant); }
+.fv-mini-footer { height: 1.5rem; background: var(--surface-container-high); display: flex; align-items: center; justify-content: center; font: var(--font-caption-m); color: var(--on-surface-variant); }
+
+.fv-menu-box { background: var(--surface-container-highest); border: 1px solid var(--divider); border-radius: var(--radius-md); padding: var(--spacing-2); }
+
+.fv-affix-scroll { height: 10rem; overflow-y: auto; border: 1px solid var(--outline-variant); border-radius: var(--radius-md); padding: var(--spacing-3); position: relative; background: var(--surface-container-highest); }
+.fv-affix-tall { height: 24rem; display: flex; align-items: flex-start; padding-top: 4rem; font: var(--font-body-s); color: var(--on-surface-variant); }
+
+.fv-grid-cell { background: var(--primary-container); border-radius: var(--radius-base); padding: var(--spacing-3); text-align: center; font: var(--font-body-s); color: var(--on-primary-container); }
