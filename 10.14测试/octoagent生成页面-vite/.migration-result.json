@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP",
+    "icon-replacement": "PASS"
+  },
+  "notes": "阶段2（antd组件替换）+ 阶段3（图标替换专项）均已完成。\n\n阶段2 改动：src/views/welcome/index.jsx — antd Button → eview Button（import 路径 + type→status + icon→leftIcon + children→text）。\n\n阶段3 改动：\n  • src/views/welcome/index.jsx — 6处 <Icon name> 调用点全部替换为 @nce/icon-plus 静态导入：\n    - hexagon → IconPlusIcIctDashboard（手动选，UNMATCHED→语义选 Dashboard 品牌标识）\n    - sun/moon（扁平三元）→ IconPlusIcPublicSun/IconPlusIcPublicMoon（confirmed 自动改写）\n    - plus/download → IconPlusIcPublicPlus/IconPlusIcPublicDownload（confirmed 自动改写）\n    - s.icon（数据数组）→ render {s.icon}，数组内 icon 字段已元素化（见 welcome.jsx）\n    - trending-up/trending-down/minus（链式三元）→ IconPlusIcPublicSortUp/SortDown/Minus（minus confirmed，SortUp/SortDown 手动选）\n    - 删除 import Icon from '@/shared/Icon'（不再引用）\n    - 修复数据数组 iconColor：parent div 加 color:s.color 让 currentcolor 继承原始 CSS 变量色\n  • src/mock/welcome.js → welcome.jsx（.js→.jsx 自动转换）— 4个 icon 字段元素化：\n    - server → IconPlusIcIctBuiltServer（手动选）\n    - bell → IconPlusIcPublicBellClock（手动选）\n    - clipboard-list → IconPlusIcPublicClipboard（手动选）\n    - list-checks → IconPlusIcPublicListBullet（SEMANTIC confirmed）\n  • src/shared/Icon/ 保留（方案A 兜底 shim 不删，当前无引用）\n\n验证：check-relative-imports.cjs PASS；check-i18n-keys.cjs PASS（无动态翻译调用）；grep <Icon\\b = 0 匹配；grep TransverseRectangleTemplate = 0 匹配（无占位残留）；npm install SKIP（@nce 内网依赖外网不可达）。"
+}

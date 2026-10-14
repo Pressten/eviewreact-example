@@ -1,0 +1,61 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "preview-vite",
+  "antdComponents": {
+    "Button": [
+      "src/views/welcome/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "tokens": {
+    "rootVarCount": 455,
+    "darkVarCount": 180,
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/theme-dark.css",
+      "src/styles/font.css",
+      "src/styles/base.css"
+    ]
+  },
+  "srcFiles": [
+    "src/context.jsx",
+    "src/mock/welcome.js",
+    "src/views/welcome/index.css",
+    "src/views/welcome/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": [],
+    "antdLocaleFiles": [],
+    "businessLocaleFiles": [],
+    "hasDayjs": false,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button",
+      "keyDiffs": "type→status（primary/risk/text/default）；带 icon 时 children→text + icon→leftIcon（必须用 text 不能用 children 否则图标不渲染）；无 loading/htmlType/danger；处理中用 disabled+文案切换",
+      "ref": "components/Button.md",
+      "files": ["src/views/welcome/index.jsx"],
+      "usageNotes": "两处用法均有 text children + icon prop：①<Button type=\"primary\" icon={<Icon name=\"plus\" size=\"0.875rem\"/>}>新建工单</Button> ②<Button icon={<Icon name=\"download\" size=\"0.875rem\"/>}>导出日报</Button>。替换时 type=\"primary\"→status=\"primary\"；icon→leftIcon；children→text=\"新建工单\"/text=\"导出日报\"。内层 <Icon> 是自定义组件（非 antd 图标），由阶段3 专项替换。"
+    }
+  ],
+  "notes": "antdIcons 恒 []（ict-coder 产物用自定义 <Icon name=...> 运行时 shim，无 @ant-design/icons 导入）。但 <Icon name> 调用点众多，阶段3 专项处理。调用点清单（均在 src/views/welcome/index.jsx）：①<Icon name=\"hexagon\" size=\"1.5rem\" color=...>（静态）②<Icon name={isDark?\"sun\":\"moon\"} size=\"1.25rem\">（三元）③<Icon name=\"plus\" size=\"0.875rem\">（静态，Button内）④<Icon name=\"download\" size=\"0.875rem\">（静态，Button内）⑤<Icon name={s.icon} size=\"1.25rem\" color={s.color}>（运行时数据数组，值来自 src/mock/welcome.js stats[].icon: server/bell/clipboard-list/list-checks）⑥<Icon name={s.trend.startsWith(\"+\")?\"trending-up\":s.trend.startsWith(\"-\")?\"trending-down\":\"minus\"} size=\"0.875rem\">（三元）。其中⑤是跨文件运行时数据数组访问（stats[].icon），⑥是三元表达式。LUCIDE 全局表在 Vite ESM 下未注入，icon-plus 在线链路经 vite.config.js proxy 可达。"
+}

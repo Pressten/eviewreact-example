@@ -1,0 +1,336 @@
+.welcome-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* —— 顶部导航条 —— */
+.welcome-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 var(--spacing-page);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-sm);
+}
+
+.welcome-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.welcome-brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+}
+
+.welcome-brand-name {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.welcome-header-tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+}
+
+.welcome-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.welcome-icon-btn:hover {
+  color: var(--on-surface);
+  border-color: var(--primary);
+}
+
+.welcome-user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.welcome-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.welcome-user-name {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+
+/* —— 主体 —— */
+.welcome-body {
+  flex: 1;
+  padding: var(--spacing-page);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* —— Hero —— */
+.welcome-hero {
+  background: #000000;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+  background-image: none;
+}
+
+.welcome-hero-eyebrow {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  margin-bottom: var(--spacing-stack);
+}
+
+.welcome-hero-title {
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-bold);
+  color: var(--on-surface);
+  margin: 0 0 var(--spacing-stack);
+}
+
+.welcome-hero-subtitle {
+  font: var(--font-body-l);
+  color: var(--on-surface-variant);
+  margin: 0 0 var(--spacing-section);
+}
+
+.welcome-hero-actions {
+  display: flex;
+  gap: var(--spacing-inline);
+}
+
+/* —— 指标卡片 —— */
+.welcome-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-gutter);
+}
+
+.welcome-stat-card {
+  position: relative;
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.welcome-stat-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.welcome-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.welcome-stat-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-stat-value {
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-bold);
+  color: var(--on-surface);
+  line-height: 1.2;
+}
+
+.welcome-stat-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.welcome-stat-trend {
+  position: absolute;
+  top: var(--spacing-gutter);
+  right: var(--spacing-gutter);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font: var(--font-caption-m);
+}
+
+.welcome-stat-trend.is-up {
+  color: var(--success);
+}
+
+.welcome-stat-trend.is-down {
+  color: var(--error);
+}
+
+.welcome-stat-trend.is-flat {
+  color: var(--on-surface-variant);
+}
+
+/* —— 近期动态 —— */
+.welcome-activity {
+  background: #992525;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+}
+
+.welcome-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-section);
+}
+
+.welcome-section-title {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  margin: 0;
+}
+
+.welcome-link {
+  font: var(--font-body-s);
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.welcome-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+.welcome-activity-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-activity-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  padding: var(--spacing-stack) 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.welcome-activity-item:last-child {
+  border-bottom: none;
+}
+
+.welcome-activity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.welcome-activity-dot.info {
+  background: var(--info);
+}
+
+.welcome-activity-dot.success {
+  background: var(--success);
+}
+
+.welcome-activity-dot.error {
+  background: var(--error);
+}
+
+.welcome-activity-dot.critical {
+  background: var(--critical);
+}
+
+.welcome-activity-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+}
+
+.welcome-activity-text {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  margin: 0;
+}
+
+.welcome-activity-time {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.welcome-activity-tag {
+  font: var(--font-caption-m);
+  padding: 2px 8px;
+  border-radius: var(--radius-badge);
+  flex-shrink: 0;
+}
+
+.welcome-activity-tag.info {
+  color: var(--info);
+  background: var(--info-container);
+}
+
+.welcome-activity-tag.success {
+  color: var(--success);
+  background: var(--success-container);
+}
+
+.welcome-activity-tag.error {
+  color: var(--error);
+  background: var(--error-container);
+}
+
+.welcome-activity-tag.critical {
+  color: var(--critical);
+  background: var(--critical-container);
+}
+
+/* —— 响应式 —— */
+@media (max-width: 768px) {
+  .welcome-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .welcome-hero-actions {
+    flex-wrap: wrap;
+  }
+
+  .welcome-user-name {
+    display: none;
+  }
+}
