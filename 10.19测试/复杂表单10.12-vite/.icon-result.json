@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 19,
+  "confirmed": 12,
+  "residual": 12,
+  "shimRetained": [],
+  "confirmedDetail": "match-icons.cjs --apply 自动改写 12 站点(均落最终正确 icon，无需手动选候选): 10 处字面量 confirmed(circle-slash/copy/trash-2/search×2/download/plus/flag/info/chevron-down) + 1 处三元(header-bar:56 isDark?sun:moon 两分支均 confirmed L1，落 {isDark ? <IconPlusIcPublicSun/> : <IconPlusIcPublicMoon/>}) + 1 处 SectionPanel wrapper 内部 name={icon}→{icon}(Phase C 自动透传改写)",
+  "residualDetail": "手动选候选替换 12 站点: (A) 7 处 script-reported residual 字面量 — pencil-line→IconPlusIcIctBulkEdit(board-table:115,编辑动作,Public 无 Edit 图标选 Ict.BulkEdit); antenna→IconPlusIcIct5gWirelessNetwork(fill-form:193,5G 基站语境); map-pin→IconPlusIcPublicMappinOnMap(fill-form:203,script top-1 候选); calendar-clock→IconPlusIcPublicCalendar(fill-form:207,计划开通日期); radio-tower→IconPlusIcIctBaseStation(header-bar:29,品牌 logo 基站塔); bell→IconPlusIcPublicBellClock(header-bar:64,Public 桶唯一 bell 形图标); circle-question-mark→IconPlusIcPublicQuestionmarkCircle(header-bar:71,字面精确匹配). (B) 5 处 SectionPanel icon= prop 占位升级(Phase C 因 catalog 未命中落 IconPlusIcPublicTransverseRectangleTemplate 占位，手动按分区语义升级) — building-2→IconPlusIcPublicBuilding(运营商主体信息); radio→IconPlusIcPublicRadiowave(网络参数); server→IconPlusIcIctServers(设备与板卡); plug-zap→IconPlusIcPublicPower(电源与环境); radar→IconPlusIcIctConfigureCoverageNetwork(覆盖与天线). 另: board-table copy/trash-2 两处 confirmed 站点 script --apply 误剥 title/onClick，按 Icon.md §2 可点击 icon+ 须挂 onClick+原生 title 规则已恢复 title+onClick 并补 style cursor:pointer.",
+  "notes": "pre-scan 19 = 18 字面量 + 1 动态(section-panel:26 name={icon}); 脚本实际处理 24 站点 = 17 真实字面量(10 confirmed + 7 residual) + 1 三元(header-bar:56 isDark?sun:moon，pre-scan 误记为 bell 第二处) + 1 wrapper 内部动态(section-panel:26 → {icon}) + 5 SectionPanel icon= prop 调用方(pre-scan 未计入，非 <Icon> 标签而是自定义组件 prop 赋值). 12+12=24 与 pre-scan 19 的差异源于此. section-panel line 26 的动态 name={icon} 未保留方案A shim —— Phase C 识别 SectionPanel 为 icon-prop wrapper(icon 解构 prop + 函数体含 <Icon name={icon}/>)，5 个调用方均为字面量(icon=building-2/radio/server/plug-zap/radar)，安全闸通过，整组自动转 B/C：内部 <Icon name={icon}/>→{icon}，调用方 icon=lit→icon={<IconPlusIc.../>}. 全部 24 站点均转为 @hui/icon-plus 静态 import，0 处保留 shim；grep 确认 src/ 下 0 处 <Icon 调用 / 0 处 import Icon from / 0 处 IconPlusIcPublicTransverseRectangleTemplate 占位残留. src/shared/Icon 文件可能仍在磁盘但无任何 import 引用(不属本步骤删除范围). esbuild 语法校验 4 文件全部通过.",
+  "filesChanged": [
+    "src/components/section-panel/index.jsx",
+    "src/views/board-table/index.jsx",
+    "src/views/fill-form/index.jsx",
+    "src/views/header-bar/index.jsx"
+  ]
+}
