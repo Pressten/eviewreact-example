@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "搬入 31 个源文件（context.jsx, use-segmented-thumb.js, mock/network.js, 11 个 components, 3 个 views, app.css）保持目录结构；icon.jsx 内容写入 src/shared/Icon/Icon.jsx 并改为 default export；app.jsx 替换 scaffold 空壳（删除 antd ConfigProvider/locale，保留 AppProvider + 布局，路径 ./src/ 改 ./）；context.jsx 的 isDark useEffect 增加 aui3_1_dark body 类切换；7 个文件的 Icon 导入改为 import Icon from @/shared/Icon；region-config 的 IpInput 导入改为 import IpInput from @/shared/IPInput；i18n scenario A 无 antd locale 导入需清理（antdLocaleImports/Files 均为空）；check-relative-imports.cjs 通过。遗留：device-selection/index.jsx 内 ./assets/uploads/*.png 及 *.svg 为字符串字面量 src 属性（非 ES import），未拷贝对应图片资源，运行时图片缺失但不影响 import 解析；Icon.jsx 保留源项目三层结构含 Lucide 全局兜底（LUCIDE 未定义时 ICONS={}，icon-plus 可达时不触发 fallback）。"
+}

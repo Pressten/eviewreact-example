@@ -1,0 +1,7 @@
+/* WizardStepper — eview-react Steps（状态/尺寸/暗色皮肤由 eview 统一提供） */
+.wizard-steps {
+  /* 次级导航是居中 flex 容器，会把 Steps 根宽度塌成内容宽，
+     item 间无富余空间 → 连接线跨距为 0 而消失。
+     给定明确宽度让 item 撑开、连接线显形。 */
+  width: 44rem;
+}

@@ -1,0 +1,152 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 19,
+  "confirmed": 14,
+  "residual": 5,
+  "shimRetained": [
+    {
+      "file": "src/components/info-banner/index.jsx",
+      "line": 11,
+      "reason": "函数参数传入的 icon prop 跨组件边界"
+    }
+  ],
+  "filesChanged": [
+    {
+      "file": "src/components/collapse-section/index.jsx",
+      "changes": [
+        "import Icon from '@/shared/Icon' → import { IconPlusIcPublicChevronDown, IconPlusIcPublicRightArrow } from '@hui/icon-plus'",
+        "<Icon name={isOpen ? 'chevron-down' : 'chevron-right'} .../> → {isOpen ? <IconPlusIcPublicChevronDown .../> : <IconPlusIcPublicRightArrow .../>} (auto-applied ternary rewrite, script-confirmed)"
+      ],
+      "callSites": 1,
+      "mechanism": "confirmed-auto"
+    },
+    {
+      "file": "src/components/dynamic-input-row/index.jsx",
+      "changes": [
+        "import Icon from '@/shared/Icon' → import { IconPlusIcPublicPlus, IconPlusIcPublicMinus } from '@hui/icon-plus'",
+        "plus → IconPlusIcPublicPlus (L1)",
+        "minus → IconPlusIcPublicMinus (L1)"
+      ],
+      "callSites": 2,
+      "mechanism": "confirmed-auto"
+    },
+    {
+      "file": "src/components/info-banner/index.jsx",
+      "changes": [
+        "RETAINED SHIM — no changes to <Icon name={icon ? icon : type === 'warning' ? 'triangle-alert' : 'info'} .../> nor import Icon from '@/shared/Icon'"
+      ],
+      "callSites": 1,
+      "mechanism": "shim-retained"
+    },
+    {
+      "file": "src/components/secondary-nav/index.jsx",
+      "changes": [
+        "import Icon from '@/shared/Icon' → import { IconPlusIcPublicLeftArrow } from '@hui/icon-plus'",
+        "arrow-left → IconPlusIcPublicLeftArrow (L2)"
+      ],
+      "callSites": 1,
+      "mechanism": "confirmed-auto"
+    },
+    {
+      "file": "src/components/top-nav/index.jsx",
+      "changes": [
+        "import Icon from '@/shared/Icon' removed (no longer used)",
+        "import { IconPlusIcDigitalPowerDpMenu, IconPlusIcHuaweiCloudNetwork, IconPlusIcPublicSun, IconPlusIcPublicMoon, IconPlusIcPublicSearch } from '@hui/icon-plus' (script-added) + IconPlusIcPublicBellClock (manually added)",
+        "menu → IconPlusIcDigitalPowerDpMenu (L1, auto)",
+        "network → IconPlusIcHuaweiCloudNetwork (L1, auto)",
+        "isDark ? 'sun' : 'moon' ternary → conditional render with IconPlusIcPublicSun + IconPlusIcPublicMoon (auto-applied ternary rewrite, script-confirmed — pre-scan missed this call site, script caught it)",
+        "search → IconPlusIcPublicSearch (L1, auto)",
+        "bell → IconPlusIcPublicBellClock (L3 residual, manually picked from top-K candidates: only bell-themed name in catalog)"
+      ],
+      "callSites": 6,
+      "mechanism": "mixed (5 confirmed-auto + 1 residual-manual)"
+    },
+    {
+      "file": "src/views/device-selection/index.jsx",
+      "changes": [
+        "import Icon from '@/shared/Icon' removed (no longer used)",
+        "import { IconPlusIcPublicAlert, IconPlusIcPublicDownload, IconPlusIcPublicSearch, IconPlusIcPublicTrash } from '@hui/icon-plus' (script-added) + IconPlusIcIctBulkEdit, IconPlusIcPublicGenericFile (manually added)",
+        "file-text → IconPlusIcPublicGenericFile (L6 residual, manually picked: generic file/document icon)",
+        "pencil → IconPlusIcIctBulkEdit (UNMATCHED residual, manually picked from catalog: closest edit-themed name — no plain Edit/Pencil in any domain; BulkEdit is the most edit-related)",
+        "trash-2 → IconPlusIcPublicTrash (SEMANTIC, auto) — also restored title='删除' prop that the script had dropped for consistency with sibling file-text/pencil titles",
+        "search (3 sites) → IconPlusIcPublicSearch (L1, auto)",
+        "download → IconPlusIcPublicDownload (L1, auto)",
+        "circle-alert → IconPlusIcPublicAlert (SEMANTIC, auto)"
+      ],
+      "callSites": 7,
+      "mechanism": "mixed (5 confirmed-auto + 2 residual-manual)"
+    },
+    {
+      "file": "src/views/network-planning/index.jsx",
+      "changes": [
+        "import Icon from '@/shared/Icon' removed (no longer used)",
+        "import { IconPlusIcPublicInfo } from '@hui/icon-plus' (script-added) + IconPlusIcDigitalPowerDpExcelFile (manually added)",
+        "file-spreadsheet → IconPlusIcDigitalPowerDpExcelFile (L6 residual, manually picked: spreadsheet-specific icon — script suggested DigitalPowerDpFile but ExcelFile is the precise xlsx match)",
+        "info → IconPlusIcPublicInfo (L1, auto)"
+      ],
+      "callSites": 2,
+      "mechanism": "mixed (1 confirmed-auto + 1 residual-manual)"
+    }
+  ],
+  "summary": {
+    "confirmedUniqueIcons": 10,
+    "confirmedCallSitesAutoApplied": 14,
+    "confirmedBreakdown": {
+      "literalCallSites": 12,
+      "ternaryCallSitesAutoApplied": 2,
+      "details": [
+        "plus → IconPlusIcPublicPlus (L1) — 1 site",
+        "minus → IconPlusIcPublicMinus (L1) — 1 site",
+        "arrow-left → IconPlusIcPublicLeftArrow (L2) — 1 site",
+        "menu → IconPlusIcDigitalPowerDpMenu (L1) — 1 site",
+        "network → IconPlusIcHuaweiCloudNetwork (L1) — 1 site",
+        "search → IconPlusIcPublicSearch (L1) — 3 sites",
+        "trash-2 → IconPlusIcPublicTrash (SEMANTIC) — 1 site",
+        "download → IconPlusIcPublicDownload (L1) — 1 site",
+        "circle-alert → IconPlusIcPublicAlert (SEMANTIC) — 1 site",
+        "info → IconPlusIcPublicInfo (L1) — 1 site",
+        "ternary isOpen ? chevron-down : chevron-right → conditional render IconPlusIcPublicChevronDown + IconPlusIcPublicRightArrow — 1 site",
+        "ternary isDark ? sun : moon → conditional render IconPlusIcPublicSun + IconPlusIcPublicMoon — 1 site (pre-scan missed, script caught)"
+      ]
+    },
+    "residualUniqueIcons": 4,
+    "residualCallSitesManual": 5,
+    "residualBreakdown": {
+      "literalReplaced": 4,
+      "chainTernaryShimRetained": 1,
+      "details": [
+        "bell → IconPlusIcPublicBellClock (top-K s3 candidate, manually picked — only bell-themed name in catalog)",
+        "file-text → IconPlusIcPublicGenericFile (manually picked from catalog — generic document icon, better than script's DigitalPowerDpFile suggestion)",
+        "pencil → IconPlusIcIctBulkEdit (UNMATCHED, manually picked — no plain Edit/Pencil in any domain; BulkEdit closest edit-themed)",
+        "file-spreadsheet → IconPlusIcDigitalPowerDpExcelFile (manually picked — spreadsheet-specific, better than script's generic DigitalPowerDpFile suggestion)",
+        "info-banner chain ternary icon ? icon : type === 'warning' ? 'triangle-alert' : 'info' — SHIM RETAINED (function-parameter icon prop cross-component boundary)"
+      ]
+    },
+    "preScanMissedCallSites": [
+      {
+        "file": "src/components/top-nav/index.jsx",
+        "line": 37,
+        "name": "isDark ? 'sun' : 'moon'",
+        "type": "dynamic",
+        "note": "Pre-scan iconCallSites table mislabeled this as 'search' literal; actual file has a dynamic ternary. match-icons.cjs correctly identified it as a ternary and auto-applied the rewrite (sun → IconPlusIcPublicSun, moon → IconPlusIcPublicMoon). No action needed beyond the script's auto-apply."
+      }
+    ]
+  },
+  "leftoverIssues": [
+    "The script's --apply mode dropped the title='删除' prop on the trash-2 rewrite in src/views/device-selection/index.jsx. I restored it manually for consistency with sibling file-text (title='查看') and pencil (title='编辑') icons in the same renderActions column. Per Icon.md §3, title should be preserved as a native HTML attribute on icon+ components — the script's drop appears to be a script quirk, not the intended convention.",
+    "pencil → IconPlusIcIctBulkEdit is a best-effort match: the icon-plus catalog has no plain Edit/Pencil icon in any domain (Public/Ict/DigitalPowerDp/Bpit/HuaweiCloud). Available Edit-themed names are all compound/specialized (BulkEdit, TopoEdit, CollapseAllEdit, ExpandAllEdit, EditMesh, EditOutdoorDrawings). BulkEdit was chosen as the closest semantic match for an 'edit' action. If a more literal pencil icon is desired, consider contributing one to the icon-plus catalog or fall back to the IconPlusIcPublicTransverseRectangleTemplate placeholder.",
+    "bell → IconPlusIcPublicBellClock includes a 'Clock' element (the only bell-themed icon in the catalog). Visually this differs from a plain notification bell. Acceptable for a notification/alerts button (topnav 'title=告警') since the clock conveys 'recent alerts', but if a pure bell is required, no catalog option exists."
+  ],
+  "verification": {
+    "remainingIconShimUsages": 1,
+    "remainingIconShimImports": 1,
+    "remainingIconShimFiles": [
+      "src/components/info-banner/index.jsx (intentionally retained per task §5)"
+    ],
+    "jsToJsxRenameNeeded": false,
+    "jsFilesWithJsxIntroduced": [],
+    "note": "All .js files in src/ are data/utility files (mock/network.js, shared/Cascader/utils.js, use-segmented-thumb.js) — none had <Icon> call sites or got JSX introduced by the rewrite, so no .js→.jsx rename was needed."
+  }
+}

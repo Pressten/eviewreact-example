@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "scenario A i18n (hardcoded zh); main.jsx IntlProvider+componentsLocales from scaffold untouched. Removed antd ConfigProvider (locale=zhCN + Empty/renderEmpty/spin) from app.jsx; kept AppProvider business context. Extended context.jsx useEffect to also toggle aui3_1_dark on <body> alongside .dark on <html>. Migrated source assets/shared/icon.jsx to src/shared/Icon/Icon.jsx (export function Icon -> export default function Icon, Lucide fallback + icon-plus online flow preserved; vite.config.js ICON_API_BASE transform + /assetRepository proxy handle networking). Migrated source assets/shared/ip-input.jsx to src/shared/ip-input.jsx (pure React, used by region-config.jsx; not redirected to scaffold's eview-react IPInput wrapper as that is stage-2 work). Copied assets/uploads/* images to public/assets/uploads/ so runtime string-literal refs (./assets/uploads/bg-one.png, empty.svg etc.) resolve via Vite public dir. All 7 Icon import sites rewritten to `import Icon from '@/shared/Icon'` (default import). All ./src/... imports in app.jsx rewritten to ./... relative. Business antd imports (Button/Modal/Table/etc.) preserved per stage-3 constraint."
+}

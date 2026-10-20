@@ -1,0 +1,64 @@
+.app-segmented {
+  display: inline-flex;
+  padding: 2px;
+  background: var(--surface-container-low, #f0f0f0);
+  border-radius: var(--radius-base, 4px);
+  line-height: 1;
+}
+
+.app-segmented-sm .app-segmented-item {
+  padding: 2px 8px;
+  font: var(--font-body-s);
+  min-height: 24px;
+}
+
+.app-segmented-group {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  --thumb-x: 0px;
+  --thumb-w: 0px;
+}
+
+.app-segmented-item {
+  position: relative;
+  z-index: 1;
+  border: none;
+  background: transparent !important;
+  padding: 4px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: var(--radius-base, 4px);
+  color: var(--on-surface-variant, #777);
+  transition: color 160ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.app-segmented-item-label {
+  position: relative;
+  z-index: 2;
+  transition: color 160ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.app-segmented-item-selected .app-segmented-item-label {
+  color: var(--gray-0, #fff);
+}
+
+.app-segmented-item:not(.app-segmented-item-selected) .app-segmented-item-label {
+  color: var(--on-surface-variant, #777);
+}
+
+.app-segmented-group::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--thumb-w, 0px);
+  transform: translateX(var(--thumb-x, 0px));
+  background: var(--brand-50, var(--primary, #0067D1));
+  border-radius: var(--radius-base, 4px);
+  transition: transform 160ms cubic-bezier(0.2, 0, 0, 1);
+  will-change: transform;
+  z-index: 0;
+  pointer-events: none;
+}

@@ -1,0 +1,111 @@
+.network-planning {
+  display: flex;
+  flex-direction: column;
+}
+
+.np-banner-area {
+  margin-bottom: 1.25rem;
+}
+
+.classic-fields,
+.custom-fields {
+  display: flex;
+  flex-direction: column;
+}
+
+.np-template-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-s);
+}
+
+.np-template-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+.np-import-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ip-planning-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.ip-pool-tabs {
+  margin-bottom: 0.75rem;
+}
+
+.ip-pool-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.ip-pool-desc {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  flex: 1 1 auto;
+}
+
+.ip-pool-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.ip-pool-selected {
+  font: var(--font-body-s);
+  color: var(--primary);
+  margin-right: 0.25rem;
+}
+
+.ip-pool-table {
+  border: 1px solid var(--outline-variant);
+  border-left: none;
+  border-radius: var(--radius-base);
+  overflow: hidden;
+}
+
+.ip-pool-table .ev_table_placeholder .ev_table_cell {
+  padding: 1rem 0;
+}
+
+.ip-pool-table .ev_empty {
+  margin: 0;
+}
+
+.ip-pool-table .ev_empty_description {
+  margin-top: 0.25rem;
+}
+
+.ip-pool-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.ip-pool-empty .ev_empty {
+  margin: 0;
+}
+
+.ip-pool-empty .ev_empty_description {
+  margin-top: 0.25rem;
+}
+
+.np-global-tip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}

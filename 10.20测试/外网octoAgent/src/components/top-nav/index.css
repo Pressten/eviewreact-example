@@ -1,0 +1,117 @@
+.topnav {
+  height: 3rem;
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid var(--outline-variant);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.topnav-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.topnav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.topnav-icon-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.topnav-icon-btn:hover {
+  background: var(--surface-variant);
+}
+
+.topnav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.topnav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.topnav-product {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.topnav-divider {
+  color: var(--outline);
+  margin: 0 0.25rem;
+}
+
+.topnav-module {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.topnav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.topnav-link {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s;
+}
+
+.topnav-link:hover {
+  color: var(--primary);
+}
+
+.topnav-link.active {
+  color: var(--primary);
+  font-weight: var(--font-weight-medium);
+  border-bottom-color: var(--primary);
+}
+
+.topnav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.topnav-user {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.topnav-avatar {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+}

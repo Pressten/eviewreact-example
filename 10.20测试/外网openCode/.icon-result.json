@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 17,
+  "confirmed": 12,
+  "residual": 5,
+  "shimRetained": [
+    "info-banner/index.jsx: icon prop（跨组件边界函数参数）— name={icon ? icon : ...} 链式三元，icon 分支保留 <Icon name={icon}/> shim 运行时 fetch；triangle-alert/info 两字面量分支已转 IconPlusIcPublicAlert/IconPlusIcPublicInfo 静态 import"
+  ],
+  "notes": "改了 7 个文件：collapse-section（三元自动改写）、dynamic-input-row（plus/minus 自动）、secondary-nav（arrow-left 自动）、top-nav（menu/network/search/sun-moon 自动 + bell 手动 IconPlusIcPublicBellClock，移除 Icon import）、device-selection（trash-2/download/circle-alert 自动 + file-text 手动 IconPlusIcDigitalPowerDpFile + pencil 手动 IconPlusIcIctBulkEdit + 恢复 trash title=删除，移除 Icon import）、network-planning（info 自动 + file-spreadsheet 手动 IconPlusIcDigitalPowerDpExcelFile，移除 Icon import）、info-banner（链式三元手动拆写：icon prop shim + triangle-alert→IconPlusIcPublicAlert + info→IconPlusIcPublicInfo）。confirmed 12 = 10 字面量 + 2 扁平三元（collapse-section chevron、top-nav sun/moon）；residual 5 = 4 字面量（bell/file-text/pencil/file-spreadsheet）+ 1 链式三元（info-banner）。实际调用点 17 处（预扫 19 处含 Phase2 已删除的 2 个 device-selection search 站点；top-nav sun/moon 三元预扫漏标为 search）。任务预告 2 处 shim（跨组件 icon prop + 运行时键访问），实际仅 1 处（info-banner icon prop）——OBJ[runtimeKey] 访问模式在当前代码中不存在（可能 Phase2 已移除或原始代码无此模式）。遗留：pencil 无精确匹配（catalog 无 pencil/edit 简单图标，选 IconPlusIcIctBulkEdit 语义最接近）；bell 无 plain Bell（仅 BellClock 变体）。.js→.jsx 无需转换（mock/network.js 无 JSX）。"
+}
