@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS(skip)",
+    "i18n-keys": "PASS",
+    "npm-install": "SKIP"
+  }
+}

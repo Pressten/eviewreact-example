@@ -1,0 +1,28 @@
+/* WizardStepper — antd Steps 标准步骤条（状态/尺寸/暗色皮肤由 ant.css 统一提供） */
+.wizard-steps {
+  /* 次级导航是居中 flex 容器，会把 Steps 根宽度塌成内容宽，
+     item 间无富余空间 → 连接线(title::after)跨距为 0 而消失。
+     给定明确宽度让 item 撑开、连接线显形。 */
+  width: 44rem;
+}
+
+/* 圆形与内部数字/勾选：用 flexbox 真正几何居中，
+   替代 antd 默认的 line-height+text-align+top:-0.5px 微调方案
+   （后者按基线落位，数字会随字体度量偏上/偏下，非真正居中）。 */
+.wizard-steps .ant-steps-item-icon {
+  display: inline-flex;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+}
+.wizard-steps .ant-steps-item-icon > .ant-steps-icon {
+  position: static !important;
+  top: 0 !important;
+  line-height: 1 !important;
+}
+
+/* Finish circle: light-blue background
+   (component-level override — the shared ant.css skin stays untouched) */
+.wizard-steps .ant-steps-item.ant-steps-item-finish .ant-steps-item-icon {
+  background-color: var(--primary-container);
+}

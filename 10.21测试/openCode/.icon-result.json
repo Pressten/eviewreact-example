@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 19,
+  "confirmed": 14,
+  "residual": 5,
+  "shimRetained": [
+    "info-banner/index.jsx:12 — icon prop 跨组件边界：InfoBanner 接收父组件传入的 icon prop（调用方 icon=\"circle-alert\" 为字面量，但 InfoBanner 内部无法静态解析），ternary 的 icon ? <Icon name={icon} size=\"1rem\"/> 分支保留方案A shim；另外两个字面量分支 triangle-alert→IconPlusIcPublicWarning、info→IconPlusIcPublicInfo 已转为静态 import"
+  ],
+  "files": [
+    "src/components/collapse-section/index.jsx",
+    "src/components/dynamic-input-row/index.jsx",
+    "src/components/info-banner/index.jsx",
+    "src/components/secondary-nav/index.jsx",
+    "src/components/top-nav/index.jsx",
+    "src/views/device-selection/index.jsx",
+    "src/views/network-planning/index.jsx"
+  ]
+}

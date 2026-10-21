@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "All 31 src files + app.css migrated into src/; app.jsx ConfigProvider (locale/wave/renderEmpty/empty/spin) removed, ./src/* paths rewritten to relative, Button import kept; context.jsx aui3_1_dark body class wired alongside .dark on <html>; icon.jsx copied to src/shared/Icon/Icon.jsx with export changed to default; 7 Icon imports + region-config IpInput import rewritten to @/shared alias; device-selection 5 uploads paths rewritten ./assets/uploads/ -> /uploads/; antd-zh.js and chart.jsx not copied (locale unused in scenario A / chart unimported). check-relative-imports.cjs PASS on round 1."
+}

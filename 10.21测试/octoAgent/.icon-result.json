@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 18,
+  "confirmed": 13,
+  "residual": 4,
+  "shimRetained": [
+    "info-banner: <Icon name={icon ? icon : type === \"warning\" ? \"triangle-alert\" : \"info\"} /> 保留方案A shim —— icon 是 prop 变量，跨组件边界（InfoBanner 接收父组件传入的 icon prop，如 device-selection <InfoBanner type=\"info\" icon=\"circle-alert\">），子组件无法静态确定 icon 值 → 按 Icon.md 硬规则保留 src/shared/Icon shim"
+  ],
+  "notes": [
+    "预扫 .umd-conversion.json 的 iconCallSites 报 19 处，但实际当前源码 18 处：预扫中的 download（device-selection 原 line 582）在前序阶段（antd 组件替换）已被移除，当前文件无该调用点，非遗漏",
+    "match-icons.cjs 还发现预扫未标注的 top-nav sun/moon 动态三元（预扫将其标为 search），脚本正确识别并展开为静态 JSX 三元 {isDark ? <IconPlusIcPublicSun/> : <IconPlusIcPublicMoon/>}",
+    "脚本 confirmed 改写 trash-2 时丢弃了原 title=\"删除\" 属性，已手动补回以与同行操作图标（file-text title=\"查看\"、pencil title=\"编辑\"）保持一致",
+    "无 .js→.jsx 转换需求：所有 icon+ 改写均在 .jsx 文件中，src/ 下无 .js 文件含 IconPlusIc"
+  ],
+  "filesModified": [
+    "src/components/collapse-section/index.jsx (script: 三元 chevron-down/chevron-right 展开为静态 JSX 三元)",
+    "src/components/dynamic-input-row/index.jsx (script: plus→IconPlusIcPublicPlus, minus→IconPlusIcPublicMinus)",
+    "src/components/secondary-nav/index.jsx (script: arrow-left→IconPlusIcPublicLeftArrow)",
+    "src/components/top-nav/index.jsx (script: menu→IconPlusIcDigitalPowerDpMenu, network→IconPlusIcHuaweiCloudNetwork, sun/moon 三元展开, search→IconPlusIcPublicSearch; manual: bell→IconPlusIcPublicBellClock, 移除 Icon import)",
+    "src/views/device-selection/index.jsx (script: trash-2→IconPlusIcPublicTrash, search×3→IconPlusIcPublicSearch, circle-alert→IconPlusIcPublicAlert; manual: file-text→IconPlusIcPublicTxtFileTextured, pencil→IconPlusIcIctBulkEdit, 移除 Icon import, 补回 trash-2 title)",
+    "src/views/network-planning/index.jsx (script: info→IconPlusIcPublicInfo; manual: file-spreadsheet→IconPlusIcDigitalPowerDpExcelFile, 移除 Icon import)",
+    "src/components/info-banner/index.jsx (未改动: 保留方案A shim)"
+  ],
+  "residualMapping": {
+    "bell": "IconPlusIcPublicBellClock (Public 域, catalog 仅有 BellClock/BellClockTextured，取最简 BellClock 作通知铃铛)",
+    "file-text": "IconPlusIcPublicTxtFileTextured (Public 域, TxtFileTextured = 文本文件，语义最佳匹配 file-text)",
+    "pencil": "IconPlusIcIctBulkEdit (Ict 域, catalog 无纯 pencil/edit 图标，取含 Edit 的最近匹配作编辑动作图标)",
+    "file-spreadsheet": "IconPlusIcDigitalPowerDpExcelFile (DigitalPowerDp 域, ExcelFile = 表格文件，语义最佳匹配 file-spreadsheet)"
+  }
+}

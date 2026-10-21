@@ -1,0 +1,176 @@
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1 1 0;
+  padding: 1rem 2rem 5rem;
+}
+
+.app-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem;
+}
+
+/* ===== Shared form layout (H5 skeleton, no Form/Form.Item) ===== */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-row:last-child {
+  margin-bottom: 0;
+}
+
+/* 表项紧邻下方子区块(参数组)时紧凑成组 8px；其余表项之间保持较宽间距 */
+.form-row:has(+ .form-subsection) {
+  margin-bottom: 0.5rem;
+}
+
+.form-label {
+  min-width: 7.5rem;
+  max-width: 7.5rem;
+  text-align: left;
+  flex-shrink: 0;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  position: relative;
+  padding-right: 0.75rem;
+}
+
+.form-label.required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--error);
+  font: var(--font-body-m);
+}
+
+/* 区域配置 form-row 标签统一 9rem + gap 1rem，
+   使 form-row 内容(67+7+126+14=214)与底板内容(67+7+126+14=214)左对齐 */
+.region-config .form-row > .form-label:not(.narrow):not(.wide) {
+  min-width: 9rem;
+  max-width: 9rem;
+  padding-right: 0;
+}
+/* 区域配置 form-row 必填星号改为内联，避免 absolute left:-0.5rem 抵消 padding-left 缩进 */
+.region-config .form-row > .form-label.required::before {
+  position: static;
+  margin-right: 0.25rem;
+  left: auto;
+  top: auto;
+  transform: none;
+}
+.region-config .form-row {
+  gap: 2rem;
+}
+
+.form-label.narrow,
+.form-label.wide {
+  min-width: 9rem;
+  max-width: 9rem;
+  text-align: left;
+  padding-right: 0;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.form-subsection {
+  background: rgb(from var(--gray-40) r g b / 0.05);
+  border-radius: var(--radius-base);
+  padding: 1rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-subsection:last-child {
+  margin-bottom: 0;
+}
+
+.form-subsection-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.form-subsection-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cell-link {
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-s);
+}
+
+.cell-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+/* ===== Segmented 滑动胶囊微动效 ===== */
+/* 去掉 item 自身背景，改由 group::after 伪元素做滑动 thumb */
+.ant-segmented-group {
+  position: relative;
+  --thumb-x: 0px;
+  --thumb-w: 0px;
+}
+.ant-segmented-item {
+  background: transparent !important;
+  position: relative;
+  z-index: 1;
+}
+/* 文字颜色过渡：与底色同步 160ms，选中白、未选中深灰 */
+.ant-segmented-item-label {
+  transition: color 160ms cubic-bezier(0.2, 0, 0, 1);
+  position: relative;
+  z-index: 2;
+}
+.ant-segmented-item-selected .ant-segmented-item-label {
+  color: var(--gray-0, #fff);
+}
+.ant-segmented-item:not(.ant-segmented-item-selected) .ant-segmented-item-label {
+  color: var(--gray-50, #777);
+}
+/* 滑动底色 thumb — JS 设置 --thumb-x / --thumb-w，transform 仅合成层不触发布局 */
+.ant-segmented-group::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--thumb-w, 0px);
+  transform: translateX(var(--thumb-x, 0px));
+  background: var(--brand-50, #0067D1);
+  border-radius: var(--radius-base, 4px);
+  transition: transform 160ms cubic-bezier(0.2, 0, 0, 1);
+  will-change: transform;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Fixed-width text buttons (88px) */
+.app-root .ant-btn:not(.ant-btn-icon-only),
+.ant-modal-footer .ant-btn {
+  width: 88px;
+}
+
+.custom-spin-indicator {
+  animation: custom-spin 1s linear infinite;
+}
+
+@keyframes custom-spin {
+  to { transform: rotate(360deg); }
+}

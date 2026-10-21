@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "源项目 31 个 srcFiles + 手写 icon.jsx/ip-input.jsx + app.jsx/app.css 已搬入 download-eview-react/src/。所有 `import { Icon } from \"../../../assets/shared/icon.jsx\"` 改为默认导入 `import Icon from \"@/shared/Icon\"`（Icon.jsx 已转 default export，scaffold 桶 index.jsx 透传）；device-selection 的 `./assets/uploads/*` 改为 `/uploads/*`（public/uploads 已就位）；region-config 的手写 IpInput 路径改为 `../../shared/IpInputHandwritten.jsx`（阶段2 替换为 @/shared/IPInput）；app.jsx 删除 antd ConfigProvider/locale/Empty（eview-react ConfigProvider+IntlProvider 已在 main.jsx 配好），`./src/...` 相对路径修正为 `./...`，app.css 搬到 src/app.css；context.jsx 的暗色 useEffect 增强为同时 toggle body.aui3_1_dark + html.dark（isDark 状态与 TopNav 切换 UI 保留在 context 中）。i18n scenario A 无需接线。check-relative-imports.cjs 通过。chart.jsx/antd-zh.js 未被 srcFiles 引用，未搬入。"
+}

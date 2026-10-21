@@ -1,0 +1,248 @@
+.device-selection {
+  flex: 1 1 0;
+  display: flex;
+  min-height: 0;
+}
+
+/* Left canvas area: full-bleed background image */
+.ds-canvas {
+  flex: 1 1 0;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ds-canvas-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Fixed sidebar: 640px wide, pinned to the right edge */
+.ds-sidebar {
+  flex: 0 0 640px;
+  width: 640px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 1rem 1.25rem;
+  background: var(--surface-container-highest);
+  border-left: 1px solid var(--outline-variant);
+}
+
+.ds-sidebar-title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  margin-bottom: 0.5rem;
+}
+
+.ds-tabs {
+  margin-bottom: 0.75rem;
+}
+
+.ds-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Search input with suffix icon: fixed total width 256px */
+.ds-toolbar .ant-input-affix-wrapper {
+  flex: 0 0 256px;
+  width: 256px;
+}
+
+.ds-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Long-text toolbar buttons (NETCONF通道信息 etc.) grow past the 88px default */
+.app-root .ds-toolbar-actions .ant-btn:not(.ant-btn-icon-only) {
+  width: auto;
+  min-width: 88px;
+}
+
+/* Status tags */
+.ds-tag-progress {
+  background: rgba(208, 216, 253, 0.3);
+  color: rgb(31, 85, 181);
+  border: none;
+}
+
+.ds-tag-ok {
+  background: var(--success-container);
+  color: var(--success);
+  border: none;
+}
+
+.ds-tag-fail {
+  background: var(--error-container);
+  color: var(--error);
+  border: none;
+}
+
+.ds-table {
+  flex: 0 0 auto;
+  min-height: 0;
+  overflow: hidden;
+  /* top rule only: no left/right/bottom borders */
+  border-top: 1px solid var(--outline-variant);
+}
+
+/* Tab content area: no bottom border under the last row */
+.ds-table .ant-table-tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
+/* Spacing fully controlled by the custom empty block */
+.ds-table .ant-table-placeholder .ant-table-cell {
+  padding: 0;
+}
+
+/* Custom empty state: img 80px below table head, text 26px below img,
+   text 92px above the table bottom border */
+.ds-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 0 92px;
+}
+
+.ds-empty-img {
+  width: 64px;
+  height: 64px;
+}
+
+.ds-empty-text {
+  margin-top: 26px;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.ds-empty-link {
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.ds-empty-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+/* Sidebar footer: bottom-right action bar */
+.ds-sidebar-footer {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Row action icons: fixed edit + delete pair, 1rem apart */
+.ds-action-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ds-action-icon {
+  color: var(--on-surface-variant);
+  cursor: pointer;
+}
+
+.ds-action-icon:hover {
+  color: var(--primary);
+}
+
+/* Pagination total: "已选" 24px after the total number, count in brand blue */
+.ds-modal-selected-label {
+  margin-left: 24px;
+}
+
+.ds-modal-selected-count {
+  color: var(--primary);
+}
+
+/* Start-onboarding confirmation modal */
+.ds-confirm-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ds-confirm-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* 16px title, 16px gap to the banner, content indented 28px from the left */
+.ds-confirm-modal .ant-modal-header {
+  margin-bottom: 1rem;
+}
+
+.ds-confirm-modal .ant-modal-header .ant-modal-title {
+  font-size: var(--font-size-lg);
+}
+
+.ds-confirm-modal .ds-confirm-body > * {
+  margin-left: 28px;
+}
+
+/* Confirm-onboarding modal */
+.ds-online-modal .ant-modal-header {
+  margin-bottom: 1rem;
+}
+
+.ds-online-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ds-online-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font: var(--font-body-s);
+  color: var(--on-surface);
+}
+
+.ds-online-tips p {
+  margin: 0;
+}
+
+.ds-online-tips strong {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Device-selection-list modal: export action lives inside the tab bar
+   (tabBarExtraContent), so the tab underline passes beneath it and stays
+   on the same baseline as the tab labels */
+.ds-modal-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-s);
+  flex-shrink: 0;
+}
+
+.ds-modal-export:hover {
+  color: var(--interactive-link-hover);
+}
+
+.ds-modal-search {
+  width: 256px;
+  margin-bottom: 0.75rem;
+}
