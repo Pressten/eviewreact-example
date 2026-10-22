@@ -1,0 +1,130 @@
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1 1 0;
+  padding: 1rem 2rem 5rem;
+}
+
+.app-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem;
+}
+
+/* ===== Shared form layout (H5 skeleton, no Form/Form.Item) ===== */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-row:last-child {
+  margin-bottom: 0;
+}
+
+/* 表项紧邻下方子区块(参数组)时紧凑成组 8px；其余表项之间保持较宽间距 */
+.form-row:has(+ .form-subsection) {
+  margin-bottom: 0.5rem;
+}
+
+.form-label {
+  min-width: 7.5rem;
+  max-width: 7.5rem;
+  text-align: left;
+  flex-shrink: 0;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  position: relative;
+  padding-right: 0.75rem;
+}
+
+.form-label.required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--error);
+  font: var(--font-body-m);
+}
+
+/* 区域配置 form-row 标签统一 9rem + gap 1rem，
+   使 form-row 内容(67+7+126+14=214)与底板内容(67+7+126+14=214)左对齐 */
+.region-config .form-row > .form-label:not(.narrow):not(.wide) {
+  min-width: 9rem;
+  max-width: 9rem;
+  padding-right: 0;
+}
+/* 区域配置 form-row 必填星号改为内联，避免 absolute left:-0.5rem 抵消 padding-left 缩进 */
+.region-config .form-row > .form-label.required::before {
+  position: static;
+  margin-right: 0.25rem;
+  left: auto;
+  top: auto;
+  transform: none;
+}
+.region-config .form-row {
+  gap: 2rem;
+}
+
+.form-label.narrow,
+.form-label.wide {
+  min-width: 9rem;
+  max-width: 9rem;
+  text-align: left;
+  padding-right: 0;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.form-subsection {
+  background: rgb(from var(--gray-40) r g b / 0.05);
+  border-radius: var(--radius-base);
+  padding: 1rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-subsection:last-child {
+  margin-bottom: 0;
+}
+
+.form-subsection-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.form-subsection-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cell-link {
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-s);
+}
+
+.cell-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+.custom-spin-indicator {
+  animation: custom-spin 1s linear infinite;
+}
+
+@keyframes custom-spin {
+  to { transform: rotate(360deg); }
+}
+

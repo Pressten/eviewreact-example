@@ -1,0 +1,70 @@
+.modal-body-inner {
+  padding: 0;
+}
+
+.modal-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  user-select: none;
+  padding: 0.5rem 0;
+}
+
+.modal-section-arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+  font-size: 0.75rem;
+  color: var(--on-surface);
+}
+
+.modal-section-arrow.collapsed {
+  transform: rotate(-90deg);
+}
+
+.modal-section-title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.modal-section-body {
+  padding: 0.25rem 0 0.75rem 1.5rem;
+}
+
+.modal-form-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.modal-form-row:last-child {
+  margin-bottom: 0;
+}
+
+.modal-form-label {
+  min-width: 7.5rem;
+  max-width: 7.5rem;
+  text-align: left;
+  flex-shrink: 0;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  position: relative;
+  padding-right: 0.75rem;
+}
+
+.modal-form-label.required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--error);
+  font: var(--font-body-m);
+}
+
+.modal-form-input {
+  flex: 1;
+  max-width: 20rem;
+}

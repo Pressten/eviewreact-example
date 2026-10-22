@@ -1,0 +1,21 @@
+.region-config {
+  display: flex;
+  flex-direction: column;
+}
+
+.rc-banner-area {
+  margin-bottom: 1.25rem;
+}
+
+/* IP地址（源-目的）：两个内置 IpInput + 分隔符 */
+.ip-range-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ip-range-dash {
+  color: var(--text-placeholder);
+  font: var(--font-body-m);
+  user-select: none;
+}

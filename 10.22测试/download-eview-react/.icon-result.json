@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 19,
+  "confirmed": 14,
+  "residual": 5,
+  "residualDetails": [
+    {
+      "file": "src/components/top-nav/index.jsx",
+      "line": 44,
+      "original": "bell",
+      "replacement": "IconPlusIcPublicBellClock",
+      "reason": "L3 residual; bell notification icon, Public.BellClock is closest semantic match from top-K candidates"
+    },
+    {
+      "file": "src/views/device-selection/index.jsx",
+      "line": 80,
+      "original": "file-text",
+      "replacement": "IconPlusIcPublicGenericFile",
+      "reason": "L6 residual; file-text is a generic document icon used as 查看 action, Public.GenericFile is the most neutral file icon (candidates were all file-type-specific Textured variants)"
+    },
+    {
+      "file": "src/views/device-selection/index.jsx",
+      "line": 87,
+      "original": "pencil",
+      "replacement": "IconPlusIcPublicEdit",
+      "reason": "UNMATCHED with no candidates; Icon.md documentation explicitly references IconPlusIcPublicEdit as the edit icon (§2 examples). Catalog lacks Public.Edit but docs are authoritative."
+    },
+    {
+      "file": "src/views/network-planning/index.jsx",
+      "line": 142,
+      "original": "file-spreadsheet",
+      "replacement": "IconPlusIcDigitalPowerDpExcelFile",
+      "reason": "L6 residual; file-spreadsheet used next to 模板.xlsx (Excel template), DigitalPowerDp.ExcelFile is the semantically correct spreadsheet icon (candidates were generic file icons, none spreadsheet-specific)"
+    },
+    {
+      "file": "src/components/info-banner/index.jsx",
+      "line": 12,
+      "original": "icon ? icon : type === \"warning\" ? \"triangle-alert\" : \"info\"",
+      "replacement": "hybrid: {icon ? <Icon name={icon} size=\"1rem\" /> : type === \"warning\" ? <IconPlusIcPublicAlert iconSize=\"1rem\" iconColor={['currentcolor']} /> : <IconPlusIcPublicInfo iconSize=\"1rem\" iconColor={['currentcolor']} />}",
+      "reason": "Chained ternary residual; icon prop branch retained as shim (runtime data), literal branches triangle-alert→IconPlusIcPublicAlert and info→IconPlusIcPublicInfo converted to static imports. Caller keeps icon=\"circle-alert\" (shim handles at runtime)."
+    }
+  ],
+  "shimRetained": [
+    {
+      "file": "src/components/info-banner/index.jsx",
+      "line": 12,
+      "pattern": "函数参数传入的 icon prop（跨组件边界）",
+      "detail": "InfoBanner receives `icon` prop from callers (device-selection passes icon=\"circle-alert\"). The `icon` variable is a function parameter — true runtime data crossing component boundary. Shim <Icon name={icon}/> retained for this branch; literal fallback branches converted to static icon+ imports."
+    }
+  ],
+  "notes": {
+    "jsToJsxConversion": "Not needed — all icon call sites are in .jsx files; no .js files were modified to introduce JSX",
+    "iconImportsCleaned": "Removed unused `import Icon from \"@/shared/Icon\"` from top-nav, device-selection, network-planning (script already cleaned collapse-section, dynamic-input-row, secondary-nav)",
+    "iconImportsRetained": "info-banner retains `import Icon from \"@/shared/Icon\"` for shim",
+    "remainingIconUsage": "1 site: info-banner/index.jsx:12 <Icon name={icon}/> (shim, expected)",
+    "potentialRisk": "IconPlusIcPublicEdit not found in offline catalog but explicitly referenced in Icon.md §2 documentation as a valid edit icon; if package lacks it, build will fail on this import — quick fix: swap to IconPlusIcIctBulkEdit"
+  }
+}
