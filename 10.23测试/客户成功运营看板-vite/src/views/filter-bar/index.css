@@ -1,0 +1,83 @@
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-3) var(--spacing-5);
+  flex-wrap: wrap;
+}
+
+.filter-left {
+  flex: 1 1 16rem;
+  min-width: 12rem;
+  max-width: 22rem;
+}
+
+.filter-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-5);
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.filter-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.filter-chev {
+  margin-inline-start: var(--spacing-1);
+  color: var(--on-surface-variant);
+}
+
+.export-dropdown {
+  position: relative;
+}
+
+.export-menu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  min-width: 10rem;
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-1) 0;
+  z-index: 200;
+}
+
+.dropdown-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.dropdown-menu-item:hover {
+  background: var(--surface-variant);
+}
+
+.dropdown-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--divider);
+  margin: var(--spacing-1) 0;
+}

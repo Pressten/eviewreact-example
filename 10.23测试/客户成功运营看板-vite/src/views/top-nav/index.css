@@ -1,0 +1,209 @@
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 3rem;
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-sm);
+}
+
+.top-nav-inner {
+  max-width: 100rem;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--spacing-page);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-bold);
+  color: var(--on-surface);
+}
+
+.brand-sub {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  padding-left: var(--spacing-2);
+  border-left: 1px solid var(--divider);
+  margin-left: var(--spacing-1);
+}
+
+.top-nav-menu {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.top-nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-1) var(--spacing-3);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.top-nav-item:hover {
+  background: var(--surface-variant);
+  color: var(--on-surface);
+}
+
+.top-nav-item.active {
+  color: var(--primary);
+  background: var(--info-container);
+}
+
+.top-nav-tools {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-shrink: 0;
+}
+
+.tool-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tool-btn:hover {
+  background: var(--surface-variant);
+  color: var(--primary);
+}
+
+.user-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  height: 2rem;
+  padding: 0 var(--spacing-2);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  color: var(--on-surface);
+  transition: background 0.2s ease;
+}
+
+.user-trigger:hover {
+  background: var(--surface-variant);
+}
+
+.user-avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.user-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.user-chev {
+  color: var(--on-surface-variant);
+}
+
+/* 通知下拉条目 */
+.notif-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-1) 0;
+  max-width: 22rem;
+}
+
+.notif-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.notif-risk { color: var(--error); background: var(--error-container); }
+.notif-warning { color: var(--warning); background: var(--warning-container); }
+.notif-info { color: var(--info); background: var(--info-container); }
+.notif-success { color: var(--success); background: var(--success-container); }
+
+.notif-text {
+  flex: 1 1 0;
+  font: var(--font-body-s);
+  color: var(--on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notif-time {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  flex-shrink: 0;
+}
+
+.notif-viewall {
+  display: block;
+  text-align: center;
+  color: var(--interactive-link);
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+}
+
+.dropdown-trigger {
+  position: relative;
+}
+
+.notif-dropdown {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  min-width: 20rem;
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-1) 0;
+  z-index: 200;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  min-width: 10rem;
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-1) 0;
+  z-index: 200;
+}
+
+.dropdown-menu-item.is-danger {
+  color: var(--error);
+}

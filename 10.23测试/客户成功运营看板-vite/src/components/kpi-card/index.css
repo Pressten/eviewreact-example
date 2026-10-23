@@ -1,0 +1,93 @@
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-5);
+  cursor: pointer;
+  outline: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.kpi-card-hover:hover,
+.kpi-card-hover:focus-visible {
+  box-shadow: var(--shadow-base);
+  transform: translateY(-2px);
+}
+
+.kpi-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kpi-title {
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+}
+
+.kpi-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-md);
+}
+
+.kpi-icon-renewal { color: var(--primary); background: var(--info-container); }
+.kpi-icon-healthy { color: var(--success); background: var(--success-container); }
+.kpi-icon-risk { color: var(--error); background: var(--error-container); }
+.kpi-icon-response { color: var(--info); background: var(--info-container); }
+
+.kpi-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-1-5);
+  margin-top: var(--spacing-1);
+}
+
+.kpi-value {
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-bold);
+  color: var(--on-surface);
+  line-height: var(--line-height-xs);
+}
+
+.kpi-unit {
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+}
+
+.kpi-delta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+}
+
+.kpi-arrow {
+  flex-shrink: 0;
+}
+
+.kpi-delta {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+}
+
+.kpi-good { color: var(--success); }
+.kpi-bad { color: var(--error); }
+
+.kpi-vs {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.kpi-desc {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  border-top: 1px solid var(--divider);
+  padding-top: var(--spacing-2);
+  margin-top: var(--spacing-1);
+}

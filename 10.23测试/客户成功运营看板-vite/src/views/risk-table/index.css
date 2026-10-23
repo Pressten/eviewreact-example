@@ -1,0 +1,84 @@
+.risk-body {
+  gap: 0;
+}
+
+.status-tabs {
+  margin-bottom: var(--spacing-3);
+}
+
+.table-count {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.table-link {
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-m);
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.table-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+.table-date {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+}
+
+.health-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.health-bar {
+  flex: 1 1 0;
+  max-width: 5rem;
+  height: 6px;
+  background: var(--surface-variant);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.health-score {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  min-width: 1.75rem;
+}
+
+.csm-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.csm-avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.row-more {
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  padding: 0.125rem;
+  border-radius: var(--radius-base);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.row-more:hover {
+  color: var(--primary);
+  background: var(--surface-variant);
+}

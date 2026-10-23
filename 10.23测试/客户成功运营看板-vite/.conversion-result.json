@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "源项目 src/ 下所有业务文件搬入目标工程；app.jsx/app.css 从源根搬入 src/；icon.jsx 搬入 src/shared/Icon/Icon.jsx（export function→export default function）；context.jsx 加 aui3_1_dark body class toggle；app.jsx 删除 antd ConfigProvider（locale+theme）；Chart 导入改 @nce/eview-react/Chart；Icon 导入改 @/shared/Icon；./assets/uploads/ 路径改 /uploads/。i18n scenario A，main.jsx 不改（scaffold IntlProvider 已就绪）。antd-zh.js 未搬入（antd locale 删除）。check-relative-imports.cjs 验证通过。"
+}

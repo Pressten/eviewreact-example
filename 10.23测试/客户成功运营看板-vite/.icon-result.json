@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 22,
+  "confirmed": 13,
+  "residual": 7,
+  "shimRetained": [
+    "kpi-card data.icon — 函数参数传入的 icon prop（跨组件边界，data prop 来自 kpiCards mock 数组，icon 字段解构自 data）"
+  ]
+}
