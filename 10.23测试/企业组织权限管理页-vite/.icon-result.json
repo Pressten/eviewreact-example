@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 67,
+  "confirmed": 19,
+  "residual": 33,
+  "shimRetained": []
+}

@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "源项目代码已搬入 eview-react Vite 工程，所有相对导入路径已修正（./src/ → ./，../../../assets/shared/icon.jsx → @/shared/Icon，../../../assets/shared/chart.jsx → @/shared/Chart）。图片路径 ./assets/uploads/ → /uploads/。antd ConfigProvider 与 antd-zh.js locale 已从 app.jsx 移除（scenario A，main.jsx 的 IntlProvider + componentsLocales 已就绪）。暗色模式 useEffect 已更新为同时切换 <body> 的 aui3_1_dark 与 <html> 的 .dark。check-relative-imports.cjs 验证通过。"
+}

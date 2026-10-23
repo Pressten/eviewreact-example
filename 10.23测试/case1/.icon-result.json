@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 44,
+  "confirmed": 16,
+  "residual": 23,
+  "shimRetained": [
+    "status-tag:24 — name={isTimeout ? \"alarm-clock\" : meta.icon} — OBJ[runtimeKey] (ORDER_STATUS_META[status].icon, status is a runtime prop)",
+    "activity-log:30 — name={a.icon} — runtime prop data (items.map((a)=>...), items is a component prop)",
+    "order-detail-modal:173 — name={cat.icon} — OBJ[runtimeKey] (CATEGORY_STYLE[x.cat].icon, x.cat is runtime order data)",
+    "order-table:308 — name={cat.icon} — OBJ[runtimeKey] (CATEGORY_STYLE[first.cat].icon, first.cat is runtime order data)",
+    "overview-cards:18 — name={c.icon} — runtime prop data (cards.map((c)=>...), cards is a component prop)"
+  ],
+  "filesChanged": [
+    "src/views/exception-bar/index.jsx",
+    "src/views/aftersale-queue/index.jsx",
+    "src/views/filter-bar/index.jsx",
+    "src/views/order-table/index.jsx",
+    "src/views/top-nav/index.jsx",
+    "src/views/overview-cards/index.jsx"
+  ],
+  "filesShimRetained": [
+    "src/components/status-tag/index.jsx",
+    "src/views/activity-log/index.jsx",
+    "src/views/order-detail-modal/index.jsx"
+  ],
+  "residualMappings": {
+    "life-buoy": "IconPlusIcDigitalPowerSupport",
+    "siren": "IconPlusIcPublicAlert",
+    "package-x": "IconPlusIcPublicCloseCircle",
+    "rotate-ccw": "IconPlusIcPublicResetting",
+    "truck": "IconPlusIcIctECommerceDualDelivery",
+    "sticky-note": "IconPlusIcPublicNotes",
+    "map-pin": "IconPlusIcPublicMappinOnMap",
+    "circle-x": "IconPlusIcPublicCloseCircle",
+    "rotate-cw": "IconPlusIcPublicRefreshClockwise",
+    "columns-3": "IconPlusIcIctCellColumn",
+    "circle-check-big": "IconPlusIcPublicCheckmark",
+    "file-plus": "IconPlusIcIctNewFile",
+    "ticket-percent": "IconPlusIcBpitTicket",
+    "package-plus": "IconPlusIcPublicBox",
+    "user-round": "IconPlusIcCarUser",
+    "settings": "IconPlusIcPublicSetting",
+    "bell": "IconPlusIcPublicBellClock",
+    "trending-up": "IconPlusIcPublicSortUp",
+    "trending-down": "IconPlusIcPublicSortDown"
+  }
+}

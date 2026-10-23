@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS(skip)",
+    "i18n-keys": "PASS",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "groups": 2,
+  "groupResults": [
+    {
+      "group": "group1",
+      "status": "PASS",
+      "files": [
+        "src/views/order-table/index.jsx",
+        "src/views/order-console/index.jsx",
+        "src/views/status-tabs/index.jsx",
+        "src/components/status-tag/index.jsx",
+        "src/app.jsx",
+        "src/views/top-nav/index.jsx"
+      ]
+    },
+    {
+      "group": "group2",
+      "status": "PASS",
+      "files": [
+        "src/views/filter-bar/index.jsx",
+        "src/views/quick-create-modals/index.jsx",
+        "src/views/aftersale-queue/index.jsx",
+        "src/views/create-order-modal/index.jsx",
+        "src/views/logistics-modal/index.jsx",
+        "src/views/order-detail-modal/index.jsx"
+      ]
+    }
+  ],
+  "notes": "12 files migrated across 2 groups. IPInput sharedFilesToRemove: none (callSites empty). Known low-severity issues: Table cross-page selection manual index conversion, antd status=error red border dropped, Spinner/TimePicker missing props, DivMessage same render tree mitigation."
+}

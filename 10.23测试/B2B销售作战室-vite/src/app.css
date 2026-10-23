@@ -1,0 +1,51 @@
+/* ============ 页面骨架 ============ */
+.app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+}
+.app-main {
+  flex: 1;
+  min-height: 0;
+  padding: var(--spacing-section) var(--spacing-page) var(--spacing-page);
+}
+.app-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  grid-template-rows: minmax(21rem, auto) minmax(23rem, 1fr) minmax(15rem, auto);
+  grid-template-areas:
+    "funnel todo"
+    "board board"
+    "team customers";
+  gap: var(--spacing-section);
+  height: 100%;
+}
+.app-funnel { grid-area: funnel; }
+.app-todo { grid-area: todo; }
+.app-board { grid-area: board; }
+.app-team { grid-area: team; }
+.app-cust { grid-area: customers; }
+.app-funnel, .app-todo, .app-board, .app-team, .app-cust {
+  min-width: 0;
+  min-height: 0;
+}
+.app-body-flex {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.app-body-board {
+  padding: 0.875rem 1rem;
+}
+
+/* 自定义 spin 指示器旋转动画 */
+.custom-spin-indicator {
+  width: 1rem;
+  height: 1rem;
+  animation: custom-spin-rotate 1s linear infinite;
+}
+@keyframes custom-spin-rotate {
+  to { transform: rotate(360deg); }
+}

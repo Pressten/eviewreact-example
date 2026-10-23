@@ -1,0 +1,100 @@
+.tt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+  min-height: 0;
+}
+.tt__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-md);
+}
+.tt__range {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.tt__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.tt__table-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.tt__rank-num {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-bold);
+  color: var(--on-surface-variant);
+}
+.tt__person {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tt__person-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.tt__person-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.tt__dept-tag {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+  border-radius: var(--radius-xs);
+  padding: 0 0.25rem;
+  line-height: 1.4;
+}
+.tt__signed {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary);
+}
+.tt__prog {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-width: 0;
+}
+.tt__prog :global(.ant-progress) {
+  flex: 1;
+  min-width: 4rem;
+}
+.tt__prog-rate {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+.tt__prog-rate.is-warn {
+  color: var(--error);
+}
+.tt__prog-rate.is-over {
+  color: var(--success);
+}
+.tt__prog-target {
+  margin-left: 0.25rem;
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-normal);
+  color: var(--on-surface-variant);
+}
+.tt__change {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+}

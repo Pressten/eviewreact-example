@@ -1,0 +1,202 @@
+{
+  "status": "PASS",
+  "files": [
+    "src/views/order-table/index.jsx",
+    "src/views/order-console/index.jsx",
+    "src/views/status-tabs/index.jsx",
+    "src/components/status-tag/index.jsx",
+    "src/app.jsx",
+    "src/views/top-nav/index.jsx"
+  ],
+  "components": [
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "Button",
+      "eview": "Button",
+      "importPath": "@nce/eview-react/Button",
+      "status": "done",
+      "notes": "type→status; children→text+leftIcon; danger→status='risk'; size='small' kept"
+    },
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "Input",
+      "eview": "TextField",
+      "importPath": "@/shared/TextField",
+      "status": "done",
+      "notes": "onChange(e=>e.target.value)→onChange(value); status prop dropped; 3 address form fields migrated"
+    },
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "Input.TextArea",
+      "eview": "TextArea",
+      "importPath": "@/shared/TextArea",
+      "status": "done",
+      "notes": "onChange(e=>e.target.value)→onChange(targetValue); rows+maxLength kept; const {TextArea}=Input removed"
+    },
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "Modal",
+      "eview": "Dialog",
+      "importPath": "@nce/eview-react/Dialog",
+      "status": "done",
+      "notes": "open→isOpen; onCancel→onClose; footer JSX→buttons array objects; 2 modals (address+remark) migrated"
+    },
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "Modal.confirm",
+      "eview": "MessageDialog",
+      "importPath": "@nce/eview-react/MessageDialog",
+      "status": "done",
+      "notes": "Imperative Modal.confirm→state-driven MessageDialog; 4 confirm calls (shipOne/cancelOne/batchShip/batchCancel) consolidated to single MessageDialog with confirm state; danger→type='risk'"
+    },
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "message",
+      "eview": "DivMessage",
+      "importPath": "@nce/eview-react/DivMessage",
+      "status": "done",
+      "notes": "All message.success/warning→setNotice state+declarative DivMessage; type 'warning'→'warn'; fixed positioning wrapper added"
+    },
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "Checkbox",
+      "eview": "Checkbox",
+      "importPath": "@nce/eview-react/Checkbox",
+      "status": "done",
+      "notes": "onChange(()=>toggleCol)→onChange(()=>toggleCol); label prop used; used in column settings dropdown"
+    },
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "Dropdown (row actions)",
+      "eview": "PopUpMenu",
+      "importPath": "@nce/eview-react/PopUpMenu",
+      "status": "done",
+      "notes": "menu.items→options with serialno; onClick({key})→onClick(evt)=>evt.value; icon→iconUrl; divider dropped (isDivider not in declared API)"
+    },
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "Dropdown (column settings)",
+      "eview": "handwrite",
+      "importPath": null,
+      "status": "done",
+      "notes": "PopUpMenu closes after each click, unsuitable for multi-toggle; handwrote state-controlled dropdown panel with Checkbox items + backdrop"
+    },
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "Pagination",
+      "eview": "Table built-in",
+      "importPath": "@nce/eview-react/Table",
+      "status": "done",
+      "notes": "Standalone Pagination removed; merged into Table via enablePagination+pagingProps(currentPage/pageSize/recordCount/pageSizeOptions/onPageSizeChange)+onPageChange; showTotal/showQuickJumper dropped (toolbar already shows count)"
+    },
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "Table",
+      "eview": "Table",
+      "importPath": "@nce/eview-react/Table",
+      "status": "done",
+      "notes": "dataSource→dataset; rowKey removed; dataIndex→key; sorter→allowSort+sort; sortOrder→sort prop; render(v,r)→render(cell,_,_,row) with row.rawData via getRowData helper; rowSelection→enableCheckBox+checkedRows(index array)+onRowCheck+onHeaderCheck (selectedRowKeys↔index conversion); pagination={false}→enablePagination; onChange→disableEviewSort+onColumnSort; scroll.x dropped; loading→enableLoading; added enableZebraCrossing={false}+width='unset'+enableColumnCompareUpdate; non-sortable cols get allowSort:false; custom selections (全选当页/反选当页/清空所有) dropped"
+    },
+    {
+      "file": "src/views/order-table/index.jsx",
+      "antd": "Tooltip",
+      "eview": "TipBox",
+      "importPath": "@nce/eview-react/TipBox",
+      "status": "done",
+      "notes": "title→content; placement→direction; type='simple' added (no title); wrapping pattern preserved"
+    },
+    {
+      "file": "src/views/order-console/index.jsx",
+      "antd": "message",
+      "eview": "DivMessage",
+      "importPath": "@nce/eview-react/DivMessage",
+      "status": "done",
+      "notes": "4 message.success calls→setNotice state+declarative DivMessage; fixed positioning wrapper"
+    },
+    {
+      "file": "src/views/status-tabs/index.jsx",
+      "antd": "Tabs",
+      "eview": "Tab",
+      "importPath": "@nce/eview-react/Tab",
+      "status": "done",
+      "notes": "items→children TabItem; activeKey→selectedIndex (key→index conversion); onChange→onClick(index); draggable={false} added; label JSX→title+titleExtraContent"
+    },
+    {
+      "file": "src/components/status-tag/index.jsx",
+      "antd": "Tag",
+      "eview": "Tag",
+      "importPath": "@/shared/Tag",
+      "status": "done",
+      "notes": "Import changed from antd to @/shared/Tag (shell wrapper); icon already in children (no icon prop to move); className/title preserved"
+    },
+    {
+      "file": "src/app.jsx",
+      "antd": "ConfigProvider",
+      "eview": null,
+      "importPath": null,
+      "status": "skipped",
+      "notes": "Already removed in phase 1; no antd imports remain in app.jsx"
+    },
+    {
+      "file": "src/app.jsx",
+      "antd": "Empty",
+      "eview": "Empty",
+      "importPath": "@nce/eview-react/Empty",
+      "status": "skipped",
+      "notes": "Empty not present in current app.jsx (already clean); migration plan listed it but file has no antd imports"
+    },
+    {
+      "file": "src/views/top-nav/index.jsx",
+      "antd": "Button",
+      "eview": "Button",
+      "importPath": "@nce/eview-react/Button",
+      "status": "done",
+      "notes": "type='primary'→status='primary'; children→text+leftIcon"
+    },
+    {
+      "file": "src/views/top-nav/index.jsx",
+      "antd": "message",
+      "eview": "DivMessage",
+      "importPath": "@nce/eview-react/DivMessage",
+      "status": "done",
+      "notes": "message.success→setNotice({type:'success'}); message.info→setNotice({type:'default'}); fixed positioning wrapper"
+    },
+    {
+      "file": "src/views/top-nav/index.jsx",
+      "antd": "Dropdown (createMenu)",
+      "eview": "PopUpMenu",
+      "importPath": "@nce/eview-react/PopUpMenu",
+      "status": "done",
+      "notes": "menu.items→options with serialno; onClick({key})→onClick(evt)=>evt.value; icon→iconUrl"
+    },
+    {
+      "file": "src/views/top-nav/index.jsx",
+      "antd": "Dropdown (notifMenu)",
+      "eview": "handwrite",
+      "importPath": null,
+      "status": "done",
+      "notes": "Notification items have custom JSX content (title+time); PopUpMenu text is string only; handwrote state-controlled panel with backdrop+divider+action button"
+    },
+    {
+      "file": "src/views/top-nav/index.jsx",
+      "antd": "Dropdown (userMenu)",
+      "eview": "PopUpMenu",
+      "importPath": "@nce/eview-react/PopUpMenu",
+      "status": "done",
+      "notes": "menu.items→options with serialno; onClick({key})→onClick(evt)=>evt.value; icon→iconUrl"
+    }
+  ],
+  "failures": [],
+  "knownIssues": [
+    "Table column 'sort' prop is described as 'initial sort state' in docs—may not be fully reactive to external sorter changes; relies on enableColumnCompareUpdate to re-evaluate columns",
+    "Table checkedRows uses row indices relative to current page dataset; cross-page selection handled manually via selectedRowKeys↔index conversion in onRowCheck/onHeaderCheck",
+    "antd Table custom selections (全选当页/反选当页/清空所有) dropped; '清空所有' still available via '取消选择' link in batch bar",
+    "PopUpMenu isDivider not in declared API fields—divider items dropped from row actions menu",
+    "Handwrite dropdown panels (column settings + notification) use fixed backdrop for click-outside detection; may need z-index tuning per project layout"
+  ],
+  "cssCleaned": [
+    "src/views/status-tabs/index.css: removed 6 .ant-tabs-* selector rules (nav, tab, tab+tab, tab-btn, active tab-btn, active stab-count); kept .stab-count styles",
+    "src/views/order-table/index.css: added .ot-col-wrapper/.ot-col-backdrop/.ot-col-menu for handwrite dropdown",
+    "src/views/top-nav/index.css: added .tn-dropdown-wrapper/.tn-dropdown-backdrop/.tn-notif-panel/.tn-notif-divider/.tn-notif-action for handwrite dropdown"
+  ]
+}

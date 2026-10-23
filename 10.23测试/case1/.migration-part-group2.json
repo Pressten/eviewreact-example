@@ -1,0 +1,211 @@
+{
+  "status": "PASS",
+  "group": "group2",
+  "files": [
+    "src/views/filter-bar/index.jsx",
+    "src/views/quick-create-modals/index.jsx",
+    "src/views/aftersale-queue/index.jsx",
+    "src/views/create-order-modal/index.jsx",
+    "src/views/logistics-modal/index.jsx",
+    "src/views/order-detail-modal/index.jsx"
+  ],
+  "cssFiles": [
+    "src/views/filter-bar/index.css",
+    "src/views/logistics-modal/index.css",
+    "src/views/order-detail-modal/index.css"
+  ],
+  "components": [
+    {
+      "antd": "Button",
+      "eview": "Button",
+      "importPath": "@nce/eview-react/Button",
+      "category": "A",
+      "files": [
+        "src/views/filter-bar/index.jsx",
+        "src/views/quick-create-modals/index.jsx",
+        "src/views/aftersale-queue/index.jsx",
+        "src/views/create-order-modal/index.jsx",
+        "src/views/logistics-modal/index.jsx",
+        "src/views/order-detail-modal/index.jsx"
+      ],
+      "changes": "type→status; danger→status=risk; children→text (when icon present); icon prop→leftIcon"
+    },
+    {
+      "antd": "Input",
+      "eview": "TextField",
+      "importPath": "@/shared/TextField",
+      "category": "A",
+      "files": [
+        "src/views/filter-bar/index.jsx",
+        "src/views/quick-create-modals/index.jsx",
+        "src/views/create-order-modal/index.jsx"
+      ],
+      "changes": "onChange(e)=>e.target.value → onChange(value); dropped allowClear/onPressEnter/size/status; suffix retained (API supported)"
+    },
+    {
+      "antd": "Input.TextArea",
+      "eview": "TextArea",
+      "importPath": "@/shared/TextArea",
+      "category": "A",
+      "files": [
+        "src/views/aftersale-queue/index.jsx"
+      ],
+      "changes": "onChange(e)=>e.target.value → onChange(targetValue); dropped status/allowClear; rows+maxLength retained"
+    },
+    {
+      "antd": "InputNumber",
+      "eview": "Spinner",
+      "importPath": "@/shared/Spinner",
+      "category": "A",
+      "files": [
+        "src/views/filter-bar/index.jsx",
+        "src/views/quick-create-modals/index.jsx",
+        "src/views/create-order-modal/index.jsx"
+      ],
+      "changes": "onChange(value) retained; dropped mode/variant/size/status/placeholder; min/max retained; value??0 for null safety"
+    },
+    {
+      "antd": "Select",
+      "eview": "Select",
+      "importPath": "@/shared/Select",
+      "category": "A",
+      "files": [
+        "src/views/filter-bar/index.jsx",
+        "src/views/quick-create-modals/index.jsx",
+        "src/views/create-order-modal/index.jsx"
+      ],
+      "changes": "options label→text; placeholder→defaultLabel; allowClear→enableClear; added 全部/请选择 placeholder option with value '' for null-safe default selection; onChange(value) retained"
+    },
+    {
+      "antd": "Select (showSearch)",
+      "eview": "InputSelect",
+      "importPath": "@/shared/InputSelect",
+      "category": "A",
+      "files": [
+        "src/views/quick-create-modals/index.jsx",
+        "src/views/create-order-modal/index.jsx"
+      ],
+      "changes": "showSearch/optionFilterProp dropped (inherently searchable); onlySelect added; options label→text; placeholder retained; onChange(value,oldValue) retained"
+    },
+    {
+      "antd": "DatePicker.RangePicker",
+      "eview": "DatePicker (range prop)",
+      "importPath": "@/shared/DatePicker",
+      "category": "A",
+      "files": [
+        "src/views/filter-bar/index.jsx",
+        "src/views/quick-create-modals/index.jsx"
+      ],
+      "changes": "RangePicker→single DatePicker with range=[] prop; onChange(dates)→onChange(dateString,date,target) with from/to target handling; dayjs↔Date conversion; array placeholder dropped; size dropped"
+    },
+    {
+      "antd": "TimePicker.RangePicker",
+      "eview": "Two TimePicker",
+      "importPath": "@/shared/TimePicker",
+      "category": "A",
+      "files": [
+        "src/views/filter-bar/index.jsx"
+      ],
+      "changes": "RangePicker→two separate TimePickers; format HH:mm→hh:mm (lowercase); time as number array [hour,minute]; onChange returns string[] converted back to dayjs via at(h,m); supportEmptyTime for null range; minuteStep dropped (not in API)"
+    },
+    {
+      "antd": "Modal",
+      "eview": "Dialog",
+      "importPath": "@nce/eview-react/Dialog",
+      "category": "C",
+      "files": [
+        "src/views/quick-create-modals/index.jsx",
+        "src/views/aftersale-queue/index.jsx",
+        "src/views/create-order-modal/index.jsx",
+        "src/views/logistics-modal/index.jsx",
+        "src/views/order-detail-modal/index.jsx"
+      ],
+      "changes": "open→isOpen; footer=[<Button/>]→buttons=[{text,status,onClick}]; onCancel→onClose; width→size=[w,'auto']; onClose does not auto-close (parent controls isOpen state)"
+    },
+    {
+      "antd": "Modal.confirm()",
+      "eview": "Dialog (controlled)",
+      "importPath": "@nce/eview-react/Dialog",
+      "category": "C",
+      "files": [
+        "src/views/aftersale-queue/index.jsx"
+      ],
+      "changes": "Static Modal.confirm()→controlled Dialog with confirmTarget state; okText/cancelText→buttons array; onOk→button onClick handler"
+    },
+    {
+      "antd": "message.success()",
+      "eview": "DivMessage",
+      "importPath": "@nce/eview-react/DivMessage",
+      "category": "A",
+      "files": [
+        "src/views/aftersale-queue/index.jsx",
+        "src/views/logistics-modal/index.jsx"
+      ],
+      "changes": "Imperative message.success()→declarative <DivMessage display type=text=> with notice state; fixed-position wrapper for top-center toast; setNotice(null) on form open to avoid same render tree"
+    },
+    {
+      "antd": "Empty",
+      "eview": "Empty",
+      "importPath": "@nce/eview-react/Empty",
+      "category": "A",
+      "files": [
+        "src/views/aftersale-queue/index.jsx"
+      ],
+      "changes": "image=PRESENTED_IMAGE_SIMPLE dropped; type=success added (search empty=loaded success)"
+    },
+    {
+      "antd": "Timeline",
+      "eview": "AppTimeline (handwrite)",
+      "importPath": null,
+      "category": "B",
+      "files": [
+        "src/views/logistics-modal/index.jsx",
+        "src/views/order-detail-modal/index.jsx"
+      ],
+      "changes": "Handwritten AppTimeline component with dot+line layout; CSS variables for colors (green/gray/blue/red→var(--color-success)/var(--color-text-placeholder)/var(--color-brand)/var(--color-error)); app- prefix class names; CSS added to both index.css files"
+    }
+  ],
+  "failures": [
+    {
+      "severity": "low",
+      "file": "src/views/filter-bar/index.jsx",
+      "issue": "TextField ref not forwarded by shared wrapper (no forwardRef); '/' shortcut focus changed to document.querySelector('.fb-search input')?.focus() workaround",
+      "impact": "Focus shortcut works via DOM query; no functional break"
+    },
+    {
+      "severity": "low",
+      "file": "multiple",
+      "issue": "antd status=\"error\" prop on Input/InputNumber/TextArea/Select dropped (not in eview API); red border on validation error lost",
+      "impact": "Error messages still shown via external fm-error divs; only red border styling missing"
+    },
+    {
+      "severity": "low",
+      "file": "src/views/filter-bar/index.jsx",
+      "issue": "Spinner has no placeholder prop; 最小/最大 placeholder text lost in amount range",
+      "impact": "Spinner shows 0 when value is null; minor UX difference"
+    },
+    {
+      "severity": "low",
+      "file": "src/views/filter-bar/index.jsx",
+      "issue": "TimePicker has no minuteStep prop; 30-minute step in delivery range lost",
+      "impact": "All minutes 0-59 selectable instead of 0/30 only"
+    },
+    {
+      "severity": "low",
+      "file": "src/views/aftersale-queue/index.jsx, src/views/logistics-modal/index.jsx",
+      "issue": "DivMessage rendered in same component tree as form inputs; mitigated by setNotice(null) on form open",
+      "impact": "Potential re-render concern; createPortal would be more robust but not critical for these use cases"
+    }
+  ],
+  "skipped": [
+    "Icon replacement (deferred to phase 3 per instructions)"
+  ],
+  "cssCleanup": {
+    "antSelectorsFound": 0,
+    "cssAdded": [
+      "src/views/filter-bar/index.css: .fb-time-range flex container for dual TimePicker",
+      "src/views/logistics-modal/index.css: .app-tl-* Timeline dot/line styles",
+      "src/views/order-detail-modal/index.css: .app-tl-* Timeline dot/line styles"
+    ]
+  }
+}
