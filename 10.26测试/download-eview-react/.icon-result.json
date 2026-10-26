@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 10,
+  "confirmed": 7,
+  "residual": 6,
+  "shimRetained": [],
+  "details": {
+    "filesChanged": [
+      "src/views/header-bar/index.jsx",
+      "src/views/showcase/index.jsx"
+    ],
+    "confirmedAutoRewrite": {
+      "literalJSX": [
+        "moon -> IconPlusIcPublicMoon (header-bar/index.jsx:27)",
+        "sun -> IconPlusIcPublicSun (header-bar/index.jsx:28)",
+        "download -> IconPlusIcPublicDownload (showcase/index.jsx:29)",
+        "copy -> IconPlusIcPublicCopy (showcase/index.jsx:30)",
+        "refresh-cw -> IconPlusIcPublicRefreshClockwise (showcase/index.jsx:31)",
+        "trash-2 -> IconPlusIcPublicTrash (showcase/index.jsx:32)",
+        "chevron-down -> IconPlusIcPublicChevronDown (showcase/index.jsx:151, Button rightIcon)"
+      ],
+      "dataArrayL1AutoRewrite": [
+        "hand -> IconPlusIcPublicHand (SECTIONS button)",
+        "network -> IconPlusIcHuaweiCloudNetwork (SECTIONS ipinput)",
+        "search -> IconPlusIcPublicSearch (SECTIONS searchinput)",
+        "chevron-down -> IconPlusIcPublicChevronDown (SECTIONS dropdown)"
+      ],
+      "dynamicRenderSiteAutoRewrite": [
+        "showcase/index.jsx:183 <Icon name={sec.icon} .../> -> {sec.icon} (Phase B auto-rewritten)"
+      ]
+    },
+    "residualManualHandled": [
+      {
+        "iconName": "component",
+        "context": "header-bar brand '组件尺寸规范展示' (header-bar/index.jsx:14)",
+        "chosen": "IconPlusIcIctContainerComponent",
+        "reason": "Script UNMATCHED; top candidate s3. Catalog has 'Ict.ContainerComponent' as the only Component-match; semantically represents a container/component concept — best available fit for the Lucide 'component' (4-square module) brand icon."
+      },
+      {
+        "iconName": "type",
+        "context": "SECTIONS textfield 'TextField 文本输入' (showcase/index.jsx:55)",
+        "chosen": "IconPlusIcPublicInput",
+        "reason": "Script placeholder (UNMATCHED); residual candidates were all 'DataType/TaskType/Transformer' (s3, off-target for a text input field). Catalog query found Public.Input — directly represents an input field, semantically superior to the suggested DataType for a TextField section."
+      },
+      {
+        "iconName": "list-filter",
+        "context": "SECTIONS inputselect 'InputSelect 输入选择' (showcase/index.jsx:80)",
+        "chosen": "IconPlusIcPublicFilter",
+        "reason": "Script placeholder; top residual candidate s2. InputSelect is a filterable dropdown — Public.Filter is the most semantic match (the 'list' part is the dropdown itself, the 'filter' part is the input)."
+      },
+      {
+        "iconName": "tags",
+        "context": "SECTIONS multipleselect 'MultipleSelect 多选选择器' (showcase/index.jsx:96)",
+        "chosen": "IconPlusIcPublicTag",
+        "reason": "Script placeholder; top residual candidate s0 (highest similarity). MultipleSelect uses tag-style selections — Public.Tag is a direct semantic match."
+      },
+      {
+        "iconName": "list",
+        "context": "SECTIONS select 'Select 单选选择器' (showcase/index.jsx:112)",
+        "chosen": "IconPlusIcPublicListBullet",
+        "reason": "Script placeholder; residual candidates were all 'DocList/AlertList/ListBullet' (s3). Select presents a list of options — Public.ListBullet is the most generic, domain-neutral list icon (avoiding DigitalPowerDp domain-specific variants)."
+      },
+      {
+        "iconName": "git-branch",
+        "context": "SECTIONS treeselect 'TreeSelect 树选择' (showcase/index.jsx:128)",
+        "chosen": "IconPlusIcDevBranch",
+        "reason": "Script placeholder; top residual candidate s2. TreeSelect renders hierarchical tree data — Dev.Branch (a generic branch icon) best represents the tree/branch concept (avoiding DigitalPower/LoadBranch domain variants)."
+      }
+    ],
+    "shimRetained": [],
+    "shimRetainedRationale": "No runtime-data patterns encountered. All icon names are either literal JSX, literal data-array values (SECTIONS.icon), or the dynamic render site sec.icon bound to the static SECTIONS array — match-icons.cjs Phase B statically resolved the entire group. No cross-component-boundary icon prop, no OBJ[runtimeKey] computed-property access. src/shared/Icon/Icon.jsx not touched per hard-constraint; the now-unused `import Icon from '@/shared/Icon'` was removed from both consumer files.",
+    "verification": {
+      "grepIconCallsites": "src/ 下 <Icon\\b 命中 0 处 (全部静态改写)",
+      "grepPlaceholder": "IconPlusIcPublicTransverseRectangleTemplate 命中 0 处 (占位已全部替换)",
+      "grepShimImport": "from '@/shared/Icon' 命中 0 处 (调用方已无 Icon import)",
+      "importPath": "@hui/icon-plus (scaffold 预置依赖,符合硬约束)"
+    }
+  }
+}

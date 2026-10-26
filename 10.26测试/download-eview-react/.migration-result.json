@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS(skip)",
+    "i18n-keys": "PASS",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "notes": "Scenario A 硬编码中文,i18n-keys 检查 0 risky/0 same-arg。业务 CSS 全用 .header-bar-* / .showcase-* 自定义前缀,无 .ant-* 残留。src/ 全树 grep `from 'antd'` 为空。Dropdown 走 PopUpMenu（非手写），menu.items→options[{id,text,serialno,iconUrl}]，按硬约束#5 丢弃 type:'divider'（PopUpMenu 已声明字段无 isDivider）与 danger（无 per-item risk 概念）。IPInput size 保留：IPInput.md API §5 列 size: 'small'|'middle'|'large' 默认 middle，文档为准（覆盖 migrationPlan keyDiffs ③）。Button type='dashed' 无 eview 对应 → status='default'（视觉最接近,但丢虚线边框）。Select 默认值 value={regionOptions[0].value}。Toggle 按文档用两个独立 prop taggledChildren(unchecked=sun)+unTaggledChildren(checked=moon)，未采用交接文中的数组形式（doc 为权威）。MultipleSelect 用 enableCloseIcon 替代 allowClear（API 无 enableClear）。TextField 删 allowClear（API 无 enableClear/clear 概念）。TreeSelector expandedKeys=['root','rd','ops','pd'] 模拟 treeDefaultExpandAll，clearable 替代 allowClear，value='rd-fe'。手写 src/components/ip-input/ 整个文件夹已删除（index.jsx + index.css）。app.jsx 阶段1 已删净 antd import（ConfigProvider/Empty 无残留）。"
+}

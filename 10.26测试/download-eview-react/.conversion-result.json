@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "Scenario A i18n: main.jsx untouched (IntlProvider + componentsLocales already wired); antd ConfigProvider/locale/Empty/spin/renderEmpty removed from app.jsx. Dark mode: html.dark + body.aui3_1_dark toggled in context.jsx. All business antd 5 imports kept (no eview-react substitution). Icon import rewritten to default `import Icon from '@/shared/Icon'`. Legacy concern: scaffold's Icon.jsx (purpose-built, in-flight dedup + size-snapping) was overwritten with source assets/shared/icon.jsx content per step-1 instruction; source version is functionally adequate (icon-plus branch works, LUCIDE global guarded by typeof so degrades to null) but lacks scaffold's caching refinements — restore scaffold Icon.jsx later if needed."
+}

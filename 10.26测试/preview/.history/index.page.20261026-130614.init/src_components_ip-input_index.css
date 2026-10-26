@@ -1,0 +1,66 @@
+/* 自定义 IPv4 输入 — 4 段,统一外框,对齐 antd 三档尺寸 */
+.ip-input {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface-container-highest);
+  border: var(--border-width-thin) solid var(--outline);
+  border-radius: var(--radius-base);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+.ip-input:hover {
+  border-color: var(--primary);
+}
+.ip-input:focus-within {
+  border-color: var(--focus-ring);
+  box-shadow: 0 0 0 var(--outline-width-focus) var(--primary-container);
+}
+.ip-input-cell {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+.ip-input-seg {
+  border: none;
+  outline: none;
+  background: transparent;
+  text-align: center;
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+.ip-input-dot {
+  color: var(--on-surface-variant);
+  user-select: none;
+}
+
+/* Large — 40px,对齐 antd large */
+.ip-input-large {
+  height: 40px;
+  padding: 0 12px;
+  gap: 6px;
+}
+.ip-input-large .ip-input-seg {
+  font: var(--font-body-l);
+  width: 3.5ch;
+}
+
+/* Middle — 32px,对齐 antd middle */
+.ip-input-middle {
+  height: 32px;
+  padding: 0 10px;
+  gap: 4px;
+}
+.ip-input-middle .ip-input-seg {
+  width: 3.2ch;
+}
+
+/* Small — 24px,对齐 antd small */
+.ip-input-small {
+  height: 24px;
+  padding: 0 8px;
+  gap: 2px;
+}
+.ip-input-small .ip-input-seg {
+  font: var(--font-body-s);
+  width: 3ch;
+}

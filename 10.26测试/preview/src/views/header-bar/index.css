@@ -1,0 +1,34 @@
+/* 顶部栏 — 48px,全局导航稳定区 */
+.header-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: var(--surface-container-highest);
+  border-bottom: var(--border-width-thin) solid var(--divider);
+  box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+}
+.header-bar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.header-bar-title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.header-bar-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.header-bar-theme-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
