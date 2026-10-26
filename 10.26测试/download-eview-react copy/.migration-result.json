@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS(skip)",
+    "i18n-keys": "PASS",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "modifiedFiles": [
+    "src/views/header-bar/index.jsx",
+    "src/views/my-todo/index.jsx",
+    "src/views/my-todo/index.css",
+    "src/views/goal-bar/index.jsx",
+    "src/views/goal-bar/index.css",
+    "src/views/opp-board/index.jsx",
+    "src/views/opp-board/index.css",
+    "src/views/opp-board/kanban.jsx",
+    "src/views/opp-board/list-view.jsx",
+    "src/views/opp-board/new-opp-modal.jsx",
+    "src/views/opp-board/detail-drawer.jsx",
+    "src/views/team-table/index.jsx",
+    "src/views/team-table/index.css"
+  ]
+}

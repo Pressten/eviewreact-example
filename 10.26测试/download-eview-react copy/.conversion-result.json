@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "Scenario A (hardcoded Chinese). dayjs used in new-opp-modal.jsx with numeric formats only (YYYY-MM-DD, MM-DD) — no Chinese weekday/month names, so no dayjs locale registration added (left to downstream runtime verification). Avatar SVG files (avatar-*.svg) referenced by owner-avatar component are not present in public/uploads/ — broken img at runtime, non-blocking for build."
+}

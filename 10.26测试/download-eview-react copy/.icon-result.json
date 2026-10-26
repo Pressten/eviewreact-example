@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 32,
+  "confirmed": 1,
+  "residual": 19,
+  "shimRetained": [],
+  "modifiedFiles": [
+    "src/app.jsx",
+    "src/views/goal-bar/index.jsx",
+    "src/views/header-bar/index.jsx",
+    "src/views/my-todo/index.jsx",
+    "src/views/opp-board/detail-drawer.jsx",
+    "src/views/opp-board/index.jsx",
+    "src/views/opp-board/kanban.jsx",
+    "src/views/opp-board/new-opp-modal.jsx",
+    "src/views/sales-funnel/index.jsx",
+    "src/views/team-table/index.jsx"
+  ],
+  "breakdown": {
+    "confirmedAutoByScript": {
+      "count": 1,
+      "detail": "goal-bar/index.jsx name={t.icon} — match-icons.cjs --apply Phase B 数据数组改写 (tiles 4 项: hourglass 命中 IconPlusIcPublicHourglass + 3 占位后续手动替换)"
+    },
+    "residualManual": {
+      "count": 19,
+      "literalSites": 18,
+      "literalDetail": [
+        "header-bar/index.jsx: radar->IconPlusIcPublicScans, bell->IconPlusIcPublicBellClock",
+        "my-todo/index.jsx: calendar-check->IconPlusIcPublicCalendar",
+        "opp-board/detail-drawer.jsx: rotate-ccw->IconPlusIcPublicRefreshClockwise, users->IconPlusIcPublicAddMember, phone->IconPlusIcPublicTelephone, mail->IconPlusIcPublicMailing, swords->IconPlusIcPublicAlert, lightbulb->IconPlusIcPublicBoltCircle",
+        "opp-board/index.jsx: columns-3->IconPlusIcPublicBoardBa, list->IconPlusIcPublicListBullet, sliders-horizontal->IconPlusIcPublicFunnel, mouse-pointer-click->IconPlusIcIctPointer",
+        "opp-board/kanban.jsx: inbox->IconPlusIcPublicTray, calendar-clock->IconPlusIcPublicCalendar",
+        "opp-board/new-opp-modal.jsx: lightbulb->IconPlusIcPublicBoltCircle",
+        "sales-funnel/index.jsx: arrow-down->IconPlusIcPublicSortDown, mouse-pointer-click->IconPlusIcIctPointer"
+      ],
+      "dynamicPreprocessed": 1,
+      "dynamicDetail": "team-table/index.jsx name={s.icon} — s 来自 rankState() 展开 module 级静态常量 rankChangeMap（lucide 字面量 trending-up/trending-down/minus），属绑到静态数组，按 B/C 预处理: rankChangeMap icon 字段值改为 icon+ 元素(SortUp/FallingDownCircle/Minus, iconColor=currentcolor 继承 span 的 s.color)，render 改 {s.icon}（JSX 子节点位包 {}），删 @/shared/Icon import"
+    },
+    "preConvertedByPriorStep": {
+      "count": 11,
+      "detail": "chevron-down x2, clock, info x2(detail-drawer+team-table), plus, timer, eye, circle-plus, trophy, bell(merge) — 上游 UMD-conversion 预扫已转 IconPlusIc，本步开始时已非 <Icon 调用"
+    },
+    "passThroughNoShim": {
+      "count": 1,
+      "detail": "section-card/index.jsx icon prop — 实际渲染 {icon && icon}（透传 ReactNode），无 <Icon name={icon}> 调用；调用方(app.jsx SectionCard)传 icon+ 元素。无需 shim，未改 section-card"
+    },
+    "extraPlaceholdersReplaced": {
+      "goalBarDataArray": "target->IconPlusIcPublicDashboard, signed->IconPlusIcPublicCheckmark, forecast->IconPlusIcPublicBarChart (脚本占位替换)",
+      "appJsxSectionCard": "商机看板->IconPlusIcPublicBoardBa, 团队业绩->IconPlusIcPublicAddMember (上游预扫占位替换)"
+    }
+  },
+  "notes": [
+    "0 shim 保留: section-card 为透传(非 <Icon 调用)、team-table s.icon 绑静态数组已预处理，均不退方案A；src/shared/Icon scaffold 文件保留但无调用方",
+    "语义近似替换(catalog 无精确命中, 已取最贴近): swords->Alert(竞争告警), lightbulb->BoltCircle(灵感⚡), radar->Scans(扫描概览), columns-3->BoardBa(看板)",
+    ".js->.jsx 自动转换: 本步 src/ 下无 .js 文件含 JSX（mock 数据文件 .js 均无 IconPlusIc/<Icon），无需转换"
+  ]
+}
