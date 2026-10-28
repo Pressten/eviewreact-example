@@ -1,0 +1,81 @@
+import Badge from "@nce/eview-react/Badge";
+import { IconPlusIcCarRadar1, IconPlusIcPublicBellClock, IconPlusIcPublicChevronDown, IconPlusIcPublicMoon, IconPlusIcPublicSun } from '@hui/icon-plus';
+import PopUpMenu from "@nce/eview-react/PopUpMenu";
+import { useApp } from "../../context.jsx";
+import { teams, teamMap } from "../../mock/teams.js";
+import { opportunities } from "../../mock/opportunities.js";
+import "./index.css";
+
+const navItems = [
+  { key: "warroom", label: "作战室", active: true },
+  { key: "customer", label: "客户", active: false },
+  { key: "opp", label: "商机", active: false, badge: true },
+  { key: "contract", label: "合同", active: false },
+  { key: "report", label: "报表", active: false },
+];
+
+// TODO(eview-react): Dropdown 无直接对应，评估后用 PopUpMenu 替代（userMenu 的分隔线/danger 态无对应 API，已省略）
+const userOptions = [
+  { id: "profile", text: "个人中心", serialno: "profile" },
+  { id: "settings", text: "偏好设置", serialno: "settings" },
+  { id: "logout", text: "退出登录", serialno: "logout" },
+];
+
+export default function HeaderBar() {
+  const { team, setTeam, isDark, toggleDark } = useApp();
+  const currentTeam = teamMap[team];
+  const oppCount = opportunities.filter((o) => o.team === team).length;
+
+  const teamOptions = teams.map((t) => ({ id: t.key, text: t.name, serialno: t.key }));
+
+  return (
+    <header className="hdr">
+      <div className="hdr__brand">
+        <span className="hdr__logo">
+          <IconPlusIcCarRadar1 iconSize="1.5rem" iconColor={['#FFFFFF']} />
+        </span>
+        <span className="hdr__name">销售作战室</span>
+        <span className="hdr__ver">v3.2</span>
+      </div>
+
+      <nav className="hdr__nav">
+        {navItems.map((it) => (
+          <a key={it.key} className={`hdr__nav-item ${it.active ? "is-active" : ""}`}>
+            {it.label}
+            {it.badge && (
+              <Badge content={oppCount} offset={[4, -2]} />
+            )}
+          </a>
+        ))}
+      </nav>
+
+      <div className="hdr__right">
+        <PopUpMenu options={teamOptions} direction="bottom" onClick={(evt) => { if (evt.value) setTeam(evt.value); }}>
+          <button className="hdr__team" type="button">
+            <span className="hdr__team-dot" style={{ background: currentTeam.color }} />
+            <span className="hdr__team-name">{currentTeam.name}</span>
+            <IconPlusIcPublicChevronDown iconSize="0.875rem" iconColor={['var(--on-surface-variant)']} />
+          </button>
+        </PopUpMenu>
+
+        <button className="hdr__icon-btn" type="button" title={isDark ? "切换浅色" : "切换深色"} onClick={toggleDark}>
+          {isDark ? <IconPlusIcPublicSun iconSize="1.125rem" iconColor={['currentcolor']} /> : <IconPlusIcPublicMoon iconSize="1.125rem" iconColor={['currentcolor']} />}
+        </button>
+
+        <button className="hdr__icon-btn" type="button" title="通知中心">
+          <Badge dot>
+            <IconPlusIcPublicBellClock iconSize="1.125rem" iconColor={['currentcolor']} />
+          </Badge>
+        </button>
+
+        <PopUpMenu options={userOptions} direction="bottom" onClick={() => {}}>
+          <button className="hdr__user" type="button">
+            <span className="hdr__user-av">陈</span>
+            <span className="hdr__user-name">陈经理</span>
+            <IconPlusIcPublicChevronDown iconSize="0.875rem" iconColor={['var(--on-surface-variant)']} />
+          </button>
+        </PopUpMenu>
+      </div>
+    </header>
+  );
+}

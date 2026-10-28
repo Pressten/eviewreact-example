@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "步骤3-4完成。搬入文件数=35(app.css 1 + app.jsx 1 + context.jsx 1 + owner-avatar 2 + section-card 2 + mock 9 + views 18[goal-bar2/header-bar2/my-todo2/opp-board6/sales-funnel2/team-table2/top-customers2] + icon.jsx→shared/Icon/Icon.jsx 1);排除.index.page.html.panel-state.json(IDE状态)与index.page.html(UMD runner)。icon import 改写数=12(12个业务jsx的`import { Icon } from \"../../../assets/shared/icon.jsx\"`→`import Icon from \"@/shared/Icon\"`默认导入;另icon.jsx自身`export function Icon`→`export default function Icon`)。uploads 改写处=1(owner-avatar/index.jsx avatar src 前缀`./assets/uploads/`→`/uploads/`);app.jsx内的uploads引用随ConfigProvider删除一并移除。相对路径修正:`./src/...`→`./...`(app.jsx,8处);`../../../src/`→`../../`(11个view文件的context/mock/components导入,深度3等价)。i18n scenario=A(硬编码中文,wired=true):main.jsx不改(IntlProvider+componentsLocales已就位);antdLocaleImports=[]/antdLocaleFiles=[]→无antd locale需删(app.jsx的`import zhCN from \"./assets/shared/antd-zh.js\"`随ConfigProvider包裹层一并删除)。dayjs判断:仅new-opp-modal.jsx用dayjs,且仅做数字日期格式化(YYYY-MM-DD/MM-DD),未用中文星期/月份→按i18n-migration.md §5无需注册dayjs zh-cn locale,main.jsx保持不变。验证:check-relative-imports.cjs 通过(all relative imports resolved,exit 0)。遗留问题:(1)avatar-*.svg源项目本就不存在(uploadsAssets仅7个:background.jpg/empty.svg/favicon.svg/icons.svg/image.jpg/loading.svg/user.png,无avatar-*.svg),owner-avatar运行时头像404属源项目遗留缺图非本阶段引入;(2)dayjs未注册zh-cn locale,若阶段2/3引入DatePicker中文月份/星期需求再按§5补注册;(3)antd组件未替换(阶段2工作),业务代码保留antd导入,仅app.jsx按要求删除ConfigProvider/Empty;(4)<Icon name=...>调用点未碰(阶段3,32处/12文件);(5)未搬入未用共享件ip-input.jsx/chart.jsx/antd-zh.js(callSites imports均为空)。硬约束遵守:未跑init-scaffold/extract-umd/build-migration-plan脚本,未npm install,未替换antd组件,未碰Icon调用点,main.jsx未改。"
+}

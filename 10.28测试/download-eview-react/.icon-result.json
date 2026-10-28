@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 32,
+  "confirmed": 20,
+  "residual": 12,
+  "shimRetained": [],
+  "finalIconPlusIcOccurrences": 42,
+  "notes": "图标替换完成（由两个续作子 agent 分两轮完成代码改写；本结果文件由 orchestrator 基于机械校验写入——子 agent 因 icon-plus-names.json 66KB catalog 上下文压力未持久化结果文件）。最终状态经 Node 校验脚本确认：(1) <Icon name=...> shim 调用点残留=0（全部 32 个 scanned 调用点 + 1 个预扫漏扫的 isDark 三元已转换）；(2) @/shared/Icon import 残留=0（所有文件已清除 unused import）；(3) 42 处 <IconPlusIc.../> 静态 import，每个 used 组件均在所在文件的 @hui/icon-plus import 行（0 missing import）；(4) .js 文件无 JSX（0 个 .js-with-JSX）。confirmed=20 为第一轮 match-icons.cjs --apply 自动匹配字面量；residual=12 为第二轮手动处理（约 9 个未自动匹配字面量从 .icon-match.json top-K 候选短名单选取 + 3 个动态调用点）。shimRetained=[] 为空——优于编排预期的 2 处保留：3 个动态调用点全部改写为 ReactNode 存储（SectionCard icon prop 跨组件边界→app.jsx 传 <IconPlusIc/> ReactNode；goal-bar tiles 数据数组→存 ReactNode 渲染 {t.icon}；team-table rankChangeMap→存 ReactNode 渲染 {s.icon}），数据结构支持 ReactNode 故无需保留运行时 shim。.js→.jsx 转换：无 .js 引入 JSX 需转扩展名。动态站点展开致 occurrence 42 > callSite 32（isDark 三元 1→2、section-card 1→5、goal-bar 1→4、team-table 1→3）。语义匹配均为 catalog 候选最佳近似（如 sliders-horizontal→PublicFilter、swords→DigitalPowerVs、lightbulb→DigitalPowerDpLight、bell→BellClock、radar→CarRadar1），属视觉近似非功能缺陷。遗留：src/shared/Icon/Icon.jsx shim 实现仍为 scaffold 预置文件保留（已无引用，baseline 不删）。"
+}
