@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS(skip)",
+    "i18n-keys": "PASS",
+    "imports": "PASS",
+    "chart-options": "PASS",
+    "table-defaults": "PASS",
+    "provider": "PASS",
+    "css": "PASS",
+    "token-drift": "PASS",
+    "props-preserved": "PASS",
+    "steps-defaults": "PASS",
+    "dark-mode": "PASS",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "tableDefaultReviews": [],
+  "cssReviews": [
+    {
+      "item": "src/views/audit-log/index.css:5 使用组件库类名 .ev_tag_fill（覆盖组件库样式）",
+      "finding": "ev_ 类名待核：原 .ant-tag margin 重置改为 .ev_tag_fill",
+      "resolution": "保留。该选择器是覆盖 eview Tag 包壳渲染的 .ev_tag_fill 类名（@/shared/Tag 包壳内部加 ev_tag_fill），将 antd Tag 的 margin:0 重置映射到 eview Tag，属覆盖组件库样式（允许用途），非自定义 ev_ 业务类名。色值无漂移（仅 margin）。",
+      "conclusion": "保留——覆盖组件库样式，合规"
+    },
+    {
+      "item": "src/views/department-modal/index.css:11 使用组件库类名 .ev_tag_fill",
+      "finding": "ev_ 类名待核：原 .ant-tag margin 重置改为 .ev_tag_fill",
+      "resolution": "保留。同 audit-log，覆盖 eview Tag 包壳 .ev_tag_fill 类名实现 margin:0 重置，属覆盖组件库样式，非自定义业务类名。",
+      "conclusion": "保留——覆盖组件库样式，合规"
+    },
+    {
+      "item": "src/views/invite-modal/index.css:52 使用组件库类名 .ev_tag_fill",
+      "finding": "ev_ 类名待核：原 .ant-tag margin 重置改为 .ev_tag_fill",
+      "resolution": "保留。同上，form-option 内 eview Tag 包壳 margin:0 重置，覆盖组件库样式，非自定义业务类名。",
+      "conclusion": "保留——覆盖组件库样式，合规"
+    }
+  ],
+  "tokenDriftReviews": [
+    {
+      "item": "src/components/action-menu/index.css:43 业务 CSS 引用 var(--hover) 未定义 token（首次 check-token-drift 报 1 处 UNDEFINED_REF）",
+      "finding": "手写 ActionMenu 组件 CSS 用了未定义 token var(--hover)",
+      "resolution": "已修复：改为源项目 hover 背景约定 token var(--surface-variant)（与 permission-panel/member-table/top-nav/transfer-modal 等 hover 背景一致）。重跑 check-token-drift PASS，无未定义引用。",
+      "conclusion": "已修复并通过"
+    }
+  ],
+  "propsPreservedReviews": [
+    {
+      "item": "views/invite-modal/index.jsx [TextField] 调用点数量不等（源 4 / 产物 3）",
+      "finding": "源 antd Input 4 处（email / name / phone / Cascader 子元素 Input 触发器），产物 TextField 3 处",
+      "resolution": "合理。源第 4 个 Input 是 antd Cascader 的子元素触发器（<Cascader><Input readOnly .../></Cascader>），eview Cascader（@/shared/Cascader 包壳，antd 兼容）自带选择器显示，不支持 children 触发器，故该 Input 被扁平化掉（非真实表单字段，无独立 style/className 需保留）。保留的 3 个真实 TextField（email/name/phone）均保留 style={{width:'100%'}}。无 style/className 丢失。",
+      "conclusion": "合理重构，无属性丢失"
+    }
+  ],
+  "stepsReviews": []
+}

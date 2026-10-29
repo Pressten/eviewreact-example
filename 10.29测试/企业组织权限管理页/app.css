@@ -1,0 +1,72 @@
+/* 应用级布局 — 企业后台三栏结构 */
+.app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  overflow: hidden;
+}
+
+/* 三栏主区域：组织树 | 中部内容 | 权限面板 */
+.app-main {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 0 1.5rem 1.5rem;
+  overflow: hidden;
+}
+.app-main__left {
+  width: 18.75rem;
+  flex-shrink: 0;
+  min-height: 0;
+}
+.app-main__center {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.app-main__table {
+  flex: 1 1 0;
+  min-height: 0;
+}
+.app-main__bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  flex-shrink: 0;
+  height: 22rem;
+}
+.app-main__bottom-item {
+  min-height: 0;
+  min-width: 0;
+}
+.app-main__right {
+  width: 24rem;
+  flex-shrink: 0;
+  min-height: 0;
+}
+
+/* 自定义 Spin 指示器（loading.svg）尺寸 */
+.custom-spin-indicator {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* 响应式：窄屏下底部双卡改单列 */
+@media (max-width: 1280px) {
+  .app-main__bottom {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .app-main__bottom-item {
+    height: 18rem;
+  }
+}

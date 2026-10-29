@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "阶段1（搬代码+修路径+i18n接线+验证）完成。check-relative-imports.cjs 通过（exit 0，全部相对导入解析，无 ./src/ 残留）。i18n scenario A（硬编码中文，wired:true）：main.jsx 未改（IntlProvider+componentsLocales 已就绪），antd locale（zhCN）导入与 antd-zh.js 文件已从目标工程移除（未搬入）。暗色三轨：context.jsx 的 useEffect 已扩展同时切 html.dark + body.aui3_1_dark（aui3_1_dark.css 由 main.jsx import）。业务代码 antd 组件导入全部保留（含 context.jsx 的 notification），未替换为 eview-react（阶段2工作）。icon.jsx 原版搬入 src/shared/Icon/Icon.jsx（export function→export default function，保留 Lucide fallback + icon-plus 在线 + 颜色继承 + MutationObserver）。chart.jsx 搬入 src/shared/chart.jsx 供 role-distribution 引用（阶段2将转为 @nce/eview-react/Chart 并删除该共享件）。ip-input.jsx 未搬入（无任何业务代码引用）。CSS 四层未动。遗留：chart.jsx 运行时依赖全局 window.HUICharts（hui-charts.umd.js），Vite 工程未加载该脚本——属运行时问题，不影响阶段1静态导入验证，留待阶段2评估。"
+}

@@ -1,0 +1,76 @@
+.role-dist__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 1.25rem 1.25rem !important;
+}
+.role-dist__chart-wrap {
+  flex-shrink: 0;
+}
+.role-dist__help {
+  border: none;
+  background: transparent;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  display: inline-flex;
+  padding: 0.25rem;
+  border-radius: var(--radius-base);
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.role-dist__help:hover {
+  color: var(--primary);
+  background: var(--surface-variant);
+}
+.role-dist__legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.role-dist__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: var(--radius-md);
+  background: var(--surface-variant);
+  cursor: help;
+  min-width: 0;
+}
+.role-dist__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+.role-dist__item--super_admin .role-dist__dot { background: #E02128; }
+.role-dist__item--dept_admin .role-dist__dot { background: #F4840C; }
+.role-dist__item--editor .role-dist__dot { background: #09AA71; }
+.role-dist__item--external_collaborator .role-dist__dot { background: #715AFB; }
+.role-dist__item--member .role-dist__dot { background: #8C8C8C; }
+.role-dist__item-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.role-dist__item-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.role-dist__item-desc {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.role-dist__item-count {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+  flex-shrink: 0;
+}

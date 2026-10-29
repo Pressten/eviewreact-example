@@ -1,0 +1,64 @@
+.app-action-menu {
+  position: relative;
+  display: inline-flex;
+}
+
+.app-action-menu__trigger {
+  display: inline-flex;
+}
+
+.app-action-menu__list {
+  position: absolute;
+  top: 100%;
+  z-index: 1050;
+  min-width: 9rem;
+  margin: 0;
+  padding: var(--spacing-1) 0;
+  list-style: none;
+  background: var(--surface-container-highest);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-popover);
+}
+
+.app-action-menu__list--bottomLeft {
+  left: 0;
+}
+
+.app-action-menu__list--bottomRight {
+  right: 0;
+}
+
+.app-action-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  padding: var(--spacing-1-5) var(--spacing-3);
+  cursor: pointer;
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.app-action-menu__item:hover {
+  background: var(--surface-variant);
+}
+
+.app-action-menu__item.is-disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.app-action-menu__item.is-disabled:hover {
+  background: transparent;
+}
+
+.app-action-menu__item-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.app-action-menu__divider {
+  height: 1px;
+  margin: var(--spacing-1) 0;
+  background: var(--divider);
+}

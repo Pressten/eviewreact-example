@@ -1,0 +1,71 @@
+.invite-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.form-row--full {
+  grid-template-columns: 1fr;
+}
+.form-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.form-label {
+  position: relative;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  text-align: left;
+}
+.form-label.required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--error);
+  font: var(--font-body-m);
+}
+.form-field {
+  position: relative;
+}
+.form-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--error);
+}
+.form-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.form-option .ev_tag_fill {
+  margin: 0 !important;
+}
+.form-option-desc {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.modal-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.modal-title svg {
+  color: var(--primary);
+}
+.modal-sub {
+  margin: 0 0 0.75rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
