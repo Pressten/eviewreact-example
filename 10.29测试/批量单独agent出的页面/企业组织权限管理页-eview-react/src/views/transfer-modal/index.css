@@ -1,0 +1,71 @@
+.transfer-modal__selected {
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.transfer-modal__selected-head {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface-variant);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.transfer-modal__selected-head svg {
+  color: var(--primary);
+}
+.transfer-modal__member-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  max-height: 10rem;
+  overflow: auto;
+}
+.transfer-modal__empty {
+  padding: 1rem;
+  text-align: center;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+.transfer-modal__member {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+}
+.transfer-modal__member:hover {
+  background: var(--surface-variant);
+}
+.transfer-modal__avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+.transfer-modal__name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  min-width: 4rem;
+}
+.transfer-modal__from {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.transfer-modal__target {
+  display: flex;
+  flex-direction: column;
+}
+.transfer-modal__hint {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.5rem;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}

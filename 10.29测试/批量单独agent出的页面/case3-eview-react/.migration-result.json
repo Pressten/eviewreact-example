@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS(skip)",
+    "i18n-keys": "PASS",
+    "imports": "PASS",
+    "chart-options": "PASS",
+    "table-defaults": "PASS",
+    "provider": "PASS",
+    "css": "PASS",
+    "token-drift": "PASS",
+    "props-preserved": "PASS",
+    "steps-defaults": "PASS",
+    "dark-mode": "PASS",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [],
+  "notes": "Stage 2 by orchestrator (subagent unavailable at depth 1). All 22 antd components replaced + 1 Chart injected. A 类直接用 migrationPlan keyDiffs/importPath（Button/Drawer/Empty/Tag(shell)/Input→TextField(shell)/Select(shell)/Segmented→SelectCard/DatePicker(shell)/Tooltip→TipBox/Checkbox/Radio→RadioGroup/Tabs→Tab+TabItem/Table/Badge/Menu→handwrite/Chart）；B 类手写（Progress→src/components/simple-progress 共享件、Timeline→AppTimeline 手写、Carousel→手写轮播）；C 类模式转换（Modal→Dialog isOpen+buttons+onClose，5处）；message→DivMessage 渲染式（context.jsx 加 notify/notice/closeNotice，app.jsx 渲染 NotificationLayer fixed 浮层，11 文件 message.success/info 改 notify）。Dropdown 3处→手写 DropdownPanel 点击触发下拉。硬FAIL项全 PASS：dark-mode(双轨 html.dark+body.aui3_1_dark+import)/imports(无from antd)/provider(IntlProvider main.jsx 顶层 locale=zh)/token-drift(455 token 一致)/chart-options(4图表含 a2ui+theme)。所有 check-*.cjs exit=0 无待核项。业务 CSS 无 .ant- 残留（src/components+src/views grep 空）。"
+}

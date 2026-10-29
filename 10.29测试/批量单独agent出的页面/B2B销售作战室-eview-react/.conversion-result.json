@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "代码搬运完成(35 文件:2 components+9 mock+12 views+context+app+app.css+Icon)+路径修正(../../../assets/shared/icon.jsx→@/shared/Icon;../../../src/*→../..//*;./assets/uploads/avatar-→/uploads/avatar-)+暗色双轨切换(context.jsx body.aui3_1_dark+html.dark)+i18n scenario A(scaffold IntlProvider 已就绪 main.jsx 不改)+antd ConfigProvider 已从 app.jsx 删除。check-relative-imports.cjs exit=0 全部解析。"
+}

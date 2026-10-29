@@ -1,0 +1,56 @@
+/* Timeline — 手写时间轴样式 */
+.tl {
+  display: flex;
+  flex-direction: column;
+}
+
+.tl-item {
+  display: flex;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+.tl-item:last-child {
+  padding-bottom: 0;
+}
+
+.tl-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 0.3125rem;
+  top: 0.875rem;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-border-separator);
+}
+
+.tl-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  z-index: 1;
+}
+
+.tl-dot-green {
+  background: var(--color-success);
+}
+
+.tl-dot-gray {
+  background: var(--color-text-disabled);
+}
+
+.tl-dot-red {
+  background: var(--color-error);
+}
+
+.tl-dot-blue {
+  background: var(--color-info-primary);
+}
+
+.tl-content {
+  flex: 1;
+  min-width: 0;
+}

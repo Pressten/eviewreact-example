@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "Stage 1 complete. Moved 31 source files into target src/. Fixups: 10 JSX icon imports -> @/shared/Icon (default); top-nav uploads path -> /uploads/; app.jsx removed antd ConfigProvider+zhCN+Empty and fixed ./src/ paths; context.jsx dual-track dark mode (body.aui3_1_dark + html.dark); shared/Icon/Icon.jsx = source icon.jsx (export default). check-relative-imports.cjs: all resolved. i18n scenario A (main.jsx unchanged)."
+}

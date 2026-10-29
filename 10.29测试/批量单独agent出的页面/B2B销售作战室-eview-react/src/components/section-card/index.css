@@ -1,0 +1,53 @@
+.sec-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+.sec-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid var(--outline-variant);
+  flex-shrink: 0;
+}
+.sec-card__title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  min-width: 0;
+}
+.sec-card__title h3 {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sec-card__accent {
+  width: 0.25rem;
+  height: 1.125rem;
+  border-radius: var(--radius-xs);
+  flex-shrink: 0;
+}
+.sec-card__extra {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-shrink: 0;
+}
+.sec-card__body {
+  padding: 1.25rem;
+  flex: 1;
+  min-height: 0;
+}
+.sec-card__body--flush {
+  padding: 0;
+}

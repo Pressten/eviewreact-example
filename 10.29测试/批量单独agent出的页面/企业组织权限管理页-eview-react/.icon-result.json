@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "match-icons-apply": "PASS",
+    "check-icon-shim-strict": "PASS",
+    "imports": "PASS",
+    "relative-imports": "PASS"
+  },
+  "iconStats": {
+    "totalCallSites": 67,
+    "confirmedAutoApply": 15,
+    "residualManual": 30,
+    "shimSitesRemaining": 0,
+    "unjustified": 0
+  },
+  "notes": "Stage 3 完成：match-icons.cjs --apply 自动改写 15 个 confirmed 站点（10 文件）。30 个 residual 站点（含 NAV_ITEMS 数组成员/circle-pause|play 扁平三元/SectionCard wrapper 占位）全部手工转为 @hui/icon-plus 静态 import——均为闭合集字面量（非 OPEN），按 Icon.md §name 解析统一原则必须转。circle-pause/circle-play 三元转两分支 IconPlusIcPublicPauseCircle/PlayCircle。UNMATCHED 占位（scroll-text/chart-pie）补真实组件 IconPlusIcPublicScrollText/IconPlusIcPublicChartPie。check-icon-shim --strict PASS（0 shim 站点、0 unjustified、0 数据源半改）。所有硬约束脚本复跑 PASS。"
+}

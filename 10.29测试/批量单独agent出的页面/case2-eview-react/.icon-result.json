@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 26,
+  "confirmed": 11,
+  "residual": 15,
+  "shimRetained": [],
+  "notes": "Stage 3 done by orchestrator directly (subagent unavailable at this delegation depth). match-icons.cjs --apply auto-rewrote 11 confirmed (ellipsis, send, chevron-right, user, copy, car, clock x2, search x2, eye, download, check x2) + data-array moreItems (flag, copy; user-check placeholder fixed to IconPlusIcDigitalPowerDpUserCluster) + ternary isDark sun/moon. 15 residual sites converted manually (all closed-set literals, none OPEN): ban→IconPlusIcPublicProhibitCircle; triangle-alert→IconPlusIcPublicAlert (3 sites: action-bar reject-warn, step-approve high-risk-warn + risk-notice); shield-check→IconPlusIcDigitalPowerDpCheck; chevron-left→IconPlusIcPublicLeftArrow (matches chevron-right→RightArrow pattern); inbox→IconPlusIcPublicFolder (no inbox icon in catalog, folder as closest semantic); file-text→IconPlusIcPublicTxtFileTextured; map-pin→IconPlusIcPublicMappinOnMap (exact name match); ternary savedAt?check:save→IconPlusIcDigitalPowerDpCheck/IconPlusIcPublicTransverseRectangleTemplate (save has no catalog match, placeholder per recipe); data-array user-check→IconPlusIcDigitalPowerDpUserCluster. Removed unused Icon shim imports from action-bar/case-header/step-approve (no <Icon name=> sites remain). check-icon-shim --strict PASS: 0 residual shim sites, 0 unjustified, 0 stale-shim-import, 0 unconverted-icon-source."
+}

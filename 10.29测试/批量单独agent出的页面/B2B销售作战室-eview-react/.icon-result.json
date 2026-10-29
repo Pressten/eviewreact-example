@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "summary": {
+    "totalCallSites": 32,
+    "confirmedAutoConverted": 8,
+    "residualsHandConvertedToStatic": 19,
+    "trulyUnmatchedKeptAsShim": 5,
+    "matchIconsExit": 0
+  },
+  "autoConvertedConfirmed": [
+    "chevron-down→IconPlusIcPublicChevronDown", "clock→IconPlusIcPublicClock", "info→IconPlusIcPublicInfo",
+    "plus→IconPlusIcPublicPlus", "timer→IconPlusIcDigitalPowerDpTimer", "eye→IconPlusIcPublicEye",
+    "circle-plus→IconPlusIcPublicPlusCircle", "trophy→IconPlusIcIctTrophy"
+  ],
+  "handConvertedToStatic": [
+    "radar→IconPlusIcCarRadar1", "bell→IconPlusIcPublicBellClock", "calendar-check→IconPlusIcPublicCalendar",
+    "rotate-ccw→IconPlusIcCarRotateRight", "users→IconPlusIcCarUser", "phone→IconPlusIcPublicPhoneGear",
+    "mail→IconPlusIcPublicMailing", "list→IconPlusIcPublicListBullet", "sliders-horizontal→IconPlusIcPublicHorizontalBarChart",
+    "mouse-pointer-click→IconPlusIcIctPointer(opp-board+sales-funnel)", "calendar-clock→IconPlusIcPublicCalendar",
+    "arrow-down→IconPlusIcPublicSortDown", "goal-bar target→IconPlusIcCarTargetForecast",
+    "goal-bar signed→IconPlusIcDigitalPowerDpCheck", "goal-bar forecast→IconPlusIcPublicSortUp",
+    "app board(table-2)→IconPlusIcPublicLists", "app team(users)→IconPlusIcCarUser",
+    "team-table closed-set: trending-up→IconPlusIcPublicSortUp, trending-down→IconPlusIcPublicSortDown, minus→IconPlusIcPublicMinus (重构 rankChangeMap 存 IconCmp 组件引用,移除动态 <Icon name={s.icon}> shim)"
+  ],
+  "keptAsShimSchemeA": [
+    "swords(detail-drawer:129) — UNMATCHED 无 catalog 候选,真 OPEN,经 Icon.jsx 包装器(Lucide fallback+在线 icon-plus API)渲染",
+    "lightbulb(detail-drawer:145, new-opp-modal:207) — UNMATCHED 无 catalog 候选,真 OPEN,同上",
+    "columns-3(opp-board/index:51) — UNMATCHED 无 catalog 候选,真 OPEN,同上",
+    "inbox(kanban:35) — UNMATCHED 无 catalog 候选,真 OPEN,同上"
+  ],
+  "catalogVerification": "所有静态导入名已对照 references/icons/icon-plus-names.json 校验:Public.SortUp(行288)/SortDown(行287)/Minus(行183)/Calendar/Sun/Moon/BellClock/ListBullet/Lists/HorizontalBarChart/PhoneGear/Mailing/Plus/ChevronDown/Clock/Info/Eye/PlusCircle/Hourglass, Car.Radar1/User/TargetForecast(行508)/RotateRight, DigitalPowerDp.Timer/Check(行971), Ict.Trophy/Pointer 均存在",
+  "placeholderCleanup": "--apply 留下的 IconPlusIcPublicTransverseRectangleTemplate 占位已全部替换(0 残留)"
+}

@@ -1,0 +1,10 @@
+.dept-modal__level {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 0.75rem;
+  background: var(--primary-container);
+  border-radius: var(--radius-md);
+  font: var(--font-body-s);
+  color: var(--on-primary-container);
+}

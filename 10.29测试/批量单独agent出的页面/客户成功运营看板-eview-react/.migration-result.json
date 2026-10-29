@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "chart-options": "PASS",
+    "css": "PASS",
+    "dark-mode": "PASS",
+    "i18n-keys": "PASS",
+    "imports": "PASS",
+    "props-preserved": "PASS",
+    "provider": "PASS",
+    "steps-defaults": "PASS",
+    "table-defaults": "ADVISORY",
+    "token-drift": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [
+    {
+      "check": "table-defaults",
+      "item": "src/views/risk-table/index.jsx:146 <Table> 缺 enableColumnCompareUpdate 标记",
+      "resolution": "无需补。源 antd columns 为静态内联数组（非条件列/权限列/useMemo 依赖重建），每次渲染内容恒定；只有 dataset(filtered) 随筛选变化。enableColumnCompareUpdate 默认 false 正确——避免仅数据变化时不必要的列重渲染。dataset 变化仍触发表格数据重渲染（不受该 prop 限制），故无需显式开启。"
+    }
+  ]
+}

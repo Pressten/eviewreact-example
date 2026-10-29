@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 36,
+  "confirmed": 10,
+  "residual": 25,
+  "shimRetained": [],
+  "notes": "Stage 3 by orchestrator. match-icons --apply auto-rewrote 10 confirmed literal icons (refresh-cw/ellipsis×2/chevron-right×2/chevron-down×2/download/search×2/eye/send/user/log-out). 26 residual 手动处理全转 icon+ 静态 import（无真 OPEN，shim 未保留）：settings→PublicSetting、siren→PublicAlert、chevron-left×2→PublicLeftArrow、megaphone×2→PublicHorn、bell→PublicBellClock、activity→PublicHeart（6 literal 残留）。数据数组闭合集全转 icon+ 元素：KPI_CARDS trend.icon（SortUp×3/SortDown×1）+ card.icon（MoneyCircle/Heart/Warning/Clock）；QUICK_ACTIONS 4 占位符转真名（Notebook/Telephone/Ticket/MessageCircle Bpit）；NOTIFICATIONS 9 字符串 icon 转元素（Ticket Bpit/Warning/Clipboard/File/Check×2/CarUser/UserCluster×2）；filter-bar EXPORT_MENU（ExcelFile/File Dp）；risk-table ROW_MENU（CarUser/Clipboard）；status-tag triangle-alert→PublicWarning；customer-drawer 链式三元 trending-up/down→SortUp/SortDown 条件渲染。修 match-icons --apply 丢失的 onClick/title（chart-actions refresh/ellipsis/alert-ticker chevron-left/chevron-right/play/pause/risk-table ellipsis 全恢复 onClick+title+stopPropagation）。check-icon-shim --strict exit=0（0 处残留 shim/0 处数据源半改/0 处 stale import）。check-relative-imports + check-imports 复跑 exit=0。icon 名映射据 icon-plus-names.json catalog 语义匹配（无 Trending/Coins/HeartPulse/UserCog/FileText 等真名，按 match-icons residual 候选 + catalog 语义选：trending→SortUp/SortDown、coins→MoneyCircle、heart-pulse→Heart、triangle-alert→Warning、users→UserCluster、user-cog→CarUser、file-text→File、file-spreadsheet→ExcelFile、message-circle-plus→MessageCircle）。"
+}

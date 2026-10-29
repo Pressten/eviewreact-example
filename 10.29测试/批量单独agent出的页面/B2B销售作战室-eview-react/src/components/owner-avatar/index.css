@@ -1,0 +1,13 @@
+.own-av {
+  display: inline-block;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+  user-select: none;
+  vertical-align: middle;
+  box-shadow: 0 0 0 0 transparent;
+  transition: box-shadow 0.18s ease;
+}
+.own-av--ring {
+  box-shadow: 0 0 0 2px var(--surface-container-highest), 0 0 0 3.5px currentColor;
+}

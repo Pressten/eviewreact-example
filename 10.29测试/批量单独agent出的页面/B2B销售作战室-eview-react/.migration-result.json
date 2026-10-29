@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "check-imports": "PASS",
+    "check-provider": "PASS",
+    "check-dark-mode": "PASS",
+    "check-i18n-keys": "PASS",
+    "check-css": "PASS",
+    "check-token-drift": "PASS",
+    "check-props-preserved": "PASS_ADVISORY_VERIFIED",
+    "check-table-defaults": "PASS",
+    "check-steps-defaults": "PASS",
+    "check-chart-options": "PASS",
+    "check-relative-imports": "SKIP(阶段1已过)",
+    "npm-install": "SKIP(@nce 内网依赖,后台运行中)"
+  },
+  "advisoriesResolved": [
+    "Table(list-view/team-table):移除1列width让其自适应+加enableZebraCrossing=false(源无斑马纹)+width=unset(源无显式表宽)→check-table-defaults PASS",
+    "Tag dd__contact-role className:line 116 实际保留(脚本按源行号79匹配致假阳性,手动核对已确认保留)"
+  ],
+  "componentsReplaced": "20 antd组件全替换:Button→@nce/Button(status+leftIcon+text);Select→@/shared/Select(options label→text);Segmented→@nce/SelectCard(type=small);Tag→@/shared/Tag(调用点保留antd写法);Checkbox→@nce/Checkbox(onChange第2参checked);Table→@nce/Table(dataSource→dataset+render row.rawData+enableColumnCompareUpdate);Modal→@nce/Dialog(isOpen+buttons数组);Drawer→@nce/Drawer(visible+onClose);Tabs→@nce/Tab+TabItem(selectedIndex+onClick+draggable=false);Input→@/shared/TextField;InputNumber→@/shared/Spinner;DatePicker→@/shared/DatePicker;message→@nce/DivMessage(状态驱动+fixed定位);Badge→@nce/Badge(content/dot);Tooltip→@nce/TipBox(包裹式);Dropdown→手写@/shared/Dropdown(无对应);Progress→手写AppProgress;Timeline→手写AppTimeline;ConfigProvider/Empty→删除(暗色双轨class切换)"
+}

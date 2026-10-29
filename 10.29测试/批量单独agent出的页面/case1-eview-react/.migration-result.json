@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "i18n-keys": "PASS",
+    "imports": "PASS",
+    "chart-options": "PASS",
+    "table-defaults": "PASS",
+    "provider": "PASS",
+    "css": "PASS",
+    "token-drift": "PASS",
+    "props-preserved": "ADVISORY",
+    "steps-defaults": "PASS",
+    "dark-mode": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [
+    {
+      "check": "table-defaults",
+      "item": "columns 共 9 列全部带 width（eview-react Table 列全设 width 会导致表格显示异常）",
+      "resolution": "已修复：移除「商品摘要」列的 width:268，让其自适应剩余空间，其余 8 列保留源 width。复跑 check-table-defaults 结论 PASS。"
+    },
+    {
+      "check": "props-preserved",
+      "item": "views/filter-bar/index.jsx [TimePicker] 调用点数量不等（源 1 / 产物 2），源 1 个带 style/className——可能重构，无法精确配对，需人工核对",
+      "resolution": "合理重构：源 antd TimePicker.RangePicker（1 个，style width:10.5rem）按 eview-react 无 RangePicker 的约束拆成 2 个独立 TimePicker（起始 + 截止），各 style width:5rem，合计视觉等价。原 style 已按拆分语义重新分配保留，非丢失。"
+    }
+  ]
+}

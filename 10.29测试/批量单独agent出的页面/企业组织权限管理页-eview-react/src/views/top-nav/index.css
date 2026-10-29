@@ -1,0 +1,112 @@
+.top-nav {
+  height: 3rem;
+  background: var(--surface-container-highest);
+  border-bottom: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: 1.5rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+.top-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.top-nav__brand-icon {
+  color: var(--primary);
+}
+.top-nav__brand-name {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.top-nav__brand-tag {
+  margin: 0 !important;
+}
+.top-nav__menu {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1 1 auto;
+  justify-content: center;
+}
+.top-nav__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 0.875rem;
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  border-radius: var(--radius-base);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  transition: color 0.15s ease;
+}
+.top-nav__item:hover {
+  color: var(--primary);
+}
+.top-nav__item.is-active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: var(--font-weight-medium);
+}
+.top-nav__tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.top-nav__tool-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  color: var(--on-surface-variant);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.top-nav__tool-btn:hover {
+  background: var(--surface-variant);
+  color: var(--primary);
+}
+.top-nav__identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+  border: 1px solid var(--outline);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.top-nav__identity:hover {
+  border-color: var(--primary);
+}
+.top-nav__avatar {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+.top-nav__identity-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.top-nav__identity-tag {
+  margin: 0 !important;
+}
+.top-nav__identity-chev {
+  color: var(--on-surface-variant);
+}

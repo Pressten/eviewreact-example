@@ -1,0 +1,50 @@
+/* 应用级骨架 — 页面背景 + 内容容器 + 主行布局 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.page-body {
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: var(--spacing-6) var(--spacing-page) var(--spacing-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+}
+
+.table-sidebar-row {
+  display: flex;
+  gap: var(--spacing-gutter);
+  align-items: flex-start;
+}
+
+.table-sidebar-row > :first-child {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.table-sidebar-row > :last-child {
+  flex: 0 0 21.25rem;
+  width: 21.25rem;
+  min-width: 0;
+}
+
+/* DivMessage 浮层（替代 antd message 命令式 API）：fixed 顶部居中，复刻 antd message 顶部浮层 */
+.notice-overlay {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+}
+
+/* 手写下拉背景遮罩（点击外部关闭） */
+.dropdown-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: transparent;
+}

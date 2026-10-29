@@ -1,0 +1,23 @@
+/* ③ 状态页签 — 数量角标随筛选实时联动 */
+.status-tabs {
+  padding: 0.25rem var(--spacing-inset) 0;
+}
+
+.stab {
+  display: inline-flex;
+  align-items: center;
+}
+
+.stab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.125rem;
+  margin-left: 0.375rem;
+  padding: 0 0.3125rem;
+  border-radius: var(--radius-full);
+  background: var(--color-fill);
+  color: var(--color-text-secondary);
+  font: var(--font-caption-m);
+}

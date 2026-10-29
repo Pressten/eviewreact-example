@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "match-icons-apply": "PASS(14 confirmed auto-converted)",
+    "check-icon-shim-strict": "PASS",
+    "check-imports": "PASS"
+  },
+  "stats": {
+    "totalCallSites": 44,
+    "confirmedAutoConverted": 14,
+    "manualConverted": 30,
+    "shimRemaining": 0,
+    "trueOpen": 0,
+    "unmatchedPlaceholders": 10
+  },
+  "notes": "全部 44 图标调用点已转为 @hui/icon-plus 静态 import（闭合集，无真 OPEN）。match-icons --apply 自动转 14 个 confirmed 字面量（含 sun/moon 三元、CATEGORY_STYLE 数据数组 15 个 cat 图标）。手工转 30 个 residual：10 个数据源（statsCards 4 + SEED_ACTIVITIES 5 + ORDER_STATUS_META 5，去重后 10 个 name）的 icon 字符串字段转 JSX 元素；20 个 render 站点（含 6 个三元/loop-bound）转条件渲染/{x.icon}。10 个 UNMATCHED name 用占位 IconPlusIcPublicTransverseRectangleTemplate（catalog 无精确匹配：siren/truck/columns-3/package/coins 等），视觉为通用矩形占位，内网 catalog 可达时建议换为精确图标。已删 8 个无引用 import Icon from @/shared/Icon。check-icon-shim --strict: 0 shim 站点 / 0 unjustified / 0 stale-import / 0 unconverted-source = PASS。",
+  "unmatchedPlaceholders": [
+    "siren → IconPlusIcPublicTransverseRectangleTemplate (无候选)",
+    "truck → IconPlusIcPublicTransverseRectangleTemplate (无候选)",
+    "columns-3 → IconPlusIcPublicTransverseRectangleTemplate (无候选)",
+    "package → IconPlusIcPublicTransverseRectangleTemplate (无候选)",
+    "coins → IconPlusIcPublicTransverseRectangleTemplate (无候选)",
+    "package-x → IconPlusIcIctX (s2 候选,语义近似 X/取消)",
+    "circle-x → IconPlusIcIctX (s2 候选,语义近似 X/取消)",
+    "life-buoy → IconPlusIcIctVirtualMachineLife (s2 候选,语义近似)",
+    "sticky-note → IconPlusIcPublicMusicNote (s2 候选,语义不同,占位性质)",
+    "settings → IconPlusIcPublicSetting (s0 候选)"
+  ]
+}

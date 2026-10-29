@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "imports": "PASS",
+    "provider": "PASS",
+    "chart-options": "PASS",
+    "dark-mode": "PASS",
+    "token-drift": "PASS",
+    "table-defaults": "PASS",
+    "steps-defaults": "PASS",
+    "css": "ADVISORY",
+    "props-preserved": "ADVISORY",
+    "i18n-keys": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [
+    {
+      "check": "check-css",
+      "item": "src/views/org-tree/index.css:89,93,96 使用 .ev_tree_node_content_wrapper / .ev_tree_treenode / .ev_tree_title 类名",
+      "resolution": "PASS — 这是覆盖 eview-react 组件库样式（调整 Tree 节点行高/padding/title flex 布局），不是自定义类名。源项目对应 antd Tree 覆盖样式（.ant-tree-*）迁移后改为 eview 组件库类名（.ev_tree_*）是正确做法，check-css 规则明确允许覆盖组件库样式用 ev_ 前缀。业务类名前缀仍为 app-/业务名（.org-tree__ev 等）。"
+    },
+    {
+      "check": "check-props-preserved",
+      "item": "views/invite-modal/index.jsx TextField 调用点数量不等（源 4 / 产物 5）",
+      "resolution": "PASS — 合理重构：源项目有效期用 antd RangePicker（1 个组件，1 个 TextField 调用点快照），eview-react scaffold 无 RangePicker，按 skill 迁移规则改为 2 个 TextField type=date（起止日期各一）。新增的 style=width:100% 与源 RangePicker style=width:100% 一致，无 style/className 丢失。源 4 个 TextField（邮箱/姓名/部门触发器/电话）全部保留 style=width:100%。"
+    }
+  ],
+  "notes": "Stage 2 完成：23 个 antd 组件全部替换为 eview-react（19 A 类直接替换 + Modal→Dialog C 类模式转换 + Dropdown 手写下拉 + Tree→eview Tree + Timeline 手写 + notification/message→DivMessage）。包壳组件从 @/shared/X 导入（Tag/Select/TextField/Cascader/TreeSelector/DatePicker 等）；Chart import 改 @nce/eview-react/Chart + chartOption 补 a2ui:true + theme（isDark 派生）；暗色双轨完整。业务 CSS .ant-* 残留已清理（org-tree 改 .ev_tree_* 覆盖，其余 .ant-tag margin 覆盖删除）。新增 src/components/dropdown-menu/ 手写下拉组件。"
+}

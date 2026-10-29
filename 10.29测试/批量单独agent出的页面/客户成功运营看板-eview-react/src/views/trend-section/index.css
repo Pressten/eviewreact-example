@@ -1,0 +1,45 @@
+.trend-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-gutter);
+  align-items: stretch;
+}
+
+.trend-card,
+.pie-card {
+  min-height: 0;
+}
+
+/* 图表高度由 style 内联给定(18rem),CSS 仅占位 */
+.chart-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.chart-action-icon {
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.chart-action-icon:hover {
+  color: var(--primary);
+}
+
+.chart-action-divider {
+  width: 1px;
+  height: 0.75rem;
+  background: var(--divider);
+  margin: 0 var(--spacing-1);
+}
+
+.legend-hint {
+  font: var(--font-body-s);
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.legend-hint:hover {
+  color: var(--interactive-link-hover);
+}

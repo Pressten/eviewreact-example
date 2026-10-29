@@ -1,0 +1,78 @@
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-3) var(--spacing-5);
+  flex-wrap: wrap;
+}
+
+.filter-left {
+  flex: 1 1 16rem;
+  min-width: 12rem;
+  max-width: 22rem;
+}
+
+.filter-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-5);
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.filter-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.filter-chev {
+  margin-inline-start: var(--spacing-1);
+  color: var(--on-surface-variant);
+}
+
+/* 手写下拉（替代 antd Dropdown） */
+.export-wrap {
+  position: relative;
+}
+
+.export-menu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  z-index: 200;
+  min-width: 10rem;
+  padding: var(--spacing-1);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-popover);
+}
+
+.export-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding: var(--spacing-1-5) var(--spacing-2);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.export-menu-item:hover {
+  background: var(--surface-variant);
+}

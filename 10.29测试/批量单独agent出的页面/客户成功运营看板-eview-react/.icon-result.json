@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "match-icons-apply": "PASS",
+    "check-icon-shim-strict": "PASS",
+    "residuals-converted": "PASS"
+  },
+  "summary": "match-icons.cjs --apply 自动改写 7 个 confirmed 字面量调用点 + 数据数组(dashboard.js→dashboard.jsx)+SectionCard wrapper；residual 22 处全部手工转 icon+ 静态 import（闭合集，非方案A）：12 个数据数组图标 + 4 个 kpiCards 跨边界 props 图标 + 2 个 kpi-card 三元 arrow(SortUp/SortDown) + 5 个字面量 residuals(megaphone→Horn, chevron-left→LeftArrow, layout-dashboard→Dashboard, bell→BellClock, settings→Setting) + SectionCard 调用点 4 处(calendar-clock→Calendar, zap→Flash, triangle-alert→Alert, trending-up→PredictionLine, chart-pie→DoughnutChart)。移除死代码 moreActionItems(eye/user-cog/bookmark/arrow-left-right 字面量，Phase2 已删消费端)。所有残留 <Icon> shim 站点清零，无 stale import，无数据源半改。check-icon-shim --strict exit=0。",
+  "iconMappings": {
+    "confirmed-auto": ["chevron-right→RightArrow", "search→Search", "chevron-down→ChevronDown", "calendar→Calendar", "arrow-right→RightArrow", "refresh-cw→RefreshClockwise", "ellipsis→Ellipsis"],
+    "residual-manual": ["layout-dashboard→Dashboard", "users→Teams", "chart-column→BarChart", "settings→Setting", "triangle-alert→Alert", "square-pen→Square", "wallet→MoneyCircle", "user-plus→AddMember", "shield-check→Security", "clock→Clock", "file-spreadsheet→ExcleFileTextured", "file-text→TxtFileTextured", "phone→Telephone", "calendar-clock→Calendar", "zap→Flash", "trending-up(section)→PredictionLine", "chart-pie→DoughnutChart", "megaphone→Horn", "chevron-left→LeftArrow", "bell→BellClock", "trending-up(arrow)→SortUp", "trending-down(arrow)→SortDown"]
+  }
+}

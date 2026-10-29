@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "Stage 1 完成：34 个源文件搬入 src/（结构保留）；icon.jsx -> src/shared/Icon/Icon.jsx (export default)；Icon 命名导入改 @/shared/Icon 默认导入（12 文件）；Chart 导入改 @nce/eview-react/Chart（role-distribution）；./assets/uploads/ -> /uploads/ 路径重写；app.jsx 删除 antd ConfigProvider + zhCN locale，./src/ 导入改 ./，保留 AppProvider + 三栏布局；context.jsx 暗色双轨（html.dark + body.aui3_1_dark）；i18n scenario A（main.jsx 不改）；check-relative-imports.cjs 全部解析通过。"
+}

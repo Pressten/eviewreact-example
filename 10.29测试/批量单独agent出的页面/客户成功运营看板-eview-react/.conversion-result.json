@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "Phase 1 完成：源 src/ 23 文件 + app.css + app.jsx + icon.jsx + chart.jsx 搬入目标；8 处 icon import 改 @/shared/Icon；chart import 改 @/shared/chart.jsx；2 处 ./assets/uploads/user.png 改 /uploads/user.png；app.jsx 删除 antd ConfigProvider/locale/Empty；context.jsx 加 body.aui3_1_dark 双轨暗色；icon.jsx export default；i18n scenario A（main.jsx scaffold IntlProvider 已就绪，未改）；check-relative-imports.cjs exit=0。"
+}

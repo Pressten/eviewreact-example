@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "Stage 1 done by orchestrator directly (subagent unavailable at this delegation depth). Moved 27 source files into target (19 byte-copied via node script + 8 view jsx byte-copied then edited); app.jsx rewritten with antd ConfigProvider/zhCN removed, imports fixed ./src/ -> ./; context.jsx dual-track dark toggle added (body.aui3_1_dark + html.dark); icon.jsx -> src/shared/Icon/Icon.jsx with export default; 6 view icon imports -> @/shared/Icon; step-verify/step-assess ./assets/uploads/ -> /uploads/; transitional assets/shared/chart.jsx kept for stage 2 replacement. i18n scenario A (hardcoded zh), main.jsx IntlProvider already in scaffold, no business locale files."
+}
