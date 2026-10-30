@@ -1,0 +1,5 @@
+/* ⑤ 城市排行 — 山峰图固定高度容器 */
+.city-chart {
+  height: 17.5rem;
+  min-width: 0;
+}

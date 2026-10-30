@@ -1,0 +1,269 @@
+/* 右侧面板：大促冲刺工作台 */
+.sprint-panel {
+  flex: 0 0 20.5rem;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  background: var(--surface-container-lowest);
+  border-left: 1px solid var(--divider);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+}
+
+.sprint-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+  flex: 0 0 auto;
+}
+
+.sprint-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: var(--spacing-3) var(--spacing-3) var(--spacing-4);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  flex: 0 0 auto;
+}
+
+.sprint-section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+/* 倒计时 */
+/* 倒计时：整体垂直居中对齐（天数大数字与时间盒同轴） */
+.cd-row {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.cd-days {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1875rem;
+  color: var(--critical);
+  line-height: 1;
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+}
+
+.cd-days em {
+  font-style: normal;
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.cd-box {
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--inverse-surface);
+  color: var(--inverse-on-surface);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  border-radius: var(--radius-xs);
+}
+
+/* 暗色修正：inverse 一对 token 在暗色下同为亮色（白底白字不可读），
+   显式反转为亮底深字，保持与浅色模式对称的高对比时间片观感 */
+.dark .sprint-panel .cd-box {
+  background: var(--gray-0);
+  color: var(--gray-90);
+}
+
+.cd-over {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--critical);
+}
+
+.cd-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cd-progress-label {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+}
+
+/* 数据速览 */
+.stat-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4375rem 0;
+}
+
+.stat-row + .stat-row {
+  border-top: 1px solid var(--divider);
+}
+
+.stat-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-base);
+  background: var(--primary-container);
+  color: var(--primary);
+  flex: 0 0 auto;
+}
+
+.stat-icon-critical {
+  background: var(--critical-container);
+  color: var(--critical);
+}
+
+.stat-label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  flex: 1 1 0;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-value {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.stat-value-critical {
+  color: var(--critical);
+}
+
+.stat-delta {
+  font: var(--font-caption-s);
+  color: var(--success);
+  font-weight: var(--font-weight-medium);
+  min-width: 3.25rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.stat-delta-muted {
+  color: var(--on-surface-variant);
+  font-weight: var(--font-weight-normal);
+}
+
+/* 操作动态 */
+.sprint-activity {
+  flex: 1 1 0;
+  min-height: 10rem;
+}
+
+.activity-tag {
+  margin-left: auto;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.375rem;
+  padding: 0.3125rem 0;
+}
+
+.activity-item + .activity-item {
+  border-top: 1px solid var(--divider);
+}
+
+.activity-icon {
+  width: 1.375rem;
+  height: 1.375rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-base);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  flex: 0 0 auto;
+  margin-top: 0.0625rem;
+}
+
+.activity-text {
+  flex: 1 1 0;
+  min-width: 0;
+  font: var(--font-caption-m);
+  color: var(--on-surface);
+  line-height: var(--line-height-md);
+}
+
+.activity-time {
+  font: var(--font-caption-s);
+  color: var(--text-placeholder);
+  font-variant-numeric: tabular-nums;
+  flex: 0 0 auto;
+  margin-top: 0.125rem;
+}
+
+.activity-empty {
+  font: var(--font-caption-m);
+  color: var(--text-placeholder);
+  padding: 0.5rem 0;
+}
+
+/* 检查清单 */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.checklist-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+  font: var(--font-caption-s);
+  color: var(--text-placeholder);
+  line-height: var(--line-height-md);
+}
+
+/* 窄屏（面板移至页面底部随文档滚动）时取消弹性伸缩，改限高滚动 */
+@media (max-width: 70rem) {
+  .sprint-activity {
+    flex: none;
+  }
+
+  .activity-list {
+    flex: none;
+    max-height: 18rem;
+  }
+}

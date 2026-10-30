@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "chart-options": "PASS",
+    "css": "PASS",
+    "dark-mode": "PASS",
+    "i18n-keys": "PASS",
+    "imports": "PASS",
+    "messagedialog-defaults": "PASS",
+    "props-preserved": "PASS",
+    "provider": "PASS",
+    "steps-defaults": "PASS",
+    "table-defaults": "PASS",
+    "token-drift": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": []
+}

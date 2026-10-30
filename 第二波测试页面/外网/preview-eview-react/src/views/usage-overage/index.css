@@ -1,0 +1,101 @@
+/* ⑤ 用量与超额 */
+.cb-uo-legend {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+}
+.cb-uo-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+.cb-uo-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+.cb-uo-dot-normal { background: var(--success); }
+.cb-uo-dot-warning { background: var(--critical); }
+.cb-uo-dot-overage { background: var(--error); }
+
+/* 图表卡 */
+.cb-uo-chart-card {
+  background: var(--surface-container);
+  border-radius: var(--radius-container);
+}
+.cb-uo-chart-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-stack);
+}
+.cb-uo-chart-title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.cb-uo-chart-sub {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+.cb-uo-chart-box {
+  height: 20rem;
+  width: 100%;
+}
+
+/* 用量三态条 */
+.cb-uo-states {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-gutter);
+}
+.cb-uo-state {
+  background: var(--surface-container);
+  border-radius: var(--radius-container);
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cb-uo-state-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.cb-uo-state-bar {
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  background: var(--surface-variant);
+  overflow: hidden;
+}
+.cb-uo-state-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+.cb-uo-state-normal .cb-uo-state-fill { background: var(--success); }
+.cb-uo-state-warning .cb-uo-state-fill { background: var(--critical); }
+.cb-uo-state-overage .cb-uo-state-fill { background: var(--error); }
+.cb-uo-state-num {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+/* 超额明细表 */
+.cb-uo-over-title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  margin-bottom: var(--spacing-stack);
+}
+.cb-uo-over-num {
+  color: var(--error);
+  font-weight: var(--font-weight-medium);
+}
+.cb-uo-over-fee {
+  color: var(--error);
+  font-weight: var(--font-weight-semibold);
+}

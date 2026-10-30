@@ -1,0 +1,238 @@
+/* ⑦ 续约与变更 */
+.cb-rc-countdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-gutter);
+  align-items: center;
+  background: var(--surface-container);
+  border-radius: var(--radius-container);
+  padding: var(--spacing-inset);
+}
+.cb-rc-cd-left {
+  display: flex;
+  justify-content: center;
+}
+.cb-rc-cd-right {
+  display: flex;
+  justify-content: center;
+}
+.cb-rc-cd-date-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.cb-rc-cd-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+.cb-rc-cd-date {
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.cb-rc-cd-days {
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+  margin-top: 0.25rem;
+}
+.cb-rc-cd-days strong {
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-bold);
+  color: var(--error);
+}
+.cb-rc-cd-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+}
+/* 手写圆形进度条 */
+.cb-rc-circle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.cb-rc-circle-track {
+  stroke: var(--outline-variant);
+}
+.cb-rc-circle-progress {
+  stroke: var(--error);
+  transition: stroke-dashoffset 0.3s;
+}
+.cb-rc-circle-text {
+  position: absolute;
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.cb-rc-cd-progress-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.cb-rc-cd-progress-text {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.cb-rc-cd-warn {
+  font: var(--font-body-s);
+  color: var(--error);
+}
+
+.cb-rc-plans-title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.cb-rc-plans {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-gutter);
+}
+.cb-rc-plan {
+  position: relative;
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-container);
+  padding: var(--spacing-inset);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack);
+}
+.cb-rc-plan-sel {
+  border: 2px solid var(--primary);
+  background: var(--primary-container);
+}
+.cb-rc-plan-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+}
+.cb-rc-plan-name {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  padding-right: 3rem;
+}
+.cb-rc-plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+.cb-rc-plan-fee {
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary);
+}
+.cb-rc-plan-unit {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+.cb-rc-plan-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cb-rc-plan-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+}
+.cb-rc-plan-row svg {
+  color: var(--on-surface-variant);
+}
+.cb-rc-plan-row span {
+  flex-shrink: 0;
+}
+.cb-rc-plan-row strong {
+  color: var(--on-surface);
+  font-weight: var(--font-weight-medium);
+}
+
+.cb-rc-history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack);
+}
+.cb-rc-timeline {
+  padding-top: var(--spacing-stack);
+}
+.cb-rc-tl-node {
+  position: relative;
+  padding-left: 1.5rem;
+  padding-bottom: var(--spacing-stack);
+}
+.cb-rc-tl-node::before {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  top: 0.5rem;
+  bottom: 0;
+  width: 2px;
+  background: var(--outline-variant);
+}
+.cb-rc-tl-node:last-child {
+  padding-bottom: 0;
+}
+.cb-rc-tl-node:last-child::before {
+  display: none;
+}
+.cb-rc-tl-dot {
+  position: absolute;
+  left: 0;
+  top: 0.375rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  border: 2px solid var(--surface-container-highest);
+  box-sizing: border-box;
+}
+.cb-rc-tl-dot-success {
+  background: var(--success);
+}
+.cb-rc-tl-dot-info {
+  background: var(--info);
+}
+.cb-rc-tl-dot-default {
+  background: var(--color-none);
+}
+.cb-rc-tl-dot-error {
+  background: var(--error);
+}
+.cb-rc-tl-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.cb-rc-tl-head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+.cb-rc-tl-time {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.cb-rc-tl-desc {
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+}
+.cb-rc-tl-operator {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+/* DivMessage 浮层（复刻 antd message 顶部居中定位） */
+.cb-notice-floating {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+}

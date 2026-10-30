@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "28 源文件全部搬入 TARGET/src/（含 app.jsx 暗色转换、icon.jsx→shared/Icon/Icon.jsx 默认导出）。chart.jsx 共享件拷到 TARGET/assets/shared/chart.jsx 使 8 个 ../../../assets/shared/chart.jsx 相对导入解析通过。9 个业务 Icon import 改为 import Icon from '@/shared/Icon'。global-nav 的 ./assets/uploads/logo.svg|user.png 改为 /uploads/。app.jsx 删除 antd ConfigProvider（含 zhCN locale + wave/renderEmpty/empty/spin props），保留 import { Empty } from 'antd'（阶段2 处理），unwrap ConfigProvider children 作根节点。context.jsx AppProvider useEffect 增补 document.body.classList.toggle('aui3_1_dark', isDark) 与原有 <html>.dark 并行。scenario A：main.jsx 无需改（scaffold IntlProvider 已就绪），无 antd locale 残留。check-relative-imports.cjs exit=0。"
+}

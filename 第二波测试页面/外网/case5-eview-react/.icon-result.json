@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 32,
+  "confirmed": 12,
+  "residual": 20,
+  "shimRetained": [],
+  "checkIconShimStrict": "PASS (exit=0; 0 shim sites, 0 stale-shim-import, 0 unconverted-icon-source)",
+  "filesChanged": [
+    "src/components/metric-card/index.jsx",
+    "src/views/category-margin/index.jsx",
+    "src/views/city-rank/index.jsx",
+    "src/views/global-nav/index.jsx",
+    "src/views/region-progress/index.jsx",
+    "src/views/report-header/index.jsx",
+    "src/views/sales-funnel/index.jsx",
+    "src/views/store-compare/index.jsx",
+    "src/views/weekly-news/index.jsx",
+    "src/mock/weekly-report.jsx"
+  ],
+  "residualHandling": {
+    "closedSetConverted": [
+      {
+        "site": "src/components/metric-card/index.jsx:33  name={kpi.icon} (untraced cross-prop)",
+        "verdict": "closed-set",
+        "evidence": "kpi prop <- KpiCards kpiList <- buildKpiList() <- static const KPI_META (4 string-literal icons: banknote/users/receipt/user-plus). Source traceable in src/mock/weekly-report.jsx. Per Icon.md §跨组件边界 props 闭合字面量集 -> convert.",
+        "dataSource": "src/mock/weekly-report.jsx KPI_META: 4 icon:\"lit\" -> icon:<IconPlusIc.../> elements (iconSize 1rem from render site); render <Icon name={kpi.icon}/> -> {kpi.icon}."
+      },
+      {
+        "site": "src/views/weekly-news/index.jsx:141  name={tip.tipIcon} (data array)",
+        "verdict": "closed-set",
+        "evidence": "tip <- MANAGEMENT_TIPS static const array in src/mock/weekly-report.jsx; tipIcon fields are string literals (target/trophy/shopping-cart/package). Script auto-converted render + MT2 trophy(real); 3 placeholders replaced manually.",
+        "dataSource": "src/mock/weekly-report.jsx MANAGEMENT_TIPS: MT1 target->IconPlusIcCarTargetForecast, MT3 shopping-cart->IconPlusIcPublicCart, MT4 package->IconPlusIcPublicBox (placeholders replaced)."
+      },
+      {
+        "site": "src/components/metric-card/index.jsx:41  name={isUp ? \"arrow-up-right\" : \"arrow-down-right\"} (flat ternary)",
+        "verdict": "closed-set (both leaves literals)",
+        "action": "-> {isUp ? <IconPlusIcPublicSortUp/> : <IconPlusIcPublicSortDown/>} (both branches were script UNMATCHED residual; assembled manually)."
+      }
+    ],
+    "literalResidualReplacements": {
+      "arrow-up-right": "IconPlusIcPublicSortUp",
+      "arrow-down-right": "IconPlusIcPublicSortDown",
+      "chevrons-up-down": "IconPlusIcIctMoveUpAndDown",
+      "award": "IconPlusIcPublicStar",
+      "chart-column": "IconPlusIcPublicChartBar",
+      "map-pin": "IconPlusIcPublicMappinOnMap",
+      "trending-up": "IconPlusIcIctMoveUp",
+      "store": "IconPlusIcHuaweiCloudStoreNew",
+      "arrow-down": "IconPlusIcPublicChevronDown",
+      "repeat": "IconPlusIcPublicRefreshClockwise",
+      "newspaper": "IconPlusIcPublicNotice",
+      "lightbulb": "IconPlusIcDigitalPowerDpTips"
+    },
+    "srcImageSite": {
+      "site": "src/views/global-nav/index.jsx:34  <Icon src=\"/uploads/logo.svg\" size=\"1.5rem\"/> (name=null / type:none)",
+      "verdict": "not an icon-name site; brand logo loaded by URL (custom asset)",
+      "action": "Converted to plain <img src=\"/uploads/logo.svg\" alt=\"品牌标识\" style={{width:'1.5rem',height:'1.5rem',display:'inline-block',verticalAlign:'middle'}}/> (matches existing .nav-user-avatar <img> pattern). icon+ cannot render arbitrary URL assets; Icon shim's src branch only wraps an <img>, so <img> is the correct primitive. Removed now-unused `import Icon from '@/shared/Icon'`."
+    }
+  },
+  "dataSourceIconLiteralsConverted": [
+    "src/mock/weekly-report.jsx KPI_META: banknote->IconPlusIcPublicMoneyCircle, users->IconPlusIcPublicPerson, receipt->IconPlusIcPublicInvoice, user-plus->IconPlusIcPublicAddMember",
+    "src/mock/weekly-report.jsx MANAGEMENT_TIPS: target->IconPlusIcCarTargetForecast, shopping-cart->IconPlusIcPublicCart, package->IconPlusIcPublicBox (placeholders replaced); trophy was script-confirmed real"
+  ],
+  "leftoverIssues": []
+}

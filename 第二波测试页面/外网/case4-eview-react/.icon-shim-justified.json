@@ -1,0 +1,10 @@
+[
+  {
+    "file": "src/views/top-nav/index.jsx",
+    "line": 102,
+    "expr": "src=\"/uploads/logo.svg\"",
+    "source": "src/views/top-nav/index.jsx line 102 — <Icon src=\"/uploads/logo.svg\" size=\"1.5rem\" />, user-asset img render (平台 Logo), NOT a name-based icon; renders the SVG asset at /uploads/logo.svg via the shim's src/asset mode. This is a static uploaded SVG asset, not an icon-name from a runtime/backend icon set — it is a user asset render that legitimately stays on the shim by design (Icon.md 渲染方式 A src/asset mode). closedSet:false.",
+    "closedSet": false,
+    "reason": "Asset render (<Icon src=\"/uploads/logo.svg\">), not a name-based icon — renders a static uploaded SVG asset (平台 Logo) via the shim's src/asset mode; this is a user-asset render (运行时 asset, /uploads/), NOT an icon-name from any 后端/接口 icon set or props icon field. It is not a closed or open icon-name set at all — it is an asset render that stays on the shim by design (Icon.md 渲染方式 A src/asset mode). No name= expression exists to convert; the src points to a fixed uploaded asset file."
+  }
+]

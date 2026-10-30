@@ -1,0 +1,92 @@
+/* 应用级骨架 — 一页式周报: 页容器 / 12 栅格区块排布 / 打印友好 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+/* 页面容器 — 全宽占满视口（数据密集型周报,图表优先用满横向空间）,仅保留页边距 */
+.report-page {
+  max-width: none;
+  padding: var(--spacing-6) var(--spacing-page) var(--spacing-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gutter);
+}
+
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-gutter);
+}
+
+.span-7 {
+  grid-column: span 7;
+  min-width: 0;
+}
+
+.span-5 {
+  grid-column: span 5;
+  min-width: 0;
+}
+
+.span-12 {
+  grid-column: span 12;
+  min-width: 0;
+}
+
+/* ② 周核心指标区块标签（页头为 01,编号 02~09 与各卡片角标连贯）*/
+.kpi-section-label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-inline);
+  padding: var(--spacing-1) var(--spacing-1) 0;
+}
+
+.kpi-section-name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.kpi-section-note {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.report-footer {
+  padding: var(--spacing-4) 0 0;
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+  text-align: center;
+  border-top: 1px solid var(--divider);
+}
+
+@media (max-width: 80rem) {
+  .span-7,
+  .span-5 {
+    grid-column: span 12;
+  }
+}
+
+/* 打印/导出 PDF: 隐藏纯交互控件,去阴影,区块不跨页断开 */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .app-root {
+    background: var(--surface-bright);
+  }
+
+  .report-page {
+    max-width: none;
+    padding: 0;
+  }
+
+  .report-section {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+}

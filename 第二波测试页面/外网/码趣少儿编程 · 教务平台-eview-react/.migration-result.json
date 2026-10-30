@@ -1,0 +1,132 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "chart-options": "ADVISORY",
+    "css": "ADVISORY",
+    "dark-mode": "PASS",
+    "i18n-keys": "PASS",
+    "imports": "PASS",
+    "messagedialog-defaults": "PASS",
+    "props-preserved": "ADVISORY",
+    "steps-defaults": "PASS",
+    "table-defaults": "PASS",
+    "token-drift": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [
+    {
+      "check": "chart-options",
+      "item": "src/views/student-drawer/index.jsx:130 <Chart> option 是外部变量 chartOption，无法静态确认，请人工核对含 a2ui: true 与 theme",
+      "resolution": "已人工核对通过——student-drawer 第33-44行 chartOption 由 {...chartBase} 展开，chartBase = { a2ui: true, theme: isDark ? 'hdesign-dark' : 'hdesign-light' }（isDark 取自 useApp()）。option 含 a2ui:true 与 theme（随暗色派生）。脚本仅因外部变量无法静态到达而报 advisory，非真实缺失。"
+    },
+    {
+      "check": "css",
+      "item": "src/views/student-drawer/index.css:30 使用组件库类名 .ev_drawer_headerTitle（若是自定义类名违规——应用 app- 前缀；若是覆盖组件库样式则允许）",
+      "resolution": "覆盖组件库样式（允许）——.ev_drawer_headerTitle 是 eview-react Drawer 渲染出的真实 DOM 类名，此处通过 .student-drawer-root 限定作用域覆盖其对齐方式（align-items: flex-start），使关闭按钮与标题顶部对齐。非自定义类名，保留。"
+    },
+    {
+      "check": "css",
+      "item": "src/views/toolbar/index.css:16 使用组件库类名 .ev_crumbs（若是自定义类名违规——应用 app- 前缀；若是覆盖组件库样式则允许）",
+      "resolution": "覆盖组件库样式（允许）——.ev_crumbs 是 eview-react Crumbs 渲染出的真实 DOM 类名，此处通过 .toolbar-left 限定作用域覆盖其字体（font: var(--font-body-m)）。非自定义类名，保留。"
+    },
+    {
+      "check": "props-preserved",
+      "item": "views/share-modal/index.jsx:75 [TextField] TextField 调用点（源 Input 行75）className 被丢弃（源 className: share-link-input）",
+      "resolution": "未丢弃——className 已保留。源 Input 行75 在迁移后对应 share-modal/index.jsx:79 <TextField value={link} readOnly className=\"share-link-input\" />，className=\"share-link-input\" 原样透传给 @/shared/TextField 包壳（包壳合并为 evTextField-custom share-link-input）。脚本报 advisory 因行号偏移未匹配到，实际已保留。"
+    },
+    {
+      "check": "manual",
+      "item": "Dropdown@toolbar",
+      "resolution": "手写点击展开浮层——toolbar 的排序下拉与新建下拉均改为手写 MoreMenu（span + 绝对定位 ul.more-menu__popover），保留点击展开/选中高亮/分隔符语义。"
+    },
+    {
+      "check": "manual",
+      "item": "Dropdown@alert-list",
+      "resolution": "手写点击展开浮层——alert-list 操作列的更多操作下拉改为手写 MoreMenu（含查看详情/升级级别/转派负责人三项）。"
+    },
+    {
+      "check": "manual",
+      "item": "Dropdown@file-list",
+      "resolution": "手写点击展开浮层——file-list 行操作更多菜单改为手写 RowMoreMenu（含 download/rename/move/divider/share/history/divider/delete，保留分隔符与 danger 态）。"
+    },
+    {
+      "check": "manual",
+      "item": "Dropdown@header-bar",
+      "resolution": "手写——header-bar 用户头像下拉改为手写点击展开 ul.more-menu__popover（个人中心/账号设置/分隔符/退出登录）；全局搜索历史/热门浮层由 antd Dropdown dropdownRender 改为条件渲染 div.search-panel（聚焦显示）。"
+    },
+    {
+      "check": "manual",
+      "item": "Dropdown@space-tree",
+      "resolution": "手写点击展开浮层——space-tree 树节点的更多操作下拉改为手写 NodeMoreMenu（重命名/移动/分隔符/删除）。"
+    },
+    {
+      "check": "manual",
+      "item": "ColorPicker@appearance-section",
+      "resolution": "手写预设色板按钮组——appearance-section 的主题色选择改为手写色板（当前色按钮 + 点击展开 THEME_PRESETS 8 色色卡，点击选色 update themeColor）。保留源选色语义（THEME_PRESETS 色值数组）。"
+    },
+    {
+      "check": "manual",
+      "item": "Anchor@settings-side",
+      "resolution": "手写左侧锚点导航——settings-side 改为 ul + a 列表，点击 scrollIntoView 定位右侧分组（getElementById + scrollIntoView smooth），active 态高亮。保留源锚点导航语义。"
+    },
+    {
+      "check": "manual",
+      "item": "Tree@space-tree",
+      "resolution": "手写递归树——space-tree 改为手写 TreeNode 递归组件（treeRaw 数据结构保留），展开/选择语义保留（expandedKeys Set + 点击 toggle，selectedKey 高亮 + onSelect 回调）。未用 @/shared/TreeSelector（其 API 承接 treeRaw 需额外数据格式转换，手写递归更直接对齐源语义）。"
+    },
+    {
+      "check": "manual",
+      "item": "Menu@sidebar→Accordion",
+      "resolution": "Menu→Accordion——sidebar 侧边导航改为 @nce/eview-react/Accordion（data 驱动，key/label/icon → value/title/icon，selectedKeys 数组 → selectedValue 单 string，inlineCollapsed → expanded 反转语义）。hideTitleBar=true。"
+    },
+    {
+      "check": "manual",
+      "item": "Timeline@detail-panel",
+      "resolution": "手写时间轴 div+css——detail-panel 最近动态改为 div.tl-item + tl-item__rail（dot + 连接线）+ tl-content，保留源 items 数据结构（activities.map 渲染）。"
+    },
+    {
+      "check": "manual",
+      "item": "Timeline@student-drawer",
+      "resolution": "手写时间轴 div+css——student-drawer 上课记录改为 div.rec-timeline__item + rec-timeline__rail（dot 颜色随出勤态 + 连接线）+ rec-item，保留源 records 数据结构。"
+    },
+    {
+      "check": "manual",
+      "item": "Timeline@handover-timeline",
+      "resolution": "手写时间轴 div+css——handover-timeline 值班交接改为 div.tl-item + tl-item__rail（dot 用 hex 色 + 连接线）+ tl-content（含可展开详情），保留源 items 数据结构与展开/收起语义。源 antd color preset（green/red/blue/gray）转为 hex 色值。"
+    },
+    {
+      "check": "manual",
+      "item": "Progress@student-table",
+      "resolution": "手写简单进度条——按 handwrite-templates.md §9 模板手写 SimpleProgress（flex track + fill + 百分比文字），status active→primary 蓝、success→success 绿。"
+    },
+    {
+      "check": "manual",
+      "item": "Progress@storage-bar",
+      "resolution": "手写简单进度条——按 handwrite-templates.md §9 模板手写 SimpleProgress（track + fill），strokeColor 保留源 #0067D1/#F4840C，trailColor #DFDFDF，showInfo=false（无百分比文字，百分比由外部 span 显示）。"
+    },
+    {
+      "check": "manual",
+      "item": "IpInput@security-section",
+      "resolution": "IpInput prop 转换——type ipv4→v4；status='error'→validator 返回 {result,message} + hintType='tip'（内置 IPv4 格式校验）；组件名 IpInput→IPInput（import 已为 @/shared/IPInput）。外部 newIpError 业务校验（空/重复）保留为 form-error div。"
+    },
+    {
+      "check": "manual",
+      "item": "Chart@dashboard/realtime-charts/student-drawer",
+      "resolution": "Chart option 补全——每个 option 显式补 a2ui:true + theme（暗色派生 useApp().isDark ? 'hdesign-dark' : 'hdesign-light'），通过 chartBase 聚合 {...chartBase} 展开到每个 option。import 已为 @nce/eview-react/Chart（阶段1已改）。"
+    },
+    {
+      "check": "manual",
+      "item": "Modal→Dialog@save-bar/security-section/share-modal/silence-modal",
+      "resolution": "C 类模式转换——Modal open→Dialog isOpen，onCancel→onClose（自行置 false），footer/onOk/cancelText/okText→buttons 数组（[{text,status,onClick}]），okButtonProps danger→按钮 status:'risk'，width→size=[w,'auto']，destroyOnClose 透传。"
+    },
+    {
+      "check": "manual",
+      "item": "message→DivMessage（12 文件）",
+      "resolution": "message.xxx() 命令式→DivMessage 声明式（display + type + text + key + onClose + enableDisposeTimeOut 默认）。外层包裹 position:fixed top:16 left:50% translateX(-50%) zIndex:1050 复刻 antd message 顶部居中浮层。type 映射：success→success，info→default，warning→warn。notice state 驱动显隐。"
+    }
+  ]
+}

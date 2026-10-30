@@ -1,0 +1,88 @@
+/* 周核心指标卡 — 可点击卡片,悬停浮起 + 键盘焦点环 */
+.metric-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-4) var(--spacing-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  cursor: pointer;
+  min-width: 0;
+  transition: box-shadow 0.2s ease;
+}
+
+.metric-card:hover {
+  box-shadow: var(--shadow-base);
+}
+
+.metric-card:focus-visible {
+  outline: var(--outline-width-focus) solid var(--focus-ring);
+  outline-offset: var(--outline-offset-gap);
+}
+
+.metric-head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.metric-icon {
+  display: inline-flex;
+  color: var(--primary);
+}
+
+.metric-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.metric-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-inline);
+}
+
+.metric-value {
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-bold);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--line-height-sm);
+}
+
+.metric-unit {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.metric-yoy {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font: var(--font-body-s);
+}
+
+.metric-yoy.up {
+  color: var(--success);
+}
+
+.metric-yoy.down {
+  color: var(--error);
+}
+
+.metric-trend {
+  height: 3.2rem;
+  margin-top: var(--spacing-1);
+  min-width: 0;
+}
+
+.metric-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font: var(--font-caption-m);
+  color: var(--interactive-link);
+  align-self: flex-end;
+}

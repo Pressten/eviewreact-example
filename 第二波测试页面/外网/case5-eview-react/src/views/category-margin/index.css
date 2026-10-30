@@ -1,0 +1,5 @@
+/* ⑥ 品类毛利率 — 玉玦图固定高度容器 */
+.category-chart {
+  height: 17.5rem;
+  min-width: 0;
+}

@@ -1,0 +1,109 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 66,
+  "confirmed": 17,
+  "residual": 24,
+  "residualHandled": {
+    "fuzzyUnmatchedConverted": 24,
+    "untracedDynamicConverted": 5,
+    "dataArrayPlaceholderFixed": 3,
+    "retainedShimTrueOpen": 0
+  },
+  "shimRetained": [],
+  "assetRenderSitesNotListed": [
+    {
+      "file": "src/views/top-nav/index.jsx",
+      "line": 102,
+      "expr": "src=\"/uploads/logo.svg\"",
+      "note": "User-asset img render (<Icon src=...>), NOT a name-icon shim. Stays on shim by design for asset rendering. Justified in .icon-shim-justified.json (closedSet:false, OPEN evidence: runtime /uploads/ asset, not an icon-name set). Not counted in shimRetained per task definition."
+    }
+  ],
+  "checkIconShimStrict": {
+    "exitCode": 0,
+    "unjustified": 0,
+    "staleShimImport": 0,
+    "unconvertedIconSource": 0,
+    "verdict": "PASS"
+  },
+  "convertedDataSources": [
+    {
+      "file": "src/mock/decoration.jsx",
+      "note": "Renamed .js->.jsx; 3 closed literal arrays converted: COMPONENT_TYPES (12 icons), SPRINT_META.stats (3 icons), INITIAL_ACTIVITY (3 icons). All icon:lit -> icon:<IconPlusIc.../>. 7 referencing imports updated to .jsx.",
+      "arrays": ["COMPONENT_TYPES", "SPRINT_META.stats", "INITIAL_ACTIVITY"]
+    },
+    {
+      "file": "src/context.jsx",
+      "note": "ACTIVITY_ICONS push-function map (13 keys) converted from string values to <IconPlusIc.../> elements; icon-plus import added. Push-function closed set feeds state.activity -> sprint-panel item.icon render (now {item.icon})."
+    },
+    {
+      "file": "src/views/smart-suggest/index.jsx",
+      "note": "useMemo suggestions array: 5 closed literal icon fields (circle-alert/images/zap/alarm-clock/layers) converted to <IconPlusIc.../>; render <Icon name={sug.icon}> -> {sug.icon}."
+    },
+    {
+      "file": "src/views/top-nav/index.jsx",
+      "note": "NAV_ITEMS (4) + NOTICE_ITEMS (3) data arrays: 3 placeholder sites (store/marketing-megaphone/n-03-megaphone) fixed to real IconPlusIc (HuaweiCloudStoreNew/Horn/Horn)."
+    }
+  ],
+  "iconNameMapping": {
+    "download": "IconPlusIcPublicDownload",
+    "chevron-down": "IconPlusIcPublicChevronDown",
+    "refresh-cw": "IconPlusIcPublicRefreshClockwise",
+    "ellipsis": "IconPlusIcPublicEllipsis",
+    "circle-check": "IconPlusIcPublicCheckmark",
+    "alarm-clock": "IconPlusIcPublicAlarmClock",
+    "info": "IconPlusIcPublicInfo",
+    "copy": "IconPlusIcPublicCopy",
+    "trash-2": "IconPlusIcPublicTrash",
+    "layers": "IconPlusIcCarLayers",
+    "plus": "IconPlusIcPublicPlus",
+    "search": "IconPlusIcPublicSearch",
+    "image": "IconPlusIcPublicImage",
+    "clock": "IconPlusIcPublicClock",
+    "sparkles": "IconPlusIcPublicStar",
+    "rocket": "IconPlusIcPublicRocket",
+    "log-out": "IconPlusIcIctLogOut",
+    "sun": "IconPlusIcPublicSun",
+    "moon": "IconPlusIcPublicMoon",
+    "file-text": "IconPlusIcPublicFiles",
+    "chart-column": "IconPlusIcPublicChart",
+    "crown": "IconPlusIcIctTrophy",
+    "badge-check": "IconPlusIcDigitalPowerDpCheck",
+    "paint-roller": "IconPlusIcPublicBrush",
+    "panel-right": "IconPlusIcDigitalPowerPvPanel",
+    "arrow-up-to-line": "IconPlusIcDigitalPowerDpToTop",
+    "pencil": "IconPlusIcIctBulkEdit",
+    "arrow-up": "IconPlusIcDigitalPowerDpArrowMoveUp",
+    "arrow-down": "IconPlusIcPublicSortDown",
+    "circle-check-big": "IconPlusIcPublicSuccess",
+    "circle-dot": "IconPlusIcPublicScopeDot",
+    "image-up": "IconPlusIcPublicUpload",
+    "repeat": "IconPlusIcIctRepeatedCoverage",
+    "save": "IconPlusIcPublicDisk",
+    "cloud-upload": "IconPlusIcPublicUpload",
+    "rotate-ccw": "IconPlusIcIctReverses",
+    "trending-up": "IconPlusIcDigitalPowerDpArrowMoveUp",
+    "file-check": "IconPlusIcDigitalPowerDpCheck",
+    "scroll-text": "IconPlusIcPublicLists",
+    "store": "IconPlusIcHuaweiCloudStoreNew",
+    "user-round": "IconPlusIcPublicPerson",
+    "shield-check": "IconPlusIcPublicSecurity",
+    "bell": "IconPlusIcPublicNotice",
+    "images": "IconPlusIcPublicImage",
+    "zap": "IconPlusIcPublicFlash",
+    "package": "IconPlusIcPublicBox",
+    "video": "IconPlusIcPublicVideo",
+    "ticket-percent": "IconPlusIcBpitTicket",
+    "megaphone": "IconPlusIcPublicHorn",
+    "layout-grid": "IconPlusIcPublicSquare",
+    "headset": "IconPlusIcPublicHeadset",
+    "timer": "IconPlusIcDigitalPowerDpTimer",
+    "users": "IconPlusIcPublicTeams",
+    "percent": "IconPlusIcIctRate",
+    "wallet": "IconPlusIcPublicMoneyCircle",
+    "toggle-left": "IconPlusIcIctSwitch",
+    "circle-alert": "IconPlusIcPublicAlert"
+  },
+  "unresolvedIssues": []
+}

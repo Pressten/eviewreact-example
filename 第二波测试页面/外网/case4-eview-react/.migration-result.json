@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS(skip)",
+    "i18n-keys": "PASS",
+    "imports": "PASS",
+    "chart-options": "PASS",
+    "table-defaults": "PASS",
+    "provider": "PASS",
+    "css": "PASS",
+    "token-drift": "PASS",
+    "props-preserved": "PASS",
+    "steps-defaults": "PASS",
+    "dark-mode": "PASS",
+    "messagedialog-defaults": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": []
+}

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 36,
+  "confirmed": 14,
+  "residual": 22,
+  "shimRetained": [],
+  "notes": {
+    "confirmedDetail": "match-icons.cjs --apply 自动改写 14 处调用点（13 处字面量 + 1 处扁平三元 page-header:73 isDark?sun:moon，两分支均 SEMANTIC/L1 命中 IconPlusIcPublicSun/IconPlusIcPublicMoon），覆盖 7 个 .jsx 文件、13 个唯一 icon+ 名。usage-overage 因仅含 residual 未被脚本触碰。",
+    "residualDetail": "22 处调用点（17 个脚本 residual 唯一名 + handshake 仅出现在三元分支 = 18 唯一名）全部手工按 catalog 语义/token 重叠选取 icon+ 静态 import 转换：receipt→PublicInvoice, file-text→DigitalPowerDpDocText, phone→PublicTelephone, building-2→PublicBuilding, calendar-days→PublicCalendar, calendar-clock→PublicDocClock, contact→PublicInfo, landmark→PublicBuilding, gauge→PublicDashboard, handshake→IctAgreement, circle-check-big→DigitalPowerDpCheck(对齐脚本 top 候选), package→PublicGift, piggy-bank→PublicMoneyCircle, shield-check→DigitalPowerSecurityProtection, users→DigitalPowerDpUserCluster, user-round→CarUser, mail→PublicMailing, git-compare→IndustryCompare。renewal-change:139 闭合三元 isSel?circle-check-big:handshake 按表达式位裸拼（leftIcon prop 容器，不加内层 {}）。所有 8 个文件的 import Icon from '@/shared/Icon' 已删除。",
+    "ternaryHandling": "两处扁平三元均为闭合集（两分支字面量）：page-header:73 由脚本 --apply 自动转条件渲染（confirmed）；renewal-change:139 两分支均 UNMATCHED，脚本插占位并交 LLM 拼装，已手工替换为 IconPlusIcDigitalPowerDpCheck / IconPlusIcIctAgreement 静态 import。无 OPEN 三元。",
+    "jsToJsx": "src/ 下无 .js 文件（glob 确认），所有源码已是 .jsx；match-icons --apply 改写的 7 个文件均为 .jsx，无 .js→.jsx 转换需求。",
+    "confirmedSiteRepairs": "脚本 --apply 对两处可点击图标 confirmed 站点误删了 onClick/title：payment-invoice:66 download（下载发票 onClick + title）与 page-header:73 主题切换三元（title + onClick={toggleDark}，后者关系硬约束⑬ 黑白主题双轨切换）。已在 <Icon> 调用点范围内手工恢复 props 到 <IconPlusIc*>，未触碰其他组件代码。",
+    "closedSetContract": "全部 36 处 name 值集合均为闭合（字面量/扁平三元，无后端自由取值字段），无真 OPEN，故 shimRetained 为空。src/shared/Icon 兜底件保留（scaffold 预置，未删）但无业务调用点引用。"
+  }
+}

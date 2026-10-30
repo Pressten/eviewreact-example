@@ -1,0 +1,75 @@
+/* 手写下拉菜单（antd Dropdown 无 eview 对应）—— 业务前缀 app-，token 取自四层 CSS */
+.app-dropdown {
+  position: relative;
+  display: inline-flex;
+}
+
+.app-dropdown-trigger {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.app-dropdown-popup {
+  position: absolute;
+  z-index: 1050;
+  min-width: 9rem;
+  padding: var(--spacing-1) 0;
+  background: var(--color-bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-popover);
+  display: flex;
+  flex-direction: column;
+}
+
+/* bottomRight：弹出层右边缘对齐触发器右边缘，位于下方 */
+.app-dropdown-bottomRight {
+  right: 0;
+  top: calc(100% + var(--spacing-1));
+}
+
+.app-dropdown-divider {
+  height: 1px;
+  margin: var(--spacing-1) 0;
+  background: var(--border);
+  border: none;
+}
+
+.app-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  border: none;
+  background: transparent;
+  color: var(--on-surface);
+  font-size: var(--font-size-base);
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.app-dropdown-item:hover {
+  background: var(--hover);
+}
+
+.app-dropdown-item-selected {
+  color: var(--color-text-on);
+  background: var(--select);
+}
+
+.app-dropdown-item-danger {
+  color: var(--color-error);
+}
+
+.app-dropdown-item-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.app-dropdown-item-label {
+  display: inline-flex;
+  align-items: center;
+}

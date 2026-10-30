@@ -1,0 +1,91 @@
+/* ⑦ 目标完成度 — 仪表盘 + 右侧关键数字面板 */
+.gauge-body {
+  display: flex;
+  gap: var(--spacing-gutter);
+  align-items: stretch;
+  min-width: 0;
+}
+
+.gauge-chart-wrap {
+  flex: 1.1;
+  min-width: 0;
+  height: 16.5rem;
+}
+
+.gauge-stats {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--spacing-2);
+}
+
+.gauge-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+  border-bottom: 1px dashed var(--divider);
+  padding-bottom: var(--spacing-1);
+}
+
+.gauge-stat-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.gauge-stat-value {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+}
+
+.gauge-stat-value.tone-exceed {
+  color: var(--success);
+}
+
+.gauge-stat-value.tone-steady {
+  color: var(--info);
+}
+
+.gauge-stat-value.tone-slow {
+  color: var(--critical);
+}
+
+.gauge-stat-value.tone-risk {
+  color: var(--error);
+}
+
+.gauge-note {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  margin: var(--spacing-2) 0 0;
+}
+
+/* 色阶图例 — 与仪表盘 splitColor 四段语义一致 */
+.gauge-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-gutter);
+  padding-top: var(--spacing-3);
+  border-top: 1px dashed var(--divider);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.legend-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  flex-shrink: 0;
+}

@@ -1,0 +1,107 @@
+/* ④ 销售漏斗 — 占比环图 + 逐级转化列表 + 明细弹窗 */
+.funnel-body {
+  display: flex;
+  gap: var(--spacing-gutter);
+  align-items: stretch;
+  min-width: 0;
+}
+
+.funnel-pie-wrap {
+  flex: 1.2;
+  min-width: 0;
+  height: 17.5rem;
+}
+
+.funnel-stages {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--spacing-1);
+}
+
+.funnel-stage-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  padding: var(--spacing-1-5) var(--spacing-2);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.funnel-stage-row:hover {
+  background: var(--surface-variant);
+}
+
+.funnel-stage-row:focus-visible {
+  outline: var(--outline-width-focus) solid var(--focus-ring);
+  outline-offset: var(--outline-offset-gap);
+}
+
+.stage-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.stage-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.stage-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.stage-count {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.stage-share {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.stage-chevron {
+  color: var(--on-surface-variant);
+}
+
+.funnel-conv {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  padding-left: var(--spacing-6);
+}
+
+.funnel-hint {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  margin: var(--spacing-2) 0 0;
+}
+
+.funnel-modal-summary {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  margin: 0 0 var(--spacing-3);
+}
+
+.funnel-modal-summary b {
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}

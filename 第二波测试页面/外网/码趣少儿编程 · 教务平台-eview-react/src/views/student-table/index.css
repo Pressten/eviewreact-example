@@ -1,0 +1,93 @@
+.table-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.table-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-gutter) var(--spacing-inset);
+  border-bottom: 1px solid var(--outline-variant);
+}
+.table-card__title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.table-card__hint {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-body-s);
+  color: var(--critical);
+}
+
+/* 表格与分页器统一左右间距 1rem：作用于 wrapper，避免分页器默认 margin 覆盖导致错位 */
+.table-card .stu-table {
+  padding: 0 1rem;
+  margin-top: 0.75rem;
+}
+
+/* 学员单元格 */
+.student-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+.student-cell__avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--outline-variant);
+}
+.student-cell__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.student-cell__name {
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-m);
+}
+.student-cell__name:hover {
+  color: var(--interactive-link-hover);
+}
+.student-cell__sub {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+/* 课时单元格 */
+.hours-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+.hours-cell__num {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.hours-cell__num.is-low {
+  color: var(--critical);
+}
+.hours-cell__total {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.hours-cell__tag {
+  margin: 0;
+}
+
+/* 操作图标 */
+.stu-table .student-action {
+  color: var(--on-surface-variant);
+}
+.stu-table .student-action:hover {
+  color: var(--primary);
+}
