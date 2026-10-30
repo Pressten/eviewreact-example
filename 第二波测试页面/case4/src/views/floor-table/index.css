@@ -1,0 +1,253 @@
+/* ③ 楼层表格 + ④ 添加组件面板 */
+.floor-section {
+  gap: var(--spacing-3);
+}
+
+.floor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+}
+
+.toolbar-block-label {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.type-select {
+  width: 12.5rem;
+}
+
+.floor-search {
+  width: 12.5rem;
+  margin-left: auto;
+}
+
+.floor-toolbar-batch {
+  padding-top: 0;
+}
+
+.floor-toolbar-batch .toolbar-hint {
+  margin-left: auto;
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 1.25rem;
+  background: var(--divider);
+  margin: 0 0.25rem;
+}
+
+.toolbar-hint {
+  margin-left: auto;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+/* 组件名列 */
+.floor-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.floor-type-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-base);
+  flex: 0 0 auto;
+}
+
+.tone-info {
+  background: var(--color-tag-bg-info);
+  color: var(--color-tag-text-info);
+}
+.tone-error {
+  background: var(--color-tag-bg-error);
+  color: var(--color-tag-text-error);
+}
+.tone-success {
+  background: var(--color-tag-bg-green);
+  color: var(--color-tag-text-green);
+}
+.tone-purple {
+  background: var(--color-tag-bg-purple);
+  color: var(--color-tag-text-purple);
+}
+.tone-cyan {
+  background: var(--color-tag-bg-cyan);
+  color: var(--color-tag-text-cyan);
+}
+.tone-alert {
+  background: var(--color-tag-bg-alert);
+  color: var(--color-tag-text-alert);
+}
+.tone-indigo {
+  background: var(--color-tag-bg-indigo);
+  color: var(--color-tag-text-indigo);
+}
+.tone-warning {
+  background: var(--color-tag-bg-warning);
+  color: var(--color-tag-text-warning);
+}
+.tone-mint {
+  background: var(--color-message-bg-success);
+  color: var(--color-tag-text-success);
+}
+.tone-pink {
+  background: var(--color-tag-bg-pink);
+  color: var(--color-tag-text-pink);
+}
+.tone-orange {
+  background: var(--color-tag-bg-alert);
+  color: var(--color-tag-text-alert);
+}
+.tone-geekblue {
+  background: var(--color-tag-bg-indigo);
+  color: var(--color-tag-text-indigo);
+}
+
+.floor-name-link {
+  color: var(--interactive-link);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.floor-name-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+.sort-number {
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface);
+}
+
+/* UV 占比列：仅进度条（数值悬浮提示） */
+.uv-bar {
+  display: block;
+  width: 6rem;
+  height: 0.375rem;
+  margin-left: auto;
+  background: var(--surface-variant);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.uv-bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--primary);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+/* 类型标签可点击筛选 */
+.type-tag {
+  cursor: pointer;
+}
+
+/* 操作列：纯图标，间距 1rem */
+.floor-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.op-icon {
+  color: var(--on-surface-variant);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.op-icon:hover {
+  color: var(--color-brand);
+}
+
+.op-icon-disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.op-icon-disabled:hover {
+  color: var(--text-disabled);
+}
+
+.op-icon-danger:hover {
+  color: var(--error);
+}
+
+.op-more {
+  cursor: pointer;
+}
+
+/* 当前行（素材替换目标）与新增行高亮 */
+.floor-table .floor-row-selected > td {
+  background: var(--primary-container);
+}
+
+.floor-table .floor-row-selected:hover > td {
+  background: var(--primary-container);
+}
+
+.floor-table .floor-row-hover > td {
+  background: var(--color-hover);
+}
+
+.floor-table .floor-row-highlight > td {
+  animation: row-flash 2.6s ease-out;
+}
+
+@keyframes row-flash {
+  0%,
+  55% {
+    background: var(--primary-container);
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+/* 定时发布列（统一「设置定时」链接，定时详情见悬浮提示/弹窗） */
+.schedule-set {
+  color: var(--interactive-link);
+  white-space: nowrap;
+}
+
+.schedule-set:hover {
+  color: var(--interactive-link-hover);
+}
+
+/* 定时发布弹窗 */
+.schedule-field-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.schedule-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.375rem;
+  margin: var(--spacing-3) 0 0;
+  padding: 0.5rem 0.75rem;
+  background: var(--info-container);
+  border-radius: var(--radius-md);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  line-height: var(--line-height-md);
+}
+
+.schedule-tip svg {
+  flex: 0 0 auto;
+  margin-top: 0.125rem;
+  color: var(--info);
+}

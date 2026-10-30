@@ -1,0 +1,21 @@
+/* 文件类型图标 — 软色块底 + 分类色图标（数据分类视觉丰富度） */
+.file-type-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  flex: none;
+}
+.file-type-icon.ft-rounded {
+  border-radius: var(--radius-md);
+}
+.file-type-icon.ft-rounded {
+  padding: 0.5rem;
+}
+
+.ft-doc { color: var(--primary); background: var(--primary-container); }
+.ft-sheet { color: var(--success); background: var(--success-container); }
+.ft-slide { color: var(--critical); background: var(--critical-container); }
+.ft-pdf { color: var(--error); background: var(--error-container); }
+.ft-image { color: var(--info); background: var(--info-container); }
+.ft-archive { color: var(--on-critical); background: var(--warning-container); }

@@ -1,0 +1,134 @@
+/* 应用级基础样式 — 页面骨架（左管理流 + 右侧大促冲刺工作台） */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.deco-app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  overflow: hidden;
+}
+
+/* 主区：左侧滚动管理流 + 右侧冲刺工作台 */
+.deco-main {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-gutter);
+  overflow: hidden;
+}
+
+.deco-left {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gutter);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* 关键：子块保持自然高度，禁止被压缩 —— 超出视口时由 .deco-left 整体滚动，
+   避免"楼层组件管理"等卡片被压扁裁切（内容溢出即重叠的根因） */
+.deco-left > * {
+  flex: 0 0 auto;
+}
+
+/* 卡片网格：自适应列数，窄屏自动降列（避免挤压重叠） */
+.deco-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: var(--spacing-gutter);
+  align-items: stretch;
+}
+
+/* 双卡行：楼层结构画布 + 智能优化建议 */
+.deco-cards-duo {
+  grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
+}
+
+/* 窄屏（< 70rem）：主区纵向堆叠，整体滚动，卡片内部改限高滚动 */
+@media (max-width: 70rem) {
+  .deco-main {
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .deco-left {
+    flex: none;
+    overflow: visible;
+  }
+
+  .sprint-panel {
+    flex: none;
+    border-left: none;
+    border-top: 1px solid var(--divider);
+    overflow: visible;
+  }
+}
+
+/* 通用卡片容器（div 而非组件）— overflow hidden 兜底：内部内容永不溢出卡片边界 */
+.deco-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 卡片头：允许换行（修复窄屏时标题说明与右侧操作区重叠） */
+.deco-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 0.375rem;
+  gap: var(--spacing-inline);
+  margin-bottom: var(--spacing-3);
+}
+
+.deco-card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  min-width: 0;
+}
+
+.card-title-icon {
+  color: var(--primary);
+  flex: 0 0 auto;
+}
+
+.card-title-caption {
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-normal);
+  color: var(--on-surface-variant);
+  margin-left: var(--spacing-inline);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.card-head-caption {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  flex: 0 0 auto;
+}

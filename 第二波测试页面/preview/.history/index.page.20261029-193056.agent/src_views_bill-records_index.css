@@ -1,0 +1,88 @@
+/* ④ 账单记录 */
+.cb-br-money {
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.cb-br-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-m);
+}
+.cb-br-action:hover {
+  color: var(--interactive-link-hover);
+}
+
+/* 账单明细 Drawer */
+.cb-br-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gutter);
+}
+.cb-br-drawer-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+}
+.cb-br-drawer-no {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.cb-br-drawer-cycle {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  margin-top: 0.25rem;
+}
+.cb-br-drawer-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--primary-container);
+  border-radius: var(--radius-container);
+}
+.cb-br-drawer-amount span {
+  font: var(--font-body-m);
+  color: var(--on-primary-container);
+}
+.cb-br-drawer-amount strong {
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary);
+}
+.cb-br-drawer-items-title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.cb-br-drawer-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cb-br-drawer-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background: var(--surface-container);
+  border-radius: var(--radius-container);
+}
+.cb-br-drawer-item-name {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+.cb-br-drawer-item-period {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  margin-top: 0.125rem;
+}
+.cb-br-drawer-item-amount {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}

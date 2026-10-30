@@ -1,0 +1,35 @@
+.filter-bar {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  flex-wrap: wrap;
+}
+.filter-bar__fields {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+}
+.filter-bar__select {
+  min-width: 8rem;
+}
+.filter-bar__select--class {
+  min-width: 9rem;
+}
+.filter-bar__search {
+  width: 18rem;
+  max-width: 100%;
+}
+.filter-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-shrink: 0;
+}

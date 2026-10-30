@@ -1,0 +1,71 @@
+/* 应用级布局 — 合同与账单中心 */
+.app-root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  overflow: hidden;
+}
+
+/* 锚点 + 正文 双栏 */
+.cb-layout {
+  flex: 1 1 0;
+  display: flex;
+  min-height: 0;
+}
+
+/* 左侧锚点目录（常驻） */
+.cb-anchor {
+  width: 13rem;
+  flex-shrink: 0;
+  background: var(--surface-container-highest);
+  border-right: 1px solid var(--outline-variant);
+  padding: var(--spacing-inset) 0.75rem;
+  position: sticky;
+  top: 0;
+  height: 100%;
+  overflow-y: auto;
+}
+.cb-anchor-title {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface-variant);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--spacing-stack);
+  padding-left: 0.5rem;
+}
+.cb-anchor .ant-anchor-link {
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-radius: var(--radius-base);
+}
+.cb-anchor .ant-anchor-link-title {
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+}
+.cb-anchor .ant-anchor-link-active > .ant-anchor-link-title {
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+}
+.cb-anchor .ant-anchor-ink {
+  left: 0;
+}
+
+/* 右侧滚动正文 */
+.cb-content {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow-y: auto;
+  padding: var(--spacing-inset) var(--spacing-page);
+}
+.cb-content > section {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+  margin-bottom: var(--spacing-section);
+}
+.cb-content > section:last-child {
+  margin-bottom: 0;
+}

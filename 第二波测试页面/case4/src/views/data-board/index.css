@@ -1,0 +1,149 @@
+/* ⑦ 数据看板 */
+.data-board {
+  gap: var(--spacing-2);
+}
+
+/* 卡片操作区：下拉 + 竖分隔线 + 图标组 */
+.board-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.board-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-body-s);
+  color: var(--on-surface);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-base);
+  transition: background 0.2s;
+}
+
+.board-filter:hover {
+  background: var(--color-hover);
+}
+
+.board-divider {
+  width: 1px;
+  height: 0.75rem;
+  background: var(--color-border);
+}
+
+.board-tool {
+  color: var(--on-surface-variant);
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.board-tool:hover {
+  color: var(--color-brand);
+}
+
+/* A/B 图例明细 */
+.ab-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 0.625rem 0.75rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-md);
+}
+
+.ab-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font: var(--font-caption-m);
+  color: var(--on-surface);
+}
+
+.ab-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-xs);
+  flex: 0 0 auto;
+}
+
+.ab-dot-a {
+  background: var(--color-chart-1);
+}
+
+.ab-dot-b {
+  background: var(--color-chart-2);
+}
+
+.ab-version {
+  font-weight: var(--font-weight-medium);
+  min-width: 9.5rem;
+}
+
+.ab-metric {
+  color: var(--on-surface-variant);
+}
+
+.ab-metric em {
+  font-style: normal;
+  margin-left: 0.25rem;
+  color: var(--success);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ab-hint {
+  font: var(--font-caption-s);
+  color: var(--text-placeholder);
+}
+
+/* 胜出版本标记 */
+.ab-winner-tag {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 0 0 auto;
+}
+
+/* 置信度说明 */
+.ab-confidence {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.375rem;
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.625rem;
+  background: var(--success-container);
+  border-radius: var(--radius-base);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  line-height: var(--line-height-md);
+}
+
+.ab-confidence-icon {
+  flex: 0 0 auto;
+  margin-top: 0.1875rem;
+  color: var(--success);
+}
+
+/* 应用胜出版本 */
+.ab-apply {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.ab-applied-tag {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ab-apply-hint {
+  font: var(--font-caption-s);
+  color: var(--text-placeholder);
+}

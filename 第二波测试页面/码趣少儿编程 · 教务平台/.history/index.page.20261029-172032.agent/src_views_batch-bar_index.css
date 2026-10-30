@@ -1,0 +1,38 @@
+/* 浮动批量操作栏 */
+.batch-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-inline) var(--spacing-gutter);
+  background: var(--inverse-surface);
+  color: var(--inverse-on-surface);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-lg);
+}
+.batch-bar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+}
+.batch-count {
+  font: var(--font-body-m);
+}
+.batch-count strong {
+  color: var(--inverse-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+}
+.batch-clear {
+  color: var(--inverse-on-surface-variant);
+  cursor: pointer;
+  font: var(--font-body-s);
+  text-decoration: none;
+}
+.batch-clear:hover {
+  color: var(--inverse-on-surface);
+}
+.batch-bar-actions {
+  display: flex;
+  gap: var(--spacing-inline);
+}

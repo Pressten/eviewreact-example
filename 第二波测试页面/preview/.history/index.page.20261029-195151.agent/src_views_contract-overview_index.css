@@ -1,0 +1,79 @@
+/* ② 合同概览 */
+.cb-co-parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-gutter);
+}
+.cb-co-party {
+  background: var(--surface-container);
+  border-radius: var(--radius-container);
+  margin-top: 1rem;
+}
+.cb-co-party-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  margin-bottom: 0.5rem;
+}
+.cb-co-party-name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  margin-bottom: var(--spacing-stack);
+}
+.cb-co-party-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cb-co-party-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+.cb-co-party-row svg {
+  color: var(--on-surface-variant);
+}
+
+.cb-co-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-gutter);
+  background: var(--surface-container);
+  border-radius: var(--radius-container);
+  margin-top: 1rem;
+}
+.cb-co-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cb-co-stat-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+.cb-co-stat-value {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.cb-co-amount {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+}
+.cb-co-autorenew {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+.cb-co-autorenew-on {
+  font: var(--font-body-s);
+  color: var(--success);
+}
+.cb-co-autorenew-off {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}

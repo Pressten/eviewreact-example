@@ -1,0 +1,226 @@
+/* 抽屉标题 */
+.drawer-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+.drawer-title__avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 1px solid var(--outline-variant);
+}
+.drawer-title__name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.drawer-title__id {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.drawer-tags {
+  display: flex;
+  gap: var(--spacing-inline);
+  flex-wrap: wrap;
+}
+
+/* 抽屉主体 */
+.student-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gutter);
+}
+.drawer-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-inline);
+}
+
+/* 信息网格 */
+.drawer-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-gutter) var(--spacing-inset);
+  background: var(--surface-variant);
+  border-radius: var(--radius-container);
+  padding: var(--spacing-gutter) var(--spacing-inset);
+}
+.drawer-info__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.drawer-info__label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.drawer-info__value {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+
+/* 概览统计 */
+.drawer-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-gutter);
+}
+.drawer-stat {
+  background: var(--surface-variant);
+  border-radius: var(--radius-container);
+  padding: var(--spacing-gutter);
+  text-align: center;
+}
+.drawer-stat__value {
+  font: var(--font-size-2xl)/var(--line-height-sm) var(--font-family);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.drawer-stat__value.is-low {
+  color: var(--critical);
+}
+.drawer-stat__sub {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-normal);
+  color: var(--on-surface-variant);
+}
+.drawer-stat__label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  margin-top: 0.25rem;
+}
+
+/* Tabs 面板 */
+.drawer-tab-pane {
+  padding-top: 1rem;
+}
+
+/* 上课记录 */
+.rec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.rec-item__head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+.rec-item__topic {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.rec-item__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+}
+.rec-item__date {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.rec-item__summary {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  margin: 0;
+  line-height: var(--line-height-md);
+}
+
+/* 作品集 */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-gutter);
+}
+.work-card {
+  background: var(--surface-container-highest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-container);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.work-card__img {
+  width: 100%;
+  height: 7rem;
+  overflow: hidden;
+}
+.work-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.work-card__body {
+  padding: var(--spacing-inline);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.work-card__title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.work-card__date {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.work-card__desc {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  margin: 0;
+  line-height: var(--line-height-md);
+}
+
+/* 老师点评 */
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gutter);
+}
+.comment-card {
+  display: flex;
+  gap: var(--spacing-inline);
+  background: var(--surface-variant);
+  border-radius: var(--radius-container);
+  padding: var(--spacing-gutter);
+}
+.comment-card__avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--outline-variant);
+}
+.comment-card__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.comment-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.comment-card__teacher {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.comment-card__date {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.comment-card__content {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  margin: 0;
+  line-height: var(--line-height-md);
+}

@@ -1,0 +1,80 @@
+/* ③ 组件配置 Modal（内容 + 样式双页签，H5 表单骨架） */
+.ef-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.ef-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-md);
+}
+
+.ef-meta-text {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.ef-tabs {
+  margin-top: 0.5rem;
+}
+
+.ef-tab-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+/* 表单：标签居上，间距 0.5rem；字段间 1rem（弹窗紧凑档） */
+.ef-pane {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ef-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ef-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  text-align: left;
+  position: relative;
+  width: max-content;
+}
+
+/* 必填星号：悬挂在标签左侧，不占排版空间 */
+.ef-label-required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--error);
+  font: var(--font-body-m);
+}
+
+.ef-control {
+  position: relative;
+}
+
+/* 校验文案：绝对定位于控件正下方，不占布局高度 */
+.ef-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--error);
+}
+
+.ef-field {
+  margin-bottom: 0.5rem;
+}

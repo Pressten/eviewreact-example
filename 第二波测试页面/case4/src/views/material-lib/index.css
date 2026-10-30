@@ -1,0 +1,172 @@
+/* ⑥ 素材库 */
+.material-lib {
+  min-height: 0;
+}
+
+.material-target {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-width: 0;
+  flex: 0 0 auto;
+}
+
+.material-target-label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.material-target-tag {
+  max-width: 8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.material-target-empty {
+  font: var(--font-caption-m);
+  color: var(--text-placeholder);
+}
+
+.material-grid {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-2);
+  align-content: start;
+}
+
+.material-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.375rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  min-width: 0;
+  border: 1px solid transparent;
+  transition: background 0.2s;
+}
+
+.material-item:hover {
+  background: var(--color-hover);
+}
+
+.material-item-selected {
+  background: var(--primary-container);
+  outline: 1px solid var(--selected);
+  outline-offset: -1px;
+}
+
+.material-thumb {
+  display: block;
+  border-radius: var(--radius-base);
+  overflow: hidden;
+}
+
+.material-thumb img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.material-name {
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.material-meta {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.material-item .ant-btn {
+  align-self: flex-start;
+}
+
+/* 窄屏（主区纵向堆叠）时网格改限高滚动 */
+@media (max-width: 70rem) {
+  .material-grid {
+    flex: none;
+    max-height: 34rem;
+  }
+}
+
+/* 上传新素材入口（占位区 + 格式与大小限制说明） */
+.material-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.75rem 0.5rem;
+  min-height: 9.5rem;
+  border: 1px dashed var(--outline);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.material-upload:hover {
+  border-color: var(--primary);
+  background: var(--color-hover);
+}
+
+.material-upload-icon {
+  color: var(--on-surface-variant);
+}
+
+.material-upload:hover .material-upload-icon {
+  color: var(--primary);
+}
+
+.material-upload-text {
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.material-upload-limits {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+  line-height: var(--line-height-md);
+}
+
+/* 悬浮预览大图（Popover 内容） */
+.material-popover {
+  width: 14rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.material-popover-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+.material-popover-name {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.material-popover-meta {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}

@@ -1,0 +1,108 @@
+/* ⑧ 区域进度 — 纵向三段式: 全宽进度图 + 六区域卡片栅格 + 洞察胶囊条 */
+.region-chart-wrap {
+  height: 13.5rem;
+  min-width: 0;
+}
+
+/* 区域卡片栅格: 基础 3 列,大屏 6 列一排,窄屏 2 列 */
+.region-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-gutter);
+}
+
+.region-card {
+  background: var(--surface-variant);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3) var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  min-width: 0;
+}
+
+/* 超额区域: 语义容器底色高亮（以容器色替代描边强调）*/
+.region-card-exceed {
+  background: var(--success-container);
+}
+
+.region-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+}
+
+.region-card-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.region-card-tag {
+  margin-inline-end: 0;
+}
+
+.region-tag-icon {
+  margin-right: var(--spacing-1);
+  display: inline-flex;
+}
+
+.region-card-rate {
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-bold);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--line-height-sm);
+}
+
+/* 完成率语义色 — 与 ⑦ 仪表盘色阶语义一致 */
+.region-card-rate.rate-exceed {
+  color: var(--success);
+}
+
+.region-card-rate.rate-steady {
+  color: var(--info);
+}
+
+.region-card-rate.rate-slow {
+  color: var(--critical);
+}
+
+.region-card-caption {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--line-height-md);
+}
+
+.region-card-stores {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+/* 底部洞察胶囊条 + 动态结论 */
+.region-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.region-summary-note {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  margin: 0;
+}
+
+@media (min-width: 96rem) {
+  .region-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 64rem) {
+  .region-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,26 @@
+/* 头像组 — 身份色块（容器 token，consistent mapping） */
+.avatar-stack {
+  display: inline-flex;
+  align-items: center;
+}
+.avatar-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-semibold);
+  border: 2px solid var(--surface-container-highest);
+  flex: none;
+  user-select: none;
+}
+
+.av-1 { background: var(--primary-container); color: var(--primary); }
+.av-2 { background: var(--success-container); color: var(--success); }
+.av-3 { background: var(--critical-container); color: var(--on-critical); }
+.av-4 { background: var(--info-container); color: var(--info); }
+
+.avatar-more {
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+}

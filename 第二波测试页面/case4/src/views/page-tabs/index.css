@@ -1,0 +1,76 @@
+/* ② 页面页签栏 */
+.page-tabs-bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-5);
+  background: var(--surface-container-highest);
+  border-bottom: 1px solid var(--divider);
+  z-index: 10;
+}
+
+.page-tabs {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.page-tabs .ant-tabs-nav {
+  margin-bottom: 0;
+}
+
+/* 页签行高加大：徽标计数块（translateY(-50%) + 偏移）会向上探出文字行约 11px，
+   上内边距需 ≥ 1rem 才能完整容纳，避免被 .ant-tabs-nav-wrap 的 overflow:hidden 裁切 */
+.page-tabs .ant-tabs-tab {
+  padding-top: 1rem;
+  padding-bottom: 0.875rem;
+}
+
+.page-tab-label {
+  padding-inline: 0.25rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.page-tabs-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+.draft-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  margin-right: 0.5rem;
+}
+
+/* 窄屏：隐藏辅助提示，保留页签与操作按钮 */
+@media (max-width: 64rem) {
+  .draft-hint {
+    display: none;
+  }
+}
+
+.publish-summary {
+  margin: 0 0 var(--spacing-3);
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+
+.publish-summary em {
+  font-style: normal;
+  color: var(--critical);
+  font-weight: var(--font-weight-semibold);
+  padding: 0 0.125rem;
+}
+
+.publish-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}

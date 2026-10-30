@@ -1,0 +1,23 @@
+/* 共享状态 Tag — 软色底 + 语义色字 */
+.share-tag {
+  border-radius: var(--radius-badge);
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  margin-inline-end: 0;
+}
+
+.share-tag--neutral {
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+  border-color: var(--outline-variant);
+}
+.share-tag--info {
+  color: var(--info);
+  background: var(--info-container);
+  border-color: transparent;
+}
+.share-tag--success {
+  color: var(--success);
+  background: var(--success-container);
+  border-color: transparent;
+}
