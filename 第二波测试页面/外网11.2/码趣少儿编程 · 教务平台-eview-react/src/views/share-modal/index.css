@@ -1,0 +1,72 @@
+/* 分享弹窗 */
+.share-modal-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  font: var(--font-headline-m);
+}
+.share-modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-inline);
+}
+
+.share-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack);
+}
+.share-file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+  padding: var(--spacing-inline) var(--spacing-stack);
+  background: var(--surface-variant);
+  border-radius: var(--radius-container);
+}
+.share-file-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.file-ext {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.share-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-inline);
+}
+.share-field--row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.share-label {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.share-pwd-hint {
+  display: block;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  margin-top: 0.125rem;
+}
+.share-link-row {
+  display: flex;
+  gap: var(--spacing-inline);
+}
+.share-link-input {
+  flex: 1;
+}
+.share-link-input.ant-input {
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+}

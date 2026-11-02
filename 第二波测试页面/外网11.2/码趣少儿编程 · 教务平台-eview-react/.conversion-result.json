@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "i18n scenario A (hardcoded Chinese); main.jsx IntlProvider+componentsLocales already wired by scaffold, no changes needed; antd ConfigProvider+zhCN locale import removed from app.jsx; dayjs used for date arithmetic only (notification-section time parsing, mock/student.js date calc) — no .format() with weekday/month names, no dayjs locale registration needed; 85 srcFiles + 3 shared files (icon.jsx/ip-input.jsx/chart.jsx) migrated; all import paths fixed (Icon named→default+@/shared/Icon, Chart→@/shared/chart, IpInput→@/shared/ip-input, ./assets/uploads/→/uploads/, ./src/→./)."
+}
