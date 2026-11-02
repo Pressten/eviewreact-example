@@ -13,9 +13,6 @@
 .toolbar-left {
   min-width: 0;
 }
-.toolbar-left .ant-breadcrumb {
-  font: var(--font-body-m);
-}
 .crumb-link {
   display: inline-flex;
   align-items: center;

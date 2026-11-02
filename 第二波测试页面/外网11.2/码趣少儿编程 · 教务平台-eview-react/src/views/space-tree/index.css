@@ -112,7 +112,6 @@
   color: var(--on-surface-variant);
   cursor: pointer;
 }
-.ant-tree-treenode:hover .tree-node-more,
 .tree-node--active .tree-node-more {
   display: inline-flex;
 }

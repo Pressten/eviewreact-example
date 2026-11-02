@@ -275,9 +275,9 @@ export default function Icon({
   );
 
     // 主题切换时 <html> class 变化不会触发 React 重渲染，需 MutationObserver 主动监听。
-    // antd Button 等组件有 transition: color 0.2s，getComputedStyle 在 transition 期间返回中间色值；
-    // 立即读一次覆盖无 transition 的图标，200ms 后再读一次覆盖 Button 等带 transition 的图标。
-    // 仅 icon-plus 模式（plus 就绪、非 src 资源、无显式 color）才挂观察者，依赖变化时重建
+  // antd Button 等组件有 transition: color 0.2s，getComputedStyle 在 transition 期间返回中间色值；
+  // 立即读一次覆盖无 transition 的图标，200ms 后再读一次覆盖 Button 等带 transition 的图标。
+  // 仅 icon-plus 模式（plus 就绪、非 src 资源、无显式 color）才挂观察者，依赖变化时重建
   useEffect(() => {
     if (src || plus !== true || color) return;
     const readColor = () => {

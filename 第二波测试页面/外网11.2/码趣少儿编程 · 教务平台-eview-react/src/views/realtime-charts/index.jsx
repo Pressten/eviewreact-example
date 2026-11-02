@@ -1,17 +1,21 @@
-import Chart from "@/shared/chart";
-import Icon from "@/shared/Icon";
+import Chart from "@nce/eview-react/Chart";
+import { IconPlusIcPublicRefreshClockwise, IconPlusIcPublicChart, IconPlusIcPublicAlert } from '@hui/icon-plus';
 import SectionCard from "../../components/section-card/index.jsx";
+import { useApp } from "../../context.jsx";
 import { getRealtime, getServices } from "../../mock/monitor.js";
 import "./index.css";
 
 // 区块⑤ 实时图表：近 1 小时 QPS 与错误率折线图（2 个系列）
 // 服务卡 / 拓扑节点点击联动切换为该服务的数据；错误率异常时段在数据上体现。
 export default function RealtimeCharts({ selectedServiceId, env, onSelectService }) {
+  const { isDark } = useApp();
+  const chartBase = { a2ui: true, theme: isDark ? "hdesign-dark" : "hdesign-light" };
   const services = getServices(env);
   const svc = services.find((s) => s.id === selectedServiceId) || services[0];
   const series = getRealtime(svc.id, env);
 
   const qpsOption = {
+    ...chartBase,
     data: series.map((p) => ({ time: p.time, QPS: p.qps })),
     xAxis: { data: "time", name: "时间" },
     yAxisTitle: "QPS (req/s)",
@@ -20,6 +24,7 @@ export default function RealtimeCharts({ selectedServiceId, env, onSelectService
   };
 
   const errOption = {
+    ...chartBase,
     data: series.map((p) => ({ time: p.time, 错误率: p.errorRate })),
     xAxis: { data: "time", name: "时间" },
     yAxisTitle: "错误率 (%)",
@@ -32,7 +37,7 @@ export default function RealtimeCharts({ selectedServiceId, env, onSelectService
     <SectionCard
       title="实时指标"
       subtitle={`近 1 小时 · ${svc.name}`}
-      icon="chart-line"
+      icon={<IconPlusIcPublicChart iconSize="1.25rem" iconColor={['currentcolor']} />}
       actions={
         <div className="rt-svc-select">
           {services.slice(0, 5).map((s) => (
@@ -47,7 +52,7 @@ export default function RealtimeCharts({ selectedServiceId, env, onSelectService
             </button>
           ))}
           <button className="rt-refresh" type="button" title="刷新数据">
-            <Icon name="refresh-cw" size="0.875rem" />
+            <IconPlusIcPublicRefreshClockwise iconSize="0.875rem" iconColor={['currentcolor']} />
           </button>
         </div>
       }
@@ -66,7 +71,7 @@ export default function RealtimeCharts({ selectedServiceId, env, onSelectService
             <span className="rt-chart-unit">%</span>
             {svc.id === "payment-service" && (
               <span className="rt-anomaly-tag">
-                <Icon name="triangle-alert" size="0.75rem" />异常时段 35-44 分
+                <IconPlusIcPublicAlert iconSize="0.75rem" iconColor={['currentcolor']} />异常时段 35-44 分
               </span>
             )}
           </div>

@@ -1,7 +1,11 @@
 import { useState } from "react";
-import { Switch, Input, Tooltip, Popover, Modal, message } from "antd";
-import Icon from "@/shared/Icon";
-import IpInput from "@/shared/ip-input";
+import { IconPlusIcPublicInfo, IconPlusIcPublicPlus, IconPlusIcPublicTrash, IconPlusIcPublicSecurity, IconPlusIcPublicClose, IconPlusIcPublicEye, IconPlusIcCarRotateRight } from '@hui/icon-plus';
+import Toggle from "@nce/eview-react/Toggle";
+import TextField from "@/shared/TextField";
+import TipBox from "@nce/eview-react/TipBox";
+import Dialog from "@nce/eview-react/Dialog";
+import DivMessage from "@nce/eview-react/DivMessage";
+import IPInput from "@/shared/IPInput";
 import SectionCard from "../../components/section-card/index.jsx";
 import SettingRow from "../../components/setting-row/index.jsx";
 import "./index.css";
@@ -25,6 +29,7 @@ export default function SecuritySection({ settings, update }) {
   const [regenOpen, setRegenOpen] = useState(false);
   const [newIp, setNewIp] = useState("");
   const [newIpError, setNewIpError] = useState("");
+  const [notice, setNotice] = useState(null);
 
   const maskedKey = "ak_live_" + "•".repeat(24);
   const displayKey = showKey ? settings.apiKey : maskedKey;
@@ -46,20 +51,20 @@ export default function SecuritySection({ settings, update }) {
     update({ ipWhitelist: [...settings.ipWhitelist, ip] });
     setNewIp("");
     setNewIpError("");
-    message.success(`已添加白名单 IP：${ip}`);
+    setNotice({ type: "success", text: `已添加白名单 IP：${ip}`, key: Date.now() });
   };
 
   const handleDeleteIp = (idx) => {
     const removed = settings.ipWhitelist[idx];
     const next = settings.ipWhitelist.filter((_, i) => i !== idx);
     update({ ipWhitelist: next });
-    message.info(`已移除白名单 IP：${removed}`);
+    setNotice({ type: "default", text: `已移除白名单 IP：${removed}`, key: Date.now() });
   };
 
   const handleRegenConfirm = () => {
     update({ apiKey: genKey() });
     setRegenOpen(false);
-    message.warning("旧密钥已立即失效，请妥善保管新生成的密钥");
+    setNotice({ type: "warn", text: "旧密钥已立即失效，请妥善保管新生成的密钥", key: Date.now() });
   };
 
   const webhookSpec = (
@@ -77,20 +82,26 @@ export default function SecuritySection({ settings, update }) {
   return (
     <SectionCard
       id="sec-security"
-      icon="shield-check"
+      icon={<IconPlusIcPublicSecurity iconSize="1.25rem" iconColor={['currentcolor']} />}
       title="安全与接入"
       description="管理 API 密钥、IP 白名单与 Webhook 回调，保障接入链路安全。"
     >
+      {notice && (
+        <div style={{ position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)', zIndex: 1050 }}>
+          <DivMessage key={notice.key} display type={notice.type} text={notice.text}
+            enableDisposeTimeOut={notice.type !== "error"} onClose={() => setNotice(null)} />
+        </div>
+      )}
       {/* API 密钥 */}
       <div className="setting-row setting-row--apikey">
         <div className="setting-row__info">
           <div className="apikey-label">
             <label className="setting-row__label">API 密钥</label>
-            <Tooltip title="用于服务端调用平台 API 的身份凭证。请妥善保管，切勿提交至代码仓库或日志中；密钥泄露将导致资源被盗用，需立即重新生成。">
+            <TipBox content="用于服务端调用平台 API 的身份凭证。请妥善保管，切勿提交至代码仓库或日志中；密钥泄露将导致资源被盗用，需立即重新生成。" direction="top">
               <span className="help-icon">
-                <Icon name="circle-question-mark" size="0.875rem" />
+                <IconPlusIcPublicInfo iconSize="0.875rem" iconColor={['currentcolor']} />
               </span>
-            </Tooltip>
+            </TipBox>
           </div>
           <p className="setting-row__desc">
             用于服务端鉴权的长效凭证，泄露后请立即重新生成。
@@ -103,10 +114,10 @@ export default function SecuritySection({ settings, update }) {
             title={showKey ? "隐藏密钥" : "显示密钥"}
             onClick={() => setShowKey((s) => !s)}
           >
-            <Icon name={showKey ? "eye-off" : "eye"} size="0.875rem" />
+            {showKey ? <IconPlusIcPublicClose iconSize="0.875rem" iconColor={['currentcolor']} /> : <IconPlusIcPublicEye iconSize="0.875rem" iconColor={['currentcolor']} />}
           </span>
           <a className="link-action" onClick={() => setRegenOpen(true)} title="重新生成密钥">
-            <Icon name="rotate-cw" size="0.875rem" />
+            <IconPlusIcCarRotateRight iconSize="0.875rem" iconColor={['currentcolor']} />
             <span>重新生成</span>
           </a>
         </div>
@@ -128,20 +139,21 @@ export default function SecuritySection({ settings, update }) {
                   title="移除该 IP"
                   onClick={() => handleDeleteIp(idx)}
                 >
-                  <Icon name="trash-2" size="0.875rem" />
+                  <IconPlusIcPublicTrash iconSize="0.875rem" iconColor={['currentcolor']} />
                 </span>
               </li>
             ))}
           </ul>
           <div className="form-field ip-add">
-            <IpInput
-              type="ipv4"
+            <IPInput
+              type="v4"
               value={newIp}
               onChange={setNewIp}
-              status={newIpError ? "error" : undefined}
+              hintType="tip"
+              validator={() => ({ result: !newIpError, message: newIpError || "" })}
             />
             <a className="link-action" onClick={handleAddIp} title="添加到白名单">
-              <Icon name="plus" size="0.875rem" />
+              <IconPlusIcPublicPlus iconSize="0.875rem" iconColor={['currentcolor']} />
               <span>添加</span>
             </a>
             {newIpError && <div className="form-error form-error--left">{newIpError}</div>}
@@ -154,19 +166,19 @@ export default function SecuritySection({ settings, update }) {
         <div className="setting-row__info">
           <div className="apikey-label">
             <label className="setting-row__label">Webhook 地址</label>
-            <Popover trigger="hover" placement="top" content={webhookSpec}>
+            <TipBox content={webhookSpec} direction="top" trigger="hover">
               <span className="help-icon">
-                <Icon name="info" size="0.875rem" />
+                <IconPlusIcPublicInfo iconSize="0.875rem" iconColor={['currentcolor']} />
               </span>
-            </Popover>
+            </TipBox>
           </div>
           <p className="setting-row__desc">事件回调推送地址，悬浮图标查看回调规范。</p>
         </div>
-        <Input
+        <TextField
           style={{ width: "22rem" }}
           value={settings.webhookUrl}
           placeholder="https://your-host.com/webhooks/event"
-          onChange={(e) => update({ webhookUrl: e.target.value })}
+          onChange={(value) => update({ webhookUrl: value })}
         />
       </div>
 
@@ -176,27 +188,29 @@ export default function SecuritySection({ settings, update }) {
         status={settings.webhookRetry ? "已开启" : "已关闭"}
         statusOn={settings.webhookRetry}
         control={
-          <Switch
-            checked={settings.webhookRetry}
-            onChange={(v) => update({ webhookRetry: v })}
+          <Toggle
+            data={[false, true]}
+            toggled={settings.webhookRetry}
+            onToggle={(v) => update({ webhookRetry: v })}
           />
         }
       />
 
-      <Modal
-        open={regenOpen}
+      <Dialog
+        isOpen={regenOpen}
         title="重新生成 API 密钥"
-        okText="确认重新生成"
-        cancelText="取消"
-        okButtonProps={{ danger: true }}
-        onOk={handleRegenConfirm}
-        onCancel={() => setRegenOpen(false)}
+        onClose={() => setRegenOpen(false)}
+        size={[480, 'auto']}
+        buttons={[
+          { text: "取消", onClick: () => setRegenOpen(false) },
+          { text: "确认重新生成", status: "risk", onClick: handleRegenConfirm }
+        ]}
       >
         <p className="regen-warn">
           重新生成后，<strong>旧密钥将立即失效</strong>，所有使用旧密钥的服务将无法调用 API。
           请在确认前同步更新相关服务的凭证配置。
         </p>
-      </Modal>
+      </Dialog>
     </SectionCard>
   );
 }

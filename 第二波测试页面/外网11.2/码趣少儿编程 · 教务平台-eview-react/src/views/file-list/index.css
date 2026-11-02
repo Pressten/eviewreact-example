@@ -14,23 +14,6 @@
   justify-content: center;
 }
 
-/* 表格 */
-.drive-table .ant-table {
-  background: transparent;
-}
-.drive-table .ant-table-thead > tr > th {
-  background: var(--surface-variant);
-  font: var(--font-body-m);
-  font-weight: var(--font-weight-semibold);
-  color: var(--on-surface-variant);
-}
-.drive-table .ant-table-tbody > tr {
-  cursor: pointer;
-}
-.drive-table .ant-table-tbody > tr > td {
-  font: var(--font-body-m);
-  color: var(--on-surface);
-}
 
 .file-name-cell {
   display: flex;

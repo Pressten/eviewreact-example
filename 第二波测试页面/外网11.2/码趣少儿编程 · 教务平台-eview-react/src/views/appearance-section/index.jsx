@@ -1,4 +1,6 @@
-import { Slider, ColorPicker, Radio } from "antd";
+import DragInput from "@nce/eview-react/DragInput";
+import { IconPlusIcPublicColorPalette } from '@hui/icon-plus';
+import RadioGroup from "@nce/eview-react/RadioGroup";
 import { THEME_PRESETS } from "../../mock/settings.js";
 import SectionCard from "../../components/section-card/index.jsx";
 import SettingRow from "../../components/setting-row/index.jsx";
@@ -17,7 +19,7 @@ export default function AppearanceSection({ settings, update }) {
   return (
     <SectionCard
       id="sec-appearance"
-      icon="palette"
+      icon={<IconPlusIcPublicColorPalette iconSize="1.25rem" iconColor={['currentcolor']} />}
       title="外观"
       description="个性化界面缩放、主题色与代码编辑器字号。"
     >
@@ -28,13 +30,13 @@ export default function AppearanceSection({ settings, update }) {
         </div>
         <div className="appearance-slider">
           <span className="appearance-slider__edge">80%</span>
-          <Slider
+          <DragInput
             min={80}
             max={120}
             step={5}
-            value={settings.uiZoom}
+            value={[settings.uiZoom]}
             style={{ width: "12rem" }}
-            onChange={(v) => update({ uiZoom: v })}
+            onChange={(v) => update({ uiZoom: v[0] })}
           />
           <span className="appearance-slider__edge">120%</span>
         </div>
@@ -46,27 +48,27 @@ export default function AppearanceSection({ settings, update }) {
           <p className="setting-row__desc">{colorNote}</p>
           <span className="appearance-swatch" style={{ background: settings.themeColor }} />
         </div>
-        <ColorPicker
-          value={settings.themeColor}
-          showText
-          format="hex"
-          presets={[{ label: "预设色板", colors: THEME_PRESETS }]}
-          onChange={(color) => update({ themeColor: color.toHexString() })}
-        />
+        <div className="color-picker-simple">
+          <input type="color" value={settings.themeColor} onChange={(e) => update({ themeColor: e.target.value })} style={{ width: '2rem', height: '2rem', border: '1px solid #e0e0e0', borderRadius: '4px', cursor: 'pointer' }} />
+          <span style={{ marginLeft: '0.5rem', fontFamily: 'monospace' }}>{settings.themeColor.toUpperCase()}</span>
+          <div style={{ display: 'flex', gap: '4px', marginLeft: '0.5rem' }}>
+            {THEME_PRESETS.map((c) => (
+              <button key={c} type="button" style={{ width: '1.25rem', height: '1.25rem', borderRadius: '50%', border: '1px solid #e0e0e0', background: c, cursor: 'pointer' }} onClick={() => update({ themeColor: c })} title={c} />
+            ))}
+          </div>
+        </div>
       </div>
 
       <SettingRow
         label="代码编辑器字号"
         description="在线代码编辑器与控制台输出的默认字号。"
         control={
-          <Radio.Group
+          <RadioGroup
+            data={[{ text: "小", value: "small" }, { text: "中", value: "medium" }, { text: "大", value: "large" }]}
             value={settings.editorFontSize}
-            onChange={(e) => update({ editorFontSize: e.target.value })}
-          >
-            <Radio value="small">小</Radio>
-            <Radio value="medium">中</Radio>
-            <Radio value="large">大</Radio>
-          </Radio.Group>
+            isControlled
+            onChange={(value) => update({ editorFontSize: value })}
+          />
         }
       />
     </SectionCard>

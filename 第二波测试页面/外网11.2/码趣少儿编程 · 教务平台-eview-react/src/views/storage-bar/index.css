@@ -39,10 +39,6 @@
   gap: var(--spacing-gutter);
   min-width: 0;
 }
-.storage-meter .ant-progress {
-  flex: 1;
-  min-width: 12rem;
-}
 .storage-usage {
   font: var(--font-body-s);
   color: var(--on-surface-variant);

@@ -1,5 +1,5 @@
 // Layer 4: 优秀作品墙（高分学员作品网格展示）
-import Icon from "@/shared/Icon";
+import { IconPlusIcPublicImage } from '@hui/icon-plus';
 import { OUTSTANDING_WORKS } from "../../mock/student.js";
 import "./index.css";
 
@@ -8,7 +8,7 @@ export default function WorksGallery() {
     <div className="gallery-card">
       <div className="gallery-card__head">
         <span className="gallery-card__title">
-          <Icon name="image" size="0.875rem" /> 优秀作品墙
+          <IconPlusIcPublicImage iconSize="0.875rem" iconColor={['currentcolor']} /> 优秀作品墙
         </span>
         <span className="gallery-card__hint">精选近期高分学员作品</span>
       </div>

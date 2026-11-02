@@ -1,6 +1,10 @@
 import { useMemo, useState } from "react";
-import { Table, Dropdown, Checkbox, Empty, message } from "antd";
-import Icon from "@/shared/Icon";
+import { IconPlusIcPublicEllipsis } from '@hui/icon-plus';
+import Table from "@nce/eview-react/Table";
+import Checkbox from "@nce/eview-react/Checkbox";
+import Empty from "@nce/eview-react/Empty";
+import DivMessage from "@nce/eview-react/DivMessage";
+import SimpleDropdown from "../../components/simple-dropdown/index.jsx";
 import { userMap } from "../../mock/drive.js";
 import FileTypeIcon from "../../components/file-type-icon/index.jsx";
 import ShareStatusTag from "../../components/share-status-tag/index.jsx";
@@ -37,64 +41,63 @@ export default function FileList({
   onShare,
   onDelete,
 }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [notice, setNotice] = useState(null);
 
   const sorted = useMemo(() => sortFiles(files, sortField), [files, sortField]);
 
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: (keys) => onSelectedRowKeysChange(keys),
-    preserveSelectedRowKeys: true,
-  };
+  const selectedIndexes = sorted
+    .map((f, i) => (selectedRowKeys.includes(f.id) ? i : -1))
+    .filter((i) => i >= 0);
 
   const handleRowAction = (file, key) => {
     if (key === "share") onShare(file);
     else if (key === "delete") onDelete([file.id]);
-    else if (key === "download") message.success(`正在下载「${file.name}.${file.ext}」`);
-    else if (key === "rename") message.info(`重命名「${file.name}」`);
-    else if (key === "move") message.info(`移动「${file.name}」到其他目录`);
-    else if (key === "history") message.info(`查看「${file.name}」的历史版本`);
+    else if (key === "download") setNotice({ type: "success", text: `正在下载「${file.name}.${file.ext}」`, key: Date.now() });
+    else if (key === "rename") setNotice({ type: "info", text: `重命名「${file.name}」`, key: Date.now() });
+    else if (key === "move") setNotice({ type: "info", text: `移动「${file.name}」到其他目录`, key: Date.now() });
+    else if (key === "history") setNotice({ type: "info", text: `查看「${file.name}」的历史版本`, key: Date.now() });
   };
 
   const columns = [
     {
       title: "文件名",
-      dataIndex: "name",
       key: "name",
-      sorter: false,
-      render: (_, r) => (
-        <div className="file-name-cell">
-          <FileTypeIcon type={r.type} />
-          <a
-            className={`file-name-link${selectedFileId === r.id ? " file-name-link--active" : ""}`}
-            onClick={(e) => { e.preventDefault(); onSelectFile(r.id); }}
-            href="#"
-          >
-            {r.name}
-          </a>
-          <span className="file-ext">.{r.ext}</span>
-        </div>
-      ),
+      allowSort: false,
+      render: (cell, rowData, options, row) => {
+        const r = row?.rawData;
+        return (
+          <div className="file-name-cell">
+            <FileTypeIcon type={r?.type} />
+            <a
+              className={`file-name-link${selectedFileId === r?.id ? " file-name-link--active" : ""}`}
+              onClick={(e) => { e.preventDefault(); onSelectFile(r?.id); }}
+              href="#"
+            >
+              {r?.name}
+            </a>
+            <span className="file-ext">.{r?.ext}</span>
+          </div>
+        );
+      },
     },
     {
       title: "大小",
-      dataIndex: "sizeText",
       key: "size",
       width: 110,
       align: "right",
-      render: (t) => <span className="cell-muted">{t}</span>,
+      allowSort: false,
+      render: (cell) => <span className="cell-muted">{cell}</span>,
     },
     {
       title: "更新人",
-      dataIndex: "updaterId",
       key: "updater",
       width: 150,
-      render: (id) => {
-        const u = userMap[id];
+      allowSort: false,
+      render: (cell) => {
+        const u = userMap[cell];
         return (
           <div className="updater-cell">
-            <AvatarStack userIds={[id]} mode="single" size={22} />
+            <AvatarStack userIds={[cell]} mode="single" size={22} />
             <span>{u ? u.name : "—"}</span>
           </div>
         );
@@ -102,39 +105,43 @@ export default function FileList({
     },
     {
       title: "更新时间",
-      dataIndex: "updateTime",
       key: "updateTime",
       width: 160,
-      render: (t) => <span className="cell-muted">{t}</span>,
+      allowSort: false,
+      render: (cell) => <span className="cell-muted">{cell}</span>,
     },
     {
       title: "共享状态",
-      dataIndex: "shareStatus",
       key: "shareStatus",
       width: 120,
-      render: (s) => <ShareStatusTag status={s} />,
+      allowSort: false,
+      render: (cell) => <ShareStatusTag status={cell} />,
     },
     {
       title: "操作",
       key: "action",
       width: 64,
       align: "left",
-      render: (_, r) => (
-        <Dropdown
-          menu={{ items: ROW_ACTIONS, onClick: ({ key }) => handleRowAction(r, key) }}
-          trigger={["click"]}
-          placement="bottomRight"
-        >
-          <span className="row-more" title="更多操作">
-            <Icon name="ellipsis" size="0.875rem" />
-          </span>
-        </Dropdown>
-      ),
+      allowSort: false,
+      render: (cell, rowData, options, row) => {
+        const r = row?.rawData;
+        if (!r) return null;
+        return (
+          <SimpleDropdown
+            items={ROW_ACTIONS}
+            onSelect={(key) => handleRowAction(r, key)}
+            placement="bottomRight"
+          >
+            <span className="row-more" title="更多操作">
+              <IconPlusIcPublicEllipsis iconSize="0.875rem" iconColor={['currentcolor']} />
+            </span>
+          </SimpleDropdown>
+        );
+      },
     },
   ];
 
   const total = sorted.length;
-  const selectedCount = selectedRowKeys.length;
 
   if (total === 0) {
     return (
@@ -146,30 +153,37 @@ export default function FileList({
 
   return (
     <div className="file-list">
+      {notice && (
+        <div style={{ position: "fixed", top: 16, left: "50%", transform: "translateX(-50%)", zIndex: 1050 }}>
+          <DivMessage
+            key={notice.key}
+            display
+            type={notice.type}
+            text={notice.text}
+            enableDisposeTimeOut={notice.type !== "error"}
+            onClose={() => setNotice(null)}
+          />
+        </div>
+      )}
       {viewMode === "list" ? (
         <Table
           className="drive-table"
           size="large"
-          rowKey="id"
           columns={columns}
-          dataSource={sorted}
-          rowSelection={rowSelection}
-          showSorterTooltip={false}
-          pagination={{
-            current: currentPage,
-            pageSize,
-            total,
-            showSizeChanger: true,
-            showQuickJumper: { goButton: "跳转" },
-            hideOnSinglePage: true,
-            showTotal: selectedCount > 0
-              ? () => `总记录数：${total}　已选中行数：${selectedCount}`
-              : (t) => `总记录数：${t}`,
-            onChange: (p) => setCurrentPage(p),
-            onShowSizeChange: (_, s) => { setPageSize(s); setCurrentPage(1); },
-            size: "default",
+          dataset={sorted}
+          enableCheckBox
+          checkedRows={selectedIndexes}
+          onRowCheck={(row, checkedRows) => {
+            const ids = checkedRows.map((i) => sorted[i]?.id).filter(Boolean);
+            onSelectedRowKeysChange(ids);
           }}
-          onRow={(r) => ({ onClick: () => onSelectFile(r.id) })}
+          onRow={(row) => ({ onClick: () => { const r = row?.rawData ?? row; if (r?.id) onSelectFile(r.id); } })}
+          enableZebraCrossing={false}
+          enableColumnCompareUpdate
+          width="unset"
+          enablePagination
+          enableAutoPaging
+          pagingProps={{ pageSize: 10, pageSizeOptions: [10, 20, 50] }}
         />
       ) : (
         <GridView
@@ -208,17 +222,17 @@ function GridView({ files, selectedFileId, onSelectFile, selectedRowKeys, onSele
               <Checkbox
                 checked={checked}
                 onClick={(e) => e.stopPropagation()}
-                onChange={() => toggleSelect(f.id)}
+                onChange={(value, isChecked) => toggleSelect(f.id)}
               />
-              <Dropdown
-                menu={{ items: ROW_ACTIONS, onClick: ({ key }) => { onRowAction(f, key); } }}
-                trigger={["click"]}
+              <SimpleDropdown
+                items={ROW_ACTIONS}
+                onSelect={(key) => { onRowAction(f, key); }}
                 placement="bottomRight"
               >
                 <span className="row-more" onClick={(e) => e.stopPropagation()} title="更多操作">
-                  <Icon name="ellipsis" size="0.875rem" />
+                  <IconPlusIcPublicEllipsis iconSize="0.875rem" iconColor={['currentcolor']} />
                 </span>
-              </Dropdown>
+              </SimpleDropdown>
             </div>
             <div className="grid-card-icon">
               <FileTypeIcon type={f.type} size="2rem" />

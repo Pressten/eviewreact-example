@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
-import { Modal, Select, Input, Button, message } from "antd";
-import Icon from "@/shared/Icon";
+import { IconPlusIcPublicInfo, IconPlusIcPublicBellClock } from '@hui/icon-plus';
+import Dialog from "@nce/eview-react/Dialog";
+import DivMessage from "@nce/eview-react/DivMessage";
+import Select from "@/shared/Select";
+import TextArea from "@/shared/TextArea";
 import "./index.css";
 
 const DURATION_OPTIONS = [
@@ -24,6 +27,7 @@ export default function SilenceModal({ open, target, objectOptions, onClose, onC
   const [scope, setScope] = useState("object");
   const [reason, setReason] = useState("");
   const [errors, setErrors] = useState({});
+  const [notice, setNotice] = useState(null);
 
   useEffect(() => {
     if (open) {
@@ -44,30 +48,35 @@ export default function SilenceModal({ open, target, objectOptions, onClose, onC
     setErrors(next);
     if (Object.keys(next).length > 0) return;
     onConfirm({ object, duration, scope, reason: reason.trim() });
-    message.success(`已对「${object}」静默 ${DURATION_OPTIONS.find((d) => d.value === duration)?.label}`);
+    setNotice({ type: "success", text: `已对「${object}」静默 ${DURATION_OPTIONS.find((d) => d.value === duration)?.label}`, key: Date.now() });
     onClose();
   };
 
   return (
-    <Modal
-      title={
-        <div className="silence-modal-title">
-          <Icon name="bell-off" size="1rem" />
-          <span>告警静默</span>
+    <>
+      {notice && (
+        <div style={{ position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)', zIndex: 1050 }}>
+          <DivMessage key={notice.key} display type={notice.type} text={notice.text}
+            enableDisposeTimeOut={notice.type !== "error"} onClose={() => setNotice(null)} />
         </div>
-      }
-      open={open}
-      onCancel={onClose}
-      width={480}
-      destroyOnClose
-      footer={
-        <div className="silence-modal-foot">
-          <Button onClick={onClose}>取消</Button>
-          <Button type="primary" onClick={submit}>确认静默</Button>
-        </div>
-      }
-    >
-      <form className="silence-form" onSubmit={(e) => { e.preventDefault(); submit(); }}>
+      )}
+      <Dialog
+        title={
+          <div className="silence-modal-title">
+            <IconPlusIcPublicBellClock iconSize="1rem" iconColor={['currentcolor']} />
+            <span>告警静默</span>
+          </div>
+        }
+        isOpen={open}
+        onClose={onClose}
+        size={[480, 'auto']}
+        destroyOnClose
+        buttons={[
+          { text: "取消", onClick: onClose },
+          { text: "确认静默", status: "primary", onClick: submit }
+        ]}
+      >
+        <form className="silence-form" onSubmit={(e) => { e.preventDefault(); submit(); }}>
         <div className="silence-field">
           <label className="form-label required" htmlFor="sf-object">静默对象</label>
           <div className="form-field">
@@ -75,12 +84,10 @@ export default function SilenceModal({ open, target, objectOptions, onClose, onC
               id="sf-object"
               size="middle"
               style={{ width: "100%" }}
-              placeholder="选择告警对象"
+              defaultLabel="选择告警对象"
               value={object}
               onChange={(v) => { setObject(v); setErrors((p) => ({ ...p, object: undefined })); }}
-              status={errors.object ? "error" : undefined}
-              options={objectOptions.map((o) => ({ value: o, label: o }))}
-              showSearch
+              options={objectOptions.map((o) => ({ value: o, text: o }))}
             />
             {errors.object && <div className="form-error">{errors.object}</div>}
           </div>
@@ -96,8 +103,7 @@ export default function SilenceModal({ open, target, objectOptions, onClose, onC
                 style={{ width: "100%" }}
                 value={duration}
                 onChange={(v) => { setDuration(v); setErrors((p) => ({ ...p, duration: undefined })); }}
-                status={errors.duration ? "error" : undefined}
-                options={DURATION_OPTIONS}
+                options={DURATION_OPTIONS.map((o) => ({ value: o.value, text: o.label }))}
               />
               {errors.duration && <div className="form-error">{errors.duration}</div>}
             </div>
@@ -111,7 +117,7 @@ export default function SilenceModal({ open, target, objectOptions, onClose, onC
                 style={{ width: "100%" }}
                 value={scope}
                 onChange={setScope}
-                options={SCOPE_OPTIONS}
+                options={SCOPE_OPTIONS.map((o) => ({ value: o.value, text: o.label }))}
               />
             </div>
           </div>
@@ -120,24 +126,24 @@ export default function SilenceModal({ open, target, objectOptions, onClose, onC
         <div className="silence-field">
           <label className="form-label required" htmlFor="sf-reason">静默原因</label>
           <div className="form-field">
-            <Input.TextArea
+            <TextArea
               id="sf-reason"
               rows={3}
               style={{ width: "100%" }}
               placeholder="说明静默原因，便于交接追溯"
               value={reason}
-              onChange={(e) => { setReason(e.target.value); setErrors((p) => ({ ...p, reason: undefined })); }}
-              status={errors.reason ? "error" : undefined}
+              onChange={(value) => { setReason(value); setErrors((p) => ({ ...p, reason: undefined })); }}
             />
             {errors.reason && <div className="form-error">{errors.reason}</div>}
           </div>
         </div>
 
         <div className="silence-tip">
-          <Icon name="info" size="0.875rem" />
+          <IconPlusIcPublicInfo iconSize="0.875rem" iconColor={['currentcolor']} />
           <span>静默期间相关告警将不再通知，到期后自动恢复。请确认已在跟进处置。</span>
         </div>
-      </form>
-    </Modal>
+        </form>
+      </Dialog>
+    </>
   );
 }

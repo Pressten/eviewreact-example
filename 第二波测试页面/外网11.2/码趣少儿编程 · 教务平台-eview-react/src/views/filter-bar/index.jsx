@@ -1,6 +1,8 @@
 // Layer 4: 筛选栏（校区 / 课程 / 班级 / 关键词 / 待续费快捷）
-import { Select, Input, Button } from "antd";
-import Icon from "@/shared/Icon";
+import Select from "@/shared/Select";
+import { IconPlusIcPublicSearch, IconPlusIcPublicAlert, IconPlusIcCarRotateRight } from '@hui/icon-plus';
+import TextField from "@/shared/TextField";
+import Button from "@nce/eview-react/Button";
 import { CAMPUSES, COURSES, CLASSES } from "../../mock/student.js";
 import "./index.css";
 
@@ -18,48 +20,44 @@ export default function FilterBar({ filters, onChange, onReset }) {
       <div className="filter-bar__fields">
         <Select
           className="filter-bar__select"
-          placeholder="全部校区"
-          allowClear
+          defaultLabel="全部校区"
+          enableClear
           value={filters.campus}
           onChange={(v) => onChange({ campus: v })}
-          options={CAMPUSES}
+          options={CAMPUSES.map((o) => ({ value: o.value, text: o.label }))}
         />
         <Select
           className="filter-bar__select"
-          placeholder="全部课程"
-          allowClear
+          defaultLabel="全部课程"
+          enableClear
           value={filters.course}
           onChange={handleCourseChange}
-          options={COURSES}
+          options={COURSES.map((o) => ({ value: o.value, text: o.label }))}
         />
         <Select
           className="filter-bar__select filter-bar__select--class"
-          placeholder="全部班级"
-          allowClear
+          defaultLabel="全部班级"
+          enableClear
           value={filters.classId}
           onChange={(v) => onChange({ classId: v })}
-          options={classOptions}
+          options={classOptions.map((o) => ({ value: o.value, text: o.label }))}
         />
-        <Input
+        <TextField
           className="filter-bar__search"
-          allowClear
           placeholder="搜索学员姓名、编号、课程或联系电话"
           value={filters.keyword}
-          onChange={(e) => onChange({ keyword: e.target.value })}
-          suffix={<Icon name="search" size="0.875rem" color="#AEAEAE" />}
+          onChange={(value) => onChange({ keyword: value })}
+          suffix={<IconPlusIcPublicSearch iconSize="0.875rem" iconColor={['#AEAEAE']} />}
         />
       </div>
       <div className="filter-bar__actions">
         <Button
-          type={filters.lowHoursOnly ? "primary" : "default"}
-          icon={<Icon name="triangle-alert" size="0.875rem" />}
+          status={filters.lowHoursOnly ? "primary" : "default"}
+          leftIcon={<IconPlusIcPublicAlert iconSize="0.875rem" iconColor={['currentcolor']} />}
+          text="仅看待续费"
           onClick={() => onChange({ lowHoursOnly: !filters.lowHoursOnly })}
-        >
-          仅看待续费
-        </Button>
-        <Button icon={<Icon name="rotate-ccw" size="0.875rem" />} onClick={onReset}>
-          重置
-        </Button>
+        />
+        <Button leftIcon={<IconPlusIcCarRotateRight iconSize="0.875rem" iconColor={['currentcolor']} />} text="重置" onClick={onReset} />
       </div>
     </div>
   );

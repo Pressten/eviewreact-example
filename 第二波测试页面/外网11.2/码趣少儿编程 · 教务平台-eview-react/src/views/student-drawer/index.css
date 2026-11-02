@@ -27,7 +27,7 @@
   margin-top: 0.25rem;
 }
 /* 关闭按钮与标题顶部对齐 */
-.student-drawer-root .ant-drawer-header-title {
+.student-drawer-root .ev_drawer_title {
   align-items: flex-start;
 }
 

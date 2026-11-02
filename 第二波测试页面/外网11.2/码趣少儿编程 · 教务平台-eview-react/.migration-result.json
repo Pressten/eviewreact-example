@@ -1,0 +1,90 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "i18n-keys": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [],
+  "summary": {
+    "filesModified": 38,
+    "filesCreated": 4,
+    "categories": {
+      "jsxViews": 28,
+      "jsxComponents": 3,
+      "jsxApp": 1,
+      "cssCleaned": 9,
+      "newSharedComponents": 4
+    },
+    "antdComponentsReplaced": {
+      "A_class": [
+        "Tag(包壳@/shared/Tag)",
+        "Table(@nce/eview-react/Table)",
+        "Input→TextField(包壳@/shared/TextField)",
+        "Input.TextArea→TextArea(包壳@/shared/TextArea)",
+        "Select(包壳@/shared/Select)",
+        "Switch→Toggle(@nce/eview-react/Toggle)",
+        "Radio/RadioGroup(@nce/eview-react/RadioGroup默认导入)",
+        "Slider→DragInput(@nce/eview-react/DragInput)",
+        "Checkbox(@nce/eview-react/Checkbox)",
+        "TimePicker(包壳@/shared/TimePicker)",
+        "Breadcrumb→Crumbs(@nce/eview-react/Crumbs)",
+        "Rate→Rating(@nce/eview-react/Rating)",
+        "Button(@nce/eview-react/Button)",
+        "Tooltip→TipBox(@nce/eview-react/TipBox)",
+        "Popover→TipBox(@nce/eview-react/TipBox)",
+        "Menu→Accordion(@nce/eview-react/Accordion)",
+        "Drawer(@nce/eview-react/Drawer)",
+        "Tabs→Tab/TabItem(@nce/eview-react/Tab)",
+        "Segmented→SelectCard(@nce/eview-react/SelectCard)",
+        "Empty(@nce/eview-react/Empty)",
+        "Chart(@nce/eview-react/Chart,补a2ui+theme)",
+        "IPInput(包壳@/shared/IPInput,type=ipv4→v4,validator+hintType)",
+        "message→DivMessage(@nce/eview-react/DivMessage,useState+fixed浮层)"
+      ],
+      "B_class_handwrite": [
+        "Timeline(文件内SimpleTimeline手写)",
+        "Progress(文件内SimpleProgress手写)"
+      ],
+      "C_class_pattern": [
+        "Modal→Dialog(open→isOpen,footer→buttons数组,onClose不自动关)",
+        "Modal.confirm→Dialog buttons(status:risk)"
+      ],
+      "unknown_handwrite": [
+        "Dropdown(共享SimpleDropdown组件,src/components/simple-dropdown/)",
+        "ColorPicker(手写input type=color+预设色板)",
+        "Anchor(手写nav+scrollIntoView)",
+        "Tree(共享SimpleTree组件,src/components/simple-tree/)",
+        "ConfigProvider(阶段1已删除,忽略)"
+      ]
+    },
+    "cssCleanup": {
+      "antRulesRemoved": 15,
+      "filesCleaned": [
+        "src/views/toolbar/index.css",
+        "src/views/student-table/index.css",
+        "src/views/storage-bar/index.css",
+        "src/views/space-tree/index.css",
+        "src/views/share-modal/index.css",
+        "src/views/file-list/index.css",
+        "src/views/appearance-section/index.css",
+        "src/views/header-bar/index.css",
+        "src/views/student-drawer/index.css"
+      ],
+      "note": "src/shared/Tag/Tag.css 中的2条.ant-tag-是注释文本(非选择器规则),保留不动"
+    },
+    "knownIssues": [
+      "TimePicker失去受控回显(删除dayjs value,eview TimePicker不接受dayjs对象)",
+      "Select/TextArea的status=error红框丢失(靠form-error文本提示呈现)",
+      "Table排序行为可能变化(删除自定义sorter函数,eview默认排序逻辑不同)",
+      "file-list的onRow prop可能不被eview Table支持(行点击选文件可能退化)",
+      "SimpleTree不支持showLine/blockNode(视觉差异)",
+      "header-bar搜索建议面板丢失antd弹层阴影/动画(改为绝对定位div)",
+      "change-feed展开行所有行都显示展开箭头(eview无rowExpandable等价物)",
+      "sidebar Accordion的onExpand未接入实际折叠逻辑(collapsed是prop非state)"
+    ]
+  }
+}

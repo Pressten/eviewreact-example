@@ -10,7 +10,7 @@
   color: var(--on-surface-variant);
 }
 
-.appearance-slider .ant-slider {
+.appearance-slider {
   margin-block: 0;
 }
 

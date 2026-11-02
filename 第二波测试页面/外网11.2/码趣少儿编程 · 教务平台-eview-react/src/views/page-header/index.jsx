@@ -1,7 +1,7 @@
 // Layer 4: 页面头部（面包屑 + 标题 + 操作区）
 import Crumbs from "@nce/eview-react/Crumbs";
+import { IconPlusIcPublicDownload, IconPlusIcPublicAddMember } from '@hui/icon-plus';
 import Button from "@nce/eview-react/Button";
-import Icon from "@/shared/Icon";
 import "./index.css";
 
 export default function PageHeader({ onExport }) {
@@ -22,8 +22,8 @@ export default function PageHeader({ onExport }) {
           </p>
         </div>
         <div className="page-header__actions">
-          <Button leftIcon={<Icon name="download" size="0.875rem" />} onClick={onExport} text="导出名册" />
-          <Button status="primary" leftIcon={<Icon name="user-plus" size="0.875rem" />} text="新增学员" />
+          <Button leftIcon={<IconPlusIcPublicDownload iconSize="0.875rem" iconColor={['currentcolor']} />} text="导出名册" onClick={onExport} />
+          <Button status="primary" leftIcon={<IconPlusIcPublicAddMember iconSize="0.875rem" iconColor={['currentcolor']} />} text="新增学员" />
         </div>
       </div>
     </div>

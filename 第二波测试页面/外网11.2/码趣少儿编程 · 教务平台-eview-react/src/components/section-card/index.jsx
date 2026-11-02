@@ -1,4 +1,3 @@
-import Icon from "@/shared/Icon";
 import "./index.css";
 
 // Layer 3: 通用区块卡片 — 标题 + 图标 + 描述 + 内容
@@ -8,7 +7,7 @@ export default function SectionCard({ id, icon, title, description, children }) 
     <section id={id} className="section-card">
       <header className="section-card__head">
         <span className="section-card__icon">
-          {icon && <Icon name={icon} size="1.25rem" />}
+          {icon && icon}
         </span>
         <div className="section-card__titles">
           <h2 className="section-card__title">{title}</h2>

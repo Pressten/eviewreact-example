@@ -1,6 +1,6 @@
 import Toggle from "@nce/eview-react/Toggle";
+import { IconPlusIcPublicCode } from '@hui/icon-plus';
 import RadioGroup from "@nce/eview-react/RadioGroup";
-import Icon from "@/shared/Icon";
 import SectionCard from "../../components/section-card/index.jsx";
 import SettingRow from "../../components/setting-row/index.jsx";
 import "./index.css";
@@ -11,7 +11,7 @@ export default function ApiPrefSection({ settings, update }) {
   return (
     <SectionCard
       id="sec-api-pref"
-      icon="code"
+      icon={<IconPlusIcPublicCode iconSize="1.25rem" iconColor={['currentcolor']} />}
       title="API 偏好"
       description="配置默认的数据交互格式、分页与沙箱环境。"
     >
@@ -20,13 +20,10 @@ export default function ApiPrefSection({ settings, update }) {
         description="平台 API 请求与响应的默认序列化格式。"
         control={
           <RadioGroup
-            isControlled
+            data={[{ text: "JSON", value: "json" }, { text: "XML", value: "xml" }]}
             value={settings.dataFormat}
-            data={[
-              { text: "JSON", value: "json" },
-              { text: "XML", value: "xml" },
-            ]}
-            onChange={(a, b) => update({ dataFormat: a === settings.dataFormat ? b : a })}
+            isControlled
+            onChange={(value) => update({ dataFormat: value })}
           />
         }
       />
@@ -36,14 +33,10 @@ export default function ApiPrefSection({ settings, update }) {
         description="列表类接口在不指定 page_size 时的默认每页条数。"
         control={
           <RadioGroup
-            isControlled
+            data={[{ text: "10", value: 10 }, { text: "20", value: 20 }, { text: "50", value: 50 }]}
             value={settings.pageSize}
-            data={[
-              { text: "10", value: 10 },
-              { text: "20", value: 20 },
-              { text: "50", value: 50 },
-            ]}
-            onChange={(a, b) => update({ pageSize: a === settings.pageSize ? b : a })}
+            isControlled
+            onChange={(value) => update({ pageSize: value })}
           />
         }
       />
@@ -54,16 +47,13 @@ export default function ApiPrefSection({ settings, update }) {
         status={settings.sandbox ? "已开启" : "已关闭"}
         statusOn={settings.sandbox}
         control={
-          <Toggle
-            toggled={settings.sandbox}
-            onToggle={(v) => update({ sandbox: v })}
-          />
+          <Toggle data={[false, true]} toggled={settings.sandbox} onToggle={(v) => update({ sandbox: v })} />
         }
       />
 
       {settings.sandbox && (
         <div className="sandbox-note" role="status">
-          <Icon name="flask-conical" size="1rem" />
+          <IconPlusIcPublicCode iconSize="1rem" iconColor={['currentcolor']} />
           <div className="sandbox-note__body">
             <span className="sandbox-note__title">沙箱域名</span>
             <p className="sandbox-note__text">

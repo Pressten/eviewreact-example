@@ -1,0 +1,46 @@
+.simple-tree {
+  font-size: 0.875rem;
+  user-select: none;
+}
+.simple-tree__row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.simple-tree__row:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.simple-tree__row.is-selected {
+  background: #E6F2FD;
+  color: #0067D1;
+}
+.simple-tree__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  flex-shrink: 0;
+  color: #777;
+  font-size: 0.75rem;
+}
+.simple-tree__arrow--leaf {
+  color: #AEAEAE;
+}
+.simple-tree__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.simple-tree__title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.simple-tree__children {
+  /* 子节点缩进由 paddingLeft 控制 */
+}

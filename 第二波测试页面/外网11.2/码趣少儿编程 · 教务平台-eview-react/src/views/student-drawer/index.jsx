@@ -1,7 +1,14 @@
 // Layer 4: 学员详情抽屉（成长曲线 + 上课记录 / 作品集 / 老师点评 / 课程安排）
-import { Drawer, Tabs, Tag, Rate, Button, Timeline, message } from "antd";
-import Icon from "@/shared/Icon";
-import Chart from "@/shared/chart";
+import { useState } from "react";
+import { IconPlusIcCarUser, IconPlusIcPublicMessage, IconPlusIcPublicSortUp, IconPlusIcPublicBellClock, IconPlusIcPublicCalendar, IconPlusIcPublicMappinOnMap } from '@hui/icon-plus';
+import Drawer from "@nce/eview-react/Drawer";
+import Tab, { TabItem } from "@nce/eview-react/Tab";
+import Tag from "@/shared/Tag";
+import Rating from "@nce/eview-react/Rating";
+import Button from "@nce/eview-react/Button";
+import DivMessage from "@nce/eview-react/DivMessage";
+import Chart from "@nce/eview-react/Chart";
+import { useApp } from "../../context.jsx";
 import { RENEWAL_THRESHOLD } from "../../mock/student.js";
 import "./index.css";
 
@@ -15,6 +22,9 @@ function avg(arr) {
 }
 
 export default function StudentDrawer({ student, onClose }) {
+  const { isDark } = useApp();
+  const [notice, setNotice] = useState(null);
+  const chartBase = { a2ui: true, theme: isDark ? "hdesign-dark" : "hdesign-light" };
   const open = !!student;
   const isLow = student && student.remainingHours < RENEWAL_THRESHOLD && student.status !== "结业";
 
@@ -32,6 +42,7 @@ export default function StudentDrawer({ student, onClose }) {
 
   const chartOption = student
     ? {
+        ...chartBase,
         data: student.classRecords.map((r, idx) => ({
           课次: `第${idx + 1}次`,
           课堂评分: r.rating,
@@ -41,7 +52,7 @@ export default function StudentDrawer({ student, onClose }) {
         smooth: true,
         markLine: { bottom: 3 },
       }
-    : {};
+    : { ...chartBase };
 
   const stats = student
     ? [
@@ -110,11 +121,11 @@ export default function StudentDrawer({ student, onClose }) {
 
   return (
     <Drawer
-      open={open}
+      visible={open}
       onClose={onClose}
       width={720}
       destroyOnClose
-      rootClassName="student-drawer-root"
+      className="student-drawer-root"
       title={
         student ? (
           <div className="drawer-title">
@@ -133,25 +144,23 @@ export default function StudentDrawer({ student, onClose }) {
           </div>
         ) : null
       }
-      footer={
-        <div className="drawer-footer">
-          <Button onClick={onClose}>关闭</Button>
-          {isLow && (
-            <Button
-              type="primary"
-              icon={<Icon name="bell-ring" size="0.875rem" />}
-              onClick={() => message.success("续费提醒已发送给 " + student.parentName)}
-            >
-              发送续费提醒
-            </Button>
-          )}
-        </div>
-      }
     >
       {student && (
         <div className="student-drawer">
+          {notice && (
+            <div style={{ position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)', zIndex: 1050 }}>
+              <DivMessage
+                key={notice.key}
+                display
+                type={notice.type}
+                text={notice.text}
+                enableDisposeTimeOut={notice.type !== "error"}
+                onClose={() => setNotice(null)}
+              />
+            </div>
+          )}
           <div className="drawer-notes">
-            <Icon name="message-square" size="0.875rem" color="#0067D1" />
+            <IconPlusIcPublicMessage iconSize="0.875rem" iconColor={['#0067D1']} />
             <span>{student.notes}</span>
           </div>
 
@@ -179,14 +188,24 @@ export default function StudentDrawer({ student, onClose }) {
           <div className="drawer-chart">
             <div className="drawer-chart__head">
               <span className="drawer-chart__title">
-                <Icon name="trending-up" size="0.875rem" /> 学习成长曲线
+                <IconPlusIcPublicSortUp iconSize="0.875rem" iconColor={['currentcolor']} /> 学习成长曲线
               </span>
               <span className="drawer-chart__hint">近 {student.classRecords.length} 次课堂评分趋势</span>
             </div>
             <Chart name="LineChart" option={chartOption} style={{ height: "13rem" }} />
           </div>
 
-          <Tabs defaultActiveKey="records" items={tabItems} className="drawer-tabs" />
+          <Tab selectedIndex={0} draggable={false} className="drawer-tabs">
+            {tabItems.map((item, idx) => (
+              <TabItem key={item.key} title={item.label}>{item.children}</TabItem>
+            ))}
+          </Tab>
+          <div className="drawer-footer" style={{ position: 'absolute', right: 0, bottom: 0, width: '100%', padding: '0.75rem 1rem', textAlign: 'right' }}>
+            <Button text="关闭" onClick={onClose} />
+            {isLow && (
+              <Button status="primary" leftIcon={<IconPlusIcPublicBellClock iconSize="0.875rem" iconColor={['currentcolor']} />} text="发送续费提醒" onClick={() => setNotice({ type: "success", text: "续费提醒已发送给 " + student.parentName, key: Date.now() })} style={{ marginLeft: '0.5rem' }} />
+            )}
+          </div>
         </div>
       )}
     </Drawer>
@@ -216,13 +235,13 @@ function TimelineView({ records }) {
           </div>
           <div className="rec-item__meta">
             <span className="rec-item__date">{r.date}</span>
-            <Rate disabled value={r.rating} className="rec-item__rate" />
+            <Rating disabled value={r.rating} className="rec-item__rate" />
           </div>
           <p className="rec-item__summary">{r.summary}</p>
         </div>
       ),
     }));
-  return <Timeline items={items} />;
+  return <SimpleTimeline items={items} />;
 }
 
 function WorkGrid({ works }) {
@@ -256,7 +275,7 @@ function CommentList({ comments }) {
               <span className="comment-card__teacher">{c.teacher}</span>
               <span className="comment-card__date">{c.date}</span>
             </div>
-            <Rate disabled value={c.rating} />
+            <Rating disabled value={c.rating} />
             <p className="comment-card__content">{c.content}</p>
           </div>
         </div>
@@ -271,17 +290,31 @@ function ScheduleList({ schedule }) {
       {schedule.map((s, i) => (
         <div className="schedule-item" key={i}>
           <div className="schedule-item__date">
-            <Icon name="calendar-days" size="0.875rem" color="#0067D1" />
+            <IconPlusIcPublicCalendar iconSize="0.875rem" iconColor={['#0067D1']} />
             <span className="schedule-item__day">{s.date}</span>
             <span className="schedule-item__time">{s.time}</span>
           </div>
           <div className="schedule-item__body">
             <div className="schedule-item__topic">{s.topic}</div>
             <div className="schedule-item__meta">
-              <span><Icon name="user" size="0.75rem" /> {s.teacher}</span>
-              <span><Icon name="map-pin" size="0.75rem" /> {s.room}</span>
+              <span><IconPlusIcCarUser iconSize="0.75rem" iconColor={['currentcolor']} /> {s.teacher}</span>
+              <span><IconPlusIcPublicMappinOnMap iconSize="0.75rem" iconColor={['currentcolor']} /> {s.room}</span>
             </div>
           </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function SimpleTimeline({ items, className }) {
+  return (
+    <div className={className} style={{ position: 'relative', paddingLeft: '1.5rem' }}>
+      <div style={{ position: 'absolute', left: '0.375rem', top: '0.5rem', bottom: '0.5rem', width: '2px', background: '#e0e0e0' }} />
+      {items.map((item, idx) => (
+        <div key={idx} style={{ position: 'relative', paddingBottom: '1rem' }}>
+          <div style={{ position: 'absolute', left: '-1.125rem', top: '0.25rem', width: '0.75rem', height: '0.75rem', borderRadius: '50%', background: 'var(--primary, #0067D1)', border: '2px solid #fff' }} />
+          {item.children}
         </div>
       ))}
     </div>

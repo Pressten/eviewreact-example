@@ -1,9 +1,12 @@
 // Layer 4: 学员数据看板（课程分布饼图 / 校区分布柱图 / 周新增趋势折线）
-import Chart from "@/shared/chart";
+import Chart from "@nce/eview-react/Chart";
+import { useApp } from "../../context.jsx";
 import { COURSE_DIST, CAMPUS_DIST, WEEKLY_NEW, TOTAL_STUDENTS } from "../../mock/student.js";
 import "./index.css";
 
 export default function Dashboard() {
+  const { isDark } = useApp();
+  const chartBase = { a2ui: true, theme: isDark ? "hdesign-dark" : "hdesign-light" };
   return (
     <div className="dashboard">
       <div className="dashboard__head">
@@ -16,6 +19,7 @@ export default function Dashboard() {
           <Chart
             name="PieChart"
             option={{
+              ...chartBase,
               data: COURSE_DIST,
               title: { text: "在读学员", subtext: `共 ${TOTAL_STUDENTS} 人` },
               legendPosition: "centerRight",
@@ -27,7 +31,7 @@ export default function Dashboard() {
           <div className="chart-panel__title">校区学员分布</div>
           <Chart
             name="BarChart"
-            option={{ data: CAMPUS_DIST, xAxis: { data: "校区" }, yAxisTitle: "学员数" }}
+            option={{ ...chartBase, data: CAMPUS_DIST, xAxis: { data: "校区" }, yAxisTitle: "学员数" }}
             style={{ height: "15rem" }}
           />
         </div>
@@ -35,7 +39,7 @@ export default function Dashboard() {
           <div className="chart-panel__title">近 8 周新增学员趋势</div>
           <Chart
             name="LineChart"
-            option={{ data: WEEKLY_NEW, xAxis: { data: "周" }, yAxisTitle: "新增学员", smooth: true }}
+            option={{ ...chartBase, data: WEEKLY_NEW, xAxis: { data: "周" }, yAxisTitle: "新增学员", smooth: true }}
             style={{ height: "15rem" }}
           />
         </div>

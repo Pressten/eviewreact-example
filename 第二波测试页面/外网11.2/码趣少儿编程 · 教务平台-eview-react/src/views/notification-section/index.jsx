@@ -1,14 +1,9 @@
 import Toggle from "@nce/eview-react/Toggle";
+import { IconPlusIcPublicBellClock } from '@hui/icon-plus';
 import TimePicker from "@/shared/TimePicker";
 import SectionCard from "../../components/section-card/index.jsx";
 import SettingRow from "../../components/setting-row/index.jsx";
 import "./index.css";
-
-const timeStrToArray = (s) => (s ? s.split(":").map(Number) : []);
-const timeArrayToStr = (t) => {
-  if (!Array.isArray(t) || t.length < 2) return "00:00";
-  return String(t[0]).padStart(2, "0") + ":" + String(t[1]).padStart(2, "0");
-};
 
 // Layer 4: 通知偏好组
 // 开关切换即时回显状态文案；免打扰时段逻辑校验（止晚于起）。
@@ -18,7 +13,7 @@ export default function NotificationSection({ settings, update, errors }) {
   return (
     <SectionCard
       id="sec-notification"
-      icon="bell"
+      icon={<IconPlusIcPublicBellClock iconSize="1.25rem" iconColor={['currentcolor']} />}
       title="通知偏好"
       description="控制平台事件、构建与安全类通知的推送方式与时段。"
     >
@@ -28,10 +23,7 @@ export default function NotificationSection({ settings, update, errors }) {
         status={settings.emailNotify ? "已开启" : "已关闭"}
         statusOn={settings.emailNotify}
         control={
-          <Toggle
-            toggled={settings.emailNotify}
-            onToggle={(v) => update({ emailNotify: v })}
-          />
+          <Toggle data={[false, true]} toggled={settings.emailNotify} onToggle={(v) => update({ emailNotify: v })} />
         }
       />
 
@@ -41,10 +33,7 @@ export default function NotificationSection({ settings, update, errors }) {
         status={settings.buildFailAlert ? "已开启" : "已关闭"}
         statusOn={settings.buildFailAlert}
         control={
-          <Toggle
-            toggled={settings.buildFailAlert}
-            onToggle={(v) => update({ buildFailAlert: v })}
-          />
+          <Toggle data={[false, true]} toggled={settings.buildFailAlert} onToggle={(v) => update({ buildFailAlert: v })} />
         }
       />
 
@@ -54,10 +43,7 @@ export default function NotificationSection({ settings, update, errors }) {
         status={settings.securityAlert ? "已开启" : "已关闭"}
         statusOn={settings.securityAlert}
         control={
-          <Toggle
-            toggled={settings.securityAlert}
-            onToggle={(v) => update({ securityAlert: v })}
-          />
+          <Toggle data={[false, true]} toggled={settings.securityAlert} onToggle={(v) => update({ securityAlert: v })} />
         }
       />
 
@@ -71,17 +57,19 @@ export default function NotificationSection({ settings, update, errors }) {
         <div className="form-field dnd-field">
           <div className="dnd-range">
             <TimePicker
-              time={timeStrToArray(settings.dndStart)}
               format="hh:mm"
+              minuteStep={5}
+              placeholder="开始"
               style={{ width: "7rem" }}
-              onChange={(t) => update({ dndStart: timeArrayToStr(t) })}
+              onChange={(time) => update({ dndStart: time.join(":") || "00:00" })}
             />
             <span className="dnd-sep">至</span>
             <TimePicker
-              time={timeStrToArray(settings.dndEnd)}
               format="hh:mm"
+              minuteStep={5}
+              placeholder="结束"
               style={{ width: "7rem" }}
-              onChange={(t) => update({ dndEnd: timeArrayToStr(t) })}
+              onChange={(time) => update({ dndEnd: time.join(":") || "00:00" })}
             />
           </div>
           {dndError && <div className="form-error">{dndError}</div>}
@@ -94,10 +82,7 @@ export default function NotificationSection({ settings, update, errors }) {
         status={settings.sensitiveVerify ? "已开启" : "已关闭"}
         statusOn={settings.sensitiveVerify}
         control={
-          <Switch
-            checked={settings.sensitiveVerify}
-            onChange={(v) => update({ sensitiveVerify: v })}
-          />
+          <Toggle data={[false, true]} toggled={settings.sensitiveVerify} onToggle={(v) => update({ sensitiveVerify: v })} />
         }
       />
     </SectionCard>

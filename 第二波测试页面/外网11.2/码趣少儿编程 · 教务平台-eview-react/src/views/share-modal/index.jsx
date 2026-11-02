@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
-import { Modal, Input, Select, Switch, Button, message } from "antd";
-import Icon from "@/shared/Icon";
+import { IconPlusIcDigitalPowerDpCheck, IconPlusIcPublicCopy, IconPlusIcPublicShare } from '@hui/icon-plus';
+import Dialog from "@nce/eview-react/Dialog";
+import Button from "@nce/eview-react/Button";
+import Toggle from "@nce/eview-react/Toggle";
+import DivMessage from "@nce/eview-react/DivMessage";
+import TextField from "@/shared/TextField";
+import Select from "@/shared/Select";
 import { shareMeta } from "../../mock/drive.js";
 import ShareStatusTag from "../../components/share-status-tag/index.jsx";
 import "./index.css";
@@ -17,6 +22,7 @@ export default function ShareModal({ open, file, onClose }) {
   const [pwd, setPwd] = useState("");
   const [link, setLink] = useState("");
   const [copied, setCopied] = useState(false);
+  const [notice, setNotice] = useState(null);
 
   useEffect(() => {
     if (open && file) {
@@ -37,29 +43,34 @@ export default function ShareModal({ open, file, onClose }) {
       /* 静默降级 */
     }
     setCopied(true);
-    message.success("分享链接已复制到剪贴板");
+    setNotice({ type: "success", text: "分享链接已复制到剪贴板", key: Date.now() });
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <Modal
-      title={
-        <div className="share-modal-title">
-          <Icon name="share-2" size="1rem" />
-          <span>分享文件</span>
+    <>
+      {notice && (
+        <div style={{ position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)', zIndex: 1050 }}>
+          <DivMessage key={notice.key} display type={notice.type} text={notice.text}
+            enableDisposeTimeOut={notice.type !== "error"} onClose={() => setNotice(null)} />
         </div>
-      }
-      open={open}
-      onCancel={onClose}
-      width={460}
-      footer={
-        <div className="share-modal-foot">
-          <Button onClick={onClose}>取消</Button>
-          <Button type="primary" onClick={onClose}>完成</Button>
-        </div>
-      }
-    >
-      {file && (
+      )}
+      <Dialog
+        title={
+          <div className="share-modal-title">
+            <IconPlusIcPublicShare iconSize="1rem" iconColor={['currentcolor']} />
+            <span>分享文件</span>
+          </div>
+        }
+        isOpen={open}
+        onClose={onClose}
+        size={[460, 'auto']}
+        buttons={[
+          { text: "取消", onClick: onClose },
+          { text: "完成", status: "primary", onClick: onClose }
+        ]}
+      >
+        {file && (
         <div className="share-modal-body">
           <div className="share-file-row">
             <span className="share-file-name" title={`${file.name}.${file.ext}`}>
@@ -72,14 +83,13 @@ export default function ShareModal({ open, file, onClose }) {
           <div className="share-field">
             <label className="share-label">分享链接</label>
             <div className="share-link-row">
-              <Input value={link} readOnly className="share-link-input" />
+              <TextField value={link} readOnly className="share-link-input" />
               <Button
-                type={copied ? "default" : "primary"}
+                status={copied ? "default" : "primary"}
                 onClick={handleCopy}
-                icon={<Icon name={copied ? "check" : "copy"} size="0.875rem" />}
-              >
-                {copied ? "已复制" : "复制"}
-              </Button>
+                leftIcon={copied ? <IconPlusIcDigitalPowerDpCheck iconSize="0.875rem" iconColor={['currentcolor']} /> : <IconPlusIcPublicCopy iconSize="0.875rem" iconColor={['currentcolor']} />}
+                text={copied ? "已复制" : "复制"}
+              />
             </div>
           </div>
 
@@ -88,7 +98,7 @@ export default function ShareModal({ open, file, onClose }) {
             <Select
               value={validity}
               onChange={setValidity}
-              options={VALIDITY_OPTIONS}
+              options={VALIDITY_OPTIONS.map((o) => ({ value: o.value, text: o.label }))}
               style={{ width: "100%" }}
             />
           </div>
@@ -98,20 +108,23 @@ export default function ShareModal({ open, file, onClose }) {
               <label className="share-label">访问密码</label>
               <span className="share-pwd-hint">开启后访问需输入密码</span>
             </div>
-            <Switch checked={pwdOn} onChange={setPwdOn} />
+            <Toggle data={[false, true]} toggled={pwdOn} onToggle={setPwdOn} />
           </div>
 
           {pwdOn && (
             <div className="share-field">
-              <Input.Password
+              <TextField
+                type="password"
+                isAllowToModifyPasswordByProps
                 placeholder="请设置 4-8 位访问密码"
                 value={pwd}
-                onChange={(e) => setPwd(e.target.value)}
+                onChange={(value) => setPwd(value)}
               />
             </div>
           )}
         </div>
       )}
-    </Modal>
+      </Dialog>
+    </>
   );
 }

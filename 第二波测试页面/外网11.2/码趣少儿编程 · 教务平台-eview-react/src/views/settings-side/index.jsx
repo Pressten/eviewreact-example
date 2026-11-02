@@ -1,5 +1,4 @@
-import { Anchor } from "antd";
-import Icon from "@/shared/Icon";
+import { IconPlusIcPublicInfo, IconPlusIcPublicHorizontalBarChart } from '@hui/icon-plus';
 import "./index.css";
 
 // Layer 4: 左侧锚点目录 — 与右侧分组滚动联动高亮、点击定位。
@@ -15,19 +14,26 @@ export default function SettingsSide({ scrollRef }) {
   return (
     <aside className="settings-side">
       <div className="settings-side__brand">
-        <Icon name="sliders-horizontal" size="1.25rem" />
+        <IconPlusIcPublicHorizontalBarChart iconSize="1.25rem" iconColor={['currentcolor']} />
         <span>开发者设置</span>
       </div>
       <nav className="settings-side__nav">
         <div className="settings-side__nav-title">页面导航</div>
-        <Anchor
-          affix={false}
-          getContainer={() => scrollRef?.current || window}
-          items={items}
-        />
+        <nav className="settings-anchor">
+          {items.map(item => (
+            <a key={item.key} href={item.href} className="settings-anchor__link"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.querySelector(item.href);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}>
+              {item.title}
+            </a>
+          ))}
+        </nav>
       </nav>
       <div className="settings-side__hint">
-        <Icon name="info" size="0.875rem" />
+        <IconPlusIcPublicInfo iconSize="0.875rem" iconColor={['currentcolor']} />
         <span>改动需点击底部「保存」后生效。</span>
       </div>
     </aside>

@@ -71,13 +71,13 @@
   flex: 1;
   max-width: 32rem;
 }
-.search-input.ant-input-affix-wrapper {
+.search-input {
   background: var(--surface-variant);
   border-color: transparent;
   border-radius: var(--radius-full);
 }
-.search-input.ant-input-affix-wrapper:hover,
-.search-input.ant-input-affix-wrapper-focused {
+.search-input:hover,
+.search-input-focused {
   border-color: var(--primary);
   background: var(--surface-container-highest);
 }

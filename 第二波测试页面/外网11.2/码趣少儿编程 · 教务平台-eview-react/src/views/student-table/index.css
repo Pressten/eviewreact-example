@@ -24,14 +24,6 @@
   color: var(--critical);
 }
 
-/* 表格与分页器统一左右间距 1rem：作用于 wrapper，避免 antd 分页器默认 margin 覆盖导致错位 */
-.table-card .ant-table-wrapper {
-  padding: 0 1rem;
-}
-.table-card .ant-table {
-  margin-top: 0.75rem;
-}
-
 /* 学员单元格 */
 .student-cell {
   display: flex;

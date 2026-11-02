@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Timeline, Tag } from "antd";
-import Icon from "@/shared/Icon";
+import { IconPlusIcCarUser, IconPlusIcPublicChevronDown, IconPlusIcPublicChevronUp, IconPlusIcIctTree } from '@hui/icon-plus';
+import Tag from "@/shared/Tag";
 import SectionCard from "../../components/section-card/index.jsx";
 import { HANDOVER } from "../../mock/monitor.js";
 import "./index.css";
@@ -11,12 +11,20 @@ const RESULT_TAG = {
   processing: { color: "processing", label: "处理中" },
   pending: { color: "warning", label: "待交接" },
 };
-const DOT_COLOR = {
-  normal: "green",
-  abnormal: "red",
-  processing: "blue",
-  pending: "gray",
-};
+
+function SimpleTimeline({ items, className }) {
+  return (
+    <div className={className} style={{ position: 'relative', paddingLeft: '1.5rem' }}>
+      <div style={{ position: 'absolute', left: '0.375rem', top: '0.5rem', bottom: '0.5rem', width: '2px', background: '#e0e0e0' }} />
+      {items.map((item, idx) => (
+        <div key={idx} style={{ position: 'relative', paddingBottom: '1rem' }}>
+          <div style={{ position: 'absolute', left: '-1.125rem', top: '0.25rem', width: '0.75rem', height: '0.75rem', borderRadius: '50%', background: 'var(--primary, #0067D1)', border: '2px solid #fff' }} />
+          {item.children}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 // 区块⑦ 值班交接 Timeline：今日 6 条，节点可展开详情
 export default function HandoverTimeline() {
@@ -35,20 +43,19 @@ export default function HandoverTimeline() {
     const rt = RESULT_TAG[h.result];
     const isOpen = expanded.has(h.time);
     return {
-      color: DOT_COLOR[h.result],
       children: (
         <div className="handover-item">
           <div className="handover-head">
             <span className="handover-time">{h.time}</span>
             <span className="handover-person">
-              <Icon name="user" size="0.875rem" />
+              <IconPlusIcCarUser iconSize="0.875rem" iconColor={['currentcolor']} />
               {h.person}
             </span>
             <Tag color={rt.color} bordered={false}>{rt.label}</Tag>
           </div>
           <div className="handover-event">{h.event}</div>
           <button type="button" className="handover-toggle" onClick={() => toggle(h.time)}>
-            <Icon name={isOpen ? "chevron-up" : "chevron-down"} size="0.875rem" />
+            {isOpen ? <IconPlusIcPublicChevronUp iconSize="0.875rem" iconColor={['currentcolor']} /> : <IconPlusIcPublicChevronDown iconSize="0.875rem" iconColor={['currentcolor']} />}
             {isOpen ? "收起详情" : "展开详情"}
           </button>
           {isOpen && <div className="handover-detail">{h.detail}</div>}
@@ -58,8 +65,8 @@ export default function HandoverTimeline() {
   });
 
   return (
-    <SectionCard title="值班交接" subtitle="今日 6 条交接与处置记录" icon="list-tree">
-      <Timeline items={items} className="handover-timeline" />
+    <SectionCard title="值班交接" subtitle="今日 6 条交接与处置记录" icon={<IconPlusIcIctTree iconSize="1.25rem" iconColor={['currentcolor']} />}>
+      <SimpleTimeline items={items} className="handover-timeline" />
     </SectionCard>
   );
 }

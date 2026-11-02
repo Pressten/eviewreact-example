@@ -1,5 +1,5 @@
 import Tag from "@/shared/Tag";
-import Icon from "@/shared/Icon";
+import { IconPlusIcPublicAlert, IconPlusIcPublicShare, IconPlusIcPublicBox, IconPlusIcPublicBoltCircle, IconPlusIcHuaweiCloudNetwork, IconPlusIcHuaweiCloudDatabase } from '@hui/icon-plus';
 import SectionCard from "../../components/section-card/index.jsx";
 import { TOPOLOGY } from "../../mock/monitor.js";
 import "./index.css";
@@ -10,7 +10,7 @@ const VB_H = 540;
 const HALF_H = { gateway: 36, service: 42, db: 34, cache: 34 };
 const STATUS_LABEL = { normal: "正常", warning: "告警", critical: "异常" };
 const STATUS_TAG_COLOR = { normal: "success", warning: "warning", critical: "error" };
-const TYPE_ICON = { gateway: "network", service: "box", db: "database", cache: "zap" };
+const TYPE_ICON = { gateway: <IconPlusIcHuaweiCloudNetwork iconSize="0.875rem" iconColor={['currentcolor']} />, service: <IconPlusIcPublicBox iconSize="0.875rem" iconColor={['currentcolor']} />, db: <IconPlusIcHuaweiCloudDatabase iconSize="0.875rem" iconColor={['currentcolor']} />, cache: <IconPlusIcPublicBoltCircle iconSize="0.875rem" iconColor={['currentcolor']} /> };
 const TYPE_LABEL = { gateway: "入口网关", service: "核心服务", db: "数据库", cache: "缓存" };
 
 // 区块④ 服务拓扑（主视觉）：1 网关 + 4 核心服务 + 8 数据节点 = 13 节点；12 条调用链路
@@ -54,7 +54,7 @@ export default function ServiceTopology({ selectedServiceId, onSelectService }) 
     <SectionCard
       title="服务拓扑"
       subtitle="API 网关 → 订单 / 商品 / 用户 / 支付 → MySQL / Redis · 13 节点"
-      icon="share-2"
+      icon={<IconPlusIcPublicShare iconSize="1.25rem" iconColor={['currentcolor']} />}
       actions={
         <div className="topo-legend">
           <span className="tl-item"><i className="tl-line tl-normal" />正常调用</span>
@@ -112,7 +112,7 @@ export default function ServiceTopology({ selectedServiceId, onSelectService }) 
               title={sid ? `点击查看 ${n.name} 实时指标` : n.name}
             >
               <span className="node-head">
-                <Icon name={TYPE_ICON[n.type]} size="0.875rem" />
+                {TYPE_ICON[n.type]}
                 <span className="node-name">{n.name}</span>
                 <i className={`node-dot st-${n.status}`} />
               </span>
@@ -136,7 +136,7 @@ export default function ServiceTopology({ selectedServiceId, onSelectService }) 
       </div>
 
       <div className="topo-footnote">
-        <Icon name="triangle-alert" size="0.875rem" />
+        <IconPlusIcPublicAlert iconSize="0.875rem" iconColor={['currentcolor']} />
         <span>异常链路：<b>API 网关 → 支付服务（延迟 850ms）</b>，根因下行至 <b>MySQL·支付（延迟 1200ms，慢查询率 12.4%）</b>，已联动支付服务可用率告警。</span>
       </div>
     </SectionCard>

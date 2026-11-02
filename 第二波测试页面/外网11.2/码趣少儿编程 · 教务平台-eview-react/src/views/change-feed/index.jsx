@@ -1,5 +1,6 @@
-import { Table, Tag } from "antd";
-import Icon from "@/shared/Icon";
+import Table from "@nce/eview-react/Table";
+import { IconPlusIcDevBranch, IconPlusIcCarRotateRight } from '@hui/icon-plus';
+import Tag from "@/shared/Tag";
 import SectionCard from "../../components/section-card/index.jsx";
 import { CHANGES } from "../../mock/monitor.js";
 import "./index.css";
@@ -15,33 +16,27 @@ export default function ChangeFeed() {
   const columns = [
     {
       title: "服务",
-      dataIndex: "service",
       key: "service",
-      render: (s) => <span className="change-service">{s}</span>,
+      allowSort: false,
+      render: (cell) => <span className="change-service">{cell}</span>,
     },
     {
       title: "版本号",
-      dataIndex: "version",
       key: "version",
-      render: (v) => <span className="change-version">{v}</span>,
+      allowSort: false,
+      render: (cell) => <span className="change-version">{cell}</span>,
     },
     {
       title: "负责人",
-      dataIndex: "owner",
       key: "owner",
+      allowSort: false,
     },
     {
       title: "结果",
-      dataIndex: "result",
       key: "result",
-      filters: [
-        { text: "成功", value: "success" },
-        { text: "失败", value: "failed" },
-        { text: "回滚", value: "rollback" },
-      ],
-      onFilter: (value, r) => r.result === value,
-      render: (res) => {
-        const t = RESULT_TAG[res];
+      allowSort: false,
+      render: (cell) => {
+        const t = RESULT_TAG[cell];
         return (
           <Tag color={t.color} bordered={false} className="change-result-tag">
             {t.label}
@@ -51,35 +46,36 @@ export default function ChangeFeed() {
     },
     {
       title: "时间",
-      dataIndex: "time",
       key: "time",
       width: 80,
+      allowSort: false,
     },
   ];
 
+  const renderExpand = (r) => {
+    if (!r || (r.result !== "failed" && r.result !== "rollback")) return null;
+    return (
+      <div className="change-expand">
+        <div className="change-expand-head">
+          <IconPlusIcCarRotateRight iconSize="0.875rem" iconColor={['currentcolor']} />
+          <span>{r.result === "failed" ? "失败说明与回滚处理" : "回滚说明"}</span>
+        </div>
+        <p className="change-reason">{r.rollbackReason}</p>
+      </div>
+    );
+  };
+
   return (
-    <SectionCard title="变更动态" subtitle="今日 4 条发布" icon="git-pull-request">
+    <SectionCard title="变更动态" subtitle="今日 4 条发布" icon={<IconPlusIcDevBranch iconSize="1.25rem" iconColor={['currentcolor']} />}>
       <Table
         size="middle"
-        rowKey="id"
         columns={columns}
-        dataSource={CHANGES}
-        sortDirections={["ascend", "descend", "ascend"]}
-        showSorterTooltip={false}
-        pagination={false}
-        expandable={{
-          defaultExpandedRowKeys: ["C2"],
-          rowExpandable: (r) => r.result === "failed" || r.result === "rollback",
-          expandedRowRender: (r) => (
-            <div className="change-expand">
-              <div className="change-expand-head">
-                <Icon name="rotate-ccw" size="0.875rem" />
-                <span>{r.result === "failed" ? "失败说明与回滚处理" : "回滚说明"}</span>
-              </div>
-              <p className="change-reason">{r.rollbackReason}</p>
-            </div>
-          ),
-        }}
+        dataset={CHANGES}
+        enableZebraCrossing={false}
+        enableColumnCompareUpdate
+        width="unset"
+        enableRowExpand
+        onRowExpend={(row) => renderExpand(row?.rawData)}
       />
     </SectionCard>
   );

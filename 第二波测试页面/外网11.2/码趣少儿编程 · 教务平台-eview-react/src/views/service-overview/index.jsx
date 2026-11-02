@@ -1,5 +1,5 @@
 import Tag from "@/shared/Tag";
-import Icon from "@/shared/Icon";
+import { IconPlusIcCarLayers, IconPlusIcCarSpeed, IconPlusIcIctServers } from '@hui/icon-plus';
 import SectionCard from "../../components/section-card/index.jsx";
 import "./index.css";
 
@@ -36,7 +36,7 @@ export default function ServiceOverview({ services, selectedServiceId, onSelectS
     <SectionCard
       title="服务总览"
       subtitle="8 个核心服务可用性"
-      icon="server"
+      icon={<IconPlusIcIctServers iconSize="1.25rem" iconColor={['currentcolor']} />}
       actions={<span className="overview-legend"><span className="legend-dot ok" />正常<span className="legend-dot warn" />告警<span className="legend-dot crit" />异常</span>}
     >
       <div className="service-grid">
@@ -61,8 +61,8 @@ export default function ServiceOverview({ services, selectedServiceId, onSelectS
               <div className="svc-card-bottom">
                 <Sparkline data={s.trend} status={s.status} />
                 <div className="svc-stats">
-                  <span className="stat-row"><Icon name="gauge" size="0.75rem" />{s.qps.toLocaleString()} QPS</span>
-                  <span className="stat-row"><Icon name="layers" size="0.75rem" />{s.instances} 实例</span>
+                  <span className="stat-row"><IconPlusIcCarSpeed iconSize="0.75rem" iconColor={['currentcolor']} />{s.qps.toLocaleString()} QPS</span>
+                  <span className="stat-row"><IconPlusIcCarLayers iconSize="0.75rem" iconColor={['currentcolor']} />{s.instances} 实例</span>
                 </div>
               </div>
             </button>

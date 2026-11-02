@@ -1,17 +1,40 @@
-import { Timeline, Button, message } from "antd";
-import Icon from "@/shared/Icon";
+import { useState } from "react";
+import { IconPlusIcPublicDownload, IconPlusIcIctPointer, IconPlusIcPublicLink, IconPlusIcPublicShare, IconPlusIcPublicEdit, IconPlusIcPublicMessage } from '@hui/icon-plus';
+import Button from "@nce/eview-react/Button";
+import DivMessage from "@nce/eview-react/DivMessage";
 import { userMap, shareMeta, typeMeta, activityTemplates, activityTimes } from "../../mock/drive.js";
 import FileTypeIcon from "../../components/file-type-icon/index.jsx";
 import ShareStatusTag from "../../components/share-status-tag/index.jsx";
 import AvatarStack from "../../components/avatar-stack/index.jsx";
 import "./index.css";
 
+const ACTIVITY_ICON = {
+  pencil: <IconPlusIcPublicEdit iconSize="0.75rem" iconColor={['currentcolor']} />,
+  "message-square": <IconPlusIcPublicMessage iconSize="0.75rem" iconColor={['currentcolor']} />,
+  "share-2": <IconPlusIcPublicShare iconSize="0.75rem" iconColor={['currentcolor']} />,
+};
+
+function SimpleTimeline({ items, className }) {
+  return (
+    <div className={className} style={{ position: 'relative', paddingLeft: '1.5rem' }}>
+      <div style={{ position: 'absolute', left: '0.375rem', top: '0.5rem', bottom: '0.5rem', width: '2px', background: '#e0e0e0' }} />
+      {items.map((item, idx) => (
+        <div key={idx} style={{ position: 'relative', paddingBottom: '1rem' }}>
+          <div style={{ position: 'absolute', left: '-1.125rem', top: '0.25rem', width: '0.75rem', height: '0.75rem', borderRadius: '50%', background: 'var(--primary, #0067D1)', border: '2px solid #fff' }} />
+          {item.children}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function DetailPanel({ file, onShare }) {
+  const [notice, setNotice] = useState(null);
   if (!file) {
     return (
       <aside className="detail-panel detail-panel--empty">
         <div className="detail-empty">
-          <Icon name="mouse-pointer" size="2rem" color="#AEAEAE" />
+          <IconPlusIcIctPointer iconSize="2rem" iconColor={['#AEAEAE']} />
           <p>选择左侧文件查看详情</p>
         </div>
       </aside>
@@ -27,6 +50,18 @@ export default function DetailPanel({ file, onShare }) {
 
   return (
     <aside className="detail-panel">
+      {notice && (
+        <div style={{ position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)', zIndex: 1050 }}>
+          <DivMessage
+            key={notice.key}
+            display
+            type={notice.type}
+            text={notice.text}
+            enableDisposeTimeOut={notice.type !== "error"}
+            onClose={() => setNotice(null)}
+          />
+        </div>
+      )}
       {/* 预览卡 */}
       <div className="detail-preview">
         <div className="detail-preview-icon">
@@ -41,18 +76,9 @@ export default function DetailPanel({ file, onShare }) {
           <span className="detail-type-badge">{meta.label}</span>
         </div>
         <div className="detail-preview-actions">
-          <Button size="small" onClick={() => message.success(`正在打开「${file.name}.${file.ext}」`)}>
-            <Icon name="external-link" size="0.875rem" />
-            打开
-          </Button>
-          <Button size="small" onClick={() => message.success(`正在下载「${file.name}.${file.ext}」`)}>
-            <Icon name="download" size="0.875rem" />
-            下载
-          </Button>
-          <Button size="small" type="primary" onClick={() => onShare(file)}>
-            <Icon name="share-2" size="0.875rem" />
-            分享
-          </Button>
+          <Button size="small" leftIcon={<IconPlusIcPublicLink iconSize="0.875rem" iconColor={['currentcolor']} />} text="打开" onClick={() => setNotice({ type: "success", text: `正在打开「${file.name}.${file.ext}」`, key: Date.now() })} />
+          <Button size="small" leftIcon={<IconPlusIcPublicDownload iconSize="0.875rem" iconColor={['currentcolor']} />} text="下载" onClick={() => setNotice({ type: "success", text: `正在下载「${file.name}.${file.ext}」`, key: Date.now() })} />
+          <Button size="small" status="primary" leftIcon={<IconPlusIcPublicShare iconSize="0.875rem" iconColor={['currentcolor']} />} text="分享" onClick={() => onShare(file)} />
         </div>
       </div>
 
@@ -72,7 +98,7 @@ export default function DetailPanel({ file, onShare }) {
       <div className="detail-section">
         <div className="detail-section-title">
           <span>协作成员</span>
-          <a className="detail-link" onClick={(e) => { e.preventDefault(); message.info("邀请成员协作"); }} href="#">邀请</a>
+          <a className="detail-link" onClick={(e) => { e.preventDefault(); setNotice({ type: "info", text: "邀请成员协作", key: Date.now() }); }} href="#">邀请</a>
         </div>
         <div className="detail-collab">
           <AvatarStack userIds={file.collaborators} max={6} size={28} />
@@ -83,20 +109,20 @@ export default function DetailPanel({ file, onShare }) {
       {/* 最近动态（时间轴） */}
       <div className="detail-section">
         <div className="detail-section-title">最近动态</div>
-        <Timeline
+        <SimpleTimeline
           className="detail-timeline"
           items={activities.map((a) => ({
-            dot: (
-              <span className="tl-dot">
-                <Icon name={a.icon} size="0.75rem" />
-              </span>
-            ),
             children: (
-              <div className="tl-content">
-                <span className="tl-actor">{a.user.name}</span>
-                <span className="tl-action">{a.action}</span>
-                <span className="tl-time">{a.time}</span>
-              </div>
+              <>
+                 <span className="tl-dot">
+                   {ACTIVITY_ICON[a.icon]}
+                 </span>
+                <div className="tl-content">
+                  <span className="tl-actor">{a.user.name}</span>
+                  <span className="tl-action">{a.action}</span>
+                  <span className="tl-time">{a.time}</span>
+                </div>
+              </>
             ),
           }))}
         />

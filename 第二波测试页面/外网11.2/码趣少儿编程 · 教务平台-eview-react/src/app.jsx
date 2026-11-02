@@ -1,13 +1,16 @@
 // App entry — 少儿编程教务 · 学员管理
-// Layer 5 layout：Provider + ConfigProvider + 顶栏/侧栏/主内容装配
+// Layer 5 layout：Provider + 顶栏/侧栏/主内容装配
 //
 // 全局状态：筛选条件 filters（校区/课程/班级/关键词/仅看待续费）、
 // 当前查看学员 drawerStudent、侧栏折叠 collapsed。
 // 列表由 filters 派生；概览统计基于全量数据。
+//
+// 暗色模式：isDark 由 context.jsx 的 AppProvider 持有，切换 <html>.dark 与 <body>.aui3_1_dark；
+// eview-react ConfigProvider + IntlProvider 已在 main.jsx 配好，此处不再嵌套 antd ConfigProvider。
 
-import { useState, useMemo, useEffect } from "react";
-import { useNotice, NoticeLayer } from "@/shared/Notice";
-import Icon from "@/shared/Icon";
+import { useState, useMemo } from "react";
+import { IconPlusIcDigitalPowerDpMenu, IconPlusIcPublicMoon, IconPlusIcPublicSun, IconPlusIcPublicBellClock } from '@hui/icon-plus';
+import DivMessage from "@nce/eview-react/DivMessage";
 import { AppProvider, useApp } from "./context.jsx";
 import { STUDENTS, OVERVIEW, RENEWAL_THRESHOLD } from "./mock/student.js";
 
@@ -34,15 +37,10 @@ const DEFAULT_FILTERS = {
 
 function Shell() {
   const { isDark, toggleDark } = useApp();
-  const [message, notice] = useNotice();
   const [collapsed, setCollapsed] = useState(false);
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [drawerStudent, setDrawerStudent] = useState(null);
-
-  useEffect(() => {
-    document.body.classList.toggle('aui3_1_dark', isDark);
-    document.documentElement.classList.toggle('dark', isDark);
-  }, [isDark]);
+  const [notice, setNotice] = useState(null);
 
   const filtered = useMemo(() => {
     const kw = filters.keyword.trim().toLowerCase();
@@ -66,26 +64,19 @@ function Shell() {
 
   return (
     <div className="app-root">
-      <NoticeLayer notice={notice} onClose={() => message.close()} />
+      {notice && (
+        <div style={{ position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)', zIndex: 1050 }}>
+          <DivMessage key={notice.key} display type={notice.type} text={notice.text}
+            enableDisposeTimeOut={notice.type !== "error"} onClose={() => setNotice(null)} />
+        </div>
+      )}
       <header className="app-topbar">
-        <Icon
-          name="menu"
-          size="1rem"
-          className="app-topbar__collapse"
-          title="折叠/展开侧栏"
-          onClick={() => setCollapsed((c) => !c)}
-        />
+        <IconPlusIcDigitalPowerDpMenu iconSize="1rem" iconColor={['currentcolor']} className="app-topbar__collapse" title="折叠/展开侧栏" onClick={() => setCollapsed((c) => !c)} />
         <span className="app-topbar__brand">码趣少儿编程 · 教务平台</span>
         <span className="app-topbar__spacer" />
         <div className="app-topbar__tools">
-          <Icon
-            name={isDark ? "sun" : "moon"}
-            size="1rem"
-            className="app-topbar__tool"
-            title="切换深浅主题"
-            onClick={toggleDark}
-          />
-          <Icon name="bell" size="1rem" className="app-topbar__tool" title="通知中心" />
+          {isDark ? <IconPlusIcPublicSun iconSize="1rem" iconColor={['currentcolor']} className="app-topbar__tool" /> : <IconPlusIcPublicMoon iconSize="1rem" iconColor={['currentcolor']} className="app-topbar__tool" />}
+          <IconPlusIcPublicBellClock iconSize="1rem" iconColor={['currentcolor']} className="app-topbar__tool" title="通知中心" />
           <div className="app-topbar__user">
             <img src="/uploads/user.png" alt="" />
             <span>王老师</span>
@@ -97,7 +88,7 @@ function Shell() {
         <Sidebar collapsed={collapsed} />
         <main className="app-main">
           <div className="app-main__inner">
-            <PageHeader onExport={() => message.success("学员名册已导出")} />
+            <PageHeader onExport={() => setNotice({ type: "success", text: "学员名册已导出", key: Date.now() })} />
             <StatOverview overview={OVERVIEW} />
             <FilterBar filters={filters} onChange={updateFilters} onReset={resetFilters} />
             <StudentTable students={filtered} onView={setDrawerStudent} />

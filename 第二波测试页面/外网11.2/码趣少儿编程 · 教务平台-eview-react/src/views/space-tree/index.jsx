@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { Tree, Dropdown, Input, message } from "antd";
-import Icon from "@/shared/Icon";
+import { IconPlusIcPublicEllipsis, IconPlusIcPublicSearch, IconPlusIcCarUser, IconPlusIcPublicFolder, IconPlusIcIctTree, IconPlusIcCarRotateRight } from '@hui/icon-plus';
+import SimpleTree from "../../components/simple-tree/index.jsx";
+import SimpleDropdown from "../../components/simple-dropdown/index.jsx";
+import TextField from "@/shared/TextField";
+import DivMessage from "@nce/eview-react/DivMessage";
 import { treeRaw } from "../../mock/drive.js";
 import "./index.css";
 
@@ -12,31 +15,28 @@ const NODE_ACTIONS = [
 ];
 
 function NodeTitle({ node, selected, onAction }) {
-  const actionMenu = {
-    items: NODE_ACTIONS,
-    onClick: ({ key }) => onAction(node, key),
-  };
+  const actionItems = NODE_ACTIONS;
   return (
     <div className={`tree-node${selected ? " tree-node--active" : ""}`}>
       <span className="tree-node-name">
         {node.shared && (
           <span className="tree-shared" title="共享空间">
-            <Icon name="users" size="0.75rem" />
+            <IconPlusIcCarUser iconSize="0.75rem" iconColor={['currentcolor']} />
           </span>
         )}
         <span className="tree-name-text">{node.name}</span>
       </span>
       <span className="tree-node-meta">
         <span className="tree-count">{node.count}</span>
-        <Dropdown menu={actionMenu} trigger={["click"]} placement="bottomRight">
+        <SimpleDropdown items={actionItems} onSelect={(key) => onAction(node, key)} placement="bottomRight">
           <span
             className="tree-node-more"
             onClick={(e) => e.stopPropagation()}
             title="更多操作"
           >
-            <Icon name="ellipsis" size="0.875rem" />
+            <IconPlusIcPublicEllipsis iconSize="0.875rem" iconColor={['currentcolor']} />
           </span>
-        </Dropdown>
+        </SimpleDropdown>
       </span>
     </div>
   );
@@ -49,7 +49,7 @@ function buildTreeData(nodes, selectedKey, onAction) {
       key: n.key,
       title: <NodeTitle node={n} selected={n.key === selectedKey} onAction={onAction} />,
       icon: (
-        <Icon name={hasChildren ? "folder" : "folder-open"} size="0.875rem" color={n.shared ? "#0067D1" : "#777777"} />
+        <IconPlusIcPublicFolder iconSize="0.875rem" iconColor={[n.shared ? "#0067D1" : "#777777"]} />
       ),
       children: hasChildren ? buildTreeData(n.children, selectedKey, onAction) : undefined,
     };
@@ -61,10 +61,11 @@ export default function SpaceTree({ selectedKey, onSelect, onNodeAction }) {
     "company", "company-report", "dept", "dept-rd", "project", "proj-park",
   ]);
   const [filter, setFilter] = useState("");
+  const [notice, setNotice] = useState(null);
 
   const handleAction = (node, action) => {
-    if (action === "rename") message.info(`重命名「${node.name}」`);
-    else if (action === "move") message.info(`移动「${node.name}」到其他空间`);
+    if (action === "rename") setNotice({ type: "info", text: `重命名「${node.name}」`, key: Date.now() });
+    else if (action === "move") setNotice({ type: "info", text: `移动「${node.name}」到其他空间`, key: Date.now() });
     else if (action === "delete") onNodeAction(node, action);
   };
 
@@ -72,36 +73,45 @@ export default function SpaceTree({ selectedKey, onSelect, onNodeAction }) {
 
   return (
     <aside className="space-tree">
+      {notice && (
+        <div style={{ position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)', zIndex: 1050 }}>
+          <DivMessage
+            key={notice.key}
+            display
+            type={notice.type}
+            text={notice.text}
+            enableDisposeTimeOut={notice.type !== "error"}
+            onClose={() => setNotice(null)}
+          />
+        </div>
+      )}
       <div className="space-tree-head">
         <span className="space-tree-title">
-          <Icon name="folder-tree" size="1rem" />
+          <IconPlusIcIctTree iconSize="1rem" iconColor={['currentcolor']} />
           文档空间
         </span>
-        <button className="icon-btn-mini" title="刷新" onClick={() => message.success("目录已刷新")}>
-          <Icon name="rotate-cw" size="0.875rem" />
+        <button className="icon-btn-mini" title="刷新" onClick={() => setNotice({ type: "success", text: "目录已刷新", key: Date.now() })}>
+          <IconPlusIcCarRotateRight iconSize="0.875rem" iconColor={['currentcolor']} />
         </button>
       </div>
 
       <div className="space-tree-search">
-        <Input
+        <TextField
           size="small"
           placeholder="搜索目录"
-          allowClear
           value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          suffix={<Icon name="search" size="0.75rem" color="#AEAEAE" />}
+          onChange={(value) => setFilter(value)}
+          suffix={<IconPlusIcPublicSearch iconSize="0.75rem" iconColor={['#AEAEAE']} />}
         />
       </div>
 
       <div className="space-tree-body">
-        <Tree
+        <SimpleTree
           treeData={treeData}
           selectedKeys={selectedKey ? [selectedKey] : []}
           expandedKeys={expandedKeys}
           onExpand={(keys) => setExpandedKeys(keys)}
-          onSelect={(keys) => onSelect(keys[0] || null)}
-          showLine={{ showLeafIcon: false }}
-          blockNode
+          onSelect={(key) => onSelect(key || null)}
         />
       </div>
     </aside>

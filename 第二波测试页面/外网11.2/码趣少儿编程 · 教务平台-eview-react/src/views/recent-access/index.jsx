@@ -1,4 +1,4 @@
-import Icon from "@/shared/Icon";
+import { IconPlusIcPublicClock, IconPlusIcPublicRightArrow } from '@hui/icon-plus';
 import { recentAccess } from "../../mock/drive.js";
 import FileTypeIcon from "../../components/file-type-icon/index.jsx";
 import "./index.css";
@@ -8,7 +8,7 @@ export default function RecentAccess({ onSelectFile }) {
     <section className="recent-access">
       <div className="recent-head">
         <span className="recent-title">
-          <Icon name="clock" size="1rem" />
+          <IconPlusIcPublicClock iconSize="1rem" iconColor={['currentcolor']} />
           最近访问
         </span>
         <a className="recent-more" onClick={(e) => e.preventDefault()} href="#">查看全部</a>
@@ -28,7 +28,7 @@ export default function RecentAccess({ onSelectFile }) {
               <span className="recent-name" title={r.name}>{r.name}</span>
               <span className="recent-meta">{r.time} · {r.space}</span>
             </span>
-            <Icon name="chevron-right" size="0.875rem" color="#AEAEAE" />
+            <IconPlusIcPublicRightArrow iconSize="0.875rem" iconColor={['#AEAEAE']} />
           </a>
         ))}
       </div>

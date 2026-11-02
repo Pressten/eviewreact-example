@@ -1,7 +1,7 @@
 // Layer 4: 近期课堂动态（聚合各学员最新上课记录的动态流）
 import Tag from "@/shared/Tag";
 import Rating from "@nce/eview-react/Rating";
-import Icon from "@/shared/Icon";
+import { IconPlusIcPublicHeartWaveform } from '@hui/icon-plus';
 import { RECENT_ACTIVITY } from "../../mock/student.js";
 import "./index.css";
 
@@ -12,7 +12,7 @@ export default function RecentActivity() {
     <div className="activity-card">
       <div className="activity-card__head">
         <span className="activity-card__title">
-          <Icon name="activity" size="0.875rem" /> 近期课堂动态
+          <IconPlusIcPublicHeartWaveform iconSize="0.875rem" iconColor={['currentcolor']} /> 近期课堂动态
         </span>
         <span className="activity-card__hint">最新 {RECENT_ACTIVITY.length} 条上课记录</span>
       </div>

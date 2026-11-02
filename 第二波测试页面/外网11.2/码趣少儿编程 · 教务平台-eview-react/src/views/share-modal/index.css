@@ -66,7 +66,7 @@
 .share-link-input {
   flex: 1;
 }
-.share-link-input.ant-input {
+.share-link-input {
   background: var(--surface-variant);
   color: var(--on-surface-variant);
 }
