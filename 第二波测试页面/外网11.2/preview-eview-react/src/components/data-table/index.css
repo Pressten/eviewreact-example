@@ -1,0 +1,6 @@
+/* 这里只约束容器几何；表头、行、筛选和分页皮肤统一来自组件库。 */
+.ict-data-table{min-width:0;max-width:100%}
+
+/* 固定高度面板只让原生表体滚动，少量记录时分页也留在面板底部。 */
+.ict-data-table.is-fill-height .ev_table_has_paging{height:auto}
+.ict-data-table.is-fill-height .ev_paging.ev_table_paging{height:auto;padding-top:1rem}

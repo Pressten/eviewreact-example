@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "i18n-keys": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "antd-imports": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": []
+}

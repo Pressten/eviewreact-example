@@ -1,0 +1,10 @@
+[
+  {
+    "file": "src/components/icon-el/index.jsx",
+    "line": 36,
+    "expr": "icon",
+    "source": "wrapper Ic receives icon as function parameter (props field); consumers in 8+ files: top-bar, report-card, lui-panel/index, lui-panel/composer, lui-panel/uc1-chat, lui-panel/uc2-chat, lui-panel/uc3-chat, canvas-area/index, lui-panel/thinking — all pass literal strings or flat/chained ternaries with literal leaves (chevron-down, chevron-up, x, map-pin, map, network, file-text, server)",
+    "closedSet": true,
+    "reason": "icon 值集合闭合（chevron-down/chevron-up/x/map-pin/map/network/file-text/server 全字面量/三元字面量，8+ 消费文件可追源）。wrapper 双模式渲染架构阻止原地转换：filled 变体用 filled[icon] 字符串键查硬编码 SVG path（filled 对象 23 个 path），若 icon 改 ReactNode 则 filled[icon] 恒 undefined、dark mode variant={isDark?filled:lined} 全部退化为 lined。转换须改 8+ 消费文件的 <Ic icon=...> 调用点（非 <Icon> 调用点），其中 7 个不在 iconCallSites 13 文件清单内，超出 §3.0 只处理 <Icon> 调用点和 icon import 范围。按 §图标-prop wrapper 组件改写规则 安全闸：整组 untraced 交 LLM 判。"
+  }
+]

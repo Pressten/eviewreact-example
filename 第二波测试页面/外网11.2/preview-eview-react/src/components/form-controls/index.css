@@ -1,0 +1,42 @@
+/* 仅保留业务控件几何；标准 Select / Input / Radio 皮肤由 assets/style/ant.css 提供。 */
+.stage-root.pc-layout .ui-kit-select{position:relative;display:inline-flex;vertical-align:middle;flex:0 1 auto;width:100%;min-width:0;height:2rem;box-sizing:border-box}
+.ui-kit-select>.ict-select-control{min-width:0}
+.ict-select-priority-label{display:inline-flex;align-items:center;gap:var(--spacing-1);min-width:0}
+.ict-select-priority-label>i{display:block;flex:none;width:0.5rem;height:0.5rem;border-radius:var(--radius-full)}
+.stage-root.pc-layout .uc3-edit-control .ui-kit-select{flex:1}
+.stage-root.pc-layout .uc1-rules-toolbar>.ui-kit-select{width:10.875rem;max-width:35%;flex:none}
+.stage-root.pc-layout .uc1-pagination-controls>.ui-kit-select{width:9.625rem;margin-right:var(--spacing-1);flex:none}
+.stage-root.pc-layout .baseline-rule-select{border:0;background:transparent}
+.stage-root.pc-layout .baseline-rule-select>.ui-kit-select{width:100%}
+.stage-root.pc-layout :is(.baseline-rule-select,.shell-mode)>.ic{display:none}
+.stage-root.pc-layout .baseline-pagination .ui-kit-select{width:6.875rem;flex:none}
+.stage-root.pc-layout .v7-rule-select>.ui-kit-select{width:16.5rem;max-width:100%}
+.stage-root.pc-layout .ui-kit-select.report-page-size{width:9.6875rem;padding:0;border:0;background:transparent}
+.stage-root.pc-layout .uc2-table-pagination .ui-kit-select.report-page-size{width:6.5rem}
+.stage-root.pc-layout .shell-mode{padding:0;border:0;background:transparent;width:7rem;height:2rem}
+.stage-root.pc-layout .shell-mode>.ui-kit-select{width:100%}
+html .stage-root.pc-layout :is(#reportCard,#uc2Report,#uc2ReportRuleList,#uc2RuleList).report-design .ui-kit-select.report-page-size{height:2rem;padding:0;border:0;background:transparent;box-shadow:none}
+@container workspace (max-width:62.5rem){.stage-root.pc-layout .uc1-pagination-controls>.ui-kit-select{width:6.875rem}}
+/* 本轮不迁移分段选择器，保留既有厂商及报告视角切换外观。 */
+.stage-root.pc-layout .ui-kit-segmented{--control-option-hover:#f3f3f30f;--control-focus:var(--brand-40)}
+html:not(.dark) .stage-root.pc-layout .ui-kit-segmented{--control-option-hover:#1919190f;--control-focus:var(--brand-50)}
+/* Compact segmented selectors in mapping and report TOP controls. */
+.stage-root.pc-layout .ui-kit-segmented,
+.stage-root.pc-layout #mappingCard.mapping-design .filters.ui-kit-segmented,
+.stage-root.pc-layout #reportCard.report-design .v7-lens.ui-kit-segmented{display:inline-flex;align-items:center;box-sizing:border-box;gap:var(--spacing-1);height:2rem;padding:var(--spacing-0-5);border:0;border-radius:var(--radius-md);background:#f3f3f333}
+.stage-root.pc-layout .ui-kit-segmented>button,
+.stage-root.pc-layout #mappingCard.mapping-design .filters.ui-kit-segmented>button,
+.stage-root.pc-layout #reportCard.report-design .v7-lens.ui-kit-segmented>button{display:flex;align-items:center;justify-content:center;box-sizing:border-box;gap:var(--spacing-1);height:1.75rem;padding:0.1875rem var(--spacing-4);border:0;border-radius:var(--radius-base);color:var(--gray-20);background:transparent;font:400 var(--font-size-md)/1.375rem 'HarmonyOS Sans SC',sans-serif;white-space:nowrap}
+.stage-root.pc-layout .ui-kit-segmented>button:hover:not([aria-pressed=true]){background:var(--control-option-hover)}
+.stage-root.pc-layout .ui-kit-segmented>button[aria-pressed=true],
+.stage-root.pc-layout #mappingCard.mapping-design .filters.ui-kit-segmented>button[aria-pressed=true],
+.stage-root.pc-layout #reportCard.report-design .v7-lens.ui-kit-segmented>button[aria-pressed=true]{background:var(--brand-50);color:var(--gray-0);box-shadow:0 1px 6px #00000080}
+.stage-root.pc-layout .ui-kit-segmented>button:focus-visible{outline:1px solid var(--control-focus);outline-offset:1px}
+html:not(.dark) .stage-root.pc-layout .ui-kit-segmented{background:#1919190d}
+html:not(.dark) .stage-root.pc-layout .ui-kit-segmented>button:not([aria-pressed=true]){color:var(--gray-60)}
+
+/* AI 对话外壳不在本轮重构范围，保留既有文字和提示色。 */
+html .stage-root.pc-layout .composer textarea{font-size:var(--font-size-md);line-height:1.375rem;color:var(--gray-90)}
+html .stage-root.pc-layout .composer textarea::placeholder{color:var(--gray-30);opacity:1}
+html.dark .stage-root.pc-layout .composer textarea{color:var(--gray-0)}
+html.dark .stage-root.pc-layout .composer textarea::placeholder{color:var(--gray-40)}

@@ -1,0 +1,4 @@
+/* Form control appearances are centralized in assets/style/ant.css. */
+:is(.stage-root.uc3,.stage-root.uc2) .uc3-edit-condition-grid>label,
+:is(.stage-root.uc3,.stage-root.uc2) .uc3-edit-expression,
+:is(.stage-root.uc3,.stage-root.uc2) .uc3-edit-condition-grid legend{line-height:1.375rem;font-weight:var(--font-weight-normal)}

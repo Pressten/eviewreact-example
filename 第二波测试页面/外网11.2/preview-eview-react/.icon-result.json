@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 20,
+  "confirmed": 7,
+  "residual": 6,
+  "shimRetained": [
+    {
+      "file": "src/components/icon-el/index.jsx",
+      "line": 36,
+      "reason": "closedSet:true — icon 值集合闭合（chevron-down/chevron-up/x/map-pin/map/network/file-text/server 全字面量/三元，8+ 消费文件可追源）。wrapper 双模式渲染（filled SVG path map[23 entries] + lined <Icon> shim）阻止原地转换：filled[icon] 字符串键查 SVG path，icon 改 ReactNode 则 filled 变体失效（dark mode variant={isDark?filled:lined} 全退化为 lined）。转换须改 8+ 文件 <Ic icon=> 调用点（非 <Icon> 调用点），7 个不在 iconCallSites 13 文件清单内，超出 §3.0 只处理 <Icon> 调用点和 icon import 范围。"
+    }
+  ],
+  "notes": {
+    "preScanEliminated": 6,
+    "preScanEliminatedDetail": "6 pre-scan iconCallSites (search×5: search-input/skill-execution-drawer/top-bar/uc1-canvas/candidate-list; info×1: app-feedback) eliminated by component conversion before match-icons.cjs (Input.Search→TextField removed search icon prefix; message.info→DivMessage removed info icon)",
+    "actualCallSites": 14,
+    "confirmedSiteRepairs": [
+      {
+        "file": "src/views/uc3-canvas/index.jsx",
+        "line": 46,
+        "detail": "match-icons.cjs --apply erroneously added wrapper-internal props (src={source} title={label} onClick={...}) to IconPlusIcPublicMinus and IconPlusIcPublicPlus elements; removed bogus props (source/label/disabled/onActivate are GraphAction wrapper params, undefined at Graph call site scope)"
+      }
+    ],
+    "residualConversions": [
+      {"file": "src/views/report-card/index.jsx", "line": 132, "from": "circle-x/circle-check ternary", "to": "IconPlusIcPublicCloseCircle / IconPlusIcPublicCheckmark"},
+      {"file": "src/views/report-card/index.jsx", "line": 133, "from": "external-link", "to": "IconPlusIcPublicLink"},
+      {"file": "src/views/uc2-canvas/candidate-list.jsx", "line": 71, "from": "square-pen", "to": "IconPlusIcIctBulkEdit (title+onClick preserved)"},
+      {"file": "src/views/uc2-canvas/candidate-list.jsx", "line": 75, "from": "file-text", "to": "IconPlusIcDigitalPowerDpFile"},
+      {"file": "src/views/uc2-canvas/index.jsx", "line": 53, "from": "network/sparkles/file-text chained ternary", "to": "IconPlusIcHuaweiCloudNetwork / IconPlusIcPublicStar / IconPlusIcDigitalPowerDpFile"},
+      {"file": "src/components/skill-execution-drawer/index.jsx", "line": 17, "from": "local Ic wrapper <Icon name={icon} size=1rem/>", "to": "pass-through {icon}; call sites <Ic icon={<IconPlusIcPublicClose iconSize=1rem/>}/>"}
+    ],
+    "checkerFindings": {
+      "check": "check-icon-shim.cjs --strict",
+      "unjustified": 1,
+      "unconvertedIconSource": 30,
+      "propDropped": 0,
+      "staleShimImport": 0,
+      "analysis": "UNJUSTIFIED (icon-el:36) = closedSet:true shim retained due to dual-mode wrapper architecture + scope constraint (8+ consumer files outside 13-file list). UNCONVERTED-ICON-SOURCE (30) = false positives: uc3-canvas nodes/evidence arrays use icon:'lit' as RuleGlyph SVG file keys (assets[icon]→<img src=.svg>), NOT <Icon> consumption; checker misreads <RuleGlyph icon={node.icon}> as converted <Icon> consumer. Remaining UNCONVERTED-ICON-SOURCE in uc2.js/left-rail/welcome/welcome-templates are in files outside 13-file scope."
+    }
+  }
+}

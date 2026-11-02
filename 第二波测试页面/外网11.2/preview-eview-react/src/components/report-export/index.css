@@ -1,0 +1,16 @@
+.report-export-trigger{display:inline-flex;align-items:center;justify-content:center;width:1.75rem;height:1.75rem;padding:0;border:0;border-radius:var(--radius-base);background:transparent;color:var(--on-surface);cursor:pointer;flex:none}
+.report-export-trigger:hover,.report-export-trigger[aria-expanded="true"]{background:var(--surface-variant);color:var(--interactive-link)}
+.report-export-trigger:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+/* Popover owns the surface skin; these rules only lay out the embedded form. */
+.report-export-panel{box-sizing:border-box;width:20rem;max-width:calc(100vw - var(--spacing-12));max-height:calc(100dvh - var(--spacing-12));overflow:auto;padding:var(--spacing-2);scrollbar-width:thin}
+.report-export-panel header{display:flex;align-items:center;justify-content:space-between;gap:var(--spacing-4);margin-bottom:var(--spacing-5)}
+.report-export-panel header strong{font:var(--font-body-m);font-weight:var(--font-weight-semibold);color:var(--on-surface)}
+.report-export-panel header>span{font:var(--font-caption-m);color:var(--on-surface-variant);font-variant-numeric:tabular-nums}
+.report-export-panel fieldset{padding:0;margin:0 0 var(--spacing-5);border:0;min-width:0}
+.report-export-panel legend{display:block;padding:0;margin-bottom:var(--spacing-2);font:var(--font-caption-m);color:var(--on-surface-variant)}
+.report-export-choices{display:flex;align-items:center;gap:var(--spacing-2);flex-wrap:wrap}
+.report-export-scope-field{margin-top:var(--spacing-3)}
+.report-export-panel footer{display:flex;align-items:center;justify-content:space-between;gap:var(--spacing-3);margin-top:var(--spacing-1);padding-top:var(--spacing-4);border-top:1px solid var(--outline-variant)}
+.report-export-panel footer small{color:var(--on-surface-variant);font:var(--font-caption-s)}
+.report-card>.report-export-actions{position:absolute;top:1rem;right:1rem;display:flex;align-items:center;gap:var(--spacing-2);z-index:5}
+.report-card>.report-export-actions>.v7-open-card-tab{position:static!important;inset:auto!important}.report-card>.report-export-actions .artifact-open-btn{position:static!important}
