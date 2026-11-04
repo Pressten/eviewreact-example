@@ -1,0 +1,35 @@
+.app-root {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: var(--surface-container-lowest);
+  overflow: hidden;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.app-content {
+  flex: 1;
+  padding: var(--spacing-section);
+  overflow: auto;
+  min-height: 0;
+}
+
+/* antd Spin 自定义指示器 */
+.custom-spin-indicator {
+  width: 2rem;
+  height: 2rem;
+  animation: custom-spin 1s linear infinite;
+}
+
+@keyframes custom-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

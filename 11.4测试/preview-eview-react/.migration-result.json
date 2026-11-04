@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "imports": "PASS",
+    "css": "ADVISORY",
+    "provider": "PASS",
+    "dark-mode": "PASS",
+    "token-drift": "PASS",
+    "props-preserved": "PASS",
+    "i18n-keys": "PASS",
+    "chart-options": "PASS",
+    "icon-names": "PASS",
+    "table-defaults": "PASS",
+    "messagedialog-defaults": "PASS",
+    "steps-defaults": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [
+    {
+      "check": "css",
+      "item": "src/components/sidebar/index.css:32 使用组件库类名 \".ev_accordion\"（若是自定义类名违规——应用 app- 前缀；若是覆盖组件库样式则允许，需核对）",
+      "resolution": "保留：此为 Accordion 组件库类名 .ev_accordion 的样式覆盖（使导航在侧边栏内 flex:1 填满高度），非自定义业务类名。原 antd 写法为 .sidebar .ant-menu { flex:1; border-inline-end:none }，迁移后将 .ant-menu 覆盖改为等价的 .ev_accordion 覆盖，属允许的覆盖组件库样式（SKILL.md 硬约束⑦）。border-inline-end:none 删除——那是 antd Menu inline 模式的右边框去除，eview-react Accordion 无此默认边框，无需覆盖。"
+    }
+  ]
+}

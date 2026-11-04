@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 11,
+  "confirmed": 11,
+  "residual": 0,
+  "shimRetained": [],
+  "method": "C (catalog offline match + static import)",
+  "filesChanged": [
+    "src/components/header-bar/index.jsx",
+    "src/components/sidebar/index.jsx",
+    "src/views/asset-tree/index.jsx",
+    "src/mock/tree.js -> src/mock/tree.jsx (.js->.jsx, cross-file closed-set data source 半改 fix)"
+  ],
+  "confirmedSiteRepairs": [
+    {
+      "file": "src/components/header-bar/index.jsx",
+      "line": 17,
+      "note": "原 <Icon name={collapsed ? 'panel-left-open' : 'panel-left-close'}> 无 onClick/title/aria props（外层 <button> 承载 onClick+title），icon+ 改写无 props 需搬运"
+    },
+    {
+      "file": "src/components/header-bar/index.jsx",
+      "line": 29,
+      "note": "原 <Icon name={isDark?'moon':'sun'} className='header-dark-icon'> 无 onClick（外层 Toggle 承载 onToggle）、无 title；className 已两分支搬运到 IconPlusIcPublicMoon/Sun"
+    },
+    {
+      "file": "src/components/header-bar/index.jsx",
+      "line": 33,
+      "note": "原 <Icon name='bell' title='通知' className='header-bell'> 的 title + className 已搬运到 IconPlusIcPublicBellClock（无 onClick，装饰性通知图标）"
+    },
+    {
+      "file": "src/views/asset-tree/index.jsx",
+      "line": 26,
+      "note": "原 <Icon name='funnel' title='筛选' className='asset-tree-filter'> 的 title + className 已由 match-icons --apply 搬运到 IconPlusIcPublicFunnel"
+    }
+  ],
+  "residualDecisions": [
+    { "source": "bell", "chosen": "IconPlusIcPublicBellClock", "reason": "通知铃铛语义，Public 域通用，catalog 实有" },
+    { "source": "layout-dashboard", "chosen": "IconPlusIcPublicDashboard", "reason": "L6 建议，总览仪表盘语义，Public 域通用" },
+    { "source": "server", "chosen": "IconPlusIcIctServers", "reason": "资产管理服务器，Ict 域复数 Servers，catalog 实有（sidebar + tree.js 共用同映射）" },
+    { "source": "scroll-text", "chosen": "IconPlusIcIctViewingLogs", "reason": "操作日志语义，Ict 域 ViewingLogs，catalog 实有；优于候选 MicText（语义不符）" },
+    { "source": "settings", "chosen": "IconPlusIcPublicSetting", "reason": "s0 精确匹配，Public 域设置图标" },
+    { "source": "activity", "chosen": "IconPlusIcPublicNetworkMonitoring", "reason": "监控告警语义，Public 域网络监控图标，catalog 实有；替换 --apply 自动落的占位 IconPlusIcPublicTransverseRectangleTemplate" },
+    { "source": "hexagon", "chosen": "IconPlusIcIctCustomShape", "reason": "品牌六边形几何形状，Ict 域 CustomShape 几何语义，catalog 实有；替换 --apply 自动落的占位（catalog 无 Hexagon 实有名，遵守禁臆造铁律不自行拼接 IconPlusIc*Hexagon）" },
+    { "source": "panel-left-open", "chosen": "IconPlusIcPublicBoxOpen", "reason": "脚本建议 + catalog 实有，展开语义" },
+    { "source": "panel-left-close", "chosen": "IconPlusIcPublicClose", "reason": "脚本建议 + catalog 实有，收起语义" }
+  ],
+  "crossFileDataSource": {
+    "file": "src/mock/tree.js -> tree.jsx",
+    "sites": 2,
+    "field": "icon",
+    "literal": "server",
+    "closedSet": true,
+    "reason": "treeData 静态字面量数组，icon:'server' 硬编码字面量（非后端接口字段），按 Icon.md §name 解析统一原则属闭合集须转 icon+；消费端 eview-react Tree 组件渲染节点 icon 字段。check-icon-shim --strict 拦此半改态，已转 + .js->.jsx + 修引用方显式扩展名 import"
+  },
+  "openSetShim": "none (11/11 call sites 转 icon+ 静态 import；tree.js 2 处数据源字面量闭合集转 icon+；无真 OPEN 后端自由取值站点)"
+}

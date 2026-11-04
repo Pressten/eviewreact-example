@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "iconCallSites": 11,
+  "confirmed": 3,
+  "residual": 8,
+  "confirmedDetail": [
+    {"site": "header-bar/index.jsx:24", "name": "search", "to": "IconPlusIcPublicSearch", "source": "match-icons.cjs --apply auto"},
+    {"site": "header-bar/index.jsx:29", "name": "isDark?moon:sun (ternary)", "to": "IconPlusIcPublicMoon / IconPlusIcPublicSun", "source": "match-icons.cjs --apply auto (ternary both-branches confirmed)"},
+    {"site": "asset-tree/index.jsx:26", "name": "funnel", "to": "IconPlusIcPublicFunnel", "source": "match-icons.cjs --apply auto"}
+  ],
+  "residualDetail": [
+    {"site": "header-bar/index.jsx:17", "name": "collapsed?panel-left-open:panel-left-close (ternary, UNMATCHED)", "to": "IconPlusIcPublicBoxOpen / IconPlusIcPublicClose", "source": "LLM manual (catalog-verified real names)"},
+    {"site": "header-bar/index.jsx:33", "name": "bell", "to": "IconPlusIcPublicBellClock", "source": "LLM manual (residual top-K candidate[0])"},
+    {"site": "sidebar/index.jsx:7", "name": "layout-dashboard", "to": "IconPlusIcPublicDashboard", "source": "LLM manual (residual top-K candidate[0])"},
+    {"site": "sidebar/index.jsx:8", "name": "server", "to": "IconPlusIcIctServers", "source": "LLM manual (catalog grep verified Ict bucket has Servers)"},
+    {"site": "sidebar/index.jsx:9", "name": "activity (orphan placeholder)", "to": "IconPlusIcPublicHeartWaveform", "source": "LLM manual (orphan replaced; catalog grep verified Public bucket has HeartWaveform, lucide activity pulse visual match)"},
+    {"site": "sidebar/index.jsx:10", "name": "scroll-text", "to": "IconPlusIcDigitalPowerLogManagement", "source": "LLM manual (catalog grep verified DigitalPower bucket has LogManagement, 操作日志 semantic match)"},
+    {"site": "sidebar/index.jsx:11", "name": "settings", "to": "IconPlusIcPublicSetting", "source": "LLM manual (residual candidate, catalog verified Public bucket has Setting)"},
+    {"site": "sidebar/index.jsx:18", "name": "hexagon (orphan placeholder)", "to": "IconPlusIcPublicTransverseRectangleTemplate (placeholder retained)", "source": "LLM manual (catalog grep: no Hexagon/shape analog exists; orphan placeholder kept, color #0067D1 preserved via iconColor)"}
+  ],
+  "convertedSource": {
+    "file": "src/mock/tree.js -> src/mock/tree.jsx",
+    "reason": "check-icon-shim --strict flagged 3 UNCONVERTED-ICON-SOURCE (icon:\"server\" literals) not in iconCallSites (data fed to <Tree data>, no <Icon> render site). Closed-set literals -> converted per Icon.md 闭合字面量不变量. .js->.jsx (JSX introduced) + asset-tree import path updated.",
+    "sites": [
+      {"line": 6, "name": "server", "to": "IconPlusIcIctServers"},
+      {"line": 30, "name": "server", "to": "IconPlusIcIctServers"},
+      {"line": 45, "name": "server", "to": "IconPlusIcIctServers"}
+    ]
+  },
+  "interactivePropsPreserved": [
+    {"site": "header-bar/index.jsx:24 (search)", "props": "className=header-search-icon", "status": "preserved on IconPlusIcPublicSearch"},
+    {"site": "header-bar/index.jsx:29 (isDark ternary)", "props": "className=header-dark-icon", "status": "preserved on BOTH IconPlusIcPublicMoon and IconPlusIcPublicSun branches"},
+    {"site": "header-bar/index.jsx:33 (bell)", "props": "className=header-bell, title=通知 (Chinese)", "status": "preserved on IconPlusIcPublicBellClock (UTF-8 title kept)"},
+    {"site": "asset-tree/index.jsx:26 (funnel)", "props": "title=筛选 (Chinese), className=asset-tree-filter", "status": "preserved on IconPlusIcPublicFunnel (UTF-8 title kept)"},
+    {"site": "sidebar/index.jsx:18 (hexagon)", "props": "color=#0067D1", "status": "preserved as iconColor=['#0067D1'] on placeholder"}
+  ],
+  "gates": {
+    "check-icon-shim --strict": {"exit": 0, "result": "PASS (0 UNJUSTIFIED / 0 STALE-SHIM-IMPORT / 0 UNCONVERTED-ICON-SOURCE / 0 PROP_DROPPED_ON_ICON_REWRITE)"},
+    "check-icon-names": {"exit": 0, "result": "PASS (all IconPlusIc* names in catalog)"}
+  },
+  "shimRetained": [],
+  "filesChanged": [
+    "src/components/header-bar/index.jsx",
+    "src/components/sidebar/index.jsx",
+    "src/views/asset-tree/index.jsx",
+    "src/mock/tree.jsx (created; src/mock/tree.js deleted)"
+  ],
+  "leftover": []
+}

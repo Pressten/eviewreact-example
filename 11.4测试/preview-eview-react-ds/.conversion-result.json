@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "步骤3-4完成:10个源文件搬入src/(app.css/app.jsx/context.jsx/mock/tree.js + header-bar/sidebar/asset-tree的jsx+css);3个jsx的Icon import改为默认导入 '@/shared/Icon';context.jsx改为双轨暗色(html.dark + body.aui3_1_dark);app.jsx删除antd ConfigProvider/zhCN locale/Empty(renderEmpty随ConfigProvider删,Empty无其他用途整行删)+相对路径./src/→./;扩展scaffold Icon.jsx支持title/onClick/id props(title→wrapper/img的title属性,onClick→合并cursor:pointer到style+加onClick,id→wrapper)。i18n scenario A:main.jsx不改。sidebar/index.css的.ant-menu选择器保留(阶段2清理)。check-relative-imports.cjs PASS。"
+}

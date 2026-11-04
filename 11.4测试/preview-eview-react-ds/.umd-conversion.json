@@ -1,0 +1,449 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "preview-eview-react",
+  "antdComponents": {
+    "ConfigProvider": [
+      "app.jsx"
+    ],
+    "Empty": [
+      "app.jsx"
+    ],
+    "Switch": [
+      "src/components/header-bar/index.jsx",
+      "src/views/asset-tree/index.jsx"
+    ],
+    "Menu": [
+      "src/components/sidebar/index.jsx"
+    ],
+    "Tree": [
+      "src/views/asset-tree/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "iconCallSites": [
+    {
+      "file": "src/components/header-bar/index.jsx",
+      "line": 17,
+      "name": "search",
+      "type": "literal"
+    },
+    {
+      "file": "src/components/header-bar/index.jsx",
+      "line": 24,
+      "name": "search",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "header-search-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/components/header-bar/index.jsx",
+      "line": 29,
+      "name": "bell",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "header-dark-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/components/header-bar/index.jsx",
+      "line": 33,
+      "name": "bell",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "header-bell",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "通知",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/components/sidebar/index.jsx",
+      "line": 7,
+      "name": "layout-dashboard",
+      "type": "literal"
+    },
+    {
+      "file": "src/components/sidebar/index.jsx",
+      "line": 8,
+      "name": "server",
+      "type": "literal"
+    },
+    {
+      "file": "src/components/sidebar/index.jsx",
+      "line": 9,
+      "name": "activity",
+      "type": "literal"
+    },
+    {
+      "file": "src/components/sidebar/index.jsx",
+      "line": 10,
+      "name": "scroll-text",
+      "type": "literal"
+    },
+    {
+      "file": "src/components/sidebar/index.jsx",
+      "line": 11,
+      "name": "settings",
+      "type": "literal"
+    },
+    {
+      "file": "src/components/sidebar/index.jsx",
+      "line": 18,
+      "name": "hexagon",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/asset-tree/index.jsx",
+      "line": 25,
+      "name": "funnel",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "title",
+          "value": "筛选",
+          "hasValue": true
+        },
+        {
+          "name": "className",
+          "value": "asset-tree-filter",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 5109,
+      "name": "layout-dashboard",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 5110,
+      "name": "server",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 5111,
+      "name": "activity",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 5112,
+      "name": "scroll-text",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 5113,
+      "name": "settings",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 5120,
+      "name": "hexagon",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 5151,
+      "name": "search",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 5158,
+      "name": "search",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "header-search-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 5163,
+      "name": "bell",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "header-dark-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 5167,
+      "name": "bell",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "header-bell",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "通知",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 5260,
+      "name": "funnel",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "title",
+          "value": "筛选",
+          "hasValue": true
+        },
+        {
+          "name": "className",
+          "value": "asset-tree-filter",
+          "hasValue": true
+        }
+      ]
+    }
+  ],
+  "inputPropCallSites": [],
+  "ipInputCallSites": {
+    "sharedFiles": [],
+    "imports": [],
+    "callSites": []
+  },
+  "chartCallSites": {
+    "sharedFiles": [],
+    "imports": [],
+    "callSites": []
+  },
+  "uploadsAssets": {
+    "copied": [],
+    "copiedCount": 0,
+    "pathRewrite": {
+      "from": "./assets/uploads/",
+      "to": "/uploads/"
+    }
+  },
+  "styles": {
+    "source": "assets/style",
+    "files": [],
+    "cssFiles": []
+  },
+  "sourceCssTokens": {},
+  "sourceCssColors": {},
+  "srcFiles": [
+    "app.css",
+    "app.jsx",
+    "src/components/header-bar/index.css",
+    "src/components/header-bar/index.jsx",
+    "src/components/sidebar/index.css",
+    "src/components/sidebar/index.jsx",
+    "src/context.jsx",
+    "src/mock/tree.js",
+    "src/views/asset-tree/index.css",
+    "src/views/asset-tree/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": [],
+    "antdLocaleFiles": [],
+    "businessLocaleFiles": [],
+    "hasDayjs": false,
+    "wired": true
+  },
+  "verification": { "relativeImports": "PASS" },
+  "migrationPlan": [
+    {
+      "antd": "Empty",
+      "category": "A",
+      "eview": "Empty",
+      "importPath": "@nce/eview-react/Empty",
+      "shellComponent": false,
+      "keyDiffs": "type=\"success\"（成功无数据）/ \"fail\"（失败）；description 可放按钮",
+      "ref": "components/Empty.md",
+      "files": [
+        "app.jsx"
+      ]
+    },
+    {
+      "antd": "Switch",
+      "category": "A",
+      "eview": "Toggle",
+      "importPath": "@nce/eview-react/Toggle",
+      "shellComponent": false,
+      "keyDiffs": "checked→toggled；onChange→onToggle(value)；data=[关,开]；taggledChildren（拼错）；Switch isControlToggled 二次确认；**disabled 保留不变**（Toggle 用 disabled 正确拼写，**不是 disable**——disable 只属于 SelectCard/FileUpload/PopUpMenu）",
+      "ref": "components/Toggle.md",
+      "files": [
+        "src/components/header-bar/index.jsx",
+        "src/views/asset-tree/index.jsx"
+      ]
+    },
+    {
+      "antd": "Menu",
+      "category": "A",
+      "eview": "Accordion",
+      "importPath": "@nce/eview-react/Accordion",
+      "shellComponent": false,
+      "keyDiffs": "items→data（key/label→value/title）；selectedKeys 数组→selectedValue 单 string；onClick({key})→onClick(node)；inlineCollapsed→expanded/onExpand（⚠️ expanded={true}=收起，语义反转）；**统一用 Accordion，不手写**（单层平铺菜单用单层 data 无 children + enableExpand={false} + hideIcons + hideTitleBar，见 [Accordion.md](components/Accordion.md) §2/§10）；见 [Accordion.md](components/Accordion.md)",
+      "ref": "components/Accordion.md",
+      "files": [
+        "src/components/sidebar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tree",
+      "category": "A",
+      "eview": "Tree",
+      "importPath": "@nce/eview-react/Tree",
+      "shellComponent": false,
+      "keyDiffs": "treeData→data；节点字段 title→text、key→id（nodeKey=\"id\" 指定主键字段名，**不是** fieldNames）；checkable→enableCheckbox（**不要用 demo 里的 checkable**，不在 API 表）；三套受控状态分离：selectedKeys/onSelect、checkedKeys/onCheck、expandedKeys/onExpand，回调首参是新 keys 数组（**不是** antd 的 (checkedKeys, info)）；**enableMultiSelect 默认 true**，单选导航树必须显式 enableMultiSelect={false}（否则 Ctrl 多选会让联动取 keys[0] 错乱）；onExpand 必须接（只传 expandedKeys 不接回调用户点箭头展开不了）；loadData(itemData, callback) 异步加载子节点（isLeaf: false 显箭头）；connectLine 连线、height 开虚拟滚动、ref.findLevelNodes(value) 搜索定位；父子联动 disabelCheckAssociated（官方拼错）；导入 @nce/eview-react/Tree（非包壳）；见 [Tree.md](components/Tree.md)",
+      "ref": "components/Tree.md",
+      "files": [
+        "src/views/asset-tree/index.jsx"
+      ]
+    }
+  ],
+  "notes": "",
+  "globalRef": {
+    "spellingAnomalies": [
+      {
+        "eview": "seprator",
+        "correct": "separator",
+        "component": "Crumbs"
+      },
+      {
+        "eview": "taggledChildren",
+        "correct": "toggledChildren",
+        "component": "Toggle"
+      },
+      {
+        "eview": "disable",
+        "correct": "disabled",
+        "component": "SelectCard/FileUpload/PopUpMenu",
+        "note": "仅这三组件用 disable；Toggle/Button/Checkbox/Radio 等仍用 disabled，勿误改"
+      },
+      {
+        "eview": "status",
+        "antd": "type",
+        "component": "Button"
+      },
+      {
+        "eview": "defaultLabel",
+        "antd": "placeholder",
+        "component": "Select"
+      },
+      {
+        "eview": "toggled",
+        "antd": "checked",
+        "component": "Toggle"
+      },
+      {
+        "eview": "iconSize",
+        "antd": "size",
+        "component": "icon-plus"
+      }
+    ],
+    "callbackSignatures": [
+      {
+        "component": "TextField",
+        "signature": "onChange(value, oldValue, event)",
+        "note": "首参是值不是 event"
+      },
+      {
+        "component": "Select",
+        "signature": "onChange(value, oldValue, text, oldText, event)",
+        "note": "五参"
+      },
+      {
+        "component": "TextArea",
+        "signature": "onChange(targetValue, value, event)"
+      },
+      {
+        "component": "MultipleSelect",
+        "signature": "onChange(value[], changeValue[], event)"
+      },
+      {
+        "component": "SearchInput",
+        "signature": "onSearch(value)",
+        "note": "值变化也触发，需防抖"
+      },
+      {
+        "component": "Button",
+        "signature": "onClick(event, additionalData)",
+        "note": "第二参是业务数据"
+      },
+      {
+        "component": "Tab",
+        "signature": "onClick(index, title, event)",
+        "note": "不是 onChange"
+      },
+      {
+        "component": "Toggle",
+        "signature": "onToggle(value)"
+      },
+      {
+        "component": "Spinner",
+        "signature": "onChange(value)",
+        "note": "只在有效值触发"
+      },
+      {
+        "component": "Checkbox",
+        "signature": "onChange(value, checked, event, additionalData)"
+      },
+      {
+        "component": "Radio",
+        "signature": "onChange(value, event)",
+        "note": "参数顺序有冲突，用兼容写法"
+      },
+      {
+        "component": "DragInput",
+        "signature": "onChange(value[])",
+        "note": "value 永远是数组"
+      },
+      {
+        "component": "TreeSelector",
+        "signature": "onChange(value: string|string[], checkedKeys?)",
+        "note": "首参是 id"
+      }
+    ]
+  }
+}
