@@ -1,0 +1,140 @@
+/* 文件列表区 */
+.file-list {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0 var(--spacing-gutter);
+  display: flex;
+  flex-direction: column;
+}
+.file-list-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 表格 */
+.drive-table .ant-table {
+  background: transparent;
+}
+.drive-table .ant-table-thead > tr > th {
+  background: var(--surface-variant);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface-variant);
+}
+.drive-table .ant-table-tbody > tr {
+  cursor: pointer;
+}
+.drive-table .ant-table-tbody > tr > td {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+
+.file-name-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+.file-name-link {
+  color: var(--on-surface);
+  text-decoration: none;
+  cursor: pointer;
+}
+.file-name-link:hover {
+  color: var(--interactive-link-hover);
+}
+.file-name-link--active {
+  color: var(--primary);
+  font-weight: var(--font-weight-medium);
+}
+.file-ext {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.cell-muted {
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+}
+.updater-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.row-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-action);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+}
+.row-more:hover {
+  background: var(--surface-variant);
+  color: var(--primary);
+}
+
+/* 网格视图 */
+.file-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-stack) 0;
+}
+.grid-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-inline);
+  padding: var(--spacing-inline);
+  background: var(--surface-container-highest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-container);
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.grid-card:hover {
+  border-color: var(--primary);
+}
+.grid-card--active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-container);
+}
+.grid-card--checked {
+  background: var(--primary-container);
+  border-color: var(--primary);
+}
+.grid-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 1.5rem;
+}
+.grid-card-icon {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+.grid-card-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.grid-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-inline);
+}
+.grid-card-foot {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  border-top: 1px solid var(--divider);
+  padding-top: var(--spacing-inline);
+}

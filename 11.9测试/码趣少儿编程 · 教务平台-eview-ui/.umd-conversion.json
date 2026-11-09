@@ -1,0 +1,3138 @@
+{
+  "skill": "umd-to-antd-vite",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "码趣少儿编程 · 教务平台-eview-ui",
+  "antdComponents": {
+    "ConfigProvider": [
+      "app.jsx"
+    ],
+    "Empty": [
+      "app.jsx",
+      "src/views/file-list/index.jsx"
+    ],
+    "message": [
+      "app.jsx",
+      "src/views/batch-bar/index.jsx",
+      "src/views/detail-panel/index.jsx",
+      "src/views/file-list/index.jsx",
+      "src/views/renewal-alert/index.jsx",
+      "src/views/save-bar/index.jsx",
+      "src/views/security-section/index.jsx",
+      "src/views/share-modal/index.jsx",
+      "src/views/silence-modal/index.jsx",
+      "src/views/space-tree/index.jsx",
+      "src/views/student-drawer/index.jsx"
+    ],
+    "Tag": [
+      "src/components/share-status-tag/index.jsx",
+      "src/views/alert-list/index.jsx",
+      "src/views/change-feed/index.jsx",
+      "src/views/handover-timeline/index.jsx",
+      "src/views/recent-activity/index.jsx",
+      "src/views/service-overview/index.jsx",
+      "src/views/service-topology/index.jsx",
+      "src/views/student-drawer/index.jsx",
+      "src/views/student-table/index.jsx"
+    ],
+    "Table": [
+      "src/views/alert-list/index.jsx",
+      "src/views/change-feed/index.jsx",
+      "src/views/file-list/index.jsx",
+      "src/views/student-table/index.jsx"
+    ],
+    "Input": [
+      "src/views/alert-list/index.jsx",
+      "src/views/filter-bar/index.jsx",
+      "src/views/header-bar/index.jsx",
+      "src/views/security-section/index.jsx",
+      "src/views/share-modal/index.jsx",
+      "src/views/silence-modal/index.jsx",
+      "src/views/space-tree/index.jsx"
+    ],
+    "Dropdown": [
+      "src/views/alert-list/index.jsx",
+      "src/views/file-list/index.jsx",
+      "src/views/header-bar/index.jsx",
+      "src/views/space-tree/index.jsx",
+      "src/views/toolbar/index.jsx"
+    ],
+    "Switch": [
+      "src/views/api-pref-section/index.jsx",
+      "src/views/notification-section/index.jsx",
+      "src/views/security-section/index.jsx",
+      "src/views/share-modal/index.jsx"
+    ],
+    "Radio": [
+      "src/views/api-pref-section/index.jsx",
+      "src/views/appearance-section/index.jsx"
+    ],
+    "Slider": [
+      "src/views/appearance-section/index.jsx"
+    ],
+    "ColorPicker": [
+      "src/views/appearance-section/index.jsx"
+    ],
+    "Button": [
+      "src/views/batch-bar/index.jsx",
+      "src/views/detail-panel/index.jsx",
+      "src/views/filter-bar/index.jsx",
+      "src/views/page-header/index.jsx",
+      "src/views/renewal-alert/index.jsx",
+      "src/views/save-bar/index.jsx",
+      "src/views/share-modal/index.jsx",
+      "src/views/silence-modal/index.jsx",
+      "src/views/storage-bar/index.jsx",
+      "src/views/student-drawer/index.jsx",
+      "src/views/toolbar/index.jsx"
+    ],
+    "Timeline": [
+      "src/views/detail-panel/index.jsx",
+      "src/views/handover-timeline/index.jsx",
+      "src/views/student-drawer/index.jsx"
+    ],
+    "Checkbox": [
+      "src/views/file-list/index.jsx"
+    ],
+    "Select": [
+      "src/views/filter-bar/index.jsx",
+      "src/views/share-modal/index.jsx",
+      "src/views/silence-modal/index.jsx"
+    ],
+    "TimePicker": [
+      "src/views/notification-section/index.jsx"
+    ],
+    "Breadcrumb": [
+      "src/views/page-header/index.jsx",
+      "src/views/toolbar/index.jsx"
+    ],
+    "Rate": [
+      "src/views/recent-activity/index.jsx",
+      "src/views/student-drawer/index.jsx"
+    ],
+    "Modal": [
+      "src/views/save-bar/index.jsx",
+      "src/views/security-section/index.jsx",
+      "src/views/share-modal/index.jsx",
+      "src/views/silence-modal/index.jsx"
+    ],
+    "Tooltip": [
+      "src/views/security-section/index.jsx"
+    ],
+    "Popover": [
+      "src/views/security-section/index.jsx"
+    ],
+    "Anchor": [
+      "src/views/settings-side/index.jsx"
+    ],
+    "Menu": [
+      "src/views/sidebar/index.jsx"
+    ],
+    "Tree": [
+      "src/views/space-tree/index.jsx"
+    ],
+    "Progress": [
+      "src/views/storage-bar/index.jsx",
+      "src/views/student-table/index.jsx"
+    ],
+    "Drawer": [
+      "src/views/student-drawer/index.jsx"
+    ],
+    "Tabs": [
+      "src/views/student-drawer/index.jsx"
+    ],
+    "Segmented": [
+      "src/views/toolbar/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "iconCallSites": [
+    {
+      "file": "app.jsx",
+      "line": 65,
+      "name": "menu",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "app-topbar__collapse",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "折叠/展开侧栏",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "() => setCollapsed((c) => !c)",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "app.jsx",
+      "line": 75,
+      "name": "bell",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "app-topbar__tool",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "切换深浅主题",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "toggleDark",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "app.jsx",
+      "line": 82,
+      "name": "bell",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "app-topbar__tool",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "通知中心",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/components/file-type-icon/index.jsx",
+      "line": 10,
+      "name": "meta.icon",
+      "type": "dynamic"
+    },
+    {
+      "file": "src/components/section-card/index.jsx",
+      "line": 11,
+      "name": "icon",
+      "type": "dynamic"
+    },
+    {
+      "file": "src/views/alert-list/index.jsx",
+      "line": 67,
+      "name": "external-link",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/alert-list/index.jsx",
+      "line": 125,
+      "name": "file-text",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/alert-list/index.jsx",
+      "line": 126,
+      "name": "arrow-up",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/alert-list/index.jsx",
+      "line": 127,
+      "name": "user-plus",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/alert-list/index.jsx",
+      "line": 135,
+      "name": "user-check",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "title",
+          "value": "canClaim ? \"认领\" : \"已认领\"",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "canClaim ? () => onClaim(r.id) : undefined",
+          "hasValue": true
+        },
+        {
+          "name": "className",
+          "value": "canClaim ? \"act-icon\" : \"act-icon is-disabled\"",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/alert-list/index.jsx",
+      "line": 142,
+      "name": "bell-off",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "title",
+          "value": "canSilence ? \"静默\" : \"已静默\"",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "canSilence ? () => onSilence(r) : undefined",
+          "hasValue": true
+        },
+        {
+          "name": "className",
+          "value": "canSilence ? \"act-icon\" : \"act-icon is-disabled\"",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/alert-list/index.jsx",
+      "line": 151,
+      "name": "ellipsis",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/alert-list/index.jsx",
+      "line": 173,
+      "name": "search",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/api-pref-section/index.jsx",
+      "line": 61,
+      "name": "flask-conical",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/batch-bar/index.jsx",
+      "line": 15,
+      "name": "move",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/batch-bar/index.jsx",
+      "line": 16,
+      "name": "download",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/batch-bar/index.jsx",
+      "line": 17,
+      "name": "trash-2",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/change-feed/index.jsx",
+      "line": 76,
+      "name": "rotate-ccw",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/detail-panel/index.jsx",
+      "line": 14,
+      "name": "mouse-pointer",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/detail-panel/index.jsx",
+      "line": 45,
+      "name": "external-link",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/detail-panel/index.jsx",
+      "line": 49,
+      "name": "download",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/detail-panel/index.jsx",
+      "line": 53,
+      "name": "share-2",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/detail-panel/index.jsx",
+      "line": 91,
+      "name": "a.icon",
+      "type": "dynamic"
+    },
+    {
+      "file": "src/views/file-list/index.jsx",
+      "line": 129,
+      "name": "ellipsis",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/file-list/index.jsx",
+      "line": 219,
+      "name": "ellipsis",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/filter-bar/index.jsx",
+      "line": 49,
+      "name": "search",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/filter-bar/index.jsx",
+      "line": 55,
+      "name": "triangle-alert",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/filter-bar/index.jsx",
+      "line": 60,
+      "name": "rotate-ccw",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/golden-metrics/index.jsx",
+      "line": 18,
+      "name": "up ? \"trending-up\" : \"trending-down\"",
+      "type": "dynamic"
+    },
+    {
+      "file": "src/views/golden-metrics/index.jsx",
+      "line": 42,
+      "name": "m.icon",
+      "type": "dynamic"
+    },
+    {
+      "file": "src/views/handover-timeline/index.jsx",
+      "line": 44,
+      "name": "user",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/handover-timeline/index.jsx",
+      "line": 51,
+      "name": "isOpen ? \"chevron-up\" : \"chevron-down\"",
+      "type": "dynamic"
+    },
+    {
+      "file": "src/views/header-bar/index.jsx",
+      "line": 24,
+      "name": "user",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/header-bar/index.jsx",
+      "line": 25,
+      "name": "settings",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/header-bar/index.jsx",
+      "line": 27,
+      "name": "log-out",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/header-bar/index.jsx",
+      "line": 37,
+      "name": "folder-tree",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/header-bar/index.jsx",
+      "line": 68,
+      "name": "clock",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/header-bar/index.jsx",
+      "line": 91,
+      "name": "trending-up",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/header-bar/index.jsx",
+      "line": 124,
+      "name": "search",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/header-bar/index.jsx",
+      "line": 132,
+      "name": "hard-drive",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/header-bar/index.jsx",
+      "line": 148,
+      "name": "bell",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/header-bar/index.jsx",
+      "line": 156,
+      "name": "chevron-down",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/page-header/index.jsx",
+      "line": 24,
+      "name": "download",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/page-header/index.jsx",
+      "line": 27,
+      "name": "user-plus",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/realtime-charts/index.jsx",
+      "line": 50,
+      "name": "refresh-cw",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/realtime-charts/index.jsx",
+      "line": 69,
+      "name": "triangle-alert",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/recent-access/index.jsx",
+      "line": 11,
+      "name": "clock",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/recent-access/index.jsx",
+      "line": 31,
+      "name": "chevron-right",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/recent-activity/index.jsx",
+      "line": 14,
+      "name": "activity",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/renewal-alert/index.jsx",
+      "line": 12,
+      "name": "triangle-alert",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "renewal-card__icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/renewal-alert/index.jsx",
+      "line": 31,
+      "name": "bell-ring",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/save-bar/index.jsx",
+      "line": 36,
+      "name": "circle-alert",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/save-bar/index.jsx",
+      "line": 41,
+      "name": "circle-check-big",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/security-section/index.jsx",
+      "line": 91,
+      "name": "circle-question-mark",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/security-section/index.jsx",
+      "line": 106,
+      "name": "rotate-cw",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/security-section/index.jsx",
+      "line": 109,
+      "name": "rotate-cw",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/security-section/index.jsx",
+      "line": 131,
+      "name": "trash-2",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/security-section/index.jsx",
+      "line": 144,
+      "name": "plus",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/security-section/index.jsx",
+      "line": 159,
+      "name": "info",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/service-overview/index.jsx",
+      "line": 64,
+      "name": "gauge",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/service-overview/index.jsx",
+      "line": 65,
+      "name": "layers",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/service-topology/index.jsx",
+      "line": 115,
+      "name": "TYPE_ICON[n.type]",
+      "type": "dynamic"
+    },
+    {
+      "file": "src/views/service-topology/index.jsx",
+      "line": 139,
+      "name": "triangle-alert",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/settings-header/index.jsx",
+      "line": 16,
+      "name": "rotate-ccw",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/settings-header/index.jsx",
+      "line": 23,
+      "name": "circle-alert",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/settings-side/index.jsx",
+      "line": 18,
+      "name": "sliders-horizontal",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/settings-side/index.jsx",
+      "line": 30,
+      "name": "info",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/share-modal/index.jsx",
+      "line": 48,
+      "name": "share-2",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/share-modal/index.jsx",
+      "line": 79,
+      "name": "copied ? \"check\" : \"copy\"",
+      "type": "dynamic"
+    },
+    {
+      "file": "src/views/sidebar/index.jsx",
+      "line": 7,
+      "name": "layout-dashboard",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/sidebar/index.jsx",
+      "line": 8,
+      "name": "users",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/sidebar/index.jsx",
+      "line": 9,
+      "name": "school",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/sidebar/index.jsx",
+      "line": 10,
+      "name": "book-open",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/sidebar/index.jsx",
+      "line": 11,
+      "name": "calendar-days",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/sidebar/index.jsx",
+      "line": 12,
+      "name": "presentation",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/sidebar/index.jsx",
+      "line": 13,
+      "name": "wallet",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/sidebar/index.jsx",
+      "line": 14,
+      "name": "image",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/sidebar/index.jsx",
+      "line": 15,
+      "name": "chart-column",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/sidebar/index.jsx",
+      "line": 22,
+      "name": "graduation-cap",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/silence-modal/index.jsx",
+      "line": 55,
+      "name": "bell-off",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/silence-modal/index.jsx",
+      "line": 137,
+      "name": "info",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/space-tree/index.jsx",
+      "line": 24,
+      "name": "users",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/space-tree/index.jsx",
+      "line": 37,
+      "name": "ellipsis",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/space-tree/index.jsx",
+      "line": 52,
+      "name": "hasChildren ? \"folder\" : \"folder-open\"",
+      "type": "dynamic"
+    },
+    {
+      "file": "src/views/space-tree/index.jsx",
+      "line": 77,
+      "name": "folder-tree",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/space-tree/index.jsx",
+      "line": 81,
+      "name": "rotate-cw",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/space-tree/index.jsx",
+      "line": 92,
+      "name": "search",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/stat-overview/index.jsx",
+      "line": 18,
+      "name": "c.icon",
+      "type": "dynamic"
+    },
+    {
+      "file": "src/views/storage-bar/index.jsx",
+      "line": 14,
+      "name": "hard-drive",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/storage-bar/index.jsx",
+      "line": 18,
+      "name": "triangle-alert",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/storage-bar/index.jsx",
+      "line": 38,
+      "name": "hard-drive-download",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/student-drawer/index.jsx",
+      "line": 142,
+      "name": "bell-ring",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/student-drawer/index.jsx",
+      "line": 154,
+      "name": "message-square",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/student-drawer/index.jsx",
+      "line": 182,
+      "name": "trending-up",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/student-drawer/index.jsx",
+      "line": 274,
+      "name": "calendar-days",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/student-drawer/index.jsx",
+      "line": 281,
+      "name": "user",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/student-drawer/index.jsx",
+      "line": 282,
+      "name": "map-pin",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/student-table/index.jsx",
+      "line": 83,
+      "name": "eye",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "student-action",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "查看详情",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "() => onView(r)",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/student-table/index.jsx",
+      "line": 98,
+      "name": "triangle-alert",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 6,
+      "name": "list",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 7,
+      "name": "layout-grid",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 29,
+      "name": "house",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 48,
+      "name": "folder",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 58,
+      "name": "folder",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 59,
+      "name": "file-text",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 61,
+      "name": "file-spreadsheet",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 62,
+      "name": "presentation",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 64,
+      "name": "upload",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 86,
+      "name": "sliders-horizontal",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 88,
+      "name": "chevron-down",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/toolbar/index.jsx",
+      "line": 93,
+      "name": "plus",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/works-gallery/index.jsx",
+      "line": 11,
+      "name": "image",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6182,
+      "name": "layout-dashboard",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6183,
+      "name": "users",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6184,
+      "name": "school",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6185,
+      "name": "book-open",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6186,
+      "name": "calendar-days",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6187,
+      "name": "presentation",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6188,
+      "name": "wallet",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6189,
+      "name": "image",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6190,
+      "name": "chart-column",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6197,
+      "name": "graduation-cap",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6240,
+      "name": "download",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6243,
+      "name": "user-plus",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6306,
+      "name": "search",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6312,
+      "name": "triangle-alert",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6317,
+      "name": "rotate-ccw",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6347,
+      "name": "c.icon",
+      "type": "dynamic"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6450,
+      "name": "eye",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "student-action",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "查看详情",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "() => onView(r)",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 6465,
+      "name": "triangle-alert",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6704,
+      "name": "bell-ring",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6716,
+      "name": "message-square",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6744,
+      "name": "trending-up",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6836,
+      "name": "calendar-days",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6843,
+      "name": "user",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6844,
+      "name": "map-pin",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6922,
+      "name": "triangle-alert",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "renewal-card__icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 6941,
+      "name": "bell-ring",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 6972,
+      "name": "activity",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7013,
+      "name": "image",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7117,
+      "name": "menu",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "app-topbar__collapse",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "折叠/展开侧栏",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "() => setCollapsed((c) => !c)",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7127,
+      "name": "bell",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "app-topbar__tool",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "切换深浅主题",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "toggleDark",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7134,
+      "name": "bell",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "app-topbar__tool",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "通知中心",
+          "hasValue": true
+        }
+      ]
+    }
+  ],
+  "inputPropCallSites": [
+    {
+      "file": "src/components/share-status-tag/index.jsx",
+      "line": 8,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/alert-list/index.jsx",
+      "line": 167,
+      "component": "Input",
+      "family": "TextField",
+      "hasStyle": true,
+      "styleSource": "{ width: 220",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/alert-list/index.jsx",
+      "line": 46,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/alert-list/index.jsx",
+      "line": 112,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/change-feed/index.jsx",
+      "line": 46,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "change-result-tag"
+    },
+    {
+      "file": "src/views/filter-bar/index.jsx",
+      "line": 43,
+      "component": "Input",
+      "family": "TextField",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "filter-bar__search"
+    },
+    {
+      "file": "src/views/filter-bar/index.jsx",
+      "line": 19,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "filter-bar__select"
+    },
+    {
+      "file": "src/views/filter-bar/index.jsx",
+      "line": 27,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "filter-bar__select"
+    },
+    {
+      "file": "src/views/filter-bar/index.jsx",
+      "line": 35,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "filter-bar__select filter-bar__select--class"
+    },
+    {
+      "file": "src/views/handover-timeline/index.jsx",
+      "line": 47,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/header-bar/index.jsx",
+      "line": 114,
+      "component": "Input",
+      "family": "TextField",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "search-input"
+    },
+    {
+      "file": "src/views/notification-section/index.jsx",
+      "line": 67,
+      "component": "TimePicker",
+      "family": "TimePicker",
+      "hasStyle": true,
+      "styleSource": "{ width: \"7rem\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/notification-section/index.jsx",
+      "line": 77,
+      "component": "TimePicker",
+      "family": "TimePicker",
+      "hasStyle": true,
+      "styleSource": "{ width: \"7rem\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/recent-activity/index.jsx",
+      "line": 28,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/security-section/index.jsx",
+      "line": 165,
+      "component": "Input",
+      "family": "TextField",
+      "hasStyle": true,
+      "styleSource": "{ width: \"22rem\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/service-overview/index.jsx",
+      "line": 55,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/service-topology/index.jsx",
+      "line": 127,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "node-tag"
+    },
+    {
+      "file": "src/views/share-modal/index.jsx",
+      "line": 106,
+      "component": "Input.Password",
+      "family": "TextField",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/share-modal/index.jsx",
+      "line": 75,
+      "component": "Input",
+      "family": "TextField",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "share-link-input"
+    },
+    {
+      "file": "src/views/share-modal/index.jsx",
+      "line": 88,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": true,
+      "styleSource": "{ width: \"100%\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/silence-modal/index.jsx",
+      "line": 123,
+      "component": "Input.TextArea",
+      "family": "TextArea",
+      "hasStyle": true,
+      "styleSource": "{ width: \"100%\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/silence-modal/index.jsx",
+      "line": 74,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": true,
+      "styleSource": "{ width: \"100%\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/silence-modal/index.jsx",
+      "line": 93,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": true,
+      "styleSource": "{ width: \"100%\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/silence-modal/index.jsx",
+      "line": 108,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": true,
+      "styleSource": "{ width: \"100%\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/space-tree/index.jsx",
+      "line": 86,
+      "component": "Input",
+      "family": "TextField",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/student-drawer/index.jsx",
+      "line": 128,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/student-drawer/index.jsx",
+      "line": 129,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/student-drawer/index.jsx",
+      "line": 130,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/student-drawer/index.jsx",
+      "line": 215,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/student-table/index.jsx",
+      "line": 56,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "hours-cell__tag"
+    },
+    {
+      "file": "src/views/student-table/index.jsx",
+      "line": 75,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    }
+  ],
+  "ipInputCallSites": {
+    "sharedFiles": [
+      "assets/shared/ip-input.jsx"
+    ],
+    "imports": [
+      {
+        "file": "src/views/security-section/index.jsx",
+        "importName": "IpInput",
+        "source": "../../../assets/shared/ip-input.jsx"
+      }
+    ],
+    "callSites": [
+      {
+        "file": "src/views/security-section/index.jsx",
+        "line": 137,
+        "component": "IpInput",
+        "props": "type=\"ipv4\"\n              value={newIp}\n              onChange={setNewIp}\n              status={newIpError ? \"error\" : undefined}\n            /"
+      }
+    ]
+  },
+  "chartCallSites": {
+    "sharedFiles": [
+      "assets/shared/chart.jsx",
+      "assets/shared/Chart.jsx"
+    ],
+    "imports": [
+      {
+        "file": "src/views/dashboard/index.jsx",
+        "importName": "Chart",
+        "source": "../../../assets/shared/chart.jsx"
+      },
+      {
+        "file": "src/views/realtime-charts/index.jsx",
+        "importName": "Chart",
+        "source": "../../../assets/shared/chart.jsx"
+      },
+      {
+        "file": "src/views/student-drawer/index.jsx",
+        "importName": "Chart",
+        "source": "../../../assets/shared/chart.jsx"
+      }
+    ],
+    "callSites": [
+      {
+        "file": "src/views/dashboard/index.jsx",
+        "line": 16,
+        "name": "PieChart",
+        "type": "literal"
+      },
+      {
+        "file": "src/views/dashboard/index.jsx",
+        "line": 28,
+        "name": "BarChart",
+        "type": "literal"
+      },
+      {
+        "file": "src/views/dashboard/index.jsx",
+        "line": 36,
+        "name": "LineChart",
+        "type": "literal"
+      },
+      {
+        "file": "src/views/realtime-charts/index.jsx",
+        "line": 61,
+        "name": "LineChart",
+        "type": "literal"
+      },
+      {
+        "file": "src/views/realtime-charts/index.jsx",
+        "line": 73,
+        "name": "LineChart",
+        "type": "literal"
+      },
+      {
+        "file": "src/views/student-drawer/index.jsx",
+        "line": 186,
+        "name": "LineChart",
+        "type": "literal"
+      }
+    ]
+  },
+  "uploadsAssets": {
+    "copied": [
+      "background.jpg",
+      "empty.svg",
+      "favicon.svg",
+      "icons.svg",
+      "image.jpg",
+      "loading.svg",
+      "user.png"
+    ],
+    "copiedCount": 7,
+    "pathRewrite": {
+      "from": "./assets/uploads/",
+      "to": "/uploads/"
+    }
+  },
+  "styles": {
+    "source": "assets/style",
+    "files": [
+      {
+        "from": "assets/style/base.css",
+        "to": "src/styles/base.css"
+      },
+      {
+        "from": "assets/style/light.css",
+        "to": "src/styles/light.css"
+      },
+      {
+        "from": "assets/style/theme.css",
+        "to": "src/styles/theme.css"
+      },
+      {
+        "from": "assets/style/dark.css",
+        "to": "src/styles/dark.css"
+      }
+    ],
+    "cssFiles": [
+      "src/styles/base.css",
+      "src/styles/light.css",
+      "src/styles/theme.css",
+      "src/styles/dark.css"
+    ]
+  },
+  "sourceCssTokens": {
+    "base.css": {
+      "--brand-05": "#E6F2FD",
+      "--brand-10": "#B8D9F9",
+      "--brand-20": "#8ABEF3",
+      "--brand-30": "#5CA2E9",
+      "--brand-40": "#2E86DE",
+      "--brand-50": "#0067D1",
+      "--brand-60": "#004EA8",
+      "--brand-70": "#003D83",
+      "--brand-80": "#002E6A",
+      "--brand-90": "#00214B",
+      "--gray-0": "#FFFFFF",
+      "--gray-05": "#F3F3F3",
+      "--gray-10": "#DFDFDF",
+      "--gray-20": "#C9C9C9",
+      "--gray-30": "#AEAEAE",
+      "--gray-40": "#939393",
+      "--gray-50": "#777777",
+      "--gray-60": "#595959",
+      "--gray-70": "#393939",
+      "--gray-80": "#2A2A2A",
+      "--gray-90": "#191919",
+      "--gray-100": "#000000",
+      "--red-05": "#FEE7E8",
+      "--red-10": "#FABDC1",
+      "--red-20": "#F59297",
+      "--red-30": "#EE696F",
+      "--red-40": "#E7434A",
+      "--red-50": "#E02128",
+      "--red-60": "#C7000B",
+      "--red-70": "#850F12",
+      "--red-80": "#59080A",
+      "--red-90": "#350305",
+      "--rose-05": "#FEE5F2",
+      "--rose-10": "#FCC3E0",
+      "--rose-20": "#F99AC7",
+      "--rose-30": "#F470AB",
+      "--rose-40": "#ED448A",
+      "--rose-50": "#E61866",
+      "--rose-60": "#C40054",
+      "--rose-70": "#811439",
+      "--rose-80": "#540D24",
+      "--rose-90": "#330614",
+      "--orange-05": "#FEF5E8",
+      "--orange-10": "#FDE2BD",
+      "--orange-20": "#FCCE92",
+      "--orange-30": "#F9B766",
+      "--orange-40": "#F69E39",
+      "--orange-50": "#F4840C",
+      "--orange-60": "#C76207",
+      "--orange-70": "#954304",
+      "--orange-80": "#642802",
+      "--orange-90": "#3D1601",
+      "--yellow-05": "#FEFCE0",
+      "--yellow-10": "#FEF8B8",
+      "--yellow-20": "#FEF08A",
+      "--yellow-30": "#FDE55C",
+      "--yellow-40": "#FCD72E",
+      "--yellow-50": "#FCC800",
+      "--yellow-60": "#D19F00",
+      "--yellow-70": "#9E7400",
+      "--yellow-80": "#614500",
+      "--yellow-90": "#2E1F00",
+      "--green-05": "#F2FBE9",
+      "--green-10": "#DFF4CC",
+      "--green-20": "#C6E9A8",
+      "--green-30": "#A8DB81",
+      "--green-40": "#87C859",
+      "--green-50": "#62B42E",
+      "--green-60": "#488E20",
+      "--green-70": "#316614",
+      "--green-80": "#1B3E0A",
+      "--green-90": "#0C2004",
+      "--mint-05": "#E7FBF2",
+      "--mint-10": "#BCF2DB",
+      "--mint-20": "#8FE5C2",
+      "--mint-30": "#63D5A8",
+      "--mint-40": "#36C18D",
+      "--mint-50": "#09AA71",
+      "--mint-60": "#058358",
+      "--mint-70": "#036142",
+      "--mint-80": "#02422E",
+      "--mint-90": "#00291D",
+      "--cyan-05": "#E8FCFD",
+      "--cyan-10": "#C9F6F9",
+      "--cyan-20": "#A4ECF1",
+      "--cyan-30": "#7DDFE7",
+      "--cyan-40": "#55CCD9",
+      "--cyan-50": "#2CB8C9",
+      "--cyan-60": "#1C94A4",
+      "--cyan-70": "#127180",
+      "--cyan-80": "#094C57",
+      "--cyan-90": "#04282F",
+      "--blue-05": "#EEF3FE",
+      "--blue-10": "#D0D8FD",
+      "--blue-20": "#B0BFFD",
+      "--blue-30": "#8CA3FA",
+      "--blue-40": "#668CF7",
+      "--blue-50": "#2070F3",
+      "--blue-60": "#1F55B5",
+      "--blue-70": "#1B3F86",
+      "--blue-80": "#112857",
+      "--blue-90": "#081635",
+      "--indigo-05": "#EEEEFE",
+      "--indigo-10": "#D5D3FD",
+      "--indigo-20": "#BFB9FA",
+      "--indigo-30": "#A89FF9",
+      "--indigo-40": "#8E81F4",
+      "--indigo-50": "#715AFB",
+      "--indigo-60": "#5531EB",
+      "--indigo-70": "#3F21B5",
+      "--indigo-80": "#281675",
+      "--indigo-90": "#160B48",
+      "--purple-05": "#F7EDFE",
+      "--purple-10": "#E8CFFE",
+      "--purple-20": "#D9B1FD",
+      "--purple-30": "#CB8EFB",
+      "--purple-40": "#BF68FA",
+      "--purple-50": "#B62BF7",
+      "--purple-60": "#8A21BC",
+      "--purple-70": "#651B8B",
+      "--purple-80": "#41125A",
+      "--purple-90": "#260937",
+      "--pink-05": "#FDE6FC",
+      "--pink-10": "#F9C5F6",
+      "--pink-20": "#F39DEC",
+      "--pink-30": "#EB74DF",
+      "--pink-40": "#E049CE",
+      "--pink-50": "#D41DBC",
+      "--pink-60": "#9F1C8D",
+      "--pink-70": "#751868",
+      "--pink-80": "#4C0F43",
+      "--pink-90": "#2E0728",
+      "--radius-none": "0",
+      "--radius-xs": "2px",
+      "--radius-base": "4px",
+      "--radius-md": "6px",
+      "--radius-lg": "8px",
+      "--radius-xl": "12px",
+      "--radius-full": "9999px",
+      "--font-family": "'HarmonyOS Sans', 'Microsoft YaHei', Arial, 'PingFang SC', 'San Francisco', sans-serif",
+      "--font-size-sm": "0.625rem",
+      "--font-size-base": "0.75rem",
+      "--font-size-md": "0.875rem",
+      "--font-size-lg": "1rem",
+      "--font-size-xl": "1.125rem",
+      "--font-size-2xl": "1.25rem",
+      "--font-size-3xl": "1.5rem",
+      "--font-size-4xl": "1.75rem",
+      "--font-size-5xl": "2.25rem",
+      "--font-size-6xl": "3rem",
+      "--font-size-7xl": "3.75rem",
+      "--font-size-8xl": "4.5rem",
+      "--line-height-xs": "1.25",
+      "--line-height-sm": "1.375",
+      "--line-height-base": "1.5",
+      "--line-height-md": "1.625",
+      "--line-height-lg": "1.8",
+      "--font-weight-light": "300",
+      "--font-weight-normal": "400",
+      "--font-weight-medium": "500",
+      "--font-weight-semibold": "600",
+      "--font-weight-bold": "700",
+      "--spacing-0": "0",
+      "--spacing-0-5": "0.125rem",
+      "--spacing-1": "0.25rem",
+      "--spacing-1-5": "0.375rem",
+      "--spacing-2": "0.5rem",
+      "--spacing-2-5": "0.625rem",
+      "--spacing-3": "0.75rem",
+      "--spacing-3-5": "0.875rem",
+      "--spacing-4": "1rem",
+      "--spacing-4-5": "1.125rem",
+      "--spacing-5": "1.25rem",
+      "--spacing-6": "1.5rem",
+      "--spacing-7": "1.75rem",
+      "--spacing-8": "2rem",
+      "--spacing-9": "2.25rem",
+      "--spacing-10": "2.5rem",
+      "--spacing-11": "2.75rem",
+      "--spacing-12": "3rem",
+      "--spacing-14": "3.5rem",
+      "--spacing-15": "3.75rem",
+      "--spacing-16": "4rem",
+      "--spacing-17": "4.25rem",
+      "--spacing-18": "4.5rem",
+      "--spacing-19": "4.75rem",
+      "--spacing-20": "5rem"
+    },
+    "light.css": {
+      "--color-brand": "var(--brand-50)",
+      "--color-brand-hover": "var(--brand-40)",
+      "--color-brand-focus": "var(--brand-50)",
+      "--color-brand-active": "var(--brand-60)",
+      "--color-brand-disabled": "var(--brand-20)",
+      "--color-text-primary": "var(--gray-90)",
+      "--color-text-secondary": "var(--gray-50)",
+      "--color-text-placeholder": "var(--gray-30)",
+      "--color-text-disabled": "var(--gray-20)",
+      "--color-text-inverse": "var(--gray-0)",
+      "--color-text-inverse-disabled": "var(--gray-0)",
+      "--color-text-on": "var(--brand-50)",
+      "--color-link": "var(--brand-50)",
+      "--color-link-hover": "var(--brand-40)",
+      "--color-link-active": "var(--brand-60)",
+      "--color-link-visited": "var(--indigo-50)",
+      "--color-link-disabled": "var(--brand-20)",
+      "--color-bg-1": "var(--gray-05)",
+      "--color-bg-2": "var(--gray-0)",
+      "--color-bg-3": "var(--gray-0)",
+      "--color-bg-4": "var(--gray-0)",
+      "--color-bg-5": "var(--gray-0)",
+      "--color-bg-6": "rgb(from var(--gray-20) r g b / 0.2)",
+      "--color-bg-mask": "rgb(from var(--gray-90) r g b / 0.3)",
+      "--color-fill-disabled": "var(--gray-10)",
+      "--color-hover": "rgb(from var(--gray-90) r g b / 0.05)",
+      "--color-fill-disabled-subtle": "rgb(from var(--gray-90) r g b / 0.05)",
+      "--color-fill": "rgb(from var(--gray-90) r g b / 0.05)",
+      "--color-select": "var(--brand-05)",
+      "--color-fill-subtle": "var(--gray-0)",
+      "--color-icon-primary": "var(--gray-90)",
+      "--color-icon-secondary": "var(--gray-50)",
+      "--color-icon-tertiary": "var(--gray-40)",
+      "--color-icon-placeholder": "var(--gray-30)",
+      "--color-icon-disabled": "var(--gray-20)",
+      "--color-icon-inverse": "var(--gray-0)",
+      "--color-icon-hover": "var(--brand-40)",
+      "--color-icon-focus": "var(--brand-50)",
+      "--color-icon-active": "var(--brand-60)",
+      "--color-border": "var(--gray-20)",
+      "--color-border-hover": "var(--gray-90)",
+      "--color-border-focus": "var(--brand-50)",
+      "--color-border-active": "var(--brand-10)",
+      "--color-border-disabled": "var(--gray-20)",
+      "--color-border-separator": "var(--gray-10)",
+      "--color-border-separator-sbutle": "var(--gray-05)",
+      "--color-error": "var(--red-50)",
+      "--color-error-hover": "var(--red-40)",
+      "--color-error-active": "var(--red-60)",
+      "--color-error-disabled": "var(--red-10)",
+      "--color-error-subtle": "var(--red-20)",
+      "--color-error-subtler": "var(--red-05)",
+      "--color-alert": "var(--orange-50)",
+      "--color-alert-hover": "var(--orange-40)",
+      "--color-alert-active": "var(--orange-60)",
+      "--color-alert-disabled": "var(--orange-10)",
+      "--color-alert-subtle": "var(--orange-20)",
+      "--color-alert-subtler": "var(--orange-05)",
+      "--color-warning": "var(--yellow-50)",
+      "--color-warning-hover": "var(--yellow-40)",
+      "--color-warning-active": "var(--yellow-60)",
+      "--color-warning-disabled": "var(--yellow-10)",
+      "--color-warning-bold": "var(--yellow-60)",
+      "--color-warning-subtle": "var(--yellow-20)",
+      "--color-warning-subtler": "var(--yellow-05)",
+      "--color-success": "var(--mint-50)",
+      "--color-success-hover": "var(--mint-40)",
+      "--color-success-active": "var(--mint-60)",
+      "--color-success-disabled": "var(--mint-10)",
+      "--color-success-subtle": "var(--mint-20)",
+      "--color-success-subtler": "var(--mint-05)",
+      "--color-info-primary": "var(--blue-50)",
+      "--color-info-primary-subtle": "var(--blue-30)",
+      "--color-info-primary-subtler": "var(--blue-05)",
+      "--color-info-secondary": "var(--blue-30)",
+      "--color-info-secondary-hover": "var(--blue-20)",
+      "--color-info-secondary-active": "var(--blue-40)",
+      "--color-info-secondary-disabled": "var(--blue-10)",
+      "--color-info-secondary-subtle": "var(--blue-05)",
+      "--color-none": "var(--gray-30)",
+      "--color-none-hover": "var(--gray-20)",
+      "--color-none-active": "var(--gray-40)",
+      "--color-none-disabled": "var(--gray-10)",
+      "--color-none-subtle": "var(--gray-05)",
+      "--color-chart-1": "var(--blue-50)",
+      "--color-chart-2": "var(--green-50)",
+      "--color-chart-3": "var(--indigo-50)",
+      "--color-chart-4": "var(--cyan-50)",
+      "--color-chart-5": "var(--orange-40)",
+      "--color-chart-6": "var(--brand-30)",
+      "--color-chart-7": "var(--purple-40)",
+      "--color-chart-8": "var(--rose-40)",
+      "--color-chart-9": "var(--indigo-20)",
+      "--color-chart-10": "var(--yellow-60)",
+      "--color-chart-11": "var(--brand-10)",
+      "--color-chart-12": "var(--green-60)",
+      "--color-chart-13": "var(--purple-20)",
+      "--color-chart-14": "var(--cyan-60)",
+      "--color-chart-15": "var(--orange-20)",
+      "--color-chart-16": "var(--rose-60)",
+      "--color-chart-17": "var(--cyan-20)",
+      "--color-chart-18": "var(--blue-60)",
+      "--color-chart-19": "var(--green-20)",
+      "--color-chart-20": "var(--indigo-70)",
+      "--color-chart-21": "var(--rose-10)",
+      "--color-chart-22": "var(--cyan-70)",
+      "--color-chart-23": "var(--yellow-20)",
+      "--color-chart-24": "var(--purple-70)",
+      "--color-chart-25": "var(--mint-20)",
+      "--color-scrollbar": "var(--gray-10)",
+      "--color-scrollbar-hover": "var(--gray-30)",
+      "--color-card-gray-disabled": "rgb(from var(--gray-30) r g b / 0.05)",
+      "--color-card-white-disabled": "rgb(from var(--gray-0) r g b / 0.5)",
+      "--color-sidenav-bg": "rgb(from var(--gray-05) r g b / 0.5)",
+      "--color-table-header": "rgb(from var(--gray-90) r g b / 0.05)",
+      "--color-table-zebra": "rgb(from var(--gray-40) r g b / 0.05)",
+      "--color-message-bg-info": "var(--blue-05)",
+      "--color-message-bg-success": "var(--mint-05)",
+      "--color-message-bg-warning": "var(--yellow-05)",
+      "--color-message-bg-alert": "var(--orange-05)",
+      "--color-message-bg-error": "var(--red-05)",
+      "--color-alert-urgent": "#F43146",
+      "--color-alert-primary": "#EC6F1A",
+      "--color-alert-secondary": "#EEBA18",
+      "--color-alert-success": "#2DA769",
+      "--color-alert-running": "#5990FD",
+      "--color-alert-none": "#939393",
+      "--color-table-1": "var(--brand-05)",
+      "--color-table-2": "var(--brand-10)",
+      "--color-table-sticky-1": "var(--brand-05)",
+      "--color-table-sticky-2": "var(--brand-10)",
+      "--color-table-sticky-bg": "var(--gray-0)",
+      "--color-table-sticky-header": "var(--gray-05)",
+      "--color-tag-text-purple": "var(--purple-60)",
+      "--color-tag-bg-purple": "rgb(from var(--purple-10) r g b / 0.6)",
+      "--color-tag-text-cyan": "var(--cyan-80)",
+      "--color-tag-bg-cyan": "rgb(from var(--cyan-60) r g b / 0.15)",
+      "--color-tag-text-rose": "var(--rose-60)",
+      "--color-tag-bg-rose": "var(--rose-05)",
+      "--color-tag-text-green": "var(--green-70)",
+      "--color-tag-bg-green": "var(--green-10)",
+      "--color-tag-text-pink": "var(--pink-60)",
+      "--color-tag-bg-pink": "var(--pink-05)",
+      "--color-tag-text-indigo": "var(--indigo-80)",
+      "--color-tag-bg-indigo": "rgb(from var(--indigo-10) r g b / 0.6)",
+      "--color-tag-text-none": "var(--gray-70)",
+      "--color-tag-bg-none": "rgb(from var(--gray-90) r g b / 0.05)",
+      "--color-tag-text-error": "var(--red-60)",
+      "--color-tag-bg-error": "var(--red-05)",
+      "--color-tag-text-alert": "var(--orange-70)",
+      "--color-tag-bg-alert": "var(--orange-10)",
+      "--color-tag-text-warning": "var(--yellow-80)",
+      "--color-tag-bg-warning": "rgb(from var(--yellow-30) r g b / 0.6)",
+      "--color-tag-text-success": "var(--mint-70)",
+      "--color-tag-bg-success": "rgb(from var(--mint-10) r g b / 0.6)",
+      "--color-tag-text-info": "var(--blue-60)",
+      "--color-tag-bg-info": "rgb(from var(--blue-10) r g b / 0.5)",
+      "--border": "var(--gray-20)",
+      "--border-light": "var(--gray-10)",
+      "--border-primary": "var(--brand-50)",
+      "--border-success": "var(--mint-20)",
+      "--border-warning": "var(--yellow-20)",
+      "--border-alert": "var(--orange-20)",
+      "--border-error": "var(--red-20)",
+      "--icon-primary": "var(--brand-50)",
+      "--icon-success": "var(--mint-50)",
+      "--icon-warning": "var(--yellow-50)",
+      "--icon-critical": "var(--orange-50)",
+      "--icon-alert": "var(--orange-50)",
+      "--icon-error": "var(--red-50)",
+      "--shadow-none": "none",
+      "--shadow-sm": "0 1px 6px rgba(0, 0, 0, 0.08)",
+      "--shadow-base": "0 4px 12px rgba(0, 0, 0, 0.16)",
+      "--shadow-md": "0 8px 24px rgba(0, 0, 0, 0.08)",
+      "--shadow-lg": "0 8px 24px rgba(0, 0, 0, 0.16)",
+      "--shadow-xl": "0 16px 48px rgba(0, 0, 0, 0.16)",
+      "--shadow-r-sm": "1px 0 6px 0 rgba(0, 0, 0, 0.08)",
+      "--shadow-t-sm": "0 -1px 6px rgba(0, 0, 0, 0.08)",
+      "--shadow-l-base": "-2px 0 12px 0 rgba(0, 0, 0, 0.08)",
+      "--shadow-l-md": "-2px 0 24px 0 rgba(0, 0, 0, 0.08)"
+    },
+    "theme.css": {
+      "--primary": "var(--color-brand)",
+      "--on-primary": "var(--color-text-inverse)",
+      "--primary-hover": "var(--color-brand-hover)",
+      "--primary-active": "var(--color-brand-active)",
+      "--primary-disabled": "var(--color-brand-disabled)",
+      "--primary-container": "var(--color-info-primary-subtler)",
+      "--on-primary-container": "var(--color-text-primary)",
+      "--primary-fixed": "var(--color-brand)",
+      "--primary-fixed-dim": "var(--color-brand-active)",
+      "--on-primary-fixed": "var(--color-text-inverse)",
+      "--on-primary-fixed-variant": "var(--color-text-inverse)",
+      "--surface": "var(--color-bg-1)",
+      "--surface-dim": "var(--color-bg-2)",
+      "--surface-bright": "var(--color-bg-2)",
+      "--on-surface": "var(--color-text-primary)",
+      "--surface-variant": "var(--color-bg-1)",
+      "--on-surface-variant": "var(--color-text-secondary)",
+      "--surface-container-lowest": "var(--color-bg-1)",
+      "--surface-container-low": "var(--color-bg-2)",
+      "--surface-container": "var(--color-bg-2)",
+      "--surface-container-high": "var(--color-bg-2)",
+      "--surface-container-highest": "var(--color-bg-2)",
+      "--inverse-surface": "var(--color-text-primary)",
+      "--inverse-on-surface": "var(--color-text-inverse)",
+      "--inverse-on-surface-variant": "var(--color-text-inverse-disabled)",
+      "--inverse-primary": "var(--color-brand)",
+      "--error": "var(--color-error)",
+      "--on-error": "var(--color-text-inverse)",
+      "--error-container": "var(--color-message-bg-error)",
+      "--on-error-container": "var(--color-text-primary)",
+      "--success": "var(--color-success)",
+      "--on-success": "var(--color-text-inverse)",
+      "--success-container": "var(--color-message-bg-success)",
+      "--on-success-container": "var(--color-text-primary)",
+      "--critical": "var(--color-alert)",
+      "--on-critical": "var(--color-text-inverse)",
+      "--critical-container": "var(--color-message-bg-alert)",
+      "--on-critical-container": "var(--color-text-primary)",
+      "--warning": "var(--color-warning)",
+      "--on-warning": "var(--color-text-inverse)",
+      "--warning-container": "var(--color-message-bg-warning)",
+      "--on-warning-container": "var(--color-text-primary)",
+      "--info": "var(--color-info-primary)",
+      "--on-info": "var(--color-text-inverse)",
+      "--info-container": "var(--color-message-bg-info)",
+      "--on-info-container": "var(--color-text-primary)",
+      "--text-placeholder": "var(--color-text-placeholder)",
+      "--text-disabled": "var(--color-text-disabled)",
+      "--text-inverse-disabled": "var(--color-text-inverse-disabled)",
+      "--interactive-link": "var(--color-link)",
+      "--interactive-link-hover": "var(--color-link-hover)",
+      "--interactive-link-active": "var(--color-link-active)",
+      "--interactive-link-visited": "var(--color-link-visited)",
+      "--interactive-link-disabled": "var(--color-link-disabled)",
+      "--scrim": "var(--color-bg-mask)",
+      "--outline": "var(--color-border)",
+      "--outline-variant": "var(--color-border-separator)",
+      "--divider": "var(--color-border-separator)",
+      "--focus-ring": "var(--color-border-focus)",
+      "--selected": "var(--color-border-focus)",
+      "--spacing-inline": "var(--spacing-2)",
+      "--spacing-stack": "var(--spacing-3)",
+      "--spacing-gutter": "var(--spacing-4)",
+      "--spacing-inset": "var(--spacing-6)",
+      "--spacing-section": "var(--spacing-4)",
+      "--spacing-page": "var(--spacing-8)",
+      "--shadow-card": "var(--shadow-sm)",
+      "--shadow-popover": "var(--shadow-lg)",
+      "--shadow-modal": "var(--shadow-xl)",
+      "--radius-badge": "var(--radius-base)",
+      "--radius-action": "var(--radius-base)",
+      "--radius-container": "var(--radius-lg)",
+      "--radius-overlay": "var(--radius-lg)",
+      "--border-width-thin": "1px",
+      "--border-width-thick": "2px",
+      "--outline-width-focus": "1px",
+      "--outline-offset-gap": "2px",
+      "--font-display-l": "var(--font-size-7xl)/var(--line-height-xs) var(--font-family)",
+      "--font-display-m": "var(--font-size-6xl)/var(--line-height-sm) var(--font-family)",
+      "--font-display-s": "var(--font-size-5xl)/var(--line-height-sm) var(--font-family)",
+      "--font-headline-l": "var(--font-size-2xl)/var(--line-height-sm) var(--font-family)",
+      "--font-headline-m": "var(--font-size-xl)/var(--line-height-sm) var(--font-family)",
+      "--font-headline-s": "var(--font-size-lg)/var(--line-height-base) var(--font-family)",
+      "--font-body-l": "var(--font-size-lg)/var(--line-height-base) var(--font-family)",
+      "--font-body-m": "var(--font-size-md)/var(--line-height-base) var(--font-family)",
+      "--font-body-s": "var(--font-size-base)/var(--line-height-md) var(--font-family)",
+      "--font-caption-m": "var(--font-size-base)/var(--line-height-md) var(--font-family)",
+      "--font-caption-s": "var(--font-size-sm)/var(--line-height-lg) var(--font-family)"
+    },
+    "dark.css": {
+      "--color-brand": "var(--brand-50)",
+      "--color-brand-hover": "var(--brand-40)",
+      "--color-brand-focus": "var(--brand-50)",
+      "--color-brand-active": "var(--brand-60)",
+      "--color-brand-disabled": "var(--brand-70)",
+      "--color-text-primary": "var(--gray-0)",
+      "--color-text-secondary": "var(--gray-20)",
+      "--color-text-placeholder": "var(--gray-40)",
+      "--color-text-disabled": "var(--gray-40)",
+      "--color-text-inverse": "var(--gray-0)",
+      "--color-text-inverse-disabled": "rgb(from var(--gray-05) r g b / 0.3)",
+      "--color-text-on": "var(--gray-0)",
+      "--color-link": "var(--brand-30)",
+      "--color-link-hover": "var(--brand-20)",
+      "--color-link-active": "var(--brand-40)",
+      "--color-link-visited": "var(--indigo-50)",
+      "--color-link-disabled": "var(--brand-60)",
+      "--color-bg-1": "var(--gray-100)",
+      "--color-bg-2": "var(--gray-90)",
+      "--color-bg-3": "var(--gray-80)",
+      "--color-bg-4": "var(--gray-70)",
+      "--color-bg-5": "rgb(from var(--gray-05) r g b / 0.1)",
+      "--color-bg-6": "rgb(from var(--gray-05) r g b / 0.1)",
+      "--color-bg-mask": "rgb(from var(--gray-0) r g b / 0.7)",
+      "--color-fill-disabled": "var(--gray-60)",
+      "--color-hover": "rgb(from var(--gray-05) r g b / 0.2)",
+      "--color-fill-disabled-subtle": "rgb(from var(--gray-05) r g b / 0.2)",
+      "--color-fill": "rgb(from var(--gray-05) r g b / 0.2)",
+      "--color-select": "rgb(from var(--brand-50) r g b / 0.4)",
+      "--color-fill-subtle": "rgb(from var(--gray-100) r g b / 0)",
+      "--color-icon-primary": "var(--gray-10)",
+      "--color-icon-secondary": "var(--gray-30)",
+      "--color-icon-tertiary": "var(--gray-50)",
+      "--color-icon-placeholder": "var(--gray-40)",
+      "--color-icon-disabled": "var(--gray-40)",
+      "--color-icon-inverse": "var(--gray-0)",
+      "--color-icon-hover": "var(--brand-20)",
+      "--color-icon-focus": "var(--brand-30)",
+      "--color-icon-active": "var(--brand-40)",
+      "--color-border": "var(--gray-50)",
+      "--color-border-hover": "var(--gray-05)",
+      "--color-border-focus": "var(--brand-40)",
+      "--color-border-active": "var(--brand-80)",
+      "--color-border-disabled": "var(--gray-60)",
+      "--color-border-separator": "rgb(from var(--gray-05) r g b / 0.15)",
+      "--color-border-separator-sbutle": "rgb(from var(--gray-05) r g b / 0.1)",
+      "--color-error": "var(--red-40)",
+      "--color-error-hover": "var(--red-30)",
+      "--color-error-active": "var(--red-50)",
+      "--color-error-disabled": "var(--red-80)",
+      "--color-error-subtle": "var(--red-60)",
+      "--color-error-subtler": "var(--red-80)",
+      "--color-alert": "var(--orange-50)",
+      "--color-alert-hover": "var(--orange-40)",
+      "--color-alert-active": "var(--orange-60)",
+      "--color-alert-disabled": "var(--orange-80)",
+      "--color-alert-subtle": "var(--orange-60)",
+      "--color-alert-subtler": "var(--orange-80)",
+      "--color-warning": "var(--yellow-40)",
+      "--color-warning-hover": "var(--yellow-30)",
+      "--color-warning-active": "var(--yellow-50)",
+      "--color-warning-disabled": "var(--yellow-80)",
+      "--color-warning-bold": "var(--yellow-60)",
+      "--color-warning-subtle": "var(--yellow-60)",
+      "--color-warning-subtler": "var(--yellow-80)",
+      "--color-success": "var(--mint-60)",
+      "--color-success-hover": "var(--mint-50)",
+      "--color-success-active": "var(--mint-60)",
+      "--color-success-disabled": "var(--mint-80)",
+      "--color-success-subtle": "var(--mint-60)",
+      "--color-success-subtler": "var(--mint-80)",
+      "--color-info-primary": "var(--blue-50)",
+      "--color-info-primary-subtle": "var(--blue-60)",
+      "--color-info-primary-subtler": "var(--blue-80)",
+      "--color-info-secondary": "var(--blue-60)",
+      "--color-info-secondary-hover": "var(--blue-40)",
+      "--color-info-secondary-active": "var(--blue-60)",
+      "--color-info-secondary-disabled": "var(--blue-80)",
+      "--color-info-secondary-subtle": "var(--blue-80)",
+      "--color-none": "var(--gray-60)",
+      "--color-none-hover": "rgb(from var(--gray-05) r g b / 0.2)",
+      "--color-none-active": "var(--gray-50)",
+      "--color-none-disabled": "var(--gray-90)",
+      "--color-none-subtle": "var(--gray-90)",
+      "--color-chart-1": "var(--blue-50)",
+      "--color-chart-2": "var(--green-50)",
+      "--color-chart-3": "var(--indigo-50)",
+      "--color-chart-4": "var(--cyan-50)",
+      "--color-chart-5": "var(--orange-40)",
+      "--color-chart-6": "var(--brand-30)",
+      "--color-chart-7": "var(--purple-60)",
+      "--color-chart-8": "var(--rose-60)",
+      "--color-chart-9": "var(--indigo-60)",
+      "--color-chart-10": "var(--yellow-60)",
+      "--color-chart-11": "var(--brand-60)",
+      "--color-chart-12": "var(--green-60)",
+      "--color-chart-13": "var(--purple-70)",
+      "--color-chart-14": "var(--cyan-60)",
+      "--color-chart-15": "var(--orange-70)",
+      "--color-chart-16": "var(--rose-60)",
+      "--color-chart-17": "var(--cyan-70)",
+      "--color-chart-18": "var(--blue-60)",
+      "--color-chart-19": "var(--green-70)",
+      "--color-chart-20": "var(--indigo-70)",
+      "--color-chart-21": "var(--rose-70)",
+      "--color-chart-22": "var(--cyan-30)",
+      "--color-chart-23": "var(--yellow-70)",
+      "--color-chart-24": "var(--purple-50)",
+      "--color-chart-25": "var(--mint-70)",
+      "--color-scrollbar": "var(--gray-60)",
+      "--color-scrollbar-hover": "var(--gray-40)",
+      "--color-card-gray-disabled": "rgb(from var(--gray-40) r g b / 0.05)",
+      "--color-card-white-disabled": "rgb(from var(--gray-40) r g b / 0.1)",
+      "--color-sidenav-bg": "var(--gray-70)",
+      "--color-table-header": "rgb(from var(--gray-05) r g b / 0.1)",
+      "--color-table-zebra": "rgb(from var(--gray-50) r g b / 0.15)",
+      "--color-message-bg-info": "rgb(from var(--blue-50) r g b / 0.15)",
+      "--color-message-bg-success": "rgb(from var(--mint-60) r g b / 0.15)",
+      "--color-message-bg-warning": "rgb(from var(--yellow-40) r g b / 0.15)",
+      "--color-message-bg-alert": "rgb(from var(--orange-50) r g b / 0.15)",
+      "--color-message-bg-error": "rgb(from var(--red-40) r g b / 0.15)",
+      "--color-alert-urgent": "#F43146",
+      "--color-alert-primary": "#EC6F1A",
+      "--color-alert-secondary": "#EEBA18",
+      "--color-alert-success": "#0D9458",
+      "--color-alert-running": "#5990FD",
+      "--color-alert-none": "#818181",
+      "--color-table-1": "rgb(from var(--brand-50) r g b / 0.2)",
+      "--color-table-2": "rgb(from var(--brand-50) r g b / 0.4)",
+      "--color-table-sticky-1": "var(--brand-80)",
+      "--color-table-sticky-2": "var(--brand-70)",
+      "--color-table-sticky-bg": "var(--gray-70)",
+      "--color-table-sticky-header": "var(--gray-70)",
+      "--color-tag-text-purple": "var(--purple-30)",
+      "--color-tag-bg-purple": "rgb(from var(--purple-30) r g b / 0.15)",
+      "--color-tag-text-cyan": "var(--cyan-40)",
+      "--color-tag-bg-cyan": "rgb(from var(--cyan-50) r g b / 0.15)",
+      "--color-tag-text-rose": "var(--rose-30)",
+      "--color-tag-bg-rose": "rgb(from var(--rose-30) r g b / 0.15)",
+      "--color-tag-text-green": "var(--green-50)",
+      "--color-tag-bg-green": "rgb(from var(--green-40) r g b / 0.15)",
+      "--color-tag-text-pink": "var(--pink-30)",
+      "--color-tag-bg-pink": "rgb(from var(--pink-30) r g b / 0.15)",
+      "--color-tag-text-indigo": "var(--indigo-30)",
+      "--color-tag-bg-indigo": "rgb(from var(--indigo-30) r g b / 0.15)",
+      "--color-tag-text-none": "var(--gray-30)",
+      "--color-tag-bg-none": "rgb(from var(--gray-30) r g b / 0.15)",
+      "--color-tag-text-error": "var(--red-40)",
+      "--color-tag-bg-error": "rgb(from var(--red-30) r g b / 0.15)",
+      "--color-tag-text-alert": "var(--orange-40)",
+      "--color-tag-bg-alert": "rgb(from var(--orange-50) r g b / 0.15)",
+      "--color-tag-text-warning": "var(--yellow-50)",
+      "--color-tag-bg-warning": "rgb(from var(--yellow-30) r g b / 0.15)",
+      "--color-tag-text-success": "var(--mint-40)",
+      "--color-tag-bg-success": "rgb(from var(--mint-50) r g b / 0.15)",
+      "--color-tag-text-info": "var(--blue-30)",
+      "--color-tag-bg-info": "rgb(from var(--blue-40) r g b / 0.15)",
+      "--border": "var(--gray-50)",
+      "--border-light": "rgb(from var(--gray-05) r g b / 0.15)",
+      "--border-primary": "var(--brand-30)",
+      "--border-success": "var(--mint-20)",
+      "--border-warning": "var(--yellow-20)",
+      "--border-alert": "var(--orange-20)",
+      "--border-error": "var(--red-20)",
+      "--icon-primary": "var(--brand-30)",
+      "--icon-success": "var(--mint-30)",
+      "--icon-warning": "var(--yellow-30)",
+      "--icon-critical": "var(--orange-30)",
+      "--icon-alert": "var(--orange-30)",
+      "--icon-error": "var(--red-30)",
+      "--shadow-none": "none",
+      "--shadow-sm": "0 1px 6px rgba(0, 0, 0, 0.5)",
+      "--shadow-base": "0 4px 12px rgba(0, 0, 0, 0.5)",
+      "--shadow-md": "0 8px 24px rgba(0, 0, 0, 0.5)",
+      "--shadow-lg": "0 8px 24px rgba(0, 0, 0, 0.5)",
+      "--shadow-xl": "0 16px 48px rgba(0, 0, 0, 0.5)",
+      "--shadow-r-sm": "1px 0 6px 0 rgba(0, 0, 0, 0.5)",
+      "--shadow-t-sm": "0 -1px 6px rgba(0, 0, 0, 0.5)",
+      "--shadow-l-base": "-2px 0 12px 0 rgba(0, 0, 0, 0.5)",
+      "--shadow-l-md": "-2px 0 24px 0 rgba(0, 0, 0, 0.5)"
+    }
+  },
+  "sourceCssColors": {
+    "views/header-bar/index.css": [
+      {
+        "line": 172,
+        "value": "rgba(244,132,12,0.25)"
+      }
+    ]
+  },
+  "srcFiles": [
+    "app.css",
+    "app.jsx",
+    "src/components/avatar-stack/index.css",
+    "src/components/avatar-stack/index.jsx",
+    "src/components/file-type-icon/index.css",
+    "src/components/file-type-icon/index.jsx",
+    "src/components/section-card/index.css",
+    "src/components/section-card/index.jsx",
+    "src/components/setting-row/index.css",
+    "src/components/setting-row/index.jsx",
+    "src/components/share-status-tag/index.css",
+    "src/components/share-status-tag/index.jsx",
+    "src/context.jsx",
+    "src/mock/drive.js",
+    "src/mock/monitor.js",
+    "src/mock/settings.js",
+    "src/mock/student.js",
+    "src/views/alert-list/index.css",
+    "src/views/alert-list/index.jsx",
+    "src/views/api-pref-section/index.css",
+    "src/views/api-pref-section/index.jsx",
+    "src/views/appearance-section/index.css",
+    "src/views/appearance-section/index.jsx",
+    "src/views/batch-bar/index.css",
+    "src/views/batch-bar/index.jsx",
+    "src/views/change-feed/index.css",
+    "src/views/change-feed/index.jsx",
+    "src/views/dashboard/index.css",
+    "src/views/dashboard/index.jsx",
+    "src/views/detail-panel/index.css",
+    "src/views/detail-panel/index.jsx",
+    "src/views/file-list/index.css",
+    "src/views/file-list/index.jsx",
+    "src/views/filter-bar/index.css",
+    "src/views/filter-bar/index.jsx",
+    "src/views/golden-metrics/index.css",
+    "src/views/golden-metrics/index.jsx",
+    "src/views/handover-timeline/index.css",
+    "src/views/handover-timeline/index.jsx",
+    "src/views/header-bar/index.css",
+    "src/views/header-bar/index.jsx",
+    "src/views/notification-section/index.css",
+    "src/views/notification-section/index.jsx",
+    "src/views/page-header/index.css",
+    "src/views/page-header/index.jsx",
+    "src/views/realtime-charts/index.css",
+    "src/views/realtime-charts/index.jsx",
+    "src/views/recent-access/index.css",
+    "src/views/recent-access/index.jsx",
+    "src/views/recent-activity/index.css",
+    "src/views/recent-activity/index.jsx",
+    "src/views/renewal-alert/index.css",
+    "src/views/renewal-alert/index.jsx",
+    "src/views/save-bar/index.css",
+    "src/views/save-bar/index.jsx",
+    "src/views/security-section/index.css",
+    "src/views/security-section/index.jsx",
+    "src/views/service-overview/index.css",
+    "src/views/service-overview/index.jsx",
+    "src/views/service-topology/index.css",
+    "src/views/service-topology/index.jsx",
+    "src/views/settings-header/index.css",
+    "src/views/settings-header/index.jsx",
+    "src/views/settings-side/index.css",
+    "src/views/settings-side/index.jsx",
+    "src/views/share-modal/index.css",
+    "src/views/share-modal/index.jsx",
+    "src/views/sidebar/index.css",
+    "src/views/sidebar/index.jsx",
+    "src/views/silence-modal/index.css",
+    "src/views/silence-modal/index.jsx",
+    "src/views/space-tree/index.css",
+    "src/views/space-tree/index.jsx",
+    "src/views/stat-overview/index.css",
+    "src/views/stat-overview/index.jsx",
+    "src/views/storage-bar/index.css",
+    "src/views/storage-bar/index.jsx",
+    "src/views/student-drawer/index.css",
+    "src/views/student-drawer/index.jsx",
+    "src/views/student-table/index.css",
+    "src/views/student-table/index.jsx",
+    "src/views/toolbar/index.css",
+    "src/views/toolbar/index.jsx",
+    "src/views/works-gallery/index.css",
+    "src/views/works-gallery/index.jsx"
+  ],
+  "darkMode": {
+    "method": "css-vars + aui3_1_dark class (antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html> + aui3_1_dark on <body>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": [],
+    "antdLocaleFiles": [],
+    "businessLocaleFiles": [],
+    "hasDayjs": true,
+    "wired": true
+  },
+  "verification": {
+    "relativeImports": "PASS"
+  },
+  "migrationPlan": null,
+  "notes": "",
+  "migrationPlanEui": [
+    {
+      "antd": "Empty",
+      "category": "B",
+      "eview": "手写",
+      "importPath": null,
+      "keyDiffs": "**无对应**；见 [handwrite-templates.md](handwrite-templates.md) §5",
+      "ref": "handwrite-templates.md §5",
+      "files": [
+        "app.jsx",
+        "src/views/file-list/index.jsx"
+      ]
+    },
+    {
+      "antd": "message",
+      "category": "unknown",
+      "eview": null,
+      "importPath": null,
+      "keyDiffs": "未在 antd-to-eview-ui 的 component-mapping.md 中找到映射，需人工评估（可能是低频组件，查 references/components/INDEX.md）",
+      "ref": null,
+      "files": [
+        "app.jsx",
+        "src/views/batch-bar/index.jsx",
+        "src/views/detail-panel/index.jsx",
+        "src/views/file-list/index.jsx",
+        "src/views/renewal-alert/index.jsx",
+        "src/views/save-bar/index.jsx",
+        "src/views/security-section/index.jsx",
+        "src/views/share-modal/index.jsx",
+        "src/views/silence-modal/index.jsx",
+        "src/views/space-tree/index.jsx",
+        "src/views/student-drawer/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tag",
+      "category": "A",
+      "eview": "Tag",
+      "importPath": "eview-ui/Tag",
+      "keyDiffs": "type=\"message\"/\"dot\"/\"status\"（antd 无此分型，默认 message）；color 枚举 default/primary/success/warning/danger/caution + hex（**仅 status/dot 类型生效**）；closable→message 型有 onClose(e)；**disable（不是 disabled，仅 message 型）**；**仅 ICT 3.1 风格**；CheckableTag→selected prop + onClick",
+      "ref": "components/Tag.md",
+      "files": [
+        "src/components/share-status-tag/index.jsx",
+        "src/views/alert-list/index.jsx",
+        "src/views/change-feed/index.jsx",
+        "src/views/handover-timeline/index.jsx",
+        "src/views/recent-activity/index.jsx",
+        "src/views/service-overview/index.jsx",
+        "src/views/service-topology/index.jsx",
+        "src/views/student-drawer/index.jsx",
+        "src/views/student-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "Table",
+      "category": "A",
+      "eview": "TablePro",
+      "importPath": "eview-ui/TablePro",
+      "keyDiffs": "[Table] API 同构度高：rowKey（默认 'key'）/columns[].dataIndex/render(text, record, pageIndex, index)/sorter/fixed（left/right，IE 无效）均保留 antd 形态；dataSource→**dataset**；pagination 对象（**设 false 不分页**，否则传 Paging props + recordCount）；rowSelection→**selection 对象**（type:'checkbox'/'radio'/selectedRowKeys/onChange(selectedRowKeys, selectedRows)/onSelect）；onChange(currentDataset, changeEvent)（分页/排序/筛选变化）；expandable→**expansion 对象**（expandedRowRender/childrenColumnName 默认 'children'）；**columnResizable 默认 true**（列宽拖拽，antd 默认无——不需要要显式 false）；排序词 ascend/descend 与 antd 一致；sortOrderList=['ascend','descend']；disabelCheckAssociated 拼写注意（父子勾选关联）；斑马纹 enableZebraCrossing 默认 false（同 antd） | [Table（需要列编辑/虚拟滚动/树表）] **columns[].dataIndex→key**（无 dataIndex）；dataSource→dataset（推荐对象数组，键=columns 的 key）；**enableColumnDrag 默认 true**（antd 默认无拖拽——不需要要显式 false）；分页 pagination→enablePagination + recordCount + currentPage + onPageChange(currentPage) + pagingProps；勾选 rowSelection→enableCheckBox + checkType + checkedRows + onRowCheck(row, checkedRows, e)（**checkedRows 语义：设 keyIndex 为该列数据，否则为行序号**）；**列 allowSort 默认 true**（同 eview-react 坑：无 sorter 的列要显式 allowSort: false）；sort: 'asc'/'desc'/'origin'（**不是 ascend/descend**）；render 默认签名 (v, r, options, row, {isEdit})；冻结列 freezeCol（列属性）+「冻结列排在 columns 最前」；enableZebraCrossing 默认 false；斑马/拖动默认值与 TablePro 不同，**两者勿混用**；TablePro 之外的 ScrollTable/VirtualizedTable 变体见 [Table.md](components/Table.md)",
+      "ref": "components/TablePro.md",
+      "files": [
+        "src/views/alert-list/index.jsx",
+        "src/views/change-feed/index.jsx",
+        "src/views/file-list/index.jsx",
+        "src/views/student-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField",
+      "importPath": "eview-ui/TextField",
+      "keyDiffs": "[Input] placeholder 同名保留；**onChange(value1, value2, event)**（新值/旧值/事件，**首参是值**）；无 prefix/suffix/addonBefore/addonAfter（手写外层 div 组合）；type 仅 text/password（数字输入用 format=\"number\"）；validator(value, id, type) => {result, message}；无 size/defaultValue（默认值转初始 value state）；ref：getValue()/validate()/focus() | [Input.Password] 加 autoComplete=\"off\"（文档警告 BM 场景必传） | [Input.TextArea] onChange(value1, value2, event)；maxLength 自带右下角计数（替代 showCount）；无 autoSize（用 rows/cols）；无 allowClear | [Input.Search] **onSearch(value) 触发时机比 antd 宽**——点图标/回车/**文本值变化时均触发**，必须加防抖或只在回车分支处理；onChange(value)（仅值）；onClear(value)；maxLength→**maxLengthInput**；下拉建议 popItems=[{text,value}] 与 onSuggest **互斥不能同设**；labelPosition=\"after\" 布局文档明言不正确，勿用",
+      "ref": "components/TextField.md",
+      "files": [
+        "src/views/alert-list/index.jsx",
+        "src/views/filter-bar/index.jsx",
+        "src/views/header-bar/index.jsx",
+        "src/views/security-section/index.jsx",
+        "src/views/share-modal/index.jsx",
+        "src/views/silence-modal/index.jsx",
+        "src/views/space-tree/index.jsx"
+      ]
+    },
+    {
+      "antd": "Dropdown",
+      "category": "A",
+      "eview": "Dropdown",
+      "importPath": "eview-ui/Dropdown",
+      "keyDiffs": "[Dropdown.Button] text + options=[{text, value, iconUrl?, disable?}] + onClick(value, event) | [Dropdown] **保留 overlay（ReactNode）/trigger（['click','hover','contextMenu'] 数组）/placement（12 值同名）**；antd v5 menu={{items}} 数组形态→**overlay={<Menu>…Menu.Item/SubMenu…</Menu>} children JSX**（见 Menu 行备选的 children 驱动）；antd v5 open→**visible**、onOpenChange→**onVisibleChange(visible)**；getPopupContainer 同名；mountOnBody（默认 false）；**不用 PopUpMenu（文档标注废弃）**",
+      "ref": "components/Dropdown.md",
+      "files": [
+        "src/views/alert-list/index.jsx",
+        "src/views/file-list/index.jsx",
+        "src/views/header-bar/index.jsx",
+        "src/views/space-tree/index.jsx",
+        "src/views/toolbar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Switch",
+      "category": "A",
+      "eview": "Toggle",
+      "importPath": "eview-ui/Toggle",
+      "keyDiffs": "checked→**toggled**；onChange→**onToggle(value)**；data=[关值, 开值]（值集合，顺序=关闭/开启）；disabled 正确拼写保留；无 loading/size；文档推荐设置 data 默认值",
+      "ref": "components/Toggle.md",
+      "files": [
+        "src/views/api-pref-section/index.jsx",
+        "src/views/notification-section/index.jsx",
+        "src/views/security-section/index.jsx",
+        "src/views/share-modal/index.jsx"
+      ]
+    },
+    {
+      "antd": "Radio",
+      "category": "A",
+      "eview": "Radio",
+      "importPath": "eview-ui/Radio",
+      "keyDiffs": "[Radio] label prop（= children）；onChange(value, event)（首参是值）；labelPosition 默认 after | [Radio.Group] **data=[{value, text, disabled?}]**（不是 options）；onChange(value, oldValue, event)（带 oldValue）；无 buttonStyle（Radio.Button 场景转 SelectCard）；无 optionType | [Radio.Button / Segmented] data=[{value, text}]；onChange(value, event)（首参即选中值）；defaultValue→初始 value state（**value=null 时取消所有选择**）；size→type（default/small，值域不同）；禁用是 **disable**（不是 disabled，拼写异常表）；仅适合 ≤7 项的单行展示（文档警告）；block 无对应（宽度走 style）",
+      "ref": "components/Radio.md",
+      "files": [
+        "src/views/api-pref-section/index.jsx",
+        "src/views/appearance-section/index.jsx"
+      ]
+    },
+    {
+      "antd": "Slider",
+      "category": "A",
+      "eview": "DragInput",
+      "importPath": "eview-ui/DragInput",
+      "keyDiffs": "**value 永远是数组**：type=\"single\" 默认 [min]、type=\"range\" 默认 [min, min]；marks 对象→**markIndexes 纯数字数组（要求递增）**；onChange(value, changeValue)；range→type=\"range\"；**无 disabled prop**（需要时外层禁用处理）；displayInput 默认 true 显示输入框",
+      "ref": "components/DragInput.md",
+      "files": [
+        "src/views/appearance-section/index.jsx"
+      ]
+    },
+    {
+      "antd": "ColorPicker",
+      "category": "A",
+      "eview": "ColorPicker",
+      "importPath": "eview-ui/ColorPicker",
+      "keyDiffs": "onChange→**onColorChange(color)**；value '#rrggbb' 字符串",
+      "ref": "components/ColorPicker.md",
+      "files": [
+        "src/views/appearance-section/index.jsx"
+      ]
+    },
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button",
+      "importPath": "eview-ui/Button",
+      "keyDiffs": "[Button（纯文字）] 文字用 text prop（**不用 children**，文档 API 只有 text）；type→status（default/primary/risk）；size 三档是 small/normal/large（**antd middle→normal**）；无 loading/htmlType/danger（danger→status=\"risk\"）；处理中用 disabled+文案切换；onClick(event) 原生事件（同 antd） | [Button icon={<Icon/>}（带图标）] **不要迁 leftIcon/rightIcon**——eview-ui 的 leftIcon/rightIcon 接收**图标 url 字符串**，不是 ReactNode，与保留的 <Icon> shim 类型不匹配。改用 children：<Button onClick={...}><Icon name=\"x\" size={14}/>{文字}</Button>（Button 底层是原生 button，children 可渲染）；纯文字部分仍优先 text prop，带图标时文字跟在 Icon 后 | [Button type=\"text\"] text prop + onClick(event)；或手写 <a> | [Button.Group] **data 数组驱动**：data=[{text, onClick, ...Button props}]（不是 children） | [Dropdown.Button] text + options=[{text, value, iconUrl?, disable?}] + onClick(value, event) | [Radio.Button / Segmented] data=[{value, text}]；onChange(value, event)（首参即选中值）；defaultValue→初始 value state（**value=null 时取消所有选择**）；size→type（default/small，值域不同）；禁用是 **disable**（不是 disabled，拼写异常表）；仅适合 ≤7 项的单行展示（文档警告）；block 无对应（宽度走 style）",
+      "ref": "components/Button.md",
+      "files": [
+        "src/views/batch-bar/index.jsx",
+        "src/views/detail-panel/index.jsx",
+        "src/views/filter-bar/index.jsx",
+        "src/views/page-header/index.jsx",
+        "src/views/renewal-alert/index.jsx",
+        "src/views/save-bar/index.jsx",
+        "src/views/share-modal/index.jsx",
+        "src/views/silence-modal/index.jsx",
+        "src/views/storage-bar/index.jsx",
+        "src/views/student-drawer/index.jsx",
+        "src/views/toolbar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Timeline",
+      "category": "A",
+      "eview": "TimeLine",
+      "importPath": "eview-ui/TimeLine",
+      "keyDiffs": "**导出名大写 L（TimeLine 不是 Timeline）**；items→**data=[{title, date, icon?, iconType?, content}]**；iconType: 'success'/'error'/'default'（= antd color 三态）；dot→icon（url）；自定义内容 render(content)（**data 项级 render 函数**）；**第一条数据的 iconType 是内置固定的不受控制**（文档警告）",
+      "ref": "components/TimeLine.md",
+      "files": [
+        "src/views/detail-panel/index.jsx",
+        "src/views/handover-timeline/index.jsx",
+        "src/views/student-drawer/index.jsx"
+      ]
+    },
+    {
+      "antd": "Checkbox",
+      "category": "A",
+      "eview": "Checkbox",
+      "importPath": "eview-ui/Checkbox",
+      "keyDiffs": "[Checkbox] label prop（= antd children）；**onChange(value, checked, event, additionalData) 四参**（首参是 value 不是 event）；indeterminate→halfChecked；labelPosition 默认 after（文本在右，与 antd 一致，勿改） | [Checkbox.Group] **data（不是 options）**，项 {value, text, checked?, tipText?}；value[]；onChange(newValue[], oldValue[], event)；selectAll 是**对象** {text, checked, onChange}；rows 多行排布如 \"0:1 \\",
+      "ref": "components/Checkbox.md",
+      "files": [
+        "src/views/file-list/index.jsx"
+      ]
+    },
+    {
+      "antd": "Select",
+      "category": "A",
+      "eview": "Select",
+      "importPath": "eview-ui/Select",
+      "keyDiffs": "[Select] options 项 label→**text**（{text, value, icon?, iconActive?}，icon 是 url 字符串）；placeholder→**defaultLabel**；**onChange(value, oldValue, text, oldText[, event])**；无 defaultValue（转初始 value state——**必须设默认选中值**，无默认时取 options[0].value）；受控双轨：value（按值）或 selectedIndex（**按下标**）——**统一用 value**（selectedIndex 是旧 API，SelectPro 已废弃它）；无 allowClear/mode/labelInValue；性能：options ≤500 | [Select mode=\"multiple\"] 删 mode；options=[{text, value}]；value 数组；**onChange(value[], changeValue[], event)**；placeholder 同名保留（不是 defaultLabel）；searchable（= showSearch）；selectAll；getValue()；性能：options ≤500 | [Select showSearch / AutoComplete] options=[{text, value}]；**onChange(value, oldValue)**（两参）；**无 placeholder prop**（需外层处理）；onInputEnter(e, value)；性能：无；enablHorzScroll 拼写注意 | [Select（受控要求高/搜索复杂）] **受控组件**（value 唯一数据源）；mode='single'/'singleSearch'/'multiple'/'multiSearch'（antd mode+showSearch 组合）；placeholder 同名；defaultValue 仅 mount 生效一次；onChange(value, options)；emptyOptionsMsg（= notFoundContent）；性能：options ≤500",
+      "ref": "components/Select.md",
+      "files": [
+        "src/views/filter-bar/index.jsx",
+        "src/views/share-modal/index.jsx",
+        "src/views/silence-modal/index.jsx"
+      ]
+    },
+    {
+      "antd": "TimePicker",
+      "category": "A",
+      "eview": "TimePicker",
+      "importPath": "eview-ui/TimePicker",
+      "keyDiffs": "**value→time 数字数组** [时, 分, 秒]（antd 是 dayjs 对象，**必须转数组**）；onChange(time: number[]) 回传数字数组；format 小写 'hh:mm:ss'/'hh:mm'/'mm:ss'；12 小时制 use12HrClock（不是 format 里写 a）；**无 RangePicker**（范围用 TimeRangeSelector——但标注在开发中，建议两个 TimePicker 手动组合）；label 类 props 已废弃；display prop 传入布尔值后将完全由 props 控制显隐（勿轻易传）",
+      "ref": "components/TimePicker.md",
+      "files": [
+        "src/views/notification-section/index.jsx"
+      ]
+    },
+    {
+      "antd": "Breadcrumb",
+      "category": "A",
+      "eview": "Crumbs",
+      "importPath": "eview-ui/Crumbs",
+      "keyDiffs": "**items→data**；项 {title, url?, enable?, icon?}（href/path→**url**；**enable: false 不可点击**，默认 true）；**separator→seprator（官方拼错，将错就错，残留正确英文 separator 即未迁移）**；头部标题 title；onClick(url, event) 组件级（非每项）；**<Breadcrumb.Item> JSX 子元素形态→拍平 data=[{title:'xxx'}] 数组**；最后一项不传 url 即当前页",
+      "ref": "components/Crumbs.md",
+      "files": [
+        "src/views/page-header/index.jsx",
+        "src/views/toolbar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Rate",
+      "category": "A",
+      "eview": "Rating",
+      "importPath": "eview-ui/Rating",
+      "keyDiffs": "count→**starCount**；allowHalf→half；**onChange→onClick(event, value)（event 在前！且事件名是 onClick 不是 onChange）**；allowClear 默认 **false**（antd 默认 true）；character→iconName（字符串）；无 tooltips",
+      "ref": "components/Rating.md",
+      "files": [
+        "src/views/recent-activity/index.jsx",
+        "src/views/student-drawer/index.jsx"
+      ]
+    },
+    {
+      "antd": "Modal",
+      "category": "A",
+      "eview": "Dialog",
+      "importPath": "eview-ui/Dialog",
+      "keyDiffs": "[Modal] open→**isOpen**；footer→**buttons=[{text, status, onClick}] 数组**；**onClose(event) 不自动关闭**（必须自己 setIsOpen(false)）；width/height→**size=[宽, 高] 数组**（无独立 width prop，size=[300,'auto']）；centered 默认居中；**destroyOnClose 默认 true（antd 默认 false，语义反转注意）**；position 是**四元边距数组 [上, 左, 右, 下]**（**与 DialogPro/MessageDialog 的 [左, 上, 右, 下] 顺序相反！**——不确定就别传 position，走默认居中）；maskClosable→modal true + 内部行为（文档无显式 maskClosable，默认模态不可点mask关闭需确认）；movable 默认 true 可拖动；zIndex 默认 9992 | [Modal（新版场景）] isOpen/onClose(event)；**无 buttons prop**（底部按钮 children/customHeader 自理）；destroyOnClose 默认 true；模态不能设位置必须居中（AUI 规范）；minSize=[504,400]；旧 Dialog 的最小化不支持 | [Modal.confirm() 等静态] **MessageDialog 是受控组件**：type **必填**（'highRisk'/'risk'/'error'/'info'/'warn'/'confirm'/'success' 7 枚举）；isOpen 受控；**buttons 是对象** {ok: {text, onClick, focused}, cancel: {...}}（**与 Dialog 的数组结构不同！**）；content/detail；onClose(event) 不自动关闭；**MessageDialogPro 另有静态方法** MessageDialogPro.confirm(config) 等（≈ antd Modal.confirm 命令式，返回引用可 update/destroy；destroyAll()）——**函数式调用脱离 ConfigProvider context**（文档警告：不能获取 context/redux，3.1+ 必须传 version）",
+      "ref": "components/Dialog.md",
+      "files": [
+        "src/views/save-bar/index.jsx",
+        "src/views/security-section/index.jsx",
+        "src/views/share-modal/index.jsx",
+        "src/views/silence-modal/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tooltip",
+      "category": "A",
+      "eview": "Tooltip",
+      "importPath": "eview-ui/Tooltip",
+      "keyDiffs": "**title→content**（ReactNode）；placement 同名 12 值；trigger 同名；visible/onVisibleChange 受控；open→visible；arrowPointAtCenter 同名；getPopupContainer 同名；mouseEnterDelay/mouseLeaveDelay 单位 **ms（antd 是秒，数值需 ×1000）**；destroyTooltipOnHide 同名",
+      "ref": "components/Tooltip.md",
+      "files": [
+        "src/views/security-section/index.jsx"
+      ]
+    },
+    {
+      "antd": "Popover",
+      "category": "A",
+      "eview": "Tooltip",
+      "importPath": "eview-ui/Tooltip",
+      "keyDiffs": "trigger=\"click\" + content 自定义；Tooltip 包裹式（<Tooltip content trigger=\"click\"><目标/></Tooltip>）；Tooltip.destroyAll()",
+      "ref": "components/Tooltip.md",
+      "files": [
+        "src/views/security-section/index.jsx"
+      ]
+    },
+    {
+      "antd": "Anchor",
+      "category": "unknown",
+      "eview": null,
+      "importPath": null,
+      "keyDiffs": "未在 antd-to-eview-ui 的 component-mapping.md 中找到映射，需人工评估（可能是低频组件，查 references/components/INDEX.md）",
+      "ref": null,
+      "files": [
+        "src/views/settings-side/index.jsx"
+      ]
+    },
+    {
+      "antd": "Menu",
+      "category": "A",
+      "eview": "Accordion",
+      "importPath": "eview-ui/Accordion",
+      "keyDiffs": "[Menu（侧边导航，items 数组）] items→**data=[{title, value, icon?, children?}]**（label→title、key→value、icon 是 url 字符串——**保留 <Icon> shim 时 icon 字段不用**，图标走 customRender? 无——图标省略）；selectedKeys→**selectedValue（单 string）**；onClick({key})→**onClick(node)**（node 是 data 项原始对象，取 node.value）；openKeys→defaultOpenKeys；mode=\"inline\" 收起态→expanded/onExpand(flag)；enableMultiOpen（嵌套菜单多开，默认 false）；forceShowTip='title' 溢出提示；单层平铺菜单：data 无 children + enableExpand={false} | [Menu（需 checkbox 多选/精确同构）] **children 驱动**（Menu.Item/Menu.SubMenu/Menu.Divider，无 items prop——antd v5 items 数组必须转 JSX）；mode（**现只有 vertical 实现**）；**selectable 默认 false——必须显式 selectable={true}**（antd 默认可选中）；selectedKeys/openKeys/defaultOpenKeys/multiple 同名；onOpenChange→**onOpenKeysChange(openKeys)**；onClick/onSelect(event: ClickItemEvent)（event 包装，取 key 方式见 [Menu.md](components/Menu.md) 事件行为表）；triggerSubMenuAction 默认 **'hover'**（antd 默认 click，行为差异见 Menu.md §事件行为）；selectable 只在 true 时 onSelect 有效",
+      "ref": "components/Accordion.md",
+      "files": [
+        "src/views/sidebar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tree",
+      "category": "A",
+      "eview": "Tree",
+      "importPath": "eview-ui/Tree",
+      "keyDiffs": "treeData→**data**；节点 title→**text**、key→**id**（主键字段名 nodeKey 默认 'id'，**不是 fieldNames**）；checkable→**enableCheckbox**（默认 false，勾选需显式开）；**enableMultiSelect 默认 true**——单选树必须显式 enableMultiSelect={false}；回调：onSelect(selectedKeys, node, event)/onCheck(checkedKeys, node)（首参是 keys 数组）/onExpand(expandedKeys, node)（**必须接**，只传 expandedKeys 不接回调点箭头展开不了）；loadData 异步加载（isLeaf 显箭头）；父子勾选关联 disabelCheckAssociated（拼写）；showLine 仅 3.1；expandedKeys/selectedKeys/checkedKeys 受控同名保留",
+      "ref": "components/Tree.md",
+      "files": [
+        "src/views/space-tree/index.jsx"
+      ]
+    },
+    {
+      "antd": "Progress",
+      "category": "A",
+      "eview": "ProgressBar",
+      "importPath": "eview-ui/ProgressBar",
+      "keyDiffs": "percent→**current**；max 默认 100；showInfo→format=\"percent\"（或 \"steps\" 步骤型）；strokeColor→barStyle；size 无对应；formatter(value, precision, format) => string",
+      "ref": "components/ProgressBar.md",
+      "files": [
+        "src/views/storage-bar/index.jsx",
+        "src/views/student-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "Drawer",
+      "category": "A",
+      "eview": "Drawer",
+      "importPath": "eview-ui/Drawer",
+      "keyDiffs": "antd v5 open→**visible**（回到 v4 拼写）；placement 同名（top/right/bottom/left）；onClose(event) **不自动关闭**（CloseEvent {type:'ok'/'cancel'/'mask'} 可区分来源）；width 默认 **'20rem'**（最小 4rem）；title/footer 支持 **false**（显式无）；遮罩 maskSetting={disable, onClickClose, show}；inContainer 挂父容器",
+      "ref": "components/Drawer.md",
+      "files": [
+        "src/views/student-drawer/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tabs",
+      "category": "A",
+      "eview": "Tab",
+      "importPath": "import Tab, { TabItem } from \"eview-ui/Tab\"（TabItem 具名导出）",
+      "keyDiffs": "**TabItem children 驱动**（<Tab><TabItem title>内容</TabItem></Tab>，**无 data/items prop**）；activeKey→**selectedIndex（数字下标，不是 key！）**——key→index 需映射；**切换回调是 onClick(index, title, event)（不是 onChange）**；onClose(index, event, title)；**draggable 默认 true**（不需要要显式 false）；TabItem：title/closable/disabled/icon（url 字符串）；tabBarExtraContent 无对应（手写）；**遍历生成 TabItem 时数据源必须判空兜底**（(tabs",
+      "ref": "components/Tab.md",
+      "files": [
+        "src/views/student-drawer/index.jsx"
+      ]
+    },
+    {
+      "antd": "Segmented",
+      "category": "unknown",
+      "eview": null,
+      "importPath": null,
+      "keyDiffs": "未在 antd-to-eview-ui 的 component-mapping.md 中找到映射，需人工评估（可能是低频组件，查 references/components/INDEX.md）",
+      "ref": null,
+      "files": [
+        "src/views/toolbar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Icon（源 shim）",
+      "category": "P",
+      "eview": "Icon（保留源 shim）",
+      "importPath": "@/shared/Icon",
+      "keyDiffs": "保留不动——import Icon from \"@/shared/Icon\" 与 <Icon name=\"...\"> 调用点零改动；禁止改用 eview-ui Icon/SvgIcon（废弃）/IconButton（废弃）；禁止把 Icon shim 塞进 eview-ui 组件的 leftIcon/rightIcon/icon（url 字符串 prop，类型不匹配）；Button 带图标用 children 组合：<Button><Icon name=\"x\" size={14}/>{文字}</Button>。步骤 3 仅 check-imports.cjs 校验路径",
+      "ref": null,
+      "files": [
+        "app.jsx",
+        "src/components/file-type-icon/index.jsx",
+        "src/components/section-card/index.jsx",
+        "src/views/alert-list/index.jsx",
+        "src/views/api-pref-section/index.jsx",
+        "src/views/batch-bar/index.jsx",
+        "src/views/change-feed/index.jsx",
+        "src/views/detail-panel/index.jsx",
+        "src/views/file-list/index.jsx",
+        "src/views/filter-bar/index.jsx",
+        "src/views/golden-metrics/index.jsx",
+        "src/views/handover-timeline/index.jsx",
+        "src/views/header-bar/index.jsx",
+        "src/views/page-header/index.jsx",
+        "src/views/realtime-charts/index.jsx",
+        "src/views/recent-access/index.jsx",
+        "src/views/recent-activity/index.jsx",
+        "src/views/renewal-alert/index.jsx",
+        "src/views/save-bar/index.jsx",
+        "src/views/security-section/index.jsx",
+        "src/views/service-overview/index.jsx",
+        "src/views/service-topology/index.jsx",
+        "src/views/settings-header/index.jsx",
+        "src/views/settings-side/index.jsx",
+        "src/views/share-modal/index.jsx",
+        "src/views/sidebar/index.jsx",
+        "src/views/silence-modal/index.jsx",
+        "src/views/space-tree/index.jsx",
+        "src/views/stat-overview/index.jsx",
+        "src/views/storage-bar/index.jsx",
+        "src/views/student-drawer/index.jsx",
+        "src/views/student-table/index.jsx",
+        "src/views/toolbar/index.jsx",
+        "src/views/works-gallery/index.jsx",
+        "index.page.html"
+      ]
+    },
+    {
+      "antd": "Chart（源封装）",
+      "category": "P",
+      "eview": "Chart（保留源封装）",
+      "importPath": null,
+      "keyDiffs": "保留不动——eview-ui 无 Chart 组件，源项目 chart.jsx 封装及其 import 原样保留；不需要补 a2ui: true / theme（那是 @nce/eview-react/Chart 的约束，勿张冠李戴）；暗色下图表主题跟随由源项目逻辑自理",
+      "ref": null,
+      "files": [
+        "src/views/dashboard/index.jsx",
+        "src/views/realtime-charts/index.jsx",
+        "src/views/student-drawer/index.jsx"
+      ]
+    },
+    {
+      "antd": "IpInput",
+      "category": "A",
+      "eview": "IPInput",
+      "importPath": "eview-ui/IPInput",
+      "keyDiffs": "ict-coder 手写 IPInput 共享件迁移到 eview-ui/IPInput：① 删除手写共享件（assets/shared/ip-input.jsx），import 改 import IPInput from \"eview-ui/IPInput\"；② type 值：源 \"ipv4\"→\"v4\"、\"ipv6\"→\"v6\"、\"mac\" 不变；③ onChange(value, event) 首参是完整字符串（如 \"192.168.1.1\"），不要拆数组；④ tip 样式 prop 是 tipStyle（IPInput）/tipProps（IPAddress，不要混用）；⑤ ref 有 getValue()/validator(value)=>{result,message}；⑥ IPAddress 是同功能新版（onChange(value) 单参），二选一勿混用",
+      "ref": "components/IPInput.md",
+      "files": [
+        "src/views/security-section/index.jsx"
+      ],
+      "sharedFilesToRemove": [
+        "assets/shared/ip-input.jsx"
+      ]
+    }
+  ],
+  "globalRefEui": {
+    "spellingAnomalies": [
+      {
+        "eview": "seprator",
+        "correct": "separator",
+        "component": "Crumbs（另有 sepratorStyle）"
+      },
+      {
+        "eview": "disable",
+        "correct": "disabled",
+        "component": "SelectCard、FileUpload、Tag(message 型)、PopUpMenu 项、ButtonMenu options 项",
+        "note": "仅这些用 disable；Button/TextField/Select/Menu 等仍用 disabled，勿全局替换"
+      },
+      {
+        "eview": "placeHolder",
+        "correct": "placeholder",
+        "component": "FileUpload、BrowseButton"
+      },
+      {
+        "eview": "upLoadErrorMessage/upLoadSuccessMessage",
+        "correct": "uploadErrorMessage/…",
+        "component": "FileUpload"
+      },
+      {
+        "eview": "disposeTimeOut",
+        "correct": "disposeTimeout",
+        "component": "TipBox、DivMessage"
+      },
+      {
+        "eview": "disabelCheckAssociated",
+        "correct": "disableCheckAssociated",
+        "component": "TablePro selection、Tree、TreeTable"
+      },
+      {
+        "eview": "enableMulitiExpand",
+        "correct": "enableMultiExpand",
+        "component": "Table"
+      },
+      {
+        "eview": "onRowExpend/expandedRow",
+        "correct": "onRowExpand/…",
+        "component": "Table"
+      },
+      {
+        "eview": "mutiSelectEnable",
+        "correct": "multiSelectEnable",
+        "component": "JList、TreeTable"
+      },
+      {
+        "eview": "enablHorzScroll",
+        "correct": "enableHorzScroll",
+        "component": "Select、InputSelect、Popup"
+      },
+      {
+        "eview": "minimizModalEnable",
+        "correct": "minimizeModalEnable",
+        "component": "Dialog"
+      }
+    ],
+    "antdToEviewRenames": [
+      {
+        "antd": "type(primary/danger)",
+        "eview": "status(primary/risk)",
+        "component": "Button"
+      },
+      {
+        "antd": "children 文字",
+        "eview": "text",
+        "component": "Button/TextButton/DivMessage/LabelField"
+      },
+      {
+        "antd": "placeholder",
+        "eview": "defaultLabel",
+        "component": "Select（其余组件 placeholder 同名）"
+      },
+      {
+        "antd": "checked",
+        "eview": "toggled",
+        "component": "Toggle"
+      },
+      {
+        "antd": "onChange",
+        "eview": "onToggle",
+        "component": "Toggle"
+      },
+      {
+        "antd": "count",
+        "eview": "starCount",
+        "component": "Rating"
+      },
+      {
+        "antd": "percent",
+        "eview": "current",
+        "component": "ProgressBar"
+      },
+      {
+        "antd": "title(tooltip 内容)",
+        "eview": "content",
+        "component": "Tooltip"
+      },
+      {
+        "antd": "picker",
+        "eview": "type",
+        "component": "DatePicker"
+      },
+      {
+        "antd": "value(dayjs)",
+        "eview": "time(数字数组[时,分,秒])",
+        "component": "TimePicker"
+      },
+      {
+        "antd": "current(下标)",
+        "eview": "currentStep(对应 data[].value)",
+        "component": "Wizards(Steps)"
+      },
+      {
+        "antd": "activeKey",
+        "eview": "selectedIndex(数字下标)",
+        "component": "Tab"
+      },
+      {
+        "antd": "items",
+        "eview": "data",
+        "component": "SelectCard/CheckboxGroup/RadioGroup/Wizards/Accordion"
+      },
+      {
+        "antd": "options 的 label",
+        "eview": "text",
+        "component": "Select 系全部"
+      },
+      {
+        "antd": "dataSource",
+        "eview": "dataset",
+        "component": "Table/TablePro"
+      },
+      {
+        "antd": "total",
+        "eview": "recordCount",
+        "component": "Paging"
+      },
+      {
+        "antd": "spinning",
+        "eview": "isOpen",
+        "component": "Loader"
+      },
+      {
+        "antd": "open",
+        "eview": "isOpen(Dialog) / visible(Drawer) / display(DivMessage)",
+        "component": "弹层系（不统一，查 visibilityProps）"
+      },
+      {
+        "antd": "destroyOnClose(默认false)",
+        "eview": "destroyOnClose(默认true)",
+        "component": "Dialog/DialogPro/MessageDialogPro"
+      },
+      {
+        "antd": "indicator(size)",
+        "eview": "type(global/local/micro)",
+        "component": "Loader"
+      }
+    ],
+    "callbackSignatures": [
+      {
+        "component": "TextField/TextArea/HexField",
+        "signature": "onChange(value1, value2, event)",
+        "note": "新值/旧值/事件，首参是值"
+      },
+      {
+        "component": "Select",
+        "signature": "onChange(value, oldValue, text, oldText[, event])",
+        "note": "五参，取值用第 1 参"
+      },
+      {
+        "component": "MultipleSelect",
+        "signature": "onChange(value[], changeValue[], event)"
+      },
+      {
+        "component": "InputSelect",
+        "signature": "onChange(value, oldValue)"
+      },
+      {
+        "component": "Checkbox",
+        "signature": "onChange(value, checked, event, additionalData)",
+        "note": "四参"
+      },
+      {
+        "component": "CheckboxGroup",
+        "signature": "onChange(newValue[], oldValue[], event)"
+      },
+      {
+        "component": "Radio",
+        "signature": "onChange(value, event)"
+      },
+      {
+        "component": "RadioGroup",
+        "signature": "onChange(value, oldValue, event)"
+      },
+      {
+        "component": "SelectCard",
+        "signature": "onChange(value, event)",
+        "note": "首参即选中值"
+      },
+      {
+        "component": "Toggle",
+        "signature": "onToggle(value)",
+        "note": "事件名也变了"
+      },
+      {
+        "component": "Spinner",
+        "signature": "onChange(value) 仅有效值；onError(value) 无效值；onBlur(value)——参数是值不是事件"
+      },
+      {
+        "component": "SearchInput",
+        "signature": "onSearch(value)",
+        "note": "值变化也触发，需防抖"
+      },
+      {
+        "component": "Rating",
+        "signature": "onClick(event, value)",
+        "note": "event 在前！且事件名是 onClick"
+      },
+      {
+        "component": "DatePicker",
+        "signature": "onChange(date, {moment, isDst, unix, utcTime})"
+      },
+      {
+        "component": "TimePicker",
+        "signature": "onChange(time: number[])"
+      },
+      {
+        "component": "IPInput",
+        "signature": "onChange(value, event)；IPAddress onChange(value) 单参"
+      },
+      {
+        "component": "CategorySearch",
+        "signature": "onSearch(category, value)；onClear(oldValue, newValue)——old 在前"
+      },
+      {
+        "component": "FileUpload",
+        "signature": "onChange(event, itemList)——event 在前；onReload({event, data})"
+      },
+      {
+        "component": "Table",
+        "signature": "onRowClick(row, e)；onRowRightClick(e, row)——右键事件在前；onColumnSort(sortColumn, sortType)"
+      },
+      {
+        "component": "TablePro",
+        "signature": "onChange(currentDataset, changeEvent)——分页/排序/筛选统一"
+      },
+      {
+        "component": "Tab",
+        "signature": "onClick(index, title, event)",
+        "note": "不是 onChange；index 是下标"
+      },
+      {
+        "component": "Panel",
+        "signature": "onExpand(selectedIndex, event)——下标"
+      },
+      {
+        "component": "Tree",
+        "signature": "onSelect(selectedKeys, node, event)；onCheck(checkedKeys, node)；onExpand 必须接"
+      },
+      {
+        "component": "Popup",
+        "signature": "onItemClick(item, e)——item 是数据项"
+      },
+      {
+        "component": "PopUpMenu",
+        "signature": "onClick({text, value, clickItem})"
+      },
+      {
+        "component": "ButtonMenu",
+        "signature": "onClick(value, event)"
+      },
+      {
+        "component": "Crumbs",
+        "signature": "onClick(url, event)——组件级非每项"
+      },
+      {
+        "component": "Dialog/DialogPro/MessageDialog",
+        "signature": "onClose(event) 不自动关闭",
+        "note": "必须自己 setIsOpen(false)"
+      },
+      {
+        "component": "Drawer",
+        "signature": "onClose(event?: {type: ok/cancel/mask}) 不自动关闭"
+      },
+      {
+        "component": "Paging",
+        "signature": "onPageChange(currentPage)；onPageSizeChange(pageSize)",
+        "note": "antd onChange(page, pageSize) 拆两个"
+      }
+    ],
+    "visibilityProps": {
+      "isOpen": [
+        "Dialog",
+        "DialogPro",
+        "MessageDialog",
+        "MessageDialogPro",
+        "PopUpMenu(废弃)",
+        "Loader"
+      ],
+      "visible": [
+        "Drawer",
+        "Tooltip",
+        "Dropdown"
+      ],
+      "display": [
+        "Popup",
+        "TipBox(默认 true)",
+        "DivMessage(默认 true)",
+        "LinkField(默认 true)"
+      ],
+      "iconDisplay": [
+        "HelpTip(默认 true)"
+      ],
+      "isShow": [
+        "Shade(默认 true)"
+      ],
+      "none": [
+        "PopConfirm(内部管理)",
+        "PageMessage",
+        "FormMessage(父级条件渲染)"
+      ],
+      "notes": "所有弹层 onClose 均不自动关闭；Dialog/DialogPro/MessageDialogPro 的 destroyOnClose 默认 true（antd 默认 false）"
+    }
+  }
+}

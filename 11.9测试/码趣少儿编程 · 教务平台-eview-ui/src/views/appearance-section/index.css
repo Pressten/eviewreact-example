@@ -1,0 +1,20 @@
+.appearance-slider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  flex-shrink: 0;
+}
+
+.appearance-slider__edge {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.appearance-swatch {
+  display: inline-block;
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: var(--radius-xs);
+  margin-top: 0.5rem;
+  border: var(--border-width-thin) solid var(--outline-variant);
+}

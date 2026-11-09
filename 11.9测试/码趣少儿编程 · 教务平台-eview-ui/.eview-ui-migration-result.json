@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "imports": "PASS",
+    "select-options": "PASS",
+    "provider": "PASS",
+    "dark-mode": "PASS",
+    "visibility": "PASS",
+    "wizards": "PASS",
+    "crumbs": "PASS",
+    "table-defaults": "PASS",
+    "css": "PASS",
+    "token-drift": "PASS",
+    "menu": "PASS",
+    "npm-install": "SKIP"
+  },
+  "advisoryReviews": {
+    "tableDefaults": [
+      {
+        item": "student-table/index.jsx TablePro columnResizable",
+        "resolution": "已修复",
+        "detail": "源 antd Table 无列宽拖拽，已显式 columnResizable={false}（student-table、change-feed、file-list 三处 TablePro 均已显式关闭）。"
+      },
+      {
+        "item": "alert-list/index.jsx TablePro columnResizable",
+        "resolution": "已修复",
+        "detail": "同上，显式 columnResizable={false}。"
+      },
+      {
+        "item": "file-list/index.jsx TablePro columnResizable + selection",
+        "resolution": "已修复",
+        "detail": "columnResizable={false}；rowSelection→selection 对象（type/selectedRowKeys/onChange）；pagination 对象含 recordCount/currentPage/pageSize，翻页回调拆 onPageChange + onPageSizeChange。"
+      }
+    ],
+    "css": [
+      {
+        "item": "业务 CSS .ant-* 选择器清理",
+        "resolution": "已修复",
+        "detail": "共清理 9 个文件 15 处 .ant-* 选择器规则（toolbar/student-table/student-drawer/storage-bar/space-tree/share-modal/header-bar/file-list/appearance-section），色值 token 忠实保留未改值。"
+      },
+      {
+        "item": "header-bar search-input 包裹层",
+        "resolution": "已修复",
+        "detail": "antd Input suffix 组合改 TextField（无 suffix）后，外层 .search-input-wrap div 接管背景/边框/圆角样式（原 .ant-input-affix-wrapper 规则迁移）。"
+      }
+    ],
+    "tokenDrift": [
+      {
+        "item": "token 定义值漂移",
+        "resolution": "无",
+        "detail": "check-token-drift PASS——src/styles/ 四层 token（base/light/theme/dark）定义值与 sourceCssTokens 快照完全一致，零漂移。"
+      }
+    ],
+    "menu": [
+      {
+        "item": "sidebar Menu → Accordion 图标兼容",
+        "resolution": "有意保留（手写侧边导航）",
+        "detail": "eview-ui Accordion data[].icon 是 url 字符串 prop，与保留的 <Icon> shim（ReactNode）类型不匹配。为保留侧边栏图标渲染，改为手写 <nav> + <a> + <Icon> 列表（加 // TODO(eview-ui) 注释）。check-menu advisory 无 ACCORDION_DATA_FIELDS / selectedKeys 命中。"
+      }
+    ],
+    "wizards": [
+      {
+        "item": "Steps/Wizards",
+        "resolution": "无",
+        "detail": "项目无 Steps/Wizards 组件，check-wizards PASS。"
+      }
+    ]
+  },
+  "notes": "覆盖范围：骨架换血（package.json 删 eview-react 生态 6 包 + 加 eview-ui:*、main.jsx 删 aui3 CSS + componentsLocales、index.html 删 body aui3_1/ev_no_wcag 类、src/shared 删 14 个转发包壳目录 + SourceIpInput.jsx、app.jsx 暗色 useEffect 摘除 body aui3_1_dark 轨）+ ConfigProvider 接线（locale=zh version=aui3 listenTheme theme={isDark?evening:lightday}）+ 25 个组件文件逐组件替换（A 类 22 组件 + B 类 Empty 手写 + unknown message shim/Anchor 手写/Segmented→SelectCard）+ CSS .ant-* 清理（15 处）。npm-install=SKIP：外网环境 npm install 超时（30s）不可达，node_modules 未安装；AST 类脚本（check-select-options/check-crumbs/check-wizards/check-menu）依赖 @babel/parser，本轮均报告 PASS（@vitejs/plugin-react 传递依赖路径或全局解析命中）。待内网确认项：① eview-ui 包名与版本号（package.json 暂写 \"eview-ui\": \"*\"，JSON 不支持注释，TODO 记录于本 result）；② eview-ui 全局样式 import 路径（main.jsx 留 // TODO(eview-ui) 注释，暂不写 import）；③ aui3 暗色 DOM 配合只走 ConfigProvider theme 轨 + html .dark 轨（body aui3_1_dark 轨已摘除）。遗留：手写组件 Empty/message/Anchor/侧边导航 均带 // TODO(eview-ui) 注释待内网确认是否有对应 eview-ui 组件可替换。"
+}
