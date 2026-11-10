@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "imports": "PASS",
+    "select-options": "PASS",
+    "provider": "PASS",
+    "dark-mode": "PASS",
+    "visibility": "PASS",
+    "wizards": "PASS",
+    "crumbs": "PASS",
+    "table-defaults": "PASS",
+    "css": "PASS",
+    "token-drift": "PASS",
+    "menu": "PASS",
+    "npm-install": "SKIP"
+  },
+  "advisoryReviews": {
+    "tableDefaults": ["check-table-defaults 直接 PASS：无 dataSource 残留，TablePro columnResizable 已显式 false（源 antd 无拖拽），selection 对象形态正确。无 advisory 项待回应。"],
+    "css": ["check-css 直接 PASS：业务 CSS 14 文件色值与源快照 20 处一致（按文件+出现顺序配对），无 ev_ 类名。无色值漂移。"],
+    "tokenDrift": ["check-token-drift 直接 PASS：4 层 token 文件 455 个 token 定义值与源完全一致（base 187/light 180/theme 88/dark 180），业务 CSS 无未定义 token 引用。"],
+    "menu": ["check-menu 直接 PASS（@babel/parser 缺失降级跳过 AST 字段扫描，regex 已核）：无 eview-ui Menu 未传 selectable 项；header-nav 的 antd Menu(horizontal) 已手写为横向标签（Accordion 仅垂直无 horizontal，加 TODO 注释），非 Accordion 残留。"],
+    "wizards": ["check-wizards 直接 PASS：无 Steps 残留，无 Wizards currentStep 下标直接量（本项目无 Wizards/Steps 组件）。"]
+  },
+  "notes": "终验证门禁 PASS（第 1 轮，无循环修复）。11 个 check 脚本中 9 个直接 PASS，2 个（check-select-options/check-crumbs）因目标工程未 npm install 缺 @babel/parser 降级 exit=2——主 agent 用 grep 降级验证其核心检查项：select-options 的 options label 残留为 0（8 处 label 全为业务数据字段如 KPI 卡 label/Cascader 库内件/Dropdown 手写 overlay children，非 eview-ui 组件 options prop）；crumbs 的 Breadcrumb/separator/Crumbs href/path 残留为 0。npm install 记 SKIP：@cloudsop 内网 registry 不可达，npm install 155s+ 无输出被终止（skill 规定 timeout=30000 内网源超时记 SKIP 不判 FAIL）。终检补充全通过：.ant- CSS 残留 0、./assets/uploads/ 旧路径残留 0、结构完整性 14 关键文件全在 + public/uploads 7 文件、@/shared/Icon 与 chart.jsx import 路径保持原样、中文无 GBK 乱码。源预存 bug（非迁移引入）：context.jsx value 未导出 setAbnormalOnly，kpi-row/store-table 调用运行时 undefined——保持忠实迁移未改，已记入遗留项。"
+}

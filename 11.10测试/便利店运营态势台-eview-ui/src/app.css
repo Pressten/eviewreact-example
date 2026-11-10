@@ -1,0 +1,82 @@
+/* 应用级基础样式 — 页面骨架 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+.page-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+  width: 100%;
+  max-width: 112rem;
+  margin: 0 auto;
+  padding: 1rem 2rem 2.5rem;
+  box-sizing: border-box;
+}
+
+/* 补给看板（⑥）与商圈绩效（⑦）同行 */
+.duo-row {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: var(--spacing-gutter);
+  align-items: stretch;
+}
+
+@media (max-width: 80rem) {
+  .duo-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.custom-spin-indicator {
+  animation: app-spin 1s linear infinite;
+}
+
+@keyframes app-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 手写下拉菜单项（Dropdown overlay 用 <div>+<a> 替代 eview-ui Menu 的 Menu.Item onClick
+   非文档化问题，migration-workflow.md §7.1：overlay 接任意 ReactNode）。样式用源项目 token。 */
+.cc-sort-menu, .rg-sort-menu, .ip-sev-menu, .hn-export-menu, .st-more-menu {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-popover);
+  padding: 0.25rem 0;
+}
+
+.cc-sort-item, .rg-sort-item, .ip-sev-item, .hn-export-item, .st-more-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.cc-sort-item:hover, .rg-sort-item:hover, .ip-sev-item:hover,
+.hn-export-item:hover, .st-more-item:hover {
+  background: var(--surface-container);
+  color: var(--primary);
+}
+
+.st-more-disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.st-more-disabled:hover {
+  background: transparent;
+  color: var(--text-disabled);
+}

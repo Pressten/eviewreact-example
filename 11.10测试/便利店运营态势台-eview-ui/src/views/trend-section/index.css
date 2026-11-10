@@ -1,0 +1,139 @@
+.ts-body {
+  display: flex;
+  gap: 1.25rem;
+  align-items: stretch;
+  min-height: 0;
+}
+
+.ts-chart {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* —— 单店营业额 TOP5 榜 —— */
+.ts-rank {
+  flex: 0 0 18rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0.875rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-md);
+  min-width: 0;
+}
+
+.ts-rank-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.25rem;
+}
+
+.ts-rank-head b {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.ts-rank-head span {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+}
+
+.ts-rank-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.4375rem 0.25rem;
+  border-bottom: 1px solid var(--divider);
+  cursor: pointer;
+  min-width: 0;
+}
+
+.ts-rank-row:last-child {
+  border-bottom: none;
+}
+
+.ts-rank-row:hover .rk-main a {
+  color: var(--interactive-link-hover);
+}
+
+.rk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: var(--radius-full);
+  background: var(--surface-container-highest);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-semibold);
+  flex: 0 0 auto;
+}
+
+.rk-1 {
+  background: var(--error);
+  color: var(--on-error);
+}
+
+.rk-2 {
+  background: var(--critical);
+  color: var(--on-critical);
+}
+
+.rk-3 {
+  background: var(--warning);
+  color: var(--on-warning);
+}
+
+.rk-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.rk-line1 a {
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.rk-line2 {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rk-sales {
+  flex: 0 0 auto;
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (max-width: 80rem) {
+  .ts-body {
+    flex-direction: column;
+  }
+
+  /* 堆叠布局下容器高度不定，给图表固定高度兜底 */
+  .ts-chart {
+    flex: 0 0 auto;
+    height: 20rem;
+  }
+
+  .ts-rank {
+    flex: 1 1 auto;
+  }
+}

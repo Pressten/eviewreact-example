@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "check-relative-imports.cjs exit 0：all relative imports resolved。源项目 src/ 31 文件搬入目标工程后，所有 ./src/... 相对导入已修正为 ./...（同级）或 ../...（上层）；Icon import 改为 @/shared/Icon 默认导入；Chart import 保持 ../../../assets/shared/chart.jsx；context/utils/mock/data 相对路径正确。"
+}
