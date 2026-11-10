@@ -1,0 +1,68 @@
+/* 告警静默弹窗 — H5 表单骨架：标签居左 Grid + 绝对定位校验文案 */
+.silence-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.sf-row {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  column-gap: 1rem;
+  align-items: start;
+  margin-bottom: 1.25rem;
+}
+
+.sf-row:last-of-type {
+  margin-bottom: 0.75rem;
+}
+
+.sf-label {
+  position: relative;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  padding-top: 0.3rem;
+  justify-self: start;
+}
+
+/* 必填星号：悬挂在标签左侧，不占排版空间 */
+.sf-label.required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-error);
+  font: var(--font-body-m);
+}
+
+.sf-field {
+  position: relative;
+  min-width: 0;
+}
+
+/* 校验文案：覆盖在控件正下方，不占布局高度 */
+.sf-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--color-error);
+}
+
+.sf-tip {
+  display: flex;
+  gap: 0.375rem;
+  align-items: flex-start;
+  background: var(--color-message-bg-warning);
+  color: var(--color-warning-bold);
+  border-radius: var(--radius-base);
+  padding: 0.5rem 0.625rem;
+  font: var(--font-caption-m);
+}
+
+.sf-tip-ico {
+  display: inline-flex;
+  flex: none;
+  margin-top: 0.125rem;
+}

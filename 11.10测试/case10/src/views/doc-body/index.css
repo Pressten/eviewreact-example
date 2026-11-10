@@ -1,0 +1,139 @@
+/* 中栏文档容器 — 独立滚动区 + 文档卡 */
+.doc-main {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--surface-container-lowest);
+}
+
+/* 面包屑条（页面级，置于灰底之上） */
+.doc-crumb-bar {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: var(--spacing-3) var(--spacing-4) 0;
+}
+
+.crumb-link {
+  cursor: pointer;
+  color: var(--on-surface-variant);
+  transition: color 0.15s;
+}
+
+.crumb-link:hover {
+  color: var(--interactive-link);
+}
+
+/* 文档卡 */
+.doc-main-inner {
+  max-width: 64rem;
+  margin: var(--spacing-3) auto var(--spacing-10);
+  padding: var(--spacing-6) var(--spacing-8) var(--spacing-8);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+/* 版本切换行 */
+.doc-version-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--divider);
+}
+
+.version-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.version-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.version-note {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+/* 文档章节通用 */
+.doc-section {
+  padding-top: var(--spacing-8);
+  scroll-margin-top: var(--spacing-4);
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+}
+
+.section-no {
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+}
+
+.section-title {
+  margin: 0;
+  font: var(--font-headline-l);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.section-lead {
+  margin: 0 0 var(--spacing-4);
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  max-width: 46rem;
+}
+
+.doc-footer {
+  margin-top: var(--spacing-8);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--divider);
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.footer-link {
+  margin-left: var(--spacing-3);
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.footer-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+/* 回到顶部按钮 */
+.back-top {
+  position: fixed;
+  right: var(--spacing-6);
+  bottom: var(--spacing-6);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--surface-container-highest);
+  color: var(--on-surface-variant);
+  box-shadow: var(--shadow-base);
+  cursor: pointer;
+  transition: color 0.15s, transform 0.15s;
+  z-index: 100;
+}
+
+.back-top:hover {
+  color: var(--primary);
+  transform: translateY(-0.125rem);
+}

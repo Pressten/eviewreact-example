@@ -1,0 +1,57 @@
+/* 区块⑧ 运行质量 —— 两行式指标(数值行 + 昨日对比行), 2×2 网格避免挤压 */
+.ops-quality {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.oq-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.oq-sub { font: var(--font-caption-m); font-weight: var(--font-weight-normal); color: var(--on-surface-variant); margin-left: auto; }
+
+.oq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.oq-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem 0.625rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+  min-width: 0;
+}
+
+.oq-row { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; min-width: 0; }
+.oq-label { font: var(--font-body-s); color: var(--on-surface-variant); white-space: nowrap; }
+.oq-value {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-bold);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.oq-value em { font-style: normal; font-size: var(--font-caption-s); font-weight: var(--font-weight-normal); color: var(--on-surface-variant); margin-left: 0.125rem; }
+
+.oq-row-delta { justify-content: flex-start; flex-wrap: nowrap; }
+.oq-row-delta b { font: var(--font-body-s); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.oq-base { font: var(--font-caption-s); color: var(--on-surface-variant); font-weight: var(--font-weight-normal); font-variant-numeric: tabular-nums; white-space: nowrap; margin-left: auto; }
+.oq-up-good { color: var(--success); }
+.oq-up-good b { color: var(--success); }
+.oq-down-bad { color: var(--error); }
+.oq-down-bad b { color: var(--error); }
+.oq-flat { color: var(--on-surface-variant); }
+.oq-flat b { color: var(--on-surface-variant); font-weight: var(--font-weight-normal); }

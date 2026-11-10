@@ -1,0 +1,105 @@
+/* 左侧栏 — 文档栏目菜单 + 接口目录树 */
+.doc-sidebar {
+  width: 16.5rem;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--surface-container-highest);
+  border-right: 1px solid var(--divider);
+}
+
+.sidebar-menu {
+  flex: none;
+  padding-top: var(--spacing-2);
+  border-bottom: 1px solid var(--divider);
+}
+
+/* 去掉 antd inline 菜单的右侧竖线，与侧栏边框共存会显得厚重 */
+.sidebar-menu .ant-menu {
+  border-inline-end: none;
+  background: transparent;
+}
+
+.tree-panel {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--spacing-2) var(--spacing-2) var(--spacing-6);
+}
+
+.tree-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  padding: var(--spacing-2) var(--spacing-2) var(--spacing-1-5);
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.06em;
+  color: var(--on-surface-variant);
+}
+
+.tree-group-icon {
+  color: var(--on-surface-variant);
+}
+
+/* 目录树节点标题：名称 + 计数（父节点带计数） */
+.tree-node-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding-right: var(--spacing-1-5);
+}
+
+.tree-node-name {
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tree-node-count {
+  flex: none;
+  font-size: var(--font-size-sm);
+  color: var(--on-surface-variant);
+}
+
+/* 接口叶子节点：名称 + 等宽方法缩写 */
+.tree-leaf-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding-right: var(--spacing-1-5);
+}
+
+.tree-leaf-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--on-surface);
+}
+
+.tree-leaf-method {
+  flex: none;
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.tlm-get {
+  color: var(--success);
+}
+.tlm-post {
+  color: var(--info);
+}
+.tlm-put {
+  color: var(--critical);
+}
+.tlm-delete {
+  color: var(--error);
+}

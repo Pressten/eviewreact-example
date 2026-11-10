@@ -1,0 +1,90 @@
+/* 更新日志章节 — Timeline（tag 样式与公告弹窗保持一致，故复用同名类） */
+.cl-item {
+  padding-bottom: var(--spacing-1);
+}
+
+.cl-head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.cl-version {
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.cl-channel {
+  padding: 0 0.375rem;
+  border-radius: var(--radius-xs);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+  color: var(--success);
+  background: var(--success-container);
+}
+
+.cl-date {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.cl-entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.cl-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+}
+
+.cl-text {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  line-height: var(--line-height-md);
+  max-width: 40rem;
+}
+
+/* Timeline 时间轴（ant.css 皮肤基础上微调内边距） */
+.cl-timeline {
+  padding-top: var(--spacing-1);
+}
+
+/* 变更类型标签（与公告弹窗同风格） */
+.ann-tag {
+  flex: none;
+  display: inline-flex;
+  padding: 0 0.375rem;
+  border-radius: var(--radius-xs);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+  margin-top: 0.0625rem;
+  white-space: nowrap;
+}
+
+.at-feat {
+  color: var(--success);
+  background: var(--success-container);
+}
+.at-opt {
+  color: var(--info);
+  background: var(--info-container);
+}
+.at-fix {
+  color: var(--primary);
+  background: var(--primary-container);
+}
+.at-sec {
+  color: var(--warning);
+  background: var(--warning-container);
+}
+.at-dep {
+  color: var(--critical);
+  background: var(--critical-container);
+}

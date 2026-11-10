@@ -1,0 +1,12 @@
+/* 延误分钟数 —— 等宽数字右对齐, 阈值分级着色 */
+.delay-min {
+  font-variant-numeric: tabular-nums;
+  font-family: "Cascadia Mono", Consolas, "HarmonyOS Sans SC", monospace;
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.delay-min-zero { color: var(--text-disabled); font-weight: var(--font-weight-normal); }
+.delay-min-low { color: var(--on-surface); }
+.delay-min-mid { color: var(--critical); }
+.delay-min-high { color: var(--error); }

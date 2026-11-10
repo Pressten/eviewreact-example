@@ -1,0 +1,249 @@
+.schedule-section {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.schedule-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--divider);
+}
+.schedule-title {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.schedule-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.legend-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: var(--radius-badge);
+}
+
+/* grid body */
+.schedule-grid {
+  display: flex;
+}
+.grid-hall-col {
+  flex-shrink: 0;
+  width: 8.75rem;
+  border-right: 1px solid var(--divider);
+}
+.grid-corner {
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  border-bottom: 1px solid var(--divider);
+}
+.grid-hall-cell {
+  height: 5.75rem;
+  border-bottom: 1px solid var(--divider);
+  padding: 0.5rem 0.625rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.1875rem;
+}
+.grid-hall-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.grid-hall-seats {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.grid-hall-versions {
+  display: flex;
+  gap: 0.1875rem;
+  flex-wrap: wrap;
+}
+
+.grid-time-area {
+  flex: 1;
+  overflow-x: auto;
+}
+.time-axis {
+  height: 2.25rem;
+  display: flex;
+  border-bottom: 1px solid var(--divider);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--surface-container-highest);
+}
+.time-tick {
+  flex-shrink: 0;
+  width: 3rem;
+  border-right: 1px solid var(--outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--font-caption-s);
+  color: var(--text-placeholder);
+}
+.time-tick.hour {
+  color: var(--on-surface);
+  font-weight: var(--font-weight-medium);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-medium);
+}
+.grid-rows {
+  position: relative;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent,
+    transparent calc(3rem - 1px),
+    var(--outline-variant) calc(3rem - 1px),
+    var(--outline-variant) 3rem
+  );
+}
+.hall-row {
+  position: relative;
+  height: 5.75rem;
+  border-bottom: 1px solid var(--divider);
+}
+.hall-row:nth-child(even) {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+/* now line */
+.now-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--error);
+  z-index: 5;
+  pointer-events: none;
+}
+.now-line-dot {
+  position: absolute;
+  top: -4px;
+  left: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--error);
+}
+.dark .hall-row:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* showtime card */
+.showtime-card {
+  position: absolute;
+  top: 0.375rem;
+  bottom: 0.375rem;
+  border-radius: var(--radius-base);
+  padding: 0.25rem 0.375rem;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.0625rem;
+  border: 1px solid;
+  transition: opacity 0.15s;
+  color: #FFFFFF;
+}
+.showtime-card:hover {
+  opacity: 0.85;
+  z-index: 3;
+}
+.showtime-card.ongoing {
+  z-index: 4;
+}
+.showtime-card.selected {
+  z-index: 5;
+}
+.st-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+.st-card-name {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.st-card-time {
+  display: flex;
+  align-items: center;
+  gap: 0.1875rem;
+  font: var(--font-caption-s);
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+}
+.st-card-progress {
+  margin-top: 0.0625rem;
+  line-height: 1;
+}
+.st-card-progress .ant-progress {
+  line-height: 1;
+}
+.st-card-bottom {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+.st-card-occupancy {
+  font: var(--font-caption-s);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+.st-optimized-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/* 实色影片卡内的 antd Tag 颜色适配：半透明白玻璃（白字白框） */
+.showtime-card .ant-tag {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+/* "已优化"状态徽标：白底主色字，高对比 */
+.showtime-card .st-optimized-tag.ant-tag {
+  background: #FFFFFF;
+  color: var(--primary);
+  border: 1px solid #FFFFFF;
+}
+.st-live-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: var(--radius-full);
+  background: var(--error);
+  flex-shrink: 0;
+  animation: live-pulse 1.5s infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}

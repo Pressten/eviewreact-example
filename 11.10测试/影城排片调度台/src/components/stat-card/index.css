@@ -1,0 +1,50 @@
+.stat-card {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.stat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.stat-card-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+.stat-card-icon {
+  color: var(--on-surface-variant);
+}
+.stat-card-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+.stat-card-value {
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-bold);
+  color: var(--on-surface);
+  line-height: 1;
+}
+.stat-card-unit {
+  font: var(--font-body-m);
+  color: var(--on-surface-variant);
+}
+.stat-card-delta {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-caption-m);
+}
+.stat-card-delta .delta-up { color: var(--success); }
+.stat-card-delta .delta-down { color: var(--error); }
+.stat-card-delta .delta-flat { color: var(--on-surface-variant); }
+
+/* 上座率阈值色 */
+.occ-red { color: var(--error) !important; }
+.occ-yellow { color: var(--critical) !important; }
+.occ-green { color: var(--success) !important; }

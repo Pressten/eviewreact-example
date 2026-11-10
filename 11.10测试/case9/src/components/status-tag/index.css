@@ -1,0 +1,66 @@
+/* 状态标签族 — 语义 token 上色，双模式自动翻转 */
+.noc-tag {
+  margin: 0;
+  border: none;
+  border-radius: var(--radius-base);
+  font: var(--font-body-s);
+  line-height: 1.5;
+  padding: 0 0.5rem;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 级别：实心色块（--color-text-inverse 双模式均为白色，红/橙底可读） */
+.noc-lvl-p0 {
+  background: var(--color-error);
+  color: var(--color-text-inverse);
+}
+.noc-lvl-p1 {
+  background: var(--color-alert);
+  color: var(--color-text-inverse);
+}
+.noc-lvl-p2 {
+  background: var(--color-message-bg-warning);
+  color: var(--color-warning-bold);
+}
+.noc-lvl-p3 {
+  background: var(--color-fill);
+  color: var(--color-text-secondary);
+}
+
+/* 告警状态：软底色徽章 */
+.noc-st-firing {
+  background: var(--color-message-bg-error);
+  color: var(--color-error);
+}
+.noc-st-claimed {
+  background: var(--color-message-bg-info);
+  color: var(--color-info-primary);
+}
+.noc-st-silenced {
+  background: var(--color-none-subtle);
+  color: var(--color-text-secondary);
+}
+.noc-st-resolved {
+  background: var(--color-message-bg-success);
+  color: var(--color-success);
+}
+
+/* 结果：软底色分色（成功 / 失败 / 已回滚 / 跟进中） */
+.noc-rs-success {
+  background: var(--color-message-bg-success);
+  color: var(--color-success);
+}
+.noc-rs-failed {
+  background: var(--color-message-bg-error);
+  color: var(--color-error);
+}
+.noc-rs-rollback {
+  background: var(--color-message-bg-alert);
+  color: var(--color-alert);
+}
+.noc-rs-ongoing {
+  background: var(--color-message-bg-info);
+  color: var(--color-info-primary);
+}

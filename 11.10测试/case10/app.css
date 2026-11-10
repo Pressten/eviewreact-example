@@ -1,0 +1,17 @@
+/* 应用级骨架 — 顶部导航 + 三栏文档布局（左右栏固定宽、中栏自适应滚动） */
+.app-root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+  overflow: hidden;
+}
+
+.page-body {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+}

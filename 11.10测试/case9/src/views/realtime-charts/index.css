@@ -1,0 +1,60 @@
+/* ⑤ 实时图表 — QPS / 错误率双图 */
+.rt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-gutter);
+}
+
+.rt-chart {
+  min-width: 0;
+}
+
+.rt-chart-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+}
+
+.rt-svc-tag {
+  margin: 0;
+  border: none;
+  border-radius: var(--radius-base);
+  background: var(--color-message-bg-info);
+  color: var(--color-info-primary);
+  font: var(--font-body-s);
+}
+
+.rt-range {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.rt-divider {
+  width: 1px;
+  height: 0.75rem;
+  background: var(--color-border);
+}
+
+.rt-more {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem;
+  cursor: pointer;
+  color: var(--color-icon-secondary);
+}
+
+.rt-more:hover {
+  color: var(--color-brand);
+}
+
+@media (max-width: 70rem) {
+  .rt-grid {
+    grid-template-columns: 1fr;
+  }
+}

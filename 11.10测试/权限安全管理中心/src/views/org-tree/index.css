@@ -1,0 +1,167 @@
+/* 左侧组织面板：与右侧内容列等高（由 .page-body align-items:stretch 驱动），
+   内部纵向弹性布局：头部/搜索固定，树区弹性滚动，部门分布与筛选状态沉底 */
+.org-panel {
+  width: 17.5rem;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  min-height: 0;
+  align-self: stretch;
+}
+
+.tree-search {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  flex: none;
+}
+
+.search-icon {
+  color: var(--text-placeholder);
+}
+
+.tree-scroll {
+  flex: 0 1 auto; /* 自然高度，受限时内部滚动；剩余高度由筛选状态沉底吸收 */
+  min-height: 8rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.25rem;
+}
+
+.org-tree {
+  background: transparent;
+  padding: 0.25rem 0;
+}
+
+.tree-node-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.tree-node-label.root .tree-node-name {
+  font-weight: var(--font-weight-semibold);
+}
+
+.tree-org-icon {
+  color: var(--primary);
+}
+
+.tree-node-name {
+  color: var(--on-surface);
+}
+
+/* 部门人数分布（沉底区） */
+.dept-stats {
+  flex: none;
+  margin-top: 1rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--divider);
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.dept-stats-title {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  margin-bottom: 0.125rem;
+}
+
+.dept-stat-row {
+  display: grid;
+  grid-template-columns: 5rem 1fr 1.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.375rem;
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.dept-stat-row:hover {
+  background: var(--surface-variant);
+}
+
+.dept-stat-row.active {
+  background: var(--primary-container);
+}
+
+.dept-stat-name {
+  font: var(--font-body-s);
+  color: var(--on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dept-stat-bar {
+  display: block;
+  height: 0.375rem;
+  border-radius: var(--radius-full);
+  background: var(--surface-variant);
+  overflow: hidden;
+}
+
+.dept-stat-row.active .dept-stat-bar {
+  background: var(--surface-container-highest);
+}
+
+.dept-stat-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  opacity: 0.55;
+  transition: width 0.3s;
+}
+
+.dept-stat-row.active .dept-stat-fill {
+  opacity: 1;
+}
+
+.dept-stat-count {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 筛选状态（margin-top:auto 沉底，等高布局下与右列底部对齐） */
+.tree-footer {
+  flex: none;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--divider);
+}
+
+.tree-hint {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.tree-selected {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font: var(--font-body-s);
+  color: var(--on-surface);
+  background: var(--primary-container);
+  border-radius: var(--radius-base);
+  padding: 0.25rem 0.5rem;
+}
+
+.filter-icon {
+  color: var(--primary);
+}
+
+.tree-selected a {
+  color: var(--interactive-link);
+  cursor: pointer;
+  margin-left: 0.25rem;
+}
+
+.tree-selected a:hover {
+  color: var(--interactive-link-hover);
+}

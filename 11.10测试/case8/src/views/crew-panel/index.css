@@ -1,0 +1,89 @@
+/* 区块⑤ 机组执勤面板 */
+.crew-panel {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.cp-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.cp-tail { font: var(--font-caption-m); font-weight: var(--font-weight-normal); color: var(--on-surface-variant); margin-left: auto; }
+
+.cp-empty { display: flex; align-items: center; justify-content: center; min-height: 8rem; }
+
+.cp-flight { display: flex; align-items: center; gap: 0.5rem; font: var(--font-body-s); color: var(--on-surface-variant); }
+.cp-f-no { font: var(--font-body-m); font-weight: var(--font-weight-semibold); color: var(--on-surface); }
+.cp-f-tag {
+  margin-left: auto;
+  font-size: var(--font-caption-s);
+  padding: 0 0.25rem;
+  border-radius: var(--radius-xs);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.cp-crew { display: grid; grid-template-columns: 1fr 1fr; gap: 0.375rem; }
+.cp-member {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+  min-width: 0;
+}
+.cp-role { font: var(--font-caption-s); color: var(--on-surface-variant); flex-shrink: 0; }
+.cp-member b { font: var(--font-body-s); font-weight: var(--font-weight-semibold); color: var(--on-surface); }
+
+.cp-legs { display: flex; align-items: center; gap: 0.25rem; flex-wrap: wrap; }
+.cp-leg {
+  font: var(--font-caption-m);
+  padding: 0 0.375rem;
+  line-height: 1.375rem;
+  border-radius: var(--radius-xs);
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  font-variant-numeric: tabular-nums;
+}
+.cp-legs-label { font: var(--font-caption-s); color: var(--on-surface-variant); margin-left: auto; white-space: nowrap; }
+
+/* 执勤进度 —— 14h 上限刻度线 */
+.cp-duty { display: flex; flex-direction: column; gap: 0.375rem; }
+.cp-duty-head { display: flex; align-items: baseline; justify-content: space-between; font: var(--font-body-s); color: var(--on-surface-variant); }
+.cp-duty-value { font: var(--font-headline-m); font-weight: var(--font-weight-bold); font-variant-numeric: tabular-nums; }
+.cp-duty-value.v-ok { color: var(--success); }
+.cp-duty-value.v-warn { color: var(--critical); }
+.cp-duty-value.v-err { color: var(--error); }
+
+.cp-bar { position: relative; }
+.cp-limit-mark {
+  position: absolute;
+  top: -0.1875rem;
+  bottom: -0.1875rem;
+  width: 2px;
+  background: var(--error);
+  z-index: 2;
+}
+.cp-duty-meta { display: flex; gap: 0.75rem; font: var(--font-caption-m); color: var(--on-surface-variant); font-variant-numeric: tabular-nums; flex-wrap: wrap; }
+
+.cp-warning {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.5rem;
+  border-radius: var(--radius-base);
+  font: var(--font-body-s);
+}
+.cp-warning.w-warn { background: var(--critical-container); color: var(--on-critical-container); }
+.cp-warning.w-err { background: var(--error-container); color: var(--error); }

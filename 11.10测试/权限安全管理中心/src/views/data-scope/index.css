@@ -1,0 +1,207 @@
+.scope-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.scope-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.scope-radio {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0.5rem 0.625rem;
+  border-radius: var(--radius-base);
+}
+
+.scope-radio:hover {
+  background: var(--surface-variant);
+}
+
+.scope-radio .ant-radio {
+  margin-top: 0.25rem;
+}
+
+.scope-name {
+  display: block;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  line-height: 1.5;
+}
+
+.scope-desc {
+  display: block;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  line-height: 1.625;
+}
+
+.exception-section {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--divider);
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  flex: 1;
+}
+
+.exception-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.exception-title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.exception-list {
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-base);
+  overflow: hidden;
+  transition: opacity 0.2s;
+}
+
+.exception-list.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(40%);
+}
+
+.exc-row {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, 1fr) auto 6.5rem 2.5rem;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.5rem 0.875rem;
+  border-bottom: 1px solid var(--divider);
+  font: var(--font-body-m);
+}
+
+.exc-row:last-child {
+  border-bottom: none;
+}
+
+.exc-head-row {
+  background: var(--surface-variant);
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  font-weight: var(--font-weight-medium);
+  padding: 0.375rem 0.875rem;
+}
+
+.exc-head-row > span:last-child {
+  text-align: center;
+}
+
+.exc-row > .tbl-op {
+  justify-self: center;
+}
+
+.add-exception-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-s);
+}
+
+.add-exception-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+/* 新增例外授权表单 */
+.ex-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.ex-form .rm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ex-form .form-label {
+  position: relative;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  text-align: left;
+}
+
+.ex-form .form-label.required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--error);
+  font: var(--font-body-m);
+}
+
+.ex-field {
+  position: relative;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-base);
+  padding: 0.75rem;
+}
+
+.ex-field .ant-checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 0.75rem;
+}
+
+.ex-validity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ex-validity-hint {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.form-error {
+  position: relative;
+  margin-top: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--error);
+}
+
+.exc-dept {
+  color: var(--on-surface);
+  font-weight: var(--font-weight-medium);
+}
+
+.exc-types {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.mono-text {
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface);
+}
+
+.tbl-op {
+  color: var(--on-surface-variant);
+}
+
+.tbl-op:hover {
+  color: var(--color-brand);
+}

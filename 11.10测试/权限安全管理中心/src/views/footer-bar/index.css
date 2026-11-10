@@ -1,0 +1,112 @@
+/* 操作条：置于 page-body 上方（页头之下、内容区之上），随外壳常驻不滚动 */
+.footer-bar {
+  flex: none;
+  margin-bottom: var(--spacing-section);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: 0.625rem 1rem;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  flex-wrap: wrap;
+}
+
+.warn-icon {
+  color: var(--critical);
+  flex: none;
+}
+
+.ok-icon {
+  color: var(--success);
+  flex: none;
+}
+
+.change-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--error-container);
+  color: var(--on-error-container);
+  border-radius: var(--radius-full);
+  padding: 0.1875rem 0.75rem;
+  font: var(--font-body-s);
+  cursor: pointer;
+}
+
+/* 变更明细气泡 */
+.cb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 10rem;
+}
+
+.cb-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.cb-row b {
+  color: var(--error);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.change-chip b {
+  color: var(--error);
+  font-weight: var(--font-weight-bold);
+  padding: 0 0.125rem;
+}
+
+.ok-chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--success-container);
+  color: var(--on-success-container);
+  border-radius: var(--radius-full);
+  padding: 0.1875rem 0.75rem;
+  font: var(--font-body-s);
+}
+
+.footer-note {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.effect-tip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.75rem;
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-s);
+}
+
+.effect-tip:hover {
+  color: var(--interactive-link-hover);
+}
+
+.footer-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: none;
+}

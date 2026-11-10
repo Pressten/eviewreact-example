@@ -1,0 +1,33 @@
+/* 接口状态标签 */
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0.0625rem 0.5rem;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+.st-active {
+  color: var(--success);
+  background: var(--success-container);
+}
+
+.st-deprecating {
+  color: var(--critical);
+  background: var(--critical-container);
+  font-weight: var(--font-weight-medium);
+}
+
+.st-sunset {
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+}
+
+/* 版本新增标记 */
+.st-new {
+  color: var(--primary);
+  background: var(--primary-container);
+  font-weight: var(--font-weight-medium);
+}

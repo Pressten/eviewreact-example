@@ -1,0 +1,112 @@
+.film-lib-section {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.film-lib-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--divider);
+}
+.film-lib-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-gutter);
+  padding: 1rem 1.25rem;
+}
+.film-card {
+  border-radius: var(--radius-container);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--surface-container-low);
+  transition: opacity 0.15s;
+  border: 1px solid var(--outline-variant);
+}
+.film-card:hover {
+  opacity: 0.9;
+}
+.film-poster {
+  height: 5.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.film-poster-text {
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-bold);
+  color: #FFFFFF;
+}
+.film-poster-badge {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.375rem;
+}
+.film-info {
+  padding: 0.625rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.film-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+.film-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.film-duration {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  flex-shrink: 0;
+}
+.film-tags-row {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+.film-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--divider);
+}
+.film-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.0625rem;
+}
+.film-stat-value {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.film-stat-label {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+}
+.film-quick-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.375rem;
+  margin-top: 0.125rem;
+  border-radius: var(--radius-action);
+  background: var(--primary-container);
+  font: var(--font-caption-m);
+  color: var(--primary);
+}

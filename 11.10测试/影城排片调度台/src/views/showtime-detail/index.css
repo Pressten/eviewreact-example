@@ -1,0 +1,99 @@
+.st-detail-section {
+  margin-bottom: 1.25rem;
+}
+.st-detail-section-title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  margin-bottom: 0.625rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.st-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1rem;
+}
+.st-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.st-info-label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.st-info-value {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  font-weight: var(--font-weight-medium);
+}
+.st-conflict-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.st-conflict-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--radius-base);
+  background: var(--error-container);
+  font: var(--font-body-s);
+  color: var(--on-surface);
+}
+.st-conflict-ok {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--radius-base);
+  background: var(--success-container);
+  font: var(--font-body-s);
+  color: var(--on-surface);
+}
+
+/* seat heatmap */
+.seat-heatmap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.375rem;
+}
+.seat-zone-cell {
+  border-radius: var(--radius-base);
+  padding: 0.5rem;
+  text-align: center;
+  font: var(--font-caption-m);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+  min-height: 3rem;
+  justify-content: center;
+}
+.seat-zone-label {
+  color: var(--on-surface);
+}
+.screen-bar {
+  text-align: center;
+  padding: 0.375rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius-base);
+  background: var(--surface-variant);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  letter-spacing: 0.25rem;
+}
+.st-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.st-detail-film-name {
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-bold);
+  color: var(--on-surface);
+}

@@ -1,0 +1,167 @@
+/* 顶部导航（原生 nav 自写，规范见 Menu.md 头部导航要求）：
+   选中项品牌色 + 2px 底部下划线，未选中 transparent 占位防跳动 */
+.top-bar {
+  position: relative;
+  z-index: 40;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+  height: 3.5rem;
+  padding: 0 var(--spacing-page);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 品牌区 */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex: none;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: var(--on-primary);
+  flex: none;
+}
+
+.brand-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.brand-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.brand-sub {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.env-tag {
+  margin-left: 0.25rem;
+  margin-inline-end: 0;
+  font-weight: var(--font-weight-normal);
+}
+
+/* 主导航：占满头部高度，下划线与头部底边齐平 */
+.main-nav {
+  display: flex;
+  align-items: stretch;
+  align-self: stretch;
+  gap: 0.25rem;
+  margin-left: 1.25rem;
+}
+
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1.125rem;
+  color: var(--on-surface-variant);
+  font: var(--font-body-m);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px; /* 下划线压住头部投影起始线，避免 1px 缝隙 */
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-icon {
+  flex: none;
+}
+
+.nav-item:hover {
+  color: var(--color-brand);
+}
+
+.nav-item.active {
+  color: var(--color-brand);
+  border-bottom-color: var(--color-brand);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* 右侧工具区 */
+.top-tools {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: none;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: var(--radius-action);
+  color: var(--on-surface-variant);
+  padding: 0.25rem;
+}
+
+.icon-btn:hover {
+  color: var(--color-brand);
+  background: var(--surface-variant);
+}
+
+.divider-v {
+  width: 1px;
+  height: 1.125rem;
+  background: var(--divider);
+}
+
+.operator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.operator:hover {
+  background: var(--surface-variant);
+}
+
+.op-avatar {
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.op-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.op-name {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.op-role {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.op-chevron {
+  color: var(--on-surface-variant);
+  flex: none;
+}

@@ -1,0 +1,98 @@
+/* 快速开始章节 — 折叠面板逐步展开 */
+.qs-collapse {
+  background: var(--surface-container-highest);
+}
+
+.qs-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-width: 0;
+}
+
+.qs-no {
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+  flex: none;
+}
+
+.qs-title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.qs-dur {
+  margin-left: auto;
+  flex: none;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.qs-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.qs-intro {
+  margin: 0;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  max-width: 46rem;
+}
+
+.qs-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  line-height: var(--line-height-md);
+}
+
+.qs-note-icon {
+  flex: none;
+  margin-top: 0.1875rem;
+  color: var(--info);
+}
+
+.qs-next {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  align-self: flex-start;
+  font: var(--font-body-m);
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.qs-next:hover {
+  color: var(--interactive-link-hover);
+}
+
+/* 多语言 SDK 示例（Tabs） */
+.qs-sdk {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1-5);
+}
+
+.qs-sdk-label {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface-variant);
+}
+
+.qs-sdk .ant-tabs-tabpane {
+  padding-top: 0.5rem;
+}
+
+.sdk-panel {
+  max-width: 46rem;
+}

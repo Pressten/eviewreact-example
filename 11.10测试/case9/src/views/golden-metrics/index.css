@@ -1,0 +1,98 @@
+/* ③ 黄金指标行 — 4 卡 */
+.gm-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+}
+
+.gm-extra {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.gm-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-container);
+  padding: 0.75rem 1rem;
+  min-width: 0;
+}
+
+/* 点击联动实时图表 */
+.gm-card.is-clickable {
+  cursor: pointer;
+  outline: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.gm-card.is-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-base);
+}
+
+.gm-card.is-clickable:focus-visible {
+  box-shadow: 0 0 0 var(--outline-width-focus) var(--focus-ring);
+}
+
+.gm-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.gm-value {
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface);
+  line-height: 1.1;
+}
+
+.gm-unit {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-normal);
+  color: var(--on-surface-variant);
+  margin-left: 0.375rem;
+}
+
+.gm-delta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+/* 环比涨跌：按方向语义上色（涨不一定好） */
+.gm-delta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  padding: 0 0.375rem;
+  border-radius: var(--radius-base);
+}
+
+.gm-delta-chip.is-good {
+  background: var(--color-message-bg-success);
+  color: var(--color-success);
+}
+
+.gm-delta-chip.is-bad {
+  background: var(--color-message-bg-error);
+  color: var(--color-error);
+}
+
+.gm-base {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+@media (max-width: 80rem) {
+  .gm-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

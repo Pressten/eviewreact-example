@@ -1,0 +1,101 @@
+/* 顶部导航 — 48px 高，承载全局导航 */
+.top-bar {
+  height: 3rem;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-6);
+  background: var(--surface-container-highest);
+  border-bottom: 1px solid var(--divider);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: none;
+}
+
+.brand-name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+/* 主导航（自写 nav）：选中项品牌色 + 2px 下划线，未选中透明下划线占位防跳动 */
+.main-nav {
+  display: flex;
+  align-items: stretch;
+  align-self: stretch;
+  gap: var(--spacing-2);
+  margin-left: var(--spacing-4);
+}
+
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--spacing-2);
+  cursor: pointer;
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s;
+}
+
+.nav-item:hover {
+  color: var(--primary);
+}
+
+.nav-item.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.top-tools {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex: none;
+}
+
+.ver-tag {
+  margin-inline-end: 0;
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+}
+
+.global-search {
+  width: 18.75rem;
+}
+
+.search-icon {
+  color: var(--on-surface-variant);
+  cursor: pointer;
+}
+
+.search-icon:hover {
+  color: var(--primary);
+}
+
+.notice-toggle {
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.notice-toggle:hover {
+  color: var(--primary);
+}
+
+.theme-toggle {
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.theme-toggle:hover {
+  color: var(--primary);
+}

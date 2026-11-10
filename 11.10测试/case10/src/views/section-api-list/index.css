@@ -1,0 +1,240 @@
+/* 接口列表章节 — 筛选 / 表格 / 分页 */
+.section-head .api-total {
+  margin-left: auto;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.api-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-3);
+}
+
+/* 方法筛选 chips（即时生效） */
+.method-filter {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.method-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  padding: 0.1875rem var(--spacing-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--outline);
+  background: var(--surface-container-highest);
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.method-chip:hover {
+  color: var(--on-surface);
+  border-color: var(--on-surface-variant);
+}
+
+.method-chip.active {
+  background: var(--primary-container);
+  color: var(--primary);
+  border-color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.chip-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  flex: none;
+}
+
+.cd-get {
+  background: var(--success);
+}
+.cd-post {
+  background: var(--info);
+}
+.cd-put {
+  background: var(--critical);
+}
+.cd-delete {
+  background: var(--error);
+}
+
+.chip-count {
+  font-size: var(--font-size-sm);
+  opacity: 0.75;
+}
+
+/* 关键词提示条 */
+.kw-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.kw-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.kw-clear:hover {
+  color: var(--interactive-link-hover);
+}
+
+/* 接口表格 */
+.api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font: var(--font-body-m);
+}
+
+.api-table th {
+  text-align: left;
+  padding: var(--spacing-2) var(--spacing-3);
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+  border-bottom: 1px solid var(--outline-variant);
+  white-space: nowrap;
+}
+
+.api-table td {
+  padding: var(--spacing-3);
+  border-bottom: 1px solid var(--divider);
+  color: var(--on-surface);
+  vertical-align: top;
+  line-height: var(--line-height-md);
+}
+
+.api-table tbody tr:hover td {
+  background: var(--surface-variant);
+}
+
+/* 即将下线：警示行样式（critical 容器底） */
+.api-table tbody tr.row-deprecating td,
+.api-table tbody tr.row-deprecating:hover td {
+  background: var(--critical-container);
+}
+
+/* 已下线：禁用态 */
+.api-table tbody tr.row-sunset td {
+  color: var(--text-disabled);
+}
+
+.api-table tbody tr.row-sunset .api-path,
+.api-table tbody tr.row-sunset .api-time {
+  color: var(--text-disabled);
+}
+
+/* 当前选中行（选中态优先于 hover / 警示底色） */
+.api-table tbody tr.row-selected td,
+.api-table tbody tr.row-selected:hover td {
+  background: var(--primary-container);
+}
+
+.col-name {
+  width: 11rem;
+}
+.col-method {
+  width: 5.5rem;
+}
+.col-path {
+  width: 13rem;
+}
+.col-time {
+  width: 6.5rem;
+}
+.col-status {
+  width: 6rem;
+}
+.col-op {
+  width: 3rem;
+}
+
+/* 操作列：纯图标，hover 品牌色 */
+.api-op {
+  white-space: nowrap;
+}
+
+.api-op-icon {
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: color 0.15s;
+  vertical-align: middle;
+}
+
+.api-op-icon:hover {
+  color: var(--primary);
+}
+
+.api-name-link {
+  color: var(--interactive-link);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+}
+
+.api-name-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+td .status-tag {
+  margin-left: var(--spacing-1-5);
+}
+
+.api-path {
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+  font-size: var(--font-size-md);
+  color: var(--on-surface);
+  word-break: break-all;
+}
+
+.api-desc {
+  color: var(--on-surface-variant);
+}
+
+.api-time {
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+  font-size: var(--font-size-base);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+/* 分页（不改变 .ant-pagination 的 display，仅调整内容对齐） */
+.api-pagination {
+  padding-top: var(--spacing-4);
+}
+
+.api-pagination .ant-pagination {
+  justify-content: flex-end;
+}
+
+/* 空结果 */
+.api-empty {
+  padding: var(--spacing-6) 0;
+  text-align: center;
+}
+
+.api-empty-clear {
+  font: var(--font-body-m);
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.api-empty-clear:hover {
+  color: var(--interactive-link-hover);
+}

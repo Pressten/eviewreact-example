@@ -1,0 +1,28 @@
+/* 等级 Tag —— 三色(紧急/重要/一般) */
+.level-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.375rem;
+  line-height: 1.125rem;
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-xs);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+.level-urgent {
+  background: var(--error-container);
+  color: var(--error);
+  border: var(--border-width-thin) solid var(--error);
+}
+.level-major {
+  background: var(--critical-container);
+  color: var(--on-critical-container);
+  border: var(--border-width-thin) solid var(--critical);
+}
+.level-minor {
+  background: var(--warning-container);
+  color: var(--on-warning-container);
+  border: var(--border-width-thin) solid var(--warning);
+}

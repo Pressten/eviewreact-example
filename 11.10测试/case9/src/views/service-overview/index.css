@@ -1,0 +1,200 @@
+/* ② 服务总览 — 8 卡网格（4×2），状态色 + 24h 迷你趋势 */
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+}
+
+.svc-extra {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+/* 卡片：Level 2 内嵌区块（surface-variant 底），点击联动 */
+.svc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-container);
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  outline: none;
+  min-width: 0;
+}
+
+.svc-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-base);
+}
+
+.svc-card:focus-visible {
+  box-shadow: 0 0 0 var(--outline-width-focus) var(--focus-ring);
+}
+
+.svc-card.is-selected {
+  box-shadow: 0 0 0 2px var(--color-brand);
+}
+
+/* 异常服务卡警示：状态色描环（box-shadow ring，非 border） */
+.svc-card.st-warning {
+  box-shadow: 0 0 0 2px var(--color-alert);
+}
+
+.svc-card.st-critical {
+  box-shadow: 0 0 0 2px var(--color-error);
+}
+
+.svc-card.st-warning.is-selected {
+  box-shadow: 0 0 0 2px var(--color-alert), 0 0 0 4px var(--color-message-bg-alert);
+}
+
+.svc-card.st-critical.is-selected {
+  box-shadow: 0 0 0 2px var(--color-error), 0 0 0 4px var(--color-message-bg-error);
+}
+
+.svc-card.st-critical:hover,
+.svc-card.st-warning:hover {
+  transform: translateY(-2px);
+}
+
+.svc-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.svc-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  flex: none;
+}
+
+.svc-dot.st-healthy {
+  background: var(--color-success);
+}
+
+.svc-dot.st-warning {
+  background: var(--color-alert);
+}
+
+.svc-dot.st-critical {
+  background: var(--color-error);
+  animation: svc-blink 1.6s ease-in-out infinite;
+}
+
+@keyframes svc-blink {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.svc-name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.svc-alarm {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-caption-m);
+  padding: 0 0.375rem;
+  border-radius: var(--radius-base);
+  white-space: nowrap;
+}
+
+.svc-alarm.st-warning {
+  background: var(--color-message-bg-alert);
+  color: var(--color-alert);
+}
+
+.svc-alarm.st-critical {
+  background: var(--color-message-bg-error);
+  color: var(--color-error);
+}
+
+.svc-domain {
+  margin-left: auto;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.svc-avail-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.svc-avail-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  flex: none;
+}
+
+.svc-avail-label {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+}
+
+.svc-avail {
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.svc-avail i {
+  font-style: normal;
+  font-size: 0.5em;
+  margin-left: 2px;
+}
+
+.svc-avail.st-healthy {
+  color: var(--color-success);
+}
+
+.svc-avail.st-warning {
+  color: var(--color-alert);
+}
+
+.svc-avail.st-critical {
+  color: var(--color-error);
+}
+
+.svc-trend {
+  flex: 1;
+  height: 2.75rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.svc-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.svc-instances {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+@media (max-width: 80rem) {
+  .svc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

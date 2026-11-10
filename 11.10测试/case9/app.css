@@ -1,0 +1,31 @@
+/* 应用级基础样式 + 页面骨架 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+/* 内容主轴：区块间用 section 间距，画布宽度上限保证大屏可读性 */
+.noc-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+  padding: var(--spacing-section) var(--spacing-page) var(--spacing-page);
+  max-width: 128rem;
+  margin: 0 auto;
+}
+
+/* ⑦ 值班交接 + ⑧ 变更动态 并排 */
+.noc-bottom-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--spacing-gutter);
+  align-items: stretch;
+}
+
+@media (max-width: 90rem) {
+  .noc-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}

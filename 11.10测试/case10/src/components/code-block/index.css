@@ -1,0 +1,51 @@
+/* 等宽代码块 — 开发者文档风 */
+.code-block {
+  border-radius: var(--radius-base);
+  overflow: hidden;
+}
+
+.code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.375rem 0.75rem;
+  background: var(--surface-variant);
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.code-lang {
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+}
+
+.code-copy {
+  color: var(--on-surface-variant);
+  transition: color 0.15s;
+}
+
+.code-copy:hover {
+  color: var(--primary);
+}
+
+.code-copy.copied {
+  color: var(--success);
+}
+
+.code-pre {
+  margin: 0;
+  padding: 0.875rem 1rem;
+  background: var(--surface-variant);
+  overflow-x: auto;
+}
+
+.code-pre code {
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+  color: var(--on-surface);
+  white-space: pre;
+}

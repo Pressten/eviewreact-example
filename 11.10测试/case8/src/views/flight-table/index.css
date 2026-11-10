@@ -1,0 +1,155 @@
+/* 区块② 航班动态主表格 —— 运控高密度风格 */
+.flight-table {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-inset);
+  min-width: 0;
+}
+
+/* 工具条: 页签 + 搜索/刷新 */
+.ft-toolbar { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--spacing-inline); flex-wrap: wrap; }
+.flight-table .ant-tabs-nav { margin-bottom: 0.75rem; }
+.ft-toolbar-right { display: flex; align-items: center; gap: 0.5rem; padding-bottom: 0.5rem; }
+.ft-search { width: 16.5rem; }
+
+/* 表头紧凑高度 —— 锁定皮肤 middle 规格(2rem), 用长写内边距防止 antd 运行时注入规则按属性逐条反超 */
+.flight-table .ant-table-thead > tr > th {
+  height: 2rem;
+  line-height: 2rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.tab-label { display: inline-flex; align-items: baseline; gap: 0.25rem; }
+.tab-count {
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface-variant);
+}
+.tab-count.tab-warn { color: var(--critical); }
+.tab-count.tab-err { color: var(--error); }
+
+/* 单元格 —— 等宽数字 */
+.cell-mono {
+  font-variant-numeric: tabular-nums;
+  font-family: "Cascadia Mono", Consolas, "HarmonyOS Sans SC", monospace;
+  white-space: nowrap;
+}
+.cell-dim { color: var(--text-disabled); }
+.flight-link { color: var(--interactive-link); cursor: pointer; font-variant-numeric: tabular-nums; }
+.flight-link:hover { color: var(--interactive-link-hover); }
+
+.route-cell { color: var(--on-surface); display: inline-flex; align-items: center; gap: 0.125rem; }
+.route-cell svg { color: var(--on-surface-variant); }
+.time-cell { display: inline-flex; align-items: center; gap: 0.25rem; }
+.time-cell sup { font-size: var(--font-caption-s); color: var(--on-surface-variant); }
+
+/* 预计/实际 标记: 实=已发生(绿) / 预=推算(灰) */
+.tp-flag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1rem;
+  height: 1rem;
+  font-size: var(--font-caption-s);
+  border-radius: var(--radius-xs);
+  border: var(--border-width-thin) solid var(--outline);
+  color: var(--on-surface-variant);
+  line-height: 1;
+}
+.tp-flag.tp-act { border-color: var(--success); color: var(--success); }
+.tp-time.tp-mid { color: var(--critical); font-weight: var(--font-weight-semibold); }
+.tp-time.tp-high { color: var(--error); font-weight: var(--font-weight-semibold); }
+.tp-alt { color: var(--critical); font-weight: var(--font-weight-semibold); }
+
+/* 关舱门倒计时: <15 分钟橙色强调 */
+.cd {
+  font-variant-numeric: tabular-nums;
+  font-family: "Cascadia Mono", Consolas, "HarmonyOS Sans SC", monospace;
+  white-space: nowrap;
+}
+.cd-na { color: var(--text-disabled); }
+.cd-closed { color: var(--on-surface-variant); }
+.cd-soon {
+  color: var(--critical);
+  font-weight: var(--font-weight-bold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.cd-soon::before {
+  content: "";
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: var(--radius-full);
+  background: var(--critical);
+  animation: cd-blink 1s ease-in-out infinite;
+}
+@keyframes cd-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+/* 行状态: 选中(波及链联动) / 取消弱化 */
+.flight-table .ant-table-tbody > tr.row-selected > td { background: var(--primary-container); }
+.flight-table .ant-table-tbody > tr.st-cancelled > td { color: var(--on-surface-variant); }
+.flight-table .ant-table-tbody > tr.ant-table-row:hover { cursor: pointer; }
+.flight-table .ant-table-tbody > tr.ant-table-row.row-selected:hover > td { background: var(--primary-container); }
+
+/* 波及链节点定位 → 行闪烁高亮 */
+@keyframes row-flash-anim {
+  0%, 100% { background: transparent; }
+  30%, 60% { background: var(--primary-container); }
+}
+.flight-table .ant-table-tbody > tr.row-flash > td { animation: row-flash-anim 1.1s ease-in-out 2; }
+
+/* 行悬浮简要信息卡 —— 19rem, 延迟弹出, 不遮挡常规浏览 */
+.hover-card {
+  position: fixed;
+  z-index: 60;
+  width: 19rem;
+  box-sizing: border-box;
+  padding: 0.75rem 0.875rem;
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-popover);
+  pointer-events: none;
+}
+.hc-head { display: flex; align-items: center; gap: 0.5rem; }
+.hc-no { font: var(--font-headline-s); font-weight: var(--font-weight-semibold); color: var(--on-surface); }
+.hc-tail { font: var(--font-caption-m); color: var(--on-surface-variant); margin-right: auto; }
+.hc-route {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0.375rem 0 0.625rem;
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.hc-route svg { color: var(--on-surface-variant); }
+.hc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.375rem 0.75rem;
+  padding: 0.625rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+}
+.hc-item { display: flex; flex-direction: column; gap: 0.125rem; min-width: 0; }
+.hc-k { font: var(--font-caption-s); color: var(--on-surface-variant); }
+.hc-v { font: var(--font-body-s); color: var(--on-surface); }
+.hc-reason {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.625rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+.hc-reason svg { color: var(--critical); flex-shrink: 0; }

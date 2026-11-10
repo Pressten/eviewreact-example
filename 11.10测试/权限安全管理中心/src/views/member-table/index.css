@@ -1,0 +1,235 @@
+.member-card .section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.member-count-badge {
+  margin-left: 0.25rem;
+}
+
+.member-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.member-avatar {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex: none;
+}
+
+.member-cell a {
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.member-cell a:hover {
+  color: var(--interactive-link-hover);
+}
+
+.mono-text {
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface);
+}
+
+.tbl-op {
+  color: var(--on-surface-variant);
+  margin-right: 1rem;
+  vertical-align: middle;
+}
+
+.tbl-op:last-child {
+  margin-right: 0;
+}
+
+.tbl-op:hover {
+  color: var(--color-brand);
+}
+
+/* 批量操作条 */
+.batch-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0.875rem;
+  margin-bottom: 0.75rem;
+  background: var(--primary-container);
+  border-radius: var(--radius-base);
+  font: var(--font-body-s);
+}
+
+.batch-count b {
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+  padding: 0 0.125rem;
+}
+
+.batch-bar a {
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.batch-bar a:hover {
+  color: var(--interactive-link-hover);
+}
+
+.batch-bar .danger-link {
+  color: var(--error);
+}
+
+.batch-bar .muted-link {
+  color: var(--on-surface-variant);
+  margin-left: auto;
+}
+
+/* 成员详情抽屉 */
+.member-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.md-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 1rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+}
+
+.md-avatar {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex: none;
+}
+
+.md-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.md-sub {
+  margin-top: 0.25rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.md-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.md-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--divider);
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+
+.md-label {
+  color: var(--on-surface-variant);
+  font: var(--font-body-s);
+  flex: none;
+}
+
+.md-section-title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.md-audit-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.md-audit-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--divider);
+  font: var(--font-body-s);
+}
+
+.md-audit-row:last-child {
+  border-bottom: none;
+}
+
+.md-audit-time {
+  color: var(--on-surface-variant);
+  flex: none;
+}
+
+.md-audit-module {
+  color: var(--on-surface);
+  margin-right: auto;
+}
+
+.md-empty {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+  padding: 0.875rem 1rem;
+}
+
+.adjust-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.25rem;
+}
+
+.adjust-meta {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+  padding: 0.625rem 0.75rem;
+  line-height: 1.7;
+}
+
+.adjust-icon {
+  color: var(--primary);
+  flex: none;
+  margin-top: 0.2rem;
+}
+
+.adjust-form .form-label {
+  position: relative;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  text-align: left;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.adjust-form .form-label.required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--error);
+  font: var(--font-body-m);
+}

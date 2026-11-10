@@ -1,0 +1,28 @@
+/* 航班状态 Tag —— 等宽数字 + 语义色软底标签 */
+.flight-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-right: 0;
+  margin-inline-end: 0;
+  padding: 0 0.4rem;
+  line-height: 1.25rem;
+  font-size: var(--font-size-md);
+  white-space: nowrap;
+}
+
+.flight-status-scheduled { background: var(--surface-variant); color: var(--on-surface-variant); }
+.flight-status-boarding { background: var(--info-container); color: var(--info); }
+.flight-status-departed { background: var(--success-container); color: var(--success); }
+.flight-status-arrived { background: var(--success); color: var(--on-success); }
+.flight-status-delayed {
+  background: var(--warning-container);
+  color: var(--on-warning-container);
+  border: var(--border-width-thin) solid var(--warning);
+}
+.flight-status-diverted {
+  background: var(--critical-container);
+  color: var(--on-critical-container);
+  border: var(--border-width-thin) solid var(--critical);
+}
+.flight-status-cancelled { background: var(--error-container); color: var(--error); }

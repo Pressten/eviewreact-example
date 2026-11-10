@@ -1,0 +1,131 @@
+/* ⑧ 变更动态 — 发布记录列表，结果分色 */
+.cf-extra {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.cf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.cf-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+  padding: 0.625rem 0.75rem;
+  min-width: 0;
+}
+
+.cf-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.cf-rocket {
+  display: inline-flex;
+  color: var(--color-icon-secondary);
+}
+
+.cf-item.failed .cf-rocket {
+  color: var(--color-error);
+}
+
+.cf-item.rollback .cf-rocket {
+  color: var(--color-alert);
+}
+
+.cf-service {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.cf-version {
+  font: var(--font-caption-m);
+  background: var(--color-fill);
+  color: var(--on-surface);
+  padding: 0 0.375rem;
+  border-radius: var(--radius-base);
+  font-variant-numeric: tabular-nums;
+}
+
+.cf-time {
+  margin-left: auto;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+
+.cf-desc {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.cf-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: fit-content;
+  font: var(--font-caption-m);
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.cf-toggle:hover {
+  color: var(--interactive-link-hover);
+}
+
+/* 回滚说明 + 跟进工单 操作行 */
+.cf-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+}
+
+.cf-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: fit-content;
+  font: var(--font-caption-m);
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.cf-action:hover {
+  color: var(--interactive-link-hover);
+}
+
+/* 回滚说明：警示底色说明块，失败行用错误底 */
+.cf-note {
+  display: flex;
+  gap: 0.375rem;
+  align-items: flex-start;
+  font: var(--font-caption-m);
+  color: var(--on-surface);
+  background: var(--color-message-bg-alert);
+  border-radius: var(--radius-base);
+  padding: 0.5rem 0.625rem;
+}
+
+.cf-item.failed .cf-note {
+  background: var(--color-message-bg-error);
+}
+
+.cf-note-ico {
+  display: inline-flex;
+  flex: none;
+  margin-top: 0.125rem;
+  color: var(--color-alert);
+}
+
+.cf-item.failed .cf-note-ico {
+  color: var(--color-error);
+}

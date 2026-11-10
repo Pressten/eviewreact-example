@@ -1,0 +1,116 @@
+/* ⑥ 告警列表 — 工具区 + 表格 */
+.alarm-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gutter);
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.alarm-search {
+  width: 18rem;
+}
+
+.alarm-summary {
+  display: flex;
+  gap: var(--spacing-inline);
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.alarm-extra-caption {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.env-chip {
+  font: var(--font-body-s);
+  letter-spacing: 0;
+}
+
+.alarm-more {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem;
+  cursor: pointer;
+  color: var(--color-icon-secondary);
+}
+
+.alarm-more:hover {
+  color: var(--color-brand);
+}
+
+/* 链接式告警对象 */
+.alarm-object {
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.alarm-object:hover {
+  color: var(--interactive-link-hover);
+}
+
+/* 策略名：链接式入口，点击打开详情抽屉 */
+.alarm-strategy-link {
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.alarm-strategy-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+.alarm-values {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.alarm-trigger {
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.alarm-trigger.lv-P0 {
+  color: var(--color-error);
+}
+
+.alarm-trigger.lv-P1 {
+  color: var(--color-alert);
+}
+
+.alarm-threshold {
+  color: var(--on-surface-variant);
+}
+
+.alarm-status-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+}
+
+.alarm-claim-by {
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+/* 操作列：纯图标，间距 1rem，hover 品牌色，禁用态置灰 */
+.alarm-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.alarm-act {
+  color: var(--color-icon-secondary);
+  flex: none;
+}
+
+.alarm-act:hover {
+  color: var(--color-brand);
+}
+
+.alarm-act.is-disabled {
+  color: var(--color-text-disabled);
+}

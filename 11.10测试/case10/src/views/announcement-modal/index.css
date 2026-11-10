@@ -1,0 +1,90 @@
+/* 版本更新公告 Modal */
+.ann-title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.ann-title-ver {
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+  color: var(--primary);
+}
+
+.ann-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.ann-date {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.ann-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2-5);
+}
+
+.ann-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+}
+
+.ann-tag {
+  flex: none;
+  display: inline-flex;
+  padding: 0 0.375rem;
+  border-radius: var(--radius-xs);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+  margin-top: 0.0625rem;
+  white-space: nowrap;
+}
+
+.at-feat {
+  color: var(--success);
+  background: var(--success-container);
+}
+.at-opt {
+  color: var(--info);
+  background: var(--info-container);
+}
+.at-fix {
+  color: var(--primary);
+  background: var(--primary-container);
+}
+.at-sec {
+  color: var(--warning);
+  background: var(--warning-container);
+}
+.at-dep {
+  color: var(--critical);
+  background: var(--critical-container);
+}
+
+.ann-text {
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  line-height: var(--line-height-base);
+}
+
+.ann-foot {
+  padding-top: var(--spacing-2-5);
+  border-top: 1px solid var(--divider);
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  line-height: var(--line-height-md);
+}
+
+.ann-link {
+  margin-left: 0.25rem;
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.ann-link:hover {
+  color: var(--interactive-link-hover);
+}

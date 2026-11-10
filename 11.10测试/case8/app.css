@@ -1,0 +1,58 @@
+/* 应用级基础样式 —— AOC 运行控制中心: 高信息密度、9 区块工作台 */
+.app-root {
+  min-height: 100vh;
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  font: var(--font-body-m);
+}
+
+/* Icon 组件 icon-plus 模式的包装 span(内联宽高、无类名)默认 inline 排版,
+   内部 SVG 沿文字基线对齐, 在 flex 容器里表现为图标不居中;
+   此处统一转为 flex 居中并禁止被压缩(不影响 antd 组件内部结构) */
+span[style*="width"][style*="height"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+span[style*="width"][style*="height"] > svg {
+  display: block;
+}
+
+.aoc-root { display: flex; flex-direction: column; min-width: 76rem; }
+
+/* 主体工作区: 左列(主表 + 登机口网格) + 右列(波及链 + 机组执勤 + 运行质量)
+   注意: 高度必须由内容撑开(不设 flex:1 1 0 / min-height:0)——
+   否则在 min-height:100vh 的纵向容器里主区会按视口截断, 内容溢出叠压下方区块 */
+.aoc-main {
+  display: flex;
+  gap: var(--spacing-gutter);
+  padding: var(--spacing-gutter);
+  align-items: flex-start;
+}
+
+.aoc-table-region {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gutter);
+}
+
+.aoc-side-region {
+  flex: 0 0 23.5rem;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-gutter);
+}
+
+/* 次级工作区: 气象流量 + 不正常事件(等高对齐) */
+.aoc-sub-row {
+  display: flex;
+  gap: var(--spacing-gutter);
+  padding: 0 var(--spacing-gutter) var(--spacing-gutter);
+  align-items: stretch;
+}

@@ -1,0 +1,234 @@
+/* 区块⑨ 底部操作栏 + 延误向导/换机/取消弹窗 */
+.action-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  height: 3.25rem;
+  padding: 0 var(--spacing-gutter);
+  background: var(--surface-container-highest);
+  box-shadow: var(--shadow-t-sm);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ab-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  margin-right: 0.5rem;
+}
+.ab-log {
+  margin-left: auto;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ab-log .mono { font-variant-numeric: tabular-nums; color: var(--on-surface-variant); }
+
+/* —— 延误发布向导 —— */
+.wz-step-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
+  border-radius: var(--radius-base);
+  background: var(--surface-variant);
+}
+.wz-step-count {
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+.wz-step-name {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.wz-step-hint { margin-left: auto; font: var(--font-caption-m); color: var(--on-surface-variant); }
+.wz-step { display: flex; flex-direction: column; gap: 0.5rem; min-height: 15rem; }
+.wz-field-label { font: var(--font-body-s); font-weight: var(--font-weight-semibold); color: var(--on-surface); margin-top: 0.25rem; }
+
+.wz-reasons { display: flex; flex-direction: column; gap: 0.375rem; }
+.wz-reason { margin-inline-start: 0; }
+
+.wz-minutes { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.wz-unit { font: var(--font-body-s); color: var(--on-surface-variant); }
+.wz-quick { display: inline-flex; align-items: stretch; gap: 0.375rem; height: 2rem; margin-left: 0.5rem; }
+.wz-quick-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-base);
+  padding: 0 0.5rem;
+  border-radius: var(--radius-base);
+  border: var(--border-width-thin) solid var(--outline);
+  color: var(--on-surface-variant);
+  cursor: pointer;
+}
+.wz-quick-item:hover { border-color: var(--primary); color: var(--primary); }
+.wz-quick-item.on { border-color: var(--primary); background: var(--primary-container); color: var(--on-primary-container); font-weight: var(--font-weight-semibold); }
+
+.wz-flights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-height: 15rem;
+  overflow-y: auto;
+  padding: 0.375rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+}
+.wz-flight {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  min-width: 0;
+}
+.wz-flight:hover { background: var(--surface-container-highest); }
+.wz-f-no { font: var(--font-body-m); font-weight: var(--font-weight-semibold); color: var(--on-surface); }
+.wz-f-route { font: var(--font-caption-m); color: var(--on-surface-variant); }
+.wz-f-time { font: var(--font-caption-m); color: var(--on-surface-variant); font-variant-numeric: tabular-nums; }
+.wz-f-pax { font: var(--font-caption-m); color: var(--on-surface-variant); margin-left: auto; font-variant-numeric: tabular-nums; }
+
+.wz-select-all { display: flex; align-items: center; gap: 0.875rem; font: var(--font-caption-m); color: var(--on-surface-variant); }
+.wz-select-all a { color: var(--interactive-link); cursor: pointer; }
+.wz-select-all a:hover { color: var(--interactive-link-hover); }
+
+.wz-preview {
+  margin-top: 0.25rem;
+  border: var(--border-width-thin) solid var(--outline-variant);
+  border-radius: var(--radius-base);
+  overflow: hidden;
+}
+.wz-preview-head {
+  padding: 0.375rem 0.75rem;
+  background: var(--surface-variant);
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.wz-preview-body {
+  padding: 0.75rem;
+  font: var(--font-body-s);
+  color: var(--on-surface);
+  line-height: 1.75;
+  background: var(--surface-container-highest);
+}
+
+.wz-confirm { display: flex; flex-direction: column; gap: 0.375rem; }
+.wz-c-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.4375rem 0.625rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+}
+.wz-c-row span { font: var(--font-body-s); color: var(--on-surface-variant); flex-shrink: 0; }
+.wz-c-row b { font: var(--font-body-s); font-weight: var(--font-weight-semibold); color: var(--on-surface); word-break: break-all; }
+.wz-c-warn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.5rem;
+  padding: 0.4375rem 0.625rem;
+  border-radius: var(--radius-base);
+  background: var(--info-container);
+  color: var(--info);
+  font: var(--font-body-s);
+}
+
+/* —— 更换飞机 —— */
+.sw-flight {
+  font: var(--font-body-s);
+  color: var(--on-surface);
+  padding: 0.5rem 0.625rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+  margin-bottom: 0.625rem;
+}
+.sw-list { display: flex; flex-direction: column; gap: 0.25rem; }
+.sw-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.4375rem 0.625rem;
+  border: var(--border-width-thin) solid var(--outline-variant);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  min-width: 0;
+}
+.sw-item:hover { border-color: var(--primary); }
+.sw-disabled { cursor: not-allowed; opacity: 0.55; }
+.sw-disabled:hover { border-color: var(--outline-variant); }
+.sw-tail { font: var(--font-body-m); font-weight: var(--font-weight-semibold); color: var(--on-surface); }
+.sw-type { font: var(--font-caption-m); color: var(--on-surface-variant); white-space: nowrap; }
+.sw-cap { font: var(--font-caption-m); color: var(--on-surface-variant); white-space: nowrap; }
+.sw-margin {
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--success);
+  white-space: nowrap;
+}
+.sw-margin.bad { color: var(--error); }
+.sw-status {
+  font: var(--font-caption-s);
+  padding: 0 0.25rem;
+  line-height: 1.125rem;
+  border-radius: var(--radius-xs);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+.sw-note {
+  margin-left: auto;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sw-warn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.75rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+/* —— 取消航班 —— */
+.cm-title { display: inline-flex; align-items: center; gap: 0.375rem; color: var(--error); }
+.cm-info {
+  font: var(--font-body-s);
+  color: var(--on-surface);
+  padding: 0.5rem 0.625rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+}
+.cm-impact { display: flex; gap: 0.875rem; margin: 0.625rem 0; font: var(--font-body-s); color: var(--on-surface-variant); flex-wrap: wrap; }
+.cm-impact b { color: var(--on-surface); font-weight: var(--font-weight-semibold); }
+.cm-label { font: var(--font-body-s); font-weight: var(--font-weight-semibold); color: var(--on-surface); margin-bottom: 0.375rem; }
+.cm-plans { display: flex; flex-direction: column; gap: 0.375rem; }
+.cm-warn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.75rem;
+  padding: 0.4375rem 0.625rem;
+  border-radius: var(--radius-base);
+  background: var(--error-container);
+  color: var(--error);
+  font: var(--font-body-s);
+}

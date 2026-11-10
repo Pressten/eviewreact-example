@@ -1,0 +1,168 @@
+/* 区块③ 延误波及链 —— 同机接力链条侧栏 */
+.delay-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-sizing: border-box;
+  padding: var(--spacing-inset);
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.dc-header { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.dc-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.dc-head-link {
+  font: var(--font-body-s);
+  color: var(--interactive-link);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.dc-head-link:hover { color: var(--interactive-link-hover); }
+
+.dc-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 12rem;
+}
+
+/* 当前延误航班头卡(可点击定位) */
+.chain-head-flight {
+  padding: 0.75rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+}
+.chain-head-flight:hover { background: var(--primary-container); }
+.chf-top { display: flex; align-items: center; gap: 0.5rem; }
+.chf-no { font: var(--font-headline-s); font-weight: var(--font-weight-bold); color: var(--on-surface); }
+.chf-delay { margin-left: auto; font: var(--font-body-s); color: var(--critical); font-weight: var(--font-weight-semibold); }
+.chf-route {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.375rem;
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+.chf-route svg { color: var(--on-surface-variant); }
+.chf-meta {
+  margin-top: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex-wrap: wrap;
+}
+.chf-meta sup { font-size: var(--font-caption-s); }
+.chf-reason {
+  margin-top: 0.5rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* 接力链条节点(时刻并入节点内容, 不再使用标签列) */
+.chain-timeline { margin-top: 0.5rem; }
+
+.chain-dot {
+  display: inline-block;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: var(--radius-full);
+}
+.chain-dot.d-low { background: var(--warning); }
+.chain-dot.d-mid { background: var(--critical); }
+.chain-dot.d-high { background: var(--error); }
+.chain-dot.d-proj { background: transparent; border: 2px solid var(--outline); }
+
+.chain-node {
+  padding: 0.5rem 0.625rem;
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.chain-node:hover { background: var(--primary-container); }
+.cn-top { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.cn-time {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+.cn-time sup { font-size: var(--font-caption-s); }
+.cn-no { font: var(--font-body-m); font-weight: var(--font-weight-semibold); color: var(--on-surface); }
+.cn-route {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+.cn-route svg { color: var(--on-surface-variant); }
+.cn-projected {
+  font: var(--font-caption-s);
+  padding: 0 0.375rem;
+  line-height: 1.125rem;
+  border-radius: var(--radius-xs);
+  border: var(--border-width-thin) dashed var(--outline);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+.cn-stats {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-top: 0.375rem;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  flex-wrap: wrap;
+}
+.cn-stat b {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.cn-stat b.cn-prop { color: var(--on-surface); }
+.cn-stat b.c-low { color: var(--warning); }
+.cn-stat b.c-mid { color: var(--critical); }
+.cn-stat b.c-high { color: var(--error); }
+
+/* 波及汇总 */
+.dc-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  flex-wrap: wrap;
+}
+.dc-summary b {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+.dc-summary b.dc-peak { color: var(--error); }
+
+.dc-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}

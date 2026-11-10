@@ -1,0 +1,151 @@
+/* 认证方式章节 */
+.term-inline {
+  color: var(--interactive-link);
+  cursor: help;
+  border-bottom: 1px dashed var(--interactive-link);
+  padding-bottom: 0.0625rem;
+  margin: 0 0.125rem;
+}
+
+/* 密钥说明卡 */
+.cred-card {
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-base);
+  padding: var(--spacing-3) var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  background: var(--surface-container-highest);
+}
+
+.cred-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-2);
+}
+
+.cred-card-title {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.cred-reset-link {
+  font: var(--font-body-s);
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.cred-reset-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+.cred-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) 0;
+  border-bottom: 1px dashed var(--outline-variant);
+}
+
+.cred-row:last-of-type {
+  border-bottom: none;
+}
+
+.cred-label {
+  flex: none;
+  width: 5rem;
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface-variant);
+}
+
+.cred-value {
+  flex: 1 1 0;
+  min-width: 0;
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+  font-size: var(--font-size-md);
+  color: var(--on-surface);
+  word-break: break-all;
+}
+
+.cred-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: none;
+}
+
+.cred-action-icon {
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.cred-action-icon:hover {
+  color: var(--primary);
+}
+
+.cred-action-icon.copied {
+  color: var(--success);
+}
+
+.cred-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-2);
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  line-height: var(--line-height-md);
+}
+
+.cred-tip-icon {
+  flex: none;
+  margin-top: 0.1875rem;
+  color: var(--critical);
+}
+
+/* 名词解释列表 */
+.glossary-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+.glossary-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+.term-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: 0.1875rem var(--spacing-2);
+  border-radius: var(--radius-full);
+  background: var(--primary-container);
+  color: var(--primary);
+  font: var(--font-body-s);
+  font-weight: var(--font-weight-medium);
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+  cursor: help;
+  white-space: nowrap;
+}
+
+.glossary-brief {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.glossary-tip-text {
+  display: block;
+  max-width: 22rem;
+  line-height: var(--line-height-md);
+}
+
+.auth-code-block {
+  max-width: 46rem;
+}

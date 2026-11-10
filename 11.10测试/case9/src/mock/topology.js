@@ -1,0 +1,68 @@
+// Layer 2 mock — ④ 服务拓扑：1 网关 + 4 核心服务 + 8 数据/缓存节点 = 13 节点、12 条调用边
+// QPS 层级：网关 > 核心服务 > 数据库/缓存；异常链路（支付方向）以警示色高亮并标注延迟毫秒数。
+// 节点状态不在此硬编码：由视图根据告警列表推导（异常节点必有对应告警）。
+
+export const TOPOLOGY = {
+  prod: {
+    nodes: [
+      { id: "api-gateway", name: "API 网关", kind: "gateway", qps: 126400, errRate: 0.9 },
+      { id: "order-service", name: "订单服务", kind: "service", lane: 0, qps: 38200, errRate: 0.42 },
+      { id: "product-service", name: "商品服务", kind: "service", lane: 1, qps: 29600, errRate: 0.05 },
+      { id: "user-service", name: "用户服务", kind: "service", lane: 2, qps: 21300, errRate: 0.06 },
+      { id: "payment-service", name: "支付服务", kind: "service", lane: 3, qps: 18900, errRate: 3.85 },
+      { id: "order-mysql", name: "order-mysql", kind: "mysql", lane: 0, qps: 8400, errRate: 0.01 },
+      { id: "order-redis", name: "order-redis", kind: "redis", lane: 0, qps: 15600, errRate: 0.02 },
+      { id: "product-mysql", name: "product-mysql", kind: "mysql", lane: 1, qps: 6200, errRate: 0.01 },
+      { id: "product-redis", name: "product-redis", kind: "redis", lane: 1, qps: 11800, errRate: 0.01 },
+      { id: "user-mysql", name: "user-mysql", kind: "mysql", lane: 2, qps: 4600, errRate: 0.01 },
+      { id: "user-redis", name: "user-redis", kind: "redis", lane: 2, qps: 9200, errRate: 0.02 },
+      { id: "payment-mysql", name: "payment-mysql", kind: "mysql", lane: 3, qps: 3900, errRate: 2.1 },
+      { id: "payment-redis", name: "payment-redis", kind: "redis", lane: 3, qps: 7400, errRate: 0.8 },
+    ],
+    edges: [
+      { from: "api-gateway", to: "order-service", latencyMs: 86, status: "ok" },
+      { from: "api-gateway", to: "product-service", latencyMs: 42, status: "ok" },
+      { from: "api-gateway", to: "user-service", latencyMs: 38, status: "ok" },
+      { from: "api-gateway", to: "payment-service", latencyMs: 1380, status: "critical", label: "P99 飙升" },
+      { from: "order-service", to: "order-mysql", latencyMs: 12, status: "ok" },
+      { from: "order-service", to: "order-redis", latencyMs: 3, status: "ok" },
+      { from: "product-service", to: "product-mysql", latencyMs: 8, status: "ok" },
+      { from: "product-service", to: "product-redis", latencyMs: 2, status: "ok" },
+      { from: "user-service", to: "user-mysql", latencyMs: 9, status: "ok" },
+      { from: "user-service", to: "user-redis", latencyMs: 3, status: "ok" },
+      { from: "payment-service", to: "payment-mysql", latencyMs: 1850, status: "critical", label: "慢查询 26%" },
+      { from: "payment-service", to: "payment-redis", latencyMs: 640, status: "warn", label: "连接池 98%" },
+    ],
+  },
+  staging: {
+    nodes: [
+      { id: "api-gateway", name: "API 网关", kind: "gateway", qps: 3600, errRate: 0.05 },
+      { id: "order-service", name: "订单服务", kind: "service", lane: 0, qps: 980, errRate: 0.05 },
+      { id: "product-service", name: "商品服务", kind: "service", lane: 1, qps: 760, errRate: 0.03 },
+      { id: "user-service", name: "用户服务", kind: "service", lane: 2, qps: 540, errRate: 0.04 },
+      { id: "payment-service", name: "支付服务", kind: "service", lane: 3, qps: 470, errRate: 0.9 },
+      { id: "order-mysql", name: "order-mysql", kind: "mysql", lane: 0, qps: 210, errRate: 0.01 },
+      { id: "order-redis", name: "order-redis", kind: "redis", lane: 0, qps: 390, errRate: 0.01 },
+      { id: "product-mysql", name: "product-mysql", kind: "mysql", lane: 1, qps: 160, errRate: 0.01 },
+      { id: "product-redis", name: "product-redis", kind: "redis", lane: 1, qps: 300, errRate: 0.01 },
+      { id: "user-mysql", name: "user-mysql", kind: "mysql", lane: 2, qps: 120, errRate: 0.01 },
+      { id: "user-redis", name: "user-redis", kind: "redis", lane: 2, qps: 230, errRate: 0.02 },
+      { id: "payment-mysql", name: "payment-mysql", kind: "mysql", lane: 3, qps: 100, errRate: 0.3 },
+      { id: "payment-redis", name: "payment-redis", kind: "redis", lane: 3, qps: 190, errRate: 0.2 },
+    ],
+    edges: [
+      { from: "api-gateway", to: "order-service", latencyMs: 52, status: "ok" },
+      { from: "api-gateway", to: "product-service", latencyMs: 45, status: "ok" },
+      { from: "api-gateway", to: "user-service", latencyMs: 40, status: "ok" },
+      { from: "api-gateway", to: "payment-service", latencyMs: 320, status: "warn", label: "联调压测中" },
+      { from: "order-service", to: "order-mysql", latencyMs: 10, status: "ok" },
+      { from: "order-service", to: "order-redis", latencyMs: 3, status: "ok" },
+      { from: "product-service", to: "product-mysql", latencyMs: 8, status: "ok" },
+      { from: "product-service", to: "product-redis", latencyMs: 2, status: "ok" },
+      { from: "user-service", to: "user-mysql", latencyMs: 9, status: "ok" },
+      { from: "user-service", to: "user-redis", latencyMs: 3, status: "ok" },
+      { from: "payment-service", to: "payment-mysql", latencyMs: 480, status: "warn", label: "慢查询 14%" },
+      { from: "payment-service", to: "payment-redis", latencyMs: 120, status: "ok" },
+    ],
+  },
+};

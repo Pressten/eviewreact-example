@@ -1,0 +1,124 @@
+/* 概述章节 — 版本化标题 / 适用性说明横幅 / 统计 / 基础信息 */
+.overview-head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.overview-title {
+  margin: 0;
+  font: var(--font-size-3xl) / var(--line-height-sm) var(--font-family);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.overview-ver-tag {
+  margin-inline-end: 0;
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+}
+
+/* 适用性说明横幅 — 无左侧色条，纯容器色 */
+.banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-base);
+  margin-bottom: var(--spacing-4);
+}
+
+.banner-icon {
+  flex: none;
+  margin-top: 0.125rem;
+}
+
+.banner-text {
+  font: var(--font-body-m);
+  line-height: var(--line-height-base);
+}
+
+.banner-info {
+  background: var(--info-container);
+  color: var(--on-info-container);
+}
+.banner-info .banner-icon {
+  color: var(--info);
+}
+
+.banner-critical {
+  background: var(--critical-container);
+  color: var(--on-critical-container);
+}
+.banner-critical .banner-icon {
+  color: var(--critical);
+}
+
+.banner-warning {
+  background: var(--warning-container);
+  color: var(--on-warning-container);
+}
+.banner-warning .banner-icon {
+  color: var(--warning);
+}
+
+/* 统计行 */
+.stat-row {
+  display: flex;
+  gap: var(--spacing-gutter);
+  margin-bottom: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  flex: 1 1 0;
+  min-width: 8rem;
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--surface-variant);
+  border-radius: var(--radius-base);
+}
+
+.stat-value {
+  font: var(--font-display-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  margin-top: 0.25rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+/* 基础信息网格 */
+.baseinfo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-2);
+}
+
+.baseinfo-item {
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-base);
+  background: var(--surface-container-highest);
+  border: 1px solid var(--outline-variant);
+}
+
+.baseinfo-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.baseinfo-value {
+  margin-top: 0.25rem;
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  word-break: break-all;
+}
+
+.mono {
+  font-family: ui-monospace, "Cascadia Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+}

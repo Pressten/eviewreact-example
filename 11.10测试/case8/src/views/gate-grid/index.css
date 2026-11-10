@@ -1,0 +1,158 @@
+/* 区块④ 登机口调度网格 —— C01-C08 × 08:00-22:00 时间刻度 */
+.gate-grid {
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  padding: 0.75rem 1rem;
+  min-width: 0;
+}
+
+.gg-header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+.gg-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font: var(--font-headline-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+.gg-meta { font: var(--font-caption-m); font-weight: var(--font-weight-normal); color: var(--on-surface-variant); }
+
+.gg-legend { display: inline-flex; align-items: center; gap: 0.5rem; font: var(--font-caption-m); color: var(--on-surface-variant); white-space: nowrap; }
+.lg { display: inline-flex; align-items: center; gap: 0.25rem; white-space: nowrap; }
+.lg::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: var(--radius-xs); flex-shrink: 0; }
+.lg-dep::before { background: var(--primary-container); border: var(--border-width-thin) solid var(--primary); }
+.lg-arr::before { background: var(--info-container); border: var(--border-width-thin) solid var(--info); }
+.lg-delayed::before { background: var(--warning-container); border: var(--border-width-thin) solid var(--warning); }
+.lg-conflict::before { background: var(--error-container); border: var(--border-width-thin) solid var(--error); }
+
+/* 时间刻度行 —— 首尾刻度贴边对齐, 不外溢 */
+.gg-gate-slot { width: 2.75rem; flex-shrink: 0; }
+.gg-scale { display: flex; align-items: center; margin-bottom: 0.125rem; }
+.gg-scale-track { position: relative; flex: 1 1 0; height: 1rem; min-width: 0; }
+.gg-tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font: var(--font-caption-s);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+.gg-tick.first { transform: none; }
+.gg-tick.last { transform: translateX(-100%); }
+
+/* 口位行 */
+.gg-body { display: flex; flex-direction: column; }
+.gg-row { display: flex; align-items: stretch; }
+.gg-gate {
+  width: 2.75rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface-variant);
+  border-top: var(--border-width-thin) solid var(--divider);
+}
+.gg-lane {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 2.75rem;
+  border-top: var(--border-width-thin) solid var(--divider);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--outline-variant) 0,
+    var(--outline-variant) 1px,
+    transparent 1px,
+    transparent calc(100% / 14)
+  );
+}
+
+/* 航班占用条块 */
+.gg-block {
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0 0.375rem;
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  cursor: pointer;
+  min-width: 0;
+  z-index: 2;
+}
+.gg-block:hover { filter: brightness(0.96); }
+.gg-b-no { font-size: var(--font-size-base); line-height: 1; font-weight: var(--font-weight-semibold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gg-b-route { font-size: var(--font-caption-s); line-height: 1; white-space: nowrap; flex-shrink: 0; }
+.gg-b-turn { font-size: var(--font-caption-s); line-height: 1; white-space: nowrap; margin-left: auto; flex-shrink: 0; }
+.gg-b-warn { flex-shrink: 0; }
+
+/* 窄条块自适应: 中等宽度隐藏周转时长, 极窄只显示航班号 */
+.gg-block.w-md .gg-b-turn { display: none; }
+.gg-block.w-md .gg-b-route { display: none; }
+.gg-block.w-sm .gg-b-route, .gg-block.w-sm .gg-b-turn { display: none; }
+
+.gg-dep { background: var(--primary-container); color: var(--on-primary-container); border: var(--border-width-thin) solid var(--primary); }
+.gg-dep .gg-b-route, .gg-dep .gg-b-turn { color: var(--on-surface-variant); }
+.gg-arr { background: var(--info-container); color: var(--info); border: var(--border-width-thin) solid var(--info); }
+.gg-arr .gg-b-route, .gg-arr .gg-b-turn { color: var(--on-surface-variant); }
+.gg-delayed { background: var(--warning-container); color: var(--on-warning-container); border: var(--border-width-thin) solid var(--warning); }
+.gg-delayed .gg-b-route, .gg-delayed .gg-b-turn { color: var(--on-surface-variant); }
+.gg-conflict {
+  background: var(--error-container);
+  color: var(--error);
+  border: var(--border-width-thin) solid var(--error);
+  font-weight: var(--font-weight-semibold);
+}
+.gg-conflict .gg-b-route, .gg-conflict .gg-b-turn { color: var(--error); }
+.gg-dim {
+  background: transparent;
+  color: var(--text-disabled);
+  border: var(--border-width-thin) dashed var(--outline);
+}
+.gg-dim .gg-b-no { text-decoration: line-through; }
+
+/* 双轨口位: 时间重叠条块上下分层, 只显示航班号 */
+.gg-lane.dual .gg-b-no { font-size: var(--font-caption-s); }
+.gg-lane.dual .gg-b-route,
+.gg-lane.dual .gg-b-turn,
+.gg-lane.dual .gg-b-warn { display: none; }
+
+/* 冲突表达: 相邻对条块整体红框高亮 + 条块内嵌警示图标(不使用悬浮芯片, 避免压字) */
+
+/* 当前时刻线(实时走秒) */
+.gg-now {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--critical);
+  z-index: 1;
+}
+
+.gg-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  flex-wrap: wrap;
+}
+.gg-conflict-count b { font-weight: var(--font-weight-semibold); color: var(--on-surface); }
+.gg-conflict-count.bad b { color: var(--error); }
+
+/* 悬浮周转详情 */
+.gg-tip { font: var(--font-body-s); max-width: 17.5rem; }
+.gt-title { color: var(--on-surface); font-weight: var(--font-weight-semibold); margin-bottom: 0.25rem; }
+.gt-line { color: var(--on-surface-variant); line-height: 1.5; }
+.gt-dim { color: var(--text-disabled); }
+.gt-warn { color: var(--error); margin-top: 0.25rem; font-weight: var(--font-weight-medium); }
