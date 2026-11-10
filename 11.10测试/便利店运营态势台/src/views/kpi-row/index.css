@@ -1,0 +1,89 @@
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+}
+
+@media (max-width: 75rem) {
+  .kpi-grid {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  }
+}
+
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 0.875rem 1.25rem;
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+  min-width: 0;
+}
+
+.kpi-label {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.kpi-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.375rem;
+  flex-wrap: wrap;
+}
+
+.kpi-value {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-sm);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-unit {
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.kpi-value-row .delta-chip {
+  align-self: center;
+}
+
+.kpi-note {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 可点击 KPI 卡：悬浮抬升反馈 */
+.kpi-card.kpi-clickable {
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+
+.kpi-card.kpi-clickable:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.kpi-card.kpi-clickable:active {
+  transform: translateY(0);
+}
+
+/* 异常门店卡：警示色 */
+.kpi-warn {
+  background: var(--error-container);
+}
+
+.kpi-warn .kpi-value {
+  color: var(--error);
+}
+
+.kpi-warn .kpi-label,
+.kpi-warn .kpi-note {
+  color: var(--on-error-container);
+}
