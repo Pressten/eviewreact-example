@@ -1,0 +1,114 @@
+.rm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.rm-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.rm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  position: relative;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  text-align: left;
+}
+
+.form-label.required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--error);
+  font: var(--font-body-m);
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--error);
+  white-space: nowrap;
+}
+
+.field-hint {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.perm-preview {
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-base);
+  padding: 0.25rem 0.875rem;
+  max-height: 16.5rem;
+  overflow: auto;
+}
+
+.pp-row {
+  display: grid;
+  grid-template-columns: minmax(7rem, 1fr) 3.5rem 3rem 3rem 3rem;
+  align-items: center;
+  min-height: 2.125rem;
+  border-bottom: 1px solid var(--divider);
+}
+
+.pp-row:last-child {
+  border-bottom: none;
+}
+
+.pp-row > span {
+  text-align: center;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+/* eview-ui Checkbox 居中（替换原 antd checkbox wrapper 选择器） */
+.pp-row > div,
+.pp-row > label {
+  justify-self: center;
+}
+
+/* DialogPro footer 自写按钮行（Modal→DialogPro 无 buttons prop） */
+.rm-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--divider);
+}
+
+.pp-head {
+  position: sticky;
+  top: 0;
+  background: var(--surface-container-highest);
+  font-weight: var(--font-weight-medium);
+  z-index: 1;
+}
+
+.pp-head > span:first-child {
+  text-align: left;
+}
+
+.pp-module {
+  text-align: left !important;
+  color: var(--on-surface) !important;
+  cursor: help;
+}

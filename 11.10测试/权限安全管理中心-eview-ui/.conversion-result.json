@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": { "relative-imports": "PASS" },
+  "notes": "步骤 3 完成：源项目 src/ 全量搬入目标工程，Icon 默认导入改 @/shared/Icon，img src 改 /uploads/，删 antd ConfigProvider/antd-zh.js/locale，context.jsx 删自写 .dark useEffect（ThemeProvider 单轨驱动），app.jsx 删 AppProvider+ConfigProvider 包裹层。i18n scenario A（硬编码中文），main.jsx 不改。步骤 4 首轮 check-relative-imports.cjs PASS，无 unresolved/suspicious。"
+}

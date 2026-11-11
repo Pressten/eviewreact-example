@@ -1,0 +1,2605 @@
+{
+  "skill": "umd-to-eview-ui",
+  "version": "1.0",
+  "sourceFile": "index.page.html",
+  "projectName": "权限安全管理中心-eview-ui",
+  "antdComponents": {
+    "ConfigProvider": [
+      "app.jsx"
+    ],
+    "Empty": [
+      "app.jsx"
+    ],
+    "Breadcrumb": [
+      "app.jsx"
+    ],
+    "message": [
+      "app.jsx",
+      "src/components/role-modal/index.jsx",
+      "src/views/data-scope/index.jsx",
+      "src/views/footer-bar/index.jsx",
+      "src/views/member-table/index.jsx",
+      "src/views/perm-matrix/index.jsx",
+      "src/views/security-policy/index.jsx",
+      "src/views/top-bar/index.jsx"
+    ],
+    "Modal": [
+      "src/components/role-modal/index.jsx",
+      "src/views/data-scope/index.jsx",
+      "src/views/member-table/index.jsx"
+    ],
+    "Input": [
+      "src/components/role-modal/index.jsx",
+      "src/views/org-tree/index.jsx"
+    ],
+    "Select": [
+      "src/components/role-modal/index.jsx",
+      "src/views/data-scope/index.jsx",
+      "src/views/member-table/index.jsx",
+      "src/views/security-policy/index.jsx"
+    ],
+    "Checkbox": [
+      "src/components/role-modal/index.jsx",
+      "src/views/data-scope/index.jsx",
+      "src/views/perm-matrix/index.jsx",
+      "src/views/security-policy/index.jsx"
+    ],
+    "Button": [
+      "src/components/role-modal/index.jsx",
+      "src/views/footer-bar/index.jsx",
+      "src/views/perm-matrix/index.jsx"
+    ],
+    "Table": [
+      "src/views/audit-log/index.jsx",
+      "src/views/member-table/index.jsx"
+    ],
+    "Tag": [
+      "src/views/audit-log/index.jsx",
+      "src/views/data-scope/index.jsx",
+      "src/views/member-table/index.jsx",
+      "src/views/perm-matrix/index.jsx",
+      "src/views/security-policy/index.jsx",
+      "src/views/top-bar/index.jsx"
+    ],
+    "Drawer": [
+      "src/views/audit-log/index.jsx",
+      "src/views/member-table/index.jsx"
+    ],
+    "Radio": [
+      "src/views/data-scope/index.jsx"
+    ],
+    "Badge": [
+      "src/views/footer-bar/index.jsx",
+      "src/views/member-table/index.jsx",
+      "src/views/org-tree/index.jsx",
+      "src/views/perm-matrix/index.jsx"
+    ],
+    "Tooltip": [
+      "src/views/footer-bar/index.jsx",
+      "src/views/perm-matrix/index.jsx"
+    ],
+    "Popover": [
+      "src/views/footer-bar/index.jsx"
+    ],
+    "Tree": [
+      "src/views/org-tree/index.jsx"
+    ],
+    "Tabs": [
+      "src/views/perm-matrix/index.jsx"
+    ],
+    "Slider": [
+      "src/views/security-policy/index.jsx"
+    ],
+    "InputNumber": [
+      "src/views/security-policy/index.jsx"
+    ],
+    "Switch": [
+      "src/views/security-policy/index.jsx"
+    ],
+    "Dropdown": [
+      "src/views/top-bar/index.jsx"
+    ]
+  },
+  "antdIcons": [],
+  "iconCallSites": [
+    {
+      "file": "app.jsx",
+      "line": 40,
+      "name": "s.icon",
+      "type": "dynamic",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "stat-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/audit-log/index.jsx",
+      "line": 71,
+      "name": "scroll-text",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/audit-log/index.jsx",
+      "line": 122,
+      "name": "circle-alert",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "ad-note-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/data-scope/index.jsx",
+      "line": 57,
+      "name": "database",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/data-scope/index.jsx",
+      "line": 82,
+      "name": "plus",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/data-scope/index.jsx",
+      "line": 103,
+      "name": "trash-2",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "tbl-op",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "移除例外授权",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "() => {\n                  removeException(ex.exceptionId);\n                  message.info(`已移除「${ex.deptName",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/footer-bar/index.jsx",
+      "line": 41,
+      "name": "circle-alert",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "warn-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/footer-bar/index.jsx",
+      "line": 64,
+      "name": "circle-check-big",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "ok-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/footer-bar/index.jsx",
+      "line": 73,
+      "name": "info",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/footer-bar/index.jsx",
+      "line": 79,
+      "name": "rotate-ccw",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/footer-bar/index.jsx",
+      "line": 85,
+      "name": "save",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 155,
+      "name": "user-cog",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "tbl-op",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "调整角色",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "(e) => {\n              e.stopPropagation && e.stopPropagation();\n              setAdjustTarget(record);\n              setTargetRoleId(undefined);",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 166,
+      "name": "trash-2",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "tbl-op",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "移除",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "(e) => {\n              e.stopPropagation && e.stopPropagation();\n              confirmRemove(record);",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 187,
+      "name": "users",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 253,
+      "name": "user-cog",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "adjust-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 287,
+      "name": "users",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "adjust-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/org-tree/index.jsx",
+      "line": 61,
+      "name": "building-2",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "tree-org-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/org-tree/index.jsx",
+      "line": 98,
+      "name": "network",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/org-tree/index.jsx",
+      "line": 110,
+      "name": "search",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "search-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/org-tree/index.jsx",
+      "line": 144,
+      "name": "funnel",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "filter-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/perm-matrix/index.jsx",
+      "line": 56,
+      "name": "rotate-ccw",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/perm-matrix/index.jsx",
+      "line": 95,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "module-help",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/perm-matrix/index.jsx",
+      "line": 137,
+      "name": "layout-grid",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/perm-matrix/index.jsx",
+      "line": 149,
+      "name": "pencil",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/perm-matrix/index.jsx",
+      "line": 152,
+      "name": "plus",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/security-policy/index.jsx",
+      "line": 28,
+      "name": "lock",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/security-policy/index.jsx",
+      "line": 49,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "preview-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/security-policy/index.jsx",
+      "line": 62,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "preview-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/security-policy/index.jsx",
+      "line": 88,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "preview-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/security-policy/index.jsx",
+      "line": 104,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "preview-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/security-policy/index.jsx",
+      "line": 126,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "preview-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/top-bar/index.jsx",
+      "line": 34,
+      "name": "user-round",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/top-bar/index.jsx",
+      "line": 35,
+      "name": "book-open",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/top-bar/index.jsx",
+      "line": 36,
+      "name": "log-out",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/top-bar/index.jsx",
+      "line": 51,
+      "name": "shield-check",
+      "type": "literal"
+    },
+    {
+      "file": "src/views/top-bar/index.jsx",
+      "line": 66,
+      "name": "item.icon",
+      "type": "dynamic",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "nav-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/top-bar/index.jsx",
+      "line": 72,
+      "name": "isDark ? \"sun\" : \"moon\"",
+      "type": "dynamic",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "icon-btn",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "isDark ? \"切换为浅色模式\" : \"切换为深色模式\"",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "toggleDark",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "src/views/top-bar/index.jsx",
+      "line": 87,
+      "name": "chevron-down",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "op-chevron",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7081,
+      "name": "user-round",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7082,
+      "name": "book-open",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7083,
+      "name": "log-out",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7098,
+      "name": "shield-check",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7113,
+      "name": "item.icon",
+      "type": "dynamic",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "nav-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7119,
+      "name": "isDark ? \"sun\" : \"moon\"",
+      "type": "dynamic",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "icon-btn",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "isDark ? \"切换为浅色模式\" : \"切换为深色模式\"",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "toggleDark",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7134,
+      "name": "chevron-down",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "op-chevron",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7202,
+      "name": "building-2",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "tree-org-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7239,
+      "name": "network",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7251,
+      "name": "search",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "search-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7285,
+      "name": "funnel",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "filter-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7519,
+      "name": "rotate-ccw",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7558,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "module-help",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7600,
+      "name": "layout-grid",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7612,
+      "name": "pencil",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7615,
+      "name": "plus",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7848,
+      "name": "user-cog",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "tbl-op",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "调整角色",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "(e) => {\r\n              e.stopPropagation && e.stopPropagation();\r\n              setAdjustTarget(record);\r\n              setTargetRoleId(undefined);",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7859,
+      "name": "trash-2",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "tbl-op",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "移除",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "(e) => {\r\n              e.stopPropagation && e.stopPropagation();\r\n              confirmRemove(record);",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7880,
+      "name": "users",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 7946,
+      "name": "user-cog",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "adjust-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 7980,
+      "name": "users",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "adjust-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 8075,
+      "name": "lock",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 8096,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "preview-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 8109,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "preview-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 8135,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "preview-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 8151,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "preview-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 8173,
+      "name": "info",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "preview-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 8236,
+      "name": "database",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 8261,
+      "name": "plus",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 8282,
+      "name": "trash-2",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "tbl-op",
+          "hasValue": true
+        },
+        {
+          "name": "title",
+          "value": "移除例外授权",
+          "hasValue": true
+        },
+        {
+          "name": "onClick",
+          "value": "() => {\r\n                  removeException(ex.exceptionId);\r\n                  message.info(`已移除「${ex.deptName",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 8426,
+      "name": "scroll-text",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 8477,
+      "name": "circle-alert",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "ad-note-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 8529,
+      "name": "circle-alert",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "warn-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 8552,
+      "name": "circle-check-big",
+      "type": "literal",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "ok-icon",
+          "hasValue": true
+        }
+      ]
+    },
+    {
+      "file": "index.page.html",
+      "line": 8561,
+      "name": "info",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 8567,
+      "name": "rotate-ccw",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 8573,
+      "name": "save",
+      "type": "literal"
+    },
+    {
+      "file": "index.page.html",
+      "line": 8640,
+      "name": "s.icon",
+      "type": "dynamic",
+      "interactiveProps": [
+        {
+          "name": "className",
+          "value": "stat-icon",
+          "hasValue": true
+        }
+      ]
+    }
+  ],
+  "inputPropCallSites": [
+    {
+      "file": "src/components/role-modal/index.jsx",
+      "line": 114,
+      "component": "Input.TextArea",
+      "family": "TextArea",
+      "hasStyle": true,
+      "styleSource": "{ width: \"100%\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/components/role-modal/index.jsx",
+      "line": 79,
+      "component": "Input",
+      "family": "TextField",
+      "hasStyle": true,
+      "styleSource": "{ width: \"100%\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/components/role-modal/index.jsx",
+      "line": 96,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": true,
+      "styleSource": "{ width: \"100%\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/audit-log/index.jsx",
+      "line": 48,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/audit-log/index.jsx",
+      "line": 64,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/audit-log/index.jsx",
+      "line": 64,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/audit-log/index.jsx",
+      "line": 107,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/audit-log/index.jsx",
+      "line": 108,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/audit-log/index.jsx",
+      "line": 108,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/data-scope/index.jsx",
+      "line": 131,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": true,
+      "styleSource": "{ width: \"100%\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/data-scope/index.jsx",
+      "line": 165,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": true,
+      "styleSource": "{ width: \"8rem\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/data-scope/index.jsx",
+      "line": 78,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/data-scope/index.jsx",
+      "line": 79,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/data-scope/index.jsx",
+      "line": 99,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 260,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": true,
+      "styleSource": "{ width: \"100%\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 292,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": true,
+      "styleSource": "{ width: \"100%\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 147,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 147,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 255,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 320,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 320,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 339,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 341,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/member-table/index.jsx",
+      "line": 341,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/org-tree/index.jsx",
+      "line": 104,
+      "component": "Input",
+      "family": "TextField",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "tree-search"
+    },
+    {
+      "file": "src/views/perm-matrix/index.jsx",
+      "line": 44,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/security-policy/index.jsx",
+      "line": 73,
+      "component": "InputNumber",
+      "family": "Spinner",
+      "hasStyle": true,
+      "styleSource": "{ width: \"8rem\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/security-policy/index.jsx",
+      "line": 55,
+      "component": "Select",
+      "family": "Select",
+      "hasStyle": true,
+      "styleSource": "{ width: \"9rem\"",
+      "hasClassName": false,
+      "classNameValue": null
+    },
+    {
+      "file": "src/views/security-policy/index.jsx",
+      "line": 95,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "mfa-tag"
+    },
+    {
+      "file": "src/views/top-bar/index.jsx",
+      "line": 57,
+      "component": "Tag",
+      "family": "Tag",
+      "hasStyle": false,
+      "styleSource": null,
+      "hasClassName": true,
+      "classNameValue": "env-tag"
+    }
+  ],
+  "ipInputCallSites": {
+    "sharedFiles": [
+      "assets/shared/ip-input.jsx"
+    ],
+    "imports": [],
+    "callSites": []
+  },
+  "chartCallSites": {
+    "sharedFiles": [
+      "assets/shared/chart.jsx",
+      "assets/shared/Chart.jsx"
+    ],
+    "imports": [],
+    "callSites": []
+  },
+  "uploadsAssets": {
+    "copied": [
+      "background.jpg",
+      "empty.svg",
+      "favicon.svg",
+      "icons.svg",
+      "image.jpg",
+      "loading.svg",
+      "user.png"
+    ],
+    "copiedCount": 7,
+    "pathRewrite": {
+      "from": "./assets/uploads/",
+      "to": "/uploads/"
+    }
+  },
+  "styles": {
+    "source": "assets/style",
+    "files": [
+      {
+        "from": "assets/style/base.css",
+        "to": "src/styles/base.css"
+      },
+      {
+        "from": "assets/style/light.css",
+        "to": "src/styles/light.css"
+      },
+      {
+        "from": "assets/style/theme.css",
+        "to": "src/styles/theme.css"
+      },
+      {
+        "from": "assets/style/dark.css",
+        "to": "src/styles/dark.css"
+      }
+    ],
+    "cssFiles": [
+      "src/styles/base.css",
+      "src/styles/light.css",
+      "src/styles/theme.css",
+      "src/styles/dark.css"
+    ]
+  },
+  "sourceCssTokens": {
+    "base.css": {
+      "--brand-05": "#E6F2FD",
+      "--brand-10": "#B8D9F9",
+      "--brand-20": "#8ABEF3",
+      "--brand-30": "#5CA2E9",
+      "--brand-40": "#2E86DE",
+      "--brand-50": "#0067D1",
+      "--brand-60": "#004EA8",
+      "--brand-70": "#003D83",
+      "--brand-80": "#002E6A",
+      "--brand-90": "#00214B",
+      "--gray-0": "#FFFFFF",
+      "--gray-05": "#F3F3F3",
+      "--gray-10": "#DFDFDF",
+      "--gray-20": "#C9C9C9",
+      "--gray-30": "#AEAEAE",
+      "--gray-40": "#939393",
+      "--gray-50": "#777777",
+      "--gray-60": "#595959",
+      "--gray-70": "#393939",
+      "--gray-80": "#2A2A2A",
+      "--gray-90": "#191919",
+      "--gray-100": "#000000",
+      "--red-05": "#FEE7E8",
+      "--red-10": "#FABDC1",
+      "--red-20": "#F59297",
+      "--red-30": "#EE696F",
+      "--red-40": "#E7434A",
+      "--red-50": "#E02128",
+      "--red-60": "#C7000B",
+      "--red-70": "#850F12",
+      "--red-80": "#59080A",
+      "--red-90": "#350305",
+      "--rose-05": "#FEE5F2",
+      "--rose-10": "#FCC3E0",
+      "--rose-20": "#F99AC7",
+      "--rose-30": "#F470AB",
+      "--rose-40": "#ED448A",
+      "--rose-50": "#E61866",
+      "--rose-60": "#C40054",
+      "--rose-70": "#811439",
+      "--rose-80": "#540D24",
+      "--rose-90": "#330614",
+      "--orange-05": "#FEF5E8",
+      "--orange-10": "#FDE2BD",
+      "--orange-20": "#FCCE92",
+      "--orange-30": "#F9B766",
+      "--orange-40": "#F69E39",
+      "--orange-50": "#F4840C",
+      "--orange-60": "#C76207",
+      "--orange-70": "#954304",
+      "--orange-80": "#642802",
+      "--orange-90": "#3D1601",
+      "--yellow-05": "#FEFCE0",
+      "--yellow-10": "#FEF8B8",
+      "--yellow-20": "#FEF08A",
+      "--yellow-30": "#FDE55C",
+      "--yellow-40": "#FCD72E",
+      "--yellow-50": "#FCC800",
+      "--yellow-60": "#D19F00",
+      "--yellow-70": "#9E7400",
+      "--yellow-80": "#614500",
+      "--yellow-90": "#2E1F00",
+      "--green-05": "#F2FBE9",
+      "--green-10": "#DFF4CC",
+      "--green-20": "#C6E9A8",
+      "--green-30": "#A8DB81",
+      "--green-40": "#87C859",
+      "--green-50": "#62B42E",
+      "--green-60": "#488E20",
+      "--green-70": "#316614",
+      "--green-80": "#1B3E0A",
+      "--green-90": "#0C2004",
+      "--mint-05": "#E7FBF2",
+      "--mint-10": "#BCF2DB",
+      "--mint-20": "#8FE5C2",
+      "--mint-30": "#63D5A8",
+      "--mint-40": "#36C18D",
+      "--mint-50": "#09AA71",
+      "--mint-60": "#058358",
+      "--mint-70": "#036142",
+      "--mint-80": "#02422E",
+      "--mint-90": "#00291D",
+      "--cyan-05": "#E8FCFD",
+      "--cyan-10": "#C9F6F9",
+      "--cyan-20": "#A4ECF1",
+      "--cyan-30": "#7DDFE7",
+      "--cyan-40": "#55CCD9",
+      "--cyan-50": "#2CB8C9",
+      "--cyan-60": "#1C94A4",
+      "--cyan-70": "#127180",
+      "--cyan-80": "#094C57",
+      "--cyan-90": "#04282F",
+      "--blue-05": "#EEF3FE",
+      "--blue-10": "#D0D8FD",
+      "--blue-20": "#B0BFFD",
+      "--blue-30": "#8CA3FA",
+      "--blue-40": "#668CF7",
+      "--blue-50": "#2070F3",
+      "--blue-60": "#1F55B5",
+      "--blue-70": "#1B3F86",
+      "--blue-80": "#112857",
+      "--blue-90": "#081635",
+      "--indigo-05": "#EEEEFE",
+      "--indigo-10": "#D5D3FD",
+      "--indigo-20": "#BFB9FA",
+      "--indigo-30": "#A89FF9",
+      "--indigo-40": "#8E81F4",
+      "--indigo-50": "#715AFB",
+      "--indigo-60": "#5531EB",
+      "--indigo-70": "#3F21B5",
+      "--indigo-80": "#281675",
+      "--indigo-90": "#160B48",
+      "--purple-05": "#F7EDFE",
+      "--purple-10": "#E8CFFE",
+      "--purple-20": "#D9B1FD",
+      "--purple-30": "#CB8EFB",
+      "--purple-40": "#BF68FA",
+      "--purple-50": "#B62BF7",
+      "--purple-60": "#8A21BC",
+      "--purple-70": "#651B8B",
+      "--purple-80": "#41125A",
+      "--purple-90": "#260937",
+      "--pink-05": "#FDE6FC",
+      "--pink-10": "#F9C5F6",
+      "--pink-20": "#F39DEC",
+      "--pink-30": "#EB74DF",
+      "--pink-40": "#E049CE",
+      "--pink-50": "#D41DBC",
+      "--pink-60": "#9F1C8D",
+      "--pink-70": "#751868",
+      "--pink-80": "#4C0F43",
+      "--pink-90": "#2E0728",
+      "--radius-none": "0",
+      "--radius-xs": "2px",
+      "--radius-base": "4px",
+      "--radius-md": "6px",
+      "--radius-lg": "8px",
+      "--radius-xl": "12px",
+      "--radius-full": "9999px",
+      "--font-family": "'HarmonyOS Sans', 'Microsoft YaHei', Arial, 'PingFang SC', 'San Francisco', sans-serif",
+      "--font-size-sm": "0.625rem",
+      "--font-size-base": "0.75rem",
+      "--font-size-md": "0.875rem",
+      "--font-size-lg": "1rem",
+      "--font-size-xl": "1.125rem",
+      "--font-size-2xl": "1.25rem",
+      "--font-size-3xl": "1.5rem",
+      "--font-size-4xl": "1.75rem",
+      "--font-size-5xl": "2.25rem",
+      "--font-size-6xl": "3rem",
+      "--font-size-7xl": "3.75rem",
+      "--font-size-8xl": "4.5rem",
+      "--line-height-xs": "1.25",
+      "--line-height-sm": "1.375",
+      "--line-height-base": "1.5",
+      "--line-height-md": "1.625",
+      "--line-height-lg": "1.8",
+      "--font-weight-light": "300",
+      "--font-weight-normal": "400",
+      "--font-weight-medium": "500",
+      "--font-weight-semibold": "600",
+      "--font-weight-bold": "700",
+      "--spacing-0": "0",
+      "--spacing-0-5": "0.125rem",
+      "--spacing-1": "0.25rem",
+      "--spacing-1-5": "0.375rem",
+      "--spacing-2": "0.5rem",
+      "--spacing-2-5": "0.625rem",
+      "--spacing-3": "0.75rem",
+      "--spacing-3-5": "0.875rem",
+      "--spacing-4": "1rem",
+      "--spacing-4-5": "1.125rem",
+      "--spacing-5": "1.25rem",
+      "--spacing-6": "1.5rem",
+      "--spacing-7": "1.75rem",
+      "--spacing-8": "2rem",
+      "--spacing-9": "2.25rem",
+      "--spacing-10": "2.5rem",
+      "--spacing-11": "2.75rem",
+      "--spacing-12": "3rem",
+      "--spacing-14": "3.5rem",
+      "--spacing-15": "3.75rem",
+      "--spacing-16": "4rem",
+      "--spacing-17": "4.25rem",
+      "--spacing-18": "4.5rem",
+      "--spacing-19": "4.75rem",
+      "--spacing-20": "5rem"
+    },
+    "light.css": {
+      "--color-brand": "var(--brand-50)",
+      "--color-brand-hover": "var(--brand-40)",
+      "--color-brand-focus": "var(--brand-50)",
+      "--color-brand-active": "var(--brand-60)",
+      "--color-brand-disabled": "var(--brand-20)",
+      "--color-text-primary": "var(--gray-90)",
+      "--color-text-secondary": "var(--gray-50)",
+      "--color-text-placeholder": "var(--gray-30)",
+      "--color-text-disabled": "var(--gray-20)",
+      "--color-text-inverse": "var(--gray-0)",
+      "--color-text-inverse-disabled": "var(--gray-0)",
+      "--color-text-on": "var(--brand-50)",
+      "--color-link": "var(--brand-50)",
+      "--color-link-hover": "var(--brand-40)",
+      "--color-link-active": "var(--brand-60)",
+      "--color-link-visited": "var(--indigo-50)",
+      "--color-link-disabled": "var(--brand-20)",
+      "--color-bg-1": "var(--gray-05)",
+      "--color-bg-2": "var(--gray-0)",
+      "--color-bg-3": "var(--gray-0)",
+      "--color-bg-4": "var(--gray-0)",
+      "--color-bg-5": "var(--gray-0)",
+      "--color-bg-6": "rgb(from var(--gray-20) r g b / 0.2)",
+      "--color-bg-mask": "rgb(from var(--gray-90) r g b / 0.3)",
+      "--color-fill-disabled": "var(--gray-10)",
+      "--color-hover": "rgb(from var(--gray-90) r g b / 0.05)",
+      "--color-fill-disabled-subtle": "rgb(from var(--gray-90) r g b / 0.05)",
+      "--color-fill": "rgb(from var(--gray-90) r g b / 0.05)",
+      "--color-select": "var(--brand-05)",
+      "--color-fill-subtle": "var(--gray-0)",
+      "--color-icon-primary": "var(--gray-90)",
+      "--color-icon-secondary": "var(--gray-50)",
+      "--color-icon-tertiary": "var(--gray-40)",
+      "--color-icon-placeholder": "var(--gray-30)",
+      "--color-icon-disabled": "var(--gray-20)",
+      "--color-icon-inverse": "var(--gray-0)",
+      "--color-icon-hover": "var(--brand-40)",
+      "--color-icon-focus": "var(--brand-50)",
+      "--color-icon-active": "var(--brand-60)",
+      "--color-border": "var(--gray-20)",
+      "--color-border-hover": "var(--gray-90)",
+      "--color-border-focus": "var(--brand-50)",
+      "--color-border-active": "var(--brand-10)",
+      "--color-border-disabled": "var(--gray-20)",
+      "--color-border-separator": "var(--gray-10)",
+      "--color-border-separator-sbutle": "var(--gray-05)",
+      "--color-error": "var(--red-50)",
+      "--color-error-hover": "var(--red-40)",
+      "--color-error-active": "var(--red-60)",
+      "--color-error-disabled": "var(--red-10)",
+      "--color-error-subtle": "var(--red-20)",
+      "--color-error-subtler": "var(--red-05)",
+      "--color-alert": "var(--orange-50)",
+      "--color-alert-hover": "var(--orange-40)",
+      "--color-alert-active": "var(--orange-60)",
+      "--color-alert-disabled": "var(--orange-10)",
+      "--color-alert-subtle": "var(--orange-20)",
+      "--color-alert-subtler": "var(--orange-05)",
+      "--color-warning": "var(--yellow-50)",
+      "--color-warning-hover": "var(--yellow-40)",
+      "--color-warning-active": "var(--yellow-60)",
+      "--color-warning-disabled": "var(--yellow-10)",
+      "--color-warning-bold": "var(--yellow-60)",
+      "--color-warning-subtle": "var(--yellow-20)",
+      "--color-warning-subtler": "var(--yellow-05)",
+      "--color-success": "var(--mint-50)",
+      "--color-success-hover": "var(--mint-40)",
+      "--color-success-active": "var(--mint-60)",
+      "--color-success-disabled": "var(--mint-10)",
+      "--color-success-subtle": "var(--mint-20)",
+      "--color-success-subtler": "var(--mint-05)",
+      "--color-info-primary": "var(--blue-50)",
+      "--color-info-primary-subtle": "var(--blue-30)",
+      "--color-info-primary-subtler": "var(--blue-05)",
+      "--color-info-secondary": "var(--blue-30)",
+      "--color-info-secondary-hover": "var(--blue-20)",
+      "--color-info-secondary-active": "var(--blue-40)",
+      "--color-info-secondary-disabled": "var(--blue-10)",
+      "--color-info-secondary-subtle": "var(--blue-05)",
+      "--color-none": "var(--gray-30)",
+      "--color-none-hover": "var(--gray-20)",
+      "--color-none-active": "var(--gray-40)",
+      "--color-none-disabled": "var(--gray-10)",
+      "--color-none-subtle": "var(--gray-05)",
+      "--color-chart-1": "var(--blue-50)",
+      "--color-chart-2": "var(--green-50)",
+      "--color-chart-3": "var(--indigo-50)",
+      "--color-chart-4": "var(--cyan-50)",
+      "--color-chart-5": "var(--orange-40)",
+      "--color-chart-6": "var(--brand-30)",
+      "--color-chart-7": "var(--purple-40)",
+      "--color-chart-8": "var(--rose-40)",
+      "--color-chart-9": "var(--indigo-20)",
+      "--color-chart-10": "var(--yellow-60)",
+      "--color-chart-11": "var(--brand-10)",
+      "--color-chart-12": "var(--green-60)",
+      "--color-chart-13": "var(--purple-20)",
+      "--color-chart-14": "var(--cyan-60)",
+      "--color-chart-15": "var(--orange-20)",
+      "--color-chart-16": "var(--rose-60)",
+      "--color-chart-17": "var(--cyan-20)",
+      "--color-chart-18": "var(--blue-60)",
+      "--color-chart-19": "var(--green-20)",
+      "--color-chart-20": "var(--indigo-70)",
+      "--color-chart-21": "var(--rose-10)",
+      "--color-chart-22": "var(--cyan-70)",
+      "--color-chart-23": "var(--yellow-20)",
+      "--color-chart-24": "var(--purple-70)",
+      "--color-chart-25": "var(--mint-20)",
+      "--color-scrollbar": "var(--gray-10)",
+      "--color-scrollbar-hover": "var(--gray-30)",
+      "--color-card-gray-disabled": "rgb(from var(--gray-30) r g b / 0.05)",
+      "--color-card-white-disabled": "rgb(from var(--gray-0) r g b / 0.5)",
+      "--color-sidenav-bg": "rgb(from var(--gray-05) r g b / 0.5)",
+      "--color-table-header": "rgb(from var(--gray-90) r g b / 0.05)",
+      "--color-table-zebra": "rgb(from var(--gray-40) r g b / 0.05)",
+      "--color-message-bg-info": "var(--blue-05)",
+      "--color-message-bg-success": "var(--mint-05)",
+      "--color-message-bg-warning": "var(--yellow-05)",
+      "--color-message-bg-alert": "var(--orange-05)",
+      "--color-message-bg-error": "var(--red-05)",
+      "--color-alert-urgent": "#F43146",
+      "--color-alert-primary": "#EC6F1A",
+      "--color-alert-secondary": "#EEBA18",
+      "--color-alert-success": "#2DA769",
+      "--color-alert-running": "#5990FD",
+      "--color-alert-none": "#939393",
+      "--color-table-1": "var(--brand-05)",
+      "--color-table-2": "var(--brand-10)",
+      "--color-table-sticky-1": "var(--brand-05)",
+      "--color-table-sticky-2": "var(--brand-10)",
+      "--color-table-sticky-bg": "var(--gray-0)",
+      "--color-table-sticky-header": "var(--gray-05)",
+      "--color-tag-text-purple": "var(--purple-60)",
+      "--color-tag-bg-purple": "rgb(from var(--purple-10) r g b / 0.6)",
+      "--color-tag-text-cyan": "var(--cyan-80)",
+      "--color-tag-bg-cyan": "rgb(from var(--cyan-60) r g b / 0.15)",
+      "--color-tag-text-rose": "var(--rose-60)",
+      "--color-tag-bg-rose": "var(--rose-05)",
+      "--color-tag-text-green": "var(--green-70)",
+      "--color-tag-bg-green": "var(--green-10)",
+      "--color-tag-text-pink": "var(--pink-60)",
+      "--color-tag-bg-pink": "var(--pink-05)",
+      "--color-tag-text-indigo": "var(--indigo-80)",
+      "--color-tag-bg-indigo": "rgb(from var(--indigo-10) r g b / 0.6)",
+      "--color-tag-text-none": "var(--gray-70)",
+      "--color-tag-bg-none": "rgb(from var(--gray-90) r g b / 0.05)",
+      "--color-tag-text-error": "var(--red-60)",
+      "--color-tag-bg-error": "var(--red-05)",
+      "--color-tag-text-alert": "var(--orange-70)",
+      "--color-tag-bg-alert": "var(--orange-10)",
+      "--color-tag-text-warning": "var(--yellow-80)",
+      "--color-tag-bg-warning": "rgb(from var(--yellow-30) r g b / 0.6)",
+      "--color-tag-text-success": "var(--mint-70)",
+      "--color-tag-bg-success": "rgb(from var(--mint-10) r g b / 0.6)",
+      "--color-tag-text-info": "var(--blue-60)",
+      "--color-tag-bg-info": "rgb(from var(--blue-10) r g b / 0.5)",
+      "--border": "var(--gray-20)",
+      "--border-light": "var(--gray-10)",
+      "--border-primary": "var(--brand-50)",
+      "--border-success": "var(--mint-20)",
+      "--border-warning": "var(--yellow-20)",
+      "--border-alert": "var(--orange-20)",
+      "--border-error": "var(--red-20)",
+      "--icon-primary": "var(--brand-50)",
+      "--icon-success": "var(--mint-50)",
+      "--icon-warning": "var(--yellow-50)",
+      "--icon-critical": "var(--orange-50)",
+      "--icon-alert": "var(--orange-50)",
+      "--icon-error": "var(--red-50)",
+      "--shadow-none": "none",
+      "--shadow-sm": "0 1px 6px rgba(0, 0, 0, 0.08)",
+      "--shadow-base": "0 4px 12px rgba(0, 0, 0, 0.16)",
+      "--shadow-md": "0 8px 24px rgba(0, 0, 0, 0.08)",
+      "--shadow-lg": "0 8px 24px rgba(0, 0, 0, 0.16)",
+      "--shadow-xl": "0 16px 48px rgba(0, 0, 0, 0.16)",
+      "--shadow-r-sm": "1px 0 6px 0 rgba(0, 0, 0, 0.08)",
+      "--shadow-t-sm": "0 -1px 6px rgba(0, 0, 0, 0.08)",
+      "--shadow-l-base": "-2px 0 12px 0 rgba(0, 0, 0, 0.08)",
+      "--shadow-l-md": "-2px 0 24px 0 rgba(0, 0, 0, 0.08)"
+    },
+    "theme.css": {
+      "--primary": "var(--color-brand)",
+      "--on-primary": "var(--color-text-inverse)",
+      "--primary-hover": "var(--color-brand-hover)",
+      "--primary-active": "var(--color-brand-active)",
+      "--primary-disabled": "var(--color-brand-disabled)",
+      "--primary-container": "var(--color-info-primary-subtler)",
+      "--on-primary-container": "var(--color-text-primary)",
+      "--primary-fixed": "var(--color-brand)",
+      "--primary-fixed-dim": "var(--color-brand-active)",
+      "--on-primary-fixed": "var(--color-text-inverse)",
+      "--on-primary-fixed-variant": "var(--color-text-inverse)",
+      "--surface": "var(--color-bg-1)",
+      "--surface-dim": "var(--color-bg-2)",
+      "--surface-bright": "var(--color-bg-2)",
+      "--on-surface": "var(--color-text-primary)",
+      "--surface-variant": "var(--color-bg-1)",
+      "--on-surface-variant": "var(--color-text-secondary)",
+      "--surface-container-lowest": "var(--color-bg-1)",
+      "--surface-container-low": "var(--color-bg-2)",
+      "--surface-container": "var(--color-bg-2)",
+      "--surface-container-high": "var(--color-bg-2)",
+      "--surface-container-highest": "var(--color-bg-2)",
+      "--inverse-surface": "var(--color-text-primary)",
+      "--inverse-on-surface": "var(--color-text-inverse)",
+      "--inverse-on-surface-variant": "var(--color-text-inverse-disabled)",
+      "--inverse-primary": "var(--color-brand)",
+      "--error": "var(--color-error)",
+      "--on-error": "var(--color-text-inverse)",
+      "--error-container": "var(--color-message-bg-error)",
+      "--on-error-container": "var(--color-text-primary)",
+      "--success": "var(--color-success)",
+      "--on-success": "var(--color-text-inverse)",
+      "--success-container": "var(--color-message-bg-success)",
+      "--on-success-container": "var(--color-text-primary)",
+      "--critical": "var(--color-alert)",
+      "--on-critical": "var(--color-text-inverse)",
+      "--critical-container": "var(--color-message-bg-alert)",
+      "--on-critical-container": "var(--color-text-primary)",
+      "--warning": "var(--color-warning)",
+      "--on-warning": "var(--color-text-inverse)",
+      "--warning-container": "var(--color-message-bg-warning)",
+      "--on-warning-container": "var(--color-text-primary)",
+      "--info": "var(--color-info-primary)",
+      "--on-info": "var(--color-text-inverse)",
+      "--info-container": "var(--color-message-bg-info)",
+      "--on-info-container": "var(--color-text-primary)",
+      "--text-placeholder": "var(--color-text-placeholder)",
+      "--text-disabled": "var(--color-text-disabled)",
+      "--text-inverse-disabled": "var(--color-text-inverse-disabled)",
+      "--interactive-link": "var(--color-link)",
+      "--interactive-link-hover": "var(--color-link-hover)",
+      "--interactive-link-active": "var(--color-link-active)",
+      "--interactive-link-visited": "var(--color-link-visited)",
+      "--interactive-link-disabled": "var(--color-link-disabled)",
+      "--scrim": "var(--color-bg-mask)",
+      "--outline": "var(--color-border)",
+      "--outline-variant": "var(--color-border-separator)",
+      "--divider": "var(--color-border-separator)",
+      "--focus-ring": "var(--color-border-focus)",
+      "--selected": "var(--color-border-focus)",
+      "--spacing-inline": "var(--spacing-2)",
+      "--spacing-stack": "var(--spacing-3)",
+      "--spacing-gutter": "var(--spacing-4)",
+      "--spacing-inset": "var(--spacing-6)",
+      "--spacing-section": "var(--spacing-4)",
+      "--spacing-page": "var(--spacing-8)",
+      "--shadow-card": "var(--shadow-sm)",
+      "--shadow-popover": "var(--shadow-lg)",
+      "--shadow-modal": "var(--shadow-xl)",
+      "--radius-badge": "var(--radius-base)",
+      "--radius-action": "var(--radius-base)",
+      "--radius-container": "var(--radius-lg)",
+      "--radius-overlay": "var(--radius-lg)",
+      "--border-width-thin": "1px",
+      "--border-width-thick": "2px",
+      "--outline-width-focus": "1px",
+      "--outline-offset-gap": "2px",
+      "--font-display-l": "var(--font-size-7xl)/var(--line-height-xs) var(--font-family)",
+      "--font-display-m": "var(--font-size-6xl)/var(--line-height-sm) var(--font-family)",
+      "--font-display-s": "var(--font-size-5xl)/var(--line-height-sm) var(--font-family)",
+      "--font-headline-l": "var(--font-size-2xl)/var(--line-height-sm) var(--font-family)",
+      "--font-headline-m": "var(--font-size-xl)/var(--line-height-sm) var(--font-family)",
+      "--font-headline-s": "var(--font-size-lg)/var(--line-height-base) var(--font-family)",
+      "--font-body-l": "var(--font-size-lg)/var(--line-height-base) var(--font-family)",
+      "--font-body-m": "var(--font-size-md)/var(--line-height-base) var(--font-family)",
+      "--font-body-s": "var(--font-size-base)/var(--line-height-md) var(--font-family)",
+      "--font-caption-m": "var(--font-size-base)/var(--line-height-md) var(--font-family)",
+      "--font-caption-s": "var(--font-size-sm)/var(--line-height-lg) var(--font-family)"
+    },
+    "dark.css": {
+      "--color-brand": "var(--brand-50)",
+      "--color-brand-hover": "var(--brand-40)",
+      "--color-brand-focus": "var(--brand-50)",
+      "--color-brand-active": "var(--brand-60)",
+      "--color-brand-disabled": "var(--brand-70)",
+      "--color-text-primary": "var(--gray-0)",
+      "--color-text-secondary": "var(--gray-20)",
+      "--color-text-placeholder": "var(--gray-40)",
+      "--color-text-disabled": "var(--gray-40)",
+      "--color-text-inverse": "var(--gray-0)",
+      "--color-text-inverse-disabled": "rgb(from var(--gray-05) r g b / 0.3)",
+      "--color-text-on": "var(--gray-0)",
+      "--color-link": "var(--brand-30)",
+      "--color-link-hover": "var(--brand-20)",
+      "--color-link-active": "var(--brand-40)",
+      "--color-link-visited": "var(--indigo-50)",
+      "--color-link-disabled": "var(--brand-60)",
+      "--color-bg-1": "var(--gray-100)",
+      "--color-bg-2": "var(--gray-90)",
+      "--color-bg-3": "var(--gray-80)",
+      "--color-bg-4": "var(--gray-70)",
+      "--color-bg-5": "rgb(from var(--gray-05) r g b / 0.1)",
+      "--color-bg-6": "rgb(from var(--gray-05) r g b / 0.1)",
+      "--color-bg-mask": "rgb(from var(--gray-0) r g b / 0.7)",
+      "--color-fill-disabled": "var(--gray-60)",
+      "--color-hover": "rgb(from var(--gray-05) r g b / 0.2)",
+      "--color-fill-disabled-subtle": "rgb(from var(--gray-05) r g b / 0.2)",
+      "--color-fill": "rgb(from var(--gray-05) r g b / 0.2)",
+      "--color-select": "rgb(from var(--brand-50) r g b / 0.4)",
+      "--color-fill-subtle": "rgb(from var(--gray-100) r g b / 0)",
+      "--color-icon-primary": "var(--gray-10)",
+      "--color-icon-secondary": "var(--gray-30)",
+      "--color-icon-tertiary": "var(--gray-50)",
+      "--color-icon-placeholder": "var(--gray-40)",
+      "--color-icon-disabled": "var(--gray-40)",
+      "--color-icon-inverse": "var(--gray-0)",
+      "--color-icon-hover": "var(--brand-20)",
+      "--color-icon-focus": "var(--brand-30)",
+      "--color-icon-active": "var(--brand-40)",
+      "--color-border": "var(--gray-50)",
+      "--color-border-hover": "var(--gray-05)",
+      "--color-border-focus": "var(--brand-40)",
+      "--color-border-active": "var(--brand-80)",
+      "--color-border-disabled": "var(--gray-60)",
+      "--color-border-separator": "rgb(from var(--gray-05) r g b / 0.15)",
+      "--color-border-separator-sbutle": "rgb(from var(--gray-05) r g b / 0.1)",
+      "--color-error": "var(--red-40)",
+      "--color-error-hover": "var(--red-30)",
+      "--color-error-active": "var(--red-50)",
+      "--color-error-disabled": "var(--red-80)",
+      "--color-error-subtle": "var(--red-60)",
+      "--color-error-subtler": "var(--red-80)",
+      "--color-alert": "var(--orange-50)",
+      "--color-alert-hover": "var(--orange-40)",
+      "--color-alert-active": "var(--orange-60)",
+      "--color-alert-disabled": "var(--orange-80)",
+      "--color-alert-subtle": "var(--orange-60)",
+      "--color-alert-subtler": "var(--orange-80)",
+      "--color-warning": "var(--yellow-40)",
+      "--color-warning-hover": "var(--yellow-30)",
+      "--color-warning-active": "var(--yellow-50)",
+      "--color-warning-disabled": "var(--yellow-80)",
+      "--color-warning-bold": "var(--yellow-60)",
+      "--color-warning-subtle": "var(--yellow-60)",
+      "--color-warning-subtler": "var(--yellow-80)",
+      "--color-success": "var(--mint-60)",
+      "--color-success-hover": "var(--mint-50)",
+      "--color-success-active": "var(--mint-60)",
+      "--color-success-disabled": "var(--mint-80)",
+      "--color-success-subtle": "var(--mint-60)",
+      "--color-success-subtler": "var(--mint-80)",
+      "--color-info-primary": "var(--blue-50)",
+      "--color-info-primary-subtle": "var(--blue-60)",
+      "--color-info-primary-subtler": "var(--blue-80)",
+      "--color-info-secondary": "var(--blue-60)",
+      "--color-info-secondary-hover": "var(--blue-40)",
+      "--color-info-secondary-active": "var(--blue-60)",
+      "--color-info-secondary-disabled": "var(--blue-80)",
+      "--color-info-secondary-subtle": "var(--blue-80)",
+      "--color-none": "var(--gray-60)",
+      "--color-none-hover": "rgb(from var(--gray-05) r g b / 0.2)",
+      "--color-none-active": "var(--gray-50)",
+      "--color-none-disabled": "var(--gray-90)",
+      "--color-none-subtle": "var(--gray-90)",
+      "--color-chart-1": "var(--blue-50)",
+      "--color-chart-2": "var(--green-50)",
+      "--color-chart-3": "var(--indigo-50)",
+      "--color-chart-4": "var(--cyan-50)",
+      "--color-chart-5": "var(--orange-40)",
+      "--color-chart-6": "var(--brand-30)",
+      "--color-chart-7": "var(--purple-60)",
+      "--color-chart-8": "var(--rose-60)",
+      "--color-chart-9": "var(--indigo-60)",
+      "--color-chart-10": "var(--yellow-60)",
+      "--color-chart-11": "var(--brand-60)",
+      "--color-chart-12": "var(--green-60)",
+      "--color-chart-13": "var(--purple-70)",
+      "--color-chart-14": "var(--cyan-60)",
+      "--color-chart-15": "var(--orange-70)",
+      "--color-chart-16": "var(--rose-60)",
+      "--color-chart-17": "var(--cyan-70)",
+      "--color-chart-18": "var(--blue-60)",
+      "--color-chart-19": "var(--green-70)",
+      "--color-chart-20": "var(--indigo-70)",
+      "--color-chart-21": "var(--rose-70)",
+      "--color-chart-22": "var(--cyan-30)",
+      "--color-chart-23": "var(--yellow-70)",
+      "--color-chart-24": "var(--purple-50)",
+      "--color-chart-25": "var(--mint-70)",
+      "--color-scrollbar": "var(--gray-60)",
+      "--color-scrollbar-hover": "var(--gray-40)",
+      "--color-card-gray-disabled": "rgb(from var(--gray-40) r g b / 0.05)",
+      "--color-card-white-disabled": "rgb(from var(--gray-40) r g b / 0.1)",
+      "--color-sidenav-bg": "var(--gray-70)",
+      "--color-table-header": "rgb(from var(--gray-05) r g b / 0.1)",
+      "--color-table-zebra": "rgb(from var(--gray-50) r g b / 0.15)",
+      "--color-message-bg-info": "rgb(from var(--blue-50) r g b / 0.15)",
+      "--color-message-bg-success": "rgb(from var(--mint-60) r g b / 0.15)",
+      "--color-message-bg-warning": "rgb(from var(--yellow-40) r g b / 0.15)",
+      "--color-message-bg-alert": "rgb(from var(--orange-50) r g b / 0.15)",
+      "--color-message-bg-error": "rgb(from var(--red-40) r g b / 0.15)",
+      "--color-alert-urgent": "#F43146",
+      "--color-alert-primary": "#EC6F1A",
+      "--color-alert-secondary": "#EEBA18",
+      "--color-alert-success": "#0D9458",
+      "--color-alert-running": "#5990FD",
+      "--color-alert-none": "#818181",
+      "--color-table-1": "rgb(from var(--brand-50) r g b / 0.2)",
+      "--color-table-2": "rgb(from var(--brand-50) r g b / 0.4)",
+      "--color-table-sticky-1": "var(--brand-80)",
+      "--color-table-sticky-2": "var(--brand-70)",
+      "--color-table-sticky-bg": "var(--gray-70)",
+      "--color-table-sticky-header": "var(--gray-70)",
+      "--color-tag-text-purple": "var(--purple-30)",
+      "--color-tag-bg-purple": "rgb(from var(--purple-30) r g b / 0.15)",
+      "--color-tag-text-cyan": "var(--cyan-40)",
+      "--color-tag-bg-cyan": "rgb(from var(--cyan-50) r g b / 0.15)",
+      "--color-tag-text-rose": "var(--rose-30)",
+      "--color-tag-bg-rose": "rgb(from var(--rose-30) r g b / 0.15)",
+      "--color-tag-text-green": "var(--green-50)",
+      "--color-tag-bg-green": "rgb(from var(--green-40) r g b / 0.15)",
+      "--color-tag-text-pink": "var(--pink-30)",
+      "--color-tag-bg-pink": "rgb(from var(--pink-30) r g b / 0.15)",
+      "--color-tag-text-indigo": "var(--indigo-30)",
+      "--color-tag-bg-indigo": "rgb(from var(--indigo-30) r g b / 0.15)",
+      "--color-tag-text-none": "var(--gray-30)",
+      "--color-tag-bg-none": "rgb(from var(--gray-30) r g b / 0.15)",
+      "--color-tag-text-error": "var(--red-40)",
+      "--color-tag-bg-error": "rgb(from var(--red-30) r g b / 0.15)",
+      "--color-tag-text-alert": "var(--orange-40)",
+      "--color-tag-bg-alert": "rgb(from var(--orange-50) r g b / 0.15)",
+      "--color-tag-text-warning": "var(--yellow-50)",
+      "--color-tag-bg-warning": "rgb(from var(--yellow-30) r g b / 0.15)",
+      "--color-tag-text-success": "var(--mint-40)",
+      "--color-tag-bg-success": "rgb(from var(--mint-50) r g b / 0.15)",
+      "--color-tag-text-info": "var(--blue-30)",
+      "--color-tag-bg-info": "rgb(from var(--blue-40) r g b / 0.15)",
+      "--border": "var(--gray-50)",
+      "--border-light": "rgb(from var(--gray-05) r g b / 0.15)",
+      "--border-primary": "var(--brand-30)",
+      "--border-success": "var(--mint-20)",
+      "--border-warning": "var(--yellow-20)",
+      "--border-alert": "var(--orange-20)",
+      "--border-error": "var(--red-20)",
+      "--icon-primary": "var(--brand-30)",
+      "--icon-success": "var(--mint-30)",
+      "--icon-warning": "var(--yellow-30)",
+      "--icon-critical": "var(--orange-30)",
+      "--icon-alert": "var(--orange-30)",
+      "--icon-error": "var(--red-30)",
+      "--shadow-none": "none",
+      "--shadow-sm": "0 1px 6px rgba(0, 0, 0, 0.5)",
+      "--shadow-base": "0 4px 12px rgba(0, 0, 0, 0.5)",
+      "--shadow-md": "0 8px 24px rgba(0, 0, 0, 0.5)",
+      "--shadow-lg": "0 8px 24px rgba(0, 0, 0, 0.5)",
+      "--shadow-xl": "0 16px 48px rgba(0, 0, 0, 0.5)",
+      "--shadow-r-sm": "1px 0 6px 0 rgba(0, 0, 0, 0.5)",
+      "--shadow-t-sm": "0 -1px 6px rgba(0, 0, 0, 0.5)",
+      "--shadow-l-base": "-2px 0 12px 0 rgba(0, 0, 0, 0.5)",
+      "--shadow-l-md": "-2px 0 24px 0 rgba(0, 0, 0, 0.5)"
+    }
+  },
+  "sourceCssColors": {},
+  "srcFiles": [
+    "app.css",
+    "app.jsx",
+    "src/components/role-modal/index.css",
+    "src/components/role-modal/index.jsx",
+    "src/context.jsx",
+    "src/mock/audit.js",
+    "src/mock/org.js",
+    "src/mock/perm.js",
+    "src/mock/policy.js",
+    "src/views/audit-log/index.css",
+    "src/views/audit-log/index.jsx",
+    "src/views/data-scope/index.css",
+    "src/views/data-scope/index.jsx",
+    "src/views/footer-bar/index.css",
+    "src/views/footer-bar/index.jsx",
+    "src/views/member-table/index.css",
+    "src/views/member-table/index.jsx",
+    "src/views/org-tree/index.css",
+    "src/views/org-tree/index.jsx",
+    "src/views/perm-matrix/index.css",
+    "src/views/perm-matrix/index.jsx",
+    "src/views/security-policy/index.css",
+    "src/views/security-policy/index.jsx",
+    "src/views/top-bar/index.css",
+    "src/views/top-bar/index.jsx"
+  ],
+  "darkMode": {
+    "method": "html .dark (custom tokens) + ConfigProvider theme (component lib, version=aui3-1, tested; antd darkAlgorithm removed in step 3)",
+    "darkClass": ".dark on <html>"
+  },
+  "i18nScenario": {
+    "scenario": "A",
+    "reactIntl": {
+      "used": false,
+      "files": []
+    },
+    "i18next": {
+      "used": false,
+      "files": []
+    },
+    "antdLocaleImports": [],
+    "antdLocaleFiles": [],
+    "businessLocaleFiles": [],
+    "hasDayjs": true,
+    "wired": true
+  },
+  "verification": {
+    "relativeImports": "PASS"
+  },
+  "notes": "",
+  "migrationPlanEui": [
+    {
+      "antd": "Empty",
+      "category": "B",
+      "eview": "手写",
+      "importPath": null,
+      "keyDiffs": "**无对应**；见 [handwrite-templates.md](handwrite-templates.md) §5",
+      "ref": "handwrite-templates.md §5",
+      "files": [
+        "app.jsx"
+      ]
+    },
+    {
+      "antd": "Breadcrumb",
+      "category": "A",
+      "eview": "Crumbs",
+      "importPath": "@cloudsop/eview-ui/Crumbs",
+      "keyDiffs": "**items→data**；项 {title, url?, enable?, icon?}（href/path→**url**；**enable: false 不可点击**，默认 true）；**separator→seprator（官方拼错，将错就错，残留正确英文 separator 即未迁移）**；头部标题 title；onClick(url, event) 组件级（非每项）；**<Breadcrumb.Item> JSX 子元素形态→拍平 data=[{title:'xxx'}] 数组**；最后一项不传 url 即当前页",
+      "ref": "components/Crumbs.md",
+      "files": [
+        "app.jsx"
+      ]
+    },
+    {
+      "antd": "message",
+      "category": "A",
+      "eview": "DivMessage",
+      "importPath": "@cloudsop/eview-ui/DivMessage",
+      "keyDiffs": "[message.*() 命令式 → DivMessage 受控渲染] **eview-ui message 无命令式 API**：message.success/info/error/warn(text) 不能直接对应方法调用，必须改为受控渲染 `<DivMessage display type=\"success\" text=\"...\" disposeTimeOut={3000} onClose={...}/>`。模式转换：① 每个用 message 的组件加一个通知 state（如 {notifyOpen, notifyType, notifyText}）；② 原调用点 message.info('xxx') 改为 setNotify({notifyOpen:true, notifyType:'info', notifyText:'xxx'})；③ 组件渲染树放一个 `<DivMessage display={notifyOpen} type={notifyType} text={notifyText} disposeTimeOut={3000} onClose={()=>setNotify(s=>({...s,notifyOpen:false}))}/>`；④ message.success→type='success'、message.info→type='info'、message.error→type='error'、message.warning→type='warn'。**显隐用 display（不是 visible/isOpen）**；**disposeTimeOut 默认 0=不自动隐藏**（大写 O 拼写），需要自动消失显式传毫秒；closable 默认 true。**焦点竞争坑**：DivMessage 渲染在父组件渲染树会打掉 TextField/Select 等输入组件焦点——通知浮层抽离独立子组件 + 自己的 state（在同一文件内定义一个小 Notify 组件，或就近放一个不受输入焦点影响的渲染位置）。若个别调用点改受控代价过大，可临时用 // TODO(eview-ui) 标注保留 message 调用，但 import 'antd' 的 message 必须删（步骤 8 check-imports 硬 FAIL）。**禁止**改用 MessageDialogPro.success(config) 静态方法（脱离 context，且语义是确认对话框非轻提示）。建议对 8 个文件逐个评估：多数 message.info/success 可受控 DivMessage 替换。",
+      "ref": "components/DivMessage.md",
+      "files": [
+        "app.jsx",
+        "src/components/role-modal/index.jsx",
+        "src/views/data-scope/index.jsx",
+        "src/views/footer-bar/index.jsx",
+        "src/views/member-table/index.jsx",
+        "src/views/perm-matrix/index.jsx",
+        "src/views/security-policy/index.jsx",
+        "src/views/top-bar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Modal",
+      "category": "A",
+      "eview": "DialogPro",
+      "importPath": "@cloudsop/eview-ui/DialogPro",
+      "keyDiffs": "[Modal] open→**isOpen**；**无 buttons prop——footer 自写**：children 底部排 <Button text=\"确定\" status=\"primary\" onClick={...}/> + 取消按钮，关闭自理（**onClose(event) 不自动关闭**，必须 setIsOpen(false)）；title→**customHeader**（ReactNode）；content→children；width/height→**size=[宽, 高]**（支持 rem，**建议偶数**）；**模态必须居中**（AUI 规范——不传 position）；destroyOnClose 默认 **true**（antd false——依赖保留 DOM 状态时显式 false）；minSize=[504,400]；focusOnClose/isNeedFocusOnOpen 聚焦管理；无最小化；resizable 默认 false 不建议开 | [Modal.confirm() 等静态] **受控形态**：type **必填** 7 枚举（highRisk/risk/error/info/warn/confirm/success）+ isOpen + **buttons={ok: {…ButtonProps}, cancel: {…}} 对象** + onClose 手动关 + children 优先于 content；**命令式**：MessageDialogPro.confirm(config) 等静态方法（≈ antd Modal.confirm，返回引用 update/destroy，destroyAll() 清场）；**函数式调用脱离 ConfigProvider context**（取不到 context/redux；3.1+ 必须传 version）——命令式弹窗优先受控形态；hasChecked 仅 risk/highRisk；autoFocusButton 默认 'ok'；keepTopPosition 尺寸变化保持顶部",
+      "ref": "components/DialogPro.md",
+      "files": [
+        "src/components/role-modal/index.jsx",
+        "src/views/data-scope/index.jsx",
+        "src/views/member-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "Input",
+      "category": "A",
+      "eview": "TextField",
+      "importPath": "@cloudsop/eview-ui/TextField",
+      "keyDiffs": "[Input.Search] **onSearch(value) 触发时机比 antd 宽**——点图标/回车/**文本值变化时均触发**，必须加防抖或只在回车分支处理；onChange(value)（仅值）；onClear(value)；maxLength→**maxLengthInput**；下拉建议 popItems=[{text,value}] 与 onSuggest **互斥不能同设**；labelPosition=\"after\" 布局文档明言不正确，勿用 | [Input.TextArea] onChange(value1, value2, event)；maxLength 自带右下角计数（替代 showCount）；无 autoSize（用 rows/cols）；无 allowClear | [Input] placeholder 同名保留；**onChange(value1, value2, event)**（新值/旧值/事件，**首参是值**）；无 prefix/suffix/addonBefore/addonAfter（手写外层 div 组合）；type 仅 text/password（数字输入用 format=\"number\"）；validator(value, id, type) => {result, message}；无 size/defaultValue（默认值转初始 value state）；ref：getValue()/validate()/focus() | [Input.Password] 加 autoComplete=\"off\"（文档警告 BM 场景必传）",
+      "ref": "components/TextField.md",
+      "files": [
+        "src/components/role-modal/index.jsx",
+        "src/views/org-tree/index.jsx"
+      ]
+    },
+    {
+      "antd": "Select",
+      "category": "A",
+      "eview": "SelectPro",
+      "importPath": "@cloudsop/eview-ui/SelectPro",
+      "keyDiffs": "[Select mode=\"multiple\"] 删 mode；options=[{text, value}]；value 数组；**onChange(value[], changeValue[], event)**；placeholder 同名保留；searchable（= showSearch）；selectAll；getValue()；性能：options ≤500（也可用 SelectPro mode='multiple'，本表主映射 MultipleSelect） | [Select] **受控组件**（value 唯一数据源）；基础下拉 mode='single'（默认可省）；options 项 label→**text**（{text, value, disabled?}）；**placeholder 同名保留**（旧 Select 才是 defaultLabel——本 skill 不用旧 Select）；**onChange(value, options) 两参**（options 是选中项对象/数组——antd labelInValue 的替代）；defaultValue 仅 mount 生效一次——antd defaultValue 转**初始 value state** 更稳（**必须设默认选中值**，无默认时取 options[0].value）；notFoundContent→emptyOptionsMsg；无 allowClear；性能：options ≤500、isVirtualScroll ≤1W 条 | [Select showSearch] 同上 + **onInputChange(value, e) 搜索时必填**（antd onSearch 逻辑迁入）；搜索过滤后仍只能选列表项；输入值可作选中值的场景（AutoComplete）用 InputSelect",
+      "ref": "components/SelectPro.md",
+      "files": [
+        "src/components/role-modal/index.jsx",
+        "src/views/data-scope/index.jsx",
+        "src/views/member-table/index.jsx",
+        "src/views/security-policy/index.jsx"
+      ]
+    },
+    {
+      "antd": "Checkbox",
+      "category": "A",
+      "eview": "Checkbox",
+      "importPath": "@cloudsop/eview-ui/Checkbox",
+      "keyDiffs": "[Checkbox] label prop（= antd children）；**onChange(value, checked, event, additionalData) 四参**（首参是 value 不是 event）；indeterminate→halfChecked；labelPosition 默认 after（文本在右，与 antd 一致，勿改） | [Checkbox.Group] **data（不是 options）**，项 {value, text, checked?, tipText?}；value[]；onChange(newValue[], oldValue[], event)；selectAll 是**对象** {text, checked, onChange}；rows 多行排布如 \"0:1 \\",
+      "ref": "components/Checkbox.md",
+      "files": [
+        "src/components/role-modal/index.jsx",
+        "src/views/data-scope/index.jsx",
+        "src/views/perm-matrix/index.jsx",
+        "src/views/security-policy/index.jsx"
+      ]
+    },
+    {
+      "antd": "Button",
+      "category": "A",
+      "eview": "Button",
+      "importPath": "@cloudsop/eview-ui/Button",
+      "keyDiffs": "[Button（纯文字）] 文字用 text prop（**不用 children**，文档 API 只有 text）；type→status（default/primary/risk）；size 三档是 small/normal/large（**antd middle→normal**）；无 loading/htmlType/danger（danger→status=\"risk\"）；处理中用 disabled+文案切换；onClick(event) 原生事件（同 antd） | [Button icon={<Icon/>}（带图标）] **不要迁 leftIcon/rightIcon**——eview-ui 的 leftIcon/rightIcon 接收**图标 url 字符串**，不是 ReactNode，与保留的 <Icon> shim 类型不匹配。改用 children：<Button onClick={...}><Icon name=\"x\" size={14}/>{文字}</Button>（Button 底层是原生 button，children 可渲染）；纯文字部分仍优先 text prop，带图标时文字跟在 Icon 后 | [Button.Group] **data 数组驱动**：data=[{text, onClick, ...Button props}]（不是 children） | [Dropdown.Button] text + options=[{text, value, iconUrl?, disable?}] + onClick(value, event) | [Radio.Button / Segmented] data=[{value, text}]；onChange(value, event)（首参即选中值）；defaultValue→初始 value state（**value=null 时取消所有选择**）；size→type（default/small，值域不同）；禁用是 **disable**（不是 disabled，拼写异常表）；仅适合 ≤7 项的单行展示（文档警告）；block 无对应（宽度走 style） | [Button type=\"text\"] text prop + onClick(event)；或手写 <a>",
+      "ref": "components/Button.md",
+      "files": [
+        "src/components/role-modal/index.jsx",
+        "src/views/footer-bar/index.jsx",
+        "src/views/perm-matrix/index.jsx"
+      ]
+    },
+    {
+      "antd": "Table",
+      "category": "A",
+      "eview": "TablePro",
+      "importPath": "@cloudsop/eview-ui/TablePro",
+      "keyDiffs": "API 同构度高：rowKey（默认 'key'）/columns[].dataIndex/render(text, record, pageIndex, index)/sorter/fixed（left/right，IE 无效）均保留 antd 形态；dataSource→**dataset**；pagination 对象（**设 false 不分页**，否则传 Paging props + recordCount）；rowSelection→**selection 对象**（type:'checkbox'/'radio'/selectedRowKeys/onChange(selectedRowKeys, selectedRows)/onSelect）；onChange(currentDataset, changeEvent)（分页/排序/筛选变化）；expandable→**expansion 对象**（expandedRowRender/childrenColumnName 默认 'children'）；**columnResizable 默认 true**（列宽拖拽，antd 默认无——不需要要显式 false）；排序词 ascend/descend 与 antd 一致（sortOrderList=['ascend','descend']）；disabelCheckAssociated 拼写注意（父子勾选关联）；斑马纹 enableZebraCrossing 默认 false（同 antd）；**旧 Table 的单元格编辑（setRowEditable）/ScrollTable/VirtualizedTable 场景不再走旧 Table**——查 TablePro 对应能力，无则手写；树表用独立组件 TreeTable（非旧 Table）",
+      "ref": "components/TablePro.md",
+      "files": [
+        "src/views/audit-log/index.jsx",
+        "src/views/member-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tag",
+      "category": "A",
+      "eview": "Tag",
+      "importPath": "@cloudsop/eview-ui/Tag",
+      "keyDiffs": "type=\"message\"/\"dot\"/\"status\"（antd 无此分型，默认 message）；color 枚举 default/primary/success/warning/danger/caution + hex（**仅 status/dot 类型生效**）；closable→message 型有 onClose(e)；**disable（不是 disabled，仅 message 型）**；**仅 ICT 3.1 风格**；CheckableTag→selected prop + onClick",
+      "ref": "components/Tag.md",
+      "files": [
+        "src/views/audit-log/index.jsx",
+        "src/views/data-scope/index.jsx",
+        "src/views/member-table/index.jsx",
+        "src/views/perm-matrix/index.jsx",
+        "src/views/security-policy/index.jsx",
+        "src/views/top-bar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Drawer",
+      "category": "A",
+      "eview": "Drawer",
+      "importPath": "@cloudsop/eview-ui/Drawer",
+      "keyDiffs": "antd v5 open→**visible**（回到 v4 拼写）；placement 同名（top/right/bottom/left）；onClose(event) **不自动关闭**（CloseEvent {type:'ok'/'cancel'/'mask'} 可区分来源）；width 默认 **'20rem'**（最小 4rem）；title/footer 支持 **false**（显式无）；遮罩 maskSetting={disable, onClickClose, show}；inContainer 挂父容器",
+      "ref": "components/Drawer.md",
+      "files": [
+        "src/views/audit-log/index.jsx",
+        "src/views/member-table/index.jsx"
+      ]
+    },
+    {
+      "antd": "Radio",
+      "category": "A",
+      "eview": "Radio",
+      "importPath": "@cloudsop/eview-ui/Radio",
+      "keyDiffs": "[Radio] label prop（= children）；onChange(value, event)（首参是值）；labelPosition 默认 after | [Radio.Group] **data=[{value, text, disabled?}]**（不是 options）；onChange(value, oldValue, event)（带 oldValue）；无 buttonStyle（Radio.Button 场景转 SelectCard）；无 optionType | [Radio.Button / Segmented] data=[{value, text}]；onChange(value, event)（首参即选中值）；defaultValue→初始 value state（**value=null 时取消所有选择**）；size→type（default/small，值域不同）；禁用是 **disable**（不是 disabled，拼写异常表）；仅适合 ≤7 项的单行展示（文档警告）；block 无对应（宽度走 style）",
+      "ref": "components/Radio.md",
+      "files": [
+        "src/views/data-scope/index.jsx"
+      ]
+    },
+    {
+      "antd": "Badge",
+      "category": "B",
+      "eview": "手写",
+      "importPath": null,
+      "keyDiffs": "**无对应**；见 [handwrite-templates.md](handwrite-templates.md) §4",
+      "ref": "handwrite-templates.md §4",
+      "files": [
+        "src/views/footer-bar/index.jsx",
+        "src/views/member-table/index.jsx",
+        "src/views/org-tree/index.jsx",
+        "src/views/perm-matrix/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tooltip",
+      "category": "A",
+      "eview": "Tooltip",
+      "importPath": "@cloudsop/eview-ui/Tooltip",
+      "keyDiffs": "**title→content**（ReactNode）；placement 同名 12 值；trigger 同名；visible/onVisibleChange 受控；open→visible；arrowPointAtCenter 同名；getPopupContainer 同名；mouseEnterDelay/mouseLeaveDelay 单位 **ms（antd 是秒，数值需 ×1000）**；destroyTooltipOnHide 同名",
+      "ref": "components/Tooltip.md",
+      "files": [
+        "src/views/footer-bar/index.jsx",
+        "src/views/perm-matrix/index.jsx"
+      ]
+    },
+    {
+      "antd": "Popover",
+      "category": "A",
+      "eview": "Tooltip",
+      "importPath": "@cloudsop/eview-ui/Tooltip",
+      "keyDiffs": "trigger=\"click\" + content 自定义；Tooltip 包裹式（<Tooltip content trigger=\"click\"><目标/></Tooltip>）；Tooltip.destroyAll()",
+      "ref": "components/Tooltip.md",
+      "files": [
+        "src/views/footer-bar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tree",
+      "category": "A",
+      "eview": "Tree",
+      "importPath": "@cloudsop/eview-ui/Tree",
+      "keyDiffs": "treeData→**data**；节点 title→**text**、key→**id**（主键字段名 nodeKey 默认 'id'，**不是 fieldNames**）；checkable→**enableCheckbox**（默认 false，勾选需显式开）；**enableMultiSelect 默认 true**——单选树必须显式 enableMultiSelect={false}；回调：onSelect(selectedKeys, node, event)/onCheck(checkedKeys, node)（首参是 keys 数组）/onExpand(expandedKeys, node)（**必须接**，只传 expandedKeys 不接回调点箭头展开不了）；loadData 异步加载（isLeaf 显箭头）；父子勾选关联 disabelCheckAssociated（拼写）；showLine 仅 3.1；expandedKeys/selectedKeys/checkedKeys 受控同名保留",
+      "ref": "components/Tree.md",
+      "files": [
+        "src/views/org-tree/index.jsx"
+      ]
+    },
+    {
+      "antd": "Tabs",
+      "category": "A",
+      "eview": "Tab",
+      "importPath": "import Tab, { TabItem } from \"@cloudsop/eview-ui/Tab\"（TabItem 具名导出）",
+      "keyDiffs": "**TabItem children 驱动**（<Tab><TabItem title>内容</TabItem></Tab>，**无 data/items prop**）；activeKey→**selectedIndex（数字下标，不是 key！）**——key→index 需映射；**切换回调是 onClick(index, title, event)（不是 onChange）**；onClose(index, event, title)；**draggable 默认 true**（不需要要显式 false）；TabItem：title/closable/disabled/icon（url 字符串）；tabBarExtraContent 无对应（手写）；**遍历生成 TabItem 时数据源必须判空兜底**（(tabs",
+      "ref": "components/Tab.md",
+      "files": [
+        "src/views/perm-matrix/index.jsx"
+      ]
+    },
+    {
+      "antd": "Slider",
+      "category": "A",
+      "eview": "DragInput",
+      "importPath": "@cloudsop/eview-ui/DragInput",
+      "keyDiffs": "**value 永远是数组**：type=\"single\" 默认 [min]、type=\"range\" 默认 [min, min]；marks 对象→**markIndexes 纯数字数组（要求递增）**；onChange(value, changeValue)；range→type=\"range\"；**无 disabled prop**（需要时外层禁用处理）；displayInput 默认 true 显示输入框",
+      "ref": "components/DragInput.md",
+      "files": [
+        "src/views/security-policy/index.jsx"
+      ]
+    },
+    {
+      "antd": "InputNumber",
+      "category": "A",
+      "eview": "Spinner",
+      "importPath": "@cloudsop/eview-ui/Spinner",
+      "keyDiffs": "value **默认 0**（antd 无默认，空态需注意）；**onChange(value) 仅有效值触发 + onError(value) 接无效值**（两路分流）；onBlur(value) **参数是值不是事件**；min/max/step/precision 同名；无 controls/formatter 字符串形态（有 formatter 函数）",
+      "ref": "components/Spinner.md",
+      "files": [
+        "src/views/security-policy/index.jsx"
+      ]
+    },
+    {
+      "antd": "Switch",
+      "category": "A",
+      "eview": "Toggle",
+      "importPath": "@cloudsop/eview-ui/Toggle",
+      "keyDiffs": "checked→**toggled**；onChange→**onToggle(value)**；data=[关值, 开值]（值集合，顺序=关闭/开启）；disabled 正确拼写保留；无 loading/size；文档推荐设置 data 默认值",
+      "ref": "components/Toggle.md",
+      "files": [
+        "src/views/security-policy/index.jsx"
+      ]
+    },
+    {
+      "antd": "Dropdown",
+      "category": "A",
+      "eview": "Dropdown",
+      "importPath": "@cloudsop/eview-ui/Dropdown",
+      "keyDiffs": "[Dropdown.Button] text + options=[{text, value, iconUrl?, disable?}] + onClick(value, event) | [Dropdown] **保留 overlay（ReactNode）/trigger（['click','hover','contextMenu'] 数组）/placement（12 值同名）**；antd v5 menu={{items}} 数组形态→**overlay={<Menu>…Menu.Item/SubMenu…</Menu>} children JSX**（见 Menu 行备选的 children 驱动）；antd v5 open→**visible**、onOpenChange→**onVisibleChange(visible)**；getPopupContainer 同名；mountOnBody（默认 false）；**不用 PopUpMenu（文档标注废弃）**",
+      "ref": "components/Dropdown.md",
+      "files": [
+        "src/views/top-bar/index.jsx"
+      ]
+    },
+    {
+      "antd": "Icon（源 shim）",
+      "category": "P",
+      "eview": "Icon（保留源 shim）",
+      "importPath": "@/shared/Icon",
+      "keyDiffs": "保留不动——import Icon from \"@/shared/Icon\" 与 <Icon name=\"...\"> 调用点零改动；禁止改用 eview-ui Icon/SvgIcon（废弃）/IconButton（废弃）；禁止把 Icon shim 塞进 eview-ui 组件的 leftIcon/rightIcon/icon（url 字符串 prop，类型不匹配）；Button 带图标用 children 组合：<Button><Icon name=\"x\" size={14}/>{文字}</Button>。步骤 3 仅 check-imports.cjs 校验路径",
+      "ref": "components/Icon.md",
+      "files": [
+        "app.jsx",
+        "src/views/audit-log/index.jsx",
+        "src/views/data-scope/index.jsx",
+        "src/views/footer-bar/index.jsx",
+        "src/views/member-table/index.jsx",
+        "src/views/org-tree/index.jsx",
+        "src/views/perm-matrix/index.jsx",
+        "src/views/security-policy/index.jsx",
+        "src/views/top-bar/index.jsx",
+        "index.page.html"
+      ]
+    }
+  ],
+  "globalRefEui": {
+    "spellingAnomalies": [
+      {
+        "eview": "seprator",
+        "correct": "separator",
+        "component": "Crumbs（另有 sepratorStyle）"
+      },
+      {
+        "eview": "disable",
+        "correct": "disabled",
+        "component": "SelectCard、FileUpload、Tag(message 型)、PopUpMenu 项、ButtonMenu options 项",
+        "note": "仅这些用 disable；Button/TextField/Select/Menu 等仍用 disabled，勿全局替换"
+      },
+      {
+        "eview": "placeHolder",
+        "correct": "placeholder",
+        "component": "FileUpload、BrowseButton"
+      },
+      {
+        "eview": "upLoadErrorMessage/upLoadSuccessMessage",
+        "correct": "uploadErrorMessage/…",
+        "component": "FileUpload"
+      },
+      {
+        "eview": "disposeTimeOut",
+        "correct": "disposeTimeout",
+        "component": "TipBox、DivMessage"
+      },
+      {
+        "eview": "disabelCheckAssociated",
+        "correct": "disableCheckAssociated",
+        "component": "TablePro selection、Tree、TreeTable"
+      },
+      {
+        "eview": "enableMulitiExpand",
+        "correct": "enableMultiExpand",
+        "component": "Table"
+      },
+      {
+        "eview": "onRowExpend/expandedRow",
+        "correct": "onRowExpand/…",
+        "component": "Table"
+      },
+      {
+        "eview": "mutiSelectEnable",
+        "correct": "multiSelectEnable",
+        "component": "JList、TreeTable"
+      },
+      {
+        "eview": "enablHorzScroll",
+        "correct": "enableHorzScroll",
+        "component": "Select、InputSelect、Popup"
+      },
+      {
+        "eview": "minimizModalEnable",
+        "correct": "minimizeModalEnable",
+        "component": "Dialog"
+      }
+    ],
+    "antdToEviewRenames": [
+      {
+        "antd": "type(primary/danger)",
+        "eview": "status(primary/risk)",
+        "component": "Button"
+      },
+      {
+        "antd": "children 文字",
+        "eview": "text",
+        "component": "Button/TextButton/DivMessage/LabelField"
+      },
+      {
+        "antd": "Select",
+        "eview": "SelectPro（mode single/singleSearch/multiple/multiSearch；placeholder 同名保留——defaultLabel 是旧 Select 的，不用）",
+        "component": "SelectPro"
+      },
+      {
+        "antd": "checked",
+        "eview": "toggled",
+        "component": "Toggle"
+      },
+      {
+        "antd": "onChange",
+        "eview": "onToggle",
+        "component": "Toggle"
+      },
+      {
+        "antd": "count",
+        "eview": "starCount",
+        "component": "Rating"
+      },
+      {
+        "antd": "percent",
+        "eview": "current",
+        "component": "ProgressBar"
+      },
+      {
+        "antd": "title(tooltip 内容)",
+        "eview": "content",
+        "component": "Tooltip"
+      },
+      {
+        "antd": "picker",
+        "eview": "type",
+        "component": "DatePicker"
+      },
+      {
+        "antd": "value(dayjs)",
+        "eview": "time(数字数组[时,分,秒])",
+        "component": "TimePicker"
+      },
+      {
+        "antd": "current(下标)",
+        "eview": "currentStep(对应 data[].value)",
+        "component": "Wizards(Steps)"
+      },
+      {
+        "antd": "activeKey",
+        "eview": "selectedIndex(数字下标)",
+        "component": "Tab"
+      },
+      {
+        "antd": "items",
+        "eview": "data",
+        "component": "SelectCard/CheckboxGroup/RadioGroup/Wizards/Accordion"
+      },
+      {
+        "antd": "options 的 label",
+        "eview": "text",
+        "component": "SelectPro 系全部"
+      },
+      {
+        "antd": "dataSource",
+        "eview": "dataset",
+        "component": "TablePro(Table)"
+      },
+      {
+        "antd": "total",
+        "eview": "recordCount",
+        "component": "Paging"
+      },
+      {
+        "antd": "spinning",
+        "eview": "isOpen",
+        "component": "Loader"
+      },
+      {
+        "antd": "footer(ReactNode)",
+        "eview": "自写(children 底部排 Button——DialogPro 无 buttons prop)",
+        "component": "DialogPro(Modal)"
+      },
+      {
+        "antd": "open",
+        "eview": "isOpen(DialogPro) / visible(Drawer) / display(DivMessage)",
+        "component": "弹层系（不统一，查 visibilityProps）"
+      },
+      {
+        "antd": "destroyOnClose(默认false)",
+        "eview": "destroyOnClose(默认true)",
+        "component": "DialogPro/MessageDialogPro"
+      },
+      {
+        "antd": "indicator(size)",
+        "eview": "type(global/local/micro)",
+        "component": "Loader"
+      }
+    ],
+    "callbackSignatures": [
+      {
+        "component": "TextField/TextArea/HexField",
+        "signature": "onChange(value1, value2, event)",
+        "note": "新值/旧值/事件，首参是值"
+      },
+      {
+        "component": "SelectPro",
+        "signature": "onChange(value, options)",
+        "note": "两参；options 是选中项对象/数组（labelInValue 替代）。搜索模式 onInputChange 必填"
+      },
+      {
+        "component": "MultipleSelect",
+        "signature": "onChange(value[], changeValue[], event)"
+      },
+      {
+        "component": "InputSelect",
+        "signature": "onChange(value, oldValue)"
+      },
+      {
+        "component": "Checkbox",
+        "signature": "onChange(value, checked, event, additionalData)",
+        "note": "四参"
+      },
+      {
+        "component": "CheckboxGroup",
+        "signature": "onChange(newValue[], oldValue[], event)"
+      },
+      {
+        "component": "Radio",
+        "signature": "onChange(value, event)"
+      },
+      {
+        "component": "RadioGroup",
+        "signature": "onChange(value, oldValue, event)"
+      },
+      {
+        "component": "SelectCard",
+        "signature": "onChange(value, event)",
+        "note": "首参即选中值"
+      },
+      {
+        "component": "Toggle",
+        "signature": "onToggle(value)",
+        "note": "事件名也变了"
+      },
+      {
+        "component": "Spinner",
+        "signature": "onChange(value) 仅有效值；onError(value) 无效值；onBlur(value)——参数是值不是事件"
+      },
+      {
+        "component": "SearchInput",
+        "signature": "onSearch(value)",
+        "note": "值变化也触发，需防抖"
+      },
+      {
+        "component": "Rating",
+        "signature": "onClick(event, value)",
+        "note": "event 在前！且事件名是 onClick"
+      },
+      {
+        "component": "DatePicker",
+        "signature": "onChange(date, {moment, isDst, unix, utcTime})"
+      },
+      {
+        "component": "TimePicker",
+        "signature": "onChange(time: number[])"
+      },
+      {
+        "component": "IPInput",
+        "signature": "onChange(value, event)；IPAddress onChange(value) 单参"
+      },
+      {
+        "component": "CategorySearch",
+        "signature": "onSearch(category, value)；onClear(oldValue, newValue)——old 在前"
+      },
+      {
+        "component": "FileUpload",
+        "signature": "onChange(event, itemList)——event 在前；onReload({event, data})"
+      },
+      {
+        "component": "Table",
+        "signature": "onRowClick(row, e)；onRowRightClick(e, row)——右键事件在前；onColumnSort(sortColumn, sortType)"
+      },
+      {
+        "component": "TablePro",
+        "signature": "onChange(currentDataset, changeEvent)——分页/排序/筛选统一"
+      },
+      {
+        "component": "Tab",
+        "signature": "onClick(index, title, event)",
+        "note": "不是 onChange；index 是下标"
+      },
+      {
+        "component": "Panel",
+        "signature": "onExpand(selectedIndex, event)——下标"
+      },
+      {
+        "component": "Tree",
+        "signature": "onSelect(selectedKeys, node, event)；onCheck(checkedKeys, node)；onExpand 必须接"
+      },
+      {
+        "component": "Popup",
+        "signature": "onItemClick(item, e)——item 是数据项"
+      },
+      {
+        "component": "PopUpMenu",
+        "signature": "onClick({text, value, clickItem})"
+      },
+      {
+        "component": "ButtonMenu",
+        "signature": "onClick(value, event)"
+      },
+      {
+        "component": "Crumbs",
+        "signature": "onClick(url, event)——组件级非每项"
+      },
+      {
+        "component": "DialogPro/MessageDialogPro",
+        "signature": "onClose(event) 不自动关闭",
+        "note": "必须自己 setIsOpen(false)"
+      },
+      {
+        "component": "Drawer",
+        "signature": "onClose(event?: {type: ok/cancel/mask}) 不自动关闭"
+      },
+      {
+        "component": "Paging",
+        "signature": "onPageChange(currentPage)；onPageSizeChange(pageSize)",
+        "note": "antd onChange(page, pageSize) 拆两个"
+      }
+    ],
+    "visibilityProps": {
+      "isOpen": [
+        "DialogPro",
+        "MessageDialogPro",
+        "PopUpMenu(废弃)",
+        "Loader"
+      ],
+      "visible": [
+        "Drawer",
+        "Tooltip",
+        "Dropdown"
+      ],
+      "display": [
+        "Popup",
+        "TipBox(默认 true)",
+        "DivMessage(默认 true)",
+        "LinkField(默认 true)"
+      ],
+      "iconDisplay": [
+        "HelpTip(默认 true)"
+      ],
+      "isShow": [
+        "Shade(默认 true)"
+      ],
+      "none": [
+        "PopConfirm(内部管理)",
+        "PageMessage",
+        "FormMessage(父级条件渲染)"
+      ],
+      "notes": "所有弹层 onClose 均不自动关闭；DialogPro/MessageDialogPro 的 destroyOnClose 默认 true（antd 默认 false）；Pro 优先：Select→SelectPro、Table→TablePro、Modal→DialogPro、Modal.confirm→MessageDialogPro、Form→FormPro，旧版导入即违规"
+    }
+  }
+}

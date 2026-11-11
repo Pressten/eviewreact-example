@@ -1,0 +1,177 @@
+/* eview-ui Tab 内容容器最小宽度（替换原 antd tabs content holder 选择器） */
+.matrix-card .eview-tab-content,
+.matrix-card > div:has(.matrix-panel) {
+  min-width: 0;
+}
+
+/* 页签栏右侧操作组 */
+.tab-extra {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.role-tab-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.matrix-panel {
+  padding-top: 1rem;
+}
+
+.role-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 0.875rem;
+  margin-bottom: 0.875rem;
+  background: var(--primary-container);
+  border-radius: var(--radius-base);
+  color: var(--on-primary-container);
+}
+
+.role-desc {
+  font: var(--font-body-s);
+  color: var(--on-surface);
+}
+
+.role-count {
+  font: var(--font-body-s);
+  color: var(--primary);
+  font-weight: var(--font-weight-medium);
+  margin-left: auto;
+  flex: none;
+}
+
+.revert-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-s);
+  flex: none;
+}
+
+.revert-link:hover {
+  color: var(--interactive-link-hover);
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: minmax(9rem, 1.5fr) 6rem 5.5rem 5.5rem 5.5rem;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-base);
+  overflow: hidden;
+}
+
+.mg-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.25rem 0.625rem;
+  border-bottom: 1px solid var(--divider);
+  background: var(--surface-container-highest);
+  font: var(--font-body-m);
+  transition: background-color 0.15s;
+}
+
+/* 列间竖向分隔（表头与表体统一） */
+.matrix-grid > .mg-cell:nth-child(n+2) {
+  border-left: 1px solid var(--divider);
+}
+
+.mg-body-row > .mg-cell:nth-child(n+2) {
+  border-left: 1px solid var(--divider);
+}
+
+.mg-cell.mod {
+  justify-content: flex-start;
+}
+
+.mg-head {
+  background: var(--surface-variant);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.mg-body-row:last-child .mg-cell {
+  border-bottom: none;
+}
+
+.mg-body-row.zebra .mg-cell {
+  background: var(--surface-variant);
+}
+
+/* 单元格悬停反馈（行级 hover 因 display:contents 不可用，降级为单元格级） */
+.mg-body-row .mg-cell:hover {
+  background: var(--primary-container);
+}
+
+.module-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--on-surface);
+  cursor: help;
+}
+
+.module-help {
+  color: var(--text-placeholder);
+  flex: none;
+}
+
+.matrix-legend {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+}
+
+.dot {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: var(--radius-xs);
+  flex: none;
+  display: inline-block;
+}
+
+.dot-full {
+  background: var(--primary);
+}
+
+.dot-half {
+  background: linear-gradient(90deg, var(--primary) 50%, var(--surface-variant) 50%);
+  box-shadow: inset 0 0 0 1px var(--outline);
+}
+
+.dot-empty {
+  background: var(--surface-container-highest);
+  box-shadow: inset 0 0 0 1px var(--outline);
+}
+
+.link-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-m);
+}
+
+.link-action:hover {
+  color: var(--interactive-link-hover);
+}

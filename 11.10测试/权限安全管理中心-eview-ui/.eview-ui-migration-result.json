@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "round": 2,
+  "failures": [],
+  "checks": {
+    "imports": "PASS",
+    "select-options": "SKIP",
+    "provider": "PASS",
+    "dark-mode": "PASS",
+    "visibility": "PASS",
+    "wizards": "PASS",
+    "crumbs": "SKIP",
+    "components": "PASS",
+    "table-defaults": "PASS",
+    "css": "PASS",
+    "token-drift": "PASS",
+    "menu": "PASS",
+    "npm-install": "SKIP"
+  },
+  "advisoryReviews": {
+    "tableDefaults": [],
+    "css": [],
+    "tokenDrift": [],
+    "menu": [
+      {
+        "file": "src/views/top-bar/index.jsx",
+        "line": 46,
+        "rule": "MENU_SELECTABLE_MISSING",
+        "review": "有意保留——top-bar 的 <Menu> 是 Dropdown overlay 操作菜单（profile/manual/logout），点击触发 handleOpClick 动作并关闭下拉，非持久选中态；eview-ui Menu selectable 默认 false 对动作菜单语义正确，antd Dropdown menu 同理无需选中态",
+        "action": "kept-as-is"
+      },
+      {
+        "file": "src/views/top-bar/index.jsx",
+        "line": 47,
+        "rule": "MENU_SELECTABLE_MISSING",
+        "review": "有意保留——同上，Menu.Item「个人中心」属动作菜单项，点击触发动作非选中",
+        "action": "kept-as-is"
+      },
+      {
+        "file": "src/views/top-bar/index.jsx",
+        "line": 50,
+        "rule": "MENU_SELECTABLE_MISSING",
+        "review": "有意保留——同上，Menu.Item「操作手册」属动作菜单项",
+        "action": "kept-as-is"
+      },
+      {
+        "file": "src/views/top-bar/index.jsx",
+        "line": 53,
+        "rule": "MENU_SELECTABLE_MISSING",
+        "review": "有意保留——同上，Menu.Item「退出登录」属动作菜单项",
+        "action": "kept-as-is"
+      }
+    ],
+    "wizards": []
+  },
+  "manualVerification": {
+    "select-options": {
+      "status": "PASS",
+      "reason": "check-select-options.cjs 因缺 @babel/parser 无法运行（连动 npm install SKIP）。人工替代验证：grep \"label:\" 在 src/**/*.jsx 仅命中业务数据数组（app.jsx STATS、top-bar NAV_ITEMS）与 src/shared/Cascader（check 跳过），均非 SelectPro/CheckboxGroup 的 options prop；所有 SelectPro options 项用 text：member-table:275/311、role-modal:114、data-scope:23-25（VALIDITY_OPTIONS {value,text}）。无 options 项 label 残留"
+    },
+    "crumbs": {
+      "status": "PASS",
+      "reason": "check-crumbs.cjs 因缺 @babel/parser 无法运行（连动 npm install SKIP）。人工替代验证：grep \"separator|Breadcrumb|seprator|href:|path:\" 在 src 仅命中 CSS token 名（--color-border-separator）与注释（app.jsx:69）；app.jsx:70-77 <Crumbs data={crumbsData}> onClick(url)，crumbsData 项 {title,url} 无 href/path 残留，无 separator 正确英文残留（用默认分隔符），无 <Breadcrumb/items= 残留"
+    }
+  },
+  "fixRounds": [
+    {
+      "round": 1,
+      "hardFail": "check-components 7 处 TEXT_AS_CHILDREN（<Button>纯文字</Button> 应改 text prop）",
+      "fix": "续派 subagent2 修复 3 文件 7 处 Button children→text prop（role-modal:176、data-scope:184/185、member-table:282/286/317/318），保留 status/onClick/disabled 等 props；表达式 child（role-modal:177 {isEdit?...}）按规则豁免未改",
+      "result": "check-components round 2 PASS"
+    }
+  ],
+  "notes": "步骤 8 终验证 PASS。10 个可直接运行的硬/advisory 脚本全 PASS（imports/provider/dark-mode/visibility/wizards/components/table-defaults/css/token-drift/menu）。2 个 AST 脚本（select-options/crumbs）因缺 @babel/parser 无法运行——根因同 npm install：内网源（cmc.centralrepo.rnd.huawei.com）不可达，@babel/parser 由 @vitejs/plugin-react 传递依赖提供，需 npm install 后方可运行；已做人工替代验证均 PASS。npm-install SKIP（用户指示跳过，内网源不可达）。check-components round1 FAIL 7 处 TEXT_AS_CHILDREN，subagent2 修复后 round2 PASS。check-menu 4 处 MENU_SELECTABLE_MISSING advisory 全部「有意保留」（top-bar Dropdown overlay 动作菜单，非选中态语义）。待内网确认项：.npmrc 的 @cloudsop scope 源路径（product_npm）需内网核对；样式接入路径 @cloudsop/eview-ui/style/aui3.1.less 待内网实测确认。"
+}
