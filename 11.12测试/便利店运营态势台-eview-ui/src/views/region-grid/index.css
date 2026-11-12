@@ -1,0 +1,203 @@
+.rg-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.rg-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.rg-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.rg-legend-label,
+.rg-legend-end {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.rg-legend-end {
+  margin-left: 0.25rem;
+}
+
+.lg {
+  width: 1.125rem;
+  height: 0.625rem;
+  border-radius: 0.1875rem;
+}
+
+.rg-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.rg-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+}
+
+.rg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-gutter);
+  align-items: stretch;
+}
+
+@media (max-width: 90rem) {
+  .rg-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 62rem) {
+  .rg-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rg-grid.rg-single {
+  grid-template-columns: 1fr;
+}
+
+.rg-group .rg-share {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.rg-share-meta {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  padding-right: 0.625rem;
+  border-right: 1px solid var(--divider);
+  white-space: nowrap;
+}
+
+.rg-share-label {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.rg-group-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.25rem, 1fr));
+  grid-auto-rows: 1fr; /* 行高均分：省份卡随行撑满分组卡，组内等高 */
+  gap: 0.625rem;
+  min-height: 0;
+}
+
+/* —— 省份小卡 —— */
+.pv-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  background: var(--surface-container-highest);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  min-width: 0;
+}
+
+.pv-card:hover {
+  border-color: var(--primary);
+}
+
+.pv-card:active {
+  transform: scale(0.98);
+}
+
+.pv-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.375rem;
+}
+
+.pv-head b {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pv-sales {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-base);
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.pv-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.375rem;
+}
+
+.pv-stores {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+/* —— 营业额热度色阶（数据分类装饰色，全页统一；暗色由 .dark 后代覆盖） —— */
+.rg-wrap .pv-card.heat-1 { background: #F0F6FE; }
+.rg-wrap .pv-card.heat-2 { background: #DCEBFD; }
+.rg-wrap .pv-card.heat-3 { background: #BBD8FA; }
+.rg-wrap .pv-card.heat-4 { background: #93C0F3; }
+.rg-wrap .pv-card.heat-5 { background: #6EA9EC; }
+
+.dark .rg-wrap .pv-card.heat-1 { background: #12283E; }
+.dark .rg-wrap .pv-card.heat-2 { background: #173754; }
+.dark .rg-wrap .pv-card.heat-3 { background: #1D4A6E; }
+.dark .rg-wrap .pv-card.heat-4 { background: #256091; }
+.dark .rg-wrap .pv-card.heat-5 { background: #2F78B5; }
+
+/* 图例色块与色阶同源 */
+.rg-wrap .lg.lg-1 { background: #F0F6FE; }
+.rg-wrap .lg.lg-2 { background: #DCEBFD; }
+.rg-wrap .lg.lg-3 { background: #BBD8FA; }
+.rg-wrap .lg.lg-4 { background: #93C0F3; }
+.rg-wrap .lg.lg-5 { background: #6EA9EC; }
+
+.dark .rg-wrap .lg.lg-1 { background: #12283E; }
+.dark .rg-wrap .lg.lg-2 { background: #173754; }
+.dark .rg-wrap .lg.lg-3 { background: #1D4A6E; }
+.dark .rg-wrap .lg.lg-4 { background: #256091; }
+.dark .rg-wrap .lg.lg-5 { background: #2F78B5; }
+
+/* 异常省份：红描边醒目（特异性需高于热度色阶） */
+.rg-wrap .pv-card.is-abnormal {
+  border-color: var(--error);
+  border-width: var(--border-width-thick);
+}
+
+/* 选中联动省份：品牌描边 + 品牌容器底色（置于热度色阶之后，按源码顺序胜出） */
+.rg-wrap .pv-card.is-selected {
+  border-color: var(--selected);
+  border-width: var(--border-width-thick);
+  background: var(--primary-container);
+}

@@ -1,0 +1,200 @@
+.dw-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.dw-title b {
+  font: var(--font-headline-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+}
+
+.dw-sub {
+  display: inline-flex;
+  align-items: center;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+/* 底部操作区：次要链接在左、主按钮在右 */
+.dw-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.dw-footer a {
+  color: var(--interactive-link);
+  cursor: pointer;
+  font: var(--font-body-m);
+}
+
+.dw-footer a:hover {
+  color: var(--interactive-link-hover);
+}
+
+.dw-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dw-sec h4 {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-surface);
+  margin-bottom: 0.625rem;
+}
+
+.dw-info {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+  margin: 0;
+}
+
+.dw-info > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.625rem 0.875rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-md);
+  min-width: 0;
+}
+
+.dw-info dt {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.dw-info dd {
+  margin: 0;
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 缺货 TOP5 */
+.dw-top5 {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dw-top5 li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid var(--divider);
+  font: var(--font-body-m);
+}
+
+.dw-top5 li:last-child {
+  border-bottom: none;
+}
+
+.t5-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: var(--radius-badge);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
+  font: var(--font-caption-m);
+  font-weight: var(--font-weight-semibold);
+  flex: 0 0 auto;
+}
+
+.t5-rank.t5-hot {
+  background: var(--error-container);
+  color: var(--error);
+}
+
+.t5-name {
+  flex: 1 1 auto;
+  color: var(--on-surface);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.t5-cat {
+  flex: 0 0 auto;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}
+
+.t5-remain {
+  flex: 0 0 auto;
+  font: var(--font-body-s);
+  color: var(--on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+
+.t5-remain.t5-zero {
+  color: var(--error);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* 巡检 */
+.dw-inspect {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.875rem 1rem;
+  background: var(--surface-variant);
+  border-radius: var(--radius-md);
+}
+
+.dw-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 0 0 auto;
+}
+
+.dw-score b {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.dw-score span {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.dw-issue {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.dw-issue p {
+  margin: 0;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+}
+
+.dw-issue-time {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+}

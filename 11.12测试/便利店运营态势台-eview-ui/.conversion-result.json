@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "check-relative-imports.cjs 首轮即通过，所有相对导入已解析，无需修复任何文件。"
+}

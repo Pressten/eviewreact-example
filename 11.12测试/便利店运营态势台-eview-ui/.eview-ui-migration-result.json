@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "imports": "PASS",
+    "select-options": "PASS",
+    "provider": "PASS",
+    "dark-mode": "PASS",
+    "visibility": "PASS",
+    "wizards": "PASS",
+    "crumbs": "PASS",
+    "components": "PASS",
+    "table-defaults": "PASS",
+    "css": "PASS",
+    "token-drift": "PASS",
+    "menu": "ADVISORY_ANNOTATED",
+    "npm-install": "SKIP"
+  },
+  "advisoryReviews": {
+    "tableDefaults": [],
+    "css": [],
+    "tokenDrift": [],
+    "menu": [
+      {
+        "id": "MENU_SELECTABLE_MISSING",
+        "count": 12,
+        "locations": [
+          "src/views/circle-chart/index.jsx:56,58",
+          "src/views/header-nav/index.jsx:104,106",
+          "src/views/inspection-panel/index.jsx:97,99",
+          "src/views/region-grid/index.jsx:123,125",
+          "src/views/store-table/index.jsx:230,231,232,233"
+        ],
+        "verdict": "有意保留",
+        "reason": "这 12 处 <Menu> 全部作为 <Dropdown> 的 overlay 传入，是点击触发的操作菜单（如 store-table 的「修改店长/临时歇业/查看证照」、header-nav 的「导出 Excel/PDF」、circle-chart/inspection-panel/region-grid 的维度切换）。点击菜单项通过 onClick 触发动作后菜单即收起，不需要持久选中态——eview-ui Menu 默认 selectable=false 对操作菜单是正确行为。若强行加 selectable=true 反而会在下拉菜单里留下不需要的高亮选中态，与 antd Dropdown+Menu 操作菜单的原语义不符。源项目这些 antd Menu 在 Dropdown overlay 里同样未依赖选中态（selectedKeys 未用），故保持 selectable 默认值忠实于原行为。"
+      }
+    ],
+    "wizards": []
+  },
+  "notes": "8 硬 FAIL 全 PASS；4 advisory 中 3 个无待核项（table-defaults/css/token-drift 直接 PASS），check-menu 12 条 MENU_SELECTABLE_MISSING 已逐条回应（有意保留，操作菜单语义）。npm-install=SKIP：.npmrc 的 @cloudsop scope 指向内网源 cmc.centralrepo.rnd.huawei.com（ENOTFOUND 不可达），npm install 30s 超时——属外网/内网环境预期行为，不判 FAIL。验证期间为运行依赖 AST 的 check-select-options/check-crumbs/check-menu 脚本，从公网 npm 临时安装 @babel/parser 到目标 node_modules（@cloudsop scope 不可达故绕过 .npmrc 在临时目录安装后拷入）；该包仅验证用，非工程依赖。"
+}
