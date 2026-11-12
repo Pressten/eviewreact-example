@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "i18n-keys": "PASS",
+    "token-drift": "PASS",
+    "props-preserved": "PASS",
+    "steps-defaults": "PASS",
+    "dark-mode": "PASS",
+    "provider": "PASS",
+    "messagedialog-defaults": "PASS",
+    "css": "PASS",
+    "chart-options": "PASS",
+    "accordion": "PASS",
+    "crumbs": "PASS",
+    "dropdown": "PASS",
+    "rangepicker": "PASS",
+    "select-options": "PASS",
+    "imports": "PASS",
+    "jsx-extension": "PASS",
+    "table-defaults": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [
+    {
+      "check": "table-defaults",
+      "item": "src/views/store-table/index.jsx <Table> 缺 enableColumnCompareUpdate 标记（advisory，对照源确认 columns 是否动态变化）",
+      "resolution": "已补 enableColumnCompareUpdate（={true}）。源 store-table columns 是组件体内每次渲染重建的 const 数组（非 useMemo 缓存），eview Table 默认 enableColumnCompareUpdate=false 会让重建的 columns 不重新渲染列定义，故显式开启以保证 columns 变化生效。同时已补 width=\"unset\"（源 antd Table 无显式容器宽度，重置 eview 默认行内 width:100%;height:100%）、enableZebraCrossing={false}（源 antd 未开斑马纹）、操作列改 flex div+gap、render 取 row.rawData、非冻结列去掉 width、未设 sorter 的列加 allowSort:false。重跑 check-table-defaults 结论 PASS。"
+    }
+  ]
+}

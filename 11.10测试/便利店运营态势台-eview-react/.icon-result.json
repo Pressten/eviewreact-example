@@ -1,0 +1,161 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "mode": "C",
+  "failures": [],
+  "iconCallSites": 33,
+  "confirmed": 22,
+  "residual": 11,
+  "shimRetained": [],
+  "checks": {
+    "icon-shim": "PASS",
+    "icon-names": "PASS",
+    "imports": "PASS"
+  },
+  "confirmedSiteRepairs": [
+    {
+      "file": "src/views/header-nav/index.jsx",
+      "line": 105,
+      "site": "dark-toggle ternary <Icon name={isDark?\"sun\":\"moon\"} onClick={toggleDark} className=\"dark-toggle\" title={...}/>",
+      "repair": "match-icons --apply auto-converted (both branches confirmed L1: sun→IconPlusIcPublicSun, moon→IconPlusIcPublicMoon). onClick={toggleDark} PASSTHROUGH-RETAINED on BOTH branches; outer {isDark ? ... : ...} wrap at JSX child position. VERIFIED post-apply line 105/106: both branches carry onClick={toggleDark} — dark-mode triple-rail toggle entry preserved (no dead toggleDark variable)."
+    },
+    {
+      "file": "src/views/circle-chart/index.jsx",
+      "line": 59,
+      "site": "multi-line <Icon name=\"refresh-cw\" className=\"cc-refresh\" title=... onClick={() => message.success(...)}/>",
+      "repair": "match-icons --apply auto-converted (SEMANTIC refresh-cw→IconPlusIcPublicRefreshClockwise). onClick arrow + title + className passthrough-retained. VERIFIED."
+    },
+    {
+      "file": "src/components/delta-chip/index.jsx",
+      "line": 13,
+      "site": "residual flat ternary <Icon name={isUp?\"trending-up\":\"trending-down\"} size=\"0.75rem\"/> (both branches UNMATCHED)",
+      "repair": "Manual residual conversion (closed-set flat ternary). trending-up→IconPlusIcPublicSortUp (Public.SortUp, catalog-verified), trending-down→IconPlusIcPublicSortDown (Public.SortDown, catalog-verified). Outer {isUp ? <SortUp/> : <SortDown/>} wrap at JSX child position (TERNARY_WRAP_LOST=0). size 0.75rem → iconSize. No handler props on source (none to drop). import Icon shim removed; @hui/icon-plus import injected. Retained shim: NO."
+    },
+    {
+      "file": "src/views/header-nav/index.jsx",
+      "line": 41,
+      "site": "residual file-spreadsheet (DropDown exportItems excel icon)",
+      "repair": "Manual residual. file-spreadsheet→IconPlusIcPublicExcleFileTextured (Public.ExcleFileTextured, catalog-verified L6 candidate; Excel file icon — semantically apt for '导出 Excel'). iconSize 0.875rem. NO handler props on source."
+    },
+    {
+      "file": "src/views/header-nav/index.jsx",
+      "line": 42,
+      "site": "residual file-text (DropDown exportItems pdf icon)",
+      "repair": "Manual residual. file-text→IconPlusIcPublicTxtFileTextured (Public.TxtFileTextured, catalog-verified; generic document text). iconSize 0.875rem."
+    },
+    {
+      "file": "src/views/header-nav/index.jsx",
+      "line": 48,
+      "site": "residual store (brand logo)",
+      "repair": "Manual residual. store→IconPlusIcHuaweiCloudStoreNew (HuaweiCloud.StoreNew, catalog-verified top candidate s3; only store/shop icon in catalog). iconSize 1.25rem, color #FFFFFF → iconColor={['#FFFFFF']}."
+    },
+    {
+      "file": "src/views/inspection-panel/index.jsx",
+      "line": 139,
+      "site": "residual file-text (证照到期提醒 head)",
+      "repair": "Manual residual. file-text→IconPlusIcPublicTxtFileTextured. iconSize 0.875rem."
+    },
+    {
+      "file": "src/views/inspection-panel/index.jsx",
+      "line": 154,
+      "site": "residual file-text (lic-slide-head icon)",
+      "repair": "Manual residual. file-text→IconPlusIcPublicTxtFileTextured. iconSize 1.25rem."
+    },
+    {
+      "file": "src/views/inspection-panel/index.jsx",
+      "line": 164,
+      "site": "orphan landmark (受理网点 icon, placeholder auto-applied)",
+      "repair": "Manual orphan-placeholder upgrade. landmark→IconPlusIcPublicBuilding (Public.Building, catalog-verified; landmark/网点 building). iconSize 0.75rem. Replaced auto-placeholder IconPlusIcPublicTransverseRectangleTemplate."
+    },
+    {
+      "file": "src/views/inspection-panel/index.jsx",
+      "line": 168,
+      "site": "residual user-round (责任专员 icon)",
+      "repair": "Manual residual. user-round→IconPlusIcPublicPerson (Public.Person, catalog-verified; person — semantically apt for '责任专员'/handler). iconSize 0.75rem."
+    },
+    {
+      "file": "src/views/inspection-panel/index.jsx",
+      "line": 178,
+      "site": "residual calendar-days (到期日 icon)",
+      "repair": "Manual residual. calendar-days→IconPlusIcPublicCalendar (Public.Calendar, catalog-verified top candidate s2). iconSize 0.75rem."
+    },
+    {
+      "file": "src/views/inspection-panel/index.jsx",
+      "line": 187,
+      "site": "residual calendar-clock (剩余天数 Badge icon)",
+      "repair": "Manual residual. calendar-clock→IconPlusIcPublicDocClock (Public.DocClock, catalog-verified; calendar+clock hybrid — apt for '剩余天数' due-date). iconSize 1.25rem."
+    },
+    {
+      "file": "src/views/ops-briefing/index.jsx",
+      "line": 26,
+      "site": "orphan megaphone (运营快报 banner icon, placeholder auto-applied)",
+      "repair": "Manual orphan-placeholder upgrade. megaphone→IconPlusIcPublicHorn (Public.Horn, catalog-verified; horn/扩音 — apt for '运营快报' broadcast). iconSize 1rem. Replaced auto-placeholder."
+    },
+    {
+      "file": "src/views/region-grid/index.jsx",
+      "line": 99,
+      "site": "residual triangle-alert (rg-hint alert icon, color #E02128)",
+      "repair": "Manual residual. triangle-alert→IconPlusIcPublicAlert (Public.Alert, catalog-verified top candidate s2). iconSize 0.75rem, color #E02128 → iconColor={['#E02128']}."
+    },
+    {
+      "file": "src/views/region-grid/index.jsx",
+      "line": 148,
+      "site": "residual triangle-alert (异常门店数 Badge icon, color #E02128)",
+      "repair": "Manual residual. triangle-alert→IconPlusIcPublicAlert. iconSize 0.875rem, iconColor={['#E02128']}."
+    },
+    {
+      "file": "src/views/store-table/index.jsx",
+      "line": 224,
+      "site": "residual user-round (DropDown 修改店长 icon)",
+      "repair": "Manual residual. user-round→IconPlusIcPublicPerson. iconSize 0.875rem."
+    },
+    {
+      "file": "src/views/store-table/index.jsx",
+      "line": 226,
+      "site": "residual file-text (DropDown 查看证照 icon)",
+      "repair": "Manual residual. file-text→IconPlusIcPublicTxtFileTextured. iconSize 0.875rem."
+    },
+    {
+      "file": "src/views/store-table/index.jsx",
+      "line": 254,
+      "site": "residual map-pin (省份联动 chip icon)",
+      "repair": "Manual residual. map-pin→IconPlusIcPublicMappinOnMap (Public.MappinOnMap, catalog-verified top candidate s3; map-pin on map — apt). iconSize 0.75rem."
+    },
+    {
+      "file": "src/components/section-card/index.jsx",
+      "line": 11,
+      "site": "SectionCard prop-wrapper internal <Icon name={icon}/> (match-icons Phase C auto → {icon})",
+      "repair": "match-icons --apply Phase C auto-converted wrapper internal site: <Icon name={icon} size=\"1rem\"/> → {icon} (JSX child position wrap). icon prop contract: string-name → ReactNode. Caller icon= literals auto-placeholder-applied; all 5 placeholders upgraded manually (see below). import Icon shim removed from wrapper file."
+    },
+    {
+      "file": "src/views/circle-chart/index.jsx",
+      "line": 44,
+      "site": "SectionCard caller icon=\"chart-column\" (wrapper auto-placeholder)",
+      "repair": "Manual orphan-placeholder upgrade. chart-column→IconPlusIcPublicBarChart (Public.BarChart, catalog-verified; bar chart — apt for '商圈绩效对比'). iconSize 1rem. Replaced auto-placeholder."
+    },
+    {
+      "file": "src/views/inspection-panel/index.jsx",
+      "line": 90,
+      "site": "SectionCard caller icon=\"clipboard-list\" (wrapper auto-placeholder)",
+      "repair": "Manual orphan-placeholder upgrade. clipboard-list→IconPlusIcPublicClipboard (Public.Clipboard, catalog-verified; clipboard — apt for '巡检与合规'). iconSize 1rem. Replaced auto-placeholder."
+    },
+    {
+      "file": "src/views/store-table/index.jsx",
+      "line": 245,
+      "site": "SectionCard caller icon=\"layout-list\" (wrapper auto-placeholder)",
+      "repair": "Manual orphan-placeholder upgrade. layout-list→IconPlusIcPublicLists (Public.Lists, catalog-verified; list layout — apt for '门店明细'). iconSize 1rem. Replaced auto-placeholder."
+    },
+    {
+      "file": "src/views/supply-board/index.jsx",
+      "line": 28,
+      "site": "SectionCard caller icon=\"truck\" (wrapper auto-placeholder)",
+      "repair": "Manual orphan-placeholder upgrade. truck→IconPlusIcPublicBoxOpen (Public.BoxOpen, catalog-verified; open box/goods — apt for '补给看板' restock). iconSize 1rem. Replaced auto-placeholder."
+    },
+    {
+      "file": "src/views/trend-section/index.jsx",
+      "line": 51,
+      "site": "SectionCard caller icon=\"activity\" (wrapper auto-placeholder)",
+      "repair": "Manual orphan-placeholder upgrade. activity→IconPlusIcPublicPredictionLine (Public.PredictionLine, catalog-verified; trend/activity line — apt for '营业额与客流趋势'). iconSize 1rem. Replaced auto-placeholder."
+    }
+  ]
+}

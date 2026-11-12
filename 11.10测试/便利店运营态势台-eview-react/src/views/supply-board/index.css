@@ -1,0 +1,122 @@
+.sp-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  /* basis auto：模块高度被卡片内容撑开，再随同行图表卡拉伸 */
+  flex: 1 1 auto;
+}
+
+.sp-extra {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14.5rem, 1fr));
+  gap: 0.75rem;
+  /* 弹性填充：网格撑满模块剩余高度，行高均分（1fr），卡片随行拉伸 */
+  flex: 1 1 auto;
+  min-height: 0;
+  grid-auto-rows: 1fr;
+}
+
+.sp-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  background: var(--surface-container-highest);
+  min-width: 0;
+  min-height: 0;
+  transition: border-color 0.2s;
+}
+
+/* 卡片拉伸时按钮钉在底部，避免中部空洞 */
+.sp-item > button {
+  margin-top: auto;
+}
+
+.sp-item:hover {
+  border-color: var(--primary);
+}
+
+/* 最紧急置顶卡：红色描边强化 */
+.sp-item.sp-top {
+  border-color: var(--error);
+  border-width: var(--border-width-thick);
+}
+
+.sp-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.sp-item-head a {
+  color: var(--interactive-link);
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sp-item-head a:hover {
+  color: var(--interactive-link-hover);
+}
+
+.sp-item-body {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.sp-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--radius-md);
+  background: var(--error-container);
+  flex: 0 0 auto;
+}
+
+.sp-main b {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  color: var(--error);
+  font-variant-numeric: tabular-nums;
+}
+
+.sp-main span {
+  font: var(--font-caption-s);
+  color: var(--on-error-container);
+  white-space: nowrap;
+}
+
+.sp-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.sp-side span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

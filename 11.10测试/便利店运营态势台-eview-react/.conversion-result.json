@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "Steps 3-4 complete. 32 source files ported verbatim into src/ (app.css, context.jsx, utils.js, mock/data.js, 2 components x {jsx,css}, 11 views x {jsx,css}, shared/Icon/Icon.jsx, shared/chart.jsx). app.jsx replaced scaffold shell: antd ConfigProvider + zhCN + Empty + uploads refs removed, AppProvider retained, import paths fixed ./src/* -> ./*. Icon.jsx export changed to default; 9 Icon imports -> @/shared/Icon (default); 3 Chart imports -> @/shared/chart.jsx; context.jsx dark useEffect made dual-track (html.dark + body.aui3_1_dark); no useEffect added to app.jsx. antd-zh.js + ip-input.jsx NOT ported (scenario A delete / unused). main.jsx untouched. check-relative-imports.cjs: all relative imports resolved (exit 0)."
+}

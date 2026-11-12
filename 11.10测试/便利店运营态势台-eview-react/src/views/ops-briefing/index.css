@@ -1,0 +1,93 @@
+.ob-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 0.875rem;
+  background: var(--primary-container);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-card);
+}
+
+.ob-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: var(--on-primary);
+  flex: 0 0 auto;
+}
+
+.ob-title {
+  font: var(--font-body-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--on-primary-container);
+  white-space: nowrap;
+}
+
+.ob-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ob-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.1875rem 0.75rem;
+  border: none;
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-full);
+  font: var(--font-caption-m);
+  color: var(--on-surface);
+  cursor: pointer;
+  line-height: 1.375rem;
+  transition: box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.ob-chip:hover {
+  box-shadow: var(--shadow-base);
+}
+
+.ob-chip b {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-semibold);
+}
+
+.ob-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: var(--radius-full);
+  flex: 0 0 auto;
+}
+
+.dot-error {
+  background: var(--error);
+}
+
+.dot-critical {
+  background: var(--critical);
+}
+
+.dot-warning {
+  background: var(--warning);
+}
+
+.ob-close {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.ob-close:hover {
+  color: var(--error);
+}

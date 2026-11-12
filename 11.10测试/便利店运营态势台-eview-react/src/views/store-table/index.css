@@ -1,0 +1,130 @@
+.st-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  /* basis auto：模块高度被表格内容撑开 */
+  flex: 1 1 auto;
+}
+
+.st-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.st-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.st-count {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+}
+
+/* 省份联动筛选 chip */
+.pv-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border: none;
+  border-radius: var(--radius-badge);
+  background: var(--primary-container);
+  color: var(--primary);
+  font: var(--font-caption-m);
+  cursor: pointer;
+  line-height: 1.375rem;
+}
+
+.pv-chip:hover {
+  background: var(--primary-hover);
+  color: var(--on-primary);
+}
+
+.cell-id {
+  font: var(--font-caption-m);
+  color: var(--on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+
+.cell-dim {
+  color: var(--text-disabled);
+}
+
+.cell-danger {
+  color: var(--error);
+}
+
+.row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.row-actions a {
+  color: var(--interactive-link);
+  cursor: pointer;
+}
+
+.row-actions a:hover {
+  color: var(--interactive-link-hover);
+}
+
+.more-trigger {
+  display: inline-flex;
+  align-items: center;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+}
+
+.more-trigger:hover {
+  color: var(--primary);
+}
+
+.st-table tbody tr {
+  cursor: pointer;
+}
+
+/* —— 修改店长 H5 表单 —— */
+.mgr-form {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0.25rem;
+}
+
+.form-label {
+  position: relative;
+  font: var(--font-body-m);
+  color: var(--on-surface);
+  white-space: nowrap;
+}
+
+.form-label.required::before {
+  content: "*";
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--error);
+  font: var(--font-body-m);
+}
+
+.form-field {
+  position: relative;
+  min-width: 0;
+}
+
+.form-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
+  font: var(--font-caption-m);
+  color: var(--error);
+}
