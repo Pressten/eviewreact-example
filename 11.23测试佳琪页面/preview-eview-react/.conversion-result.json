@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": { "relative-imports": "PASS" },
+  "notes": "阶段1完成：41 个 src 文件已搬入，icon/chart 临时本地包装件接线（@/shared/Icon、@/shared/Chart），app.jsx 删除 ConfigProvider 并加双轨暗色 useEffect，相对导入与 uploads 路径已修正，check-relative-imports 通过。Icon 调用点与 icon import 路径留待阶段3。"
+}

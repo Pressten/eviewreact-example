@@ -1,0 +1,3 @@
+.report-ratio-meter{display:inline-flex;align-items:center;gap:var(--spacing-2);min-width:0;color:var(--on-surface);font:var(--font-body-m);font-variant-numeric:tabular-nums;white-space:nowrap}
+.report-ratio-ring{display:inline-flex;align-items:center;justify-content:center;flex:none;width:var(--spacing-6);height:var(--spacing-6)}
+.report-ratio-meter strong{font:inherit;font-weight:var(--font-weight-medium)}

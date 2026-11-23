@@ -1,0 +1,69 @@
+.inspection-report-page{display:flex;flex-direction:column;gap:var(--report-space-section);max-width:120rem;min-height:100%;margin:auto;padding:var(--report-space-section);background:var(--report-canvas);color:var(--on-surface)}
+.inspection-report-page>*{flex:none}
+.inspection-report-header{display:flex;flex-direction:column;gap:var(--report-space-group)}
+.inspection-report-heading{display:flex;align-items:center;gap:var(--report-header-gap);width:100%;min-height:var(--spacing-8)}
+.inspection-report-title{display:flex;align-items:center;gap:var(--spacing-2);flex:none;min-width:0}
+.inspection-report-title h1{margin:0;font:var(--font-headline-m);font-weight:var(--font-weight-medium);white-space:nowrap}
+.inspection-report-time{display:flex;align-items:baseline;gap:var(--spacing-1);margin:0;white-space:nowrap;color:var(--on-surface-variant);font:var(--font-body-m)}
+.inspection-report-time>span:first-child{margin-right:calc(-1 * var(--spacing-1))}
+.inspection-report-time time{white-space:nowrap;font-variant-numeric:tabular-nums}
+.report-export-action{display:flex;align-items:center;justify-content:center;gap:var(--spacing-2);flex:none;height:var(--spacing-8);margin-left:auto;padding:0;border:0;border-radius:var(--radius-action);background:transparent;color:var(--on-surface-variant);font:var(--font-body-m);white-space:nowrap;cursor:pointer}
+.report-export-action:hover:not(:disabled){color:var(--interactive-link)}
+.report-export-action:focus-visible{outline:var(--outline-width-focus) solid var(--focus-ring);outline-offset:var(--outline-offset-gap)}
+.report-export-action:disabled{color:var(--text-disabled);cursor:default}
+.report-export-error{margin:0;color:var(--error);font:var(--font-body-m)}
+.report-section-heading{display:flex;align-items:center;justify-content:space-between;gap:var(--report-space-group);margin-bottom:var(--report-space-group)}
+.report-section-heading h2{margin:0;font:var(--font-headline-s);font-weight:var(--font-weight-medium)}
+
+/* Adapt the rollout report's shimmer and 4px reveal to a short local preview. */
+.report-reveal-skeleton {
+  --report-skeleton-base: color-mix(in srgb, var(--on-surface) 6%, transparent);
+  --report-skeleton-highlight: color-mix(in srgb, var(--on-surface) 13%, transparent);
+  pointer-events: none;
+}
+
+.report-reveal-skeleton :is(.report-summary-body > *, .rule-overview-item, .report-overview-empty, .rule-results-tools, .inspection-table-frame) {
+  position: relative;
+  visibility: hidden;
+}
+
+.report-reveal-skeleton :is(.report-summary-body > *, .rule-overview-item, .report-overview-empty, .rule-results-tools, .inspection-table-frame)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  visibility: visible;
+  border-radius: var(--radius-container);
+  background: linear-gradient(100deg, var(--report-skeleton-base) 15%, var(--report-skeleton-highlight) 45%, var(--report-skeleton-base) 75%);
+  background-size: 240% 100%;
+  mask: none;
+  animation: report-skeleton-sweep 600ms ease-in-out infinite;
+}
+
+.report-reveal-skeleton .segmented-compliance-gauge::before {
+  border-radius: var(--radius-full) var(--radius-full) var(--radius-container) var(--radius-container);
+}
+
+.report-reveal-content[data-reveal-animate] {
+  animation: report-content-in 160ms ease-out backwards;
+}
+
+@keyframes report-skeleton-sweep {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@keyframes report-content-in {
+  from { opacity: 0; transform: translateY(var(--spacing-1)); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .report-reveal-content[data-reveal-animate],
+  .report-reveal-skeleton :is(.report-summary-body > *, .rule-overview-item, .report-overview-empty, .rule-results-tools, .inspection-table-frame)::before {
+    animation: none;
+  }
+}
+
+@container report-workspace (max-width:1000px){.inspection-report-heading{flex-wrap:wrap;row-gap:var(--spacing-2)}.inspection-report-time{order:2;flex-basis:100%}}
+@media(max-width:640px){.inspection-report-page{padding:var(--spacing-4)}}

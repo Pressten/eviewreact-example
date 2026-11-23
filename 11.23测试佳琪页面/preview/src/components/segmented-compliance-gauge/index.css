@@ -1,0 +1,9 @@
+.segmented-compliance-gauge{position:relative;width:var(--report-gauge-width);height:var(--report-gauge-box-height);flex:none}
+.segmented-compliance-plot{position:absolute;inset:0 0 auto;height:var(--report-gauge-height)}
+.segmented-compliance-value{position:absolute;top:var(--report-gauge-value-top);left:0;right:0;display:flex;align-items:baseline;justify-content:center;gap:var(--spacing-1);white-space:nowrap}
+.segmented-compliance-value strong{font-size:var(--report-gauge-value-size);line-height:var(--report-gauge-value-line);font-weight:var(--font-weight-bold);font-variant-numeric:tabular-nums}
+.segmented-compliance-value>span{font-size:var(--report-gauge-unit-size);line-height:var(--report-gauge-percent-line);color:var(--on-surface-variant)}
+.segmented-compliance-caption{position:absolute;top:var(--report-gauge-caption-top);left:0;right:0;display:flex;align-items:center;justify-content:center;gap:var(--spacing-1);height:var(--report-gauge-caption-line);color:var(--on-surface-variant);font-size:var(--report-gauge-caption-size);line-height:var(--report-gauge-caption-line);white-space:nowrap}
+.segmented-compliance-caption>span{font-weight:var(--font-weight-medium)}
+.segmented-compliance-caption strong{font:var(--font-body-m);font-weight:var(--font-weight-normal);color:var(--on-surface)}
+.segmented-compliance-caption .report-gauge-trend-icon{color:var(--report-gauge-active);margin-left:calc(-1 * var(--spacing-1))}

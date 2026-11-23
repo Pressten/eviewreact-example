@@ -1693,7 +1693,7 @@
       "category": "A",
       "eview": "Button",
       "importPath": "@cloudsop/eview-ui/Button",
-      "keyDiffs": "[Button（纯文字）] 文字用 text prop（**不用 children**，文档 API 只有 text）；type→status（default/primary/risk）；size 三档是 small/normal/large（**antd middle→normal**）；无 loading/htmlType/danger（danger→status=\"risk\"）；处理中用 disabled+文案切换；onClick(event) 原生事件（同 antd） | [Button icon={<Icon/>}（带图标）] **不要迁 leftIcon/rightIcon**——eview-ui 的 leftIcon/rightIcon 接收**图标 url 字符串**，不是 ReactNode，与保留的 <Icon> shim 类型不匹配。改用 children：<Button onClick={...}><Icon name=\"x\" size={14}/>{文字}</Button>（Button 底层是原生 button，children 可渲染）；纯文字部分仍优先 text prop，带图标时文字跟在 Icon 后 | [Button.Group] **data 数组驱动**：data=[{text, onClick, ...Button props}]（不是 children） | [Dropdown.Button] text + options=[{text, value, iconUrl?, disable?}] + onClick(value, event) | [Radio.Button / Segmented] data=[{value, text}]；onChange(value, event)（首参即选中值）；defaultValue→初始 value state（**value=null 时取消所有选择**）；size→type（default/small，值域不同）；禁用是 **disable**（不是 disabled，拼写异常表）；仅适合 ≤7 项的单行展示（文档警告）；block 无对应（宽度走 style） | [Button type=\"text\"] text prop + onClick(event)；或手写 <a>",
+      "keyDiffs": "[Button（纯文字）] 文字用 text prop（**不用 children**，文档 API 只有 text）；type→status（default/primary/risk）；size 三档是 small/normal/large（**antd middle→normal**）；无 loading/htmlType/danger（danger→status=\"risk\"）；处理中用 disabled+文案切换；onClick(event) 原生事件（同 antd） | [Button.Group] **data 数组驱动**：data=[{text, onClick, ...Button props}]（不是 children） | [Dropdown.Button] text + options=[{text, value, iconUrl?, disable?}] + onClick(value, event) | [Radio.Button / Segmented] data=[{value, text}]；onChange(value, event)（首参即选中值）；defaultValue→初始 value state（**value=null 时取消所有选择**）；size→type（default/small，值域不同）；禁用是 **disable**（不是 disabled，拼写异常表）；仅适合 ≤7 项的单行展示（文档警告）；block 无对应（宽度走 style） | [Button type=\"text\"] text prop + onClick(event)；或手写 <a>",
       "ref": "components/Button.md",
       "files": [
         "src/views/circle-chart/index.jsx",
@@ -1872,7 +1872,7 @@
       "category": "P",
       "eview": "Icon（保留源 shim）",
       "importPath": "@/shared/Icon",
-      "keyDiffs": "保留不动——import Icon from \"@/shared/Icon\" 与 <Icon name=\"...\"> 调用点零改动；禁止改用 eview-ui Icon/SvgIcon（废弃）/IconButton（废弃）；禁止把 Icon shim 塞进 eview-ui 组件的 leftIcon/rightIcon/icon（url 字符串 prop，类型不匹配）；Button 带图标用 children 组合：<Button><Icon name=\"x\" size={14}/>{文字}</Button>。步骤 3 仅 check-imports.cjs 校验路径",
+      "keyDiffs": "保留不动——import Icon from \"@/shared/Icon\" 与 <Icon name=\"...\"> 调用点零改动；禁止改用 eview-ui Icon/SvgIcon（废弃）/IconButton（废弃）；禁止把 Icon shim 塞进 eview-ui 组件的 leftIcon/rightIcon/icon（url 字符串 prop，类型不匹配）；Button 文字一律 text prop（children 不渲染文字——实测按钮空白），图标走 base64 data-url 接 leftIcon/rightIcon（官方示例）或纯装饰图标省略。步骤 3 仅 check-imports.cjs 校验路径",
       "ref": "components/Icon.md",
       "files": [
         "src/components/delta-chip/index.jsx",

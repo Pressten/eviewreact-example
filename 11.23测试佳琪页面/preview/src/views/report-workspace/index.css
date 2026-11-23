@@ -1,0 +1,24 @@
+.report-workspace{--workspace-chat-width:clamp(22.5rem,calc((100vw - 3rem)*.3162393162),45rem);--workspace-panel-radius:1rem;--workspace-header-height:var(--spacing-12);position:relative;height:100dvh;display:grid;grid-template-columns:3rem var(--workspace-chat-width) minmax(0,1fr);grid-template-rows:var(--workspace-header-height) minmax(0,1fr);overflow:hidden;background:var(--surface-container-highest)}
+.workspace-global-header{grid-row:1}
+.workspace-navigation{grid-column:1;grid-row:2}
+.report-conversation{grid-column:2;grid-row:2}
+.workspace-report{grid-column:3;grid-row:2}
+.workspace-global-header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:var(--spacing-4);padding:0 var(--spacing-6);border-bottom:var(--border-width-thin) solid var(--divider);color:var(--on-surface-variant)}
+.workspace-brand,.workspace-account-tools,.workspace-account,.workspace-mode{display:flex;align-items:center;gap:var(--spacing-4)}
+.workspace-brand{gap:var(--spacing-8)}
+.workspace-brand img{object-fit:contain}
+.workspace-account-tools{gap:var(--spacing-6);font:var(--font-body-m)}
+.workspace-account{gap:var(--spacing-2);color:var(--on-surface)}
+.workspace-theme-toggle{display:grid;place-items:center;flex:none;width:var(--spacing-8);height:var(--spacing-8);padding:0;border:0;border-radius:var(--radius-action);background:transparent;color:var(--on-surface-variant);cursor:pointer}
+.workspace-theme-toggle:hover{background:var(--surface-variant);color:var(--on-surface)}
+.workspace-theme-toggle:focus-visible{outline:var(--outline-width-focus) solid var(--focus-ring);outline-offset:var(--outline-offset-gap)}
+.workspace-mode{gap:var(--spacing-5);padding:var(--spacing-1) var(--spacing-3);border:var(--border-width-thin) solid var(--outline-variant);border-radius:var(--radius-base);color:var(--on-surface)}
+.workspace-navigation{display:flex;flex-direction:column;align-items:center;min-width:0;border-right:var(--border-width-thin) solid var(--divider)}
+.workspace-assistant-mark{margin:var(--spacing-5) 0 var(--spacing-3)}
+.workspace-navigation-footer{margin-top:auto;padding:var(--spacing-4) 0;color:var(--on-surface-variant)}
+.workspace-report{display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;container:report-workspace / inline-size}
+.workspace-report-tabs{flex:none;display:flex;align-items:center;min-height:3.5rem;padding:0 var(--spacing-8);background:var(--surface-container-highest)}
+.workspace-report-tabs>div{flex:1;min-width:0}
+.workspace-report-scroll{min-height:0;flex:1;overflow:auto;scrollbar-width:thin;scrollbar-color:var(--outline) transparent}
+.workspace-report .inspection-report-page{padding:var(--report-space-section);min-height:0}
+.workspace-report,.workspace-report-tabs,.workspace-report-scroll{background:var(--report-canvas)}

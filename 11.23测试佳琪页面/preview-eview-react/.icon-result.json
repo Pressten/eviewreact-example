@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "mode": "C",
+  "failures": [],
+  "iconCallSites": 25,
+  "confirmed": 17,
+  "residual": 8,
+  "shimRetained": [],
+  "checks": {
+    "icon-shim": "PASS",
+    "icon-names": "PASS",
+    "imports": "PASS"
+  },
+  "confirmedSiteRepairs": [
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 11,
+      "site": "house (orphan placeholder IconPlusIcPublicTransverseRectangleTemplate auto-applied by --apply)",
+      "repair": "Replaced placeholder with IconPlusIcPublicHome (Public.Home, catalog-real). Original <Icon> had name/size only — no handler/title/aria/className props to preserve. Object value position (icon: <IconPlusIcPublicHome .../>), no {} wrap."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 12,
+      "site": "messages-square (UNMATCHED residual)",
+      "repair": "Replaced <Icon> shim with IconPlusIcPublicMessageBubble (Public.MessageBubble, catalog-real — semantic chat-bubble match for 智能体对话 nav item, better than candidates[0] IconPlusIcPublicSquare). Original had name/size only. Object value position, no {} wrap."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 14,
+      "site": "file-text (L6 residual)",
+      "repair": "Replaced <Icon> shim with IconPlusIcDigitalPowerDpDocText (DigitalPowerDp.DocText, catalog-real — document-with-text match for 检查报告 nav item, better than FileTextured candidates). Original had name/size only. Object value position, no {} wrap."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 31,
+      "site": "circle-question-mark (UNMATCHED residual)",
+      "repair": "Replaced <Icon> shim with IconPlusIcPublicQuestionmarkCircle (Public.QuestionmarkCircle, catalog-real — exact semantic match for circle-with-question-mark, better than candidates[0] IconPlusIcIctMark). Original <Icon> had name/size only. JSX child position. NOTE: onClick/title/aria-* live on the adjacent <button workspace-theme-toggle> (parent), NOT on this <Icon> — no prop migration needed; that button is a real semantic <button role=switch> (not an antd Button to strip), stays untouched."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 35,
+      "site": "user-round (L6 residual)",
+      "repair": "Replaced <Icon> shim with IconPlusIcPublicPerson (Public.Person, catalog-real — single-user figure, better semantic match than candidates[0] IconPlusIcCarUser). Original had name/size only. JSX child position (inside <span workspace-account>)."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 42,
+      "site": "panel-left-close (UNMATCHED residual)",
+      "repair": "Replaced <Icon> shim with IconPlusIcPublicClose (Public.Close, candidates[0] — closest catalog-real for sidebar-close action; no PanelLeftClose semantic equivalent exists). Original had name/size only. JSX child position (inside <span workspace-navigation-footer>)."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 2,
+      "site": "import line (residual cleanup)",
+      "repair": "Removed IconPlusIcPublicTransverseRectangleTemplate (placeholder replaced by Home); added IconPlusIcDigitalPowerDpDocText, IconPlusIcPublicClose, IconPlusIcPublicHome, IconPlusIcPublicMessageBubble, IconPlusIcPublicPerson, IconPlusIcPublicQuestionmarkCircle. Removed `import Icon from '@/shared/Icon'` (no <Icon> usage remains in file)."
+    },
+    {
+      "file": "src/components/status-mark/index.jsx",
+      "line": 2,
+      "site": "import line (residual cleanup)",
+      "repair": "Replaced `import Icon from '@/shared/Icon'` with `import { IconPlusIcPublicCheckmark, IconPlusIcPublicCloseCircle } from '@hui/icon-plus'`."
+    },
+    {
+      "file": "src/components/status-mark/index.jsx",
+      "line": 6,
+      "site": "failed?'circle-x':'circle-check' flat ternary residual (circle-x UNMATCHED + circle-check SEMANTIC)",
+      "repair": "Replaced `<Icon name={failed?'circle-x':'circle-check'} size='0.75rem'/>` with `failed ? <IconPlusIcPublicCloseCircle iconSize='0.75rem' iconColor={['currentcolor']} /> : <IconPlusIcPublicCheckmark iconSize='0.75rem' iconColor={['currentcolor']} />`. circle-x → IconPlusIcPublicCloseCircle (Public.CloseCircle, catalog-real — circle-with-X exact match for lucide circle-x). circle-check → IconPlusIcPublicCheckmark (Public.Checkmark, SEMANTIC_MAP confirmed). Original <Icon> had name/size only — no className/onClick/title/aria props to preserve. Ternary-branch position (inside outer ternary `unknown||!showIcon?undefined:EXPR`), NO outer {} wrap per Icon.md {} context rule (expression position)."
+    },
+    {
+      "file": "src/components/segmented-compliance-gauge/index.jsx",
+      "line": 4,
+      "site": "import line (residual cleanup)",
+      "repair": "Replaced `import Icon from '@/shared/Icon'` with `import { IconPlusIcPublicSortDown, IconPlusIcPublicSortUp } from '@hui/icon-plus'`."
+    },
+    {
+      "file": "src/components/segmented-compliance-gauge/index.jsx",
+      "line": 53,
+      "site": "change>=0?'arrow-up':'arrow-down' flat ternary residual (both branches residual: arrow-up L7 + arrow-down UNMATCHED)",
+      "repair": "Replaced `<Icon className='report-gauge-trend-icon' name={change>=0?'arrow-up':'arrow-down'} size='0.875rem'/>` with `{change>=0 ? <IconPlusIcPublicSortUp iconSize='0.875rem' iconColor={['currentcolor']} className='report-gauge-trend-icon' /> : <IconPlusIcPublicSortDown iconSize='0.875rem' iconColor={['currentcolor']} className='report-gauge-trend-icon' />}`. Picked symmetric Public.SortUp/SortDown pair (both catalog-real, same domain — better than script's asymmetric suggestion DigitalPowerDp.ArrowMoveUp + Public.SortDown) for visual consistency as up/down trend arrows. className='report-gauge-trend-icon' PRESERVED on BOTH branches (handler-prop/title/aria blind spot: original had no handler/title/aria — only className, which is preserved). JSX child position (inside Fragment <>...</>), wrapped in {} per Icon.md {} context rule."
+    }
+  ]
+}

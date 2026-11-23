@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "accordion": "PASS",
+    "chart-options": "PASS",
+    "crumbs": "PASS",
+    "css": "PASS",
+    "dark-mode": "PASS",
+    "divmessage": "PASS",
+    "dropdown": "PASS",
+    "group-jsx": "PASS",
+    "i18n-keys": "PASS",
+    "imports": "PASS",
+    "jsx-extension": "PASS",
+    "messagedialog-defaults": "PASS",
+    "props-preserved": "PASS",
+    "provider": "PASS",
+    "rangepicker": "PASS",
+    "select-form": "PASS",
+    "select-options": "PASS",
+    "steps-defaults": "PASS",
+    "table-defaults": "ADVISORY",
+    "token-drift": "ADVISORY",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [
+    {
+      "check": "table-defaults",
+      "item": "src/components/inspection-results/index.jsx:64 <Table> 缺 allowSort 标记 → eview 默认 true 全列表头带排序箭头",
+      "resolution": "源 antd columns（ruleColumns + deviceColumns）每列均设 sorter 函数，eview allowSort 默认 true 与源行为一致。无需补 allowSort: false（源无任何列缺 sorter）。keepSorter 函数保留（eview 忽略但不报错）。"
+    },
+    {
+      "check": "table-defaults",
+      "item": "src/components/report-detail-drawer/index.jsx:61 <Table> 缺 allowSort 标记（RuleDeviceEvidence 表）",
+      "resolution": "源 antd columns（name + statusColumn + evidenceColumn）每列均设 sorter 函数，eview allowSort 默认 true 与源行为一致。无需补 allowSort: false。"
+    },
+    {
+      "check": "table-defaults",
+      "item": "src/components/report-detail-drawer/index.jsx:120 <Table> 缺 allowSort 标记（DeviceRuleEvidence 表）",
+      "resolution": "源 antd columns（name + statusColumn + evidenceColumn/expected）每列均设 sorter 函数，eview allowSort 默认 true 与源行为一致。无需补 allowSort: false。"
+    },
+    {
+      "check": "token-drift",
+      "item": "73 处 UNDEFINED_REF：业务 CSS 引用 var(--report-*) / var(--workspace-*) 但未在 src/styles/*.css 四层中定义",
+      "resolution": "全部 --report-* 和 --workspace-* token 均定义于 src/views/report-workspace/event-colors.css 的 .report-workspace 选择器作用域内（scoped CSS custom properties，非全局 :root），如 --report-canvas、--report-space-section、--workspace-chat-width 等。check-token-drift.cjs 仅扫描 src/styles/{base,light,theme,dark}.css 的全局 :root 定义，不识别业务 CSS 中的 scoped 定义，故全部 73 处为 false positive。这些 token 在源项目即以 scoped 方式定义（pre-existing），阶段2 迁移未引入也未修改。无需修复。"
+    }
+  ]
+}
