@@ -1,0 +1,17 @@
+.device-inspection-rule {
+  border-bottom: var(--border-width-thin) solid var(--color-border-separator);
+}
+
+.device-inspection-rule[aria-pressed="true"] {
+  border-bottom-color: transparent;
+  background: color-mix(in srgb, var(--color-select) 60%, var(--color-bg-2));
+}
+
+.device-inspection-rule strong {
+  font-weight: var(--font-weight-medium);
+}
+
+.rule-inspection-criterion .device-inspection-rule-link {
+  margin-inline-start: auto;
+  font: var(--font-body-s);
+}

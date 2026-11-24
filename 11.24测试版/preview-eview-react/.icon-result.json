@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "mode": "C",
+  "failures": [],
+  "iconCallSites": 26,
+  "confirmed": 17,
+  "residual": 9,
+  "shimRetained": [],
+  "checks": {
+    "icon-shim": "PASS",
+    "icon-names": "PASS",
+    "imports": "PASS"
+  },
+  "confirmedSiteRepairs": [
+    {
+      "file": "src/components/report-overview/index.jsx",
+      "line": 25,
+      "site": "<Icon name=\"server\" size=\"0.875rem\"/> (literal, residual — script L3 suggested IconPlusIcIctServers)",
+      "repair": "Closed-set literal → icon+ static import. Replaced with <IconPlusIcIctServers iconSize=\"0.875rem\" iconColor={['currentcolor']} />; merged import into existing @hui/icon-plus line and dropped now-unused '@/shared/Icon' import. Props review: original had only name+size (no onClick/title/aria/style/className) — none to preserve; iconSize透传 0.875rem."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 11,
+      "site": "icon:<IconPlusIcPublicTransverseRectangleTemplate .../> (orphan placeholder auto-applied by --apply for source name 'house', UNMATCHED in catalog)",
+      "repair": "Closed-set literal (nav '首页'/home) → replaced orphan placeholder with catalog-real IconPlusIcPublicHome (Public bucket, leaf 'Home'). iconSize=\"1rem\" iconColor currentcolor preserved from placeholder. Props review: nav data entry, no interactive props."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 12,
+      "site": "icon:<Icon name=\"messages-square\" size=\"1rem\"/> (literal, residual — script UNMATCHED, candidates all 'Square' semantically wrong)",
+      "repair": "Closed-set literal (nav '智能体对话'/AI conversation) → icon+ static import. Chose catalog-real IconPlusIcPublicMessageBubble (Public bucket, leaf 'MessageBubble') as semantically correct chat/conversation icon over script's Square candidates. Replaced with <IconPlusIcPublicMessageBubble iconSize=\"1rem\" iconColor={['currentcolor']} />. Props review: nav data entry, no interactive props."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 14,
+      "site": "icon:<Icon name=\"file-text\" size=\"1rem\"/> (literal, residual — script L6 suggested IconPlusIcDigitalPowerDpFile)",
+      "repair": "Closed-set literal (nav '检查报告'/report) → icon+ static import. Used script-suggested catalog-real IconPlusIcDigitalPowerDpFile (DigitalPowerDp bucket, leaf 'File'). Replaced with <IconPlusIcDigitalPowerDpFile iconSize=\"1rem\" iconColor={['currentcolor']} />. Props review: nav data entry, no interactive props."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 25,
+      "site": "<Icon name=\"circle-question-mark\" size=\"1.25rem\"/> (literal, residual — script UNMATCHED)",
+      "repair": "Closed-set literal (help/question icon) → icon+ static import. Found exact catalog-real match IconPlusIcPublicQuestionmarkCircle (Public bucket, leaf 'QuestionmarkCircle') via catalog grep. Replaced with <IconPlusIcPublicQuestionmarkCircle iconSize=\"1.25rem\" iconColor={['currentcolor']} />. Props review: original had only name+size, no interactive props."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 29,
+      "site": "<Icon name=\"user-round\" size=\"1.25rem\"/> (literal, residual — script L6 suggested IconPlusIcCarUser)",
+      "repair": "Closed-set literal (account user icon) → icon+ static import. Used script-suggested catalog-real IconPlusIcCarUser (Car bucket, leaf 'User', the only plain 'User' leaf in catalog). Replaced with <IconPlusIcCarUser iconSize=\"1.25rem\" iconColor={['currentcolor']} />. Props review: original had only name+size, no interactive props."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 36,
+      "site": "<Icon name=\"panel-left-close\" size=\"1rem\"/> (literal, residual — script UNMATCHED, top candidate IconPlusIcPublicClose)",
+      "repair": "Closed-set literal (nav panel close/collapse action) → icon+ static import. Chose catalog-real IconPlusIcPublicClose (Public bucket, leaf 'Close') as semantically appropriate close action. Replaced with <IconPlusIcPublicClose iconSize=\"1rem\" iconColor={['currentcolor']} />. Props review: original had only name+size, no onClick/title/aria to preserve."
+    },
+    {
+      "file": "src/components/segmented-compliance-gauge/index.jsx",
+      "line": 53,
+      "site": "<Icon className=\"report-gauge-trend-icon\" name={change>=0?'arrow-up':'arrow-down'} size=\"0.875rem\"/> (flat ternary, residual — script marked both branches residual)",
+      "repair": "Closed-set flat ternary (two literal branches) → icon+ conditional render. Chose symmetric catalog-real pair IconPlusIcPublicSortUp/IconPlusIcPublicSortDown (Public bucket, leaves 'SortUp'/'SortDown') for up/down trend. JSX child-node position → whole ternary wrapped in {}: {change>=0 ? <IconPlusIcPublicSortUp iconSize=\"0.875rem\" iconColor={['currentcolor']} className=\"report-gauge-trend-icon\" /> : <IconPlusIcPublicSortDown iconSize=\"0.875rem\" iconColor={['currentcolor']} className=\"report-gauge-trend-icon\" />}. Props review: className=\"report-gauge-trend-icon\" preserved on BOTH branches; no onClick/title. TERNARY_WRAP_LOST check: {} wrap present, PASS."
+    },
+    {
+      "file": "src/components/status-mark/index.jsx",
+      "line": 6,
+      "site": "<Icon name={failed?'circle-x':'circle-check'} size=\"0.75rem\"/> (flat ternary, residual — circle-x UNMATCHED, circle-check confirmed)",
+      "repair": "Closed-set flat ternary (two literal branches) → icon+ conditional render. circle-x → catalog-real IconPlusIcPublicCloseCircle (Public bucket, leaf 'CloseCircle', exact match); circle-check → IconPlusIcPublicCheckmark (script SEMANTIC confirmed). Ternary-branch expression position (inside {(unknown||!showIcon)?null:<Icon/>}) → bare expression, NO extra {} (would become object literal): failed ? <IconPlusIcPublicCloseCircle iconSize=\"0.75rem\" iconColor={['currentcolor']} /> : <IconPlusIcPublicCheckmark iconSize=\"0.75rem\" iconColor={['currentcolor']} />. Props review: original had only name+size, no interactive props; both branches carry iconSize+iconColor."
+    }
+  ]
+}

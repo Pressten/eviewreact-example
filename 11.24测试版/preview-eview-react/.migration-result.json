@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "imports": "PASS-deferred",
+    "i18n-keys": "PASS",
+    "chart-options": "PASS",
+    "table-defaults": "PASS",
+    "provider": "PASS",
+    "css": "PASS",
+    "token-drift": "PASS",
+    "props-preserved": "PASS",
+    "steps-defaults": "PASS",
+    "dark-mode": "PASS",
+    "messagedialog-defaults": "PASS",
+    "accordion": "PASS",
+    "crumbs": "PASS",
+    "dropdown": "PASS",
+    "select-options": "PASS",
+    "rangepicker": "PASS",
+    "group-jsx": "PASS",
+    "divmessage": "PASS",
+    "jsx-extension": "PASS",
+    "select-form": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [
+    {
+      "check": "check-imports",
+      "item": "ICONS_RESIDUAL — 阶段2 图标未转时 @ant-design/icons 残留必然命中。经扫描全工程无 from '@ant-design/icons' 导入（项目使用 @/shared/Icon name= 调用点，非 @ant-design/icons），违规条目数为 0，全属该类 → PASS-deferred，留待阶段3 图标转换处理",
+      "resolution": "PASS-deferred：当前无 @ant-design/icons 残留导入（项目图标走 @/shared/Icon + name 属性），阶段3 图标转换时再处理 <Icon name=...> 调用点"
+    },
+    {
+      "check": "check-token-drift",
+      "item": "85 处 UNDEFINED_REF：业务 CSS（src/components/*/index.css + src/views/*/index.css + event-colors.css）引用 var(--report-*) / var(--workspace-*) 自定义业务 token，但 check-token-drift 仅扫描 src/styles/{base,light,theme,dark}.css 四层 token 定义，未扫描业务 CSS。这些 token 实际定义在 src/views/report-workspace/event-colors.css 的 :root 块（如 --report-space-section:var(--spacing-8) 等业务语义别名 token）",
+      "resolution": "无需处理：85 处 UNDEFINED_REF 全部是 Stage 1 既有的业务语义别名 token（--report-space-section / --report-canvas / --workspace-header-height 等），定义在业务 CSS 文件（event-colors.css :root 块）中，非本阶段 antd→eview-react 组件迁移引入。check-token-drift 仅扫 src/styles/ 四层定义文件，业务 CSS :root 定义未纳入扫描范围 → 误报。本次迁移未修改任何 CSS token 定义或引用，token 漂移检查无硬 FAIL（TOKEN_VALUE_DRIFT=0），exit=0"
+    }
+  ]
+}

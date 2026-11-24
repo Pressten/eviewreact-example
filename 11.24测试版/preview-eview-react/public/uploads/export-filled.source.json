@@ -1,0 +1,11 @@
+{
+  "platform": "iconfont",
+  "collectionId": 34056,
+  "collectionName": "系统",
+  "iconId": 23180646,
+  "iconName": "share-box-fill",
+  "source": "https://www.iconfont.cn/collections/detail?cid=34056",
+  "changes": [
+    "Inherited currentColor for ICT theme switching; original geometry preserved."
+  ]
+}

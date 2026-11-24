@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "i18n scenario A (hardcoded zh) — antd ConfigProvider/locale removed from app.jsx; scaffold main.jsx IntlProvider locale='zh' retained. Source icon.jsx moved to src/shared/Icon/Icon.jsx (named→default export), chart.jsx to src/shared/Chart/Chart.jsx + index.jsx barrel. context.jsx migrated verbatim (isDark/toggleTheme preserved). All ./assets/uploads/ refs rewritten to /uploads/. geometry.js byte-copied (single >2k char line, no transform patterns). Icon component still uses LUCIDE global + Chart still uses window.echarts — both deferred to Stage 2 replacement with @nce/eview-react equivalents."
+}

@@ -1,0 +1,79 @@
+.report-status-filters {
+  --status-group-gap: var(--report-space-group);
+  --status-label-gap: var(--report-space-related);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--report-space-related) var(--status-group-gap);
+  color: var(--color-text-primary);
+}
+
+.report-status-filters[data-compact] {
+  --status-group-gap: var(--spacing-1-5);
+  --status-label-gap: var(--spacing-1-5);
+}
+
+.report-status-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.report-status-option + .report-status-option {
+  padding-inline-start: var(--status-group-gap);
+  border-inline-start: var(--border-width-thin) solid var(--color-border-separator);
+}
+
+/* 单选框覆盖整个选项，文字、色点和计数都可点击。 */
+.report-status-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.report-status-content {
+  display: flex;
+  align-items: center;
+  gap: var(--status-label-gap);
+  border-radius: var(--radius-xs);
+  font: var(--font-body-m);
+  white-space: nowrap;
+}
+
+.report-status-input:focus-visible + .report-status-content {
+  outline: var(--outline-width-focus) solid var(--focus-ring);
+  outline-offset: var(--outline-offset-gap);
+}
+
+.report-status-dot {
+  flex: none;
+  width: var(--spacing-2);
+  height: var(--spacing-2);
+  border-radius: var(--radius-full);
+}
+
+[data-value="failed"] > .report-status-content .report-status-dot {
+  background: var(--color-error);
+}
+
+[data-value="passed"] > .report-status-content .report-status-dot {
+  background: var(--color-success);
+}
+
+.report-status-count {
+  padding-inline: var(--spacing-1);
+  border: var(--border-width-thin) solid transparent;
+  border-radius: var(--radius-xl);
+  font: var(--font-body-l);
+  line-height: 1.25rem;
+}
+
+.report-status-input:checked + .report-status-content .report-status-count {
+  border-color: var(--brand-30);
+  background: var(--event-count-selected-fill);
+}
