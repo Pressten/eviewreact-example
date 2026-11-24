@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "accordion": "PASS",
+    "chart-options": "PASS",
+    "crumbs": "PASS",
+    "css": "PASS",
+    "dark-mode": "PASS",
+    "divmessage": "PASS",
+    "dropdown": "PASS",
+    "group-jsx": "PASS",
+    "i18n-keys": "PASS",
+    "imports": "PASS",
+    "jsx-extension": "PASS",
+    "messagedialog-defaults": "PASS",
+    "props-preserved": "PASS",
+    "provider": "PASS",
+    "rangepicker": "PASS",
+    "select-form": "PASS",
+    "select-options": "PASS",
+    "steps-defaults": "PASS",
+    "table-defaults": "PASS",
+    "token-drift": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [
+    {
+      "check": "token-drift",
+      "item": "UNDEFINED_REF — 84 处：业务 CSS 引用 var(--report-*) / var(--workspace-*) 等 token 但该 token 未在产物任何 CSS 层定义（源项目也无此 token）。涉及文件：src/components/compliance-summary/index.css (24 处)、src/components/inspection-results/index.css (2 处)、src/components/option-group/index.css (4 处)、src/components/report-dimension-tabs/index.css (1 处)、src/components/report-overview/index.css (16 处)、src/components/report-rule-detail/index.css (4 处)、src/components/segmented-compliance-gauge/index.css (12 处)、src/views/report-conversation/index.css (3 处)、src/views/report-page/index.css (6 处)、src/views/report-workspace/event-colors.css (4 处)、src/views/report-workspace/index.css (4 处)、src/components/report-device-detail/index.css (0 处未列)。全部为 --report-gauge-*、--report-card-*、--report-space-*、--report-overview-*、--report-ai-*、--report-brief-*、--workspace-*、--event-*、--status-*、--finding-*、--rule-* 等业务自定义 token",
+      "resolution": "保留不改——全部 84 处 UNDEFINED_REF 均为源项目（umd-to-antd-vite 阶段）预置的业务 CSS 引用，引用的 --report-* / --workspace-* token 名由源项目 AI 手写时发明但未在任何 CSS 层定义，非本次 antd→eview-react 组件迁移引入（check 脚本本身标注「源项目也无此 token——可能 AI 手写时发明」）。本次迁移仅替换 antd 组件为 eview-react 组件 + 清理 .ant-* 选择器，未触碰业务 CSS 的 token 引用。这些未定义引用应在独立的 CSS token 治理 pass 中统一补定义或改用已定义 token，不属于组件迁移门禁范围。"
+    }
+  ]
+}

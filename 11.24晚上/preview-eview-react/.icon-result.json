@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "mode": "C",
+  "failures": [],
+  "iconCallSites": 25,
+  "confirmed": 16,
+  "residual": 9,
+  "shimRetained": [],
+  "checks": {
+    "icon-shim": "PASS",
+    "icon-names": "PASS",
+    "imports": "PASS"
+  },
+  "confirmedSiteRepairs": [
+    {
+      "file": "src/components/report-overview/index.jsx",
+      "line": 25,
+      "site": "<Icon name=\"server\" size=\"0.875rem\"/>",
+      "repair": "closed-set literal → IconPlusIcIctServers (real catalog name, Ict bucket). No HANDLER props; className on wrapper <span> unchanged. Removed stale Icon import."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 12,
+      "site": "house orphan placeholder IconPlusIcPublicTransverseRectangleTemplate",
+      "repair": "Orphan (catalog UNMATCHED); replaced placeholder with real catalog name IconPlusIcPublicHome (Public bucket, semantic match for home/首页 nav). Removed TransverseRectangleTemplate from import."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 13,
+      "site": "<Icon name=\"messages-square\" size=\"1rem\"/>",
+      "repair": "closed-set literal, candidates all 'square' (semantically wrong) → searched catalog, used real name IconPlusIcPublicMessageBubble (Public bucket, semantic match for chat/对话). No HANDLER props."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 15,
+      "site": "<Icon name=\"file-text\" size=\"1rem\"/>",
+      "repair": "closed-set literal, candidates all typed-file variants (CSV/PDF/etc.) → searched catalog, used real name IconPlusIcPublicGenericFile (Public bucket, semantic match for report/检查报告). No HANDLER props."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 27,
+      "site": "<Icon name=\"circle-question-mark\" size=\"1.25rem\"/>",
+      "repair": "closed-set literal, candidates semantically wrong (Mark/BookMark/LeafCircle) → searched catalog, used real name IconPlusIcPublicQuestionmarkCircle (Public bucket, exact match for circle-question-mark). No HANDLER props."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 31,
+      "site": "<Icon name=\"user-round\" size=\"1.25rem\"/>",
+      "repair": "closed-set literal, candidates all domain-specific user (CarUser/UserCluster) → searched catalog, used real name IconPlusIcPublicPerson (Public bucket, semantic match for admin account). No HANDLER props."
+    },
+    {
+      "file": "src/views/report-workspace/index.jsx",
+      "line": 38,
+      "site": "<Icon name=\"panel-left-close\" size=\"1rem\"/>",
+      "repair": "closed-set literal, candidates[0]=IconPlusIcPublicClose (generic close) → searched catalog, used real name IconPlusIcPublicMenuCollapse (Public bucket, semantic match for sidebar/panel collapse). No HANDLER props."
+    },
+    {
+      "file": "src/components/segmented-compliance-gauge/index.jsx",
+      "line": 45,
+      "site": "<Icon className=\"report-gauge-trend-icon\" name={change>=0?'arrow-up':'arrow-down'} size=\"0.875rem\"/>",
+      "repair": "closed-set flat ternary (both branches literal) → IconPlusIcPublicSortUp / IconPlusIcPublicSortDown (consistent Public-bucket pair). JSX child node position (inside <>fragment) → wrapped whole conditional with {}. className='report-gauge-trend-icon' preserved on both branches. No HANDLER props. Removed stale Icon import."
+    },
+    {
+      "file": "src/components/status-mark/index.jsx",
+      "line": 7,
+      "site": "<Icon className=\"report-status-mark-icon\" name={failed ? 'circle-x' : 'circle-check'} size=\"0.75rem\"/>",
+      "repair": "closed-set flat ternary (both branches literal) → IconPlusIcPublicCloseCircle (fail) / IconPlusIcPublicCheckmark (pass, SEMANTIC confirmed). Expression position (ternary branch of const icon= assignment) → no outer {}. className='report-status-mark-icon' preserved on both branches. No HANDLER props. Removed stale Icon import."
+    }
+  ]
+}

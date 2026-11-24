@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "relative-imports": "PASS"
+  },
+  "notes": "源项目 50 个文件已搬入 eview-react 工程并修正路径。assets/shared/icon.jsx → src/shared/Icon/Icon.jsx（export function → export default）；assets/shared/chart.jsx → src/shared/Chart/Chart.jsx + index.jsx 桶；antd-zh.js 未搬入（scenario A，IntlProvider 已由 scaffold main.jsx 接线）。业务组件 ../../../assets/shared/{icon,chart}.jsx 改为 @/shared/{Icon,Chart} 默认导入；JSX/CSS 中 ./assets/uploads/xxx 改为 /uploads/xxx；app.jsx 删除 ConfigProvider/zhCN/componentTheme，加 body.aui3_1_dark 暗色轨，context.jsx 保留 useApp/toggleTheme 契约。geometry.js 因单行超 2000 字符无法经 read/write 文本工具完整搬运，改用 Copy-Item 字节拷贝（无编码风险）。check-relative-imports.cjs 验证通过。"
+}
