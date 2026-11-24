@@ -1,0 +1,4 @@
+/* eview Drawer 适配：嵌套抽屉抬升层级（对应源版 antd zIndex 1100）。 */
+.report-drawer-nested {
+  z-index: 1100;
+}

@@ -1,0 +1,24 @@
+.ev_textArea.evTextArea-custom {
+    display: inline-flex;
+    min-width: 0px;
+}
+
+.evTextArea-custom .ev_textArea_area_container {
+    flex: 1;
+    min-width: 0px;
+    display: inline-flex;
+}
+
+
+.evTextArea-custom .ev_textArea_area {
+    flex: 1;
+    min-width: 0px;
+}
+
+.evTextArea-custom .ev_textArea_area_container .ev_form_standardTip {
+    align-self: flex-end;
+}
+
+.aui3_1_dark .ev_textArea_area_container_num {
+    background-color: transparent;
+}
