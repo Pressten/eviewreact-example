@@ -1,0 +1,14 @@
+.report-rule-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--interactive-link);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.rule-overview-item .report-rule-link { color: var(--on-surface); }
+.report-rule-link:hover { color: var(--interactive-link-hover); text-decoration: underline; }
+.report-rule-link:focus-visible { outline: var(--outline-width-focus) solid var(--focus-ring); outline-offset: var(--outline-offset-gap); }

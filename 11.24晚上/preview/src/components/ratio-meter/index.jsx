@@ -1,6 +1,6 @@
 import {useMemo} from 'react';
 import {Tooltip} from 'antd';
-import Chart from '../../../assets/shared/chart.jsx';
+import EchartsCanvas from '../echarts-canvas/index.jsx';
 import {useReportChartTheme} from '../../context.jsx';
 import './index.css';
 
@@ -20,7 +20,7 @@ export default function RatioMeter({value,total,unit}) {
   return <Tooltip title={description}>
     <span className="report-ratio-meter" role="img" aria-label={percent===null?'合规率暂无数据':'合规率 '+percent.toFixed(1)+'%，'+description}>
       {percent!==null&&<span className="report-ratio-ring" aria-hidden="true">
-        {echartsOption&&<Chart echartsOption={echartsOption}/>}
+        {echartsOption&&<EchartsCanvas echartsOption={echartsOption}/>}
       </span>}
       <strong>{percent===null?'—':percent.toFixed(1)+'%'}</strong>
     </span>

@@ -1,8 +1,0 @@
-.report-dimension-panel {
-  display: flex;
-  flex-direction: column;
-  gap: var(--report-space-section);
-  min-width: 0;
-  padding-top: var(--report-space-section);
-  color: var(--on-surface);
-}

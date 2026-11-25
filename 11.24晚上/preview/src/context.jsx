@@ -5,10 +5,11 @@ const ReportChartThemeContext=createContext(null);
 const themeStorageKey='fabric.icbc-config-report.theme.v1';
 
 export function AppProvider({children}) {
+  // 默认浅色（design_system 规则 6：页面默认 light）；URL 参数优先，其次本地记忆的用户选择。
   const [isDark,setIsDark]=useState(()=>{
     const requested=new URLSearchParams(window.location.search).get('theme');
     if(requested==='dark'||requested==='light')return requested==='dark';
-    try{const saved=localStorage.getItem(themeStorageKey);return saved===null?true:saved==='dark';}catch{return true;}
+    try{return localStorage.getItem(themeStorageKey)==='dark';}catch{return false;}
   });
   useLayoutEffect(()=>{
     document.documentElement.classList.toggle('dark',isDark);

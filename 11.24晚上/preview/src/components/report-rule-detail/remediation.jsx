@@ -1,6 +1,6 @@
 import {useId, useRef, useState} from 'react';
 import {Button} from 'antd';
-import {Icon} from '../../../assets/shared/icon.jsx';
+import {Icon} from '../../../public/shared/icon.jsx';
 
 function CommandBlock({label, lines}) {
   const titleId = useId();

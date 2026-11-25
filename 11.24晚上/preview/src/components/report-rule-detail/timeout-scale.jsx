@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import Chart from '../../../assets/shared/chart.jsx';
+import EchartsCanvas from '../echarts-canvas/index.jsx';
 import {useReportChartTheme} from '../../context.jsx';
 
 function scaleOption(maximum, actual, maximumLabel, actualLabel, colors) {
@@ -40,6 +40,6 @@ export default function TimeoutScale({maximum, actual, maximumLabel, actualLabel
   const option = useMemo(() => colors && scaleOption(maximum, actual, maximumLabel, actualLabel, colors),
     [maximum, actual, maximumLabel, actualLabel, colors]);
   return <div className="rule-inspection-scale" aria-hidden="true">
-    {option && <Chart echartsOption={option}/>}
+    {option && <EchartsCanvas echartsOption={option}/>}
   </div>;
 }

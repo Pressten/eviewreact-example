@@ -1,6 +1,6 @@
 import {useMemo, useRef, useState} from 'react';
 import {Empty} from 'antd';
-import {ruleSeverities} from '../../utils/rule-severity.js';
+import {ruleSeverities} from '../../constants/rule-severity.js';
 import OptionGroup from '../option-group/index.jsx';
 import {InspectionHeader, inspectionTime, RuleEvidence} from '../report-rule-detail/index.jsx';
 import ReportRuleLink from '../report-rule-link/index.jsx';
@@ -14,7 +14,7 @@ const deviceRuleOrder = {ssh: 0, timeout: 1, mgmt: 2, ntp2: 3};
 export function ReportDeviceHeader({device, checkedAt}) {
   const failed = device.status === 'failed';
   const unknown = device.status === 'unknown';
-  return <InspectionHeader name={device.name} icon={<img src="./assets/uploads/detail-leaf-switch.svg" alt=""/>}
+  return <InspectionHeader name={device.name} icon={<img src="./public/uploads/detail-leaf-switch.svg" alt=""/>}
     badge={<StatusMark failed={failed} unknown={unknown} showIcon={false}>{unknown ? '无检查结果' : failed ? '不通过' : '通过'}</StatusMark>}
     metadata={[[ '设备IP', device.managementIp ], [ '厂商', device.vendor ], [ '型号', device.model ], [ '区域', device.region ],
       [ '检查时间', inspectionTime(device.checkedAt ?? checkedAt) ]]}/>;

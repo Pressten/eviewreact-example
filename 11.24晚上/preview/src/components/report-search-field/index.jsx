@@ -1,5 +1,5 @@
 import {Input} from 'antd';
-import {Icon} from '../../../assets/shared/icon.jsx';
+import {Icon} from '../../../public/shared/icon.jsx';
 
 export default function ReportSearchField({className, ariaLabel, placeholder, size, value, onChange, onSubmit}) {
   return <Input className={className} aria-label={ariaLabel} placeholder={placeholder} size={size} value={value}

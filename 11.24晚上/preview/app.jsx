@@ -1,25 +1,20 @@
+// App entry — ICT React page
 // 保留原工作台架构，仅实现当前报告与静态对话呈现。
+// ConfigProvider 用法与 skill 样板一致（zhCN locale + 全局 Empty/Spin 配置），
+// antd 组件皮肤统一在 public/style/ant.css，theme 保持默认 light 算法。
 import {ConfigProvider,Empty} from 'antd';
-import zhCN from './assets/shared/antd-zh.js';
+import zhCN from './public/shared/antd-zh.js';
 import ReportWorkspace from './src/views/report-workspace/index.jsx';
-import {AppProvider,useApp} from './src/context.jsx';
+import {AppProvider} from './src/context.jsx';
 import './app.css';
 
-const componentTheme = {
-  components: {
-    Menu: {collapsedWidth:48, collapsedIconSize:16, itemHeight:48, itemMarginInline:0},
-    // Drawer 的原生关闭键随 html.dark 使用同一组 ICT 前景色。
-    Drawer: {colorIcon:'var(--on-surface-variant)', colorIconHover:'var(--on-surface)'},
-  },
-};
-
-function AppSurface() {
- const {isDark}=useApp();
- return <ConfigProvider locale={zhCN} wave={{disabled:true}}
-   empty={{image:isDark?'./assets/uploads/no-data.svg':'./assets/uploads/empty.svg',imageStyle:{height:72}}}
-   renderEmpty={()=><Empty/>} theme={componentTheme}><ReportWorkspace/></ConfigProvider>;
-}
-
 export default function App() {
- return <AppProvider><AppSurface/></AppProvider>;
+  return <AppProvider>
+    <ConfigProvider locale={zhCN} wave={{disabled:true}}
+      renderEmpty={()=><Empty style={{padding:'2rem 0'}}/>}
+      empty={{image:'./public/uploads/empty.svg'}}
+      spin={{indicator:<img src='./public/uploads/loading.svg' alt='' className='custom-spin-indicator'/>}}>
+      <ReportWorkspace/>
+    </ConfigProvider>
+  </AppProvider>;
 }

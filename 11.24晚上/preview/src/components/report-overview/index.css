@@ -28,10 +28,11 @@
 }
 .rule-overview[data-dimension="devices"] h3 .report-rule-link>span{-webkit-line-clamp:1}
 .report-overview-priority{display:flex;align-items:center;gap:var(--report-space-related);margin:var(--report-space-related) 0 0;color:var(--on-surface-variant);font:var(--font-body-m)}
-.report-overview-priority i,.report-device-priorities i{flex:none;width:var(--spacing-2);height:var(--spacing-2);border-radius:var(--radius-full);background:var(--rule-priority-color)}
+.report-overview-priority i,.report-device-priorities i{flex:none;width:var(--spacing-2);height:var(--spacing-2);border-radius:var(--radius-full);background:var(--rule-priority-color,var(--on-surface-variant))}
+.report-overview-priority,.report-device-priorities>span{--rule-priority-color:var(--on-surface-variant)}
 .report-device-metadata{display:flex;gap:var(--spacing-2);margin:0;font:var(--font-body-m);line-height:var(--report-card-meta-line);color:var(--color-text-placeholder)}
 .report-device-metadata>span{display:inline-flex;align-items:center;gap:var(--spacing-0-5);white-space:nowrap}
-.report-address-icon{display:inline-block;flex:none;width:var(--report-address-icon-size);height:var(--report-address-icon-size);background:currentColor;mask:url('./assets/uploads/report-ip-address.svg') center/contain no-repeat}
+.report-address-icon{display:inline-block;flex:none;width:var(--report-address-icon-size);height:var(--report-address-icon-size);background:currentColor;mask:url('./public/uploads/report-ip-address.svg') center/contain no-repeat}
 .report-device-metadata .report-device-model{flex:0 0 var(--report-card-model-width)}
 .report-device-model>svg{flex:none}
 .report-overview-impact{display:flex;align-items:baseline;gap:var(--report-space-related);margin:0;color:var(--on-surface-variant);font:var(--font-body-s)}

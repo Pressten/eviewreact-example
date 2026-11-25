@@ -1,0 +1,92 @@
+{
+  "status": "PASS",
+  "round": 1,
+  "failures": [],
+  "checks": {
+    "accordion": "PASS",
+    "chart-options": "PASS",
+    "crumbs": "PASS",
+    "css": "PASS",
+    "dark-mode": "PASS",
+    "divmessage": "PASS",
+    "dropdown": "PASS",
+    "group-jsx": "PASS",
+    "i18n-keys": "PASS",
+    "imports": "PASS",
+    "jsx-extension": "PASS",
+    "messagedialog-defaults": "PASS",
+    "props-preserved": "PASS",
+    "provider": "PASS",
+    "rangepicker": "PASS",
+    "select-form": "PASS",
+    "select-options": "PASS",
+    "steps-defaults": "PASS",
+    "table-defaults": "PASS",
+    "token-drift": "PASS",
+    "relative-imports": "PASS(skip)",
+    "antd-css": "PASS",
+    "npm-install": "SKIP"
+  },
+  "reviews": [
+    {
+      "check": "table-defaults",
+      "item": "src/components/inspection-results/index.jsx:71 <Table> 缺 allowSort 标记（eview 默认 true 全列表头带排序箭头，源 antd 默认无）",
+      "resolution": "源 antd ruleColumns/deviceColumns 每列均显式设 sorter（6 列/7 列全有 sorter），eview allowSort 默认 true 与源一致——保留默认排序行为，无需逐列加 allowSort:false。enableZebraCrossing={false}（源无斑马纹）、width=\"unset\"（源无显式容器宽度）、enableColumnCompareUpdate（columns 经 .map 动态构建）均已补齐。columnsAllWidth 硬 FAIL 未触发（name/expected 列无 width，非全列定宽）。"
+    },
+    {
+      "check": "token-drift",
+      "item": "src/components/compliance-summary/index.css:2-25 UNDEFINED_REF（25 处：--report-overview-height/--report-space-section/--report-overview-surface/--report-space-card/--report-overview-title-size/--report-overview-title-line/--report-gauge-width/--report-overview-counts-width/--report-overview-body-min-height/--report-space-group/--report-outcome-row-height/--report-space-related/--report-overview-meta-inset/--report-overview-meta-line/--report-brief-height/--report-ai-tint/--report-ai-surface/--report-ai-blue/--report-ai-purple/--report-ai-red/--report-ai-red-strong/--report-brief-title-line/--report-brief-copy-line/--report-ai-orange/--report-gauge-box-height）",
+      "resolution": "这些 token 均定义于业务 CSS src/views/report-workspace/event-colors.css（.report-workspace 作用域内），非 src/styles/ token 层。check-token-drift 的 UNDEFINED_REF 仅扫 src/styles/{base,light,theme,dark}.css 查 token 定义、不扫业务 CSS，故误报。源自源项目（umd-to-antd-vite 产物），antd→eview 迁移未改这些 CSS；无需处理。"
+    },
+    {
+      "check": "token-drift",
+      "item": "src/components/inspection-results/index.css:2,5,6 UNDEFINED_REF（3 处：--report-space-group/--report-scope-width/--report-search-width）",
+      "resolution": "--report-space-group 定义于 event-colors.css:34；--report-scope-width/--report-search-width 定义于 event-colors.css:70-71。均为业务 CSS 作用域内定义，check-token-drift 不扫业务 CSS 查定义故误报；源自源项目，迁移未改，无需处理。"
+    },
+    {
+      "check": "token-drift",
+      "item": "src/components/option-group/index.css:2,3,7,42,78 UNDEFINED_REF（5 处：--report-space-group/--report-space-related/--status-group-gap/--status-label-gap/--event-count-selected-fill）",
+      "resolution": "--report-space-group/--report-space-related 定义于 event-colors.css:33-34；--status-group-gap/--status-label-gap 定义于 option-group/index.css:2-3,12-13 自身；--event-count-selected-fill 定义于 event-colors.css:13。均业务 CSS 作用域内定义，check 不扫业务 CSS 故误报；源自源项目，无需处理。"
+    },
+    {
+      "check": "token-drift",
+      "item": "src/components/report-dimension-tabs/index.css:4 UNDEFINED_REF（1 处：--report-space-section）",
+      "resolution": "--report-space-section 定义于 event-colors.css:36，业务 CSS 作用域内；check 不扫业务 CSS 故误报；源自源项目，无需处理。"
+    },
+    {
+      "check": "token-drift",
+      "item": "src/components/report-overview/index.css:2-46 UNDEFINED_REF（17 处：--report-space-group/--report-rule-card-height/--report-space-card/--report-card-outline/--report-card-surface/--report-device-card-height/--report-card-title-line/--report-card-hover-surface/--report-card-hover-outline/--report-space-related/--report-card-meta-line/--report-address-icon-size/--report-card-model-width/--report-impact-number-size/--report-impact-number-line/--report-card-detail-line/--report-priority-zero-opacity）",
+      "resolution": "全部定义于 event-colors.css:34-69（.report-workspace 作用域），业务 CSS 作用域内；check 不扫业务 CSS 故误报；源自源项目，无需处理。"
+    },
+    {
+      "check": "token-drift",
+      "item": "src/components/report-rule-detail/index.css:76,225,267,306 UNDEFINED_REF（4 处：--rule-evidence-card/--finding-card-min-width/--rule-detail-card/--rule-evidence-hit）",
+      "resolution": "--rule-detail-card/--rule-evidence-card/--rule-evidence-hit 定义于 report-rule-detail/index.css:74-76,80-81 自身；--finding-card-min-width 定义于 report-rule-detail/index.css:218 自身。均业务 CSS 作用域内定义，check 不扫业务 CSS 故误报；源自源项目，无需处理。"
+    },
+    {
+      "check": "token-drift",
+      "item": "src/components/segmented-compliance-gauge/index.css:1-9 UNDEFINED_REF（12 处：--report-gauge-width/--report-gauge-box-height/--report-gauge-height/--report-gauge-value-top/--report-gauge-value-size/--report-gauge-value-line/--report-gauge-unit-size/--report-gauge-percent-line/--report-gauge-caption-top/--report-gauge-caption-line/--report-gauge-caption-size/--report-gauge-active）",
+      "resolution": "全部定义于 event-colors.css:21,46-56（.report-workspace 作用域），业务 CSS 作用域内；check 不扫业务 CSS 故误报；源自源项目，无需处理。"
+    },
+    {
+      "check": "token-drift",
+      "item": "src/views/report-conversation/index.css:7,7,16 UNDEFINED_REF（3 处：--report-answer-fill/--workspace-panel-radius/--report-artifact-fill）",
+      "resolution": "--report-answer-fill/--report-artifact-fill 定义于 event-colors.css:11-12；--workspace-panel-radius 定义于 report-workspace/index.css:1 自身。均业务 CSS 作用域内定义，check 不扫业务 CSS 故误报；源自源项目，无需处理。"
+    },
+    {
+      "check": "token-drift",
+      "item": "src/views/report-page/index.css:1,1,3,4,37,37 UNDEFINED_REF（6 处：--report-space-section/--report-canvas/--report-space-group/--report-header-gap/--report-skeleton-base/--report-skeleton-highlight）",
+      "resolution": "--report-space-section/--report-canvas/--report-space-group/--report-header-gap 定义于 event-colors.css:14,34,36,37；--report-skeleton-base/--report-skeleton-highlight 定义于 report-page/index.css:20-21 自身。均业务 CSS 作用域内定义，check 不扫业务 CSS 故误报；源自源项目，无需处理。"
+    },
+    {
+      "check": "token-drift",
+      "item": "src/views/report-workspace/event-colors.css:18,18,27,28,29,30,31,37,76,77 UNDEFINED_REF（10 处：--report-card-outline-opacity/--report-card-outline/--report-ai-palette-blue/--report-ai-palette-purple/--report-ai-palette-red/--report-ai-palette-red-strong/--report-ai-palette-orange/--report-space-group/--report-design-neutral/--report-canvas）",
+      "resolution": "全部定义于 event-colors.css 自身（line 5-14,18,27-34）。该文件本身即 token 定义源，check 仅在'引用'维度扫到这些 var()（如 line 18 --report-card-outline 引用 --report-card-outline-opacity、line 37 --report-header-gap 引用 --report-space-group），但定义就在同文件上方；check 不扫业务 CSS 查定义故误报；源自源项目，无需处理。"
+    },
+    {
+      "check": "token-drift",
+      "item": "src/views/report-workspace/index.css:1,1,23,24 UNDEFINED_REF（4 处：--workspace-chat-width/--workspace-header-height/--report-space-section/--report-canvas）",
+      "resolution": "--workspace-chat-width/--workspace-header-height 定义于 report-workspace/index.css:1 自身（.report-workspace 作用域）；--report-space-section/--report-canvas 定义于 event-colors.css:14,36。均业务 CSS 作用域内定义，check 不扫业务 CSS 故误报；源自源项目，无需处理。"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import {useMemo} from 'react';
 import {Tooltip} from 'antd';
-import Chart from '../../../assets/shared/chart.jsx';
-import {Icon} from '../../../assets/shared/icon.jsx';
+import EchartsCanvas from '../echarts-canvas/index.jsx';
+import {Icon} from '../../../public/shared/icon.jsx';
 import {useReportChartTheme} from '../../context.jsx';
 import {gaugeGeometry} from './geometry.js';
 import './index.css';
@@ -36,7 +36,7 @@ export default function SegmentedComplianceGauge({summary,comparison}){
   const change=comparison&&summary.total?summary.passed/summary.total*100-comparison.passed/comparison.total*100:null;
   return <div className="segmented-compliance-gauge" role="img" aria-label={'设备合规率 '+summary.compliance+'%，'+summary.passed+' / '+summary.total+' 台设备通过'}>
     <div className="segmented-compliance-plot">
-      {echartsOption&&<Chart echartsOption={echartsOption}/>}
+      {echartsOption&&<EchartsCanvas echartsOption={echartsOption}/>}
     </div>
     <div className="segmented-compliance-value"><strong>{summary.compliance}</strong><span>%</span></div>
     <Tooltip title={change===null?'通过设备数 / 已检查设备数':'较上次提升 '+change.toFixed(1)+' 个百分点'}>

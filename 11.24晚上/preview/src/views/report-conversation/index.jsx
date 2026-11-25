@@ -1,4 +1,4 @@
-import {Icon} from '../../../assets/shared/icon.jsx';
+import {Icon} from '../../../public/shared/icon.jsx';
 import {reportData} from '../../mock/report.js';
 import {reportSummary,rankedFailedRules} from '../../utils/report-summary.js';
 import './index.css';
@@ -17,7 +17,7 @@ export default function ReportConversation({onShowReport}) {
           <h2>重点问题</h2><ul>{rules.slice(0,3).map(rule=><li key={rule.id}><span>{rule.name}</span><strong>{rule.failed} 台设备</strong></li>)}</ul></>:
           <p>{summary.total?'本次检查未发现不通过结果。':'完成检查后可查看报告统计。'}</p>}
         <a href="#report" className="report-conversation-artifact" onClick={event=>{event.preventDefault();onShowReport();}}>
-          <img src="./assets/uploads/lui-report-file.svg" width="28" height="28" alt=""/><span><strong>配置基线检查 · 检查报告</strong><small>{summary.total} 台设备 · {summary.ruleCount} 条规则</small></span><span>预览</span>
+          <img src="./public/uploads/lui-report-file.svg" width="28" height="28" alt=""/><span><strong>配置基线检查 · 检查报告</strong><small>{summary.total} 台设备 · {summary.ruleCount} 条规则</small></span><span>预览</span>
         </a>
       </article>
     </div>

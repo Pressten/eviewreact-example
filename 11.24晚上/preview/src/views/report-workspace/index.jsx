@@ -1,6 +1,6 @@
 import {useRef} from 'react';
 import {Menu,Tabs} from 'antd';
-import {Icon} from '../../../assets/shared/icon.jsx';
+import {Icon} from '../../../public/shared/icon.jsx';
 import ReportPage from '../report-page/index.jsx';
 import ReportConversation from '../report-conversation/index.jsx';
 import {ReportChartThemeProvider,useApp} from '../../context.jsx';
@@ -21,7 +21,7 @@ export default function ReportWorkspace() {
   const showReport=()=>document.getElementById('report-scroll')?.scrollTo({top:0,behavior:'smooth'});
   return <div ref={workspaceRef} className="report-workspace">
     <header className="workspace-global-header">
-      <div className="workspace-brand"><Icon name="menu" size="1.5rem"/><img src={isDark?'./assets/uploads/shell-brand.svg':'./assets/uploads/shell-brand-light.svg'} width="144" height="24" alt="iMaster NCE"/></div>
+      <div className="workspace-brand"><Icon name="menu" size="1.5rem"/><img src={isDark?'./public/uploads/shell-brand.svg':'./public/uploads/shell-brand-light.svg'} width="144" height="24" alt="iMaster NCE"/></div>
       <div className="workspace-account-tools"><span className="workspace-mode">智驾模式<Icon name="chevron-down" size="0.875rem"/></span>
         <Icon name="search" size="1.25rem"/><Icon name="circle-question-mark" size="1.25rem"/>
         <button type="button" className="workspace-theme-toggle" role="switch" aria-checked={isDark} aria-label="深色主题" title={isDark?'切换为浅色主题':'切换为深色主题'} onClick={toggleTheme}>
@@ -31,7 +31,7 @@ export default function ReportWorkspace() {
       </div>
     </header>
     <aside className="workspace-navigation" aria-label="主导航">
-      <img className="workspace-assistant-mark" src="./assets/uploads/nav-assistant.svg" width="24" height="24" alt="Aico"/>
+      <img className="workspace-assistant-mark" src="./public/uploads/nav-assistant.svg" width="24" height="24" alt="Aico"/>
       <Menu mode="inline" inlineCollapsed selectedKeys={['chat']} items={navigation} onClick={showReport}/>
       <span className="workspace-navigation-footer"><Icon name="panel-left-close" size="1rem"/></span>
     </aside>

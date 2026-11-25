@@ -1,10 +1,9 @@
+import {Icon} from '../../../public/shared/icon.jsx';
 import './index.css';
 
-// Official Ant Design two-tone geometry; the parent supplies ICT theme colors.
+// 状态图标一律走 Lucide（Icon.md：绝不手写 SVG path）；
+// 颜色由 ICT 语义 token 经 currentColor 注入描边。
 export default function ReportStatusIcon({failed = false}) {
-  return <svg className="report-status-icon" viewBox="0 0 1024 1024"
-    width="20" height="20" aria-hidden="true" focusable="false"
-    style={{color: failed ? 'var(--icon-error)' : 'var(--icon-success)'}}>
-    <use href={'./assets/uploads/report-status-icons.svg#' + (failed ? 'close-circle' : 'check-circle')}/>
-  </svg>;
+  return <Icon className="report-status-icon" name={failed ? 'circle-x' : 'circle-check-big'}
+    size="1.25rem" style={{color: failed ? 'var(--icon-error)' : 'var(--icon-success)'}}/>;
 }

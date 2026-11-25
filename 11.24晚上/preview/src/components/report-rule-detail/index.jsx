@@ -1,7 +1,7 @@
 import {useMemo, useRef, useState} from 'react';
 import {Button, Empty, Tag} from 'antd';
 import {ruleDeviceRows} from '../../utils/report-summary.js';
-import {ruleSeverities} from '../../utils/rule-severity.js';
+import {ruleSeverities} from '../../constants/rule-severity.js';
 import OptionGroup from '../option-group/index.jsx';
 import ReportDeviceLink from '../report-device-link/index.jsx';
 import ReportSearchField from '../report-search-field/index.jsx';
@@ -38,7 +38,7 @@ export function InspectionHeader({name, icon, badge, metadata}) {
 
 export function ReportRuleHeader({rule, checkedAt}) {
   const severity = ruleSeverities[rule.priority];
-  return <InspectionHeader name={rule.name} icon={<img src="./assets/uploads/uc2-rule-detail/rule-overview.svg" alt=""/>}
+  return <InspectionHeader name={rule.name} icon={<img src="./public/uploads/uc2-rule-detail/rule-overview.svg" alt=""/>}
     badge={severity && <Tag color={severity.tagColor}>{severity.label}</Tag>}
     metadata={[[ '检查时间', inspectionTime(checkedAt) ], [ '规则编号', rule.id ],
       [ '适用设备', rule.total + ' 台' ], [ '不通过设备', rule.failed + ' 台' ]]}/>;

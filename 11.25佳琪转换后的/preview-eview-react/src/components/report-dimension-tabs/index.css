@@ -1,0 +1,9 @@
+.report-dimension-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--report-space-section);
+  min-width: 0;
+  /* Tabs.md：items children 根容器 padding-top: 1rem（spec 精确值）。 */
+  padding-top: 1rem;
+  color: var(--on-surface);
+}

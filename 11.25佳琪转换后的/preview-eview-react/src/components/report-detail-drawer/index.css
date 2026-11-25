@@ -1,0 +1,55 @@
+.rule-inspection-drawer-body {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% + var(--spacing-inset));
+  min-height: 0;
+  /* 业务底板铺至 Drawer 正文边缘，两个内栏仍对齐共享正文内距。 */
+  margin: 0 calc(-1 * var(--spacing-inset)) calc(-1 * var(--spacing-inset));
+  padding: 0 var(--spacing-inset) var(--spacing-inset);
+  border-block-start: var(--border-width-thin) solid var(--divider);
+  background: var(--surface-container);
+}
+
+/* 单抽屉钻取：标题区 = 返回箭头 + 当前层详情头（Drawer.md：同一抽屉内切换内容）。 */
+.rule-inspection-drill {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+.rule-inspection-drill .rule-inspection-overview {
+  flex: 1;
+  min-width: 0;
+}
+.rule-inspection-drill-back {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-action);
+  background: transparent;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+}
+.rule-inspection-drill-back:hover {
+  background: var(--surface-variant);
+  color: var(--on-surface);
+}
+.rule-inspection-drill-back:focus-visible {
+  outline: var(--outline-width-focus) solid var(--focus-ring);
+  outline-offset: var(--outline-offset-gap);
+}
+
+/* 钻取层级容器：仅顶层可见，父层保持挂载（保留筛选状态），回退即时切换。 */
+.rule-inspection-drawer-level {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+}
+.rule-inspection-drawer-level[hidden] {
+  display: none;
+}

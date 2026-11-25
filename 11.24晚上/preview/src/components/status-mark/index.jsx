@@ -1,5 +1,5 @@
 import {Tag} from 'antd';
-import {Icon} from '../../../assets/shared/icon.jsx';
+import {Icon} from '../../../public/shared/icon.jsx';
 import './index.css';
 
 export default function StatusMark({failed,unknown=false,showIcon=true,children}) {

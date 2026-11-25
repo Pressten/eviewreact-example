@@ -1,7 +1,7 @@
 import {Empty} from 'antd';
-import {Icon} from '../../../assets/shared/icon.jsx';
+import {Icon} from '../../../public/shared/icon.jsx';
 import {devicePriorityCounts,overviewEmptyState} from '../../utils/report-summary.js';
-import {ruleSeverities} from '../../utils/rule-severity.js';
+import {ruleSeverities} from '../../constants/rule-severity.js';
 import ReportRuleLink from '../report-rule-link/index.jsx';
 import ReportDeviceLink from '../report-device-link/index.jsx';
 import './index.css';

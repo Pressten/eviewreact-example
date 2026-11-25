@@ -1,5 +1,5 @@
 import {useEffect,useRef,useState} from 'react';
-import {Icon} from '../../../assets/shared/icon.jsx';
+import {Icon} from '../../../public/shared/icon.jsx';
 import {reportData} from '../../mock/report.js';
 import {deviceResults,rankedFailedDevices,reportConclusion,reportSummary,rankedFailedRules,resultCounts} from '../../utils/report-summary.js';
 import {downloadReport} from '../../utils/report-export.js';
@@ -54,16 +54,17 @@ export default function ReportPage() {
     catch (error) { setExportError(error.message || '导出失败，请重试'); }
     finally { setExporting(false); }
   };
-  const [selection, setSelection] = useState(null);
-  const [relatedSelection, setRelatedSelection] = useState(null);
-  const openDetail = (entry, setter) => {
+  // 抽屉钻取栈：栈底由页面链接打开，抽屉内规则↔设备互钻逐层入栈，返回逐层回退（单抽屉，不级联）。
+  const [detailStack, setDetailStack] = useState([]);
+  const [detailOpen, setDetailOpen] = useState(false);
+  const buildDetail = entry => {
     const deviceRecord = entry.type === 'device' ? devicesById.get(entry.device.id) : undefined;
-    if (entry.type === 'device' && !deviceRecord) return;
-    setter({...entry, deviceRecord, open: true});
+    if (entry.type === 'device' && !deviceRecord) return null;
+    return {...entry, deviceRecord};
   };
   const openPrimaryDetail = entry => {
-    setRelatedSelection(null);
-    openDetail(entry, setSelection);
+    const detail = buildDetail(entry);
+    if (detail) { setDetailStack([detail]); setDetailOpen(true); }
   };
   const showRule = rule => openPrimaryDetail({type: 'rule', rule});
   const showDevice = device => openPrimaryDetail({type: 'device', device});
@@ -71,7 +72,7 @@ export default function ReportPage() {
   return <main className="inspection-report-page" data-dimension={dimension} aria-busy={revealStage < revealDelays.length}>
     <header className="inspection-report-header">
       <div className="inspection-report-heading">
-        <div className="inspection-report-title"><img src="./assets/uploads/lui-report-file.svg" width="16" height="16" alt=""/><h1>配置基线检查报告</h1></div>
+        <div className="inspection-report-title"><img src="./public/uploads/lui-report-file.svg" width="16" height="16" alt=""/><h1>配置基线检查报告</h1></div>
         {reportData.execution&&<p className="inspection-report-time" aria-label="执行时间，北京时间">
           <span>执行时间：</span><time dateTime={reportData.execution.startedAt}>{displayTime(reportData.execution.startedAt)}</time>
           <span aria-hidden="true">—</span><time dateTime={reportData.execution.completedAt}>{displayTime(reportData.execution.completedAt)}</time>
@@ -95,10 +96,10 @@ export default function ReportPage() {
         <InspectionResults items={items} counts={counts} dimension={dimension} onOpenRule={showRule} onOpenDevice={showDevice}/>
       </ReportReveal>
     </ReportDimensionTabs>
-    <ReportDetailDrawer selection={selection} relatedSelection={relatedSelection}
+    <ReportDetailDrawer stack={detailStack} open={detailOpen}
       devices={reportData.devices} rules={reportData.rules} checkedAt={reportData.checkedAt}
-      onOpenRelated={entry => openDetail(entry, setRelatedSelection)}
-      onClose={() => setSelection(current => ({...current, open: false}))}
-      onCloseRelated={() => setRelatedSelection(current => ({...current, open: false}))}/>
+      onOpenRelated={entry => { const detail = buildDetail(entry); if (detail) setDetailStack(stack => [...stack, detail]); }}
+      onBack={() => setDetailStack(stack => stack.slice(0, -1))}
+      onClose={() => setDetailOpen(false)}/>
   </main>;
 }

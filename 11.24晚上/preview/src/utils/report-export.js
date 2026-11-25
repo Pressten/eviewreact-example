@@ -61,9 +61,9 @@ export function buildReportWorkbook(report) {
   };
 }
 
-export async function downloadReport(report) {
+export function downloadReport(report) {
   const workbook = buildReportWorkbook(report);
-  const url = URL.createObjectURL(await createXlsxBlob(workbook));
+  const url = URL.createObjectURL(createXlsxBlob(workbook));
   const anchor = document.createElement('a');
   anchor.href = url; anchor.download = workbook.filename;
   document.body.appendChild(anchor); anchor.click(); anchor.remove();

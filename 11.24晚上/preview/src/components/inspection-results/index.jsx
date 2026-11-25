@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Empty,Select,Table} from 'antd';
 import {resultCounts} from '../../utils/report-summary.js';
-import {ruleSeverities} from '../../utils/rule-severity.js';
+import {ruleSeverities} from '../../constants/rule-severity.js';
 import StatusMark from '../status-mark/index.jsx';
 import OptionGroup from '../option-group/index.jsx';
 import RatioMeter from '../ratio-meter/index.jsx';
@@ -20,7 +20,7 @@ const resultColumn={title:'检查结果',key:'result',width:136,filters:[{text:'
 const ruleColumns=[
   {title:'规则名称',key:'name',dataIndex:'name',ellipsis:true,sorter:(a,b)=>a.name.localeCompare(b.name,'zh-CN')},
   resultColumn,
-  {title:'检查要求',key:'expected',dataIndex:'expected',width:440.36,sorter:(a,b)=>a.expected.localeCompare(b.expected,'zh-CN'),render:value=><span className="report-cell-copy">{value}</span>},
+  {title:'检查要求',key:'expected',dataIndex:'expected',ellipsis:true,sorter:(a,b)=>a.expected.localeCompare(b.expected,'zh-CN'),render:value=><span className="report-cell-copy">{value}</span>},
   {title:'适用设备',key:'total',dataIndex:'total',width:112,sorter:(a,b)=>a.total-b.total,render:value=><span className="report-number">{value}<small>台</small></span>},
   {title:'不通过设备',key:'failed',dataIndex:'failed',width:126,sorter:(a,b)=>a.failed-b.failed,defaultSortOrder:'descend',render:value=><span className="report-number" style={{color:value?'var(--error)':'var(--on-surface)'}}><strong>{value}</strong><small>台</small></span>},
   {title:'合规率',key:'passRate',dataIndex:'passRate',width:136,sorter:(a,b)=>(a.passRate??-1)-(b.passRate??-1),render:(_,rule)=><RatioMeter value={rule.passed} total={rule.total} unit="台设备"/>},
@@ -49,7 +49,9 @@ export default function InspectionResults({items,counts,dimension,onOpenRule,onO
     if(column.key==='result')render=(_,row)=><StatusMark failed={row.failed>0} unknown={!row.total} showIcon={isDevices}>{!row.total?'无检查结果':row.failed>0?'不通过':'通过'}</StatusMark>;
     if(column.key==='name')render=(_,row)=>isDevices?<ReportDeviceLink className="report-rule-name" device={row} onOpen={onOpenDevice}/>:<ReportRuleLink className="report-rule-name" rule={row} onOpen={onOpenRule}/>;
     if(isDevices&&column.key==='failed')render=(value,device)=><span className="report-device-findings-cell"><span className="report-number"><strong>{value}</strong><small>条</small></span>{value>0&&<a href={'#device-'+device.id} className="report-findings-detail" aria-haspopup="dialog" onClick={event=>{event.preventDefault();onOpenDevice(device);}}>详情</a>}</span>;
-    return {...column,align:'left',render};
+    // Table 规范：数字类（计数/合规率）右对齐，文本与操作列左对齐。
+    const align=['total','failed','passed','passRate'].includes(column.key)?'right':'left';
+    return {...column,align,render};
   });
   const scopeOptions=isDevices?[{value:'all',label:'全部设备'},...Array.from(new Set(items.map(item=>item.model))).filter(Boolean).sort().map(model=>({value:model,label:model}))]:
     ruleScopeOptions;

@@ -1,5 +1,5 @@
 import {Empty} from 'antd';
-import {ruleSeverities} from '../../utils/rule-severity.js';
+import {ruleSeverities} from '../../constants/rule-severity.js';
 import SegmentedComplianceGauge from '../segmented-compliance-gauge/index.jsx';
 import ReportMetric from '../report-metric/index.jsx';
 import ReportStatusIcon from '../report-status-icon/index.jsx';
@@ -22,7 +22,7 @@ export default function ComplianceSummary({summary,comparison,conclusion}) {
           </dl>
         </div>
         {conclusion&&<div className="report-brief">
-          <h3><img src="./assets/uploads/report-ai-sparkle.svg" width="20" height="20" alt=""/>检查概要</h3>
+          <h3><img src="./public/uploads/report-ai-sparkle.svg" width="20" height="20" alt=""/>检查概要</h3>
           <p>{conclusion}<span className="report-ai-recommendation"> 优先核验{ruleSeverities.high.label}违规项，结合变更记录确认后修复。</span></p>
         </div>}
       </div>

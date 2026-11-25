@@ -1,5 +1,13 @@
 /* Report role tokens: reuse ICT semantics; exact design-only geometry is named here. */
 .report-workspace{
+  /* Pixso 报告专属的中性与非语义 AI 插画色板（design_system 规则 2：非语义色仅用于视觉丰富性）。
+     原先误放在 public/style/base.css，现按规范归位到组件 token 层（两模式共用，值不变）。 */
+  --report-design-neutral:#262626;
+  --report-ai-palette-blue:#669FFF;
+  --report-ai-palette-purple:#9567FF;
+  --report-ai-palette-red:#BC6467;
+  --report-ai-palette-red-strong:#CD5B5A;
+  --report-ai-palette-orange:#FF9466;
   --report-answer-fill:var(--color-bg-1);
   --report-artifact-fill:var(--color-bg-2);
   --event-count-selected-fill:var(--color-select);
